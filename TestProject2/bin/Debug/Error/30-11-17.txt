@@ -1,0 +1,2656 @@
+
+Log Entry : 
+11/30/2017 14:04:30
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:33
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)76
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:34
+Error in: . Error Message:entro a Preprocesos 96
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:35
+Error in: . Error Message:despues de AgregarEmbarques101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:35
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:35
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:35
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:35
+Error in: . Error Message:entro en PostProcesos 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:36
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:36
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:38
+Error in: . Error Message:System.Data.Linq.ChangeConflictException
+Error en 1 de 29 actualizaciones.
+   en System.Data.Linq.ChangeProcessor.SubmitChanges(ConflictMode failureMode)
+   en System.Data.Linq.DataContext.SubmitChanges(ConflictMode failureMode)
+   en System.Data.Linq.DataContext.SubmitChanges()
+   en LogicaFacturacion.RefrescaTarifaTablaTemporal(DataTable& dt, String sc, Int32 optFacturarA, String sClienteTercero, Int64 sesionId, Int64 idClienteAfacturarle, Int64 IdArticulo, Double tarif, Boolean exporta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 7571
+System.Data.Linq
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:38
+Error in: . Error Message:GenerarTablaparamodosnoautomaticos
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:38
+Error in: . Error Message:System.Data.Linq.ChangeConflictException
+Error en 1 de 29 actualizaciones.
+   en System.Data.Linq.ChangeProcessor.SubmitChanges(ConflictMode failureMode)
+   en System.Data.Linq.DataContext.SubmitChanges(ConflictMode failureMode)
+   en System.Data.Linq.DataContext.SubmitChanges()
+   en LogicaFacturacion.RefrescaTarifaTablaTemporal(DataTable& dt, String sc, Int32 optFacturarA, String sClienteTercero, Int64 sesionId, Int64 idClienteAfacturarle, Int64 IdArticulo, Double tarif, Boolean exporta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 7575
+   en LogicaFacturacion.generarTablaParaModosNoAutomaticos(String sc, Object& pag, Object& sesionId, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, Int64 startRowIndex, Int64 maximumRows, String txtclienteauxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1614
+System.Data.Linq
+__________________________
+
+Log Entry : 
+11/30/2017 14:04:38
+Error in: . Error Message:explota en GetDatatableAsignacionAutomatica
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:01
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:32
+Error in: . Error Message:Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:32
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1031
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:32
+Error in: . Error Message:GenerarTablaparamodosnoautomaticos
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:32
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1060
+   en LogicaFacturacion.generarTablaParaModosNoAutomaticos(String sc, Object& pag, Object& sesionId, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, Int64 startRowIndex, Int64 maximumRows, String txtclienteauxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1249
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 14:15:32
+Error in: . Error Message:explota en GetDatatableAsignacionAutomatica
+__________________________
+
+Log Entry : 
+11/30/2017 14:20:39
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:21:10
+Error in: . Error Message:Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+11/30/2017 14:21:10
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1031
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 14:21:10
+Error in: . Error Message:GenerarTablaparamodosnoautomaticos
+__________________________
+
+Log Entry : 
+11/30/2017 14:21:10
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1060
+   en LogicaFacturacion.generarTablaParaModosNoAutomaticos(String sc, Object& pag, Object& sesionId, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, Int64 startRowIndex, Int64 maximumRows, String txtclienteauxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1249
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 14:21:10
+Error in: . Error Message:explota en GetDatatableAsignacionAutomatica
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:39
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:42
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)76
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:43
+Error in: . Error Message:entro a Preprocesos 96
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de AgregarEmbarques101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:entro en PostProcesos 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:31:48
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:00
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7226
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:13
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7226
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:13
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7226
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:54
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:59
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:59
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:59
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:33:59
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:00
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:02
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:02
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:02
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:03
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:03
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:03
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:06
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:06
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 14:34:06
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:06
+Error in: . Error Message:ActualizarCampoClienteSeparador 101 filas
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:07
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:34:11
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 14:34:11
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:51
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:52
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)76
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:52
+Error in: . Error Message:entro a Preprocesos 96
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de AgregarEmbarques101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:entro en PostProcesos 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:35:53
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7975
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7975
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7975
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1069
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 14:37:05
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:05
+Error in: . Error Message:ActualizarCampoClienteSeparador 101 filas
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:06
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 14:37:07
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 14:37:07
+__________________________
+
+Log Entry : 
+11/30/2017 14:39:33
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 14:44:12
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8314
+ClientConnectionId:81eba683-0003-4fd8-90da-00d9d09fa76c
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 14:45:28
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 14:46:56
+Error in: . Error Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8316
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:17
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)76
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:entro a Preprocesos 96
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de AgregarEmbarques101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:entro en PostProcesos 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 101
+__________________________
+
+Log Entry : 
+11/30/2017 14:55:18
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 101
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:35
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:35
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)9
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:entro a Preprocesos 10
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de AgregarEmbarques15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:entro en PostProcesos 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:36
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:37
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:37
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:10:37
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:11:37
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:12:52
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:14:27
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:14:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:14:29
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:14:31
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:14:32
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:16:35
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:16:35
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:16:36
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:16:36
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:18:08
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:18:12
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:20:00
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:20:00
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 7069
+__________________________
+
+Log Entry : 
+11/30/2017 15:20:14
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:26
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:28
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:23:38
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:13
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 15:24:13
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:13
+Error in: . Error Message:ActualizarCampoClienteSeparador 15 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:14
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:45
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:51
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:55
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:55
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:58
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:58
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:58
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:58
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:24:59
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 15:24:59
+__________________________
+
+Log Entry : 
+11/30/2017 15:33:09
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:34:42
+Error in: . Error Message:Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+__________________________
+
+Log Entry : 
+11/30/2017 15:34:46
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1031
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 15:34:47
+Error in: . Error Message:GenerarTablaparamodosnoautomaticos
+__________________________
+
+Log Entry : 
+11/30/2017 15:34:48
+Error in: . Error Message:System.Data.SqlClient.SqlException
+Se agotó el tiempo de espera de ejecución. El período de tiempo de espera transcurrió antes de la finalización de la operación o el servidor no responde.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.ListadoManualConTablaTemporal(String sc, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, String sesionId, Int64 startRowIndex, Int64 maximumRows, String txtClienteAuxiliar, String& ms, String txtFacturarA, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1060
+   en LogicaFacturacion.generarTablaParaModosNoAutomaticos(String sc, Object& pag, Object& sesionId, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, Int64 startRowIndex, Int64 maximumRows, String txtclienteauxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1249
+.Net SqlClient Data Provider
+__________________________
+
+Log Entry : 
+11/30/2017 15:34:49
+Error in: . Error Message:explota en GetDatatableAsignacionAutomatica
+__________________________
+
+Log Entry : 
+11/30/2017 15:35:56
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:28
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:33
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)9
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:36
+Error in: . Error Message:entro a Preprocesos 10
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:42
+Error in: . Error Message:despues de AgregarEmbarques15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:42
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:42
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:42
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:42
+Error in: . Error Message:entro en PostProcesos 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:43
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 15
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2876
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2876
+__________________________
+
+Log Entry : 
+11/30/2017 15:38:44
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2876
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:07
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9953
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:39:08
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+TestProject2
+__________________________
+
+Log Entry : 
+11/30/2017 15:41:59
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 15:41:59
+__________________________
+
+Log Entry : 
+11/30/2017 15:41:59
+Error in: . Error Message:ActualizarCampoClienteSeparador 15 filas
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:03
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 15:42:11
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 15:42:11
+__________________________
+
+Log Entry : 
+11/30/2017 15:43:20
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 15:43:21
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8316
+ClientConnectionId:b58d2c05-4957-4c28-af1a-8d6437736978
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)9
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:entro a Preprocesos 10
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:despues de AgregarEmbarques15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:10
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:18
+Error in: . Error Message:entro en PostProcesos 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:08:19
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:52
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:52
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:52
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 15
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2378
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2378
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2378
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 16:16:53
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:ActualizarCampoClienteSeparador 15 filas
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:53
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:54
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:16:54
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 16:16:54
+__________________________
+
+Log Entry : 
+11/30/2017 16:17:40
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:17:41
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8316
+ClientConnectionId:b3823174-28eb-4147-8f22-03d1f2f5b780
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:49
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:50
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:50
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:19:52
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:23
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:23
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:23
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 8338
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 8338
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 8338
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 16:21:24
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:24
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:21:25
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 16:21:25
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:13
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:13
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:bd2b2389-504e-4e4a-9ae3-c0cff96168b9
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:13
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:13
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:bd2b2389-504e-4e4a-9ae3-c0cff96168b9
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:14
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:14
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:bd2b2389-504e-4e4a-9ae3-c0cff96168b9
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:15
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:15
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:bd2b2389-504e-4e4a-9ae3-c0cff96168b9
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:16
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:16
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:bd2b2389-504e-4e4a-9ae3-c0cff96168b9
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:16
+Error in: . Error Message:Fin facturacion.7877 7885  Tiempo usado: 52 segundos. 
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:16
+Error in: . Error Message:UPDATE    Facturas  SET numeroordencompraexterna=0   WHERE idFactura>= 100241  AND    idFactura <= 100249
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)19
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:entro a Preprocesos 27
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:despues de AgregarEmbarques32
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos32
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor32
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios32
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:entro en PostProcesos 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:22:42
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:despues de SepararAcopiosLDCyACA 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:despues de PostProcesoFacturacion_ReglaExportadores 32
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:punto 2 en GetDatatableAsignacionAutomatica . tanda 2255
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:punto 3 en GetDatatableAsignacionAutomatica . tanda 2255
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:14
+Error in: . Error Message:punto 4 en GetDatatableAsignacionAutomatica . tanda 2255
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:System.Exception
+La tarifa de la lista está vencida
+   en Pronto.ERP.Bll.ListaPreciosManager.VerificarVencimientoLista(Int64 idListaPrecio, String SC) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 520
+   en Pronto.ERP.Bll.ListaPreciosManager.SavePrecioPorCliente(String SC, Int64 IdCliente, Int64 IdArticulo, Double Precio, Int64 IdDestino) en C:\bdl\pronto\BussinessLogic\ListaPreciosManager.vb:línea 549
+   en ProntoMVC.Tests.TestsWilliams.FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265() en C:\bdl\pronto\TestProject2\TestWilliams.cs:línea 1072
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:Separo las facturas que se generan en el lote.30/11/2017 16:26:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:15
+Error in: . Error Message:ActualizarCampoClienteSeparador 32 filas
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(Int64 IdVendedor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12720
+BusinessLogic
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:System.IndexOutOfRangeException: No hay ninguna fila en la posición 0.
+   en System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   en System.Data.DataRowCollection.get_Item(Int32 index)
+   en CartaDePorteManager.EsteClienteSeleFacturaAlCorredorPorSeparadoId(Int64 idCliente, Int64 idCorredor, String SC) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 12754
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:16
+Error in: . Error Message:Empiezo a facturar en serio.30/11/2017 16:26:16
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:17
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:17
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:1d92d60b-0ad8-4448-b3ea-7d0de36555d7
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:18
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:18
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:1d92d60b-0ad8-4448-b3ea-7d0de36555d7
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:18
+Error in: . Error Message:Incorrect syntax near '='.
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:18
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Incorrect syntax near '='.
+   en Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.CallMethod(Container BaseReference, String MethodName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, BindingFlags InvocationFlags, Boolean ReportErrors, ResolutionFailure& Failure)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.ObjectLateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Microsoft.VisualBasic.CompilerServices.NewLateBinding.LateCall(Object Instance, Type Type, String MemberName, Object[] Arguments, String[] ArgumentNames, Type[] TypeArguments, Boolean[] CopyBack, Boolean IgnoreReturn)
+   en Pronto.ERP.Dal.GeneralDB.ExecDinamico(String SC, String comandoSQLdinamico, Int32 timeoutSegundos)
+   en Pronto.ERP.Bll.EntidadManager.ExecDinamico(String SC, String sComandoDinamico, Int32 timeoutSegundos) en C:\bdl\pronto\BussinessLogic\EntidadManager.vb:línea 884
+   en LogicaFacturacion.PercepcionIngresosBrutos(Object& oFac, String sc, HttpSessionState& session, ClienteNuevo cli, Double mvarNetoGravado, Boolean Parametros_EsAgenteDePercepcionIIBB, Boolean Pventa_AgentePercepcionIIBB) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 8319
+ClientConnectionId:1d92d60b-0ad8-4448-b3ea-7d0de36555d7
+Error Number:102,State:1,Class:15
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)74
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:entro a Preprocesos 87
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:despues de AgregarEmbarques92
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:despues de ExcluirDeGastosAdministrativos92
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:despues de ReasignarAquellosQueSeLeFacturanForzosamenteAlCorredor92
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:despues de CasosSyngenta_y_Acopios92
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:entro en PostProcesos 92
+__________________________
+
+Log Entry : 
+11/30/2017 16:26:39
+Error in: . Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 92
+__________________________
+
+Log Entry : 
+11/30/2017 16:28:25
+Error in: . Error Message:entrando en GetDatatableAsignacionAutomatica . tanda 0
+__________________________
+
+Log Entry : 
+11/30/2017 16:28:25
+Error in: . Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)393
+__________________________
+
+Log Entry : 
+11/30/2017 16:29:28
+Error in: . Error Message:GenerarTablaparamodosnoautomaticos
+__________________________
+
+Log Entry : 
+11/30/2017 16:29:29
+Error in: . Error Message:System.InvalidCastException
+La conversión de la cadena "" en el tipo 'Integer' no es válida.
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(String Value)
+   en Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(Object Value)
+   en LogicaFacturacion.generarTablaParaModosNoAutomaticos(String sc, Object& pag, Object& sesionId, String sLista, String sWHEREadicional, Int64 optFacturarA, String txtFacturarATerceros, String HFSC, String txtTitular, String txtCorredor, String txtDestinatario, String txtIntermediario, String txtRcomercial, String txt_AC_Articulo, String txtProcedencia, String txtDestino, String txtBuscar, String cmbCriterioWHERE, String cmbmodo, String optDivisionSyngenta, String txtFechaDesde, String txtFechaHasta, String cmbPuntoVenta, Int64 startRowIndex, Int64 maximumRows, String txtclienteauxiliar, String& sErrores, String txtFacturarA, String agruparArticulosPor, Object& filas, Object& slinks, String sesionIdposta) en C:\bdl\pronto\BussinessLogic\LogicaFacturacion.vb:línea 1388
+Microsoft.VisualBasic
+__________________________
+
+Log Entry : 
+11/30/2017 16:29:32
+Error in: . Error Message:explota en GetDatatableAsignacionAutomatica
+__________________________

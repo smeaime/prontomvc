@@ -1028,7 +1028,7 @@ Public Class LogicaFacturacion
             'generarTablaParaModosNoAutomaticos()
 
             Debug.Print(s)
-            dt = EntidadManager.ExecDinamico(sc, s)
+            dt = EntidadManager.ExecDinamico(sc, s, 200)
 
 
 
@@ -4795,10 +4795,13 @@ Public Class LogicaFacturacion
                     'y por que no la anuló? me mandó el mail bien (del timeout) del 22 de junio a las 15:42
 
                     Dim myFactura As Pronto.ERP.BO.Factura = FacturaManager.GetItem(SC, idFactura)
-                    FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
 
-                    'terminar lote
-                    Throw
+                    If Not Debugger.IsAttached Then
+                        FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
+
+                        'terminar lote
+                        Throw
+                    End If
                 End Try
 
 
@@ -6947,7 +6950,9 @@ Public Class LogicaFacturacion
 
                                 .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
 
-                                If (.Fields("PrecioUnitario").Value = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+                                If (.Fields("PrecioUnitario").Value = 0) Then
+                                    If Not Debugger.IsAttached Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+                                End If
 
 
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value 'mTotal - mIVA
