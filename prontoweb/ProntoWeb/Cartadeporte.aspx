@@ -2,7 +2,7 @@
     CodeFile="Cartadeporte.aspx.vb" Inherits="CartadeporteABM" Title="Untitled Page"
     EnableEventValidation="false" %>
 
-<%--mlo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
+<%--lo del enableeventvalidation lo puse porque tenia un problema con este abm. no copiarlo a los demas abms--%>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -384,7 +384,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="485px" Width=""
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%"
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
@@ -2840,16 +2840,19 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6"  type="button"   value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
-                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;"  UseSubmitBehavior="false" />
+                        
                         
                         <span>
-                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
+                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3" Height="40px" Font-Size="16"
                                 UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
 
-                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
-                             <asp:Button ID="btnAbrirReclamo" runat="server" Text="abrir consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
+
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+
                        
 
                             
@@ -2872,8 +2875,56 @@
 
 
 
+                            $("#Button9").click(function () {
+                              
+
+                                var d = {
+                                    idCartaPorte: qs["Id"],
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/GrabarComentario",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
                             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
                                 //alert("hola")
+
+                                //return;
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
