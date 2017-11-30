@@ -2713,7 +2713,7 @@
                 <ContentTemplate>
                     <br />
                     <br />
-                    <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
+                    <table style="padding: 0px; border: none #FFFFFF; width: ; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
 
@@ -2854,13 +2854,18 @@
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
 
-                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height: 50px; vertical-align: top;" />
-
+                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;"  UseSubmitBehavior="false" />
+                        
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                                UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
+                                UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
-                            <%--<input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary"  />--%>
+
+                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
+                             <asp:Button ID="btnAbrirReclamo" runat="server" Text="abrir consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;"  UseSubmitBehavior="false" />
+                       
+
+                            
                         </span>
 
                         <script>
@@ -2880,7 +2885,7 @@
 
 
 
-                            $("#Button6").click(function () {
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
                                 //alert("hola")
 
                                 var d = {
@@ -2923,6 +2928,120 @@
 
 
                             })
+
+
+
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/CerrarReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+                                        
+
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/AbrirReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+
+
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+
+
 
 
 
@@ -3021,7 +3140,7 @@
                     --%>
                     <%-- Ajax Extender has to be in the same UpdatePanel as its TargetControlID --%>
                     <%--al principio del load con AutoCompleteExtender1.ContextKey = SC le paso al webservice la cadena de conexion--%>
-                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="402px" Height="22px" CssClass="button-link"
+                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="" Height="22px" CssClass="button-link"
                         Font-Underline="False" />
                     <%--se dispara cuando se oculta la lista. me está dejando una marca fea--%>
                     <asp:LinkButton ID="lnkBorrarAdjunto" runat="server" ForeColor="White">borrar</asp:LinkButton><br />
@@ -3272,7 +3391,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="395px">
+            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="">
                 <table style="" class="t1">
                     <tr>
                         <td align="center" style="font-weight: bold; color: white; background-color: red; height: 14px;">Información
@@ -4937,7 +5056,7 @@
                 sortorder: 'asc',
                 viewrecords: true,
 
-                shrinkToFit: false,
+                shrinkToFit: true,
 
                 width: 300, //$(window).width() - 10, // 310, //'auto',
                 height: 320, //'auto', // '100%', //$(window).height() - 260, // '100%'

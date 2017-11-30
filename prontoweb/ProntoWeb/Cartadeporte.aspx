@@ -2784,7 +2784,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px" OnClientPopulated="TabListo()">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="200px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
