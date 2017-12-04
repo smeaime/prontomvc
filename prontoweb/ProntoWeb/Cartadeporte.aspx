@@ -281,7 +281,7 @@
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
     </script>
-    <div style="width: ; margin-top: 3px; height: auto; max-width: 800px">
+    <div style="width: ; margin-top: 3px; height: auto; max-width: 900px">
         <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
         

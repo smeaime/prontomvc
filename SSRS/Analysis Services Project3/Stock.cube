@@ -1,0 +1,210 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="2767f303-c75e-43d1-9b86-24fdb344484b" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Tabla tempStock</ID>
+  <Name>Stock</Name>
+  <CreatedTimestamp>0001-01-01T03:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T03:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="3" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-8499" scrolltop="-4855" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="18415" y="20770" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboStock" left="20" top="0" logicalid="2" controlid="1" masterid="0" hint1="0" hint2="0" width="3228" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000800009c0c000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo__TempCuboStock" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-8499</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-4855</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T03:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="35554604-04c8-4be4-ba78-35f92bc3b7f5">
+      <ID>arti</ID>
+      <Name>Artículos</Name>
+      <DimensionID>Temp Cubo Stock</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="5f0f14b7-1879-4b88-bc48-8cff57a2057a">
+          <AttributeID>Id Cubo Stock</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="34e2d620-978f-444c-a6a6-655851d6760a">
+          <AttributeID>Articulo</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0dee5356-39c2-4191-b4fc-0087e3f428b7">
+          <AttributeID>Detalle</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="7cecb1b9-30e3-427d-8e30-df6fc55185d9">
+          <HierarchyID>Hierarchy</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+    <Dimension dwd:design-time-name="abaf85c0-1873-4eca-9ca8-0436c5632758">
+      <ID>depo</ID>
+      <Name>Depósitos</Name>
+      <DimensionID>depo</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="772fd6e2-1a10-4a1e-bf13-27076371f6f5">
+          <AttributeID>Id Cubo Stock</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a38f7b9b-bb79-4f70-bb07-090e930e478b">
+          <AttributeID>Articulo</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="243a7473-1859-4d52-b4dd-097681536cc1">
+          <AttributeID>Deposito</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="30b9bd0c-84b9-46af-b1bc-dff8259a77db">
+          <AttributeID>Ubicacion</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f08057aa-4680-4f2b-9f9a-ee707e00f0d9">
+          <AttributeID>Detalle</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="04df971d-3603-4958-9450-7c48a0803c8d">
+          <HierarchyID>Hierarchy</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="80fa0241-1803-43b7-9e21-aafa2828bb74">
+      <ID>Temp Cubo Stock</ID>
+      <Name>Temp Cubo Stock</Name>
+      <CreatedTimestamp>0001-01-01T03:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T03:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T03:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="23be5796-08d3-4b2f-94f5-b03e6916a57a">
+          <ID>Cantidad</ID>
+          <Name>Cantidad</Name>
+          <Source dwd:design-time-name="38c902fa-3178-4dd6-a2d2-654ae2edc1e6">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="3b024d6f-c11a-47be-9e26-af880a9917ce">
+              <TableID>dbo__TempCuboStock</TableID>
+              <ColumnID>Cantidad</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="90131456-46c9-4317-ab34-2150fb06afe7">
+          <ID>Costo</ID>
+          <Name>Costo</Name>
+          <Source dwd:design-time-name="4f3e1620-911e-4985-b80c-e5a7ab9c030b">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="6ed9521f-6cb1-4b62-bb6e-a4e9386ce3bd">
+              <TableID>dbo__TempCuboStock</TableID>
+              <ColumnID>Costo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="cd18228d-5c57-409c-b59d-79284311b07b">
+          <ID>Stock Valorizado</ID>
+          <Name>Stock Valorizado</Name>
+          <Source dwd:design-time-name="057b7485-bce8-4400-8b19-4a32fbde4d40">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="5c035375-e9c1-47b1-a801-beabc2f3e293">
+              <TableID>dbo__TempCuboStock</TableID>
+              <ColumnID>StockValorizado</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="661cfc50-2dc5-47e5-8395-eeccbb6ee588">
+          <CubeDimensionID>arti</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="8b8afd5f-5bb2-4b3d-861d-94ef28a2801b">
+              <AttributeID>Id Cubo Stock</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="7353bb9f-07a0-4145-83e7-4a949e59a00b">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="01a43857-b91d-4143-bdd5-27b75917338c">
+                    <TableID>dbo__TempCuboStock</TableID>
+                    <ColumnID>IdCuboStock</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="c4ee84d4-b23c-4776-a41c-b1eb167f30e5">
+          <CubeDimensionID>depo</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="92e84fba-5f95-4785-9bf6-f02f0b7b4b6a">
+              <AttributeID>Id Cubo Stock</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e71c4386-9831-4133-862c-ba2d3c46b211">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="0016874b-e2bd-48a6-8e01-8402a8655022">
+                    <TableID>dbo__TempCuboStock</TableID>
+                    <ColumnID>IdCuboStock</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="7bc2da00-d387-4fa9-8871-3a300e8e00c8">
+    <DataSourceViewID>Equimac</DataSourceViewID>
+  </Source>
+</Cube>
