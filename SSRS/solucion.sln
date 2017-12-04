@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Informes", "Report Project2\Informes.rptproj", "{0A98DD4E-D981-4FBD-A317-0763D2754BA1}"
+EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Cubos", "Analysis Services Project3\Cubos.dwproj", "{A68608FB-8E65-425B-B021-C7050224F0D2}"
+EndProject
+Project("{999D2CB9-9277-4465-A902-1604ED3686A3}") = "Modelos", "Modelos\Modelos.smdlproj", "{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}"
+EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "Analysis Services Project1", "Analysis Services Project1\Analysis Services Project1.dwproj", "{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Development|Default = Development|Default
+		Production|Default = Production|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Debug|Default.ActiveCfg = Debug
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Debug|Default.Build.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Debug|Default.Deploy.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.DebugLocal|Default.Build.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.DebugLocal|Default.Deploy.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Development|Default.ActiveCfg = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Development|Default.Build.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Development|Default.Deploy.0 = DebugLocal
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Production|Default.ActiveCfg = Release
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Production|Default.Build.0 = Release
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Production|Default.Deploy.0 = Release
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Release|Default.ActiveCfg = Release
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Release|Default.Build.0 = Release
+		{0A98DD4E-D981-4FBD-A317-0763D2754BA1}.Release|Default.Deploy.0 = Release
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Debug|Default.ActiveCfg = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Debug|Default.Build.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Debug|Default.Deploy.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.DebugLocal|Default.ActiveCfg = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.DebugLocal|Default.Build.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.DebugLocal|Default.Deploy.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Development|Default.ActiveCfg = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Development|Default.Build.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Development|Default.Deploy.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Production|Default.ActiveCfg = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Production|Default.Build.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Production|Default.Deploy.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Release|Default.ActiveCfg = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Release|Default.Build.0 = Development
+		{A68608FB-8E65-425B-B021-C7050224F0D2}.Release|Default.Deploy.0 = Development
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Debug|Default.ActiveCfg = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Debug|Default.Build.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Debug|Default.Deploy.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.DebugLocal|Default.ActiveCfg = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.DebugLocal|Default.Build.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.DebugLocal|Default.Deploy.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Development|Default.ActiveCfg = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Development|Default.Build.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Development|Default.Deploy.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Production|Default.ActiveCfg = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Production|Default.Build.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Production|Default.Deploy.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Release|Default.ActiveCfg = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Release|Default.Build.0 = Production
+		{3A98D5B8-E543-4CC0-9D69-156B292D4F8A}.Release|Default.Deploy.0 = Production
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Debug|Default.ActiveCfg = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Debug|Default.Build.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Debug|Default.Deploy.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.DebugLocal|Default.ActiveCfg = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.DebugLocal|Default.Build.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.DebugLocal|Default.Deploy.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Development|Default.ActiveCfg = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Development|Default.Build.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Development|Default.Deploy.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Production|Default.ActiveCfg = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Production|Default.Build.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Production|Default.Deploy.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Release|Default.ActiveCfg = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Release|Default.Build.0 = Development
+		{0ECB0769-F22B-46CA-A4BD-8BD3117171C1}.Release|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

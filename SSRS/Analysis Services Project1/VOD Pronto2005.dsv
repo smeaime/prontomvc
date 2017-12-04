@@ -1,0 +1,1589 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005</ID>
+  <Name>VOD Pronto2005</Name>
+  <CreatedTimestamp>2010-01-28T14:00:48Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:48Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout>
+              <dds>
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="22" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="61493" scrolltop="-10024" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="25585" y="19209" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboIngresoEgresosPorObra (dbo._TempCuboIngresoEgresosPorObra)" left="151460" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="5054" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000be13000043110000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboIngresoEgresosPorObra" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboBalance (dbo._TempCuboBalance)" left="144465" top="0" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="3995" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800009b0f000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboBalance" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuadroGastosParaCubo (dbo._TempCuadroGastosParaCubo)" left="137920" top="0" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3545" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000d90d000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuadroGastosParaCubo" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboComparativa (dbo._TempCuboComparativa)" left="130554" top="0" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="4366" height="3572" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800000e110000f40d0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboComparativa" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboCostosImportacion (dbo._TempCuboCostosImportacion)" left="122448" top="0" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="5106" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000f213000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboCostosImportacion" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboIVAPorObra (dbo._TempCuboIVAPorObra)" left="115876" top="0" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="3572" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000f40d00004d0c0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboIVAPorObra" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPedidos (dbo._TempCuboPedidos)" left="109780" top="0" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="3096" height="3995" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000180c00009b0f0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboPedidos" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPosicionFinanciera (dbo._TempCuboPosicionFinanciera)" left="99716" top="0" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="7064" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000981b000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboPosicionFinanciera" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPresupuestoEconomico (dbo._TempCuboPresupuestoEconomico)" left="92165" top="0" logicalid="9" controlid="9" masterid="0" hint1="0" hint2="0" width="4551" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000c711000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboPresupuestoEconomico" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPresupuestoFinanciero (dbo._TempCuboPresupuestoFinanciero)" left="84905" top="0" logicalid="10" controlid="10" masterid="0" hint1="0" hint2="0" width="4260" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000a410000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboPresupuestoFinanciero" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPresupuestoFinanciero2 (dbo._TempCuboPresupuestoFinanciero2)" left="77354" top="0" logicalid="11" controlid="11" masterid="0" hint1="0" hint2="0" width="4551" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000c711000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboPresupuestoFinanciero2" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboProduccion (dbo._TempCuboProduccion)" left="70121" top="0" logicalid="12" controlid="12" masterid="0" hint1="0" hint2="0" width="4233" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800008910000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboProduccion" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboReservaPresupuestaria (dbo._TempCuboReservaPresupuestaria)" left="61406" top="0" logicalid="13" controlid="13" masterid="0" hint1="0" hint2="0" width="5715" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="0008000053160000ea120000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboReservaPresupuestaria" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboSaldosComprobantesPorObraProveedor (dbo._TempCuboSaldosComprobantesPorObraProveedor)" left="50627" top="0" logicalid="14" controlid="14" masterid="0" hint1="0" hint2="0" width="7779" height="4842" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000631e0000ea120000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboSaldosComprobantesPorObraProveedor" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboStock (dbo._TempCuboStock)" left="44399" top="0" logicalid="15" controlid="15" masterid="0" hint1="0" hint2="0" width="3228" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800009c0c000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboStock" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboVentasEnCuotas (dbo._TempCuboVentasEnCuotas)" left="36504" top="0" logicalid="16" controlid="16" masterid="0" hint1="0" hint2="0" width="4895" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800001f13000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo__TempCuboVentasEnCuotas" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboCashFlow" left="30197" top="0" logicalid="17" controlid="17" masterid="0" hint1="0" hint2="0" width="3307" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000eb0c000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="_TempCuboCashFlow" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboPresupuestoFinancieroTeorico" left="21958" top="0" logicalid="18" controlid="18" masterid="0" hint1="0" hint2="0" width="5239" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800007714000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="_TempCuboPresupuestoFinancieroTeorico" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboProyeccionEgresos" left="14460" top="0" logicalid="19" controlid="19" masterid="0" hint1="0" hint2="0" width="4498" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800009211000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="_TempCuboProyeccionEgresos" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboVentasEnCuotas1" left="6565" top="0" logicalid="20" controlid="20" masterid="0" hint1="0" hint2="0" width="4895" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000800001f13000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="_TempCuboVentasEnCuotas1" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempVentasParaCubo" left="20" top="0" logicalid="21" controlid="21" masterid="0" hint1="0" hint2="0" width="3545" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="00080000d90d000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="_TempVentasParaCubo" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+              </dds>
+            </DiagramLayout>
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>61493</DiagramViewPortLeft>
+            <DiagramViewPortTop>-10024</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>75</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>OD Pronto2005</DataSourceID>
+  <Schema>
+    <xs:schema id="VOD_x0020_Pronto2005" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="VOD_x0020_Pronto2005" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo__TempCuboIngresoEgresosPorObra" msprop:FriendlyName="_TempCuboIngresoEgresosPorObra" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboIngresoEgresosPorObra" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboIngresoEgresosPorObra" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdCuboIngresoEgresosPorObra" msprop:DbColumnName="IdCuboIngresoEgresosPorObra" type="xs:int" />
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="UnidadOperativa" msprop:FriendlyName="UnidadOperativa" msprop:DbColumnName="UnidadOperativa" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="13" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RubroContable" msprop:FriendlyName="RubroContable" msprop:DbColumnName="RubroContable" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Grupo" msprop:FriendlyName="Grupo" msprop:DbColumnName="Grupo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboBalance" msprop:FriendlyName="_TempCuboBalance" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboBalance" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboBalance" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdCuboBalance" msprop:DbColumnName="IdCuboBalance" type="xs:int" />
+                  <xs:element name="Jerarquia1" msprop:FriendlyName="Jerarquia1" msprop:DbColumnName="Jerarquia1" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia2" msprop:FriendlyName="Jerarquia2" msprop:DbColumnName="Jerarquia2" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia3" msprop:FriendlyName="Jerarquia3" msprop:DbColumnName="Jerarquia3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia4" msprop:FriendlyName="Jerarquia4" msprop:DbColumnName="Jerarquia4" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cuenta" msprop:FriendlyName="Cuenta" msprop:DbColumnName="Cuenta" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SaldoInicial" msprop:FriendlyName="SaldoInicial" msprop:DbColumnName="SaldoInicial" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoDeudorPeriodo" msprop:FriendlyName="SaldoDeudorPeriodo" msprop:DbColumnName="SaldoDeudorPeriodo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoAcreedorPeriodo" msprop:FriendlyName="SaldoAcreedorPeriodo" msprop:DbColumnName="SaldoAcreedorPeriodo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoPeriodo" msprop:FriendlyName="SaldoPeriodo" msprop:DbColumnName="SaldoPeriodo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoFinal" msprop:FriendlyName="SaldoFinal" msprop:DbColumnName="SaldoFinal" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuadroGastosParaCubo" msprop:FriendlyName="_TempCuadroGastosParaCubo" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuadroGastosParaCubo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboGastos" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdCuboGastos" msprop:DbColumnName="IdCuboGastos" type="xs:int" />
+                  <xs:element name="IdObra" msprop:FriendlyName="IdObra" msprop:DbColumnName="IdObra" type="xs:int" minOccurs="0" />
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IdRubroContable" msprop:FriendlyName="IdRubroContable" msprop:DbColumnName="IdRubroContable" type="xs:int" minOccurs="0" />
+                  <xs:element name="RubroContable" msprop:FriendlyName="RubroContable" msprop:DbColumnName="RubroContable" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IdUnidadOperativa" msprop:FriendlyName="IdUnidadOperativa" msprop:DbColumnName="IdUnidadOperativa" type="xs:int" minOccurs="0" />
+                  <xs:element name="UnidadOperativa" msprop:FriendlyName="UnidadOperativa" msprop:DbColumnName="UnidadOperativa" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="ProvinciaDestino" msprop:FriendlyName="ProvinciaDestino" msprop:DbColumnName="ProvinciaDestino" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Mes" msprop:DbColumnName="Mes" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboComparativa" msprop:FriendlyName="_TempCuboComparativa" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboComparativa" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboComparativa" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboComparativa" msprop:DbColumnName="IdTempCuboComparativa" type="xs:int" />
+                  <xs:element name="Rubro" msprop:FriendlyName="Rubro" msprop:DbColumnName="Rubro" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Material" msprop:FriendlyName="Material" msprop:DbColumnName="Material" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="5500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Solicitud" msprop:FriendlyName="Solicitud" msprop:DbColumnName="Solicitud" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cantidad" msprop:FriendlyName="Cantidad" msprop:DbColumnName="Cantidad" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Precio" msprop:FriendlyName="Precio" msprop:DbColumnName="Precio" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboCostosImportacion" msprop:FriendlyName="_TempCuboCostosImportacion" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboCostosImportacion" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboCostosImportacion" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboCostosImportacion" msprop:DbColumnName="IdTempCuboCostosImportacion" type="xs:int" />
+                  <xs:element name="Articulo" msprop:FriendlyName="Articulo" msprop:DbColumnName="Articulo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Pedido" msprop:FriendlyName="Pedido" msprop:DbColumnName="Pedido" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="12" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DatosPedido" msprop:FriendlyName="DatosPedido" msprop:DbColumnName="DatosPedido" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="70" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Origen" msprop:FriendlyName="Origen" msprop:DbColumnName="Origen" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="40" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Movimientos" msprop:FriendlyName="Movimientos" msprop:DbColumnName="Movimientos" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cantidad" msprop:FriendlyName="Cantidad" msprop:DbColumnName="Cantidad" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Entregado" msprop:FriendlyName="Entregado" msprop:DbColumnName="Entregado" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoPedido" msprop:FriendlyName="CostoPedido" msprop:DbColumnName="CostoPedido" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoItemPedido" msprop:FriendlyName="CostoItemPedido" msprop:DbColumnName="CostoItemPedido" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalPedido" msprop:FriendlyName="TotalPedido" msprop:DbColumnName="TotalPedido" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalComprobantes" msprop:FriendlyName="TotalComprobantes" msprop:DbColumnName="TotalComprobantes" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoAAsignar" msprop:FriendlyName="CostoAAsignar" msprop:DbColumnName="CostoAAsignar" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoPedidoDolar" msprop:FriendlyName="CostoPedidoDolar" msprop:DbColumnName="CostoPedidoDolar" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoItemPedidoDolar" msprop:FriendlyName="CostoItemPedidoDolar" msprop:DbColumnName="CostoItemPedidoDolar" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalPedidoDolar" msprop:FriendlyName="TotalPedidoDolar" msprop:DbColumnName="TotalPedidoDolar" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalComprobantesDolar" msprop:FriendlyName="TotalComprobantesDolar" msprop:DbColumnName="TotalComprobantesDolar" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CostoAAsignarDolar" msprop:FriendlyName="CostoAAsignarDolar" msprop:DbColumnName="CostoAAsignarDolar" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboIVAPorObra" msprop:FriendlyName="_TempCuboIVAPorObra" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboIVAPorObra" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboIVAPorObra" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdCuboIVAPorObra" msprop:DbColumnName="IdCuboIVAPorObra" type="xs:int" />
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="13" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IVA" msprop:FriendlyName="IVA" msprop:DbColumnName="IVA" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboPedidos" msprop:FriendlyName="_TempCuboPedidos" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboPedidos" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboPedidos" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdCuboPedidos" msprop:DbColumnName="IdCuboPedidos" type="xs:int" />
+                  <xs:element name="Proveedor" msprop:FriendlyName="Proveedor" msprop:DbColumnName="Proveedor" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="70" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="150" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Articulo" msprop:FriendlyName="Articulo" msprop:DbColumnName="Articulo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="300" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboPosicionFinanciera" msprop:FriendlyName="_TempCuboPosicionFinanciera" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboPosicionFinanciera" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdPosicionFinaciera" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdPosicionFinaciera" msprop:DbColumnName="IdPosicionFinaciera" type="xs:int" />
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Moneda" msprop:FriendlyName="Moneda" msprop:DbColumnName="Moneda" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Descripcion" msprop:FriendlyName="Descripcion" msprop:DbColumnName="Descripcion" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DepositosPendientes" msprop:FriendlyName="DepositosPendientes" msprop:DbColumnName="DepositosPendientes" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TransferenciasEntreCuentasPropiasPendientes" msprop:FriendlyName="TransferenciasEntreCuentasPropiasPendientes" msprop:DbColumnName="TransferenciasEntreCuentasPropiasPendientes" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="ChequesEmitidosPendientes" msprop:FriendlyName="ChequesEmitidosPendientes" msprop:DbColumnName="ChequesEmitidosPendientes" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoContable" msprop:FriendlyName="SaldoContable" msprop:DbColumnName="SaldoContable" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Otros" msprop:FriendlyName="Otros" msprop:DbColumnName="Otros" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboPresupuestoEconomico" msprop:FriendlyName="_TempCuboPresupuestoEconomico" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboPresupuestoEconomico" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdPresupuestoEconomico" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdPresupuestoEconomico" msprop:DbColumnName="IdPresupuestoEconomico" type="xs:int" />
+                  <xs:element name="Jerarquia1" msprop:FriendlyName="Jerarquia1" msprop:DbColumnName="Jerarquia1" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia2" msprop:FriendlyName="Jerarquia2" msprop:DbColumnName="Jerarquia2" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia3" msprop:FriendlyName="Jerarquia3" msprop:DbColumnName="Jerarquia3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia4" msprop:FriendlyName="Jerarquia4" msprop:DbColumnName="Jerarquia4" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cuenta" msprop:FriendlyName="Cuenta" msprop:DbColumnName="Cuenta" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PresupuestoTeoricoMes01" msprop:FriendlyName="PresupuestoTeoricoMes01" msprop:DbColumnName="PresupuestoTeoricoMes01" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes01" msprop:FriendlyName="SaldoMes01" msprop:DbColumnName="SaldoMes01" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes02" msprop:FriendlyName="PresupuestoTeoricoMes02" msprop:DbColumnName="PresupuestoTeoricoMes02" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes02" msprop:FriendlyName="SaldoMes02" msprop:DbColumnName="SaldoMes02" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes03" msprop:FriendlyName="PresupuestoTeoricoMes03" msprop:DbColumnName="PresupuestoTeoricoMes03" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes03" msprop:FriendlyName="SaldoMes03" msprop:DbColumnName="SaldoMes03" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes04" msprop:FriendlyName="PresupuestoTeoricoMes04" msprop:DbColumnName="PresupuestoTeoricoMes04" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes04" msprop:FriendlyName="SaldoMes04" msprop:DbColumnName="SaldoMes04" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes05" msprop:FriendlyName="PresupuestoTeoricoMes05" msprop:DbColumnName="PresupuestoTeoricoMes05" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes05" msprop:FriendlyName="SaldoMes05" msprop:DbColumnName="SaldoMes05" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes06" msprop:FriendlyName="PresupuestoTeoricoMes06" msprop:DbColumnName="PresupuestoTeoricoMes06" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes06" msprop:FriendlyName="SaldoMes06" msprop:DbColumnName="SaldoMes06" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes07" msprop:FriendlyName="PresupuestoTeoricoMes07" msprop:DbColumnName="PresupuestoTeoricoMes07" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes07" msprop:FriendlyName="SaldoMes07" msprop:DbColumnName="SaldoMes07" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes08" msprop:FriendlyName="PresupuestoTeoricoMes08" msprop:DbColumnName="PresupuestoTeoricoMes08" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes08" msprop:FriendlyName="SaldoMes08" msprop:DbColumnName="SaldoMes08" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes09" msprop:FriendlyName="PresupuestoTeoricoMes09" msprop:DbColumnName="PresupuestoTeoricoMes09" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes09" msprop:FriendlyName="SaldoMes09" msprop:DbColumnName="SaldoMes09" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes10" msprop:FriendlyName="PresupuestoTeoricoMes10" msprop:DbColumnName="PresupuestoTeoricoMes10" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes10" msprop:FriendlyName="SaldoMes10" msprop:DbColumnName="SaldoMes10" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes11" msprop:FriendlyName="PresupuestoTeoricoMes11" msprop:DbColumnName="PresupuestoTeoricoMes11" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes11" msprop:FriendlyName="SaldoMes11" msprop:DbColumnName="SaldoMes11" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes12" msprop:FriendlyName="PresupuestoTeoricoMes12" msprop:DbColumnName="PresupuestoTeoricoMes12" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes12" msprop:FriendlyName="SaldoMes12" msprop:DbColumnName="SaldoMes12" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalPresupuestoTeorico" msprop:FriendlyName="TotalPresupuestoTeorico" msprop:DbColumnName="TotalPresupuestoTeorico" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalSaldo" msprop:FriendlyName="TotalSaldo" msprop:DbColumnName="TotalSaldo" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboPresupuestoFinanciero" msprop:FriendlyName="_TempCuboPresupuestoFinanciero" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboPresupuestoFinanciero" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="idPresupuestoFinanciero" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="idPresupuestoFinanciero" msprop:DbColumnName="idPresupuestoFinanciero" type="xs:int" />
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="13" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Rubro" msprop:FriendlyName="Rubro" msprop:DbColumnName="Rubro" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Año" msprop:FriendlyName="Año" msprop:DbColumnName="Año" type="xs:int" minOccurs="0" />
+                  <xs:element name="Mes" msprop:FriendlyName="Mes" msprop:DbColumnName="Mes" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="15" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Semana" msprop:FriendlyName="Semana" msprop:DbColumnName="Semana" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ImporteTeorico" msprop:FriendlyName="ImporteTeorico" msprop:DbColumnName="ImporteTeorico" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="ImporteReal" msprop:FriendlyName="ImporteReal" msprop:DbColumnName="ImporteReal" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboPresupuestoFinanciero2" msprop:FriendlyName="_TempCuboPresupuestoFinanciero2" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboPresupuestoFinanciero2" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdPresupuestoFinanciero2" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdPresupuestoFinanciero2" msprop:DbColumnName="IdPresupuestoFinanciero2" type="xs:int" />
+                  <xs:element name="Jerarquia1" msprop:FriendlyName="Jerarquia1" msprop:DbColumnName="Jerarquia1" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia2" msprop:FriendlyName="Jerarquia2" msprop:DbColumnName="Jerarquia2" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia3" msprop:FriendlyName="Jerarquia3" msprop:DbColumnName="Jerarquia3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Jerarquia4" msprop:FriendlyName="Jerarquia4" msprop:DbColumnName="Jerarquia4" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cuenta" msprop:FriendlyName="Cuenta" msprop:DbColumnName="Cuenta" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="PresupuestoTeoricoMes01" msprop:FriendlyName="PresupuestoTeoricoMes01" msprop:DbColumnName="PresupuestoTeoricoMes01" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes01" msprop:FriendlyName="SaldoMes01" msprop:DbColumnName="SaldoMes01" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes02" msprop:FriendlyName="PresupuestoTeoricoMes02" msprop:DbColumnName="PresupuestoTeoricoMes02" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes02" msprop:FriendlyName="SaldoMes02" msprop:DbColumnName="SaldoMes02" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes03" msprop:FriendlyName="PresupuestoTeoricoMes03" msprop:DbColumnName="PresupuestoTeoricoMes03" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes03" msprop:FriendlyName="SaldoMes03" msprop:DbColumnName="SaldoMes03" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes04" msprop:FriendlyName="PresupuestoTeoricoMes04" msprop:DbColumnName="PresupuestoTeoricoMes04" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes04" msprop:FriendlyName="SaldoMes04" msprop:DbColumnName="SaldoMes04" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes05" msprop:FriendlyName="PresupuestoTeoricoMes05" msprop:DbColumnName="PresupuestoTeoricoMes05" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes05" msprop:FriendlyName="SaldoMes05" msprop:DbColumnName="SaldoMes05" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes06" msprop:FriendlyName="PresupuestoTeoricoMes06" msprop:DbColumnName="PresupuestoTeoricoMes06" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes06" msprop:FriendlyName="SaldoMes06" msprop:DbColumnName="SaldoMes06" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes07" msprop:FriendlyName="PresupuestoTeoricoMes07" msprop:DbColumnName="PresupuestoTeoricoMes07" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes07" msprop:FriendlyName="SaldoMes07" msprop:DbColumnName="SaldoMes07" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes08" msprop:FriendlyName="PresupuestoTeoricoMes08" msprop:DbColumnName="PresupuestoTeoricoMes08" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes08" msprop:FriendlyName="SaldoMes08" msprop:DbColumnName="SaldoMes08" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes09" msprop:FriendlyName="PresupuestoTeoricoMes09" msprop:DbColumnName="PresupuestoTeoricoMes09" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes09" msprop:FriendlyName="SaldoMes09" msprop:DbColumnName="SaldoMes09" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes10" msprop:FriendlyName="PresupuestoTeoricoMes10" msprop:DbColumnName="PresupuestoTeoricoMes10" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes10" msprop:FriendlyName="SaldoMes10" msprop:DbColumnName="SaldoMes10" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes11" msprop:FriendlyName="PresupuestoTeoricoMes11" msprop:DbColumnName="PresupuestoTeoricoMes11" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes11" msprop:FriendlyName="SaldoMes11" msprop:DbColumnName="SaldoMes11" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PresupuestoTeoricoMes12" msprop:FriendlyName="PresupuestoTeoricoMes12" msprop:DbColumnName="PresupuestoTeoricoMes12" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoMes12" msprop:FriendlyName="SaldoMes12" msprop:DbColumnName="SaldoMes12" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboProduccion" msprop:FriendlyName="_TempCuboProduccion" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboProduccion" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboProduccion" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboProduccion" msprop:DbColumnName="IdTempCuboProduccion" type="xs:int" />
+                  <xs:element name="Rubro" msprop:FriendlyName="Rubro" msprop:DbColumnName="Rubro" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Articulo" msprop:FriendlyName="Articulo" msprop:DbColumnName="Articulo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Uni" msprop:FriendlyName="Uni" msprop:DbColumnName="Uni" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="15" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="StockInicial" msprop:FriendlyName="StockInicial" msprop:DbColumnName="StockInicial" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Bajas" msprop:FriendlyName="Bajas" msprop:DbColumnName="Bajas" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Muestras" msprop:FriendlyName="Muestras" msprop:DbColumnName="Muestras" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Ajustes" msprop:FriendlyName="Ajustes" msprop:DbColumnName="Ajustes" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Devoluciones" msprop:FriendlyName="Devoluciones" msprop:DbColumnName="Devoluciones" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Compras" msprop:FriendlyName="Compras" msprop:DbColumnName="Compras" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Costo" msprop:FriendlyName="Costo" msprop:DbColumnName="Costo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Cliente" msprop:FriendlyName="Cliente" msprop:DbColumnName="Cliente" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Consumo" msprop:FriendlyName="Consumo" msprop:DbColumnName="Consumo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Total" msprop:FriendlyName="Total" msprop:DbColumnName="Total" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="150" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboReservaPresupuestaria" msprop:FriendlyName="_TempCuboReservaPresupuestaria" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboReservaPresupuestaria" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboReservaPresupuestaria" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboReservaPresupuestaria" msprop:DbColumnName="IdTempCuboReservaPresupuestaria" type="xs:int" />
+                  <xs:element name="Rubro" msprop:FriendlyName="Rubro" msprop:DbColumnName="Rubro" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Material" msprop:FriendlyName="Material" msprop:DbColumnName="Material" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Precio" msprop:FriendlyName="Precio" msprop:DbColumnName="Precio" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Cantidad" msprop:FriendlyName="Cantidad" msprop:DbColumnName="Cantidad" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Subrubro" msprop:FriendlyName="Subrubro" msprop:DbColumnName="Subrubro" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RM" msprop:FriendlyName="RM" msprop:DbColumnName="RM" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboSaldosComprobantesPorObraProveedor" msprop:FriendlyName="_TempCuboSaldosComprobantesPorObraProveedor" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboSaldosComprobantesPorObraProveedor" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboSaldosComprobantesPorObraProveedor" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboSaldosComprobantesPorObraProveedor" msprop:DbColumnName="IdTempCuboSaldosComprobantesPorObraProveedor" type="xs:int" />
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="13" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Proveedor" msprop:FriendlyName="Proveedor" msprop:DbColumnName="Proveedor" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RubroContable" msprop:FriendlyName="RubroContable" msprop:DbColumnName="RubroContable" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="TotalComprobante" msprop:FriendlyName="TotalComprobante" msprop:DbColumnName="TotalComprobante" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoComprobante" msprop:FriendlyName="SaldoComprobante" msprop:DbColumnName="SaldoComprobante" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="SaldoImporte" msprop:FriendlyName="SaldoImporte" msprop:DbColumnName="SaldoImporte" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboStock" msprop:FriendlyName="_TempCuboStock" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboStock" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdArticulo" msprop:FriendlyName="IdArticulo" msprop:DbColumnName="IdArticulo" type="xs:int" minOccurs="0" />
+                  <xs:element name="Articulo" msprop:FriendlyName="Articulo" msprop:DbColumnName="Articulo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="256" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Deposito" msprop:FriendlyName="Deposito" msprop:DbColumnName="Deposito" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Ubicacion" msprop:FriendlyName="Ubicacion" msprop:DbColumnName="Ubicacion" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Partida" msprop:FriendlyName="Partida" msprop:DbColumnName="Partida" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cantidad" msprop:FriendlyName="Cantidad" msprop:DbColumnName="Cantidad" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Costo" msprop:FriendlyName="Costo" msprop:DbColumnName="Costo" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="StockValorizado" msprop:FriendlyName="StockValorizado" msprop:DbColumnName="StockValorizado" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Cuenta" msprop:FriendlyName="Cuenta" msprop:DbColumnName="Cuenta" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Unidad" msprop:FriendlyName="Unidad" msprop:DbColumnName="Unidad" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IdCuboStock" msprop:DbColumnName="IdCuboStock" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo__TempCuboVentasEnCuotas" msprop:FriendlyName="_TempCuboVentasEnCuotas" msprop:DbSchemaName="dbo" msprop:DbTableName="_TempCuboVentasEnCuotas" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboVentasEnCuotas" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="IdTempCuboVentasEnCuotas" msprop:DbColumnName="IdTempCuboVentasEnCuotas" type="xs:int" />
+                  <xs:element name="Articulo" msprop:FriendlyName="Articulo" msprop:DbColumnName="Articulo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="250" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="NumeroManzana" msprop:FriendlyName="NumeroManzana" msprop:DbColumnName="NumeroManzana" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Estado" msprop:FriendlyName="Estado" msprop:DbColumnName="Estado" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cuotas" msprop:FriendlyName="Cuotas" msprop:DbColumnName="Cuotas" type="xs:int" minOccurs="0" />
+                  <xs:element name="ImporteCuotas" msprop:FriendlyName="ImporteCuotas" msprop:DbColumnName="ImporteCuotas" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="ImporteCuotasPagas" msprop:FriendlyName="ImporteCuotasPagas" msprop:DbColumnName="ImporteCuotasPagas" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="ImporteCuotasVencidas" msprop:FriendlyName="ImporteCuotasVencidas" msprop:DbColumnName="ImporteCuotasVencidas" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CuotasVencidas" msprop:FriendlyName="CuotasVencidas" msprop:DbColumnName="CuotasVencidas" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="_TempCuboCashFlow" msprop:FriendlyName="_TempCuboCashFlow" msprop:QueryBuilder="SpecificQueryBuilder" msprop:DbTableName="_TempCuboCashFlow" msprop:QueryDefinition="SELECT     IdCuboCashFlow, Tipo, IdProveedor, Proveedor, IdCliente, Cliente, Fecha, Importe, Detalle, DATEPART(year, Fecha) AS Column1, DATEPART(month, &#xD;&#xA;                      Fecha) AS Column2, CONVERT(varchar, DATEPART(month, Fecha)) + '/' + CONVERT(varchar, DATEPART(year, Fecha)) AS Column3, DATEPART(week, &#xD;&#xA;                      Fecha) AS Column4, 'Del ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, Fecha) - 1, CONVERT(datetime, '01/01/' + CONVERT(char,&#xD;&#xA;                       YEAR(Fecha)))) - 1, 103), 1, 5) + ' al ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, Fecha), CONVERT(datetime, &#xD;&#xA;                      '01/01/' + CONVERT(char, YEAR(Fecha)))) - 2, 103), 1, 10) AS Column5, CONVERT(char, Fecha, 112) AS Column6, CONVERT(varchar, DATENAME(day, &#xD;&#xA;                      Fecha)) + '/' + CONVERT(varchar, DATEPART(month, Fecha)) AS Column7, CONVERT(CHAR, DATENAME(month, Fecha)) AS Column8, CONVERT(CHAR, &#xD;&#xA;                      Fecha, 112) AS Column9, CONVERT(CHAR, DATENAME(day, Fecha)) AS Column10&#xD;&#xA;FROM         _TempCuboCashFlow" msprop:TableType="View" msprop:IsLogical="True">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboCashFlow" msprop:FriendlyName="IdCuboCashFlow" msprop:DbColumnName="IdCuboCashFlow" type="xs:int" />
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IdProveedor" msprop:FriendlyName="IdProveedor" msprop:DbColumnName="IdProveedor" type="xs:int" minOccurs="0" />
+                  <xs:element name="Proveedor" msprop:FriendlyName="Proveedor" msprop:DbColumnName="Proveedor" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="IdCliente" msprop:FriendlyName="IdCliente" msprop:DbColumnName="IdCliente" type="xs:int" minOccurs="0" />
+                  <xs:element name="Cliente" msprop:FriendlyName="Cliente" msprop:DbColumnName="Cliente" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="120" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column1" msdata:ReadOnly="true" msprop:FriendlyName="Column1" msprop:DbColumnName="Column1" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column2" msdata:ReadOnly="true" msprop:FriendlyName="Column2" msprop:DbColumnName="Column2" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column3" msdata:ReadOnly="true" msprop:FriendlyName="Column3" msprop:DbColumnName="Column3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column4" msdata:ReadOnly="true" msprop:FriendlyName="Column4" msprop:DbColumnName="Column4" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column5" msdata:ReadOnly="true" msprop:FriendlyName="Column5" msprop:DbColumnName="Column5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="23" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column6" msdata:ReadOnly="true" msprop:FriendlyName="Column6" msprop:DbColumnName="Column6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column7" msdata:ReadOnly="true" msprop:FriendlyName="Column7" msprop:DbColumnName="Column7" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column8" msdata:ReadOnly="true" msprop:FriendlyName="Column8" msprop:DbColumnName="Column8" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column9" msdata:ReadOnly="true" msprop:FriendlyName="Column9" msprop:DbColumnName="Column9" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column10" msdata:ReadOnly="true" msprop:FriendlyName="Column10" msprop:DbColumnName="Column10" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="_TempCuboPresupuestoFinancieroTeorico" msprop:FriendlyName="_TempCuboPresupuestoFinancieroTeorico" msprop:QueryBuilder="SpecificQueryBuilder" msprop:DbTableName="_TempCuboPresupuestoFinancieroTeorico" msprop:QueryDefinition="SELECT     IdPresupuestoFinancieroTeorico, Tipo, RubroFinanciero, UnidadOperativa, Obra, Fecha, Detalle, Importe, DATEPART(year, Fecha) AS Column1, &#xD;&#xA;                      DATEPART(month, Fecha) AS Column2, CONVERT(CHAR, DATENAME(month, Fecha)) AS Column3, CONVERT(CHAR, Fecha, 112) AS Column4, &#xD;&#xA;                      CONVERT(CHAR, DATENAME(day, Fecha)) AS Column5&#xD;&#xA;FROM         _TempCuboPresupuestoFinancieroTeorico" msprop:TableType="View" msprop:IsLogical="True">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdPresupuestoFinancieroTeorico" msprop:FriendlyName="IdPresupuestoFinancieroTeorico" msprop:DbColumnName="IdPresupuestoFinancieroTeorico" type="xs:int" />
+                  <xs:element name="Tipo" msprop:FriendlyName="Tipo" msprop:DbColumnName="Tipo" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="RubroFinanciero" msprop:FriendlyName="RubroFinanciero" msprop:DbColumnName="RubroFinanciero" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="UnidadOperativa" msprop:FriendlyName="UnidadOperativa" msprop:DbColumnName="UnidadOperativa" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Column1" msdata:ReadOnly="true" msprop:FriendlyName="Column1" msprop:DbColumnName="Column1" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column2" msdata:ReadOnly="true" msprop:FriendlyName="Column2" msprop:DbColumnName="Column2" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column3" msdata:ReadOnly="true" msprop:FriendlyName="Column3" msprop:DbColumnName="Column3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column4" msdata:ReadOnly="true" msprop:FriendlyName="Column4" msprop:DbColumnName="Column4" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column5" msdata:ReadOnly="true" msprop:FriendlyName="Column5" msprop:DbColumnName="Column5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="_TempCuboProyeccionEgresos" msprop:FriendlyName="_TempCuboProyeccionEgresos" msprop:QueryBuilder="SpecificQueryBuilder" msprop:DbTableName="_TempCuboProyeccionEgresos" msprop:QueryDefinition="SELECT     IdCuboProyeccionEgresos, IdProveedor, Proveedor, Fecha, Importe, Detalle, DATEPART(year, Fecha) AS Column1, DATEPART(month, Fecha) &#xD;&#xA;                      AS Column2, CONVERT(varchar, DATEPART(month, Fecha)) + '/' + CONVERT(varchar, DATEPART(year, Fecha)) AS Column3, DATEPART(week, Fecha) &#xD;&#xA;                      AS Column4, 'Del ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, Fecha) - 1, CONVERT(datetime, '01/01/' + CONVERT(char, &#xD;&#xA;                      YEAR(Fecha)))) - 1, 103), 1, 5) + ' al ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, Fecha), CONVERT(datetime, &#xD;&#xA;                      '01/01/' + CONVERT(char, YEAR(Fecha)))) - 2, 103), 1, 10) AS Column5, CONVERT(char, Fecha, 112) AS Column6, CONVERT(varchar, DATENAME(day, &#xD;&#xA;                      Fecha)) + '/' + CONVERT(varchar, DATEPART(month, Fecha)) AS Column7, CONVERT(CHAR, DATENAME(month, Fecha)) AS Column8, CONVERT(CHAR, &#xD;&#xA;                      Fecha, 112) AS Column9, CONVERT(CHAR, DATENAME(day, Fecha)) AS Column10&#xD;&#xA;FROM         _TempCuboProyeccionEgresos" msprop:TableType="View" msprop:IsLogical="True">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdCuboProyeccionEgresos" msprop:FriendlyName="IdCuboProyeccionEgresos" msprop:DbColumnName="IdCuboProyeccionEgresos" type="xs:int" />
+                  <xs:element name="IdProveedor" msprop:FriendlyName="IdProveedor" msprop:DbColumnName="IdProveedor" type="xs:int" minOccurs="0" />
+                  <xs:element name="Proveedor" msprop:FriendlyName="Proveedor" msprop:DbColumnName="Proveedor" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column1" msdata:ReadOnly="true" msprop:FriendlyName="Column1" msprop:DbColumnName="Column1" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column2" msdata:ReadOnly="true" msprop:FriendlyName="Column2" msprop:DbColumnName="Column2" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column3" msdata:ReadOnly="true" msprop:FriendlyName="Column3" msprop:DbColumnName="Column3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column4" msdata:ReadOnly="true" msprop:FriendlyName="Column4" msprop:DbColumnName="Column4" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column5" msdata:ReadOnly="true" msprop:FriendlyName="Column5" msprop:DbColumnName="Column5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="23" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column6" msdata:ReadOnly="true" msprop:FriendlyName="Column6" msprop:DbColumnName="Column6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column7" msdata:ReadOnly="true" msprop:FriendlyName="Column7" msprop:DbColumnName="Column7" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column8" msdata:ReadOnly="true" msprop:FriendlyName="Column8" msprop:DbColumnName="Column8" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column9" msdata:ReadOnly="true" msprop:FriendlyName="Column9" msprop:DbColumnName="Column9" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column10" msdata:ReadOnly="true" msprop:FriendlyName="Column10" msprop:DbColumnName="Column10" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="_TempCuboVentasEnCuotas1" msprop:FriendlyName="_TempCuboVentasEnCuotas1" msprop:QueryBuilder="SpecificQueryBuilder" msprop:DbTableName="_TempCuboVentasEnCuotas1" msprop:QueryDefinition="SELECT     IdTempCuboVentasEnCuotas, Cliente, Detalle, FechaVencimiento, Importe, DATEPART(year, FechaVencimiento) AS Column1, DATEPART(month, &#xD;&#xA;                      FechaVencimiento) AS Column2, CONVERT(varchar, DATEPART(month, FechaVencimiento)) + '/' + CONVERT(varchar, DATEPART(year, &#xD;&#xA;                      FechaVencimiento)) AS Column3, DATEPART(week, FechaVencimiento) AS Column4, 'Del ' + SUBSTRING(CONVERT(varchar, DATEADD(week, &#xD;&#xA;                      DATEPART(week, FechaVencimiento) - 1, CONVERT(datetime, '01/01/' + CONVERT(char, YEAR(FechaVencimiento)))) - 1, 103), 1, 5) &#xD;&#xA;                      + ' al ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, FechaVencimiento), CONVERT(datetime, '01/01/' + CONVERT(char, &#xD;&#xA;                      YEAR(FechaVencimiento)))) - 2, 103), 1, 10) AS Column5, CONVERT(char, FechaVencimiento, 112) AS Column6, CONVERT(varchar, DATENAME(day, &#xD;&#xA;                      FechaVencimiento)) + '/' + CONVERT(varchar, DATEPART(month, FechaVencimiento)) AS Column7, DATEPART(quarter, FechaVencimiento) AS Column8, &#xD;&#xA;                      'Trimestre ' + CONVERT(CHAR, DATEPART(quarter, FechaVencimiento)) AS Column9, CONVERT(CHAR, DATENAME(month, FechaVencimiento)) &#xD;&#xA;                      AS Column10&#xD;&#xA;FROM         _TempCuboVentasEnCuotas1" msprop:TableType="View" msprop:IsLogical="True">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdTempCuboVentasEnCuotas" msprop:FriendlyName="IdTempCuboVentasEnCuotas" msprop:DbColumnName="IdTempCuboVentasEnCuotas" type="xs:int" />
+                  <xs:element name="Cliente" msprop:FriendlyName="Cliente" msprop:DbColumnName="Cliente" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="60" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="FechaVencimiento" msprop:FriendlyName="FechaVencimiento" msprop:DbColumnName="FechaVencimiento" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Column1" msdata:ReadOnly="true" msprop:FriendlyName="Column1" msprop:DbColumnName="Column1" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column2" msdata:ReadOnly="true" msprop:FriendlyName="Column2" msprop:DbColumnName="Column2" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column3" msdata:ReadOnly="true" msprop:FriendlyName="Column3" msprop:DbColumnName="Column3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column4" msdata:ReadOnly="true" msprop:FriendlyName="Column4" msprop:DbColumnName="Column4" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column5" msdata:ReadOnly="true" msprop:FriendlyName="Column5" msprop:DbColumnName="Column5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="23" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column6" msdata:ReadOnly="true" msprop:FriendlyName="Column6" msprop:DbColumnName="Column6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column7" msdata:ReadOnly="true" msprop:FriendlyName="Column7" msprop:DbColumnName="Column7" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column8" msdata:ReadOnly="true" msprop:FriendlyName="Column8" msprop:DbColumnName="Column8" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column9" msdata:ReadOnly="true" msprop:FriendlyName="Column9" msprop:DbColumnName="Column9" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="40" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column10" msdata:ReadOnly="true" msprop:FriendlyName="Column10" msprop:DbColumnName="Column10" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="_TempVentasParaCubo" msprop:FriendlyName="_TempVentasParaCubo" msprop:QueryBuilder="SpecificQueryBuilder" msprop:DbTableName="_TempVentasParaCubo" msprop:QueryDefinition="SELECT     IdVentasParaCubo, CodigoCliente, Cliente, TipoIVA, Fecha, Vendedor, Obra, UnidadOperativa, Importe, Cuenta, ProvinciaDestino, Detalle, &#xD;&#xA;                      DATEPART(year, Fecha) AS Column1, DATEPART(month, Fecha) AS Column2, CONVERT(varchar, DATEPART(month, Fecha)) + '/' + CONVERT(varchar, &#xD;&#xA;                      DATEPART(year, Fecha)) AS Column3, DATEPART(week, Fecha) AS Column4, 'Del ' + SUBSTRING(CONVERT(varchar, DATEADD(week, DATEPART(week, &#xD;&#xA;                      Fecha) - 1, CONVERT(datetime, '01/01/' + CONVERT(char, YEAR(Fecha)))) - 1, 103), 1, 5) + ' al ' + SUBSTRING(CONVERT(varchar, DATEADD(week, &#xD;&#xA;                      DATEPART(week, Fecha), CONVERT(datetime, '01/01/' + CONVERT(char, YEAR(Fecha)))) - 2, 103), 1, 10) AS Column5, CONVERT(char, Fecha, 112) &#xD;&#xA;                      AS Column6, CONVERT(varchar, DATENAME(day, Fecha)) + '/' + CONVERT(varchar, DATEPART(month, Fecha)) AS Column7, DATEPART(quarter, Fecha) &#xD;&#xA;                      AS Column8, 'Trimestre ' + CONVERT(CHAR, DATEPART(quarter, Fecha)) AS Column9, CONVERT(CHAR, DATENAME(month, Fecha)) AS Column10&#xD;&#xA;FROM         _TempVentasParaCubo" msprop:TableType="View" msprop:IsLogical="True">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IdVentasParaCubo" msprop:FriendlyName="IdVentasParaCubo" msprop:DbColumnName="IdVentasParaCubo" type="xs:int" />
+                  <xs:element name="CodigoCliente" msprop:FriendlyName="CodigoCliente" msprop:DbColumnName="CodigoCliente" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Cliente" msprop:FriendlyName="Cliente" msprop:DbColumnName="Cliente" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TipoIVA" msprop:FriendlyName="TipoIVA" msprop:DbColumnName="TipoIVA" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Vendedor" msprop:FriendlyName="Vendedor" msprop:DbColumnName="Vendedor" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Obra" msprop:FriendlyName="Obra" msprop:DbColumnName="Obra" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="UnidadOperativa" msprop:FriendlyName="UnidadOperativa" msprop:DbColumnName="UnidadOperativa" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Importe" msprop:FriendlyName="Importe" msprop:DbColumnName="Importe" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Cuenta" msprop:FriendlyName="Cuenta" msprop:DbColumnName="Cuenta" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ProvinciaDestino" msprop:FriendlyName="ProvinciaDestino" msprop:DbColumnName="ProvinciaDestino" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Detalle" msprop:FriendlyName="Detalle" msprop:DbColumnName="Detalle" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column1" msdata:ReadOnly="true" msprop:FriendlyName="Column1" msprop:DbColumnName="Column1" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column2" msdata:ReadOnly="true" msprop:FriendlyName="Column2" msprop:DbColumnName="Column2" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column3" msdata:ReadOnly="true" msprop:FriendlyName="Column3" msprop:DbColumnName="Column3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column4" msdata:ReadOnly="true" msprop:FriendlyName="Column4" msprop:DbColumnName="Column4" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column5" msdata:ReadOnly="true" msprop:FriendlyName="Column5" msprop:DbColumnName="Column5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="23" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column6" msdata:ReadOnly="true" msprop:FriendlyName="Column6" msprop:DbColumnName="Column6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column7" msdata:ReadOnly="true" msprop:FriendlyName="Column7" msprop:DbColumnName="Column7" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="61" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column8" msdata:ReadOnly="true" msprop:FriendlyName="Column8" msprop:DbColumnName="Column8" type="xs:int" minOccurs="0" />
+                  <xs:element name="Column9" msdata:ReadOnly="true" msprop:FriendlyName="Column9" msprop:DbColumnName="Column9" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="40" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Column10" msdata:ReadOnly="true" msprop:FriendlyName="Column10" msprop:DbColumnName="Column10" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="30" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboIngresoEgresosPorObra" />
+          <xs:field xpath="IdCuboIngresoEgresosPorObra" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboBalance_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboBalance" />
+          <xs:field xpath="IdCuboBalance" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuadroGastosParaCubo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuadroGastosParaCubo" />
+          <xs:field xpath="IdCuboGastos" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboComparativa_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboComparativa" />
+          <xs:field xpath="IdTempCuboComparativa" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboCostosImportacion_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboCostosImportacion" />
+          <xs:field xpath="IdTempCuboCostosImportacion" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboIVAPorObra_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboIVAPorObra" />
+          <xs:field xpath="IdCuboIVAPorObra" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboPedidos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboPedidos" />
+          <xs:field xpath="IdCuboPedidos" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboPosicionFinanciera_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboPosicionFinanciera" />
+          <xs:field xpath="IdPosicionFinaciera" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboPresupuestoEconomico_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboPresupuestoEconomico" />
+          <xs:field xpath="IdPresupuestoEconomico" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboPresupuestoFinanciero_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboPresupuestoFinanciero" />
+          <xs:field xpath="idPresupuestoFinanciero" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboPresupuestoFinanciero2_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboPresupuestoFinanciero2" />
+          <xs:field xpath="IdPresupuestoFinanciero2" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboProduccion_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboProduccion" />
+          <xs:field xpath="IdTempCuboProduccion" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboReservaPresupuestaria_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboReservaPresupuestaria" />
+          <xs:field xpath="IdTempCuboReservaPresupuestaria" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboSaldosComprobantesPorObraProveedor_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboSaldosComprobantesPorObraProveedor" />
+          <xs:field xpath="IdTempCuboSaldosComprobantesPorObraProveedor" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboStock_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboStock" />
+          <xs:field xpath="IdCuboStock" />
+        </xs:unique>
+        <xs:unique name="dbo__TempCuboVentasEnCuotas_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo__TempCuboVentasEnCuotas" />
+          <xs:field xpath="IdTempCuboVentasEnCuotas" />
+        </xs:unique>
+        <xs:unique name="_TempCuboCashFlow_Constraint1" msdata:ConstraintName="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//_TempCuboCashFlow" />
+          <xs:field xpath="IdCuboCashFlow" />
+        </xs:unique>
+        <xs:unique name="_TempCuboPresupuestoFinancieroTeorico_Constraint1" msdata:ConstraintName="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//_TempCuboPresupuestoFinancieroTeorico" />
+          <xs:field xpath="IdPresupuestoFinancieroTeorico" />
+        </xs:unique>
+        <xs:unique name="_TempCuboProyeccionEgresos_Constraint1" msdata:ConstraintName="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//_TempCuboProyeccionEgresos" />
+          <xs:field xpath="IdCuboProyeccionEgresos" />
+        </xs:unique>
+        <xs:unique name="_TempCuboVentasEnCuotas1_Constraint1" msdata:ConstraintName="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//_TempCuboVentasEnCuotas1" />
+          <xs:field xpath="IdTempCuboVentasEnCuotas" />
+        </xs:unique>
+        <xs:unique name="_TempVentasParaCubo_Constraint1" msdata:ConstraintName="Constraint1" msprop:IsLogical="True" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//_TempVentasParaCubo" />
+          <xs:field xpath="IdVentasParaCubo" />
+        </xs:unique>
+      </xs:element>
+    </xs:schema>
+    <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+  </Schema>
+</DataSourceView>

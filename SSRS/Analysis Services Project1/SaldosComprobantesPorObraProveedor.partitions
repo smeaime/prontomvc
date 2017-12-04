@@ -1,0 +1,33 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="265c470c-e41a-4776-aab4-be51d72d8566" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>SaldosComprobantesPorObraProveedor</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Temp Cubo Saldos Comprobantes Por Obra Proveedor</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="fc6dd3db-8874-42da-8718-d622bbfd8106">
+          <ID>Temp Cubo Saldos Comprobantes Por Obra Proveedor</ID>
+          <Name>SaldosComprobantesPorObraProveedor</Name>
+          <CreatedTimestamp>2010-01-28T14:00:53Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-28T14:00:53Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-28T14:01:19Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="d833c443-7dd0-4768-8d28-56039911dd6c">
+            <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+            <TableID>dbo__TempCuboSaldosComprobantesPorObraProveedor</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="c764092e-258a-4788-a412-7a44ed3846c3">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="4ef2a813-ad2c-41a5-831d-6dfa0af2c671" />
+          </ProactiveCaching>
+          <EstimatedSize>1101</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

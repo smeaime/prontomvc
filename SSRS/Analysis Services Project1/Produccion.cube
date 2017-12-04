@@ -1,0 +1,241 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="09d552f5-eb14-4612-9dd8-34a10f3975f0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005 15</ID>
+  <Name>Produccion</Name>
+  <CreatedTimestamp>2010-01-28T14:00:53Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:53Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:06Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="ec951f97-9ab9-4da0-bcd6-adedcce5b172">
+      <ID>Produccion</ID>
+      <Name>Produccion</Name>
+      <DimensionID>Temp Cubo Produccion</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="a28dfe72-4916-43d9-b5d0-c3b3e206ffb3">
+          <AttributeID>Temp Cubo Produccion</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="04734356-e256-4366-8f68-192aacc8612a">
+          <AttributeID>Rubro</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="a9b7eaeb-19c4-4def-84bc-61acf09205d6">
+          <AttributeID>Articulo</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="5d82873f-3714-4a75-8f87-b81400be7db3">
+          <AttributeID>Uni</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="8136253f-fc3e-480e-bf23-03df5a7ff539">
+          <AttributeID>Cliente</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="31461769-7c0a-42c6-bd7a-0751f3decea9">
+          <AttributeID>Detalle</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="4b714ea4-8416-4f64-be08-011c3e965a3b">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="b4471796-5dc2-4318-8888-c4244090412f">
+          <HierarchyID>Jerarquía 1</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="f7dfe7e5-b785-4481-8663-e18ae91f7430">
+      <ID>Temp Cubo Produccion</ID>
+      <Name>Produccion</Name>
+      <CreatedTimestamp>2010-01-28T14:00:53Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:53Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:05Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="a47292cb-3a3a-4135-ab9f-6bf70a217ddb">
+          <ID>Costo</ID>
+          <Name>Costo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="36952898-be59-4e41-9454-1cc4030d9903">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="f7053fe3-7cf5-4a74-9263-ae9f26b8be50">
+              <TableID>dbo__TempCuboProduccion</TableID>
+              <ColumnID>Costo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="083602f4-5675-412b-9512-a3ba79f14248">
+          <ID>Consumo</ID>
+          <Name>Consumo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="47e54a1a-b4ac-4e9e-8188-5aba977de57e">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="09d891f6-97ce-4b36-9451-67865b194bd2">
+              <TableID>dbo__TempCuboProduccion</TableID>
+              <ColumnID>Consumo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="9a73a972-6c4d-46d0-8e6a-24daffc8e00a">
+          <ID>Total</ID>
+          <Name>Total</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="b83bbfd5-2ce2-41b3-9ccd-bcd06c908605">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="3c145d9d-4340-488c-a4ac-220c944bdeb1">
+              <TableID>dbo__TempCuboProduccion</TableID>
+              <ColumnID>Total</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="c5f61231-4d2d-4853-afcb-96d90bfac728">
+          <ID>Recuento Temp Cubo Produccion</ID>
+          <Name>Recuento Temp Cubo Produccion</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="96776918-4a7e-4492-9756-8fcfee908b84">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="1a403e37-c516-4114-9afd-078879564534">
+              <TableID>dbo__TempCuboProduccion</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>3215</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="1fc5cabc-e1c7-4196-a18e-029569ba2873">
+          <CubeDimensionID>Produccion</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="6d3256f7-69f6-46c4-849c-cd34be546db2">
+              <AttributeID>Temp Cubo Produccion</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="42c3ae21-7bc1-4195-adeb-e8e6f4f8edcc">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="16d3a6b4-138e-4d6b-abb6-ea3778c5a21e">
+                    <TableID>dbo__TempCuboProduccion</TableID>
+                    <ColumnID>IdTempCuboProduccion</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="1267ce03-1d81-4ad5-962c-151f91e063b4">
+              <AttributeID>Rubro</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="af990bb6-9fc2-45cd-a1d3-64a38cf14017">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="e1ba1e94-4f0c-45b2-bc66-b81a20bdcd5b" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="5a2d4959-d0f0-4a3b-aa40-a1a1160e7a58">
+              <AttributeID>Articulo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="823810b8-9640-4547-95aa-0bc29eb1fc5f">
+                  <DataType>WChar</DataType>
+                  <DataSize>100</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="4a8a54dd-6572-46b3-8229-7f49b8e975fa" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="e4c09c88-8e2d-4209-b6c6-0abb60c8bb5a">
+              <AttributeID>Uni</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="576c1394-a4f7-4d23-89f8-71b65f5a69c6">
+                  <DataType>WChar</DataType>
+                  <DataSize>15</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="51d42bde-e786-4aac-a24f-25ce97b1f629" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="4e875684-d675-435e-90b0-d6af53375cf4">
+              <AttributeID>Cliente</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e310272a-e5a6-4caa-aa75-67c66a07b544">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="97a6eaab-56e3-4a61-a617-df523b2164ab" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="72bc063b-f8cc-490b-826f-4b1d04ad7383">
+              <AttributeID>Detalle</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="54266165-29af-4d72-b306-d4b46e9207cc">
+                  <DataType>WChar</DataType>
+                  <DataSize>150</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="3c44c880-c97c-41c5-8460-c3020b6e7633" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="bdc3dda1-977d-4164-98ce-5d49ee4bb57d">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="48ea742b-25a3-47c6-897b-eef3264f4f9d" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="237e9345-3562-4537-bae0-2fc033c3c642">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <ProactiveCaching dwd:design-time-name="e22c05a8-d36d-4696-897e-486abce53d0b">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="c87801f6-8ae0-4ed9-904c-a9f3ee4ba68b" />
+  </ProactiveCaching>
+</Cube>
