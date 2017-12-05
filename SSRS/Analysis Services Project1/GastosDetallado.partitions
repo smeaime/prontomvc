@@ -1,0 +1,33 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="5e8b1357-8253-4db0-93bd-d8f00f4aa12b" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>GastosDetallado</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Temp Cuadro Gastos Para Cubo</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="8a975e7d-102d-440f-8cc8-390f85ef914e">
+          <ID>Temp Cuadro Gastos Para Cubo</ID>
+          <Name>GastosDetallado</Name>
+          <CreatedTimestamp>2010-01-28T14:00:51Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-28T14:00:51Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-28T14:01:16Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="6809e954-6b0d-4e0a-a741-88562dd2742d">
+            <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+            <TableID>dbo__TempCuadroGastosParaCubo</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="451eb1a3-4d2f-45c7-94a0-64de45b603d5">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="4d9d95b4-19cd-4584-a75b-82bce49f0ec4" />
+          </ProactiveCaching>
+          <EstimatedSize>11698</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

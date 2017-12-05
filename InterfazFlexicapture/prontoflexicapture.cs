@@ -2414,7 +2414,7 @@ namespace ProntoFlexicapture
                     cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
 
 
-                    cdp.NRecibo = Convert.ToInt32(Conversion.Val(Recibo));
+                    cdp.NRecibo = Recibo;
 
                     cdp.Observaciones = Observaciones;
                     cdp.Humedad = Conversion.Val(HumedadPorc.Replace(".", "").Replace(",", ""));
@@ -6007,8 +6007,8 @@ Formato localidad-provincia	destination	x
 
             var cartareclamo = db.CartasDePortes.Find(idcarta);
             int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
-            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
-
+            // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+            q = q.Where(x => x.IdReclamo == (idreclamo ?? -1 ));
 
 
             // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
@@ -6736,6 +6736,54 @@ Formato localidad-provincia	destination	x
 
         }
 
+
+        public virtual string[] AbrirReclamo_DLL(int idcarta, string nombreusuario, string SC)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+                if (carta.IdReclamo == null)
+                {
+                    rec = new Reclamo();
+                    rec.Estado = 1;
+                    rec.Descripcion = "nuevo reclamo";
+                    db.Reclamos.Add(rec);
+                    carta.IdReclamo = rec.IdReclamo;
+                }
+                else
+                {
+                    rec = db.Reclamos.Find(carta.IdReclamo);
+                }
+
+                               
+
+                rec.Estado = 1;
+
+
+                db.SaveChanges();
+
+
+                var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+                return usuariosParticipantes;
+
+            }
+
+
+
+        }
 
 
 

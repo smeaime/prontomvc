@@ -549,7 +549,8 @@ Namespace Pronto.ERP.Dal
                         myCartaDePorte.Hora = myDataRecord.GetDateTime(myDataRecord.GetOrdinal("Hora"))
                     End If
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("NRecibo")) Then
-                        myCartaDePorte.NRecibo = myDataRecord.GetInt32(myDataRecord.GetOrdinal("NRecibo"))
+                        myCartaDePorte.NRecibo = myDataRecord.GetString(myDataRecord.GetOrdinal("NRecibo"))
+                        'myCartaDePorte.NRecibo = myDataRecord.GetInt32(myDataRecord.GetOrdinal("NRecibo"))
                     End If
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("CalidadDe")) Then
                         myCartaDePorte.CalidadDe = myDataRecord.GetInt32(myDataRecord.GetOrdinal("CalidadDe"))

@@ -95,7 +95,7 @@ Namespace Pronto.ERP.BO
         Public TarifaTransportista As Double = 0
         Public FechaDescarga As Date
         Public Hora As Date
-        Public NRecibo As Long
+        Public NRecibo As String
         Public CalidadDe As Integer = 0
         Public TaraFinal As Double = 0
         Public BrutoFinal As Double = 0

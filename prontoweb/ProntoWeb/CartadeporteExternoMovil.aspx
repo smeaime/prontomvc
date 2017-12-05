@@ -9,11 +9,6 @@
 
 
 
-    
-
-
-
-
 
 
     <%--/////////////////////////////////////////////////////////////--%>
@@ -191,7 +186,6 @@
         }
 
 
-
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
 
@@ -290,14 +284,7 @@
     <div style="width: ; margin-top: 3px; height: auto;">
         <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
-            <%--  <tr>
-                <td colspan="3" style="border: thin none #FFFFFF; font-weight: bold; color: #FFFFFF;
-                    font-size: large; height: 12px;" align="left" valign="top">
-                    CARTA DE PORTE
-                  
-                </td>
-               
-            </tr>--%>
+        
             <tr>
                 <td class="EncabezadoCell" style="width: 70px; font-weight: bold; font-size: 20px;">C.PORTE
                 </td>
@@ -307,7 +294,7 @@
                             <td>
                                 <div>
                                     <a href="javascript:;" accesskey="f"></a>
-                                    <asp:TextBox ID="txtNumeroCDP" runat="server" Width="120px" TabIndex="2" AutoPostBack="True"
+                                    <asp:TextBox ID="txtNumeroCDP" runat="server" Width="120px" TabIndex="2" AutoPostBack="True" Enabled="false"
                                         Font-Bold="true" Font-Size="24px" Height="24px" MaxLength="10" Style="font-weight: bolder;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender441" runat="server" TargetControlID="txtNumeroCDP"
                                         ValidChars="1234567890" Enabled="True">
@@ -317,7 +304,7 @@
                                         Font-Bold="True" ValidationGroup="Encabezado" Style="display: none" />
                                     <ajaxToolkit:ValidatorCalloutExtender ID="ValidatorCalloutExtender8" runat="server"
                                         Enabled="True" TargetControlID="RequiredFieldValidator12" CssClass="CustomValidatorCalloutStyle" />
-                                    <asp:TextBox ID="txtSubfijo" runat="server" Width="35px" TabIndex="2" ToolTip="Subfijo"
+                                    <asp:TextBox ID="txtSubfijo" runat="server" Width="35px" TabIndex="2" ToolTip="Subfijo" Visible="false"
                                         MaxLength="5" Font-Size="24px" Height="24px" Style="font-weight: bolder;"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender112" runat="server" TargetControlID="txtSubfijo"
                                         ValidChars="1234567890" Enabled="True" />
@@ -330,7 +317,7 @@
                                     </style>
                                     <%-- <ajaxToolkit:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtSubfijo"
                                         WatermarkText="Subf" WatermarkCssClass="watermarked aaa" Enabled="True" />--%>
-                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True"
+                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True"  Visible="false"
                                         ToolTip="Vagón" MaxLength="7" Font-Size="24px" Height="24px" Style="font-weight: bolder;">
                                         
                                         
@@ -397,7 +384,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="320"
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%"
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
@@ -2713,7 +2700,7 @@
                 <ContentTemplate>
                     <br />
                     <br />
-                    <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
+                    <table style="padding: 0px; border: none #FFFFFF; width: ; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
 
@@ -2797,7 +2784,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="300px" OnClientPopulated="TabListo()">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="200px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -2853,14 +2840,22 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6"  type="button"   value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
-                        <input type="button" id="Button6" value="enviar" class="btn btn-primary" style="height: 50px; vertical-align: top;" />
-
+                        
+                        
                         <span>
-                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                                UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
+                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3" Height="40px" Font-Size="16"
+                                UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
-                            <%--<input type="button" id="Button77" value="cerrar consulta" class="btn btn-primary"  />--%>
+
+
+<%--<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />--%>
+
+                       
+
+                            
                         </span>
 
                         <script>
@@ -2880,8 +2875,8 @@
 
 
 
-                            $("#Button6").click(function () {
-                                //alert("hola")
+                            $("#Button9").click(function () {
+                              
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
@@ -2923,6 +2918,168 @@
 
 
                             })
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
+                                //alert("hola")
+
+                                //return;
+
+                                var d = {
+                                    idCartaPorte: qs["Id"],
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/GrabarComentario",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/CerrarReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+                                        
+
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/AbrirReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+
+
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+
+
 
 
 
@@ -3021,7 +3178,7 @@
                     --%>
                     <%-- Ajax Extender has to be in the same UpdatePanel as its TargetControlID --%>
                     <%--al principio del load con AutoCompleteExtender1.ContextKey = SC le paso al webservice la cadena de conexion--%>
-                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="402px" Height="22px" CssClass="button-link"
+                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="" Height="22px" CssClass="button-link"
                         Font-Underline="False" />
                     <%--se dispara cuando se oculta la lista. me está dejando una marca fea--%>
                     <asp:LinkButton ID="lnkBorrarAdjunto" runat="server" ForeColor="White">borrar</asp:LinkButton><br />
@@ -3031,7 +3188,7 @@
         </asp:UpdatePanel>
     </div>
     <br />
-    <div style="display: inline;">
+    <div style="display: inline; visibility: hidden">
         <table style="vertical-align: middle">
             <tr>
                 <td>
@@ -3098,7 +3255,7 @@
                                         Visible="False"></asp:Label>
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
-                            <asp:Label ID="Label1" Width="600px" runat="server" Font-Bold="true" ForeColor="LightGreen" />
+                            <asp:Label ID="Label1" Width="" runat="server" Font-Bold="true" ForeColor="LightGreen" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </td>
@@ -3272,7 +3429,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="395px">
+            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="">
                 <table style="" class="t1">
                     <tr>
                         <td align="center" style="font-weight: bold; color: white; background-color: red; height: 14px;">Información
@@ -4937,9 +5094,9 @@
                 sortorder: 'asc',
                 viewrecords: true,
 
-                shrinkToFit: false,
+                shrinkToFit: true,
 
-                width: 310, //$(window).width() - 4, // 310, //'auto',
+                width: 300, //$(window).width() - 10, // 310, //'auto',
                 height: 320, //'auto', // '100%', //$(window).height() - 260, // '100%'
 
                 altRows: false,

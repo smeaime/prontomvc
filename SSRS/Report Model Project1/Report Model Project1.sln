@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{999D2CB9-9277-4465-A902-1604ED3686A3}") = "Report Model Project1", "Report Model Project1.smdlproj", "{C11DF996-863F-4074-9D5E-8DBC3336FCF1}"
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Report Project2", "..\Report Project2\Report Project2.rptproj", "{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Production|Default = Production|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Debug|Default.ActiveCfg = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Debug|Default.Build.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Debug|Default.Deploy.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.DebugLocal|Default.ActiveCfg = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.DebugLocal|Default.Build.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.DebugLocal|Default.Deploy.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Production|Default.ActiveCfg = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Production|Default.Build.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Production|Default.Deploy.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Release|Default.ActiveCfg = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Release|Default.Build.0 = Production
+		{C11DF996-863F-4074-9D5E-8DBC3336FCF1}.Release|Default.Deploy.0 = Production
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Debug|Default.ActiveCfg = Debug
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Debug|Default.Build.0 = DebugLocal
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Debug|Default.Deploy.0 = DebugLocal
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.DebugLocal|Default.Build.0 = DebugLocal
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Production|Default.ActiveCfg = Release
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Production|Default.Build.0 = Release
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Production|Default.Deploy.0 = Release
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Release|Default.ActiveCfg = Release
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Release|Default.Build.0 = Release
+		{F701EDD6-6FC4-4603-BE1E-34D7799DA69F}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
