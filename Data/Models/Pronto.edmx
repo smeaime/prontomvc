@@ -554,7 +554,7 @@
           <Property Name="Tarifa" Type="numeric" Precision="18" Scale="2" />
           <Property Name="FechaDescarga" Type="datetime" />
           <Property Name="Hora" Type="datetime" />
-          <Property Name="NRecibo" Type="int" />
+          <Property Name="NRecibo" Type="varchar" MaxLength="15" />
           <Property Name="CalidadDe" Type="int" />
           <Property Name="TaraFinal" Type="numeric" Precision="18" Scale="2" />
           <Property Name="BrutoFinal" Type="numeric" Precision="18" Scale="2" />
@@ -1061,6 +1061,7 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="IdIBCondicionPorDefecto37" Type="int" />
           <Property Name="IdIBCondicionPorDefecto38" Type="int" />
           <Property Name="IdIBCondicionPorDefecto39" Type="int" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="ColaCorreosComprobantes">
           <Key>
@@ -3585,6 +3586,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="RetencionIBrutos39" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PorcentajeIBrutos39" Type="numeric" Precision="6" Scale="2" />
           <Property Name="CircuitoLiquidacionFlete" Type="int" />
+          <Property Name="ObservacionesAFIP" Type="ntext" />
         </EntityType>
         <EntityType Name="Feriados">
           <Key>
@@ -4350,6 +4352,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="PuntoVenta" Type="int" />
           <Property Name="DocumentacionCompleta" Type="varchar" MaxLength="2" />
           <Property Name="FechaTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="RetencionOTROS" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrdenesTrabajo">
           <Key>
@@ -5187,6 +5190,7 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="RegimenSimplificadoIIBB" Type="varchar" MaxLength="2" />
           <Property Name="IdIBCondicionAnterior" Type="int" />
           <Property Name="RiesgoFiscal" Type="varchar" MaxLength="2" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Provincias">
           <Key>
@@ -7741,6 +7745,18 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             </Principal>
             <Dependent Role="DetalleComprobantesProveedores">
               <PropertyRef Name="IdCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleComprobantesProveedores_DetalleRecepciones">
+          <End Role="DetalleRecepciones" Type="Self.DetalleRecepciones" Multiplicity="0..1" />
+          <End Role="DetalleComprobantesProveedores" Type="Self.DetalleComprobantesProveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleRecepciones">
+              <PropertyRef Name="IdDetalleRecepcion" />
+            </Principal>
+            <Dependent Role="DetalleComprobantesProveedores">
+              <PropertyRef Name="IdDetalleRecepcion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11140,6 +11156,10 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             <End Role="Cuentas" EntitySet="Cuentas" />
             <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleComprobantesProveedores_DetalleRecepciones" Association="Self.FK_DetalleComprobantesProveedores_DetalleRecepciones">
+            <End Role="DetalleRecepciones" EntitySet="DetalleRecepciones" />
+            <End Role="DetalleComprobantesProveedores" EntitySet="DetalleComprobantesProveedores" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleConciliaciones_Conciliaciones" Association="Self.FK_DetalleConciliaciones_Conciliaciones">
             <End Role="Conciliaciones" EntitySet="Conciliaciones" />
             <End Role="DetalleConciliaciones" EntitySet="DetalleConciliaciones" />
@@ -13617,6 +13637,10 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             <End Role="ReclamoComentario" EntitySet="ReclamoComentarios" />
           </AssociationSet>
           <EntitySet Name="PresupuestoObrasRubros" EntityType="DemoProntoModel.PresupuestoObrasRubro" />
+          <AssociationSet Name="FK_DetalleComprobantesProveedores_DetalleRecepciones" Association="DemoProntoModel.FK_DetalleComprobantesProveedores_DetalleRecepciones">
+            <End Role="DetalleRecepcione" EntitySet="DetalleRecepciones" />
+            <End Role="DetalleComprobantesProveedore" EntitySet="DetalleComprobantesProveedores" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -14787,6 +14811,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="IdIBCondicionPorDefecto37" Type="Int32" />
           <Property Name="IdIBCondicionPorDefecto38" Type="Int32" />
           <Property Name="IdIBCondicionPorDefecto39" Type="Int32" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="PuntosVenta">
           <Key>
@@ -16223,6 +16248,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="RetencionIBrutos39" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PorcentajeIBrutos39" Type="Decimal" Precision="6" Scale="2" />
           <Property Name="CircuitoLiquidacionFlete" Type="Int32" />
+          <Property Name="ObservacionesAFIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_DetalleFacturas_Articulos">
           <End Type="DemoProntoModel.Articulo" Role="Articulo" Multiplicity="0..1" />
@@ -16526,6 +16552,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="RegimenSimplificadoIIBB" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="IdIBCondicionAnterior" Type="Int32" />
           <Property Name="RiesgoFiscal" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeOtrosImpuestos1" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -18663,6 +18690,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="PuntoVenta" Type="Int32" />
           <Property Name="DocumentacionCompleta" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="FechaTimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RetencionOTROS" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleOrdenesPagoRubrosContables_RubrosContables">
           <End Type="DemoProntoModel.RubrosContable" Role="RubrosContable" Multiplicity="0..1" />
@@ -18985,6 +19013,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="IdPedido" Type="Int32" />
           <Property Name="IdUsuarioEnlazoRecepcion" Type="Int32" />
           <Property Name="FechaEnlazoRecepcion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DetalleRecepcione" Relationship="DemoProntoModel.FK_DetalleComprobantesProveedores_DetalleRecepciones" FromRole="DetalleComprobantesProveedore" ToRole="DetalleRecepcione" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedoresPresupuestosObra">
           <Key>
@@ -21686,6 +21715,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <NavigationProperty Name="Ubicacione" Relationship="DemoProntoModel.FK_DetalleRecepciones_Ubicaciones" FromRole="DetalleRecepcione" ToRole="Ubicacion" />
           <NavigationProperty Name="DetalleSalidasMateriales" Relationship="DemoProntoModel.FK_DetalleSalidasMateriales_DetalleRecepciones" FromRole="DetalleRecepcione" ToRole="DetalleSalidasMateriale" />
           <Property Name="IdSituacion" Type="Int32" />
+          <NavigationProperty Name="DetalleComprobantesProveedores" Relationship="DemoProntoModel.FK_DetalleComprobantesProveedores_DetalleRecepciones" FromRole="DetalleRecepcione" ToRole="DetalleComprobantesProveedore" />
         </EntityType>
         <EntityType Name="DetalleSalidasMateriale">
           <Key>
@@ -25320,7 +25350,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -25820,7 +25850,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="Tarifa" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaDescarga" Type="DateTime" Precision="3" />
           <Property Name="Hora" Type="DateTime" Precision="3" />
-          <Property Name="NRecibo" Type="Int32" />
+          <Property Name="NRecibo" Type="String" />
           <Property Name="CalidadDe" Type="Int32" />
           <Property Name="TaraFinal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BrutoFinal" Type="Decimal" Precision="18" Scale="2" />
@@ -26491,6 +26521,18 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TipoConsumo" Type="Int32" />
         </EntityType>
+        <Association Name="FK_DetalleComprobantesProveedores_DetalleRecepciones">
+          <End Type="DemoProntoModel.DetalleRecepcione" Role="DetalleRecepcione" Multiplicity="0..1" />
+          <End Type="DemoProntoModel.DetalleComprobantesProveedore" Role="DetalleComprobantesProveedore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetalleRecepcione">
+              <PropertyRef Name="IdDetalleRecepcion" />
+            </Principal>
+            <Dependent Role="DetalleComprobantesProveedore">
+              <PropertyRef Name="IdDetalleRecepcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -27318,6 +27360,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DemoProntoModel.Cliente">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="PorcentajeOtrosImpuestos1" ColumnName="PorcentajeOtrosImpuestos1" />
                 <ScalarProperty Name="IdIBCondicionPorDefecto39" ColumnName="IdIBCondicionPorDefecto39" />
                 <ScalarProperty Name="IdIBCondicionPorDefecto38" ColumnName="IdIBCondicionPorDefecto38" />
                 <ScalarProperty Name="IdIBCondicionPorDefecto37" ColumnName="IdIBCondicionPorDefecto37" />
@@ -28109,6 +28152,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySetMapping Name="Facturas">
             <EntityTypeMapping TypeName="DemoProntoModel.Factura">
               <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="ObservacionesAFIP" ColumnName="ObservacionesAFIP" />
                 <ScalarProperty Name="CircuitoLiquidacionFlete" ColumnName="CircuitoLiquidacionFlete" />
                 <ScalarProperty Name="PorcentajeIBrutos39" ColumnName="PorcentajeIBrutos39" />
                 <ScalarProperty Name="RetencionIBrutos39" ColumnName="RetencionIBrutos39" />
@@ -28315,6 +28359,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="PorcentajeOtrosImpuestos1" ColumnName="PorcentajeOtrosImpuestos1" />
                 <ScalarProperty Name="RiesgoFiscal" ColumnName="RiesgoFiscal" />
                 <ScalarProperty Name="IdIBCondicionAnterior" ColumnName="IdIBCondicionAnterior" />
                 <ScalarProperty Name="RegimenSimplificadoIIBB" ColumnName="RegimenSimplificadoIIBB" />
@@ -29787,6 +29832,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySetMapping Name="OrdenesPago">
             <EntityTypeMapping TypeName="DemoProntoModel.OrdenPago">
               <MappingFragment StoreEntitySet="OrdenesPago">
+                <ScalarProperty Name="RetencionOTROS" ColumnName="RetencionOTROS" />
                 <ScalarProperty Name="FechaTimeStamp" ColumnName="FechaTimeStamp" />
                 <ScalarProperty Name="DocumentacionCompleta" ColumnName="DocumentacionCompleta" />
                 <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />

@@ -10192,18 +10192,18 @@ usuario As String, ConexBDLmaster As String,
         'arreglar esto, porque la segunda vez que se llama con el mismo subnumerodefacturacion, va a devolver un error
 
 
-        'Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
         ' hay que revisar por qué no se banca el demoprontoentities
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
 
         Dim familia = (From e In db.CartasDePortes
-                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
-                             And e.SubnumeroVagon.GetValueOrDefault = SubNumeroVagon
+                       Where If(e.NumeroCartaDePorte, 0) = NumeroCartaDePorte _
+                             And If(e.SubnumeroVagon, 0) = SubNumeroVagon
                        Order By e.FechaAnulacion Descending
                        Select e).ToList()
 
 
-        Dim sss = familia.Where(Function(x) x.SubnumeroDeFacturacion = SubnumeroFacturacion).FirstOrDefault
+        Dim sss = familia.Where(Function(x) If(x.SubnumeroDeFacturacion, 0) = SubnumeroFacturacion).FirstOrDefault
 
 
         If familia.Count = 0 Then
@@ -10454,6 +10454,9 @@ usuario As String, ConexBDLmaster As String,
 
 
                     Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
+
+                    oCarta.NRecibo = .NRecibo 'y si me desembarazo de CartaDePorteDB.Save y su molesto wCartasDePorte_A?....
+
                     oCarta.CalidadGranosQuemados = CDec(iisNull(.CalidadGranosQuemados, 0))
                     oCarta.CalidadGranosQuemadosBonifica_o_Rebaja = iisNull(.CalidadGranosQuemadosBonifRebaja, 0)
                     oCarta.CalidadTierra = CDec(iisNull(.CalidadTierra, 0))

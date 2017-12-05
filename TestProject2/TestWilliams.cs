@@ -867,6 +867,56 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void SincroChiambretto_46876()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void numerador_recibo_a_string_46500()
+        {
+
+            var cp = CartaDePorteManager.GetItem(SC, 46464);
+            cp.NRecibo = "0068989864";
+            string ms = "";
+            CartaDePorteManager.Save(SC, cp, 1, "",  true  ,ref ms);
+
+            var cp2 = CartaDePorteManager.GetItem(SC, 46464);
+
+            Assert.IsTrue(cp2.NRecibo == "0068989864");
+        }
+
+
+
+
         [TestMethod]
         public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
         {
@@ -1231,39 +1281,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
             System.Diagnostics.Process.Start(output);
         }
 
-
-
-
-
-
-
-
-        [TestMethod]
-        public void SincroChiambretto_46876()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcli,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-
-            System.Diagnostics.Process.Start(output);
-        }
 
 
 
