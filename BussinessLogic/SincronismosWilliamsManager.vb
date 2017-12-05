@@ -1567,16 +1567,16 @@ Namespace Pronto.ERP.Bll
 
                             db.Database.CommandTimeout = 240
 
-                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
+                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, maximumRows, enumCDPestado.DescargasMasFacturadas,
                                                                      Nothing, idVendedor,
                                  idCorredor, idDestinatario, idIntermediario, idRComercial,
                                  idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
                                   sDesde, sHasta, 0,
                                  Nothing, False, Nothing, Nothing, Nothing,
                                   Nothing, Nothing, Nothing, Nothing)
-                                            Select c).Take(3000).ToList
+                                            Select c).Take(maximumRows).ToList
 
-                            output = Sincronismo_Chiambretto(dbcartas, , "")
+                            output = Sincronismo_Chiambretto(dbcartas, "", "", SC)
                             registrosFiltrados = dbcartas.Count
 
                         Case "GESAGRO"
@@ -9110,7 +9110,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_Chiambretto(ByVal pDataTable As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3), Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
+        Public Shared Function Sincronismo_Chiambretto(ByVal pDataTable As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3),
+                                                       titulo As String, sWHERE As String, SC As String) As String
 
 
 
@@ -9229,6 +9230,7 @@ Namespace Pronto.ERP.Bll
                     Dim cero = 0
 
 
+                    Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
 
 
 
@@ -9313,7 +9315,7 @@ Namespace Pronto.ERP.Bll
                     '	20	TarifaReferencia		
 
 
-                    sb &= .Observaciones & SEP
+                    sb &= "" & SEP '.Observaciones & SEP
                     sb &= .Acoplado & SEP
                     sb &= .Patente & SEP
                     sb &= .Tarifa & SEP
@@ -9330,7 +9332,7 @@ Namespace Pronto.ERP.Bll
 
                     sb &= .EstablecimientoCodigo & SEP
                     sb &= "" & SEP
-                    sb &= .Cosecha & SEP
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) & SEP
                     sb &= .CTG & SEP
                     sb &= .CorredorDesc & SEP
 
@@ -9390,8 +9392,8 @@ Namespace Pronto.ERP.Bll
                     sb &= .EspecieONCAA & SEP
                     sb &= "" & SEP
                     sb &= .BrutoFinal & SEP
-                    sb &= .Humedad & SEP
                     sb &= .HumedadDesnormalizada & SEP
+                    sb &= .Merma & SEP
 
                     '	45	KgTaraDescargado	15460	14840
                     '	46	KgTotalDescarga	29780	29980
@@ -9401,8 +9403,8 @@ Namespace Pronto.ERP.Bll
 
                     sb &= .TaraFinal & SEP
                     sb &= .NetoFinal & SEP
-                    sb &= "" & SEP
-                    sb &= "" & SEP
+                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) & SEP
+                    sb &= Int(Val(cc.CalidadZarandeoMerma)).ToString.PadLeft(10) & SEP
                     sb &= .NumeroCartaDePorte & SEP
 
                     '	50	Romaneo	884392	884392
@@ -9413,9 +9415,22 @@ Namespace Pronto.ERP.Bll
 
                     sb &= .Turno & SEP
                     sb &= .Humedad & SEP
-                    sb &= "" & SEP
-                    sb &= "" & SEP
-                    sb &= "" & SEP
+                    sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) & SEP
+                    sb &= String.Format("{0:F2}", cc.CalidadMermaZarandeo).PadLeft(10) & SEP
+
+
+
+                    'la recuperacion del calculo del porcentaje de la merma de humedad
+                    sb &= String.Format("{0:F2}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
+                    'Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, idarticulo, StringToDecimal(txtPorcentajeHumedad.Text))
+                    'Dim humedadtot = porcentajemerma / 100 * StringToDecimal(txtNetoDescarga.Text)
+                    'txtHumedadTotal.Text = DecimalToString(Math.Round(humedadtot))
+
+
+
+
+
+
 
                     '	55	OtrasMermas		
                     '	56	Procedencia	10941	10941
