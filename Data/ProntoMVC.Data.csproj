@@ -452,6 +452,9 @@
     <Compile Include="Models\DetalleFacturasRemito.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetalleFlete.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DetalleLMateriale.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -609,6 +612,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FertilizantesTiposDespacho.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flete.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Formulario.cs">

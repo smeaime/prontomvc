@@ -29,157 +29,91 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "SalidaMateriales")',
+            url: '@Url.Action("SalidaMateriales_DynamicGridData", "SalidaMateriales")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdSalidaMateriales', 'TipoSalida', 'IdProveedor', 'IdObra', 'IdTransportista1', 'Numero de salida', 'Fecha', 'Vale preimpreso',
-                       'Requerimientos', 'Recepciones', 'Vales de salida', 'Obra', 'Emitio', 'Aprobo', 'Cliente', 'Proveedor', 'Direccion', 'Localidad', 'Cod. postal', 'Transportista',
-                       'Items', 'Equipos destino', 'Tarifa flete', 'Anulada', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Confecciono', 'Fecha ingreso', 'Modifico', 'Fecha modifico',
-                       'Deposito origen', 'Numero orden produccion', 'Detalle', 'Numero pesada', 'Recibido en destino', 'Fecha recepcion en destino', 'Recibio en destino', 'Observaciones'],
+            colNames: ['', '', 'IdSalidaMateriales', 'Tipo de salida', 'Nro. salida 1', 'Nro. salida 2', 'Fecha salida', 'Obra', 'Cliente', 'Proveedor', 'Direccion', 'Localidad', 'Cod. postal',
+                       'Transportista', 'Observaciones', 'Costo total', 'Vale preimpreso', 'Nro. orden produccion', 'Requerimientos', 'Equipos destino', 'Aprobo', 'Valor declarado', 'Bultos',
+                       'Anulada', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Confecciono', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Detalle', 'Flete', 'Chofer', 'Nro. documento',
+                       'Patente', 'Nro remito Transporte', 'Nro remito Transporte 1', 'Nro remito Transporte 2', 'Nro. pesada', 'Progresiva 1', 'Progresiva 2', 'Fecha pesada',
+                       'Observaciones pesada', 'Peso bruto', 'Peso neto', 'Tara', 'Cant. en origen', 'Distancia recorrida', 'Recibido en destino', 'Fecha recibidos en destino',
+                       'Recibio en destino', 'Destino (entre calles)', 'Circ. Compl. de firmas', 'Items'
+            ],
             colModel: [
-
                         { name: 'ver', index: 'ver', align: 'center', width: 80, sortable: false, editable: false, search: false },
                         { name: 'Emitir', index: 'Emitir'  , width: 80, sortable: false, editable: false, search: false },
                         { name: 'IdSalidaMateriales', index: 'IdSalidaMateriales', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'TipoSalida', index: 'TipoSalida', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'IdProveedor', index: 'IdProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'IdTransportista1', index: 'IdTransportista1', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'NumeroSalidaMateriales', index: 'NumeroSalidaMateriales', align: 'right', width: 120, editable: false, hidden: false },
-
-                           {
-                               name: 'FechaSalidaMateriales', index: 'FechaSalidaMateriales', width: 100, align: 'center',
-                               sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                               datefmt: 'dd/mm/yy',
-
-                               search: true,
-                               searchrules: {
-                                   date: true
-                               },
-                               searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                   sopt: ['ge', 'le', 'eq'],
-                                   dataInit: function (elem) {
-                                       $(elem).datepicker({
-                                           dateFormat: 'dd/mm/yy',
-                                           changeYear: true,
-                                           changeMonth: true,
-                                           showButtonPanel: true,
-                                           onSelect: function () {
-                                               $(this).keydown();
-                                           }
-                                       });
-                                   }
-                               }
-
-                           },
-
-                        { name: 'ValePreimpreso', index: 'ValePreimpreso', align: 'right', width: 80, editable: false, hidden: false },
-                        { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'ValesSalida', index: 'ValesSalida', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Obras', index: 'Obras', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Emitio', index: 'Emitio', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Items', index: 'Items', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'EquiposDestino', index: 'EquiposDestino', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'TarifaFlete', index: 'TarifaFlete', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 130, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Confecciono', index: 'Confecciono', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                             {
-                                 name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center',
-                                 sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                                 datefmt: 'dd/mm/yy',
-
-                                 search: true,
-                                 searchrules: {
-                                     date: true
-                                 },
-                                 searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                     sopt: ['ge', 'le', 'eq'],
-                                     dataInit: function (elem) {
-                                         $(elem).datepicker({
-                                             dateFormat: 'dd/mm/yy',
-                                             changeYear: true,
-                                             changeMonth: true,
-                                             showButtonPanel: true,
-                                             onSelect: function () {
-                                                 $(this).keydown();
-                                             }
-                                         });
-                                     }
-                                 }
-
-                             },
-                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                            {
-                                name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center',
-                                sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-                                datefmt: 'dd/mm/yy',
-
-                                search: true,
-                                searchrules: {
-                                    date: true
-                                },
-                                searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-                                    sopt: ['ge', 'le', 'eq'],
-                                    dataInit: function (elem) {
-                                        $(elem).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            changeYear: true,
-                                            changeMonth: true,
-                                            showButtonPanel: true,
-                                            onSelect: function () {
-                                                $(this).keydown();
-                                            }
-                                        });
-                                    }
-                                }
-
-                            },
-                        { name: 'DepositoOrigen', index: 'DepositoOrigen', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'NumeroOrdenProduccion', index: 'NumeroOrdenProduccion', align: 'right', width: 90, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'NumeroPesada', index: 'NumeroPesada', align: 'right', width: 80, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'RecibidosEnDestino', index: 'RecibidosEnDestino', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-
-       {
-           name: 'RecibidosEnDestinoFecha', index: 'RecibidosEnDestinoFecha', width: 100, align: 'center',
-           sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' },
-           datefmt: 'dd/mm/yy',
-
-           search: true,
-           searchrules: {
-               date: true
-           },
-           searchoptions: { // http://stackoverflow.com/questions/14632735/jqgrid-searching-dates
-               sopt: ['ge', 'le', 'eq'],
-               dataInit: function (elem) {
-                   $(elem).datepicker({
-                       dateFormat: 'dd/mm/yy',
-                       changeYear: true,
-                       changeMonth: true,
-                       showButtonPanel: true,
-                       onSelect: function () {
-                           $(this).keydown();
-                       }
-                   });
-               }
-           }
-
-       },
-
-                        { name: 'MarcoRecepcionEnDestino', index: 'MarcoRecepcionEnDestino', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
+                        { name: 'TipoSalida', index: 'TipoSalida', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'NumeroSalidaMateriales1', index: 'NumeroSalidaMateriales1', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'NumeroSalidaMateriales2', index: 'NumeroSalidaMateriales2', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        {
+                            name: 'FechaSalidaMateriales', index: 'FechaSalidaMateriales', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'Obra', index: 'Obra', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Cliente', index: 'Cliente', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Direccion', index: 'Direccion', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Localidad', index: 'Localidad', align: 'left', width: 150, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Transportista', index: 'Transportista', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CostoTotal', index: 'CostoTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'ValePreimpreso', index: 'ValePreimpreso', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'NumeroOrdenProduccion', index: 'NumeroOrdenProduccion', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'EquiposDestino', index: 'EquiposDestino', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'ValorDeclarado', index: 'ValorDeclarado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Bultos', index: 'Bultos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Anulo', index: 'Anulo', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Confecciono', index: 'Confecciono', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaIngreso', index: 'FechaIngreso', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'Modifico', index: 'Modifico', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'FechaModifico', index: 'FechaModifico', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'Detalle', index: 'Detalle', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Flete', index: 'Flete', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Chofer', index: 'Chofer', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroDocumento', index: 'NumeroDocumento', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Patente1', index: 'Patente1', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroRemitoTransporte', index: 'NumeroRemitoTransporte', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'NumeroRemitoTransporte2', index: 'NumeroRemitoTransporte2', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'NumeroRemitoTransporte1', index: 'NumeroRemitoTransporte1', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'NumeroPesada', index: 'NumeroPesada', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Progresiva1', index: 'Progresiva1', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Progresiva2', index: 'Progresiva2', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
+                        {
+                            name: 'FechaPesada', index: 'FechaPesada', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'ObservacionesPesada', index: 'ObservacionesPesada', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'PesoBruto', index: 'PesoBruto', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'PesoNeto', index: 'PesoNeto', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'Tara', index: 'Tara', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'CantidadEnOrigen', index: 'CantidadEnOrigen', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'DistanciaRecorrida', index: 'DistanciaRecorrida', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'RecibidosEnDestino', index: 'RecibidosEnDestino', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        {
+                            name: 'RecibidosEnDestinoFecha', index: 'RecibidosEnDestinoFecha', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                            search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                        },
+                        { name: 'RecibioEnDestino', index: 'RecibioEnDestino', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'DestinoEntreCalles', index: 'DestinoEntreCalles', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Items', index: 'Items', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -192,32 +126,33 @@
             pager: $('#ListaPager'),
             rowNum: 15,
             rowList: [10, 20, 50, 20000],
-            sortname: 'FechaSalidaMateriales,NumeroSalidaMateriales',
+            sortname: 'FechaSalidaMateriales,NumeroSalidaMateriales2,NumeroSalidaMateriales1',
             sortorder: 'desc',
             viewrecords: true,
             width: 'auto', // 'auto',
             autowidth: true,
             shrinkToFit: false,
-            height: '100%',
+            height: $(window).height() - ALTOLISTADO, // '100%'
             altRows: false,
             footerrow: false,
             userDataOnFooter: true,
-            caption: '<b>SALIDAS DE MATERIALES</b>'
+            caption: '<b>SALIDAS DE MATERIALES</b>',
+            gridview: true,
+            multiboxonly: true,
+            multipleSearch: true
         });
 
 
-        jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: true, add: false, edit: false, del: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-        //        jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 1500, minHeight: 80, maxHeight: 500 });
+        jQuery("#Lista").jqGrid('bindKeys');
 
         jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
- { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
- {
-     //sopt: ["cn"]
-     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
- }
-);
-
+         { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+         {
+             //sopt: ["cn"]
+             //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+             width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+         }
+        );
 
         jQuery("#Lista").filterToolbar({
             stringResult: true, searchOnEnter: true,
@@ -225,19 +160,12 @@
             enableClear: false
         }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
 
-
-
+        pageLayout.hide('east');
+        pageLayout.hide('south');
 
         $(window).resize(function () {
             RefrescaAnchoJqgrids();
         });
-
-
-
-
-
-        pageLayout.hide('east');
-        pageLayout.hide('south');
     });
 
 </script>

@@ -1104,7 +1104,8 @@ namespace ProntoMVC.Controllers
                 Int32 mIdCuentaBonificaciones = 0;
                 Int32 mIdCuenta = 0;
                 Int32 mIdCuentaReintegros = 0;
-
+                Int32 mIdImputacion = 0;
+                
                 string errs = "";
                 string warnings = "";
                 string mWebService = "";
@@ -1320,13 +1321,16 @@ namespace ProntoMVC.Controllers
                             {
                                 CtaCte = new CuentasCorrientesAcreedor();
                                 mIdCtaCte = 0;
+                                mIdImputacion = 0;
                             }
                             else
                             {
                                 mIdCtaCte = CtaCte.IdCtaCte;
+                                mIdImputacion = CtaCte.IdImputacion ?? 0;
                             }
 
                             CtaCte.IdTipoComp = mIdTipoComprobante;
+                            CtaCte.IdComprobante = mIdComprobanteProveedor;
                             CtaCte.IdProveedor = ComprobanteProveedor.IdProveedor;
                             CtaCte.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
                             CtaCte.Fecha = ComprobanteProveedor.FechaRecepcion;
@@ -1334,7 +1338,7 @@ namespace ProntoMVC.Controllers
                             CtaCte.CotizacionDolar = ComprobanteProveedor.CotizacionDolar;
                             CtaCte.CotizacionEuro = ComprobanteProveedor.CotizacionEuro;
                             CtaCte.CotizacionMoneda = ComprobanteProveedor.CotizacionMoneda;
-                            CtaCte.IdComprobante = ComprobanteProveedor.IdOrdenPago;
+                            //CtaCte.IdComprobante = ComprobanteProveedor.IdOrdenPago;
                             CtaCte.ImporteTotal = mTotal;
                             CtaCte.Saldo = mTotal - mTotalAnterior;
                             CtaCte.ImporteTotalDolar = mTotalDolar;
@@ -1348,6 +1352,17 @@ namespace ProntoMVC.Controllers
 
                             db.SaveChanges();
                             mIdCtaCte = CtaCte.IdCtaCte;
+
+                            if (mIdImputacion == 0)
+                            {
+                                CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdCtaCte == mIdCtaCte).SingleOrDefault();
+                                if (CtaCte != null)
+                                {
+                                    CtaCte.IdImputacion = mIdCtaCte;
+                                    db.Entry(CtaCte).State = System.Data.Entity.EntityState.Modified;
+                                    db.SaveChanges();
+                                }
+                            }
                         }
 
                         ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
@@ -1909,8 +1924,11 @@ namespace ProntoMVC.Controllers
         void inic(ref ComprobanteProveedor o)
         {
             Parametros parametros = db.Parametros.Find(1); //fondoFijoService.Parametros();
+
+            Int32 mIdMonedaDolar = parametros.IdMonedaDolar ?? 2;
+            Int32 mIdMonedaEuro = parametros.IdMonedaEuro ?? 3;
+
             o.NumeroReferencia = parametros.ProximoComprobanteProveedorReferencia;
-            //o.SubNumero = 1;
             o.FechaComprobante = DateTime.Today;
 
             o.FechaIngreso = DateTime.Today;
@@ -1931,53 +1949,13 @@ namespace ProntoMVC.Controllers
             o.CotizacionMoneda = 1;
             ViewBag.Proveedor = "";
 
-            //o.PorcentajeIva1 = 21;                  //  mvarP_IVA1_Tomado
-            //o.FechaFactura = DateTime.Now;
-
-            //Parametros parametros = fondoFijoService.Parametros();
-            //o.OtrasPercepciones1 = 0;
-            //o.OtrasPercepciones1Desc = ((parametros.OtrasPercepciones1 ?? "NO") == "SI") ? parametros.OtrasPercepciones1Desc : "";
-            //o.OtrasPercepciones2 = 0;
-            //o.OtrasPercepciones2Desc = ((parametros.OtrasPercepciones2 ?? "NO") == "SI") ? parametros.OtrasPercepciones2Desc : "";
-            //o.OtrasPercepciones3 = 0;
-            //o.OtrasPercepciones3Desc = ((parametros.OtrasPercepciones3 ?? "NO") == "SI") ? parametros.OtrasPercepciones3Desc : "";
-
-            //o.IdMoneda = 1;
-
-            //mvarP_IVA1 = .Fields("Iva1").Value
-            //mvarP_IVA2 = .Fields("Iva2").Value
-            //mvarPorc_IBrutos_Cap = .Fields("Porc_IBrutos_Cap").Value
-            //mvarTope_IBrutos_Cap = .Fields("Tope_IBrutos_Cap").Value
-            //mvarPorc_IBrutos_BsAs = .Fields("Porc_IBrutos_BsAs").Value
-            //mvarTope_IBrutos_BsAs = .Fields("Tope_IBrutos_BsAs").Value
-            //mvarPorc_IBrutos_BsAsM = .Fields("Porc_IBrutos_BsAsM").Value
-            //mvarTope_IBrutos_BsAsM = .Fields("Tope_IBrutos_BsAsM").Value
-            //mvarDecimales = .Fields("Decimales").Value
-            //mvarAclaracionAlPie = .Fields("AclaracionAlPieDeFactura").Value
-            //mvarIdMonedaPesos = .Fields("IdMoneda").Value
-            //mvarIdMonedaDolar = .Fields("IdMonedaDolar").Value
-            //mvarPercepcionIIBB = IIf(IsNull(.Fields("PercepcionIIBB").Value), "NO", .Fields("PercepcionIIBB").Value)
-            //mvarOtrasPercepciones1 = IIf(IsNull(.Fields("OtrasPercepciones1").Value), "NO", .Fields("OtrasPercepciones1").Value)
-            //mvarOtrasPercepciones1Desc = IIf(IsNull(.Fields("OtrasPercepciones1Desc").Value), "", .Fields("OtrasPercepciones1Desc").Value)
-            //mvarOtrasPercepciones2 = IIf(IsNull(.Fields("OtrasPercepciones2").Value), "NO", .Fields("OtrasPercepciones2").Value)
-            //mvarOtrasPercepciones2Desc = IIf(IsNull(.Fields("OtrasPercepciones2Desc").Value), "", .Fields("OtrasPercepciones2Desc").Value)
-            //mvarOtrasPercepciones3 = IIf(IsNull(.Fields("OtrasPercepciones3").Value), "NO", .Fields("OtrasPercepciones3").Value)
-            //mvarOtrasPercepciones3Desc = IIf(IsNull(.Fields("OtrasPercepciones3Desc").Value), "", .Fields("OtrasPercepciones3Desc").Value)
-            //mvarConfirmarClausulaDolar = IIf(IsNull(.Fields("ConfirmarClausulaDolar").Value), "NO", .Fields("ConfirmarClausulaDolar").Value)
-            //mvarNumeracionUnica = False
-            //If .Fields("NumeracionUnica").Value = "SI" Then mvarNumeracionUnica = True
-            //gblFechaUltimoCierre = IIf(IsNull(.Fields("FechaUltimoCierre").Value), DateSerial(1980, 1, 1), .Fields("FechaUltimoCierre").Value)
-
-
-            // fondoFijoService.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
             o.CotizacionMoneda = 1;
-            //  o.CotizacionADolarFijo=
-            o.CotizacionDolar = (decimal)(mvarCotizacion ?? 0);
 
-            //o.DetalleFacturas.Add(new DetalleFactura());
-            //o.DetalleFacturas.Add(new DetalleFactura());
-            //o.DetalleFacturas.Add(new DetalleFactura());
+            Cotizacione Cotizaciones = db.Cotizaciones.Where(x => x.IdMoneda == mIdMonedaDolar && x.Fecha == DateTime.Today).FirstOrDefault();
+            if (Cotizaciones != null) { o.CotizacionDolar = Cotizaciones.Cotizacion ?? 0; }
+
+            Cotizaciones = db.Cotizaciones.Where(x => x.IdMoneda == mIdMonedaEuro && x.Fecha == DateTime.Today).FirstOrDefault();
+            if (Cotizaciones != null) { o.CotizacionEuro = Cotizaciones.Cotizacion ?? 0; }
         }
 
         public virtual ActionResult Create()
@@ -3742,6 +3720,8 @@ namespace ProntoMVC.Controllers
                         {
                             a.IdDetalleComprobanteProveedor,
                             a.IdCuenta,
+                            a.IdDetallePedido,
+                            a.IdDetalleRecepcion,
                             a.IdObra,
                             a.IdCuentaGasto,
                             a.IdCuentaBancaria,
@@ -3777,6 +3757,8 @@ namespace ProntoMVC.Controllers
                             string.Empty,
                             a.IdDetalleComprobanteProveedor.ToString(),
                             a.IdCuenta.NullSafeToString(),
+                            a.IdDetallePedido.NullSafeToString(),
+                            a.IdDetalleRecepcion.NullSafeToString(),
                             a.IdObra.NullSafeToString(),
                             a.IdCuentaGasto.NullSafeToString(),
                             a.IdCuentaBancaria.NullSafeToString(),
