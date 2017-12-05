@@ -2176,9 +2176,11 @@ go
 
 
 
-select * from vendedores where nombre like 'futuros%'
+sp_help cartasdeporte
 
-select * from  wTempCartasPorteFacturacionAutomatica where idsesion=7069
+ALTER TABLE  cartasdeporte  ALTER COLUMN  
+	 NRecibo VARCHAR(15) NULL  --de int a string   
+GO
 
 
 

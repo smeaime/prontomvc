@@ -731,39 +731,43 @@ Partial Class CartadeporteABM
         '////////////////////////////////////////////
 
 
+        Try
 
 
+            Using db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
 
-        Using db = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+                Dim rec As Reclamo
+                Dim carta = db.CartasDePortes.Find(myCartaDePorte.Id)
 
-            Dim rec As Reclamo
-            Dim carta = db.CartasDePortes.Find(myCartaDePorte.Id)
+                rec = db.Reclamos.Find(carta.IdReclamo)
 
-            rec = db.Reclamos.Find(carta.IdReclamo)
+                If rec IsNot Nothing Then
+                    If rec.Estado = 2 Then
+                        'Button6.Enabled = False
+                        TextBox5.Enabled = False
+                        AsyncFileUpload3.Enabled = False
+                        'btnCerrarReclamo.Enabled = False
 
-            If rec IsNot Nothing Then
-                If rec.Estado = 2 Then
-                    'Button6.Enabled = False
-                    TextBox5.Enabled = False
-                    AsyncFileUpload3.Enabled = False
-                    'btnCerrarReclamo.Enabled = False
+                        AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
+                                "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').hide();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').show(); " _
+                                , True)
 
-                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
-                            "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').hide();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').show(); " _
-                            , True)
+                    Else
 
-                Else
+                        AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
+                                "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').show();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').hide(); " _
+                                , True)
 
-                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "StartUp2",
-                            "$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo').show();  $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo').hide(); " _
-                            , True)
+                    End If
 
                 End If
 
-            End If
+            End Using
 
-        End Using
+        Catch ex As Exception
 
+            ErrHandler2.WriteError(ex)
+        End Try
 
 
     End Sub

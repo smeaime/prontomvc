@@ -156,6 +156,7 @@ namespace ProntoMVC.Data.Models
         public string RegimenSimplificadoIIBB { get; set; }
         public Nullable<int> IdIBCondicionAnterior { get; set; }
         public string RiesgoFiscal { get; set; }
+        public Nullable<decimal> PorcentajeOtrosImpuestos1 { get; set; }
     
         public virtual ICollection<DetalleProveedor> DetalleProveedoresContactos { get; set; }
         public virtual ICollection<DetalleProveedoresIB> DetalleProveedoresIBs { get; set; }

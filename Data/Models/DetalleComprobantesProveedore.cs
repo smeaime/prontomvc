@@ -105,5 +105,6 @@ namespace ProntoMVC.Data.Models
     
         public virtual ComprobanteProveedor ComprobantesProveedore { get; set; }
         public virtual Cuenta Cuenta { get; set; }
+        public virtual DetalleRecepcione DetalleRecepcione { get; set; }
     }
 }
