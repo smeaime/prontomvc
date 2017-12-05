@@ -867,6 +867,385 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void SincroChiambretto_46876()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+            idcli = -1;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 13), new DateTime(2016, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 100);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroMBC_47026()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("MBC", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+        
+
+
+
+
+
+
+        [TestMethod]
+        public void numerador_recibo_a_string_46500()
+        {
+
+            var cp = CartaDePorteManager.GetItem(SC, 46464);
+            cp.NRecibo = "0068989864";
+            string ms = "";
+            CartaDePorteManager.Save(SC, cp, 1, "",  true  ,ref ms);
+
+            var cp2 = CartaDePorteManager.GetItem(SC, 46464);
+
+            Assert.IsTrue(cp2.NRecibo == "0068989864");
+        }
+
+
+
+
+        [TestMethod]
+        public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
+        {
+
+
+
+
+            /*
+
+            Andrès, estoy facturando el corredor Futuros y Opciones, como tiene muchas descargas, deberia generar automàticamente 2 facturas, solamente genera una y sale esta leyenda:
+            No se pudo crear la factura para FUTUROS Y OPCIONES .COM; Excede el máximo de renglones
+            No se pudo crear la factura para FUTUROS Y OPCIONES.COM; verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no se haya disparado el error **listacdp vacia** o no haya otro cliente con el mismo nombre
+
+
+Facturas generadas  Cliente Total   IVA IBrutos1    IBrutos2 IBrutos3    Certif IIBB
+A - 0020 - 00009403 FUTUROS Y OPCIONES.COM 41003.50    7116.31 0.00    0.00    0.00
+
+Es con el unico corredor que todos los meses pasa lo mismo.
+
+
+
+
+
+            Log Entry : 
+06/05/2017 11:24:15
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)15
+__________________________
+
+            __________________________
+
+Log Entry : 
+06/05/2017 11:24:15
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 378
+__________________________
+
+Log Entry : 
+06/05/2017 11:24:15
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 378
+__________________________
+
+Log Entry : 
+06/05/2017 11:24:15
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 378
+
+                __________________________
+
+Log Entry:
+            06 / 05 / 2017 11:24:33
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:La factura para 13648 tiene 63 renglones y el 
+            máximo es 20
+            __________________________
+
+            Log Entry:
+            06 / 05 / 2017 11:24:33
+Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la 
+            factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  Excede el máximo 
+            de renglones <br/>No se pudo crear la factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
+
+
+            */
+
+
+
+
+
+            int idClienteAfacturarle = 13648; // futuros y opciones
+            const int idcorredorFYO = 107;
+            int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
+            bool SeEstaSeparandoPorCorredor = false;
+            string agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)"; // usar un agrupamiento complejo, así salen más renglones en la factura
+
+
+            string txtCorredor = "";
+            int idClienteObservaciones = -1;
+            int PuntoVenta = 1;
+
+
+
+
+            string txtBuscar = "";
+            string txtTarifaGastoAdministrativo = "";
+
+            bool chkPagaCorredor = false;
+            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
+
+
+
+
+            DataTable dtRenglonesAgregados = new DataTable();
+            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
+
+            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
+            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
+
+
+
+            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
+            string ms = "";
+
+
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            List<int> lista_int = new List<int>();
+
+
+            // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            for (int n = 2000000; n < 2000500; n++) // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            {
+                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
+                cp.TarifaFacturada = Convert.ToDecimal(2.77);
+                cp.Vendedor = idClienteAfacturarle;
+                cp.Corredor = idcorredorFYO;
+                cp.IdFacturaImputada = 0;
+            }
+            db.SaveChanges();
+
+            for (int n = 2000000; n < 2000500; n++) // estás agregando cartas q no son facturables (por ejemplo, incompletas) que desde el frontend no se pueden agregar
+            {
+                var c = CartaDePorteManager.GetItem(SC, n);
+                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
+
+                lote.Add(c);
+                lista_int.Add(n);
+            }
+
+
+            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
+
+
+
+
+            //var f = db.Facturas.Find(idFactura);
+
+            //Assert.AreEqual(true, f.ImporteTotal<100);
+            //Assert.AreEqual(0, f.RetencionIBrutos1);
+
+            object primerId = 0, ultimoId = 0;
+
+            // uso dos tickets: uno el de la grilla. el otro, de qué?
+            object sesionId = 0;
+            string sesionIdposta = (new Random()).Next().ToString();
+
+
+            var gv = new System.Web.UI.WebControls.GridView();
+
+            string errLog = "";
+            object filas = "", slinks = "";
+
+
+
+            //no importa las fechas, lo importante son las tildes de la grilla
+            var desde = new DateTime(1900, 1, 31);
+            var hasta = new DateTime(2100, 1, 31);
+
+
+            System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
+            //Session[SESSIONPRONTO_glbIdUsuario] = 1;
+
+
+
+
+
+            //marcar las cartas en wGrillaPersistencia
+            //lote.Select(x => x.IdCartaDePorte)
+            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, sesionIdposta, lista_int);
+
+
+
+            //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
+
+
+            string sLista = string.Join(",", lista_int);
+
+
+            object pag = 1;
+            int cuantosrenglones = 9999999;
+
+
+            string txtFacturarATerceros = EntidadManager.NombreCliente(SC, idClienteAfacturarle);
+
+
+            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
+                                                     SC, ref pag, ref sesionId,
+                                                   cuantosrenglones, PuntoVenta,
+                                                    desde,
+                                                    hasta,
+                                                     sLista, "", optFacturarA, optFacturarA==4 ? txtFacturarATerceros : ""
+                                                     , SC, "", "",
+                                                    "", "", "", "",
+                                                    "", "", txtBuscar, "",
+                                                     "", "",
+                                                     0, 0, "", ref errLog,
+                                                     "", agruparArticulosPor,
+                                                     ref filas, ref slinks, sesionIdposta);
+
+
+            // codigo de CambiarLasTarifasQueEstenEnCero()
+
+            foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
+            {
+                if ((decimal)(r["TarifaFacturada"]) == 0)
+                {
+                    try
+                    {
+                        long Cli = SQLdinamico.BuscaIdClientePreciso(r["FacturarselaA"].NullSafeToString(), SC);
+
+                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int)r["idCartaDePorte"]);
+
+                        ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrHandler2.WriteError(ex);
+
+                    }
+                }
+            }
+
+
+
+
+
+            DataTable dtViewstateRenglonesManuales = null;
+
+
+
+            //hay q vigilar la funcion EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones -evidentemente esa funcion solo está haciendo 2 facturas si se queda corto, pero no más.
+
+            LogicaFacturacion.GenerarLoteFacturas_NUEVO(
+                            ref tablaEditadaDeFacturasParaGenerar, SC,
+                            optFacturarA, ref gv,
+                            SeEstaSeparandoPorCorredor, ref Session, PuntoVenta,
+                            dtViewstateRenglonesManuales, agruparArticulosPor,
+                            txtBuscar, txtTarifaGastoAdministrativo, ref errLog, txtCorredor,
+                            chkPagaCorredor, "", ref primerId, ref ultimoId, 0);
+
+
+
+            //int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
+            //                            dtRenglonesAgregados, SC, null, optFacturarA,
+            //                         agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
+            //                           txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void plantillas_por_punto_de_venta_47029()
+        {
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            var f = db.Facturas.Find(80500);
+            f.CAE = "654646";
+            db.SaveChanges();
+
+            var f2 = db.Facturas.Find(87700);
+            f2.CAE = "654646";
+            db.SaveChanges();
+
+
+            var output2 = CartaDePorteManager.ImprimirFacturaElectronica(80500, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output2);
+
+
+            var output3 = CartaDePorteManager.ImprimirFacturaElectronica(87700, false, SC, DirApp);
+
+
+            System.Diagnostics.Process.Start(output3);
+
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void SincroAMAGGI_47023()
         {
@@ -943,39 +1322,6 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void SincroChiambretto_46876()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            int registrosf = 0;
-
-            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30 -71544287-2", SC, "");
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, idcli,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2017, 1, 13), new DateTime(2017, 1, 16),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-
-
 
 
         [TestMethod]
@@ -1006,9 +1352,9 @@ namespace ProntoMVC.Tests
         {
 
             CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
-            
-        //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-        //    btnsituacion.Visible = False
+
+            //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            //    btnsituacion.Visible = False
 
 
 
@@ -1020,13 +1366,13 @@ namespace ProntoMVC.Tests
         {
 
             // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
-            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf",SC,scbdlmasterappconfig);
+            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf", SC, scbdlmasterappconfig);
             //Busco en q comentario esta el archivo
             //    busco el reclamo del comentario, y la carta del comentario
             //    veo si tiene permiso para esa carta
 
         }
-            
+
 
 
 
@@ -1045,7 +1391,7 @@ namespace ProntoMVC.Tests
         }
 
 
-        
+
 
         [TestMethod]
         public void EnviarMailALosQueParticipanEnElReclamo()
@@ -1076,10 +1422,11 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void cerrar_consulta_43063()
         {
-            int idcarta = 2633399;
+            int idcarta = 2633333;
 
 
             var s = new ServicioCartaPorte.servi();
+            s.AbrirReclamo_DLL(idcarta, usuario, SC);
             s.CerrarReclamo_DLL(idcarta, usuario, SC);
 
         }
@@ -2437,248 +2784,6 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
 
 
 
-
-
-
-
-
-
-        [TestMethod]
-        public void FACTURACION_FUTUROS_Y_OPCIONES_maximo_de_renglones_28265()
-        {
-
-
-
-
-            /*
-
-            Andrès, estoy facturando el corredor Futuros y Opciones, como tiene muchas descargas, deberia generar automàticamente 2 facturas, solamente genera una y sale esta leyenda:
-            No se pudo crear la factura para FUTUROS Y OPCIONES .COM; Excede el máximo de renglones
-            No se pudo crear la factura para FUTUROS Y OPCIONES.COM; verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no se haya disparado el error **listacdp vacia** o no haya otro cliente con el mismo nombre
-
-
-Facturas generadas  Cliente Total   IVA IBrutos1    IBrutos2 IBrutos3    Certif IIBB
-A - 0020 - 00009403 FUTUROS Y OPCIONES.COM 41003.50    7116.31 0.00    0.00    0.00
-
-Es con el unico corredor que todos los meses pasa lo mismo.
-
-
-
-
-
-            Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)15
-__________________________
-
-            __________________________
-
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 378
-__________________________
-
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 378
-__________________________
-
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 378
-
-                __________________________
-
-Log Entry:
-            06 / 05 / 2017 11:24:33
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:La factura para 13648 tiene 63 renglones y el 
-            máximo es 20
-            __________________________
-
-            Log Entry:
-            06 / 05 / 2017 11:24:33
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la 
-            factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  Excede el máximo 
-            de renglones <br/>No se pudo crear la factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
-
-
-            */
-
-
-
-
-
-            long idClienteAfacturarle = 13648; // futuros y opciones
-            int optFacturarA = 4; //para fyo, stella usa "por corredor" (o sea, opcion 3.   1. titular/ 2 destinatario /   3.corredor  / 4 a tercero / 5 automatico)   
-            bool SeEstaSeparandoPorCorredor = false;
-            string agruparArticulosPor = "Destino";
-
-
-            string txtCorredor = "";
-            int idClienteObservaciones = -1;
-            int PuntoVenta = 1;
-
-
-
-
-            string txtBuscar = "";
-            string txtTarifaGastoAdministrativo = "";
-
-            bool chkPagaCorredor = false;
-            //   numeroOrdenCompra As String, ByRef PrimeraIdFacturaGenerada As Object, 
-
-
-
-
-
-            DataTable dtRenglonesAgregados = new DataTable();
-            //dtRenglonesAgregados.Rows.Add(dtRenglonesAgregados.NewRow());
-
-            var listEmbarques = new System.Collections.Generic.List<System.Data.DataRow>();
-            //listEmbarques.Add(dtRenglonesAgregados.NewRow());
-
-
-
-            var lote = new System.Collections.Generic.List<Pronto.ERP.BO.CartaDePorte>();
-            string ms = "";
-
-
-
-            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            List<int> lista_int = new List<int>();
-
-
-
-            for (int n = 1372900; n < 1372999; n++)
-            {
-                var cp = (from i in db.CartasDePortes where i.IdCartaDePorte == n select i).Single();
-                cp.TarifaFacturada = Convert.ToDecimal(2.77);
-                cp.IdFacturaImputada = 0;
-                db.SaveChanges();
-
-                var c = CartaDePorteManager.GetItem(SC, n);
-                // CartaDePorteManager.Save(SC, c, 2, "", false, ref ms);
-
-                lote.Add(c);
-                lista_int.Add(n);
-            }
-
-
-            IEnumerable<LogicaFacturacion.grup> imputaciones = null;
-
-
-
-
-            //var f = db.Facturas.Find(idFactura);
-
-            //Assert.AreEqual(true, f.ImporteTotal<100);
-            //Assert.AreEqual(0, f.RetencionIBrutos1);
-
-            object primerId = 0, ultimoId = 0;
-
-            // uso dos tickets: uno el de la grilla. el otro, de qué?
-            object sesionId = 0;
-            string sesionIdposta = (new Random()).Next().ToString();
-
-
-            var gv = new System.Web.UI.WebControls.GridView();
-
-            string errLog = "";
-            object filas = "", slinks = "";
-
-
-
-            //no importa las fechas, lo importante son las tildes de la grilla
-            var desde = new DateTime(1900, 1, 31);
-            var hasta = new DateTime(2100, 1, 31);
-
-
-            System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
-
-
-
-
-            //marcar las cartas en wGrillaPersistencia
-            //lote.Select(x => x.IdCartaDePorte)
-            LogicaFacturacion.GridCheckboxPersistenciaBulk(SC, sesionIdposta, lista_int);
-
-
-
-            //DataTable tablaEditadaDeFacturasParaGenerar = dtDatasourcePaso2() // es casi un wrapper. esto lo puedo reemplazar con la llamada mas directa a GetDatatableAsignacionAutomatica
-
-
-            string sLista = string.Join(",", lista_int);
-
-
-            object pag = 1;
-            int cuantosrenglones = 9999999;
-
-            DataTable tablaEditadaDeFacturasParaGenerar = LogicaFacturacion.GetDatatableAsignacionAutomatica(
-                                                     SC, ref pag, ref sesionId,
-                                                   cuantosrenglones, PuntoVenta,
-                                                    desde,
-                                                    hasta,
-                                                     sLista, "", optFacturarA, ""
-                                                     , SC, "", "",
-                                                    "", "", "", "",
-                                                    "", "", txtBuscar, "",
-                                                     "", "",
-                                                     0, 0, "", ref errLog,
-                                                     "", agruparArticulosPor,
-                                                     ref filas, ref slinks, sesionIdposta);
-
-
-            // codigo de CambiarLasTarifasQueEstenEnCero()
-
-            foreach (DataRow r in tablaEditadaDeFacturasParaGenerar.Rows)
-            {
-                if ((decimal)(r["TarifaFacturada"]) == 0)
-                {
-                    try
-                    {
-                        long Cli = SQLdinamico.BuscaIdClientePreciso(r["FacturarselaA"].NullSafeToString(), SC);
-
-                        Pronto.ERP.BO.CartaDePorte ocdp = CartaDePorteManager.GetItem(SC, (int)r["idCartaDePorte"]);
-
-                        ListaPreciosManager.SavePrecioPorCliente(SC, Cli, ocdp.IdArticulo, 1.55);
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrHandler2.WriteError(ex);
-
-                    }
-                }
-            }
-
-
-
-
-
-            DataTable dtViewstateRenglonesManuales = null;
-
-
-
-            LogicaFacturacion.GenerarLoteFacturas_NUEVO(
-                            ref tablaEditadaDeFacturasParaGenerar, SC,
-                            optFacturarA, ref gv,
-                            SeEstaSeparandoPorCorredor, ref Session, PuntoVenta,
-                            dtViewstateRenglonesManuales, agruparArticulosPor,
-                            txtBuscar, txtTarifaGastoAdministrativo, ref errLog, txtCorredor,
-                            chkPagaCorredor, "", ref primerId, ref ultimoId, 0);
-
-
-
-            //int idFactura = LogicaFacturacion.CreaFacturaCOMpronto(lote, idClienteAfacturarle, PuntoVenta,
-            //                            dtRenglonesAgregados, SC, null, optFacturarA,
-            //                         agruparArticulosPor, txtBuscar, txtTarifaGastoAdministrativo, SeEstaSeparandoPorCorredor,
-            //                           txtCorredor, chkPagaCorredor, listEmbarques, ref imputaciones, idClienteObservaciones);
-
-
-
-
-        }
 
 
 

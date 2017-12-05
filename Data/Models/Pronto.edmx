@@ -13696,8 +13696,11 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             <End Role="DetalleRecepcione" EntitySet="DetalleRecepciones" />
             <End Role="DetalleComprobantesProveedore" EntitySet="DetalleComprobantesProveedores" />
           </AssociationSet>
+<<<<<<< HEAD
           <EntitySet Name="DetalleFletes" EntityType="DemoProntoModel.DetalleFlete" />
           <EntitySet Name="Fletes" EntityType="DemoProntoModel.Flete" />
+=======
+>>>>>>> e8cf6bba02488e8343b4ba3aaaef061d14611185
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -24840,7 +24843,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -25029,7 +25032,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -25407,7 +25410,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" MaxLength="15" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -25666,7 +25669,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -25907,7 +25910,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="Tarifa" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaDescarga" Type="DateTime" Precision="3" />
           <Property Name="Hora" Type="DateTime" Precision="3" />
-          <Property Name="NRecibo" Type="Int32" />
+          <Property Name="NRecibo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="CalidadDe" Type="Int32" />
           <Property Name="TaraFinal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BrutoFinal" Type="Decimal" Precision="18" Scale="2" />
@@ -26180,7 +26183,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Type="Decimal" Name="Tarifa" Nullable="true" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaDescarga" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="Hora" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="NRecibo" Nullable="true" />
+          <Property Type="String" Name="NRecibo" Nullable="true" />
           <Property Type="Int32" Name="CalidadDe" Nullable="true" />
           <Property Type="Decimal" Name="TaraFinal" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="BrutoFinal" Nullable="true" Precision="18" Scale="2" />
@@ -26590,6 +26593,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
         <EntityType Name="DetalleFlete">
           <Key>
             <PropertyRef Name="IdDetalleFlete" />
@@ -26631,6 +26635,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="IdOrigenTransmision" Type="Int32" />
           <Property Name="PatenteChasis" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+=======
+>>>>>>> e8cf6bba02488e8343b4ba3aaaef061d14611185
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

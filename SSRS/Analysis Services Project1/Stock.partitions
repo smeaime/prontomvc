@@ -1,0 +1,33 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="3ecdcce3-8055-4149-abf3-3f272bcc64fd" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Stock</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Temp Cubo Stock</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="83722482-d0ea-43cd-a402-e118e60e27ce">
+          <ID>Temp Cubo Stock</ID>
+          <Name>Stock</Name>
+          <CreatedTimestamp>2010-01-28T14:00:54Z</CreatedTimestamp>
+          <LastSchemaUpdate>2010-01-28T14:00:54Z</LastSchemaUpdate>
+          <LastProcessed>2010-01-28T14:01:16Z</LastProcessed>
+          <State>Processed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="27291b82-60ae-4c96-a85c-df561b36029a">
+            <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+            <TableID>dbo__TempCuboStock</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="ae4d62e9-1226-41fb-a7e6-0242a5c5f99c">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="3cf4f5e7-8fe1-421b-8c1f-b1f639e21428" />
+          </ProactiveCaching>
+          <EstimatedSize>1332013</EstimatedSize>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

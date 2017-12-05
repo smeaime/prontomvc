@@ -1,0 +1,302 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="0570cd1d-c010-4884-affb-460d91db421a" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005</ID>
+  <Name>Balance</Name>
+  <CreatedTimestamp>2010-01-28T14:00:49Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:49Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-9386" scrolltop="-6443" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="22807" y="17886" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuboBalance (dbo._TempCuboBalance)" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3995" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000800009b0f000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo__TempCuboBalance" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-9386</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-6443</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:07Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="fe018fb6-d61a-4233-901e-e21b676a5ec1">
+      <ID>Balance</ID>
+      <Name>Balance</Name>
+      <DimensionID>Temp Cubo Balance</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="4748eda2-8782-4e0a-988e-3d241c1e9375">
+          <AttributeID>Temp Cubo Balance</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="8e87ac67-5f60-4e59-bcc7-e33fce5a6e09">
+          <AttributeID>Jerarquia1</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="3b2e152e-b2b8-4248-ae6a-3a75ddfc8ddf">
+          <AttributeID>Jerarquia2</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="08eaa48e-20da-4ac7-b38f-47516bbde810">
+          <AttributeID>Jerarquia3</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="2bb6abf1-4cf1-459a-b25d-04a08c67a913">
+          <AttributeID>Jerarquia4</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="6f94b9d5-ab32-4bd3-84d8-ca00fad02c6c">
+          <AttributeID>Cuenta</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="f9325dab-54d3-48e2-8ece-f7e3bdc7003f">
+          <AttributeID>Detalle</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="8c61ed7a-da0e-44a0-8a98-1dc227f4f0db">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="bd5f924e-3f61-4f39-b8e9-467e685cc4ba">
+      <ID>Temp Cubo Balance</ID>
+      <Name>Balance</Name>
+      <CreatedTimestamp>2010-01-28T14:00:49Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:49Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:06Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="f8b8200b-3c18-4e30-8e22-52573a6ffc51">
+          <ID>Saldo Inicial</ID>
+          <Name>Saldo Inicial</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="24776431-8f35-4407-8b46-8b46b0d640fc">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="882b69d2-69ba-4408-a0f4-09e7e36095a0">
+              <TableID>dbo__TempCuboBalance</TableID>
+              <ColumnID>SaldoInicial</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="bed631d6-e739-4a6f-bc68-c4c0a27e9055">
+          <ID>Saldo Deudor Periodo</ID>
+          <Name>Saldo Deudor Periodo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="a3227523-0fb5-4c9e-b4c1-f5513ddf1cf8">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="f89ed997-4609-422d-8bb8-632637396f84">
+              <TableID>dbo__TempCuboBalance</TableID>
+              <ColumnID>SaldoDeudorPeriodo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="e0089667-7b1a-4a98-aa00-0a9c54adfd31">
+          <ID>Saldo Acreedor Periodo</ID>
+          <Name>Saldo Acreedor Periodo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="9c56d5b4-c8c4-4308-91cf-5ef64fce0ef7">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="97d654eb-3b4b-420d-ad6f-a794eaddae50">
+              <TableID>dbo__TempCuboBalance</TableID>
+              <ColumnID>SaldoAcreedorPeriodo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="5c633ea7-cc39-4a66-8254-e4af2a6d0ba8">
+          <ID>Saldo Periodo</ID>
+          <Name>Saldo Periodo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="f257321d-5ebe-4c83-a180-d8cfca531292">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="8988538b-616d-4b49-af20-305fefb36b15">
+              <TableID>dbo__TempCuboBalance</TableID>
+              <ColumnID>SaldoPeriodo</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2c14bf05-82ef-4f47-8c1e-b00b4aef8d17">
+          <ID>Saldo Final</ID>
+          <Name>Saldo Final</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="0d1a6843-c6e9-45c9-996f-97d7293ad29e">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="57e047a8-26f5-47ba-beca-67e0f35a56fa">
+              <TableID>dbo__TempCuboBalance</TableID>
+              <ColumnID>SaldoFinal</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="a9918c4f-2417-4d9e-ae75-78b15b771250">
+          <ID>Recuento Temp Cubo Balance</ID>
+          <Name>Recuento Temp Cubo Balance</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="f574683f-bac5-47c9-87f6-b7d489e8402d">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="b661197b-5f2e-4e77-af12-e58763955c61">
+              <TableID>dbo__TempCuboBalance</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>285969</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="ac696c44-2919-468d-8a1f-f1a6682d6966">
+          <CubeDimensionID>Balance</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="2648e5a8-c67f-4251-b69f-0dfa2dc5b928">
+              <AttributeID>Temp Cubo Balance</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="a41f08b8-bd8f-4bad-92ee-d2e6065d4777">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c8d4c18d-39fc-400e-bd3c-f246f77967b9">
+                    <TableID>dbo__TempCuboBalance</TableID>
+                    <ColumnID>IdCuboBalance</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="ee08db52-9243-449f-9b85-5d67ed9469ca">
+              <AttributeID>Jerarquia1</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e555d9e3-628a-4f8c-9bd4-93f44567b7fe">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="0cd0b4a2-5674-47e7-9161-f8e89718e201" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="5e3344fe-232d-4bb1-9ac8-5d4f37131166">
+              <AttributeID>Jerarquia2</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e28db79a-c2b7-4559-94d4-b59c34437b2b">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="ae9ee2b2-37a6-4383-b7c0-a0aa89291a72" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="af867373-a8aa-43b8-b644-1e5cf6ff2904">
+              <AttributeID>Jerarquia3</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="21bf52f9-ccc8-488c-8cb5-4e76a1d0c17c">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="80114173-6e78-4d0a-acae-5df3667918c2" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="56730a3a-164c-4bf3-996f-f520f5051fa7">
+              <AttributeID>Jerarquia4</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e3f6e674-b8c3-4f90-9648-c4d04b4155d9">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="16d5c77b-08fd-4ccb-bbe6-d2262ae103ae" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="2f01ea4b-1f6e-4635-ad04-456ac94ffa61">
+              <AttributeID>Cuenta</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="af0e2386-d154-4b93-b681-7579bf7cfe4e">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="f9034b84-d5e9-404c-9602-9324d73942c2" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="db848b74-aef9-41b9-b2f8-73fd7a5f1b98">
+              <AttributeID>Detalle</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="7d076253-3aca-4c73-ad5d-de4f8e715a73">
+                  <DataType>WChar</DataType>
+                  <DataSize>100</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="484d2311-a0f6-4fb9-8061-2ce8fad64e42" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="3e4e5462-e5da-4536-91a3-c29976579ac4">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="44c2b890-5fa0-4a5f-a3db-408a4d33d8f1" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="52637889-3b4f-4490-9c64-fda3e3614992">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <ProactiveCaching dwd:design-time-name="1d18a45d-dc14-478d-b8a7-1d154698e3ca">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="738e969f-eae1-4fec-8f7c-d3d04e44f0ef" />
+  </ProactiveCaching>
+</Cube>
