@@ -2481,6 +2481,8 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.PresupuestoObrasRubro" Width="1.5" PointX="32.375" PointY="3.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.DetalleFlete" Width="1.5" PointX="33.375" PointY="6.75" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.Flete" Width="1.5" PointX="33.375" PointY="10.75" />
         </edmx:Diagram>
       <edmx:Diagram DiagramId="969036793a6c4ca0892bc2dcadf55b7a" Name="Diagram1" ZoomLevel="100">
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Articulo" Width="2" PointX="3" PointY="132.125" IsExpanded="true" />
@@ -2950,6 +2952,7 @@
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleAsientos_IdObra" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Rubros_Cuentas_IdCuentaCompras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" />
+        <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleComprobantesProveedores_DetalleRecepciones" />
       </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

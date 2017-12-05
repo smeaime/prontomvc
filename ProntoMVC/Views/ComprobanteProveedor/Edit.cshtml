@@ -54,9 +54,10 @@
                                 <div>@Html.Hidden("IdComprobanteProveedor", Model.IdComprobanteProveedor)</div>
                                 <div>@Html.Hidden("IdProveedor", Model.IdProveedor)</div>
                                 <div>@Html.Hidden("IdProveedorEventual", Model.IdProveedorEventual)</div>
-                                <div>@Html.Hidden("IdTipoComprobante", Model.IdTipoComprobante)</div>
+                                @*<div>@Html.Hidden("IdTipoComprobante", Model.IdTipoComprobante)</div>*@
                                 <div>@Html.Hidden("IdCodigoIva", Model.IdCodigoIva)</div>
-                                @*<div>@Html.Hidden("TotalIVANoDiscriminado", Model.TotalIvaNoDiscriminado)</div>*@
+                                <div>@Html.Hidden("IdComprobanteImputado", Model.IdComprobanteImputado)</div>
+                                <div><input id="CoeficienteComprobante" name="CoeficienteComprobante" type="hidden"></div>
                                 <div><input id="TotalIVANoDiscriminado" name="TotalIVANoDiscriminado" type="hidden"></div>
                                 <div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
                                 <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
@@ -149,6 +150,10 @@
                             @Html.TextBoxFor(model => model.NumeroComprobante2, new { style = "text-align: center; font-weight: bold; font-size: 18px;", @class = "span12" })
                             @Html.ValidationMessageFor(model => model.NumeroComprobante2)
                         </div>
+                        <div class="span3 lightblue" id="DivComprobanteImputado">
+                            <label for="lblComprobanteImputado">Comprobante imputado</label>
+                            <input type="text" name="ComprobanteImputado" id="ComprobanteImputado" style="font-size: 15px; text-align: left;" readonly="readonly" class="span12" />
+                        </div>
                     </div>
 
                     <div class="row-fluid">
@@ -175,6 +180,10 @@
                                         //$("#ListaGastos").jqGrid().setGridParam({ datatype: "local" });
                                         $("#ListaDrag").jqGrid().setGridParam({ IdProveedor: ui.item.id }).trigger("reloadGrid");
                                         //$("#ListaDrag").trigger("reloadGrid");
+                                        $("#ListaDrag2").jqGrid("clearGridData", true)
+                                        $("#ListaDrag2").jqGrid().setGridParam({ IdProveedor: ui.item.id }).trigger("reloadGrid");
+                                        $("#ListaDrag3").jqGrid("clearGridData", true)
+                                        $("#ListaDrag3").jqGrid().setGridParam({ IdProveedor: ui.item.id }).trigger("reloadGrid");
                                         ActualizarDatos();
                                         //ActualizarPuntosDeVenta();
                                     }
@@ -350,8 +359,8 @@
                                     <td width="150">@Html.TextBoxFor(model => model.RetencionIBrutos3, new { @class = "span10 subtotales", @readonly = "readonly", @style = "background-color: #e8eef4;font-size: 15px" })</td>
                                 </tr>*@
                                 <tr>
-                                    <td width="100"></td>
-                                    <td width="100"></td>
+                                    <td width="100">COTIZ EURO</td>
+                                    <td width="100">@Html.TextBoxFor(model => model.CotizacionEuro, new { @class = "span8 subtotales" })</td>
                                     <td width="10"></td>
                                     <td width="150" colspan="2" style="font-size: 12px; font-weight: bold; ">TOTAL</td>
                                     <td width="60"></td>
