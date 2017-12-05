@@ -1515,7 +1515,7 @@ Partial Class CartadeporteABM
             End Try
 
 
-            .NRecibo = StringToDecimal(txtNRecibo.Text)
+            .NRecibo = txtNRecibo.Text
             .CalidadDe = BuscaIdCalidadPreciso(TextBoxCalidad.Text, SC)
             .NetoFinalIncluyendoMermas = StringToDecimal(txtNetoDescarga.Text)
             .TaraFinal = StringToDecimal(txtTaraDescarga.Text)
