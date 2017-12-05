@@ -1561,6 +1561,7 @@ namespace ProntoMVC.Controllers
         {
             public int IdPedido { get; set; }
             public int? IdProveedor { get; set; }
+            public int? IdCondicionCompra { get; set; }
             public int? PuntoVenta { get; set; }
             public int? NumeroPedido { get; set; }
             public int? SubNumero { get; set; }
@@ -1635,6 +1636,7 @@ namespace ProntoMVC.Controllers
                         {
                             IdPedido = a.IdPedido,
                             IdProveedor = a.IdProveedor,
+                            IdCondicionCompra = a.IdCondicionCompra,
                             PuntoVenta = a.PuntoVenta,
                             NumeroPedido = a.NumeroPedido,
                             SubNumero = a.SubNumero,
@@ -1691,7 +1693,8 @@ namespace ProntoMVC.Controllers
                                 //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 a.IdPedido.ToString(), 
-                                a.IdProveedor.ToString(), 
+                                a.IdProveedor.NullSafeToString(), 
+                                a.IdCondicionCompra.NullSafeToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -1733,7 +1736,6 @@ namespace ProntoMVC.Controllers
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
 
         public virtual ActionResult Pedidos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString, string FechaInicial, string FechaFinal)
         {
@@ -2014,7 +2016,7 @@ namespace ProntoMVC.Controllers
         {
             int IdProveedor1 = IdProveedor ?? 0;
 
-            var Entidad = db.Pedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && (p.CircuitoFirmasCompleto ?? "") == "SI" && (IdProveedor1 <= 0 || p.IdProveedor == IdProveedor1)).AsQueryable();
+            var Entidad = db.Pedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && (p.CircuitoFirmasCompleto ?? "") == "SI" && (IdProveedor1 <= 0 || p.IdProveedor == IdProveedor1) && (db.DetallePedidos.Where(q => q.IdPedido == p.IdPedido && (db.DetalleComprobantesProveedores.Where(r => r.IdDetallePedido == q.IdDetallePedido).Count() > 0)).Count() == 0)).AsQueryable();
 
             int totalRecords = 0;
             int pageSize = rows;
@@ -2029,6 +2031,7 @@ namespace ProntoMVC.Controllers
                         {
                             IdPedido = a.IdPedido,
                             IdProveedor = a.IdProveedor,
+                            IdCondicionCompra = a.IdCondicionCompra,
                             PuntoVenta = a.PuntoVenta,
                             NumeroPedido = a.NumeroPedido,
                             SubNumero = a.SubNumero,
@@ -2084,6 +2087,7 @@ namespace ProntoMVC.Controllers
                             cell = new string[] { 
                                 a.IdPedido.ToString(), 
                                 a.IdProveedor.ToString(), 
+                                a.IdCondicionCompra.ToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -2256,7 +2260,6 @@ namespace ProntoMVC.Controllers
             public decimal? PorcentajeBonificacion { get; set; }
             public decimal? PorcentajeIVA { get; set; }
             public decimal? Precio { get; set; }
-
             public int? NumeroPedido { get; set; }
             public int? SubNumero { get; set; }
             public int? ItemPE { get; set; }
