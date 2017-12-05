@@ -878,9 +878,42 @@ namespace ProntoMVC.Tests
             int registrosf = 0;
 
             int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
-
+            idcli = -1;
 
             var output = SincronismosWilliamsManager.GenerarSincro("Chiambretto", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, idcli,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 13), new DateTime(2016, 1, 16),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 100);
+
+
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroMBC_47026()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarVendedorPorCUIT("30-71544287-2", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("MBC", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, idcli,
                 -1, -1,
@@ -894,6 +927,7 @@ namespace ProntoMVC.Tests
 
             System.Diagnostics.Process.Start(output);
         }
+        
 
 
 

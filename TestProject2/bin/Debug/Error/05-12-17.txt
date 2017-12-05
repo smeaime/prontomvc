@@ -86,3 +86,33 @@ Log Entry :
 12/05/2017 12:33:07
 Error in: . Error Message:Generando sincro para Chiambretto
 __________________________
+
+Log Entry : 
+12/05/2017 12:43:00
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 12:49:21
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 12:53:28
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 12:55:25
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 13:18:43
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 13:28:42
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
