@@ -63,7 +63,7 @@ namespace ProntoMVC.Data.Models
         public Nullable<decimal> Tarifa { get; set; }
         public Nullable<System.DateTime> FechaDescarga { get; set; }
         public Nullable<System.DateTime> Hora { get; set; }
-        public Nullable<int> NRecibo { get; set; }
+        public string NRecibo { get; set; }
         public Nullable<int> CalidadDe { get; set; }
         public Nullable<decimal> TaraFinal { get; set; }
         public Nullable<decimal> BrutoFinal { get; set; }

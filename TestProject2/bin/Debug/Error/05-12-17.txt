@@ -1,0 +1,59 @@
+
+Log Entry : 
+12/05/2017 10:58:10
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9954
+BusinessLogic
+__________________________
+
+Log Entry : 
+12/05/2017 10:58:57
+Error in: . Error Message:Error en la carga System.InvalidCastException: La conversión especificada no es válida.
+   en System.Data.SqlClient.SqlBuffer.get_Int32()
+   en System.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+   en Pronto.ERP.Dal.CartaDePorteDB.FillDataRecord(IDataRecord myDataRecord) en C:\bdl\pronto\BussinessLogic\CartaDePorteDB.vb:línea 552
+__________________________
+
+Log Entry : 
+12/05/2017 11:18:59
+Error in: . Error Message:System.NullReferenceException
+Referencia a objeto no establecida como instancia de un objeto.
+   en CartaDePorteManager.GetItem(String SC, Int32 id, Boolean getCartaDePorteDetalles) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 9954
+BusinessLogic
+__________________________
+
+Log Entry : 
+12/05/2017 11:22:05
+Error in: . Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   en System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   en CartaDePorteManager.GetItemPorNumero(String SC, Int64 NumeroCartaDePorte, Int64 SubNumeroVagon, Int32 SubnumeroFacturacion) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 10199
+   en CartaDePorteManager.IsValid(String SC, CartaDePorte& myCartaDePorte, String& ms, String& sWarnings) en C:\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 11238
+EntityFramework
+__________________________
+
+Log Entry : 
+12/05/2017 11:34:15
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 11:35:30
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
+
+Log Entry : 
+12/05/2017 11:37:01
+Error in: . Error Message:Generando sincro para Chiambretto
+__________________________
