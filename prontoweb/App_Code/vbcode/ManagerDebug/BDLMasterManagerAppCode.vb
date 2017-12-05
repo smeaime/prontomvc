@@ -42,9 +42,9 @@ Namespace Pronto.ERP.Bll
         Public Shared Function GetUltimaBaseQueAccedioUsuario(ByVal userid As String) As String
             Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))
 
-            Dim ue = (From p In db.UserDatosExtendidos _
-                           Where p.UserId.ToString = userid _
-                           Select p).SingleOrDefault
+            Dim ue = (From p In db.UserDatosExtendidos
+                      Where p.UserId.ToString = userid
+                      Select p).SingleOrDefault
 
 
             If IsNothing(ue) Then
@@ -54,6 +54,9 @@ Namespace Pronto.ERP.Bll
             End If
 
         End Function
+
+
+
 
         Public Shared Function SetUltimaBaseQueAccedioUsuario(ByVal userid As String, ByVal base As String) As Boolean
             Dim db = New LinqBDLmasterDataContext(Encriptar(ConexBDLmaster))

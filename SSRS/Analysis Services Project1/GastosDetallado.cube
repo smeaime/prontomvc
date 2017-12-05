@@ -1,0 +1,269 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="25bb4028-f022-4283-b40e-8c4775e0f3a9" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005 6</ID>
+  <Name>GastosDetallado</Name>
+  <CreatedTimestamp>2010-01-28T14:00:51Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:51Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-8341" scrolltop="-4855" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="20267" y="14711" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="_TempCuadroGastosParaCubo" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="7884" height="5318" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="00080000cc1e0000c6140000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo__TempCuadroGastosParaCubo" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-8341</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-4855</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:18Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="0c05ccf1-aa8a-45aa-8e3c-0135e70a9ad2">
+      <ID>GastosDetallado</ID>
+      <Name>GastosDetallado</Name>
+      <DimensionID>Temp Cuadro Gastos Para Cubo 1</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="b8a9e29a-2785-4d7a-a9ad-ba1b2511f279">
+          <AttributeID>Temp Cuadro Gastos Para Cubo</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="bf514bc3-cfa5-4e8c-ae34-920252318896">
+          <AttributeID>Obra</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="2e45b690-19e4-47a8-8705-b728cd493b80">
+          <AttributeID>Rubro Contable</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="8f589f0d-7c37-40be-8280-d53cc55bcd41">
+          <AttributeID>Unidad Operativa</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="c9047999-6e72-4b71-ada6-410991268fca">
+          <AttributeID>Provincia Destino</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="a7ed289b-4b48-464f-b31a-e5ca29c6e264">
+          <AttributeID>Detalle</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="97299134-b973-4545-84a3-4f88f2a15a61">
+          <AttributeID>Mes</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="4d6aaa93-a287-400d-afdc-d03214bf9cde">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="2d32ae29-d19f-4ff0-bc5d-195d6ad37dee">
+          <HierarchyID>Jerarquía 1</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="05a37c40-d985-4e6c-a2c3-83d73e0e6539">
+          <HierarchyID>Jerarquía 2</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="e67b6068-86ce-4dc8-bbae-703841360e02">
+          <HierarchyID>Jerarquía 3</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="e989a6f5-eef1-40a2-8e7d-a02b7d19198a">
+          <HierarchyID>Jerarquía 4</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="1dea1331-7fc3-417d-86a1-4dcf3f827fb3">
+          <HierarchyID>Jerarquía 5</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="97e21359-0205-4cf9-a4e3-904c1c9bd7ef">
+      <ID>Temp Cuadro Gastos Para Cubo</ID>
+      <Name>GastosDetallado</Name>
+      <CreatedTimestamp>2010-01-28T14:00:51Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:51Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:16Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="4e2c56de-ba2a-4e19-8ffd-bb13fd0da3e4">
+          <ID>Importe</ID>
+          <Name>Importe</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="806533c3-b12f-4abf-8e25-d65286eeb0df">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="5b3e9e53-f904-42ec-bf12-56ed266194c2">
+              <TableID>dbo__TempCuadroGastosParaCubo</TableID>
+              <ColumnID>Importe</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2bf65879-aaa7-49cb-b726-5fb854087cbc">
+          <ID>Recuento Temp Cuadro Gastos Para Cubo</ID>
+          <Name>Recuento Temp Cuadro Gastos Para Cubo</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="40349170-219b-4c3b-a8d0-447c2561e040">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="03eae494-fe6d-4dbd-ada5-f6d393bb95a3">
+              <TableID>dbo__TempCuadroGastosParaCubo</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>13862</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="fb7c25b2-f706-4885-abcb-e45c3c0ebce7">
+          <CubeDimensionID>GastosDetallado</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="86e5ef83-d94d-4f85-b225-da6366a6a8ce">
+              <AttributeID>Temp Cuadro Gastos Para Cubo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="6f079255-a776-44ca-9724-b4896ece78ca">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="8311a5dc-c732-4c42-87df-d05c2150d102">
+                    <TableID>dbo__TempCuadroGastosParaCubo</TableID>
+                    <ColumnID>IdCuboGastos</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="160beee4-1306-4301-901c-90973ff0a6a6">
+              <AttributeID>Obra</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="b5370a26-fe73-48e1-9eb1-10f69fa18a90">
+                  <DataType>WChar</DataType>
+                  <DataSize>20</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="9b152abc-ea43-4360-8c69-f2ebc115845a" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="f7a357c7-f28a-4642-afa7-a57187a95a38">
+              <AttributeID>Rubro Contable</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="281ad37f-6ed0-4202-b8a4-718b4ca4b21d">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="73bd63c0-53d9-4625-b44c-b1737b09de92" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="bf7c8350-1214-44e2-a052-c317ae2c78bb">
+              <AttributeID>Unidad Operativa</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="ab1cd88d-59f8-485c-a688-20e6dfc3fc51">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="78269deb-8994-49e9-9721-65ae3530f816" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="7f0bfda9-820a-4857-bd99-07b4ca25d82f">
+              <AttributeID>Provincia Destino</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="6cbcbc67-c8bb-4bf3-9edd-a2125c892b74">
+                  <DataType>WChar</DataType>
+                  <DataSize>50</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="232a6bac-2d7f-4cb0-9fbc-7e1cff050bf1" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="1464b3a9-0cf1-4378-89e1-e4a99d72d122">
+              <AttributeID>Detalle</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="320bf342-23d9-4cea-bdf3-e94d5e427efd">
+                  <DataType>WChar</DataType>
+                  <DataSize>200</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="59233e96-e6dc-4c97-8bde-5f95d6442e40" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="03044fb0-084b-476d-a6ab-beeedad12c9c">
+              <AttributeID>Mes</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="469cf390-7c3c-4c20-9509-9f698166b342">
+                  <DataType>WChar</DataType>
+                  <DataSize>20</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="45e4200d-f787-4a85-8bba-27f5a5b37234" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="a418506c-265c-4c70-bca9-8688ad86cb93">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="094c2c69-ed3b-4c4b-8e04-9f0b1f21c423" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="fb50e6ed-52c3-4214-950e-c99de88394e3">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <ProactiveCaching dwd:design-time-name="b8121b46-a2b4-4f85-956b-4cbf57a911b6">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="ce3cc983-5d2e-4387-9e56-c2c93cd0accb" />
+  </ProactiveCaching>
+</Cube>

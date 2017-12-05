@@ -316,6 +316,8 @@ namespace ProntoMVC.Data
 
         public static string RemoveSpecialCharacters(string str)
         {
+            if (str == null) return "";
+
             StringBuilder sb = new StringBuilder();
             foreach (char c in str)
             {

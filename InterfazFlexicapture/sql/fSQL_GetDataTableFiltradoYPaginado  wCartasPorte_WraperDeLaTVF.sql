@@ -685,7 +685,7 @@ go
 
 
 
-
+/*
 declare @ModoExportacion  VARCHAR(20)
 set  @ModoExportacion ='Export' --'Entregas'
 
@@ -736,7 +736,7 @@ WITH summary AS (
 SELECT s.*
   FROM summary s
  --WHERE s.rk = 1
-
+ */
 
 
 
