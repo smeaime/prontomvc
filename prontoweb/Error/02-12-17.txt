@@ -1,0 +1,30 @@
+
+Log Entry : 
+12/02/2017 14:11:12
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+12/02/2017 14:11:15
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________
+
+Log Entry : 
+12/02/2017 14:24:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:La carta numero 565168593 id=3154800 tiene el subnumerodefacturacion mal subn=0
+__________________________
+
+Log Entry : 
+12/02/2017 14:24:21
+Error in: http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=3154800. Error Message:PV 2 0
+__________________________
+
+Log Entry : 
+12/02/2017 14:45:18
+Error in: http://localhost:50769/ProntoWeb/Principal.aspx. Error Message:Mariano esta logueado, pero lo redirijo al login porque faltan los datos de session. No deberia mejor mandarlo a SeleccionarEmpresa? Ademas, no hago el LogOut y le queda el cookie!!!
+__________________________
+
+Log Entry : 
+12/02/2017 14:45:20
+Error in: http://localhost:50769/ProntoWeb/CartasDePortes.aspx?tipo=Todas. Error Message:Mariano
+__________________________

@@ -572,7 +572,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div style="background-color: #FFFFFF; width: 800px">
+            <div style="background-color: #FFFFFF; width: ">
                 <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="95%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True" BackColor="White">
                     <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
@@ -593,7 +593,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Label ID="lblErrores" CssClass="Alerta" runat="server" Font-Size="12pt" Enabled="false"></asp:Label>
-            <div style="background-color: #FFFFFF; width: 800px">
+            <div style="background-color: #FFFFFF; width: ">
                 <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
                     <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">

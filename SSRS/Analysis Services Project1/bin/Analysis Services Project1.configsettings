@@ -1,0 +1,390 @@
+﻿<ConfigurationSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Database>
+    <DataSources>
+      <DataSource>
+        <ID>OD Pronto2005</ID>
+        <ConnectionString>Provider=SQLNCLI10.1;Data Source=NANOPC\FONDO;Persist Security Info=True;Password=;User ID=;Initial Catalog=equimac</ConnectionString>
+        <ImpersonationInfo>
+          <ImpersonationMode>Default</ImpersonationMode>
+          <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+        </ImpersonationInfo>
+      </DataSource>
+    </DataSources>
+    <Dimensions>
+      <Dimension>
+        <ID>Temp Cubo Balance</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Cash Flow</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Comparativa</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Costos Importacion</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Proyeccion Egresos</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cuadro Gastos Para Cubo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cuadro Gastos Para Cubo 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Ingreso Egresos Por Obra 1 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo IVA Por Obra</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Pedidos</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Posicion Financiera</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Presupuesto Economico</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Presupuesto Financiero</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Presupuesto Financiero2</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Presupuesto Financiero Teorico</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Produccion</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Reserva Presupuestaria</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Saldos Comprobantes Por Obra Proveedor</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Stock</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Ventas Para Cubo</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Ventas Para Cubo 1</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Ventas En Cuotas</ID>
+      </Dimension>
+      <Dimension>
+        <ID>Temp Cubo Ventas En Cuotas1</ID>
+      </Dimension>
+    </Dimensions>
+    <Cubes>
+      <Cube>
+        <ID>VOD Pronto2005</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Balance</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Balance</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 1</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Cash Flow</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Cash Flow</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 2</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Comparativa</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Comparativa</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 3</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Costos Importacion</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Costos Importacion</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 4</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Proyeccion Egresos</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Proyeccion Egresos</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 5</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cuadro Gastos Para Cubo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cuadro Gastos Para Cubo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 6</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cuadro Gastos Para Cubo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cuadro Gastos Para Cubo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 7</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Ingreso Egresos Por Obra</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Ingreso Egresos Por Obra</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 8</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo IVA Por Obra</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo IVA Por Obra</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 9</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Pedidos</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Pedidos</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 10</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Posicion Financiera</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Posicion Financiera</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 11</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Presupuesto Economico</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Presupuesto Economico</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 12</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Presupuesto Financiero</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Presupuesto Financiero</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 13</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Presupuesto Financiero2</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Presupuesto Financiero2</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 14</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Presupuesto Financiero Teorico</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Presupuesto Financiero Teorico</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 15</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Produccion</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Produccion</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 16</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Reserva Presupuestaria</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Reserva Presupuestaria</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 17</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Saldos Comprobantes Por Obra Proveedor</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Saldos Comprobantes Por Obra Proveedor</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 18</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Stock</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Stock</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 19</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Ventas Para Cubo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Ventas Para Cubo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 20</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Ventas Para Cubo</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Ventas Para Cubo</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 21</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Ventas En Cuotas</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Ventas En Cuotas</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+      <Cube>
+        <ID>VOD Pronto2005 22</ID>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>Temp Cubo Ventas En Cuotas1</ID>
+            <Partitions>
+              <Partition>
+                <ID>Temp Cubo Ventas En Cuotas1</ID>
+              </Partition>
+            </Partitions>
+          </MeasureGroup>
+        </MeasureGroups>
+      </Cube>
+    </Cubes>
+    <DataSourceImpersonationInfo>
+      <ImpersonationMode>Default</ImpersonationMode>
+      <ImpersonationInfoSecurity>Unchanged</ImpersonationInfoSecurity>
+    </DataSourceImpersonationInfo>
+  </Database>
+</ConfigurationSettings>

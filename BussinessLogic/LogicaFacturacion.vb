@@ -1028,7 +1028,7 @@ Public Class LogicaFacturacion
             'generarTablaParaModosNoAutomaticos()
 
             Debug.Print(s)
-            dt = EntidadManager.ExecDinamico(sc, s)
+            dt = EntidadManager.ExecDinamico(sc, s, 200)
 
 
 
@@ -1384,30 +1384,38 @@ Public Class LogicaFacturacion
 
 
 
-                        .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
-                        .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
-                        .Confirmado = iisNull(cdp("Confirmado"))
-                        .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
-                        .CUIT = CStr(iisNull(cdp("CUIT")))
-                        .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
-                        .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
-                        .Producto = CStr(iisNull(cdp("Producto")))
-                        .KgNetos = CDec(iisNull(cdp("KgNetos")))
-                        .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
-                        .IdTitular = CInt(iisNull(cdp("IdTitular")))
-                        .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
-                        .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
-                        .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
-                        .Titular = CStr(iisNull(cdp("Titular")))
-                        .Intermediario = CStr(iisNull(cdp("Intermediario")))
-                        .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
-                        .Corredor = CStr(iisNull(cdp("Corredor ")))
-                        .Destinatario = CStr(iisNull(cdp("Destinatario")))
-                        .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
-                        .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
-                        .IdDestino = CInt(iisNull(cdp("IdDestino")))
-                        .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
-                        lista.Add(x)
+                        Try
+
+                            .FacturarselaA = CStr(iisNull(cdp("FacturarselaA")))
+                            .IdFacturarselaA = CInt(iisNull(cdp("IdFacturarselaA")))
+                            .Confirmado = iisNull(cdp("Confirmado"))
+                            .IdCodigoIVA = CInt(iisNull(cdp("IdCodigoIVA"), -1))
+                            .CUIT = CStr(iisNull(cdp("CUIT")))
+                            .ClienteSeparado = CStr(iisNull(cdp("ClienteSeparado")))
+                            .TarifaFacturada = CDec(iisNull(cdp("TarifaFacturada"), 0))
+                            .Producto = CStr(iisNull(cdp("Producto")))
+                            .KgNetos = CDec(iisNull(cdp("KgNetos")))
+                            .IdCorredor = CInt(iisNull(cdp("IdCorredor")))
+                            .IdTitular = CInt(iisNull(cdp("IdTitular")))
+                            .IdIntermediario = CInt(iisNull(cdp("IdIntermediario"), -1))
+                            .IdRComercial = CInt(iisNull(cdp("IdRComercial"), -1))
+                            .IdDestinatario = CInt(iisNull(cdp("IdDestinatario")))
+                            .Titular = CStr(iisNull(cdp("Titular")))
+                            .Intermediario = CStr(iisNull(cdp("Intermediario")))
+                            .R__Comercial = CStr(iisNull(cdp("R. Comercial")))
+                            .Corredor = CStr(iisNull(cdp("Corredor ")))
+                            .Destinatario = CStr(iisNull(cdp("Destinatario")))
+                            .DestinoDesc = CStr(iisNull(cdp("DestinoDesc")))
+                            .Procedcia_ = CStr(iisNull(cdp("Procedcia.")))
+                            .IdDestino = CInt(iisNull(cdp("IdDestino")))
+                            .AgregaItemDeGastosAdministrativos = CStr(iisNull(cdp("AgregaItemDeGastosAdministrativos")))
+                            lista.Add(x)
+                        Catch ex As Exception
+                            If Not Debugger.IsAttached Then Throw
+
+                        End Try
+
+
                     End With
                 Next
 
@@ -3026,40 +3034,60 @@ Public Class LogicaFacturacion
 
 
 
+
+
+
+
+
+
             Dim lotecito As List(Of CartaDePorte) = (From c In listaDeCartasPorteAFacturar
                                                      Where c.IdFacturarselaA = cli And c.ClienteSeparado = clisep
                                                      Select New CartaDePorte With {
+                                                         .Id = c.IdCartaDePorte,
                                                      .IdArticulo = If(c.IdArticulo, -1) _
                                                       , .Destino = If(c.IdDestino, -1),
                                                 .Titular = If(c.IdTitular, -1),
                                             .Entregador = If(c.IdDestinatario, -1),
                                             .NetoFinalIncluyendoMermas = c.KgNetos,
-                                        .TarifaCobradaAlCliente = c.TarifaFacturada
-                                                 }
-                 ).ToList
+                                                    .TarifaCobradaAlCliente = c.TarifaFacturada,
+                                                    .Corredor = If(c.IdCorredor, -1),
+                                                         .CuentaOrden1 = If(c.IdIntermediario, -1),
+                                                         .CuentaOrden2 = If(c.IdRComercial, -1),
+                                                         .FechaDescarga = c.FechaDescarga,
+                                                    .AgregaItemDeGastosAdministrativos = (c.AgregaItemDeGastosAdministrativos.ToString = "SI")
+                                                                 }).ToList
 
-            Dim grupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
-            grupo.ToList()
+            Dim renglongrupo As IEnumerable(Of grup) = AgruparItemsDeLaFactura(lotecito, optFacturarA, agruparArticulosPor, SC, sBusqueda)
+            renglongrupo.ToList()
 
-            If grupo.Count > MAXRENGLONES Then
-                For n = MAXRENGLONES To grupo.Count - 1
+
+
+            If renglongrupo.Count > MAXRENGLONES Then
+
+
+                For n = MAXRENGLONES To renglongrupo.Count - 1
                     'marco esas cartas como de otra agrupacion
 
-                    Dim g = grupo(n)
+                    Dim g = renglongrupo(n)
+                    Dim ids = g.cartas.Select(Function(x) x.Id).ToList()
 
                     Dim carts = From c In listaDeCartasPorteAFacturar
-                                Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
-                                And (g.Destino = -1 Or c.IdDestino = g.Destino) _
-                                And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
-                                And (g.Titular = -1 Or c.IdTitular = g.Titular)
+                                Where ids.Contains(c.IdCartaDePorte)
+                    '            Where (g.IdArticulo = -1 Or c.IdArticulo = g.IdArticulo) _
+                    '            And (g.Destino = -1 Or c.IdDestino = g.Destino) _
+                    '            And (g.Entregador = -1 Or c.IdDestinatario = g.Entregador) _
+                    '            And (g.Titular = -1 Or c.IdTitular = g.Titular)
 
 
+                    carts.ToList()
 
                     For Each cdp In carts
+                        'hago division entera del contador de renglones por el maximo de renglones, y ahi tengo el numero de factura adicional!!!!
+                        'hago division entera del contador de renglones por el maximo de renglones, y ahi tengo el numero de factura adicional!!!!
 
                         'Dim c As wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult = listaDeCartasPorteAFacturar.Where(Function(x) x.IdCartaDePorte = cdp.Id).FirstOrDefault
                         Dim c As wCartasDePorte_TX_FacturacionAutomatica_con_wGrillaPersistenciaResult = cdp
-                        c.ClienteSeparado = (reasignador).ToString() + "° renglones maximos" + " " + c.ClienteSeparado + "" 'le reasigno un clienteseparador de fantasía, ya que no tengo un tempIdFacturaAgenerar"
+                        c.ClienteSeparado = ((n + 1) \ MAXRENGLONES).ToString() + "° renglones maximos" + " " + c.ClienteSeparado + "" 'le reasigno un clienteseparador de fantasía, ya que no tengo un tempIdFacturaAgenerar"
 
                     Next
                 Next
@@ -4391,8 +4419,10 @@ Public Class LogicaFacturacion
         Dim l = tablaEditadaDeFacturasParaGenerarComoLista.Select(Function(x) x.idCartaDePorte).ToList
         Dim ss As String
         If Not VerificarQueNoHayaCambiadoElLoteDesdeQueSeCreoLaFacturacion(l, SC, ss) Then
-            Throw New Exception(ss)
-            Return
+            If Not Debugger.IsAttached Then
+                Throw New Exception(ss)
+                Return
+            End If
         End If
 
 
@@ -4795,10 +4825,13 @@ Public Class LogicaFacturacion
                     'y por que no la anuló? me mandó el mail bien (del timeout) del 22 de junio a las 15:42
 
                     Dim myFactura As Pronto.ERP.BO.Factura = FacturaManager.GetItem(SC, idFactura)
-                    FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
 
-                    'terminar lote
-                    Throw
+                    If Not Debugger.IsAttached Then
+                        FacturaManager.AnularFactura(SC, myFactura, Session(SESSIONPRONTO_glbIdUsuario))
+
+                        'terminar lote
+                        Throw
+                    End If
                 End Try
 
 
@@ -6908,14 +6941,21 @@ Public Class LogicaFacturacion
 
                     'el asunto es que si una se pasa, debería parar toda la facturacion, y no saltarse solo esa factura
 
-                    If (renglons + IIf(cantidadGastosAdministrativos > 0, 1, 0) + dtRenglonesManuales.Rows.Count + listEmbarques.Count) > MAXRENGLONES Then
-                        'tomar en cuenta embarques y manuales
+                    'tomar en cuenta embarques y manuales -mejor no, porque en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones no los tomé en cuenta
+                    'tomar en cuenta embarques y manuales -mejor no, porque en EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones no los tomé en cuenta
+                    'If (renglons + IIf(cantidadGastosAdministrativos > 0, 1, 0) + dtRenglonesManuales.Rows.Count + listEmbarques.Count) > MAXRENGLONES Then
+                    If (renglons) > MAXRENGLONES Then
 
                         'si tiro una excepcion acá, la captura el try de esta funcion
-                        Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
-                        ErrHandler2.WriteError(s2)
-                        'Throw New Exception(s2)
-                        Return -12
+                        If Debugger.IsAttached Then
+                            Stop
+                        Else
+                            Dim s2 = "La factura para " & IdClienteAFacturarle.ToString() & " tiene " & renglons.ToString() & " renglones y el máximo es " & MAXRENGLONES.ToString()
+                            ErrHandler2.WriteError(s2)
+                            'Throw New Exception(s2)
+                            Return -12
+                        End If
+
                     End If
 
 
@@ -6945,9 +6985,16 @@ Public Class LogicaFacturacion
                                 .Fields("Cantidad").Value = o.NetoFinal '/ 1000 '1
 
 
-                                .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
+                                If o.NetoFinal = 0 Then
+                                    .Fields("PrecioUnitario").Value = 0
+                                Else
+                                    .Fields("PrecioUnitario").Value = o.total / o.NetoFinal 'o.Tarifa 'tarifa(IdClienteAFacturarle, o.IdArticulo)
+                                End If
 
-                                If (.Fields("PrecioUnitario").Value = 0) Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+
+                                If (.Fields("PrecioUnitario").Value = 0) Then
+                                    If Not Debugger.IsAttached Then Throw New Exception("El item de la factura tiene tarifa 0.    " & .Fields("IdArticulo").Value & " " & .Fields("Cantidad").Value)
+                                End If
 
 
                                 .Fields("PrecioUnitarioTotal").Value = .Fields("PrecioUnitario").Value 'mTotal - mIVA
@@ -7572,7 +7619,7 @@ Public Class LogicaFacturacion
             Catch ex As Exception
 
                 ErrHandler2.WriteError(ex)
-                Throw
+                If Not Debugger.IsAttached Then Throw
             End Try
 
 

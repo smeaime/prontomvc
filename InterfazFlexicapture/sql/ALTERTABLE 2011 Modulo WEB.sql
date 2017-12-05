@@ -483,11 +483,6 @@ go
 
 
 
-CREATE INDEX IDX_Cartasdeporte_PorFecha  on cartasdeporte(FechaModificacion )
-go
-
-
-
 
 
 
@@ -2167,6 +2162,25 @@ alter table ReclamoComentarios ADD
 go
 
 
+
+
+
+
+
+CREATE INDEX IDX_Cartasdeporte_PorFecha  on cartasdeporte(FechaModificacion )
+go
+
+
+
+
+
+
+
+sp_help cartasdeporte
+
+ALTER TABLE  cartasdeporte  ALTER COLUMN  
+	 NRecibo VARCHAR(15) NULL  --de int a string   
+GO
 
 
 

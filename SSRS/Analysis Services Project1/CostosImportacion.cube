@@ -1,0 +1,349 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="3ec2b83f-6139-494a-b1ad-707b6ccbc4f9" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005 3</ID>
+  <Name>CostosImportacion</Name>
+  <CreatedTimestamp>2010-01-28T14:00:50Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:50Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:20Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="78af5de4-802f-467f-bae6-0724e9b39898">
+      <ID>CostosImportacion</ID>
+      <Name>CostosImportacion</Name>
+      <DimensionID>Temp Cubo Costos Importacion</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="9281dfa0-44e4-4a56-b6b0-337acc687e7f">
+          <AttributeID>Temp Cubo Costos Importacion</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="5c56d8cf-8656-473e-95f6-0942f3682c13">
+          <AttributeID>Articulo</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="e138f289-616d-48f5-b423-c5986ed6d2c1">
+          <AttributeID>Pedido</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="e3e7b999-bb01-402f-8111-b1fa44754da6">
+          <AttributeID>Datos Pedido</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="1b25cad0-43ad-4a06-bdb1-816e4feaec5b">
+          <AttributeID>Origen</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="c9cc4bc7-ada3-47ea-83a7-73ac51213b1c">
+          <AttributeID>Movimientos</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="4f1b01d0-6435-44ea-b8d7-c678a3dac10b">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+        <Hierarchy dwd:design-time-name="3db590f5-b62b-4de4-9763-007100024b2c">
+          <HierarchyID>Jerarquía 1</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="e0ab7337-da41-4c48-b06b-fbdd245f09f9">
+      <ID>Temp Cubo Costos Importacion</ID>
+      <Name>CostosImportacion</Name>
+      <CreatedTimestamp>2010-01-28T14:00:50Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:50Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:19Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="64981d00-a5f0-4983-bb1a-1d84f600497d">
+          <ID>Cantidad</ID>
+          <Name>Cantidad</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="813ffb10-06fb-4bd6-85a4-b98cd56c456a">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="81a4f1f5-ef8f-457a-bfe4-8148557502bf">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>Cantidad</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="9f2a31e6-e8dc-4d5d-8b8c-9d3839ccb550">
+          <ID>Entregado</ID>
+          <Name>Entregado</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="86dfbd9a-31b7-491d-9b55-8adb25406668">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="bbc97ecf-d024-488f-97d9-202152679708">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>Entregado</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="90d4548b-f644-46b8-a65c-b4ad1d222753">
+          <ID>Costo Pedido</ID>
+          <Name>Costo Pedido</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="be3d762e-ab16-4db4-a270-27ab131ee8ac">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="1ccddfb8-a47d-4264-adab-53b8098e7b09">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoPedido</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="843ef6bf-b7f5-498c-b08a-ebfcba35c8d4">
+          <ID>Costo Item Pedido</ID>
+          <Name>Costo Item Pedido</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="eddb0219-f402-48dc-853b-73bb6921065a">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="239698ac-ef3e-41d5-9cb9-8f121be29121">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoItemPedido</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="71bc06fc-b5de-4217-b3c9-d42d4a5ea3d6">
+          <ID>Total Pedido</ID>
+          <Name>Total Pedido</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="b4a81d13-0670-4305-8378-f76da56a68e1">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="879d76b2-76f7-44db-afdb-feafc33e88d1">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>TotalPedido</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="1456fb0c-ec53-472c-b094-f46da0e1566e">
+          <ID>Total Comprobantes</ID>
+          <Name>Total Comprobantes</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="982eb9fc-52ce-44ca-bd5d-a7d2a665fc03">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="d000fbbb-7376-47b8-a9b2-17dda5deb752">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>TotalComprobantes</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="78b0ef64-e1d2-48b3-8484-78aee6126dd7">
+          <ID>Costo A Asignar</ID>
+          <Name>Costo A Asignar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="9b32a45d-18df-4ccf-8bf6-3c3ad6c8f746">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="20d0629f-9620-4955-93a7-545cd72fda61">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoAAsignar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="fe2a4aed-c30f-40d4-8def-cbf83a613a2c">
+          <ID>Costo Pedido Dolar</ID>
+          <Name>Costo Pedido Dolar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="39bdc475-1395-467d-9f33-77b99c2836d0">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="7713f9cc-3c17-4b29-a372-57368f6b3a5e">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoPedidoDolar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="14046aa3-e765-4ed9-924d-9300daf9e527">
+          <ID>Costo Item Pedido Dolar</ID>
+          <Name>Costo Item Pedido Dolar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="e847f128-71f6-4710-9430-b241bab84074">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="e6b2c9e1-ea1b-4532-aabe-a7ee129e1a03">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoItemPedidoDolar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="64050ab0-5a6d-4b87-bcef-0f43c8f61431">
+          <ID>Total Pedido Dolar</ID>
+          <Name>Total Pedido Dolar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="1476b11e-4025-4051-bd79-bd13907636bb">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="67aaf243-02d7-4fc9-9f68-764f566e0fe2">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>TotalPedidoDolar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="d03b1213-9923-4306-aab7-674b20ee753d">
+          <ID>Total Comprobantes Dolar</ID>
+          <Name>Total Comprobantes Dolar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="54e3b9bc-bd58-4e82-aae1-e442d65aa264">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="61e452d2-cfed-4a79-aa5d-62f0c8ba6bf2">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>TotalComprobantesDolar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="c3bbbd7c-7663-477a-a2fd-26066374aad1">
+          <ID>Costo A Asignar Dolar</ID>
+          <Name>Costo A Asignar Dolar</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="8adf8e52-a49d-4302-888f-a44f6ea92766">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="974944f9-b02d-4aab-9bbf-0a5ff91dbcdf">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+              <ColumnID>CostoAAsignarDolar</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2cece764-5b15-44b4-8439-7b4bf828e6e1">
+          <ID>Recuento Temp Cubo Costos Importacion</ID>
+          <Name>Recuento Temp Cubo Costos Importacion</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="593e5e75-6f35-43bf-b98b-3f673fc2922d">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="9195f6f1-56cf-47ae-a6f6-139af44f6778">
+              <TableID>dbo__TempCuboCostosImportacion</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>3463</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="d4e683c8-a8f3-411e-9aa2-ffd49e140221">
+          <CubeDimensionID>CostosImportacion</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="1b031b49-e937-424a-b2e5-f39c247d0232">
+              <AttributeID>Temp Cubo Costos Importacion</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3168537b-554b-4bc5-a498-0bd29da0c4ca">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="41737092-b409-4dd9-8d76-0b13116565fe">
+                    <TableID>dbo__TempCuboCostosImportacion</TableID>
+                    <ColumnID>IdTempCuboCostosImportacion</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="4a1d8784-c316-47c0-a622-d75537a2e543">
+              <AttributeID>Articulo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3a477847-dc2b-499f-bcd1-533a910f3f26">
+                  <DataType>WChar</DataType>
+                  <DataSize>500</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="167a88c2-6d43-424d-af25-b0805f56b803" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="e424c774-90a4-4b52-966d-eae1935148e3">
+              <AttributeID>Pedido</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="d4b5e1ac-08e8-44e5-8174-1dd0f4f162d9">
+                  <DataType>WChar</DataType>
+                  <DataSize>12</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="8f274e06-9189-4f5f-bfce-42108d0a41b0" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="50ff0046-16ea-4796-b607-06c3bd773c67">
+              <AttributeID>Datos Pedido</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="37891728-6fa2-47c6-b01e-d064c02d6677">
+                  <DataType>WChar</DataType>
+                  <DataSize>70</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="f37ead32-596a-4bca-9dd8-a79bb4bc12fe" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="a4ab5fa5-049a-498d-8787-7cc4be34bdac">
+              <AttributeID>Origen</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="a8172d5a-a68e-459f-b72a-7f6959a0e0fc">
+                  <DataType>WChar</DataType>
+                  <DataSize>40</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="913ee492-3bbc-417e-b38f-53a6c365e01f" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="5902761d-fd00-44d9-8b75-388b0b678499">
+              <AttributeID>Movimientos</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="57cd2dde-41ee-4908-8ef8-6c06dce3d90c">
+                  <DataType>WChar</DataType>
+                  <DataSize>100</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="f3d88d93-3e18-4511-bd6c-825fc99d3e5d" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="ce9e5fbc-7d3f-4a24-80db-f00042a37c71">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="cb0c24e5-5a09-4245-b98b-b302ce93a074" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="3cbeaf95-857b-47be-9a04-3a2f5bf09bcb">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <ProactiveCaching dwd:design-time-name="666d2ba7-ab88-41da-a372-2de9046edc64">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="0389a906-060b-44d2-ac85-d05d224806bd" />
+  </ProactiveCaching>
+</Cube>

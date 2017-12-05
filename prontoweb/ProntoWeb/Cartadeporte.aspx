@@ -281,17 +281,10 @@
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
         //            http: //www.scottklarr.com/topic/126/how-to-create-ctrl-key-shortcuts-in-javascript/
     </script>
-    <div style="width: 700px; margin-top: 3px; height: auto;">
-        <table style="padding: 0px; border: none #FFFFFF; width: 1000px; margin-right: 0px; font-size: large;"
+    <div style="width: ; margin-top: 3px; height: auto; max-width: 900px">
+        <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
-            <%--  <tr>
-                <td colspan="3" style="border: thin none #FFFFFF; font-weight: bold; color: #FFFFFF;
-                    font-size: large; height: 12px;" align="left" valign="top">
-                    CARTA DE PORTE
-                  
-                </td>
-               
-            </tr>--%>
+        
             <tr>
                 <td class="EncabezadoCell" style="width: 210px; font-weight: bold; font-size: 20px;">CARTA DE PORTE
                 </td>
@@ -391,7 +384,7 @@
             </tr>
         </table>
         <br />
-        <cc1:TabContainer ID="TabContainer2" runat="server" Height="485px" Width="900px"
+        <cc1:TabContainer ID="TabContainer2" runat="server" Height="" Width="100%" 
             Style="" ActiveTabIndex="0" CssClass="NewsTab" AccessKey="p">
             <%--  CssClass="SimpleTab"        CssClass="NewsTab"--%>
             <cc1:TabPanel ID="TabPanel2" runat="server" Height="550px">
@@ -2707,7 +2700,7 @@
                 <ContentTemplate>
                     <br />
                     <br />
-                    <table style="padding: 0px; border: none #FFFFFF; width: 696px; height: 202px; margin-left: 5px; margin-right: 0px;"
+                    <table style="padding: 0px; border: none #FFFFFF; width: ; height: 202px; margin-left: 5px; margin-right: 0px;"
                         cellpadding="1" cellspacing="1">
                         <tr>
 
@@ -2791,7 +2784,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px" OnClientPopulated="TabListo()">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="200px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -2847,15 +2840,19 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6"  type="button"   value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
-                        <asp:Button ID="Button6" runat="server" Text="enviar" class="btn btn-primary" style="height: 50px; width: 50px; vertical-align: top;" />
+                        
                         
                         <span>
-                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3"
-                                UploaderStyle="Modern" CssClass="AFU AFU3" FailedValidation="False" />
+                            <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3" Height="40px" Font-Size="16"
+                                UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
 
-                             <asp:Button ID="btnCerrarReclamo" runat="server" Text="cerrar consulta" class="btn btn-primary" style="height: ; width: ; vertical-align: top;" />
+
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="abrir" class="btn btn-primary" style="  height: 40px ; width: ; vertical-align: top;" />
+
                        
 
                             
@@ -2878,8 +2875,56 @@
 
 
 
-                            $("#Button6").click(function () {
+                            $("#Button9").click(function () {
+                              
+
+                                var d = {
+                                    idCartaPorte: qs["Id"],
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/GrabarComentario",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
                                 //alert("hola")
+
+                                //return;
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
@@ -2927,7 +2972,7 @@
 
 
 
-                            $("#btnCerrarReclamo").click(function () {
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").click(function () {
                                 //alert("hola")
 
                                 var d = {
@@ -2950,6 +2995,16 @@
                                         $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
                                         $("#Lista").trigger("reloadGrid");
                                         scrollToLastRow($("#Lista"))
+
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+
+
+
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", true);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", true);
+                                        $('#gbox_Lista').attr("disabled", true);
                                     }
 
 
@@ -2963,7 +3018,10 @@
                                     complete: function () {
                                         $("#loading").hide();
 
-                                        $('#Button6').attr("disabled", true);
+                                        //
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                             
+                                        
                                     }
 
 
@@ -2971,6 +3029,71 @@
 
 
                             })
+
+
+
+
+
+                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").click(function () {
+                                //alert("hola")
+
+                                var d = {
+                                    idCartaPorte: qs["Id"]
+                                }
+
+
+                                $.ajax({
+                                    type: "POST",
+                                    //method: "POST",
+                                    url: "WebServiceCartas.asmx/AbrirReclamo",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+
+                                    data: JSON.stringify(d),
+
+                                    success: function (data) {
+                                        //alert(data.d);
+                                        //window.open(data.d);
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                        $("#Lista").trigger("reloadGrid");
+                                        scrollToLastRow($("#Lista"))
+
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+
+
+
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", false);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", false);
+                                        $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", false);
+                                        $('#gbox_Lista').attr("disabled", false);
+                                    }
+
+
+                                    ,
+                                    beforeSend: function () {
+                                        //$('.loading').html('some predefined loading img html');
+                                        $("#loading").show();
+                                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                                    },
+                                    complete: function () {
+                                        $("#loading").hide();
+
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                       
+
+                                    }
+
+
+                                })
+
+
+                            })
+
+
+
 
 
 
@@ -3071,7 +3194,7 @@
                     --%>
                     <%-- Ajax Extender has to be in the same UpdatePanel as its TargetControlID --%>
                     <%--al principio del load con AutoCompleteExtender1.ContextKey = SC le paso al webservice la cadena de conexion--%>
-                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="402px" Height="22px" CssClass="button-link"
+                    <asp:FileUpload ID="FileUpLoad2" runat="server" Width="" Height="22px" CssClass="button-link"
                         Font-Underline="False" />
                     <%--se dispara cuando se oculta la lista. me está dejando una marca fea--%>
                     <asp:LinkButton ID="lnkBorrarAdjunto" runat="server" ForeColor="White">borrar</asp:LinkButton><br />
@@ -3148,7 +3271,7 @@
                                         Visible="False"></asp:Label>
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
-                            <asp:Label ID="Label1" Width="600px" runat="server" Font-Bold="true" ForeColor="LightGreen" />
+                            <asp:Label ID="Label1" Width="" runat="server" Font-Bold="true" ForeColor="LightGreen" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </td>
@@ -3163,7 +3286,7 @@
     </div>
     <asp:UpdatePanel runat="server" ID="upLog" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:Label ID="lblLog" Width="1000px" runat="server" ForeColor="White"></asp:Label>
+            <asp:Label ID="lblLog" Width="" runat="server" ForeColor="White"></asp:Label>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:LinkButton ID="LinkImprimir" runat="server" Font-Bold="False" ForeColor="White"
@@ -3322,7 +3445,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="395px">
+            <asp:Panel ID="PanelInfo" runat="server" Height="87px" Visible="false" Width="">
                 <table style="" class="t1">
                     <tr>
                         <td align="center" style="font-weight: bold; color: white; background-color: red; height: 14px;">Información

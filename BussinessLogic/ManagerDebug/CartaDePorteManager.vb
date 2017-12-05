@@ -7962,6 +7962,7 @@ usuario As String, ConexBDLmaster As String,
                 tablafact = "CLIVEN" 'esto esta mallllllll
                 If BuscaIdClientePreciso(txtFacturarATerceros, HFSC) = -1 Then
                     'si no encontras el cliente, por qué no te quejás en lugar de hacer esto?
+                    If Debugger.IsAttached Then Stop
                     optFacturarA = 1
                     IdFacturarselaA = "CLIVEN.IdCliente"
                     facturarselaA = "CLIVEN.Razonsocial"
@@ -10191,18 +10192,18 @@ usuario As String, ConexBDLmaster As String,
         'arreglar esto, porque la segunda vez que se llama con el mismo subnumerodefacturacion, va a devolver un error
 
 
-        'Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
         ' hay que revisar por qué no se banca el demoprontoentities
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))        ' hay que revisar por qué no se banca el demoprontoentities
 
         Dim familia = (From e In db.CartasDePortes
-                       Where e.NumeroCartaDePorte.GetValueOrDefault = NumeroCartaDePorte _
-                             And e.SubnumeroVagon.GetValueOrDefault = SubNumeroVagon
+                       Where If(e.NumeroCartaDePorte, 0) = NumeroCartaDePorte _
+                             And If(e.SubnumeroVagon, 0) = SubNumeroVagon
                        Order By e.FechaAnulacion Descending
                        Select e).ToList()
 
 
-        Dim sss = familia.Where(Function(x) x.SubnumeroDeFacturacion = SubnumeroFacturacion).FirstOrDefault
+        Dim sss = familia.Where(Function(x) If(x.SubnumeroDeFacturacion, 0) = SubnumeroFacturacion).FirstOrDefault
 
 
         If familia.Count = 0 Then
@@ -10453,6 +10454,9 @@ usuario As String, ConexBDLmaster As String,
 
 
                     Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
+
+                    oCarta.NRecibo = .NRecibo 'y si me desembarazo de CartaDePorteDB.Save y su molesto wCartasDePorte_A?....
+
                     oCarta.CalidadGranosQuemados = CDec(iisNull(.CalidadGranosQuemados, 0))
                     oCarta.CalidadGranosQuemadosBonifica_o_Rebaja = iisNull(.CalidadGranosQuemadosBonifRebaja, 0)
                     oCarta.CalidadTierra = CDec(iisNull(.CalidadTierra, 0))
@@ -14018,6 +14022,22 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+    Public Shared Function PlantillaWilliamsPorPuntoVenta(puntoventa As Integer) As String
+        Dim planti As String
+        Select Case puntoventa
+            Case 10
+                planti = "FactElec_Williams_0010.docx"
+            Case 20
+                planti = "FactElec_Williams_0020.docx"
+            Case 30
+                planti = "FactElec_Williams_0030.docx"
+            Case 40
+                planti = "FactElec_Williams_0040.docx"
+            Case Else
+                planti = "FactElec_Williams.docx"
+        End Select
+        Return planti
+    End Function
 
 
 
@@ -14029,7 +14049,13 @@ usuario As String, ConexBDLmaster As String,
         Dim output As String
         Randomize()
         Dim prefijo As String = Int(Rnd() * 10000)
-        Dim p = DirApp & "\Documentos\" & "FactElec_Williams.docx"
+
+
+
+        Dim planti = PlantillaWilliamsPorPuntoVenta(ofac.PuntoVenta)
+
+        Dim p = DirApp & "\Documentos\" & planti
+
 
 
         output = System.IO.Path.GetTempPath() & "\" & prefijo & "FacturaElectronica_Numero" & ofac.Numero & ".docx"

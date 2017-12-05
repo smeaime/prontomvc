@@ -1,0 +1,531 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="aa877992-9057-4d14-8b9f-a06d8f462a2d" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>VOD Pronto2005 13</ID>
+  <Name>PresupuestoFinanciero2</Name>
+  <CreatedTimestamp>2010-01-28T14:00:52Z</CreatedTimestamp>
+  <LastSchemaUpdate>2010-01-28T14:00:52Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>2010-01-28T14:01:19Z</LastProcessed>
+  <State>Processed</State>
+  <Language>3082</Language>
+  <Collation>Latin1_General_CI_AS</Collation>
+  <Dimensions>
+    <Dimension dwd:design-time-name="96fd24a9-0f14-40c6-b4f3-d4cd0e420c4a">
+      <ID>PresupuestoFinanciero2</ID>
+      <Name>PresupuestoFinanciero2</Name>
+      <DimensionID>Temp Cubo Presupuesto Financiero2</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="57d68717-c4f4-440b-9d8f-d5cda76216f7">
+          <AttributeID>Temp Cubo Presupuesto Financiero2</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="b10e60f3-5d50-4aef-ab75-f123f2acd08e">
+          <AttributeID>Jerarquia1</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="ecaa9c80-866f-4d5a-bbd7-635a2fc3cfcc">
+          <AttributeID>Jerarquia2</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="855bf4c2-dd7d-46a1-871b-931ed9998785">
+          <AttributeID>Jerarquia3</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="c324a08a-2fe5-491c-9cd2-bba0db89d886">
+          <AttributeID>Jerarquia4</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="0bbf16ed-4146-44fd-be75-b8d52808d98b">
+          <AttributeID>Cuenta</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+        <Attribute dwd:design-time-name="6430c251-d7b4-4a15-9d46-e2fb8d19d66c">
+          <AttributeID>Detalle</AttributeID>
+          <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy dwd:design-time-name="72912b48-28e5-4495-9025-e812d789856b">
+          <HierarchyID>Jerarquía</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="2c3f0d0a-21d6-47d0-bf9f-6ead76eec279">
+      <ID>Temp Cubo Presupuesto Financiero2</ID>
+      <Name>PresupuestoFinanciero2</Name>
+      <CreatedTimestamp>2010-01-28T14:00:52Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:52Z</LastSchemaUpdate>
+      <LastProcessed>2010-01-28T14:01:18Z</LastProcessed>
+      <State>Processed</State>
+      <Measures>
+        <Measure dwd:design-time-name="1c8350cd-605c-4695-8949-cf76ae0b2faa">
+          <ID>Presupuesto Teorico Mes01</ID>
+          <Name>Teorico Enero</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="fcdd8206-1202-41b0-a223-1f6a0a5441ec">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="83c3dc8a-9473-41d4-b540-6108e8913fcd">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes01</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="bb1f3a68-d0fc-45da-8ee3-70aa7a16df07">
+          <ID>Saldo Mes01</ID>
+          <Name>Real Enero</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="a9b7fad0-2700-47fe-b8f8-78d62df8fbba">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="b5bfa137-fa11-4205-b931-375f2a081622">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes01</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2eef2f91-9e8b-4008-a981-fb44d99bad2f">
+          <ID>Presupuesto Teorico Mes02</ID>
+          <Name>Teorico Febrero</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="b227659d-3b7f-4478-9ddf-8f01092f60dd">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="d9e74ccc-7c06-48bd-91b0-37ac63153b23">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes02</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="1923e2cf-f3ca-4bb5-b82c-e565d7b4c4b2">
+          <ID>Saldo Mes02</ID>
+          <Name>Real Febrero</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="ab21fc5e-dd9d-46e9-9705-91690d7bea89">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="609bc8d5-2ea6-4557-bff3-1d2f86789890">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes02</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2e4cad53-decd-40b8-a382-fcafd09b3214">
+          <ID>Presupuesto Teorico Mes03</ID>
+          <Name>Teorico Marzo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="b92d82e6-2398-4ea8-b664-d07d3b164cb2">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="25724f32-2e6a-4f81-8abe-fce92bd56685">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes03</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="d23f68cd-3536-4c94-90f8-3fe0c755e580">
+          <ID>Saldo Mes03</ID>
+          <Name>Real Marzo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="7c464e27-9d35-46f4-8b69-5888fdce815c">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="4d5005d1-25f5-47cb-a3b2-3c4e9faa47af">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes03</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="5c458aaf-222b-45d9-ba7d-d69c1e1ee626">
+          <ID>Presupuesto Teorico Mes04</ID>
+          <Name>Teorico Abril</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="add00dcd-dc24-40cf-9582-458e75d8bca1">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="a0a61766-a23a-4ac6-901c-7903e8bef4e7">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes04</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="880e934c-db69-40d6-bdb0-d296a947559f">
+          <ID>Saldo Mes04</ID>
+          <Name>Real Abril</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="31d8c6c0-9892-45cb-84f8-26c355b1bf2b">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="1bf6184a-7593-4167-a9f9-32e6f29425c3">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes04</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="47d7eb3c-e5ea-4d6c-aaf8-3d3cf660fa3b">
+          <ID>Presupuesto Teorico Mes05</ID>
+          <Name>Teorico Mayo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="92a53f10-cf8f-4f70-85f1-e140e2ce2967">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="e2bbc1d8-9577-400b-8036-6c0fe6118d82">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes05</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="95b6ee49-175c-42a5-81b2-7b1c2503803e">
+          <ID>Saldo Mes05</ID>
+          <Name>Real Mayo</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="e28e64b6-beeb-419e-9ea7-575193161252">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="064933f0-929b-4c6b-9fa8-8047490ac4e6">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes05</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="e6567a1a-cd0b-40d9-9cab-d11f1bd5e9c3">
+          <ID>Presupuesto Teorico Mes06</ID>
+          <Name>Teorico Junio</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="a52468a8-d78b-4747-94ae-da48e07b9b33">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="59e9e7fe-71bf-45fd-aa5d-f5488ec14b57">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes06</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="d6196ec2-d963-4f4a-b2fd-501a6dbd5580">
+          <ID>Saldo Mes06</ID>
+          <Name>Real Junio</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="449c740b-89ab-40ec-8d30-2cc49477c3af">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="0b495bf8-527a-4e77-84da-436b04818ea2">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes06</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="92f1e4fe-08c0-48d6-9b19-de8c1a64df35">
+          <ID>Presupuesto Teorico Mes07</ID>
+          <Name>Teorico Julio</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="d510853a-a3bb-4f46-80d9-1eb6f510710d">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="039e8d9a-dd48-4b87-a15d-ebff058e6061">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes07</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="5960de84-e964-4f48-87b7-ab737aef8b20">
+          <ID>Saldo Mes07</ID>
+          <Name>Real Julio</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="396549db-c7ce-4341-8d69-ab268f9a9342">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="dfe32aaa-c55b-4f2c-b982-bb0dc66374b1">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes07</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="668cf405-fb5d-4db3-9f18-fe6a38f96008">
+          <ID>Presupuesto Teorico Mes08</ID>
+          <Name>Teorico Agosto</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="e5ea33b9-4da3-4fa8-8923-43f4de36b827">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="fc0f2d21-a2c9-4440-99c1-76d1f7d00f72">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes08</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="5c6606dd-ea13-4b48-9f95-02623bc0145b">
+          <ID>Saldo Mes08</ID>
+          <Name>Real Agosto</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="7ba9d57e-8d0c-4cda-9f2e-f6768f0bf6bb">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="a9887758-bece-4127-ba57-8666dee705d4">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes08</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="1c13610d-2deb-4f60-a1cc-ef6ff3c46fbd">
+          <ID>Presupuesto Teorico Mes09</ID>
+          <Name>Teorico Setiembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="7ee0575e-e414-4ba1-bfd7-3ba6e65bf1ea">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="9c8d6b32-c482-4de9-84df-cdc2433c532d">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes09</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="9a6dcf65-aad1-463a-835c-a817aeee67c4">
+          <ID>Saldo Mes09</ID>
+          <Name>Real Setiembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="c63008da-04d4-4d0d-8c81-9c58e9c8db99">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="8e6cefc1-c015-4842-a1cf-59b691bc4398">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes09</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="e5cd548c-3a5b-42f6-90cd-99c0b8c2380f">
+          <ID>Presupuesto Teorico Mes10</ID>
+          <Name>Teorico Octubre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="01eddd66-9ecf-436e-9929-8a84cd599c45">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="20ae3651-dd6f-4458-95f1-0472b78fe1f6">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes10</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="8fd5040d-2d48-442a-a4ad-c25c63bac0ee">
+          <ID>Saldo Mes10</ID>
+          <Name>Real Octubre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="a1a874f1-d16d-4c02-8677-b74364d18357">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="ec6ec20b-24da-4463-813a-d703b3640897">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes10</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="da552a4e-4c2c-4d51-9679-9dd62d0532bd">
+          <ID>Presupuesto Teorico Mes11</ID>
+          <Name>Teorico Noviembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="4b45f047-e9e9-4d57-9241-1347e7d7ce1e">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="95fa7351-d446-4a4b-b633-fa543d0cc11f">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes11</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="3210ad5a-8038-4ee7-9780-3b2b0ef66b78">
+          <ID>Saldo Mes11</ID>
+          <Name>Real Noviembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="9deece71-0e5e-457e-b62b-fd66f40384a9">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="025e3ec3-437f-43c1-b3cd-17814f5116f9">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes11</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="31121e63-18db-43e0-afea-3c50c976b662">
+          <ID>Presupuesto Teorico Mes12</ID>
+          <Name>Teorico Diciembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="d5982d9f-08fd-4436-b200-4d5ac86004a4">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="5898e9de-91d0-4220-b9d7-a576f1c3dde8">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>PresupuestoTeoricoMes12</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="bf7a6124-5fa3-4d9d-93ec-fcaf288eab4b">
+          <ID>Saldo Mes12</ID>
+          <Name>Real Diciembre</Name>
+          <DataType>Double</DataType>
+          <Source dwd:design-time-name="04c2d06b-f6b7-45b8-a2d2-1fc1f856a720">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="95112c4d-9ea1-48b0-9917-573beceb2f1e">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+              <ColumnID>SaldoMes12</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="15d67a0d-6fe3-49ef-9d05-0d5279fc0c9a">
+          <ID>Recuento Temp Cubo Presupuesto Financiero2</ID>
+          <Name>Recuento Temp Cubo Presupuesto Financiero2</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="0edb678a-e032-4be8-998a-e84d2a6d8022">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="507b239b-3f6e-4590-936d-aa21946c9cea">
+              <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <EstimatedSize>3776</EstimatedSize>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="1588e951-d6bb-4dc8-8668-35fd3ec30ce9">
+          <CubeDimensionID>PresupuestoFinanciero2</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="9678f76d-5380-41ce-9d17-d57022cce0d7">
+              <AttributeID>Temp Cubo Presupuesto Financiero2</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="948c9a8d-caab-41b3-860d-df27cd9a50d2">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="9512f682-bca7-453a-b741-b9fd75364d58">
+                    <TableID>dbo__TempCuboPresupuestoFinanciero2</TableID>
+                    <ColumnID>IdPresupuestoFinanciero2</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+            <Attribute dwd:design-time-name="9b3c9660-f564-4f5e-9cbf-987a401a66c4">
+              <AttributeID>Jerarquia1</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="d86efc22-b8e9-433c-9574-2801889c0179">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="b6c2f921-6efe-4a18-b916-afb724d89a16" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="38e63342-0ccd-4c5d-a4b5-4f67a9f14ba0">
+              <AttributeID>Jerarquia2</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="36d37c36-26df-4a2a-b225-1d7a183beb71">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="eabc6fe4-1a18-4f9f-9220-8334529fe5ac" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="cebb2bd6-1280-4a2b-abf5-e9341df79eca">
+              <AttributeID>Jerarquia3</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="8d9a5844-84c9-457f-9071-13f93aec76b3">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="f0e4e293-2335-4978-ab85-13148aa97ac1" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="df69b820-4001-4c77-a138-d6eb5d81f953">
+              <AttributeID>Jerarquia4</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="0a9fcac9-41d4-4416-a3c7-eb2e39a0d40a">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="7326d7ef-d380-4ba8-959a-abecdaa082af" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="933299ea-8300-41f4-8188-3f36c70aed1b">
+              <AttributeID>Cuenta</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="1c71c8c1-e924-4b93-9ab5-78dccabb0fb7">
+                  <DataType>WChar</DataType>
+                  <DataSize>60</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="5e27a102-bbe0-440f-a869-351723d379e9" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="2f4a2add-7771-4606-9003-4ecd37e2911d">
+              <AttributeID>Detalle</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="345e8262-6840-4903-a528-af14de4bd162">
+                  <DataType>WChar</DataType>
+                  <DataSize>100</DataSize>
+                  <Source xsi:type="InheritedBinding" dwd:design-time-name="e49e0614-2346-43e3-a26f-ca413cb84cb2" />
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+      <ProactiveCaching dwd:design-time-name="ddc284f1-237b-4a6b-9655-bc7a90f4e9da">
+        <SilenceInterval>-PT1S</SilenceInterval>
+        <Latency>-PT1S</Latency>
+        <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+        <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+        <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="75902a71-2d44-4be9-b31d-691091a3a1c9" />
+      </ProactiveCaching>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="483d9554-48d2-4007-9707-9b782647d6a8">
+    <DataSourceViewID>VOD Pronto2005</DataSourceViewID>
+  </Source>
+  <MdxScripts>
+    <MdxScript dwd:design-time-name="b1791330-062b-405f-a152-d72d3bbc1b3c">
+      <ID>MdxScript</ID>
+      <Name>MdxScript</Name>
+      <CreatedTimestamp>2010-01-28T14:00:53Z</CreatedTimestamp>
+      <LastSchemaUpdate>2010-01-28T14:00:53Z</LastSchemaUpdate>
+      <Commands>
+        <Command>
+          <Text>CALCULATE;
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Enero] AS 'Iif([Measures].[Teorico Enero]=0, 0,  ([Measures].[Teorico Enero]-[Measures].[Real Enero])/[Measures].[Teorico Enero])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Febrero] AS 'Iif([Measures].[Teorico Febrero]=0, 0,  ([Measures].[Teorico Febrero]-[Measures].[Real Febrero])/[Measures].[Teorico Febrero])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Marzo] AS 'Iif([Measures].[Teorico Marzo]=0, 0,  ([Measures].[Teorico Marzo]-[Measures].[Real Marzo])/[Measures].[Teorico Marzo])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Abril] AS 'Iif([Measures].[Teorico Abril]=0, 0,  ([Measures].[Teorico Abril]-[Measures].[Real Abril])/[Measures].[Teorico Abril])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Mayo] AS 'Iif([Measures].[Teorico Mayo]=0, 0,  ([Measures].[Teorico Mayo]-[Measures].[Real Mayo])/[Measures].[Teorico Mayo])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Junio] AS 'Iif([Measures].[Teorico Junio]=0, 0,  ([Measures].[Teorico Junio]-[Measures].[Real Junio])/[Measures].[Teorico Junio])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Julio] AS 'Iif([Measures].[Teorico Julio]=0, 0,  ([Measures].[Teorico Julio]-[Measures].[Real Julio])/[Measures].[Teorico Julio])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Agosto] AS 'Iif([Measures].[Teorico Agosto]=0, 0,  ([Measures].[Teorico Agosto]-[Measures].[Real Agosto])/[Measures].[Teorico Agosto])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Setiembre] AS 'Iif([Measures].[Teorico Setiembre]=0, 0,  ([Measures].[Teorico Setiembre]-[Measures].[Real Setiembre])/[Measures].[Teorico Setiembre])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Octubre] AS 'Iif([Measures].[Teorico Octubre]=0, 0,  ([Measures].[Teorico Octubre]-[Measures].[Real Octubre])/[Measures].[Teorico Octubre])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Noviembre] AS 'Iif([Measures].[Teorico Noviembre]=0, 0,  ([Measures].[Teorico Noviembre]-[Measures].[Real Noviembre])/[Measures].[Teorico Noviembre])';
+CREATE MEMBER CURRENTCUBE.Measures.[Desvio Diciembre] AS 'Iif([Measures].[Teorico Diciembre]=0, 0,  ([Measures].[Teorico Diciembre]-[Measures].[Real Diciembre])/[Measures].[Teorico Diciembre])';
+
+</Text>
+        </Command>
+      </Commands>
+    </MdxScript>
+  </MdxScripts>
+  <ProactiveCaching dwd:design-time-name="ed1c5efd-8a9d-423a-a6d4-4f0a68e9ea89">
+    <SilenceInterval>-PT1S</SilenceInterval>
+    <Latency>-PT1S</Latency>
+    <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+    <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+    <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="00b9f6f9-acfb-4617-8fb0-9da0e7da24ef" />
+  </ProactiveCaching>
+</Cube>
