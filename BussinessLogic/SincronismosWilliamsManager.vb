@@ -1565,6 +1565,8 @@ Namespace Pronto.ERP.Bll
                         Case "CHIAMBRETTO"
                             Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
+                            db.Database.CommandTimeout = 240
+
                             Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
                                                                      Nothing, idVendedor,
                                  idCorredor, idDestinatario, idIntermediario, idRComercial,
