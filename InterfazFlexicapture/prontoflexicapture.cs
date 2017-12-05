@@ -2414,7 +2414,7 @@ namespace ProntoFlexicapture
                     cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
 
 
-                    cdp.NRecibo = Convert.ToInt32(Conversion.Val(Recibo));
+                    cdp.NRecibo = Recibo;
 
                     cdp.Observaciones = Observaciones;
                     cdp.Humedad = Conversion.Val(HumedadPorc.Replace(".", "").Replace(",", ""));
