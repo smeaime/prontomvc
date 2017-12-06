@@ -66,16 +66,7 @@ namespace ProntoMVC.Controllers
 
         void inic(ref ProntoMVC.Data.Models.Requerimiento o)
         {
-            //o.PorcentajeIva1 = 21;                  //  mvarP_IVA1_Tomado
-            //o.FechaFactura = DateTime.Now;
-
             Parametros parametros = db.Parametros.Find(1);
-            //o.OtrasPercepciones1 = 0;
-            //o.OtrasPercepciones1Desc = ((parametros.OtrasPercepciones1 ?? "NO") == "SI") ? parametros.OtrasPercepciones1Desc : "";
-            //o.OtrasPercepciones2 = 0;
-            //o.OtrasPercepciones2Desc = ((parametros.OtrasPercepciones2 ?? "NO") == "SI") ? parametros.OtrasPercepciones2Desc : "";
-            //o.OtrasPercepciones3 = 0;
-            //o.OtrasPercepciones3Desc = ((parametros.OtrasPercepciones3 ?? "NO") == "SI") ? parametros.OtrasPercepciones3Desc : "";
 
             o.IdMoneda = 1;
 
@@ -83,15 +74,6 @@ namespace ProntoMVC.Controllers
             //var IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
             //var IdSector = (from item in db.Empleados where item.IdEmpleado == IdUsuario select item).SingleOrDefault().IdSector;
             //ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra");
-
-            //o.IdSector = ;
-            //o.IdSolicito=
-
-            // db.Cotizaciones_TX_PorFechaMoneda(fecha,IdMoneda)
-            //var mvarCotizacion = db.Cotizaciones.OrderByDescending(x => x.IdCotizacion).FirstOrDefault().Cotizacion; //  mo  Cotizacion(Date, glbIdMonedaDolar);
-            //o.CotizacionMoneda = 1;
-            ////  o.CotizacionADolarFijo=
-            //o.CotizacionDolar = (decimal)mvarCotizacion;
 
             o.DetalleRequerimientos.Add(new ProntoMVC.Data.Models.DetalleRequerimiento());
             o.DetalleRequerimientos.Add(new ProntoMVC.Data.Models.DetalleRequerimiento());
@@ -116,34 +98,6 @@ namespace ProntoMVC.Controllers
             ViewBag.IdSolicito = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI").OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.IdSolicito);
             ViewBag.IdSector = new SelectList(db.Sectores.OrderBy(x => x.Descripcion), "IdSector", "Descripcion", o.IdSector);
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, 0, -1).Count();
-
-            //ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSolicito = new SelectList(db.Empleados, "IdEmpleado", "Nombre");
-            //ViewBag.IdSector = new SelectList(db.Sectores, "IdSector", "Descripcion");
-            //ViewBag.PuntoVenta = new SelectList((from i in db.PuntosVentas
-            //                                     where i.IdTipoComprobante == (int)Pronto.ERP.Bll.EntidadManager.IdTipoComprobante.Factura
-            //                                     select new { PuntoVenta = i.PuntoVenta })
-            //    // http://stackoverflow.com/questions/2135666/databinding-system-string-does-not-contain-a-property-with-the-name-dbmake
-            //                                     .Distinct(), "PuntoVenta", "PuntoVenta"); //traer solo el Numero de PuntoVenta, no el Id
-
-
-            //ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
-            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "RazonSocial", o.IdCliente);
-            //ViewBag.IdTipoRetencionGanancia = new SelectList(db.TiposRetencionGanancias, "IdTipoRetencionGanancia", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", o.IdCodigoIva);
-            //ViewBag.IdListaPrecios = new SelectList(db.ListasPrecios, "IdListaPrecios", "Descripcion", o.IdListaPrecios);
-            //ViewBag.IdMoneda = new SelectList(db.Monedas, "IdMoneda", "Nombre", o.IdMoneda);
-            //ViewBag.IdCondicionVenta = new SelectList(db.Condiciones_Compras, "IdCondicionCompra", "Descripcion", o.IdCondicionVenta);
-
-            ////http://stackoverflow.com/questions/942262/add-empty-value-to-a-dropdownlist-in-asp-net-mvc
-            //// http://stackoverflow.com/questions/7659612/mvc3-dropdownlist-and-viewbag-how-add-new-items-to-collection
-            ////List<SelectListItem>  l = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-            ////l.ad
-            ////l.Add((new SelectListItem { IdIBCondicion = " ", Descripcion = "-1" }));
-            //ViewBag.IdIBCondicionPorDefecto = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion);
-
-            //ViewBag.IdIBCondicionPorDefecto2 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion2);
-            //ViewBag.IdIBCondicionPorDefecto3 = new SelectList(db.IBCondiciones, "IdIBCondicion", "Descripcion", o.IdIBCondicion3);
 
             Parametros parametros = db.Parametros.Find(1);
             ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
@@ -247,17 +201,7 @@ namespace ProntoMVC.Controllers
 
         private bool Validar(ProntoMVC.Data.Models.Requerimiento o, ref string sErrorMsg)
         {
-            // una opcion es extender el modelo autogenerado, para ensoquetar ahí las validaciones
-            // si no, podemos usar una funcion como esta, y devolver los  errores de dos maneras:
-            // con ModelState.AddModelError si los devolvemos en una ViewResult,
-            // o con un array de strings si es una JsonResult.
-            //
-            // If you are returning JSON, you cannot use ModelState.
-            // http://stackoverflow.com/questions/2808327/how-to-read-modelstate-errors-when-returned-by-json
-
-
             if (!PuedeEditar(enumNodos.Facturas)) sErrorMsg += "\n" + "No tiene permisos de edición";
-
 
             if (o.IdRequerimiento <= 0)
             {
@@ -271,11 +215,6 @@ namespace ProntoMVC.Controllers
                 sErrorMsg += "\n" + "Falta la obra";
                 // return false;
             }
-            //if (o.NumeroFactura == null) sErrorMsg += "\n" + "Falta el número de factura";
-            //// if (o.IdPuntoVenta== null) sErrorMsg += "\n" + "Falta el punto de venta";
-            //if (o.IdCodigoIva == null) sErrorMsg += "\n" + "Falta el codigo de IVA";
-            //if (o.IdCondicionVenta == null) sErrorMsg += "\n" + "Falta la condicion venta";
-            //if (o.IdListaPrecios == null) sErrorMsg += "\n" + "Falta la lista de precios";
 
             string OrigenDescripcionDefault = BuscarClaveINI("OrigenDescripcion en 3 cuando hay observaciones");
 
@@ -367,21 +306,9 @@ namespace ProntoMVC.Controllers
                 if (ModelState.IsValid)
                 {
                     requerimiento.ConfirmadoPorWeb = "SI";
-                    //if (requerimiento.FechaAnulacion != null)
-                    //{
-                    //    requerimiento.Cumplido = "AN";
-                    //    // requerimiento.UsuarioAnulacion = "";
-                    //    requerimiento.FechaAnulacion = DateTime.Now;
-                    //    requerimiento.MotivoAnulacion = requerimiento.MotivoAnulacion;
-                    //}
-
-
                     string tipomovimiento = "";
-                    // Perform Update
-
 
                     ValidaryReformatearRequerimiento(requerimiento);
-
 
                     if (requerimiento.IdRequerimiento > 0)
                     {
@@ -436,7 +363,6 @@ namespace ProntoMVC.Controllers
                         //}
                         //db.Entry(requerimiento).State = System.Data.Entity.EntityState.Modified;
                     }
-                    //Perform Save
                     else
                     {
                         tipomovimiento = "N";
@@ -445,25 +371,15 @@ namespace ProntoMVC.Controllers
                         db.Requerimientos.Add(requerimiento);
                     }
 
-
                     db.SaveChanges();
-
 
                     db.wActualizacionesVariasPorComprobante(103, requerimiento.IdRequerimiento, tipomovimiento);
                     db.Tree_TX_Actualizar("RequerimientosAgrupados", requerimiento.IdRequerimiento, "Requerimiento");
 
-
-                    //////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////
-                    //////////////////////////////////////////////////////////
-
                     try
                     {
-
-
                         // esto tarda 30 segundos en autotrol!!!
                         List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
-
                     }
                     catch (Exception ex)
                     {
@@ -489,8 +405,6 @@ namespace ProntoMVC.Controllers
                     //return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
 
                     return Json(res);
-
-
                 }
             }
             catch (Exception ex)
@@ -498,12 +412,9 @@ namespace ProntoMVC.Controllers
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 Response.TrySkipIisCustomErrors = true;
 
-
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return Json(errors);
-
-
 
                 // If Sucess== 0 then Unable to perform Save/Update Operation and send Exception to View as JSON
                 return Json(new { Success = 0, ex = ex.Message.ToString() });
@@ -551,7 +462,6 @@ namespace ProntoMVC.Controllers
                         dr.TipoDesignacion = null;
                     else if (Modalidad == "CN" && IdDetallePedido == 0 && dr.TipoDesignacion == "S/D")
                         dr.TipoDesignacion = null;
-
                 }
 
                 if (dr.IdComprador == null)
@@ -560,7 +470,6 @@ namespace ProntoMVC.Controllers
                 }
             }
         }
-
 
         public enum Status
         {
@@ -719,29 +628,12 @@ namespace ProntoMVC.Controllers
         [HttpPost]
         public virtual JsonResult AnularFirmas(Requerimiento Pedido)
         {
-            //         Set oRs = Aplicacion.Pedidos.TraerFiltrado("_RecepcionesPorIdPedido", mvarId)
-            //If oRs.RecordCount > 0 Then
-            //   mError = mError & "Hay recepciones ya registradas contra este pedido, no puede eliminar las firmas"
-            //End If
-
-            //With origen.Registro
-            //   .Fields("Aprobo").Value = Null
-            //   .Fields("CircuitoFirmasCompleto").Value = Null
-            //   .Fields("Subnumero").Value = IIf(IsNull(.Fields("Subnumero").Value), 1, .Fields("Subnumero").Value + 1)
-            //End With
             int glbIdUsuario = Pedido.Aprobo ?? -1;
             if (glbIdUsuario <= 0) glbIdUsuario = -1;
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             Pronto.ERP.Bll.EntidadManager.Tarea(nSC, "AutorizacionesPorComprobante_EliminarFirmas",
                                                     (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales,
                                                     Pedido.IdRequerimiento, -1, glbIdUsuario);  // idformulario,idcomprobante, orden autorizacion, idusuarioelimino
-
-            //mError = ""
-            //Set oRs = Aplicacion.Pedidos.TraerFiltrado("_RecepcionesPorIdPedido", mvarId)
-            //If oRs.RecordCount > 0 Then
-            //   mError = mError & "Hay recepciones ya registradas contra este pedido, no puede eliminar las firmas"
-            //End If
-            //oRs.Close
 
             Pedido.Aprobo = null;
             Pedido.CircuitoFirmasCompleto = null;
@@ -758,12 +650,6 @@ namespace ProntoMVC.Controllers
             Requerimiento.IdUsuarioDeslibero = Requerimiento.Aprobo;
             Requerimiento.FechaDesliberacion = DateTime.Now;
             Requerimiento.NumeradorDesliberaciones++;
-
-            //.Fields("Aprobo").Value = Null
-            //.Fields("CircuitoFirmasCompleto").Value = Null
-            //.Fields("IdUsuarioDeslibero").Value = mIdAprobo
-            //.Fields("FechaDesliberacion").Value = Now
-            //.Fields("NumeradorDesliberaciones").Value = IIf(IsNull(.Fields("NumeradorDesliberaciones").Value), 0, .Fields("NumeradorDesliberaciones").Value) + 1
 
             return BatchUpdate(Requerimiento);
         }
@@ -806,14 +692,6 @@ namespace ProntoMVC.Controllers
         public virtual ActionResult Requerimientos_DynamicGridData
                 (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
         {
-            /*
-            var aada =( db.Requerimientos
-                    .Include("DetalleRequerimientos.DetallePedidos") // funciona tambien
-                    .Include("DetalleRequerimientos.DetallePresupuestos") // funciona tambien
-                    .Include("DetalleRequerimientos.DetallePresupuestos,DetalleRequerimientos.DetallePedidos") // funciona tambien
-                    .Take(10) ).ToList();
-            */
-
             DateTime FechaDesde, FechaHasta;
             try
             {
@@ -931,7 +809,6 @@ namespace ProntoMVC.Controllers
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
 
         public PartialViewResult PartialPage1(string idDetalleRequerimientos)
         {
@@ -1068,10 +945,6 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public virtual ActionResult Requerimientos(string sidx, string sord, int? page, int? rows, bool _search, string searchField, string searchOper, string searchString,
                                                    string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
@@ -1225,13 +1098,6 @@ namespace ProntoMVC.Controllers
 
                                 //  string.Join(" ",  a.DetalleRequerimientos.Select(x=> (x.DetallePresupuestos.Select(y=> y.IdPresupuesto))  )),
                                 // string.Join(" ",  a.DetalleRequerimientos.Select(x=>(x.DetallePresupuestos   ==null) ? "" : x.DetallePresupuestos.Select(z=>z.Presupuesto.Numero.ToString()).NullSafeToString() ).Distinct()),
-
-
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-                                // Req ya viene con todos los datos para las colecciones hijas. lo paginé y ahí hice el select (arriba)
-
                                 string.Join(",",  a.DetalleRequerimientos
                                     .SelectMany(x =>
                                         (x.DetallePresupuestos == null) ?
@@ -1548,54 +1414,43 @@ namespace ProntoMVC.Controllers
                             .Include(x => x.ControlCalidad)
                             .Where(p => p.IdRequerimiento == IdRequerimiento1 || IdRequerimiento1 == -1).AsQueryable();
 
-            bool Eliminado = false;
-
             int pageSize = rows ?? 20;
             int totalRecords = DetReq.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             int currentPage = page ?? 1;
 
-
-            switch (sidx.ToLower())
-            {
-                case "numerorequerimiento":
-                    if (sord.Equals("desc"))
-                        DetReq = DetReq.OrderByDescending(a => a.IdRequerimiento);
-                    else
-                        DetReq = DetReq.OrderBy(a => a.IdRequerimiento);
-                    break;
-                default:
-                    if (sord.Equals("desc"))
-                        DetReq = DetReq.OrderByDescending(a => a.IdRequerimiento);
-                    else
-                        DetReq = DetReq.OrderBy(a => a.IdRequerimiento);
-                    break;
-            }
-
-
             var data = (from a in DetReq
                         select new
                         {
                             a.IdDetalleRequerimiento,
+                            a.IdRequerimiento,
                             a.IdArticulo,
                             a.IdUnidad,
+                            a.IdControlCalidad,
+                            a.OrigenDescripcion,
                             a.NumeroItem,
                             a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.FechaEntrega,
+                            Unidad = a.Unidad.Abreviatura,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion,
                             a.Observaciones,
-                            a.Adjunto,
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            a.FechaEntrega,
+                            a.Cumplido,
+                            DescripcionControlCalidad = (a.ControlCalidad == null) ? "" : a.ControlCalidad.Descripcion,
                             a.ArchivoAdjunto1,
                             a.ArchivoAdjunto2,
                             a.ArchivoAdjunto3,
-                            a.Cumplido,
-                            a.OrigenDescripcion,
-                            a.IdRequerimiento,
-                            IdControlCalidad = (a.ControlCalidad == null) ? 0 : a.ControlCalidad.IdControlCalidad,
-                            ControlCalidadDesc = (a.ControlCalidad == null) ? "" : a.ControlCalidad.Descripcion
-                        }).Skip((currentPage - 1) * pageSize).OrderBy(x => x.NumeroItem).Take(pageSize).ToList();
+                            a.ArchivoAdjunto4,
+                            a.ArchivoAdjunto5,
+                            a.ArchivoAdjunto6,
+                            a.ArchivoAdjunto7,
+                            a.ArchivoAdjunto8,
+                            a.ArchivoAdjunto9,
+                            a.ArchivoAdjunto10
+                        }).OrderBy(x => x.NumeroItem)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1609,35 +1464,33 @@ namespace ProntoMVC.Controllers
                             cell = new string[] {
                                 string.Empty,
                                 a.IdDetalleRequerimiento.ToString(),
+                                a.IdRequerimiento.NullSafeToString(),
                                 a.IdArticulo.ToString(),
                                 a.IdUnidad.ToString(),
-                                //Eliminado.ToString(),
+                                a.IdControlCalidad.NullSafeToString(),
+                                a.OrigenDescripcion.ToString(),
                                 a.NumeroItem.ToString(),
                                 a.Cantidad.ToString(),
-                                a.Abreviatura,
+                                a.Unidad,
                                 a.Codigo,
-                                "",
-                                a.Descripcion,
-                                a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Articulo,
                                 a.Observaciones,
+                                a.TiposDeDescripcion,
+                                a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
+                                a.DescripcionControlCalidad.NullSafeToString(),
                                 a.ArchivoAdjunto1,
-                                a.OrigenDescripcion.ToString(),
-                                a.IdRequerimiento.NullSafeToString(),
-                                a.IdControlCalidad.NullSafeToString(),
-                                a.ControlCalidadDesc.NullSafeToString()
+                                a.ArchivoAdjunto2,
+                                a.ArchivoAdjunto3,
+                                a.ArchivoAdjunto4,
+                                a.ArchivoAdjunto5,
+                                a.ArchivoAdjunto6,
+                                a.ArchivoAdjunto7,
+                                a.ArchivoAdjunto8,
+                                a.ArchivoAdjunto9,
+                                a.ArchivoAdjunto10
                          }
                         }).ToArray()
-                //           If .OrigenDescripcion = 1 Then
-                //    RadioButtonList1.Items(0).Selected = True
-                //ElseIf .OrigenDescripcion = 2 Then
-                //    RadioButtonList1.Items(1).Selected = True
-                //ElseIf .OrigenDescripcion = 3 Then
-                //    RadioButtonList1.Items(2).Selected = True
-                //Else
-                //    RadioButtonList1.Items(0).Selected = True
-                //End If
-                //<asp:Label Width="300px" ID="Label7" runat="server" Text='<%# Eval("Codigo") & " " & IIf(Eval("OrigenDescripcion")<>2, Eval("Articulo"),"") & " " & IIf(Eval("OrigenDescripcion")<>1, Eval("Observaciones"),"") %>' />
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
@@ -1681,22 +1534,6 @@ namespace ProntoMVC.Controllers
             //            int totalRecords = DetReq.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
             int currentPage = page; // ?? 1;
-
-            //switch (sidx.ToLower())
-            //{
-            //    case "numerorequerimiento":
-            //        if (sord.Equals("desc"))
-            //            DetReq = DetReq.OrderByDescending(a => a.IdRequerimiento);
-            //        else
-            //            DetReq = DetReq.OrderBy(a => a.IdRequerimiento);
-            //        break;
-            //    default:
-            //        if (sord.Equals("desc"))
-            //            DetReq = DetReq.OrderByDescending(a => a.IdRequerimiento);
-            //        else
-            //            DetReq = DetReq.OrderBy(a => a.IdRequerimiento);
-            //        break;
-            //}
 
             var data = (from a in pagedQuery
                         select new
@@ -1908,14 +1745,6 @@ namespace ProntoMVC.Controllers
         public virtual JsonResult DetRequerimientosSinFormato(int IdRequerimiento)
         {
             var Det = db.DetalleRequerimientos.Where(p => p.IdRequerimiento == IdRequerimiento).AsQueryable();
-
-            //Det = Det.Where(a =>
-            //                    (a.Cantidad -
-            //                     db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento
-            //                                                    && ((x.Cumplido ?? "NO") != "AN"))
-            //                                            .Sum(z => z.Cantidad)
-            //                     ) > 0
-            //                     );
 
             var data = (from a in Det
                         select new

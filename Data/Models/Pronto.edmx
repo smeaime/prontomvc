@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content lkjlkjlk -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -716,8 +716,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -874,8 +874,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -2247,6 +2247,21 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="IdDetalleRemito" Type="int" />
           <Property Name="EnviarEmail" Type="tinyint" />
         </EntityType>
+        <EntityType Name="DetalleFletes">
+          <Key>
+            <PropertyRef Name="IdDetalleFlete" />
+          </Key>
+          <Property Name="IdDetalleFlete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFlete" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Tara" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Ancho" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="Largo" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="Alto" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="Capacidad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Patente" Type="varchar" MaxLength="6" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+        </EntityType>
         <EntityType Name="DetalleLMateriales">
           <Key>
             <PropertyRef Name="IdDetalleLMateriales" />
@@ -3245,8 +3260,8 @@ warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -3672,6 +3687,32 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           </Key>
           <Property Name="IdFertilizantesTiposDespacho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fletes">
+          <Key>
+            <PropertyRef Name="IdFlete" />
+          </Key>
+          <Property Name="IdFlete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Patente" Type="varchar" MaxLength="10" />
+          <Property Name="NumeroInterno" Type="int" />
+          <Property Name="IdTransportista" Type="int" />
+          <Property Name="IdChofer" Type="int" />
+          <Property Name="Capacidad" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Tara" Type="int" />
+          <Property Name="TouchCarga" Type="varchar" MaxLength="5" />
+          <Property Name="TouchDescarga" Type="varchar" MaxLength="5" />
+          <Property Name="IdMarca" Type="int" />
+          <Property Name="IdModelo" Type="int" />
+          <Property Name="Año" Type="int" />
+          <Property Name="Ancho" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="Largo" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="Alto" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="ModalidadFacturacion" Type="tinyint" />
+          <Property Name="IdTarifaFlete" Type="int" />
+          <Property Name="PathImagen1" Type="varchar" MaxLength="200" />
+          <Property Name="IdOrigenTransmision" Type="int" />
+          <Property Name="PatenteChasis" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Formularios">
           <Key>
@@ -6008,8 +6049,8 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6221,8 +6262,8 @@ warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defin
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -6334,8 +6375,8 @@ warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a pr
           <Property Name="IdDestino" Type="int" />
           <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VistaCartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -10153,6 +10194,18 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
         <Function Name="Pedidos_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="IdPedido" Type="int" Mode="In" />
         </Function>
+        <Function Name="Recepciones_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Pedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Recepciones_Solicitantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdRecepcion" Type="int" Mode="In" />
+        </Function>
         <Function Name="Remitos_TX_ItemsPendientesDeFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Requerimientos_ActualizarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdRequerimiento" Type="int" Mode="In" />
@@ -10172,6 +10225,12 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
         </Function>
         <Function Name="Requerimientos_TX_PendientesDeAsignacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Depositos" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SalidasMateriales_EquiposDestino" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdSalidaMateriales" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SalidasMateriales_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdSalidaMateriales" Type="int" Mode="In" />
         </Function>
         <Function Name="Tree_TX_Actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Clave" Type="varchar" Mode="In" />
@@ -10335,6 +10394,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySet Name="DetalleFacturasOrdenesCompra" EntityType="Self.DetalleFacturasOrdenesCompra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturasProvincias" EntityType="Self.DetalleFacturasProvincias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturasRemitos" EntityType="Self.DetalleFacturasRemitos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFletes" EntityType="Self.DetalleFletes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleLMateriales" EntityType="Self.DetalleLMateriales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleNotasCredito" EntityType="Self.DetalleNotasCredito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleNotasCreditoImputaciones" EntityType="Self.DetalleNotasCreditoImputaciones" Schema="dbo" store:Type="Tables" />
@@ -10387,6 +10447,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySet Name="FertilizantesCupos" EntityType="Self.FertilizantesCupos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FertilizantesPuntosDespacho" EntityType="Self.FertilizantesPuntosDespacho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FertilizantesTiposDespacho" EntityType="Self.FertilizantesTiposDespacho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fletes" EntityType="Self.Fletes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
@@ -13641,6 +13702,9 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             <End Role="DetalleRecepcione" EntitySet="DetalleRecepciones" />
             <End Role="DetalleComprobantesProveedore" EntitySet="DetalleComprobantesProveedores" />
           </AssociationSet>
+          <EntitySet Name="DetalleFletes" EntityType="DemoProntoModel.DetalleFlete" />
+          <EntitySet Name="Fletes" EntityType="DemoProntoModel.Flete" />
+
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -26533,6 +26597,49 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
+        <EntityType Name="DetalleFlete">
+          <Key>
+            <PropertyRef Name="IdDetalleFlete" />
+          </Key>
+          <Property Name="IdDetalleFlete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFlete" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Tara" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Ancho" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Largo" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Alto" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Capacidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Patente" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Flete">
+          <Key>
+            <PropertyRef Name="IdFlete" />
+          </Key>
+          <Property Name="IdFlete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroInterno" Type="Int32" />
+          <Property Name="IdTransportista" Type="Int32" />
+          <Property Name="IdChofer" Type="Int32" />
+          <Property Name="Capacidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tara" Type="Int32" />
+          <Property Name="TouchCarga" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TouchDescarga" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="IdModelo" Type="Int32" />
+          <Property Name="Año" Type="Int32" />
+          <Property Name="Ancho" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Largo" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Alto" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ModalidadFacturacion" Type="Byte" />
+          <Property Name="IdTarifaFlete" Type="Int32" />
+          <Property Name="PathImagen1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdOrigenTransmision" Type="Int32" />
+          <Property Name="PatenteChasis" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33762,6 +33869,49 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
                 <ScalarProperty Name="TipoConsumo" ColumnName="TipoConsumo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdPresupuestoObraRubro" ColumnName="IdPresupuestoObraRubro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFletes">
+            <EntityTypeMapping TypeName="DemoProntoModel.DetalleFlete">
+              <MappingFragment StoreEntitySet="DetalleFletes">
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Alto" ColumnName="Alto" />
+                <ScalarProperty Name="Largo" ColumnName="Largo" />
+                <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+                <ScalarProperty Name="Tara" ColumnName="Tara" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdFlete" ColumnName="IdFlete" />
+                <ScalarProperty Name="IdDetalleFlete" ColumnName="IdDetalleFlete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fletes">
+            <EntityTypeMapping TypeName="DemoProntoModel.Flete">
+              <MappingFragment StoreEntitySet="Fletes">
+                <ScalarProperty Name="PatenteChasis" ColumnName="PatenteChasis" />
+                <ScalarProperty Name="IdOrigenTransmision" ColumnName="IdOrigenTransmision" />
+                <ScalarProperty Name="PathImagen1" ColumnName="PathImagen1" />
+                <ScalarProperty Name="IdTarifaFlete" ColumnName="IdTarifaFlete" />
+                <ScalarProperty Name="ModalidadFacturacion" ColumnName="ModalidadFacturacion" />
+                <ScalarProperty Name="Alto" ColumnName="Alto" />
+                <ScalarProperty Name="Largo" ColumnName="Largo" />
+                <ScalarProperty Name="Ancho" ColumnName="Ancho" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="TouchDescarga" ColumnName="TouchDescarga" />
+                <ScalarProperty Name="TouchCarga" ColumnName="TouchCarga" />
+                <ScalarProperty Name="Tara" ColumnName="Tara" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="IdTransportista" ColumnName="IdTransportista" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdFlete" ColumnName="IdFlete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

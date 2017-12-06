@@ -677,6 +677,236 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public class SalidasMateriales2
+        {
+            public int IdSalidaMateriales { get; set; }
+            public string TipoSalida { get; set; }  //ClaveTipoSalida
+            public string NumeroSalidaMateriales1 { get; set; }
+            public string NumeroSalidaMateriales2 { get; set; }
+            public DateTime? FechaSalidaMateriales { get; set; }
+            public string Obra { get; set; }
+            public string Cliente { get; set; }
+            public string Proveedor { get; set; }
+            public string Direccion { get; set; }
+            public string Localidad { get; set; }
+            public string CodigoPostal { get; set; }
+            public string Transportista { get; set; }
+            public string Observaciones { get; set; }
+            public decimal? CostoTotal { get; set; }
+            public int? ValePreimpreso { get; set; }
+            public int? NumeroOrdenProduccion { get; set; }
+            public string Requerimientos { get; set; }
+            public string EquiposDestino { get; set; }
+            public string Aprobo { get; set; }
+            public decimal? ValorDeclarado { get; set; }
+            public int? Bultos { get; set; }
+            public string Anulada { get; set; }
+            public string Anulo { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string MotivoAnulacion { get; set; }
+            public string Confecciono { get; set; }
+            public DateTime? FechaIngreso { get; set; }
+            public string Modifico { get; set; }
+            public DateTime? FechaModifico { get; set; }
+            public string Detalle { get; set; }
+            public string Flete { get; set; }
+            public string Chofer { get; set; }
+            public string NumeroDocumento { get; set; }
+            public string Patente1 { get; set; }
+            public string NumeroRemitoTransporte { get; set; }
+            public string NumeroRemitoTransporte2 { get; set; }
+            public string NumeroRemitoTransporte1 { get; set; }
+            public int? NumeroPesada { get; set; }
+            public decimal? Progresiva1 { get; set; }
+            public decimal? Progresiva2 { get; set; }
+            public DateTime? FechaPesada { get; set; }
+            public string ObservacionesPesada { get; set; }
+            public decimal? PesoBruto { get; set; }
+            public decimal? PesoNeto { get; set; }
+            public decimal? Tara { get; set; }
+            public decimal? CantidadEnOrigen { get; set; }
+            public decimal? DistanciaRecorrida { get; set; }
+            public string RecibidosEnDestino { get; set; }
+            public DateTime? RecibidosEnDestinoFecha { get; set; }
+            public string RecibioEnDestino { get; set; }
+            public string DestinoEntreCalles { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
+            public int? Items { get; set; }
+        }
+
+        public virtual JsonResult SalidaMateriales_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.SalidasMateriales
+                        from b in db.Obras.Where(o => o.IdObra == a.IdObra).DefaultIfEmpty()
+                        from c in db.Proveedores.Where(o => o.IdProveedor == a.IdProveedor).DefaultIfEmpty()
+                        from d in db.Transportistas.Where(o => o.IdTransportista == a.IdTransportista1).DefaultIfEmpty()
+                        from e in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from f in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioAnulo).DefaultIfEmpty()
+                        from g in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
+                        from h in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        from i in db.Fletes.Where(o => o.IdFlete == a.IdFlete).DefaultIfEmpty()
+                        from j in db.Choferes.Where(o => o.IdChofer == a.IdChofer).DefaultIfEmpty()
+                        from k in db.Empleados.Where(o => o.IdEmpleado == a.RecibidosEnDestinoIdUsuario).DefaultIfEmpty()
+                        from l in db.Calles.Where(o => o.IdCalle == a.IdCalle1).DefaultIfEmpty()
+                        from m in db.Calles.Where(o => o.IdCalle == a.IdCalle2).DefaultIfEmpty()
+                        from n in db.Calles.Where(o => o.IdCalle == a.IdCalle3).DefaultIfEmpty()
+                        select new SalidasMateriales2
+                        {
+                            IdSalidaMateriales = a.IdSalidaMateriales,
+                            TipoSalida = ((a.TipoSalida ?? 0) == 0 ? "Salida a fabrica" : ((a.TipoSalida ?? 0) == 1 ? "Salida a obra" : ((a.TipoSalida ?? 0) == 2 ? "A Proveedor" : (a.ClaveTipoSalida ?? "")))),
+                            NumeroSalidaMateriales1 = SqlFunctions.Replicate("0", 4 - a.NumeroSalidaMateriales2.ToString().Length) + a.NumeroSalidaMateriales2.ToString(),
+                            NumeroSalidaMateriales2 = SqlFunctions.Replicate("0", 8 - a.NumeroSalidaMateriales.ToString().Length) + a.NumeroSalidaMateriales.ToString(),
+                            FechaSalidaMateriales = a.FechaSalidaMateriales,
+                            Obra = b != null ? b.NumeroObra : "",
+                            Cliente = a.Cliente,
+                            Proveedor = c != null ? c.RazonSocial : "",
+                            Direccion = a.Direccion,
+                            Localidad = a.Localidad,
+                            CodigoPostal = a.CodigoPostal,
+                            Transportista = d != null ? d.RazonSocial : "",
+                            Observaciones = a.Observaciones,
+                            CostoTotal = a.DetalleSalidasMateriales.Sum(x => (x.Cantidad ?? 0) * (x.CostoUnitario ?? 0) * (x.CotizacionMoneda ?? 1)),
+                            ValePreimpreso = a.ValePreimpreso,
+                            NumeroOrdenProduccion = a.NumeroOrdenProduccion,
+                            Requerimientos = ModelDefinedFunctions.SalidasMateriales_Requerimientos(a.IdSalidaMateriales).ToString(),
+                            EquiposDestino = ModelDefinedFunctions.SalidasMateriales_EquiposDestino(a.IdSalidaMateriales).ToString(),
+                            Aprobo = e != null ? e.Nombre : "",
+                            ValorDeclarado = a.ValorDeclarado,
+                            Bultos = a.Bultos,
+                            Anulada = a.Anulada,
+                            Anulo = f != null ? f.Nombre : "",
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion,
+                            Confecciono = g != null ? g.Nombre : "",
+                            FechaIngreso = a.FechaIngreso,
+                            Modifico = h != null ? h.Nombre : "",
+                            FechaModifico = a.FechaModifico,
+                            Detalle = a.Detalle,
+                            Flete = i != null ? i.Descripcion : "",
+                            Chofer = j != null ? j.Nombre : "",
+                            NumeroDocumento = a.NumeroDocumento,
+                            Patente1 = a.Patente1,
+                            NumeroRemitoTransporte = a.NumeroRemitoTransporte,
+                            NumeroRemitoTransporte2 = SqlFunctions.Replicate("0", 4 - a.NumeroRemitoTransporte2.ToString().Length) + a.NumeroRemitoTransporte2.ToString(),
+                            NumeroRemitoTransporte1 = SqlFunctions.Replicate("0", 8 - a.NumeroRemitoTransporte1.ToString().Length) + a.NumeroRemitoTransporte1.ToString(),
+                            NumeroPesada = a.NumeroPesada,
+                            Progresiva1 = a.Progresiva1,
+                            Progresiva2 = a.Progresiva2,
+                            FechaPesada = a.FechaPesada,
+                            ObservacionesPesada = a.ObservacionesPesada,
+                            PesoBruto = a.PesoBruto,
+                            PesoNeto = a.PesoNeto,
+                            Tara = a.Tara,
+                            CantidadEnOrigen = a.CantidadEnOrigen,
+                            DistanciaRecorrida = a.DistanciaRecorrida,
+                            RecibidosEnDestino = a.RecibidosEnDestino,
+                            RecibidosEnDestinoFecha = a.RecibidosEnDestinoFecha,
+                            RecibioEnDestino = k != null ? k.Nombre : "",
+                            DestinoEntreCalles = (l != null ? l.Nombre : "") + (m != null ? " entre "+m.Nombre : "") + (n != null ? " y "+n.Nombre : ""),
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
+                            Items = a.DetalleSalidasMateriales.Distinct().Count(),
+                        }).Where(a => a.FechaSalidaMateriales >= FechaDesde && a.FechaSalidaMateriales <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<SalidasMateriales2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdSalidaMateriales.ToString(),
+                            cell = new string[] {
+                                "<a href="+ Url.Action("Edit",new {id = a.IdSalidaMateriales} ) + ">Editar</>",
+                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdSalidaMateriales} ) + ">Emitir</a> ",
+                                a.IdSalidaMateriales.ToString(),
+                                a.TipoSalida.NullSafeToString(),
+                                a.NumeroSalidaMateriales1.NullSafeToString(),
+                                a.NumeroSalidaMateriales2.NullSafeToString(),
+                                a.FechaSalidaMateriales == null ? "" : a.FechaSalidaMateriales.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Obra.NullSafeToString(),
+                                a.Cliente.NullSafeToString(),
+                                a.Proveedor.NullSafeToString(),
+                                a.Direccion.NullSafeToString(),
+                                a.Localidad.NullSafeToString(),
+                                a.CodigoPostal.NullSafeToString(),
+                                a.Transportista.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.CostoTotal.NullSafeToString(),
+                                a.ValePreimpreso.NullSafeToString(),
+                                a.NumeroOrdenProduccion.NullSafeToString(),
+                                a.Requerimientos.NullSafeToString(),
+                                a.EquiposDestino.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.ValorDeclarado.NullSafeToString(),
+                                a.Bultos.NullSafeToString(),
+                                a.Anulada.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion == null ? "" : a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.Confecciono.NullSafeToString(),
+                                a.FechaIngreso == null ? "" : a.FechaIngreso.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Modifico.NullSafeToString(),
+                                a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Detalle.NullSafeToString(),
+                                a.Flete.NullSafeToString(),
+                                a.Chofer.NullSafeToString(),
+                                a.NumeroDocumento.NullSafeToString(),
+                                a.Patente1.NullSafeToString(),
+                                a.NumeroRemitoTransporte.NullSafeToString(),
+                                a.NumeroRemitoTransporte2.NullSafeToString(),
+                                a.NumeroRemitoTransporte1.NullSafeToString(),
+                                a.NumeroPesada.NullSafeToString(),
+                                a.Progresiva1.NullSafeToString(),
+                                a.Progresiva2.NullSafeToString(),
+                                a.FechaPesada == null ? "" : a.FechaPesada.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.ObservacionesPesada.NullSafeToString(),
+                                a.PesoBruto.NullSafeToString(),
+                                a.PesoNeto.NullSafeToString(),
+                                a.Tara.NullSafeToString(),
+                                a.CantidadEnOrigen.NullSafeToString(),
+                                a.DistanciaRecorrida.NullSafeToString(),
+                                a.RecibidosEnDestino.NullSafeToString(),
+                                a.RecibidosEnDestinoFecha == null ? "" : a.RecibidosEnDestinoFecha.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.RecibioEnDestino.NullSafeToString(),
+                                a.DestinoEntreCalles.NullSafeToString(),
+                                a.CircuitoFirmasCompleto.NullSafeToString(),
+                                a.Items.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult DetSalidaMateriales(string sidx, string sord, int? page, int? rows, int? IdSalidaMateriales)
         {
             int IdSalidaMateriales1 = IdSalidaMateriales ?? 0;

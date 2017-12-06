@@ -188,8 +188,8 @@ namespace ProntoMVC.Controllers
                             a.CodigoAFIP3_Letra_C,
                             a.CodigoAFIP3_Letra_E
                         }).Where(campo).OrderBy(sidx + " " + sord)
-//.Skip((currentPage - 1) * pageSize).Take(pageSize)
-.ToList();
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -329,6 +329,22 @@ namespace ProntoMVC.Controllers
                 TiposComprobante.Add(u.IdTipoComprobante, u.Descripcion);
 
             return PartialView("Select", TiposComprobante);
+        }
+
+        public virtual ActionResult TipoComprobantePorId(int IdTipoComprobante)
+        {
+            var filtereditems = (from a in db.TiposComprobantes
+                                 where (a.IdTipoComprobante == IdTipoComprobante)
+                                 select new
+                                 {
+                                     IdTipoComprobante = a.IdTipoComprobante,
+                                     Descripcion = a.Descripcion,
+                                     Coeficiente = a.Coeficiente
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
         }
     }
 }

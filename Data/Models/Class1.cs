@@ -21,7 +21,6 @@ namespace ProntoMVC.Data.Models
         }
     }
 
-
     public partial class BDLMasterEntities : DbContext
     {
         public BDLMasterEntities(string connectionString)
@@ -140,6 +139,42 @@ public static class ModelDefinedFunctions
 
     [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Pedidos_EquiposDestino")]
     public static string Pedidos_EquiposDestino(int IdPedido)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Obras")]
+    public static string Recepciones_Obras(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Pedidos")]
+    public static string Recepciones_Pedidos(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Requerimientos")]
+    public static string Recepciones_Requerimientos(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Recepciones_Solicitantes")]
+    public static string Recepciones_Solicitantes(int IdRecepcion)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "SalidasMateriales_EquiposDestino")]
+    public static string SalidasMateriales_EquiposDestino(int IdSalidaMateriales)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "SalidasMateriales_Requerimientos")]
+    public static string SalidasMateriales_Requerimientos(int IdSalidaMateriales)
     {
         throw new NotSupportedException("Direct calls are not supported.");
     }
