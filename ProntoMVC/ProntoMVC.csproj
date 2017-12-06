@@ -820,7 +820,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery.table2excel.js" />
     <Content Include="Scripts\ScriptComprobanteProveedor2.js" />
-    <Content Include="Scripts\ScriptFactura - Copia.js" />
+    <Content Include="Scripts\ScriptRequerimiento2.js" />
     <Content Include="Scripts\ScriptValeSalida.js" />
     <Content Include="Scripts\ScriptResumenConciliacion.js" />
     <Content Include="Scripts\ScriptPlazoFijo.js" />
