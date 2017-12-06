@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content lkjlkjlk -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -10226,6 +10226,12 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
         <Function Name="Requerimientos_TX_PendientesDeAsignacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Depositos" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SalidasMateriales_EquiposDestino" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdSalidaMateriales" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SalidasMateriales_Requerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="IdSalidaMateriales" Type="int" Mode="In" />
+        </Function>
         <Function Name="Tree_TX_Actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Clave" Type="varchar" Mode="In" />
           <Parameter Name="IdComprobante" Type="int" Mode="In" />
@@ -13696,11 +13702,9 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             <End Role="DetalleRecepcione" EntitySet="DetalleRecepciones" />
             <End Role="DetalleComprobantesProveedore" EntitySet="DetalleComprobantesProveedores" />
           </AssociationSet>
-<<<<<<< HEAD
           <EntitySet Name="DetalleFletes" EntityType="DemoProntoModel.DetalleFlete" />
           <EntitySet Name="Fletes" EntityType="DemoProntoModel.Flete" />
-=======
->>>>>>> e8cf6bba02488e8343b4ba3aaaef061d14611185
+
           </EntityContainer>
         <EntityType Name="Articulo">
           <Key>
@@ -26593,7 +26597,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
-<<<<<<< HEAD
+
         <EntityType Name="DetalleFlete">
           <Key>
             <PropertyRef Name="IdDetalleFlete" />
@@ -26635,8 +26639,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="IdOrigenTransmision" Type="Int32" />
           <Property Name="PatenteChasis" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-=======
->>>>>>> e8cf6bba02488e8343b4ba3aaaef061d14611185
+
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
