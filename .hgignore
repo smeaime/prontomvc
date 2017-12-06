@@ -10,6 +10,6 @@ ProntoMVC/bin/BusinessLogic.dll
 ProntoMVC/Documentos/sincro demopronto campos de tabla.sql
 ProntoMVC/Documentos/SchemaCompare1.scmp
 ProntoMVC/App_Data/ASPNETDB.MDF
-.vs
-prontoweb/Error
-prontoweb/DataBackupear
+.vs/
+prontoweb/Error/
+prontoweb/DataBackupear/

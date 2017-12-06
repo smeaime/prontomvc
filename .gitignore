@@ -156,3 +156,5 @@ prontoweb/Temp
 prontoweb/DataBackupear
 
 /.vs/ProntoMVC/v15/sqlite3/storage.ide
+.vs/
+prontoweb/Error/
