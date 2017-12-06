@@ -490,7 +490,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-        If (CheckBoxTerraverde.Checked) Then sTodosErr += Enviar("Terra Verde", txtMailTerraverde.Text, sErr, bVistaPrevia)
+        If (CheckBoxTerraVerde.Checked) Then sTodosErr += Enviar("Terra Verde", txtMailTerraverde.Text, sErr, bVistaPrevia)
         If (CheckBoxTomas.Checked) Then sTodosErr += Enviar("Tomas Hnos", txtMailTomas.Text, sErr, bVistaPrevia)
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
         If (CheckBoxZENI.Checked) Then sTodosErr += Enviar("Zeni", txtMailZENI.Text, sErr, bVistaPrevia)
@@ -550,7 +550,6 @@ Partial Class SincronismosAutomaticos
 
             SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
-            si los filtros estan vacíos, debería deshabilitar esta descarga. Cómo manejar estos casos, más allá de los automaticos?
 
 
             Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
@@ -563,6 +562,21 @@ Partial Class SincronismosAutomaticos
             Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
             Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
 
+
+            'si los filtros estan vacíos, debería deshabilitar esta descarga. Cómo manejar estos casos, más allá de los automaticos?
+            If idVendedor <= 0 _
+                 And idCorredor <= 0 _
+                 And idIntermediario <= 0 _
+                 And idRComercial <= 0 _
+                 And idClienteAuxiliar <= 0 _
+                 And idDestinatario <= 0 _
+                 And idArticulo <= 0 _
+                 And idProcedencia <= 0 _
+                 And idDestino <= 0 _
+                 Then
+                sErr += vbCrLf + "No se puede enviar el sincro si no se aplican filtros" + vbCrLf
+                Return sErr
+            End If
 
 
 

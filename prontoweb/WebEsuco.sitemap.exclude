@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+
+
+
+	<siteMapNode title="Inicio"  description="Home" roles="*">
+
+
+
+
+
+
+
+		<!--//////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        El nodo que tiene los roles, debe tener la url en blanco 
+        (es decir, es un nodo que agrupa, no tiene link) !!!!!!!!!
+        
+        (aparece un tercero) MOMENTO!!!! Lo que estas haciendo es trampa! Vos sólo ocultás nodos, pero 
+        puedo seguir accediendo a la url con un usuario sin permiso!!!! Es por eso que no podés ocultar
+        los que no son de agrupamiento!!!!
+        
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        El path access se hace en el web.config con <authorization>
+        
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+        SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!SOLUCION!!!!!!
+      //////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////-->
+
+
+
+
+		<siteMapNode url="" title="REQUERIM. DE MATERIAL"  description="Requerimientos de Materiales" roles="Usuario,Administrador,Compras">
+			<siteMapNode url="ProntoWeb/RequerimientoB.aspx?Id=-1" title="Nuevo"  description="Nuevo" roles="Usuario,Administrador,Compras" />
+			<siteMapNode url="ProntoWeb/RequerimientosB.aspx" title="Todas"  description="Todos" roles="Usuario,Administrador,Compras" />
+			<siteMapNode url="ProntoWeb/RequerimientosB.aspx?Tipo=Aliberar" title="A liberar"  description="Todos" roles="Usuario,Administrador,Compras" />
+			<siteMapNode url="ProntoWeb/RequerimientosB.aspx?Tipo=Aconfirmar" title="A confirmar"  description="Todos" roles="Usuario,Administrador,Compras" />
+		</siteMapNode>
+
+		<siteMapNode url="" title="COMPRAS"  description="Compras" roles="Usuario,Administrador,Compras">
+			<siteMapNode url="ProntoWeb/Comparativas.aspx?tipo=Confirmados" title="Comparativas"  description="Cerrados" roles="Administrador,Compras" />
+			<siteMapNode url="ProntoWeb/CtaCteAcreedores.aspx" title="Cta. Cte. Acreedores"  description="Cta. Cte. Deudores" roles="Administrador,Ventas" />
+		</siteMapNode>
+		
+		<siteMapNode url="" title="SEGURIDAD"  description="Requerimientos de Materiales" roles="Usuario,Administrador,Compras">
+			<siteMapNode url="ProntoWeb/Firmas/DocumentosAFirmar.aspx" title="Documentos a firmar"  description="Documentos a Firmar" roles="Administrador,Firmas" />
+		</siteMapNode>
+
+
+
+
+		<siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,WilliamsAdmin">
+			<siteMapNode url="Admin/ListadoUsuarios.aspx" title="Usuarios"  description="Listado de usuarios" roles="Administrador,WilliamsAdmin" />
+			<siteMapNode url="Admin/AgregarUsuarios.aspx" title="Nuevo usuario"  description="Agregar usuarios" roles="Administrador,WilliamsAdmin" />
+			<!--<siteMapNode url="Admin/AsignarEmpresa.aspx" title="Asignar a empresas"  description="Asignar a empresas" roles="Administrador,WilliamsAdmin" />-->
+			<!--<siteMapNode url="ProntoWeb/Empleados.aspx" title="Empleados"  description="Empleados" roles="Administrador,WilliamsAdmin" />
+			<siteMapNode url="ProntoWeb/Configuracion.aspx" title="Configuración"  description="Configuracion" roles="Administrador,WilliamsAdmin" />-->
+		</siteMapNode>
+
+
+
+	</siteMapNode>
+
+
+</siteMap>
