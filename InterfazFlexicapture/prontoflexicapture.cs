@@ -6008,7 +6008,7 @@ Formato localidad-provincia	destination	x
             var cartareclamo = db.CartasDePortes.Find(idcarta);
             int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
             // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
-            q = q.Where(x => x.IdReclamo == (idreclamo ?? -1 ));
+            q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
 
             // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
@@ -6667,7 +6667,7 @@ Formato localidad-provincia	destination	x
                 {
                     rec = new Reclamo();
                     rec.Estado = 1;
-                    rec.Descripcion = "nuevo reclamo";
+                    rec.Descripcion = "carta " + carta.NumeroCartaDePorte + " - usuario " + nombreusuario;
                     db.Reclamos.Add(rec);
                     db.SaveChanges();
                     carta.IdReclamo = rec.IdReclamo;
@@ -6768,7 +6768,7 @@ Formato localidad-provincia	destination	x
                     rec = db.Reclamos.Find(carta.IdReclamo);
                 }
 
-                               
+
 
                 rec.Estado = 1;
 
