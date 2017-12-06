@@ -548,8 +548,9 @@ Partial Class SincronismosAutomaticos
 
 
 
-
             SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+
+            si los filtros estan vacíos, debería deshabilitar esta descarga. Cómo manejar estos casos, más allá de los automaticos?
 
 
             Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
@@ -561,6 +562,9 @@ Partial Class SincronismosAutomaticos
             Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
             Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
             Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+
+
 
             Dim estadofiltro As CartaDePorteManager.enumCDPestado
             Select Case cmbEstado.Text  '
