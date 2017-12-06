@@ -36,15 +36,15 @@
             colNames: ['', '', 'IdSalidaMateriales', 'Tipo de salida', 'Nro. salida 1', 'Nro. salida 2', 'Fecha salida', 'Obra', 'Cliente', 'Proveedor', 'Direccion', 'Localidad', 'Cod. postal',
                        'Transportista', 'Observaciones', 'Costo total', 'Vale preimpreso', 'Nro. orden produccion', 'Requerimientos', 'Equipos destino', 'Aprobo', 'Valor declarado', 'Bultos',
                        'Anulada', 'Anulo', 'Fecha anulacion', 'Motivo anulacion', 'Confecciono', 'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Detalle', 'Flete', 'Chofer', 'Nro. documento',
-                       'Patente', 'Nro remito Transporte', 'Nro remito Transporte 1', 'Nro remito Transporte 2', 'Nro. pesada', 'Progresiva 1', 'Progresiva 2', 'Fecha pesada',
+                       'Patente', 'Nro remito Transp.', 'Nro remito Transp. 1', 'Nro remito Transp. 2', 'Nro. pesada', 'Progresiva 1', 'Progresiva 2', 'Fecha pesada',
                        'Observaciones pesada', 'Peso bruto', 'Peso neto', 'Tara', 'Cant. en origen', 'Distancia recorrida', 'Recibido en destino', 'Fecha recibidos en destino',
                        'Recibio en destino', 'Destino (entre calles)', 'Circ. Compl. de firmas', 'Items'
             ],
             colModel: [
-                        { name: 'ver', index: 'ver', align: 'center', width: 80, sortable: false, editable: false, search: false },
-                        { name: 'Emitir', index: 'Emitir'  , width: 80, sortable: false, editable: false, search: false },
+                        { name: 'ver', index: 'ver', align: 'center', width: 50, sortable: false, editable: false, search: false },
+                        { name: 'Emitir', index: 'Emitir'  , width: 50, sortable: false, editable: false, search: false },
                         { name: 'IdSalidaMateriales', index: 'IdSalidaMateriales', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'TipoSalida', index: 'TipoSalida', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'TipoSalida', index: 'TipoSalida', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         { name: 'NumeroSalidaMateriales1', index: 'NumeroSalidaMateriales1', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         { name: 'NumeroSalidaMateriales2', index: 'NumeroSalidaMateriales2', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         {
@@ -59,7 +59,7 @@
                         { name: 'CodigoPostal', index: 'CodigoPostal', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Transportista', index: 'Transportista', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CostoTotal', index: 'CostoTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                        { name: 'CostoTotal', index: 'CostoTotal', align: 'right', width: 120, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'ValePreimpreso', index: 'ValePreimpreso', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'NumeroOrdenProduccion', index: 'NumeroOrdenProduccion', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
@@ -67,7 +67,7 @@
                         { name: 'Aprobo', index: 'Aprobo', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'ValorDeclarado', index: 'ValorDeclarado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'Bultos', index: 'Bultos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Anulada', index: 'Anulada', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulo', index: 'Anulo', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         {
                             name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
@@ -90,7 +90,7 @@
                         { name: 'NumeroDocumento', index: 'NumeroDocumento', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Patente1', index: 'Patente1', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'NumeroRemitoTransporte', index: 'NumeroRemitoTransporte', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
-                        { name: 'NumeroRemitoTransporte2', index: 'NumeroRemitoTransporte2', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
+                        { name: 'NumeroRemitoTransporte2', index: 'NumeroRemitoTransporte2', align: 'center', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         { name: 'NumeroRemitoTransporte1', index: 'NumeroRemitoTransporte1', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         { name: 'NumeroPesada', index: 'NumeroPesada', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
                         { name: 'Progresiva1', index: 'Progresiva1', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } },
@@ -105,15 +105,15 @@
                         { name: 'Tara', index: 'Tara', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'CantidadEnOrigen', index: 'CantidadEnOrigen', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
                         { name: 'DistanciaRecorrida', index: 'DistanciaRecorrida', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
-                        { name: 'RecibidosEnDestino', index: 'RecibidosEnDestino', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'RecibidosEnDestino', index: 'RecibidosEnDestino', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         {
                             name: 'RecibidosEnDestinoFecha', index: 'RecibidosEnDestinoFecha', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
                             search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                         },
                         { name: 'RecibioEnDestino', index: 'RecibioEnDestino', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'DestinoEntreCalles', index: 'DestinoEntreCalles', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
-                        { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Items', index: 'Items', align: 'left', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } }
+                        { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
+                        { name: 'Items', index: 'Items', align: 'left', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {
@@ -125,7 +125,7 @@
             },
             pager: $('#ListaPager'),
             rowNum: 15,
-            rowList: [10, 20, 50, 20000],
+            rowList: [10, 20, 100],
             sortname: 'FechaSalidaMateriales,NumeroSalidaMateriales2,NumeroSalidaMateriales1',
             sortorder: 'desc',
             viewrecords: true,
