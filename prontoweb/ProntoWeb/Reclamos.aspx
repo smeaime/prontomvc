@@ -1401,15 +1401,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             $('#Lista').jqGrid({
-                //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                url: 'HandlerCartaPorte.ashx',
+                //url: 'HandlerCartaPorte.ashx',
+                url: "WebServiceCartas.asmx/ReclamosMaestro",
                 //postData: {},
                 postData: {
+                    'filters': '',
+                    'idcarta': 2122,
                     'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
                     'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
                     'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
                     'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
-                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); }
+                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); },
+                    'nombreusuario':'adasddas'
         },
                 datatype: 'json',
                 mtype: 'POST',
@@ -2314,7 +2317,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 pager: $('#ListaPager'),
                 rowNum: 1000,
                 rowList: [10, 20, 50, 100, 500, 1000],
-                sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
+                sortname: 'Fecha',  //'FechaDescarga', //'NumeroCartaDePorte',
                 sortorder: 'desc',
                 viewrecords: true,
                 multiselect: true,
