@@ -652,67 +652,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <div class="row">
             <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxLartirigoyen" runat="server" Checked="true" />
-                Lartirigoyen
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailLartirigoyen" runat="server" Text=''
-                    AutoPostBack="false" autocomplete="off"> </asp:TextBox>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxBiznaga" runat="server" Checked="true" />
-                La Biznaga
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailBiznaga" runat="server" Text='' AutoPostBack="false"
-                    autocomplete="off"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxBragadense" runat="server" Checked="true" />
-                La Bragadense
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailBragadense" runat="server" Text='' AutoPostBack="false"
-                    autocomplete="off"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxLeiva" runat="server" Checked="true" />
-                Leiva
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailLeiva" runat="server" Text='' AutoPostBack="false"
-                    autocomplete="off"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxLelfun" runat="server" Checked="true" />
-                Lelfun
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailLelfun" runat="server" Text='' AutoPostBack="false"
-                    autocomplete="off"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <asp:CheckBox ID="CheckBoxGrobo" runat="server" Checked="true" />
-                Los Grobo
-            </div>
-            <div class="col-md-10">
-                <asp:TextBox CssClass="col-md-8" ID="txtMailGrobo" runat="server" Text='' AutoPostBack="false"
-                    autocomplete="off"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxFYO" runat="server" Checked="true" />
                 FYO
             </div>
@@ -779,6 +718,70 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             </div>
             <%--corredor--%>
         </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxLartirigoyen" runat="server" Checked="true" />
+                Lartirigoyen
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailLartirigoyen" runat="server" Text=''
+                    AutoPostBack="false" autocomplete="off"> </asp:TextBox>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxBiznaga" runat="server" Checked="true" />
+                La Biznaga
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailBiznaga" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxBragadense" runat="server" Checked="true" />
+                La Bragadense
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailBragadense" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxLeiva" runat="server" Checked="true" />
+                Leiva
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailLeiva" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxLelfun" runat="server" Checked="true" />
+                Lelfun
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailLelfun" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <asp:CheckBox ID="CheckBoxGrobo" runat="server" Checked="true" />
+                Los Grobo
+            </div>
+            <div class="col-md-10">
+                <asp:TextBox CssClass="col-md-8" ID="txtMailGrobo" runat="server" Text='' AutoPostBack="false"
+                    autocomplete="off"></asp:TextBox>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxCinque" runat="server" Checked="true" />

@@ -203,6 +203,7 @@
 
 
 
+      <siteMapNode url="ProntoWeb/Reclamos.aspx?Id=-1" title="Reclamos"  description="Reclamos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
 
       <siteMapNode url="ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados" title="Facturación"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
@@ -252,6 +253,9 @@
       <siteMapNode url="ProntoWeb/CartasPortesExternoMovil.aspx" title="Informes Movil"  description="Informes Movil" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
       <siteMapNode url="ProntoWeb/SituacionCalidadMovil.aspx?a"  title="Calidad Situacion"  description="" roles="Usuario,Administrador,Comercial,Demo,WilliamsFacturacion,Cliente,WilliamsClientes" />
       <siteMapNode url="CambiaPassword.aspx?tipo=a" title="Cambiar contraseña"  description="Cambiar contraseña" roles="Cliente,Administrador,Comercial,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
+
+      <siteMapNode url="ProntoWeb/Reclamos.aspx" title="Reclamos"  description="Reclamos" roles="Cliente,Administrador,Comercial,WilliamsFacturacion,WilliamsClientes,AdministradorLimitado" />
+
     </siteMapNode>
 
     <siteMapNode url="" title="SUPERADMIN" description="" roles="SuperAdmin">
