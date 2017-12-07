@@ -5935,11 +5935,200 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual string ReclamosComentarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
+                                                     string FechaInicial, string FechaFinal, int puntovent, int idcarta,
+                                                     string SC, string nombreusuario, string SCbdlmaster)
+        {
+
+            // An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
+
+            //string SC;
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scLocal"]);
+            //else
+            //    SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.AppSettings["scWilliamsRelease"]);
+
+
+
+            //var usuario = Membership.GetUser();
+            //System.Data.DataTable dt = EntidadManager.ExecDinamico(SC, "Empleados_TX_UsuarioNT '" + nombreusuario + "'");
+            //int idUsuario = Convert.ToInt32(dt.Rows[0][0]);
+            // int puntovent = EmpleadoManager.GetItem(SC, idUsuario).PuntoVentaAsociado;
+
+
+            DateTime FechaDesde = new DateTime(1980, 1, 1);
+            DateTime FechaHasta = new DateTime(2050, 1, 1);
+
+            try
+            {
+
+                FechaDesde = DateTime.ParseExact(FechaInicial, "d/M/yyyy", null);
+            }
+            catch (Exception e)
+            {
+                //throw;
+            }
+
+            try
+            {
+                FechaHasta = DateTime.ParseExact(FechaFinal, "d/M/yyyy", null);
+
+            }
+            catch (Exception e)
+            {
+                //throw;
+
+            }
 
 
 
 
-        public virtual string Reclamos_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
+
+            ProntoMVC.Data.Models.DemoProntoEntities db =
+                               new ProntoMVC.Data.Models.DemoProntoEntities(
+                                   Auxiliares.FormatearConexParaEntityFramework(
+                                   ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)));
+
+
+            db.Database.CommandTimeout = 240;
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+            IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
+
+
+            var cartareclamo = db.CartasDePortes.Find(idcarta);
+            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
+            // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+            q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
+
+
+            // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
+            // -tambien tenes el tema de los clientes con filtros configurables.... en DataTablePorClienteSQL()
+            if (SCbdlmaster != "")
+            {
+
+                //string rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuarioNombre(nombreusuario, SCbdlmaster, SC);
+                //if (rs != "")
+                //{
+                //    int idcliente = SQLdinamico.BuscaIdClientePreciso(rs, SC);
+                //    int idCorredor = SQLdinamico.BuscaIdVendedorPreciso(EntidadManager.NombreCliente(SC, idcliente), SC);
+                //    q = q.Where(x => x.Vendedor == idcliente || x.Entregador == idcliente || x.Corredor == idCorredor ||
+                //                    x.CuentaOrden1 == idcliente || x.CuentaOrden2 == idcliente || x.IdClienteAuxiliar == idcliente);
+                //}
+            }
+
+
+
+
+            int totalRecords = 0;
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.ReclamoComentario>
+                            (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
+
+
+
+
+
+
+            //db.CartasDePortes
+            //                              .Where(x =>
+            //                                      (x.FechaDescarga >= FechaDesde && x.FechaDescarga <= FechaHasta)
+            //                                       &&
+            //                                      (x.PuntoVenta == puntovent || puntovent <= 0)
+            //                                       &&
+            //                                      (x.Destino == iddestino || iddestino <= 0)
+            //                                   )
+
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+            string campo = "true";
+            int pageSize = rows;
+            int currentPage = page;
+
+
+            //if (sidx == "Numero") sidx = "NumeroPedido"; // como estoy haciendo "select a" (el renglon entero) en la linq antes de llamar jqGridJson, no pude ponerle el nombre explicito
+            //if (searchField == "Numero") searchField = "NumeroPedido"; 
+
+            var Entidad = pagedQuery
+                          //.Include(x => x.Moneda)
+                          //.Include(x => x.Proveedor)
+                          //.Include(x => x.DetallePedidos
+                          //            .Select(y => y.DetalleRequerimiento
+                          //                )
+                          //        )
+                          //.Include("DetallePedidos.DetalleRequerimiento.Requerimientos.Obra") // funciona tambien
+                          //.Include(x => x.Comprador)
+                          .AsQueryable();
+
+
+            //var Entidad1 = (from a in Entidad.Where(campo) select new { Id = a.IdCartasDePorteControlDescarga });
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var data = (from a in Entidad
+                        select a
+                        )//.Where(campo).OrderBy(sidx + " " + sord)
+                        .ToList();
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdReclamoComentario.ToString(),
+                            cell = new string[] {
+                                "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                
+                                a.IdReclamoComentario.ToString(),
+                                a.IdReclamo.ToString(),
+                                a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
+
+                                (a.IdEmpleado==1) ? "" : a.Comentario,
+                                //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+                                a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
+
+                                a.ArchivoAdjunto.NullSafeToString(),
+
+
+
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
+
+                            }
+                        }).ToArray()
+            };
+
+            //return Json(jsonData, JsonRequestBehavior.AllowGet);
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return jsonSerializer.Serialize(jsonData);
+
+
+        }
+
+
+
+
+
+        public virtual string ReclamosMaestro_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
                                                         string FechaInicial, string FechaFinal, int puntovent, int idcarta,
                                                         string SC, string nombreusuario, string SCbdlmaster)
         {
@@ -6127,6 +6316,42 @@ Formato localidad-provincia	destination	x
 
 
         }
+
+
+
+        public virtual List<string> UsuariosExternosQuePuedenChatearEnEstaCarta(int idcarta, string usuario, string SC, string bdlmasterExternos)
+        {
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            var carta = db.CartasDePortes.Find(idcarta);
+
+            List<string> queusuarioshayEnestacarta = new List<string>();
+
+            queusuarioshayEnestacarta.Add(carta.Vendedor.NullSafeToString());
+            queusuarioshayEnestacarta.Add(carta.CuentaOrden1.NullSafeToString());
+            queusuarioshayEnestacarta.Add(carta.CuentaOrden2.NullSafeToString());
+            queusuarioshayEnestacarta.Add(carta.Entregador.NullSafeToString());
+            queusuarioshayEnestacarta.Add(CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(carta.Corredor ?? -1 ,SC).NullSafeToString());
+
+
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bdlmasterExternos)));
+
+
+            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+            var q = (from p in dbmaster.UserDatosExtendidos
+                join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                where queusuarioshayEnestacarta.Contains(p.RazonSocial)
+                select u.UserName).ToList();  //.ToDictionary();
+
+
+
+            return q;
+        }
+
+
+
 
 
 

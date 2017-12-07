@@ -1,5 +1,4 @@
 
-
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -2092,7 +2091,7 @@ go
 
 
 
-update
+
 select * from listaspreciosdetalle where idlistaprecios=2219
 
 
@@ -2181,6 +2180,11 @@ sp_help cartasdeporte
 ALTER TABLE  cartasdeporte  ALTER COLUMN  
 	 NRecibo VARCHAR(15) NULL  --de int a string   
 GO
+
+
+
+
+
 
 
 

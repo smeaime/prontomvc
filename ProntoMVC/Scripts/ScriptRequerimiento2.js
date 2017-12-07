@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     $("#loading").hide();
 
     'use strict';
@@ -374,6 +374,9 @@
                     },
                     {
                         name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 250, editable: true, edittype: 'file',
+
+                     
+                        
                         editoptions: {
                             enctype: "multipart/form-data", dataEvents: [{
                                 type: 'change', fn: function (e) {
