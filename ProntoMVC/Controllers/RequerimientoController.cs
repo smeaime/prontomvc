@@ -1462,7 +1462,7 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
                             cell = new string[] {
-                                string.Empty,
+                                string.Empty, //  "<input style='height:22px;width:20px;' id='fileupload' type='file' name='files[]' multiple value='A' onclick=\"Adjunto;\"  />",
                                 a.IdDetalleRequerimiento.ToString(),
                                 a.IdRequerimiento.NullSafeToString(),
                                 a.IdArticulo.ToString(),
@@ -1479,6 +1479,7 @@ namespace ProntoMVC.Controllers
                                 a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.DescripcionControlCalidad.NullSafeToString(),
+                                string.Empty,
                                 a.ArchivoAdjunto1,
                                 a.ArchivoAdjunto2,
                                 a.ArchivoAdjunto3,
