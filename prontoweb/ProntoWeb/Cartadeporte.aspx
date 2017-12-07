@@ -2832,10 +2832,10 @@
 
                     <asp:ListBox ID="usuarioschat" runat="server"
                         DataTextField="Descripcion" DataValueField="Id">
-                        <asp:ListItem Value="1" Text="nano"></asp:ListItem>
+<%--                        <asp:ListItem Value="1" Text="nano"></asp:ListItem>
                         <asp:ListItem Value="2" Text="luis titular"></asp:ListItem>
                         <asp:ListItem Value="3" Text="GROBO intermediario"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="asdasdnano"></asp:ListItem>
+                        <asp:ListItem Value="4" Text="asdasdnano"></asp:ListItem>--%>
                     </asp:ListBox>
 
                     <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 22px;" width="">
