@@ -221,65 +221,12 @@ Public Class WebServiceCartas
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
-            Dim usuario = Membership.GetUser.UserName
-            Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
 
 
-            Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
-            Dim casillas = ""
-            For Each u In usuarios
-                If u Is Nothing Then Continue For
-                If u = usuario Then Continue For
-                casillas += Membership.GetUser(u).Email + ","
-            Next
 
 
-            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-                'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+            EnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs)
 
-                Dim De As String
-                Dim CCOaddress As String
-                Select Case carta.PuntoVenta
-                    Case 1
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                    Case 2
-                        De = "sanlorenzo@williamsentregas.com.ar"
-                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                    Case 3
-                        De = "arroyoseco@williamsentregas.com.ar"
-                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                    Case 4
-                        De = "bahiablanca@williamsentregas.com.ar"
-                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                    Case Else
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                End Select
-
-                casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
-            End If
-
-
-            Try
-
-
-                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
-                               "Consulta por carta porte",
-                            "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpServer"),
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpPass"),
-                              "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
-
-            Catch ex As Exception
-                ErrHandler2.WriteError(ex)
-
-            End Try
 
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,6 +247,80 @@ Public Class WebServiceCartas
 
 
     End Function
+
+
+
+
+
+
+    Private Function EnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String)
+
+
+        Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+        Dim usuario = Membership.GetUser.UserName
+        Dim s = New ServicioCartaPorte.servi()
+        Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
+
+
+
+
+        Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
+        Dim casillas = ""
+        For Each u In usuarios
+            If u Is Nothing Then Continue For
+            If u = usuario Then Continue For
+            casillas += Membership.GetUser(u).Email + ","
+        Next
+
+
+        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+
+            Dim De As String
+            Dim CCOaddress As String
+            Select Case carta.PuntoVenta
+                Case 1
+                    De = "buenosaires@williamsentregas.com.ar"
+                    CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+                Case 2
+                    De = "sanlorenzo@williamsentregas.com.ar"
+                    CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+                Case 3
+                    De = "arroyoseco@williamsentregas.com.ar"
+                    CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+                Case 4
+                    De = "bahiablanca@williamsentregas.com.ar"
+                    CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+                Case Else
+                    De = "buenosaires@williamsentregas.com.ar"
+                    CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+            End Select
+
+            casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+        End If
+
+
+        Try
+
+
+            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
+                               "Consulta por carta porte",
+                            "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpServer"),
+                            ConfigurationManager.AppSettings("SmtpUser"),
+                            ConfigurationManager.AppSettings("SmtpPass"),
+                              "",
+                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+
+        End Try
+
+
+    End Function
+
 
 
     <WebMethod(Description:="", EnableSession:=False)>
@@ -493,6 +514,74 @@ Public Class WebServiceCartas
 
 
     End Function
+
+
+
+
+
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim SCbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString)
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
+            Dim usuario = Membership.GetUser.UserName
+            Dim s = New ServicioCartaPorte.servi()
+            'Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+            Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
+
+
+
+            ' https://stackoverflow.com/questions/19563641/how-to-get-json-response-from-a-3-5-asmx-web-service
+
+            Context.Response.Clear()
+            Context.Response.ContentType = "application/json"
+            'HelloWorldData Data = New HelloWorldData()
+            'Data.Message = "HelloWorld"
+            'Context.Response.Write(js.Serialize(Data));
+            Context.Response.Write(ret)
+            '            Return ret
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Sub
+
+
 
 
 End Class
