@@ -240,6 +240,13 @@ Namespace Pronto.ERP.Bll
                     txtRcomercial.Text = "NOBLE ARGENTINA S.A."
 
                 Case "GESAGRO"
+                    txtCorredor.Text = ""
+                    Dim cuit = "30-65919110-1"
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+
 
                 Case "PELAYO"
                     txtTitular.Text = "PELAYO AGRONOMIA SA"
@@ -440,6 +447,9 @@ Namespace Pronto.ERP.Bll
                     Throw New Exception(sSincronismo.ToUpper + " No existe ese sincro")
 
             End Select
+
+            'que explote si no tiene filtro?
+
         End Sub
 
 
