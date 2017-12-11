@@ -572,10 +572,19 @@ Public Class WebServiceCartas
 
 
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
-            Dim usuario = Membership.GetUser.UserName
+            Dim usuario = ""
             Dim s = New ServicioCartaPorte.servi()
-            'Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
-            Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                usuario = Membership.GetUser.UserName
+            End If
+
+
+            Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+            'Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
 
 
 
