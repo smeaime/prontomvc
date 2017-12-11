@@ -50,7 +50,7 @@
 
     <%-- El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html# --%>
     <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
-        class="bodyMasterPage">
+        class="bodyMasterPage"   style="height: 100%">
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>
@@ -334,7 +334,7 @@
                                     }
 
                                         div.mousescroll:hover {
-                                            overflow-y: scroll;
+                                            overflow-y: auto; /* scroll;*/
                                         }
 
                                     ul {
@@ -342,7 +342,7 @@
                                     }
                                 </style>
 
-                                <div style="width: 100%; height: 650px;" id="DIVmenu" class="mousescroll">
+                                <div style="width: 100%; height: 100%;" id="DIVmenu" class="mousescroll">
                                     <asp:UpdatePanel ID="UpdatePanelAcordion" runat="server" EnableViewState="false"
                                         UpdateMode="Conditional">
                                         <ContentTemplate>
