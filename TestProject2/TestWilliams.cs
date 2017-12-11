@@ -1002,34 +1002,6 @@ namespace ProntoMVC.Tests
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
 
-            /*
-            int idcarta = 2633399;
-
-
-            var rec = new Reclamo();
-            rec.Estado = 22;
-            rec.Descripcion = "asdfasdf";
-            db.Reclamos.Add(rec);
-            db.SaveChanges();
-
-            var comentario = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-            comentario.IdReclamo = rec.IdReclamo;
-            comentario.IdEmpleado = 1;
-            comentario.Comentario = "hola hola";
-            db.ReclamoComentarios.Add(comentario);
-
-            var comentario2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-            comentario2.IdReclamo = rec.IdReclamo;
-            comentario2.IdEmpleado = 10;
-            comentario2.Comentario = "q haces";
-            db.ReclamoComentarios.Add(comentario2);
-
-
-            db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
-
-            db.SaveChanges();
-            */
-
             var s = new ServicioCartaPorte.servi();
             string ret = s.ReclamosMaestro_DynamicGridData("IdReclamo", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -1120,7 +1092,10 @@ namespace ProntoMVC.Tests
 
             //Tendría que poder usarse la segunda bdlmaster(la de externos). Cómo hacemos entonces????
 
-            s.UsuariosExternosQuePuedenChatearEnEstaCarta(idcarta, usuario, SC, scbdlmasterappconfig);
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC, "carlitos"); //cómo abro un chat con usuarios especificos?
+
+
+            var usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(idcarta, SC, scbdlmasterappconfig);
 
             // crear un chat con el primero de la lista
             // listar despues los comentarios de esa carta 
@@ -1132,7 +1107,7 @@ namespace ProntoMVC.Tests
 
 
 
-            string ret2 = s.ReclamosMaestro_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+            string ret2 = s.ReclamosMaestro_DynamicGridData("IdReclamo", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
 
 
         }
@@ -1170,17 +1145,26 @@ namespace ProntoMVC.Tests
 
 
             var s = new ServicioCartaPorte.servi();
-            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC);
-            //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC, "carlitos"); //cómo abro un chat con usuarios especificos?
+                                                                                               //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
+
 
 
         }
 
 
 
-
-
         #endregion
+
+
+
+
+
+
+
+
+
+
 
 
 

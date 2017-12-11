@@ -971,6 +971,16 @@ Partial Class CartadeporteABM
 
 
 
+
+
+        Dim s = New ServicioCartaPorte.servi()
+
+        Dim usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(IdCartaDePorte, SC, ConexBDLmaster)
+
+        usuarioschat.DataSource = usuarios
+
+
+
         ''///////////////////////////////////////////////
         ''///////////////////////////////////////////////
 
@@ -3823,7 +3833,7 @@ Partial Class CartadeporteABM
 
 
         Dim s = New ServicioCartaPorte.servi()
-        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC)
+        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC, "")
 
         AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
 

@@ -6000,10 +6000,11 @@ Formato localidad-provincia	destination	x
 
             //IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
             IQueryable<Reclamo> q = db.Reclamos;
+            if (nombreusuario != "") q =  q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
 
             var cartareclamo = db.CartasDePortes.Find(idcarta);
             int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
-             if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
             //q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
 
@@ -6322,7 +6323,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual List<string> UsuariosExternosQuePuedenChatearEnEstaCarta(int idcarta, string usuario, string SC, string bdlmasterExternos)
+        public virtual List<string> UsuariosExternosQuePuedenChatearEnEstaCarta(int idcarta,  string SC, string bdlmasterExternos)
         {
 
             var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
@@ -6335,7 +6336,7 @@ Formato localidad-provincia	destination	x
             queusuarioshayEnestacarta.Add(carta.CuentaOrden1.NullSafeToString());
             queusuarioshayEnestacarta.Add(carta.CuentaOrden2.NullSafeToString());
             queusuarioshayEnestacarta.Add(carta.Entregador.NullSafeToString());
-            queusuarioshayEnestacarta.Add(CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(carta.Corredor ?? -1 ,SC).NullSafeToString());
+            queusuarioshayEnestacarta.Add(CartaDePorteManager.IdClienteEquivalenteDelIdVendedor(carta.Corredor ?? -1, SC).NullSafeToString());
 
 
             BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(bdlmasterExternos)));
@@ -6343,10 +6344,10 @@ Formato localidad-provincia	destination	x
 
             // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
             var q = (from p in dbmaster.UserDatosExtendidos
-                join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-                where queusuarioshayEnestacarta.Contains(p.RazonSocial)
-                select u.UserName).ToList();  //.ToDictionary();
+                     join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+                     join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+                     where queusuarioshayEnestacarta.Contains(p.RazonSocial)
+                     select u.UserName).ToList();  //.ToDictionary();
 
 
 
@@ -6875,7 +6876,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC)
+        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC, string nombreusuarioDestino )
         {
 
 
@@ -6913,6 +6914,23 @@ Formato localidad-provincia	destination	x
                 com.Comentario = comentario;
                 com.Fecha = DateTime.Now;
                 db.ReclamoComentarios.Add(com);
+
+
+                if (nombreusuarioDestino!="")
+                {
+                    //por ahora zafo agregando un "comentario" vacío del destinatario para que esté participando del reclamo
+
+                    var com2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+                    com2.IdReclamo = rec.IdReclamo;
+                    com2.IdEmpleado = 1;
+                    com2.NombreUsuario = nombreusuarioDestino;
+                    com2.Comentario = "";
+                    com2.Fecha = DateTime.Now;
+                    db.ReclamoComentarios.Add(com2);
+
+
+                }
+
 
 
                 db.SaveChanges();
@@ -7021,7 +7039,7 @@ Formato localidad-provincia	destination	x
 
             //estan como empleados los usuarios externos de williams?
 
-            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC);
+            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC,"");
             return "";
 
         }
