@@ -973,7 +973,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void ListadoDeReclamosDeEsteUsuario_43063()
+        public void ListadoDeUltimosReclamosDeEsteUsuario_43063()
         {
 
 
@@ -1001,7 +1001,7 @@ namespace ProntoMVC.Tests
             ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
 
 
-
+            /*
             int idcarta = 2633399;
 
 
@@ -1027,10 +1027,10 @@ namespace ProntoMVC.Tests
             db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
 
             db.SaveChanges();
-
+            */
 
             var s = new ServicioCartaPorte.servi();
-            string ret = s.ReclamosGeneral_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+            string ret = s.ReclamosMaestro_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
             Assert.IsTrue(listado.records > 0);
