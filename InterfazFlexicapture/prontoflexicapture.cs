@@ -5995,16 +5995,16 @@ Formato localidad-provincia	destination	x
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-              
 
 
-            IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
 
+            //IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
+            IQueryable<Reclamo> q = db.Reclamos;
 
             var cartareclamo = db.CartasDePortes.Find(idcarta);
             int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
-            // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
-            q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
+             if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+            //q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
 
             // si el usuario tiene una razon social asignada, hay que filtrar. -Pero hay que filtrar antes! como en ListadoSegunCliente()
@@ -6026,7 +6026,7 @@ Formato localidad-provincia	destination	x
 
 
             int totalRecords = 0;
-            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.ReclamoComentario>
+            var pagedQuery = Filtrador.Filters.FiltroGenerico_UsandoIQueryable<ProntoMVC.Data.Models.Reclamo>
                             (sidx, sord, page, rows, _search, filters, db, ref totalRecords, q);
 
 
@@ -6094,24 +6094,26 @@ Formato localidad-provincia	destination	x
                 rows = (from a in data
                         select new jqGridRowJson
                         {
-                            id = a.IdReclamoComentario.ToString(),
+                            id = a.IdReclamo.ToString(),
                             cell = new string[] {
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
-                                a.IdReclamoComentario.ToString(),
                                 a.IdReclamo.ToString(),
-                                a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
+                                a.IdReclamo.ToString(),
+                                "",  // a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
 
-                                (a.IdEmpleado==1) ? "" : a.Comentario,
-                                //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
-                                a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
-                                a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
+                                "", //(a.IdEmpleado==1) ? "" : a.Comentario,
+                               a.Descripcion, //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
+                                "", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+                                "", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
-                                a.ArchivoAdjunto.NullSafeToString(),
+                                "", // a.ArchivoAdjunto.NullSafeToString(),
 
 
 
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.Reclamo.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
+
+                                a.ReclamoComentarios.SelectMany(x=>x.Comentario).NullSafeToString()
 
                             }
                         }).ToArray()
