@@ -1427,7 +1427,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                    colNames: ['[Grabar]', 'Id', 'Nro Reclamo', 'Titulo', 'ultimo comentario', ''
+                    colNames: ['[Grabar]', 'Id', 'Nro Reclamo', 'Titulo', 'ultimo comentario', 'fecha'
 
 
 
@@ -1499,7 +1499,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                        { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+                        { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
 
 
@@ -1604,7 +1604,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     pager: $('#ListaPager'),
                     rowNum: 1000,
                     rowList: [10, 20, 50, 100, 500, 1000],
-                    sortname: 'Fecha',  //'FechaDescarga', //'NumeroCartaDePorte',
+                    sortname: 'IdReclamo',  //'FechaDescarga', //'NumeroCartaDePorte',
                     sortorder: 'desc',
                     viewrecords: true,
                     multiselect: true,
