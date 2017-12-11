@@ -269,6 +269,7 @@ Public Class WebServiceCartas
         For Each u In usuarios
             If u Is Nothing Then Continue For
             If u = usuario Then Continue For
+            If Membership.GetUser(u) Is Nothing Then Continue For
             casillas += Membership.GetUser(u).Email + ","
         Next
 
