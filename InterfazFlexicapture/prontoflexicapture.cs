@@ -5935,7 +5935,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string ReclamosComentarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
+        public virtual string ReclamosMaestro_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
                                                      string FechaInicial, string FechaFinal, int puntovent, int idcarta,
                                                      string SC, string nombreusuario, string SCbdlmaster)
         {
@@ -6099,21 +6099,22 @@ Formato localidad-provincia	destination	x
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 
                                 a.IdReclamo.ToString(),
-                                a.IdReclamo.ToString(),
-                                "",  // a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
+                                 "<a href=\"CartaDePorte.aspx?Id=" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
+                                //"",  // a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
 
-                                "", //(a.IdEmpleado==1) ? "" : a.Comentario,
+                                //"", //(a.IdEmpleado==1) ? "" : a.Comentario,
                                a.Descripcion, //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
-                                "", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
-                                "", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
-
-                                "", // a.ArchivoAdjunto.NullSafeToString(),
 
 
 
                                 "<a href=\"CartaDePorte.aspx?Id=" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
 
-                                a.ReclamoComentarios.SelectMany(x=>x.Comentario).NullSafeToString()
+                                string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.Comentario)),
+
+                                                                "", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+                                "", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
+
+                                "", // a.ArchivoAdjunto.NullSafeToString(),
 
                             }
                         }).ToArray()
@@ -6130,7 +6131,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string ReclamosMaestro_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
+        public virtual string ReclamosComentarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
                                                         string FechaInicial, string FechaFinal, int puntovent, int idcarta,
                                                         string SC, string nombreusuario, string SCbdlmaster)
         {
