@@ -976,9 +976,10 @@ Partial Class CartadeporteABM
         Dim s = New ServicioCartaPorte.servi()
 
         Dim usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(IdCartaDePorte, SC, ConexBDLmaster)
-
         usuarioschat.DataSource = usuarios
-
+        usuarioschat.DataTextField = ""
+        usuarioschat.DataValueField = ""
+        usuarioschat.DataBind()
 
 
         ''///////////////////////////////////////////////
