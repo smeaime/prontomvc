@@ -6000,7 +6000,7 @@ Formato localidad-provincia	destination	x
 
             //IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
             IQueryable<Reclamo> q = db.Reclamos;
-            if (nombreusuario != "") q =  q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
+            if (nombreusuario != "") q = q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
 
             var cartareclamo = db.CartasDePortes.Find(idcarta);
             int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
@@ -6106,13 +6106,13 @@ Formato localidad-provincia	destination	x
                                 //"", //(a.IdEmpleado==1) ? "" : a.Comentario,
                                a.Descripcion, //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
 
-
-
-                                "<a href=\"CartaDePorte.aspx?Id=" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
+                               (a.ReclamoComentarios.LastOrDefault() ?? new ReclamoComentario()).Fecha.NullSafeToString(),
+                               // "<a href=\"CartaDePorte.aspx?Id=" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
 
                                 string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.Comentario)),
 
-                                                                "", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+                                string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.NombreUsuario).Distinct()),
+                                "", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
                                 "", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
                                 "", // a.ArchivoAdjunto.NullSafeToString(),
@@ -6198,8 +6198,10 @@ Formato localidad-provincia	destination	x
             IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
 
 
-            var cartareclamo = db.CartasDePortes.Find(idcarta);
-            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
+            var cartareclamo = IdReclamoSegunCartaYUsuario(idcarta,nombreusuario)
+                
+                db.CartasDePortes.Find(idcarta);
+            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo; q dependa tambien del usuario -pero como asignarselo a la carta? servi lo pongo en el titulo? o en columnas auxiliareS?
             // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
             q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
@@ -6323,7 +6325,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual List<string> UsuariosExternosQuePuedenChatearEnEstaCarta(int idcarta,  string SC, string bdlmasterExternos)
+        public virtual List<string> UsuariosExternosQuePuedenChatearEnEstaCarta(int idcarta, string SC, string bdlmasterExternos)
         {
 
             var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
@@ -6876,7 +6878,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC, string nombreusuarioDestino )
+        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC, string nombreusuarioDestino)
         {
 
 
@@ -6916,7 +6918,7 @@ Formato localidad-provincia	destination	x
                 db.ReclamoComentarios.Add(com);
 
 
-                if (nombreusuarioDestino!="")
+                if (nombreusuarioDestino != "")
                 {
                     //por ahora zafo agregando un "comentario" vacío del destinatario para que esté participando del reclamo
 
@@ -7039,7 +7041,7 @@ Formato localidad-provincia	destination	x
 
             //estan como empleados los usuarios externos de williams?
 
-            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC,"");
+            GrabarComentario_DLL(idcarta, comentario, nombreusuario, SC, "");
             return "";
 
         }
