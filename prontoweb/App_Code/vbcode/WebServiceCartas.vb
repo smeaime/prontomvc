@@ -198,7 +198,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function GrabarComentario(idCartaPorte As Integer, sComentario As String) As String
+    Public Function GrabarComentario(idCartaPorte As Integer, sComentario As String, usuarioDestino As String) As String
 
 
         Try
@@ -225,7 +225,7 @@ Public Class WebServiceCartas
 
 
 
-            EnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs)
+            GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs, usuarioDestino)
 
 
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,13 +253,13 @@ Public Class WebServiceCartas
 
 
 
-    Private Function EnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String)
+    Private Function GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
 
 
         Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
         Dim usuario = Membership.GetUser.UserName
         Dim s = New ServicioCartaPorte.servi()
-        Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
+        Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs), usuarioDestino)
 
 
 
@@ -581,7 +581,7 @@ Public Class WebServiceCartas
             End If
 
 
-            Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+            Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), usuario, SCbdlmaster)
             'Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
 
 
