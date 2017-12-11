@@ -885,6 +885,7 @@ namespace ProntoMVC.Tests
 
             var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
 
+            // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
         }
 
 
@@ -1030,7 +1031,7 @@ namespace ProntoMVC.Tests
             */
 
             var s = new ServicioCartaPorte.servi();
-            string ret = s.ReclamosMaestro_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+            string ret = s.ReclamosMaestro_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
             Assert.IsTrue(listado.records > 0);
