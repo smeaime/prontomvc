@@ -2184,6 +2184,13 @@ GO
 
 
 
+ALTER TABLE  Reclamos  ADD 
+	 AuxInt1	int NULL,
+	 AuxInt2	int NULL,
+	 AuxString1 VARCHAR(50) NULL,
+	 AuxString2 VARCHAR(50) NULL
+GO
+
 
 
 
