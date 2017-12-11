@@ -1427,7 +1427,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'comentarios', 'comentarios', 'fecha', 'usuarios'
+                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'comentarios', 'fecha', 'usuarios'
 
 
 
@@ -1448,35 +1448,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     colModel: [
                 
 
+                        { name: 'act', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
                         { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
 
-                        {
-                            name: 'CartaDePorte', index: 'CartaDePorte', width: 90, align: 'left', sorttype: "text", sortable: false
-                            , editable: false, editrules: { required: false, number: true }, edittype: 'text',
-
-                            searchoptions: { sopt: ['bw', 'cn', 'eq'] },
-
-
-                            editoptions: {
-                                maxlength: 20, defaultValue: '0.00',
-                                dataEvents: [
-                                    {
-                                        type: 'keypress',
-                                        fn: function (e) {
-                                            var key = e.charCode || e.keyCode;
-                                            if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                            if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                        }
-                                    }]
-                            }
-                        },
-
-                        // { name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
-
-
-
-
-                        
+                       
                         
                         { name: 'cp', index: 'cp', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
 
