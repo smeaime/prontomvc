@@ -33,7 +33,7 @@ namespace Sch_WCFApplication
                 //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
 
                 //armar el service worker con este ejemplo https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419
-
+                // usar firesharp? -es q necesitas una biblioteca para .net?
 
 
 

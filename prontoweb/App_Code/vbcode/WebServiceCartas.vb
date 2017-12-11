@@ -528,14 +528,17 @@ Public Class WebServiceCartas
 
 
 
-    <WebMethod(Description:="", EnableSession:=False)>
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
-    Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
-                                     FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
-        ReclamosMaestro(sidx, sord, page, rows, _search, "",
-                                     FechaInicial, FechaFinal, puntovent, idcarta, nombreusuario)
+    '<WebMethod(Description:="", EnableSession:=False)>
+    '<System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    'Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+    '                                 FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+    '    ReclamosMaestro(sidx, sord, page, rows, _search, "",
+    '                                 FechaInicial, FechaFinal, puntovent, idcarta, nombreusuario)
 
-    End Sub
+
+    '    'https://stackoverflow.com/questions/1522585/can-web-methods-be-overloaded  -parece que no....
+
+    'End Sub
 
 
 
