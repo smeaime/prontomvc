@@ -6198,10 +6198,11 @@ Formato localidad-provincia	destination	x
             IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
 
 
-            var cartareclamo = IdReclamoSegunCartaYUsuario(idcarta,nombreusuario)
-                
-                db.CartasDePortes.Find(idcarta);
-            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo; q dependa tambien del usuario -pero como asignarselo a la carta? servi lo pongo en el titulo? o en columnas auxiliareS?
+            //var cartareclamo = db.CartasDePortes.Find(idcarta);
+            //int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo; //q dependa tambien del usuario -pero como asignarselo a la carta? servi lo pongo en el titulo? o en columnas auxiliareS?
+
+            int? idreclamo = IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC);
+
             // if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
             q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
@@ -6322,6 +6323,32 @@ Formato localidad-provincia	destination	x
 
 
         }
+
+
+
+        public virtual int IdReclamoSegunCartaYUsuario(int idcarta, string usuario, string SC)
+        {
+
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            var carta = db.CartasDePortes.Find(idcarta);
+            var titulo = DescripcionReclamoSegunCartaYUsuario(idcarta, usuario, SC);
+            var reclamo = db.Reclamos.Where(x => x.Descripcion == titulo).SingleOrDefault();
+
+            if (reclamo == null) return -1;
+            return reclamo.IdReclamo;
+        }
+
+
+        public virtual string DescripcionReclamoSegunCartaYUsuario(int idcarta, string usuario, string SC)
+        {
+            var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+            var carta = db.CartasDePortes.Find(idcarta);
+            var titulo = "CP " + carta.NumeroCartaDePorte + " " + usuario;
+            return titulo;
+        }
+
 
 
 
@@ -6898,7 +6925,8 @@ Formato localidad-provincia	destination	x
                 {
                     rec = new Reclamo();
                     rec.Estado = 1;
-                    rec.Descripcion = "carta " + carta.NumeroCartaDePorte + " - usuario " + nombreusuario;
+                    rec.Descripcion = DescripcionReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuario, SC);
+
                     db.Reclamos.Add(rec);
                     db.SaveChanges();
                     carta.IdReclamo = rec.IdReclamo;
@@ -6907,15 +6935,6 @@ Formato localidad-provincia	destination	x
                 {
                     rec = db.Reclamos.Find(carta.IdReclamo);
                 }
-
-
-                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-                com.IdReclamo = rec.IdReclamo;
-                com.IdEmpleado = 1;
-                com.NombreUsuario = nombreusuario;
-                com.Comentario = comentario;
-                com.Fecha = DateTime.Now;
-                db.ReclamoComentarios.Add(com);
 
 
                 if (nombreusuarioDestino != "")
@@ -6932,6 +6951,17 @@ Formato localidad-provincia	destination	x
 
 
                 }
+
+                var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+                com.IdReclamo = rec.IdReclamo;
+                com.IdEmpleado = 1;
+                com.NombreUsuario = nombreusuario;
+                com.Comentario = comentario;
+                com.Fecha = DateTime.Now;
+                db.ReclamoComentarios.Add(com);
+
+
+           
 
 
 
@@ -6967,7 +6997,7 @@ Formato localidad-provincia	destination	x
                 Reclamo rec;
                 CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
-                rec = db.Reclamos.Find(carta.IdReclamo);
+                rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC)) ;
 
                 rec.Estado = 2;
 
@@ -7007,13 +7037,13 @@ Formato localidad-provincia	destination	x
                 {
                     rec = new Reclamo();
                     rec.Estado = 1;
-                    rec.Descripcion = "nuevo reclamo";
+                    rec.Descripcion = DescripcionReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC);
                     db.Reclamos.Add(rec);
                     carta.IdReclamo = rec.IdReclamo;
                 }
                 else
                 {
-                    rec = db.Reclamos.Find(carta.IdReclamo);
+                    rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC));
                 }
 
 

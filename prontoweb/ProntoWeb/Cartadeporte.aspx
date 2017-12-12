@@ -2898,7 +2898,8 @@
 
                                                     var d = {
                                                         idCartaPorte: qs["Id"],
-                                                        sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                                        sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
+                                                        usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
                                                     }
 
 
