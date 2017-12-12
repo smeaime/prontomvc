@@ -6933,6 +6933,25 @@ Formato localidad-provincia	destination	x
 					db.Reclamos.Add(rec);
 					db.SaveChanges();
 					carta.IdReclamo = rec.IdReclamo;
+
+
+
+
+					if (nombreusuarioDestino != "")
+					{
+						//por ahora zafo agregando un "comentario" vacío del destinatario para que esté participando del reclamo
+
+						var com2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+						com2.IdReclamo = rec.IdReclamo;
+						com2.IdEmpleado = 1;
+						com2.NombreUsuario = nombreusuarioDestino;
+						com2.Comentario = "";
+						com2.Fecha = DateTime.Now;
+						db.ReclamoComentarios.Add(com2);
+
+
+					}
+
 				}
 				else
 				{
@@ -6940,20 +6959,6 @@ Formato localidad-provincia	destination	x
 				}
 
 
-				if (nombreusuarioDestino != "")
-				{
-					//por ahora zafo agregando un "comentario" vacío del destinatario para que esté participando del reclamo
-
-					var com2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-					com2.IdReclamo = rec.IdReclamo;
-					com2.IdEmpleado = 1;
-					com2.NombreUsuario = nombreusuarioDestino;
-					com2.Comentario = "";
-					com2.Fecha = DateTime.Now;
-					db.ReclamoComentarios.Add(com2);
-
-
-				}
 
 				var com = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
 				com.IdReclamo = rec.IdReclamo;
@@ -7918,7 +7923,7 @@ Formato localidad-provincia	destination	x
 
 
 
-		public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
+		public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless = true)
 		{
 
 
@@ -7933,13 +7938,20 @@ Formato localidad-provincia	destination	x
 			//https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
 			ChromeOptions chromeOptions = new ChromeOptions();
-			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
-			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
-			chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox", "--disable-extensions");
-			//chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+            if (bHeadless) chromeOptions.AddArguments("--headless");
+            chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
+            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
 
-			chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);
-			chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            int lastSlash = directorioDescarga.LastIndexOf('/');
+            directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
+            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+
+            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
 			chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
@@ -8136,7 +8148,7 @@ __________________________
 
 
 
-		public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver)
+		public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless=true)
 		{
 
 
@@ -8216,13 +8228,22 @@ __________________________
 			//https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
 			ChromeOptions chromeOptions = new ChromeOptions();
-			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
-			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
-			chromeOptions.AddArguments("--headless", "--disable-gpu", "--no-sandbox", "--disable-extensions");
-			//chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+            if (bHeadless) chromeOptions.AddArguments("--headless");
+            chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
+            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
 
-			chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);
-			chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            int lastSlash = directorioDescarga.LastIndexOf('/');
+            directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
+            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga); // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+
+
+            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
 			chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
