@@ -523,7 +523,7 @@ Partial Class CartadeporteABM
 
             Dim pventa As Integer
             Try
-                pventa = EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+                pventa = If(EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado).PuntoVentaAsociado 'sector del confeccionó
             Catch ex As Exception
                 pventa = 0
                 ErrHandler2.WriteError(ex)
@@ -960,7 +960,7 @@ Partial Class CartadeporteABM
 
         Dim pventa As Integer
         Try
-            pventa = EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+            pventa = If(EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado).PuntoVentaAsociado 'sector del confeccionó
         Catch ex As Exception
             pventa = 0
             ErrHandler2.WriteError(ex)
