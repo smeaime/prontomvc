@@ -266,7 +266,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         cmbPuntoVenta.SelectedIndex = 0
 
         Try
-            If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+            If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()) .PuntoVentaAsociado > 0 Then
                 Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
                 BuscaIDEnCombo(cmbPuntoVenta, pventa)
                 'BuscaTextoEnCombo(cmbPuntoVenta, pventa)

@@ -522,7 +522,7 @@ Partial Class CartadeporteABMMovil
 
             Dim pventa As Integer
             Try
-                pventa = EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+                pventa = If(EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)), New Empleado).PuntoVentaAsociado 'sector del confeccionó
             Catch ex As Exception
                 pventa = 0
                 ErrHandler2.WriteError(ex)
@@ -920,7 +920,7 @@ Partial Class CartadeporteABMMovil
 
         Dim pventa As Integer
         Try
-            pventa = EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
+            pventa = If(EmpleadoManager.GetItem(SC, Session(SESSIONPRONTO_glbIdUsuario)), New Empleado).PuntoVentaAsociado 'sector del confeccionó
         Catch ex As Exception
             pventa = 0
             ErrHandler2.WriteError(ex)
@@ -3785,7 +3785,7 @@ Partial Class CartadeporteABMMovil
 
 
         Dim s = New ServicioCartaPorte.servi()
-        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC)
+        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC, "")
 
         AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
 
