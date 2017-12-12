@@ -1073,7 +1073,7 @@ namespace ProntoMVC.Tests
             //haria falta aclarar el usuario tambien
 
             var s = new ServicioCartaPorte.servi();
-            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "","");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
             Assert.IsTrue(listado.records > 0);
