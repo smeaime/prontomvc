@@ -617,4 +617,110 @@ Public Class WebServiceCartas
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '<WebMethod(Description:="", EnableSession:=False)>
+    '<System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    'Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+    '                                 FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+    '    ReclamosMaestro(sidx, sord, page, rows, _search, "",
+    '                                 FechaInicial, FechaFinal, puntovent, idcarta, nombreusuario)
+
+
+    '    'https://stackoverflow.com/questions/1522585/can-web-methods-be-overloaded  -parece que no....
+
+    'End Sub
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    Public Sub ReclamosComentarios(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim SCbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString)
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
+            Dim usuario = ""
+            Dim s = New ServicioCartaPorte.servi()
+
+
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                usuario = Membership.GetUser.UserName
+            End If
+
+
+            'Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), usuario, SCbdlmaster)
+            'Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
+
+            Dim ret = s.ReclamosComentarios_DynamicGridData(
+                                        sidx, sord, page,
+                                        rows, _search, filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                                        Convert.ToInt32(idcarta),
+                                        Encriptar(scs), usuario, SCbdlmaster, nombreusuario)
+
+
+
+
+            ' https://stackoverflow.com/questions/19563641/how-to-get-json-response-from-a-3-5-asmx-web-service
+
+            Context.Response.Clear()
+            Context.Response.ContentType = "application/json"
+            'HelloWorldData Data = New HelloWorldData()
+            'Data.Message = "HelloWorld"
+            'Context.Response.Write(js.Serialize(Data));
+            Context.Response.Write(ret)
+            '            Return ret
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Sub
+
+
+
+
+
+
+
 End Class
