@@ -6921,7 +6921,10 @@ Formato localidad-provincia	destination	x
 				Reclamo rec;
 				CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
-				if (carta.IdReclamo == null)
+
+				
+
+				if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1) 
 				{
 					rec = new Reclamo();
 					rec.Estado = 1;
@@ -6933,7 +6936,7 @@ Formato localidad-provincia	destination	x
 				}
 				else
 				{
-					rec = db.Reclamos.Find(carta.IdReclamo);
+					rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC));
 				}
 
 
