@@ -3492,7 +3492,325 @@ begin
    exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Empleados', N'column', N'IdSuplenteFirma'
 end
 Go
+--------------------<< 29-08-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'Pedidos','IdControlCalidad', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Pedidos ADD
+    IdControlCalidad   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Pedidos', N'column', N'IdControlCalidad'
+end
+Go
+--------------------<< 01-09-2017 >>----------------------
 
+declare @esta1 int
+exec _AlterTable 'Localidades','Lat', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Localidades ADD
+    Lat   [Decimal] (15,12)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Localidades', N'column', N'Lat'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'Localidades','Lng', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Localidades ADD
+    Lng   [Decimal] (15,12)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Localidades', N'column', N'Lng'
+end
+Go
+
+--------------------<< 11-10-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'ComprobantesProveedores','ControlAFIP_Resultado', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].ComprobantesProveedores ADD
+    ControlAFIP_Resultado   [varchar] (2)  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'ComprobantesProveedores', N'column', N'ControlAFIP_Resultado'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'ComprobantesProveedores','ControlAFIP_Fecha', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].ComprobantesProveedores ADD
+    ControlAFIP_Fecha   [datetime]  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'ComprobantesProveedores', N'column', N'ControlAFIP_Fecha'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'ComprobantesProveedores','ControlAFIP_Mensaje', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].ComprobantesProveedores ADD
+    ControlAFIP_Mensaje   [ntext]  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'ComprobantesProveedores', N'column', N'ControlAFIP_Mensaje'
+end
+Go
+
+--------------------<< 12-10-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'RubrosContables','PresupuestadoPorAdministracion', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].RubrosContables ADD
+    PresupuestadoPorAdministracion   [varchar] (2)  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'RubrosContables', N'column', N'PresupuestadoPorAdministracion'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'ComprobantesProveedores','ControlAFIP_TipoComprobante', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].ComprobantesProveedores ADD
+    ControlAFIP_TipoComprobante   [varchar] (2)  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'ComprobantesProveedores', N'column', N'ControlAFIP_TipoComprobante'
+end
+Go
+
+--------------------<< 17-10-2017 >>----------------------
+
+declare @esta1 int
+exec _AlterTable 'DetalleNotasCredito','IvaNoDiscriminado', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].DetalleNotasCredito ADD
+    IvaNoDiscriminado   [numeric] (19,4)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'DetalleNotasCredito', N'column', N'IvaNoDiscriminado'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'DetalleNotasDebito','IvaNoDiscriminado', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].DetalleNotasDebito ADD
+    IvaNoDiscriminado   [numeric] (19,4)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'DetalleNotasDebito', N'column', N'IvaNoDiscriminado'
+end
+Go
+--------------------<< 27-10-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'Previajes','NumeroOrden', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Previajes ADD
+    NumeroOrden   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Previajes', N'column', N'NumeroOrden'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'Viajes','IdPreviaje', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Viajes ADD
+    IdPreviaje   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Viajes', N'column', N'IdPreviaje'
+end
+Go
+--------------------<< 01-11-2017 >>----------------------
+
+
+declare @esta1 int
+exec _AlterTable 'Fletes','PatenteChasis', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Fletes ADD
+    PatenteChasis   [varchar] (10)  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Fletes', N'column', N'PatenteChasis'
+end
+Go
+
+--------------------<< 01-11-2017 >>----------------------
+
+declare @esta1 int
+exec _AlterTable 'LMateriales','IdUsuarioDeslibero', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].LMateriales ADD
+    IdUsuarioDeslibero   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'LMateriales', N'column', N'IdUsuarioDeslibero'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'LMateriales','FechaDesliberacion', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].LMateriales ADD
+    FechaDesliberacion   [datetime]  NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'LMateriales', N'column', N'FechaDesliberacion'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'LMateriales','NumeradorDesliberaciones', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].LMateriales ADD
+    NumeradorDesliberaciones   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'LMateriales', N'column', N'NumeradorDesliberaciones'
+end
+Go
+--------------------<< 27-11-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto31', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto31   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto31'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto32', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto32   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto32'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto33', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto33   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto33'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto34', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto34   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto34'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto35', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto35   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto35'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto36', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto36   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto36'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto37', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto37   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto37'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto38', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto38   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto38'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Clientes','IdIBCondicionPorDefecto39', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    IdIBCondicionPorDefecto39   [int]   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'IdIBCondicionPorDefecto39'
+end
+Go
+
+--------------------<< 28-11-2017 >>----------------------
+declare @esta1 int
+exec _AlterTable 'Clientes','PorcentajeOtrosImpuestos1', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Clientes ADD
+    PorcentajeOtrosImpuestos1   [numeric] (6,2)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Clientes', N'column', N'PorcentajeOtrosImpuestos1'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'Proveedores','PorcentajeOtrosImpuestos1', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Proveedores ADD
+    PorcentajeOtrosImpuestos1   [numeric] (6,2)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Proveedores', N'column', N'PorcentajeOtrosImpuestos1'
+end
+Go
+declare @esta1 int
+exec _AlterTable 'OrdenesPago','RetencionOTROS', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].OrdenesPago ADD
+    RetencionOTROS   [numeric] (18,2)   NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'OrdenesPago', N'column', N'RetencionOTROS'
+end
+Go
+
+declare @esta1 int
+exec _AlterTable 'Facturas','ObservacionesAFIP', @esta = @esta1 output
+if @esta1 = 0
+begin
+--select @esta1 as Existe_Si_1_NO_0
+  ALTER TABLE [dbo].Facturas ADD
+    ObservacionesAFIP   [ntext]    NULL
+   exec sp_addextendedproperty N'MS_Description', N'Campo Agregado el dia 20/07/17', N'user', N'dbo', N'table', N'Facturas', N'column', N'ObservacionesAFIP'
+end
+Go
 
 --------------------<< FIN ALTER TABLE >>----------------------
 
@@ -3788,6 +4106,42 @@ begin
 end
 Go
 
+
+     ALTER TABLE [dbo].[Parametros2]
+    Alter Column [Valor] [varchar] (2000) NULL
+
+GO
+
+
+ALTER TABLE [dbo].[Facturas]
+    Alter Column [IdCodigoIva] [int] NULL
+
+GO
+
+ALTER TABLE [dbo].[NotasCredito]
+    Alter Column [IdCodigoIva] [int] NULL
+
+GO
+
+ ALTER TABLE [dbo].[NotasDebito]
+    Alter Column [IdCodigoIva] [int] NULL
+GO
+
+ ALTER TABLE [dbo].[Proveedores]
+    Alter Column [Email] [varchar] (100) NULL
+GO
+
+ ALTER TABLE [dbo].[Previajes]
+    Alter Column [Patente] [varchar] (30) NULL
+GO
+
+ ALTER TABLE [dbo].[CuentasCorrientesControlDefiniciones]
+    Alter Column [Abreviatura] [varchar] (20) NULL
+GO
+
+ ALTER TABLE [dbo].[CuentasCorrientesControlComprobantes]
+    Alter Column [Comprobante] [varchar] (40) NULL
+GO
 --------------------<< FIN ALTER COLUMN >>----------------------
 
 

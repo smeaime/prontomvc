@@ -546,8 +546,8 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-
-            string[] sincros = { "Beraza", "Granar" };
+            
+            string[] sincros = { "BTG PACTUAL[BIT]", "Beraza", "Granar" };
             //            string[] sincros = { "Beraza", "Zeni" };
 
 
@@ -570,6 +570,9 @@ namespace ProntoMVC.Tests
 
 
         }
+
+
+
 
         [TestMethod]
         public void mail_de_error()
@@ -865,6 +868,76 @@ namespace ProntoMVC.Tests
 
 
 
+        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
+    MostrarLinksAFamiliaDeDuplicados
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_4()
+        {
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false);
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_3()
+        {
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void problemasPorElCambioDeNRecibo_46500()
+        {
+
+
+            LogicaFacturacion.LeyendaSyngenta(2343, SC);
+
+
+
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+            var output2 = SincronismosWilliamsManager.GenerarSincro("BTG PACTUAL [BIT]", ref sErrores, SC, "dominio", ref sTitulo,
+                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                     "", -1, -1, -1, -1,
+                                     -1, -1, -1, -1,
+                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //wCartasDePorte_TX_InformesCorregidoTableAdapter
+
+        }
 
 
 
@@ -1073,7 +1146,7 @@ namespace ProntoMVC.Tests
             //haria falta aclarar el usuario tambien
 
             var s = new ServicioCartaPorte.servi();
-            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "","");
+            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "", "");
             System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
             jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
             Assert.IsTrue(listado.records > 0);
@@ -1122,7 +1195,7 @@ namespace ProntoMVC.Tests
 
             string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
                                 //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "","");
+            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "", "");
 
 
 
@@ -4486,14 +4559,16 @@ namespace ProntoMVC.Tests
 
 
 
+        MostrarLinksAFamiliaDeDuplicados
 
         [TestMethod]
         public void loginEnUrenport3_42773_4()
         {
             var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas\";
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo =  @"C:\Users\Mariano\Documents\"; 
 
-            s.UrenportSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo+ @"pronto\InterfazFlexicapture\bin\Debug\", false);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -4504,9 +4579,10 @@ namespace ProntoMVC.Tests
         public void loginEnUrenport3_42773_3()
         {
             var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas\";
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\",true);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
