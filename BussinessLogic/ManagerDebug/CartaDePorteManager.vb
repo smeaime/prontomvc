@@ -12869,12 +12869,17 @@ usuario As String, ConexBDLmaster As String,
         Public SubNumeroFacturacion
     End Class
 
-    Shared Function FamiliaDeDuplicadosDeCartasPorte(ByVal SC As String, ByVal oCP As CartaDePorte) As IQueryable(Of CartasDePorte)
-        Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+
+
+    Shared Function FamiliaDeDuplicadosDeCartasPorte(ByVal SC As String, ByVal oCP As ProntoMVC.Data.Models.CartasDePorte <zxcz<xc<zc) As IQueryable(Of CartasDePorte)
+        'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
+
 
         'http://stackoverflow.com/questions/534690/linq-to-sql-return-anonymous-type
 
-        Dim duplicados As IQueryable(Of CartasDePorte) =
+
+        Dim duplicados As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte) =
                             From e In db.CartasDePortes
                             Where e.NumeroCartaDePorte = oCP.NumeroCartaDePorte _
                             And e.SubnumeroVagon = oCP.SubnumeroVagon
@@ -12883,7 +12888,9 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
-    Shared Function ListaDeLinks(ByVal oListaCartasPorte As IQueryable(Of CartasDePorte), ByVal DeEste As Long) As String
+
+
+    Shared Function ListaDeLinks(ByVal oListaCartasPorte As IQueryable(Of ProntoMVC.Data.Models.CartasDePorte), ByVal DeEste As Long) As String
 
         If oListaCartasPorte.Count <= 1 Then Return ""
 
