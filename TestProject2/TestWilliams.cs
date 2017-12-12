@@ -1083,7 +1083,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void ListarUsuariosDeEstaCartaConLosQueSePuedaChatear_43063()
+        public void IdReclamoSegunCartaYUsuario_43063()
         {
 
             int idcarta = 2633333;
@@ -1092,7 +1092,7 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
 
 
-            s.IdReclamoSegunCartaYUsuario(idcarta, nombreusuario);
+            s.IdReclamoSegunCartaYUsuario(idcarta, "", SC);
 
         }
 
