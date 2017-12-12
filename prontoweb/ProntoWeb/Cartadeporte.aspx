@@ -4891,14 +4891,18 @@
 
             $('#Lista').jqGrid({
                 //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                url: 'HandlerReclamos.ashx',
+                //url: 'HandlerReclamos.ashx',
+                url: "WebServiceCartas.asmx/ReclamosComentarios",
+
                 //postData: {},
                 postData: {
-                    'FechaInicial': function () { return $("#txtFechaDesde").val(); },
-                    'FechaFinal': function () { return $("#txtFechaHasta").val(); },
-                    'destino': function () { return $("txtDestino").val(); },
-                    'puntovent': function () { return $("#cmbPuntoVenta").val(); },
-                    'idcarta': qs["Id"]
+                    'filters': '', //filtersparam,
+                    'FechaInicial': '', // function () { return $("#txtFechaDesde").val(); },
+                    'FechaFinal': '', //function () { return $("#txtFechaHasta").val(); },
+                    'destino': '',//  function () { return $("txtDestino").val(); },
+                    'puntovent': 0, //function () { return $("#cmbPuntoVenta").val(); },
+                    'idcarta': qs["Id"],
+                    'nombreusuario': function () { return $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val() }
                 },
                 datatype: 'json',
                 mtype: 'POST',
@@ -5134,7 +5138,7 @@
                 footerrow: false,
                 userDataOnFooter: true,
                 //caption: '<b>Control de Descargas</b>',
-                cellEdit: false, // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
+                cellEdit: true, // si usas frozencolumns, estas obligado a sacar el cellEdit!!!
                 cellsubmit: 'clientArray',
                 dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
 
