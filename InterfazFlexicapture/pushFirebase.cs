@@ -32,7 +32,7 @@ namespace Sch_WCFApplication
                 // https://console.firebase.google.com/project/pronto-f87bf/settings/cloudmessaging/ las dos claves estan acá
                 var applicationID = "AIzaSyBuC5oWSsrDcmVBa3EIG_-j5le-81mH9E4"; //   este figura como "Clave de servidor hereda..." (quizas era apikey con GCM, pero ahora con FCM no, no?)
                 var senderId = "741177410808";  //                                  este figura como "messagingSenderId" en la consola del Firebase. ¡¡¡no es el gcm_sender_id (103953800507)!!!!
-                //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
+                                                //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
 
                 //armar el service worker con este ejemplo 
                 //https://firebase.google.com/docs/web/setup?hl=es-419  para agregar FCM
@@ -43,6 +43,10 @@ namespace Sch_WCFApplication
 
 
                 // usar firesharp? -es q necesitas una biblioteca para .net?
+
+
+                // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
+                // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
 
 
 
