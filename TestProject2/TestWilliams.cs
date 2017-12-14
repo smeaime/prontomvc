@@ -919,7 +919,7 @@ namespace ProntoMVC.Tests
 
 
 
-        
+
 
 
 
@@ -929,7 +929,7 @@ namespace ProntoMVC.Tests
 
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
             string dirMiRepo = @"C:\Users\Mariano\Documents\";
-            string testExecutionPath =  @"C:\Users\Mariano\Documents\pronto\TestProject2";
+            string testExecutionPath = @"C:\Users\Mariano\Documents\pronto\TestProject2";
 
 
             //var testExecutionPath = TestContext.CurrentContext.TestDirectory;
@@ -1002,15 +1002,24 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void enviosPush__()
         {
+            // https://firebase.google.com/docs/cloud-messaging/js/device-group?hl=es-419
+            //Administra grupos de dispositivos
+            //Antes de enviar mensajes a un grupo de dispositivos, debes:
+            //Obtener los tokens de registro de cada dispositivo que desees agregar al grupo.
+            //Crear la notification_key, que identifica el grupo de dispositivos mediante la asignación de un grupo específico(por lo general, un usuario) a 
+            //todos los tokens de registro relacionados del grupo.Puedes crear claves de notificación en el servidor de apps o en las apps cliente de Android.
+
+
+
             string deviceId = "fqVODCwdcOo:APA91bEexJWImhHzaiXYLVTGj3T2mxZvQCZhcd_vtRGZutXTPslZ2voCpQomWbHHH2YQ4z8fgSNmF9YGpSK80GteJZiVhpt14sX6653g8AdKRg4SrOiFdzhmYzxkPXfX3DsAhAqS4DwZ";
 
             var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
-            
-            
-            
-            // https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419
+            // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
+
+
+
         }
 
 
@@ -1018,6 +1027,8 @@ namespace ProntoMVC.Tests
         {
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
             //            MandoMensajeAListadoDeSubscripciones(subs);
+
+            AsociarUsuarioConTokenFirebase()
 
         }
 

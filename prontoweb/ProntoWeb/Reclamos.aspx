@@ -1749,7 +1749,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
 
-    
+
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-auth.js"></script>
@@ -1775,22 +1775,22 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-      <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-
-  
-  <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
 
+    <link rel="manifest" href="./manifest.json">
 
 
 
 
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-  <!-- Header section containing title -->
-  <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <!-- Header section containing title -->
+        <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
       <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
         <h3>Firebase Cloud Messaging</h3>
@@ -1798,7 +1798,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
   </header>
 
-  <main class="mdl-layout__content mdl-color--grey-100">
+        <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
 
       <!-- Container for the Table of content -->
@@ -1827,11 +1827,11 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     </div>
   </main>
-</div>
+    </div>
 
 
 
-    
+
 
 
     <script>
@@ -1915,7 +1915,36 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 if (!isTokenSentToServer()) {
                     console.log('Sending token to server...');
                     // TODO(developer): Send the current token to your server.
-                    setTokenSentToServer(true);
+
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+
+
+                    var d = {
+                        token: currentToken
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        //method: "POST",
+                        url: "WebServiceCartas.asmx/AsociarUsuarioConTokenFirebase",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify(d),
+
+                        success: function (data) {
+                            setTokenSentToServer(true);
+                        }
+                    })
+
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+
+
+
                 } else {
                     console.log('Token already sent to server so won\'t send it again ' +
                         'unless it changes');
@@ -2006,5 +2035,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             }
             resetUI();
     </script>
+
+
 
 </asp:Content>
