@@ -1,5 +1,5 @@
 {
-  "gcm_sender_id": "103953800507",
+  "gcm_sender_id": "103953800507", // https://stackoverflow.com/questions/42224908/how-to-get-gcm-sender-id-for-website-in-firebase The sender ID that you enter in the manifest.json of your web app is independent of your Firebase project. It is the same for all web apps (yours, mine, everbody's)
   "name": "Simple Push Demo",
   "short_name": "Push Demo",
   "start_url": "./?utm_source=homescreen",
