@@ -872,9 +872,9 @@ namespace ProntoWindowsService
 
                     if (dir1 != "")
                     {
-                        s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver, false);
                         ClassFlexicapture.Log(idthread + " Bajado 1");
-                        s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver, false);
                         ClassFlexicapture.Log(idthread + " Bajado 2");
                     }
 
@@ -882,7 +882,7 @@ namespace ProntoWindowsService
                     {
                         s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver,false);
                         ClassFlexicapture.Log(idthread + " Bajado 1");
-                        s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver, false);
                         ClassFlexicapture.Log(idthread + " Bajado 2");
                     }
 

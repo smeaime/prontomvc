@@ -68,6 +68,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 
+using Tellurium.MvcPages;
+using Tellurium.MvcPages.Configuration;
+using Tellurium.MvcPages.SeleniumUtils;
+
+
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -546,7 +553,7 @@ namespace ProntoMVC.Tests
 
             int registrosf = 0;
 
-            
+
             string[] sincros = { "BTG PACTUAL[BIT]", "Beraza", "Granar" };
             //            string[] sincros = { "Beraza", "Zeni" };
 
@@ -888,15 +895,15 @@ namespace ProntoMVC.Tests
         {
 
 
-//            Comment 94 by ankitkoo...@gmail.com, Dec 5
-//For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
-//GitHub link to framework : https://github.com/cezarypiatek/Tellurium
+            //            Comment 94 by ankitkoo...@gmail.com, Dec 5
+            //For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
+            //GitHub link to framework : https://github.com/cezarypiatek/Tellurium
 
-//Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
+            //Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
 
-//https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
+            //https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
 
-//This class has the required implementation.
+            //This class has the required implementation.
 
             //con la nueva version del chromedriver, en modo headless no me baja el archivo. https://bugs.chromium.org/p/chromium/issues/detail?id=696481
 
@@ -912,49 +919,20 @@ namespace ProntoMVC.Tests
 
 
 
+        
 
-
-
-        [TestMethod]
-        //[TestCase(BrowserType.Chrome)]
-        //[TestCase(BrowserType.ChromeHeadless)]
-        //[TestCase(BrowserType.Firefox)]
-        //[TestCase(BrowserType.FirefoxGecko)]
-        //[TestCase(BrowserType.FirefoxGeckoHeadless)]
-        public void should_be_able_to_download_file(BrowserType browserType)
-        {
-            var browserAdapterConfig = new BrowserAdapterConfig()
-            {
-                BrowserType = browserType,
-                SeleniumDriversPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Drivers"),
-                PageUrl = "http://localhost:51767",
-            };
-
-            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
-            {
-                browser.NavigateTo<HomeController>(c => c.Index());
-                browser.DownloadFileWith(() => browser.ClickOnElementWithText("Download manual"), filePath =>
-                {
-                    Assert.IsNotNull(filePath);
-                    Assert.True(File.Exists(filePath));
-                });
-
-                browser.DownloadFileWith(() => browser.ClickOnElementWithText("Download Large"), filePath =>
-                {
-                    Assert.IsNotNull(filePath);
-                    Assert.True(File.Exists(filePath));
-                });
-            }
-        }
 
 
         [TestMethod]
         public void should_be_able_to_run_test_with_configuration_from_file()
         {
 
-            Tellurium.Core.
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            string testExecutionPath =  @"C:\Users\Mariano\Documents\pronto\TestProject2";
 
-            var testExecutionPath = TestContext.CurrentContext.TestDirectory;
+
+            //var testExecutionPath = TestContext.CurrentContext.TestDirectory;
             var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(testExecutionPath);
             using (var browser = BrowserAdapter.Create(browserAdapterConfig))
             {
@@ -983,8 +961,8 @@ namespace ProntoMVC.Tests
 
 
 
-    //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
-    //MostrarLinksAFamiliaDeDuplicados
+            //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
+            //MostrarLinksAFamiliaDeDuplicados
 
 
 
@@ -4635,9 +4613,9 @@ namespace ProntoMVC.Tests
         {
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            string dirMiRepo =  @"C:\Users\Mariano\Documents\"; 
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
 
-            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo+ @"pronto\InterfazFlexicapture\bin\Debug\", false);
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -4651,7 +4629,7 @@ namespace ProntoMVC.Tests
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
             string dirMiRepo = @"C:\Users\Mariano\Documents\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\",true);
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
