@@ -30,9 +30,15 @@ namespace Sch_WCFApplication
 
                 var applicationID = "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc"; //   este figura como "apiKey" en la consola del Firebase
                 var senderId = "741177410808";  //                                  este figura como "messagingSenderId" en la consola del Firebase
-                //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
+                                                //string deviceId = "euxqdp------ioIdL87abVL"; //                   este seria el ticket???  	-It is a token generated using a method FirebaseInstanceId.getInstance().getToken() in a Service – Nilesh Panchal Dec 2 '16 at 12:14 
 
-                //armar el service worker con este ejemplo https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419
+                //armar el service worker con este ejemplo 
+                //https://firebase.google.com/docs/web/setup?hl=es-419  para agregar FCM
+                //https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419  para empezar a usarlo. 
+                //https://github.com/firebase/quickstart-js/blob/master/messaging/index.html#L84-L85 ahí está el codigo
+                //por ahora ponelo en Reclamos.aspx. Despues, el registrador tendría que estar llamado en la primera pagina (masterpage o algo)
+
+
                 // usar firesharp? -es q necesitas una biblioteca para .net?
 
 
