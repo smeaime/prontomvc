@@ -1779,8 +1779,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-  <link rel="stylesheet" href="main.css">
-
+  
   <link rel="manifest" href="manifest.json">
 
 
@@ -1832,7 +1831,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-
+    
 
 
     <script>
