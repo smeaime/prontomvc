@@ -527,6 +527,50 @@ Public Class WebServiceCartas
 
 
 
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function AsociarUsuarioConTokenFirebase(token As String) As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim usuario = Membership.GetUser().UserName
+
+
+            Return CartaDePorteManager.AsociarUsuarioConTokenFirebase(token, Encriptar(scs))
+
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     '<WebMethod(Description:="", EnableSession:=False)>
