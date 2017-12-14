@@ -6359,7 +6359,10 @@ Formato localidad-provincia	destination	x
 			DemoProntoEntities db = new DemoProntoEntities(scEF);
 			var carta = db.CartasDePortes.Find(idcarta);
 
+			
 			List<string> queusuarioshayEnestacarta = new List<string>();
+
+			if (carta == null) return null;
 
 			queusuarioshayEnestacarta.Add(carta.Vendedor.NullSafeToString());
 			queusuarioshayEnestacarta.Add(carta.CuentaOrden1.NullSafeToString());
@@ -7938,20 +7941,20 @@ Formato localidad-provincia	destination	x
 			//https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
 			ChromeOptions chromeOptions = new ChromeOptions();
-            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
-            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
-            if (bHeadless) chromeOptions.AddArguments("--headless");
-            chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
-            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+			if (bHeadless) chromeOptions.AddArguments("--headless");
+			chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
+			//chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
 
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            int lastSlash = directorioDescarga.LastIndexOf('/');
-            directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
-            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			int lastSlash = directorioDescarga.LastIndexOf('/');
+			directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
+			chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga);// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
 
-            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+			chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
 			chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
@@ -8228,22 +8231,22 @@ __________________________
 			//https://thefriendlytester.co.uk/2017/04/new-headless-chrome-with-selenium.html
 
 			ChromeOptions chromeOptions = new ChromeOptions();
-            //chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
-            //chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
-            if (bHeadless) chromeOptions.AddArguments("--headless");
-            chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
-            //chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
+			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+			if (bHeadless) chromeOptions.AddArguments("--headless");
+			chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
+			//chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
 
 
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            int lastSlash = directorioDescarga.LastIndexOf('/');
-            directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
-            chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga); // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			// es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+			int lastSlash = directorioDescarga.LastIndexOf('/');
+			directorioDescarga = (lastSlash > -1) ? directorioDescarga.Substring(0, lastSlash) : directorioDescarga;
+			chromeOptions.AddUserProfilePreference("download.default_directory", directorioDescarga); // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
 
 
-            chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
+			chromeOptions.AddUserProfilePreference("download.directory_upgrade", "true");
 			chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
 			chromeOptions.AddUserProfilePreference("safebrowsing.enabled", "true");
 			chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
