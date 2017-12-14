@@ -868,11 +868,9 @@ namespace ProntoMVC.Tests
 
 
 
-        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
-    MostrarLinksAFamiliaDeDuplicados
 
         [TestMethod]
-        public void loginEnUrenport3_42773_4()
+        public void loginEnUrenport3_42773_5()
         {
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
@@ -886,8 +884,23 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void loginEnUrenport3_42773_3()
+        public void loginEnUrenport3_42773_6()
         {
+
+
+//            Comment 94 by ankitkoo...@gmail.com, Dec 5
+//For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
+//GitHub link to framework : https://github.com/cezarypiatek/Tellurium
+
+//Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
+
+//https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
+
+//This class has the required implementation.
+
+            //con la nueva version del chromedriver, en modo headless no me baja el archivo. https://bugs.chromium.org/p/chromium/issues/detail?id=696481
+
+
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
             string dirMiRepo = @"C:\Users\Mariano\Documents\";
@@ -902,6 +915,60 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        //[TestCase(BrowserType.Chrome)]
+        //[TestCase(BrowserType.ChromeHeadless)]
+        //[TestCase(BrowserType.Firefox)]
+        //[TestCase(BrowserType.FirefoxGecko)]
+        //[TestCase(BrowserType.FirefoxGeckoHeadless)]
+        public void should_be_able_to_download_file(BrowserType browserType)
+        {
+            var browserAdapterConfig = new BrowserAdapterConfig()
+            {
+                BrowserType = browserType,
+                SeleniumDriversPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Drivers"),
+                PageUrl = "http://localhost:51767",
+            };
+
+            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
+            {
+                browser.NavigateTo<HomeController>(c => c.Index());
+                browser.DownloadFileWith(() => browser.ClickOnElementWithText("Download manual"), filePath =>
+                {
+                    Assert.IsNotNull(filePath);
+                    Assert.True(File.Exists(filePath));
+                });
+
+                browser.DownloadFileWith(() => browser.ClickOnElementWithText("Download Large"), filePath =>
+                {
+                    Assert.IsNotNull(filePath);
+                    Assert.True(File.Exists(filePath));
+                });
+            }
+        }
+
+
+        [TestMethod]
+        public void should_be_able_to_run_test_with_configuration_from_file()
+        {
+
+            Tellurium.Core.
+
+            var testExecutionPath = TestContext.CurrentContext.TestDirectory;
+            var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(testExecutionPath);
+            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
+            {
+                //Perform test
+            }
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -910,11 +977,14 @@ namespace ProntoMVC.Tests
         public void problemasPorElCambioDeNRecibo_46500()
         {
 
+            //varios dejaron de andar porque no actualicé los modelos de LinqToSql y el del TypedDatatables
 
             LogicaFacturacion.LeyendaSyngenta(2343, SC);
 
 
 
+    //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
+    //MostrarLinksAFamiliaDeDuplicados
 
 
 
@@ -4559,7 +4629,6 @@ namespace ProntoMVC.Tests
 
 
 
-        MostrarLinksAFamiliaDeDuplicados
 
         [TestMethod]
         public void loginEnUrenport3_42773_4()

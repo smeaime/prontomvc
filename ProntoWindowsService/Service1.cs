@@ -880,7 +880,7 @@ namespace ProntoWindowsService
 
                     if (dir2 != "")
                     {
-                        s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver,false);
                         ClassFlexicapture.Log(idthread + " Bajado 1");
                         s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
                         ClassFlexicapture.Log(idthread + " Bajado 2");
