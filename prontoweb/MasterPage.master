@@ -631,18 +631,5 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
 
 
 
-    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
-            authDomain: "pronto-f87bf.firebaseapp.com",
-            databaseURL: "https://pronto-f87bf.firebaseio.com",
-            projectId: "pronto-f87bf",
-            storageBucket: "",
-            messagingSenderId: "741177410808"
-        };
-        firebase.initializeApp(config);
-    </script>
 </body>
 </html>
