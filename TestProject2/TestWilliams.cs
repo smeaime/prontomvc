@@ -1007,6 +1007,10 @@ namespace ProntoMVC.Tests
             var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
+            
+            
+            
+            // https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419
         }
 
 
