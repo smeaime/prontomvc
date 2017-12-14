@@ -36,6 +36,7 @@ namespace Sch_WCFApplication
                 //https://firebase.google.com/docs/web/setup?hl=es-419  para agregar FCM
                 //https://firebase.google.com/docs/cloud-messaging/js/client?hl=es-419  para empezar a usarlo. 
                 //https://github.com/firebase/quickstart-js/blob/master/messaging/index.html#L84-L85 ahí está el codigo
+                //https://github.com/firebase/quickstart-js/tree/master/messaging todo el codigo
                 //por ahora ponelo en Reclamos.aspx. Despues, el registrador tendría que estar llamado en la primera pagina (masterpage o algo)
 
 
