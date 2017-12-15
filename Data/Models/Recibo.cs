@@ -125,6 +125,16 @@ namespace ProntoMVC.Data.Models
         public string ServicioCobro { get; set; }
         public string LoteServicioCobro { get; set; }
         public Nullable<int> IdFacturaDirecta { get; set; }
+        public Nullable<decimal> PorcentajePercepcion1 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion2 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion3 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion4 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion5 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion6 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion7 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion8 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion9 { get; set; }
+        public Nullable<decimal> PorcentajePercepcion10 { get; set; }
     
         public virtual ICollection<DetalleRecibo> DetalleRecibosImputaciones { get; set; }
         public virtual ICollection<DetalleRecibosCuenta> DetalleRecibosCuentas { get; set; }
