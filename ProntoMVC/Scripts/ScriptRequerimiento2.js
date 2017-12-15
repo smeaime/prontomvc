@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
     $("#loading").hide();
 
     'use strict';
@@ -198,7 +198,8 @@ $(function () {
         mtype: 'POST',
         colNames: ['Acciones', 'IdDetalleRequerimiento', 'IdRequerimiento', 'IdArticulo', 'IdUnidad', 'IdControlCalidad', 'OrigenDescripcion', 
                    'Nro. item', 'Cant.', 'Un.', 'Codigo', 'Articulo', 'Observaciones', 'Tipos de descripcion', 'Fecha entrega', 'Cump.', 'Control de calidad', 
-                   'Archivo adjunto 1'
+                   'Agregar adjunto', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4', 'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7',
+                   'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'
         ],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
@@ -373,25 +374,67 @@ $(function () {
                         }
                     },
                     {
-                        name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', label: 'TB', align: 'left', width: 250, editable: true, edittype: 'file',
-
-                     
-                        
+                        name: 'AgregarAdjunto', index: 'AgregarAdjunto', label: 'TB', align: 'left', width: 90, editable: true, edittype: 'file',
                         editoptions: {
                             enctype: "multipart/form-data", dataEvents: [{
                                 type: 'change', fn: function (e) {
+                                    var i, data;
                                     var thisval = $(e.target).val();
                                     var thisval2 = thisval.replace(/C:\\fakepath\\/i, '')
                                     var rowid = $('#Lista').getGridParam('selrow');
-                                    //$('#Lista').jqGrid('setCell', rowid, 'ArchivoAdjunto1', thisval2);
+                                    data = $('#Lista').jqGrid('getRowData', rowid);
+
+                                    for (i = 1; i <= 10; i++) {
+                                        if (data['ArchivoAdjunto'+i].length == 0) {
+                                            $('#Lista').jqGrid('setCell', rowid, 'ArchivoAdjunto'+i, thisval2);
+                                            break
+                                        }
+                                    }
+                                    if (i > 10) { alert("No hay mas adjuntos disponibles") }
                                 }
                             }]
                         }
+                    },
+                    {
+                        name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto2', index: 'ArchivoAdjunto2', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto3', index: 'ArchivoAdjunto3', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto4', index: 'ArchivoAdjunto4', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto5', index: 'ArchivoAdjunto5', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto6', index: 'ArchivoAdjunto6', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto7', index: 'ArchivoAdjunto7', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto8', index: 'ArchivoAdjunto8', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto9', index: 'ArchivoAdjunto9', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
+                    },
+                    {
+                        name: 'ArchivoAdjunto10', index: 'ArchivoAdjunto10', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
                     }
-
-
-
-
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
