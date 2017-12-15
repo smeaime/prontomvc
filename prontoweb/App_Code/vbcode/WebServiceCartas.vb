@@ -546,7 +546,9 @@ Public Class WebServiceCartas
             Dim usuario = Membership.GetUser().UserName
 
 
-            Return CartaDePorteManager.AsociarUsuarioConTokenFirebase(token, Encriptar(scs))
+            Dim s = New ServicioCartaPorte.servi()
+            s.AsociarUsuarioConTokenFirebase(token, usuario, Encriptar(scs))
+
 
 
         Catch ex As Exception
