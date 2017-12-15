@@ -261,6 +261,7 @@ namespace ProntoMVC.Data.Models
         public virtual DbSet<PresupuestoObrasRubro> PresupuestoObrasRubros { get; set; }
         public virtual DbSet<DetalleFlete> DetalleFletes { get; set; }
         public virtual DbSet<Flete> Fletes { get; set; }
+        public virtual DbSet<GoogleToken> GoogleTokens { get; set; }
     
         public virtual int Requerimientos_ActualizarEstado(Nullable<int> idRequerimiento, Nullable<int> idDetalleRequerimiento)
         {

@@ -1965,6 +1965,33 @@ Public Module ProntoFuncionesUIWeb
 
 
 
+    Function ConexBDLmasterClientes() As String
+        Dim sCadena As String
+
+
+        If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+            sCadena = "LocalSqlServer"
+
+            Try
+                Return Encriptar(System.Configuration.ConfigurationManager.ConnectionStrings(sCadena).ConnectionString)
+            Catch ex As Exception
+                ErrHandler2.WriteError("No se pudo conectar a la BDLmaster." & ex.ToString)
+                Throw
+            End Try
+
+        Else
+            'scs = scWilliamsRelease
+            Dim scs = "Data Source=172.31.44.132;Initial Catalog=BDLMasterClientes;Uid=pronto; PWD=MeDuV8NSlxRlnYxhMFL3; Connect Timeout=60"
+
+            Return Encriptar(scs)
+        End If
+
+
+
+
+    End Function
+
+
     Class UsuarioSesion
         Public Shared Function Mail(ByVal sc As String, ByVal Session As System.Web.SessionState.HttpSessionState) As String
 

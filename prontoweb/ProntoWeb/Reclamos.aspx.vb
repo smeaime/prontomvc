@@ -84,7 +84,7 @@ Partial Class Reclamos
             '////////////////////////////////////////////
 
 
-            Me.Title = "Situacion"
+            'Me.Title = "Situacion"
 
             BindTypeDropDown()
             refrescaPeriodo()

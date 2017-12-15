@@ -23,6 +23,10 @@ namespace ProntoMVC.Data.Models
         public int IdReclamo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> Estado { get; set; }
+        public Nullable<int> AuxInt1 { get; set; }
+        public Nullable<int> AuxInt2 { get; set; }
+        public string AuxString1 { get; set; }
+        public string AuxString2 { get; set; }
     
         public virtual ICollection<CartasDePorte> CartasDePortes { get; set; }
         public virtual ICollection<ReclamoComentario> ReclamoComentarios { get; set; }

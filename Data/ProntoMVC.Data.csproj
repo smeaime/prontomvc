@@ -641,6 +641,9 @@
     <Compile Include="Models\Ganancia.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoogleToken.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GruposObra.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
