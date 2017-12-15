@@ -218,7 +218,7 @@ Namespace Pronto.ERP.Dal
                     myCommand.Parameters.AddWithValue("@Tarifa", myCartaDePorte.TarifaTransportista)
                     myCommand.Parameters.AddWithValue("@FechaDescarga", fechaNETtoSQL(myCartaDePorte.FechaDescarga, System.DBNull.Value))
                     myCommand.Parameters.AddWithValue("@Hora", iisValidSqlDate(myCartaDePorte.Hora, System.DBNull.Value))
-                    myCommand.Parameters.AddWithValue("@NRecibo", myCartaDePorte.NRecibo)
+                    myCommand.Parameters.AddWithValue("@NRecibo", 0) 'no importa, lo actualizo con EF
                     myCommand.Parameters.AddWithValue("@CalidadDe", IdNull(myCartaDePorte.CalidadDe))
                     myCommand.Parameters.AddWithValue("@TaraFinal", myCartaDePorte.TaraFinal)
                     myCommand.Parameters.AddWithValue("@BrutoFinal", myCartaDePorte.BrutoFinal)

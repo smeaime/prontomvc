@@ -1,5 +1,6 @@
 
 
+
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -2191,6 +2192,27 @@ ALTER TABLE  Reclamos  ADD
 	 AuxString1 VARCHAR(50) NULL,
 	 AuxString2 VARCHAR(50) NULL
 GO
+
+
+
+
+
+
+create TABLE GoogleToken
+(
+	 IdGoogleToken int IDENTITY (1, 1) PRIMARY KEY,
+	 Token VARCHAR(200),
+	 NombreUsuario VARCHAR(128),
+	 
+--	constraint U_CartasDePorteReglasDeFacturacion unique NONCLUSTERED (IdCliente,PuntoVenta)
+)
+
+GO
+
+
+
+
+
 
 
 

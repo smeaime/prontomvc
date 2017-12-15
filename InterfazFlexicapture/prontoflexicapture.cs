@@ -6112,7 +6112,7 @@ Formato localidad-provincia	destination	x
 								string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.Comentario)),
 
 								string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.NombreUsuario).Distinct()),
-								"", // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+								 (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() , // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
 								"", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),

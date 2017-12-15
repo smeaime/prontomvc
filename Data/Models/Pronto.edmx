@@ -3735,6 +3735,14 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="MinimoNoImponible" Type="numeric" Precision="18" Scale="2" />
           <Property Name="MinimoARetener" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="GoogleToken">
+          <Key>
+            <PropertyRef Name="IdGoogleToken" />
+          </Key>
+          <Property Name="IdGoogleToken" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="200" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="GruposObras">
           <Key>
             <PropertyRef Name="IdGrupoObra" />
@@ -5520,6 +5528,10 @@ warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a pri
           <Property Name="IdReclamo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="Estado" Type="int" />
+          <Property Name="AuxInt1" Type="int" />
+          <Property Name="AuxInt2" Type="int" />
+          <Property Name="AuxString1" Type="varchar" MaxLength="50" />
+          <Property Name="AuxString2" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Regiones">
           <Key>
@@ -10461,6 +10473,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySet Name="Fletes" EntityType="Self.Fletes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formularios" EntityType="Self.Formularios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ganancias" EntityType="Self.Ganancias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoogleToken" EntityType="Self.GoogleToken" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposObras" EntityType="Self.GruposObras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IBCondiciones" EntityType="Self.IBCondiciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IGCondiciones" EntityType="Self.IGCondiciones" Schema="dbo" store:Type="Tables" />
@@ -13715,6 +13728,7 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           </AssociationSet>
           <EntitySet Name="DetalleFletes" EntityType="DemoProntoModel.DetalleFlete" />
           <EntitySet Name="Fletes" EntityType="DemoProntoModel.Flete" />
+          <EntitySet Name="GoogleTokens" EntityType="DemoProntoModel.GoogleToken" />
 
           </EntityContainer>
         <EntityType Name="Articulo">
@@ -26562,6 +26576,10 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="Estado" Type="Int32" />
           <NavigationProperty Name="CartasDePortes" Relationship="DemoProntoModel.FK__CartasDeP__IdRec__09B62712" FromRole="Reclamo" ToRole="CartasDePorte" />
           <NavigationProperty Name="ReclamoComentarios" Relationship="DemoProntoModel.FK__ReclamoCo__IdRec__05E5962E" FromRole="Reclamo" ToRole="ReclamoComentario" />
+          <Property Name="AuxInt1" Type="Int32" />
+          <Property Name="AuxInt2" Type="Int32" />
+          <Property Name="AuxString1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuxString2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CartasDeP__IdRec__09B62712">
           <End Type="DemoProntoModel.Reclamo" Role="Reclamo" Multiplicity="0..1" />
@@ -26660,6 +26678,14 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <Property Name="PathImagen1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdOrigenTransmision" Type="Int32" />
           <Property Name="PatenteChasis" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GoogleToken">
+          <Key>
+            <PropertyRef Name="IdGoogleToken" />
+          </Key>
+          <Property Name="IdGoogleToken" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
 
         </Schema>
@@ -33890,6 +33916,10 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
           <EntitySetMapping Name="Reclamos">
             <EntityTypeMapping TypeName="DemoProntoModel.Reclamo">
               <MappingFragment StoreEntitySet="Reclamos">
+                <ScalarProperty Name="AuxString2" ColumnName="AuxString2" />
+                <ScalarProperty Name="AuxString1" ColumnName="AuxString1" />
+                <ScalarProperty Name="AuxInt2" ColumnName="AuxInt2" />
+                <ScalarProperty Name="AuxInt1" ColumnName="AuxInt1" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdReclamo" ColumnName="IdReclamo" />
@@ -33945,6 +33975,15 @@ warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not h
                 <ScalarProperty Name="Patente" ColumnName="Patente" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdFlete" ColumnName="IdFlete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoogleTokens">
+            <EntityTypeMapping TypeName="DemoProntoModel.GoogleToken">
+              <MappingFragment StoreEntitySet="GoogleToken">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IdGoogleToken" ColumnName="IdGoogleToken" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
