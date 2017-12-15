@@ -67,7 +67,7 @@ Partial Class Reclamos
 
 
         If Request.Browser("IsMobileDevice") = "true" Then
-            Response.Redirect("SituacionCalidadMovil.aspx")
+            'Response.Redirect("SituacionCalidadMovil.aspx")
         End If
 
 
