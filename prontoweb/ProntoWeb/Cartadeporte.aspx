@@ -2828,8 +2828,7 @@
 
 .ui-jqgrid {font-size:0.4em}*/
                     </style>
-
-
+                    <span style="vertical-align:top">                    Chatear con</span>
                     <asp:ListBox ID="usuarioschat" runat="server"
                         DataTextField="Descripcion" DataValueField="Id">
 <%--                        <asp:ListItem Value="1" Text="nano"></asp:ListItem>
@@ -2849,7 +2848,7 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
-                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6" type="button" value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar" type="button" value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
 
 
@@ -2886,61 +2885,17 @@
 
 
                                                 
-                                                
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", true); //que no se pueda enviar si no se eligió un usuario
+                            
                                                 $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").change(function () {
                                                     $("#Lista").trigger("reloadGrid");
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", false);
                                                 });
 
 
+                            
 
-                                                $("#Button9").click(function () {
-
-
-                                                    var d = {
-                                                        idCartaPorte: qs["Id"],
-                                                        sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
-                                                        usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
-                                                    }
-
-
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        //method: "POST",
-                                                        url: "WebServiceCartas.asmx/GrabarComentario",
-                                                        dataType: "json",
-                                                        contentType: "application/json; charset=utf-8",
-
-                                                        data: JSON.stringify(d),
-
-                                                        success: function (data) {
-                                                            //alert(data.d);
-                                                            //window.open(data.d);
-                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
-                                                            $("#Lista").trigger("reloadGrid");
-                                                            scrollToLastRow($("#Lista"))
-                                                        }
-
-
-                                                        ,
-                                                        beforeSend: function () {
-                                                            //$('.loading').html('some predefined loading img html');
-                                                            $("#loading").show();
-                                                            $('#grabar2').attr("disabled", true).val("Espere...");
-
-                                                        },
-                                                        complete: function () {
-                                                            $("#loading").hide();
-                                                        }
-
-
-                                                    })
-
-
-                                                })
-
-
-
-                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").click(function () {
                                                     //alert("hola")
 
                                                     //return;
@@ -3021,7 +2976,7 @@
 
 
 
-                                                            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                                            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').attr("disabled", true);
                                                             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", true);
                                                             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", true);
                                                             $('#gbox_Lista').attr("disabled", true);
@@ -3039,7 +2994,7 @@
                                                             $("#loading").hide();
 
                                                             //
-                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').val("habilitar consulta");
 
 
                                                         }
@@ -3083,7 +3038,7 @@
 
 
 
-                                                            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", false);
+                                                            $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').attr("disabled", false);
                                                             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", false);
                                                             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", false);
                                                             $('#gbox_Lista').attr("disabled", false);
@@ -3100,8 +3055,8 @@
                                                         complete: function () {
                                                             $("#loading").hide();
 
-                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
-                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').attr("disabled", true);
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').val("habilitar consulta");
 
 
                                                         }
