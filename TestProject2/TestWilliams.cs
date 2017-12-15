@@ -1028,12 +1028,14 @@ namespace ProntoMVC.Tests
         }
 
 
-        EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje,string titulo, string SC)
+        public void EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje,string titulo, string SC)
         {
             var s = new ServicioCartaPorte.servi();
             string[] deviceIds =s.TraerTokensDelUsuario(usuario, SC);
             var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo);
         }
+        
+
 
         [TestMethod]
         public void AsociarUsuarioConTokenFirebase(string usuario)
