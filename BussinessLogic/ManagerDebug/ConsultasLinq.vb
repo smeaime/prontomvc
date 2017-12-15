@@ -378,9 +378,17 @@ Public Class ConsultasLinq
         'updates the compatibility level of the database and fixes the problem.
 
 
+
+
+        'http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=46735
+        'como mierda hago para filtrar los Exporta=SI con cliente Syngenta, cuando ya apliqué el filtro antes?
+        '-y si agregás a mano los que tienen syngenta
+        '-otra opcion es no filtrar por ModoExportacion arriba, hacerlo despues. -me gusta eso. pasemos el filtro ModoExportacion abajo
+
+
         Dim aaa = From xz In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, Nothing, Nothing, Nothing, idVendedor,
                                                 idCorredor, idDestinatario, idIntermediario, idRemComercial,
-                                                idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, ModoExportacion,
+                                                idArticulo, idProcedencia, idDestino, AplicarANDuORalFiltro, Nothing,
                                                 fechadesde, fechahasta, puntoventa,
                                                 Nothing, True, Nothing, Nothing, Nothing,
                                                 Nothing, Nothing, Nothing, Nothing)
@@ -389,9 +397,26 @@ Public Class ConsultasLinq
 
 
 
-        'como mierda hago para filtrar los Exporta=SI con cliente Syngenta, cuando ya apliqué el filtro antes?
-        '-y si agregás a mano los que tienen syngenta
-        '-otra opcion es no filtrar por ModoExportacion arriba, hacerlo despues.
+        Dim clienteSyngenta As Integer = CartaDePorteManager.BuscarClientePorCUIT("30-64632845-0", SC, "")
+
+
+
+
+        aaa = aaa.Where(Function(cdp) ((ModoExportacion = "Ambos") Or (ModoExportacion = "Entregas" And If(cdp.Exporta, "NO") = "NO") Or (ModoExportacion = "Export" And If(cdp.Exporta, "NO") = "SI")))
+
+
+
+        aaa = aaa.Where(Function(x) _
+                      (x.Vendedor = clienteSyngenta Or x.CuentaOrden1 = clienteSyngenta Or x.CuentaOrden2 = clienteSyngenta Or x.IdClienteAuxiliar = clienteSyngenta) And
+                        x.IdClienteEntregador > 0 And x.IdClienteEntregador <> 12454
+                      )
+
+
+        'Select Case EsExporta() = "SI"
+
+
+
+
 
 
         'aaa.ToList()
@@ -425,43 +450,43 @@ Public Class ConsultasLinq
 
         db.Database.CommandTimeout = 300
 
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
 
-        'http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
-        '        Are there other callers of fDE_myquery outside of your specific usage? And how often does this get called? The issue is not that your SELECT * FROM dbo.fDE_myquery(); is getting a sub-optimal plan, it is that one or more queries inside of fDE_myquery is getting a sub-optimal plan. Hence, you could just add the OPTION(RECOMPILE) to one or more queries inside that TVF.
+                            'http://stackoverflow.com/questions/26761827/adding-a-query-hint-when-calling-table-valued-function
+                            '        Are there other callers of fDE_myquery outside of your specific usage? And how often does this get called? The issue is not that your SELECT * FROM dbo.fDE_myquery(); is getting a sub-optimal plan, it is that one or more queries inside of fDE_myquery is getting a sub-optimal plan. Hence, you could just add the OPTION(RECOMPILE) to one or more queries inside that TVF.
 
-        'If this TVF is called a lot then this would have a negative impact on performance. That is why I asked about other uses of this TVF: if this is the only, or by far the main, use of this TVF, then it might be well worth it if the bad plans are being picked up frequently.
+                            'If this TVF is called a lot then this would have a negative impact on performance. That is why I asked about other uses of this TVF: if this is the only, or by far the main, use of this TVF, then it might be well worth it if the bad plans are being picked up frequently.
 
-        'But if there are several other callers of this TVF that are not experiencing an issue, then putting the RECOMPILE in the TVF might not be the way to go. Although, in that case you could create a wrapper TVF that encapsulates the SELECT * FROM dbo.fDE_myquery() OPTION (RECOMPILE);. This would appear to be a more flexible solution :). It would have to be a Multistatment TVF instead of the typically better Inline TVF as I just tried it and the Inline TVF does not seem to appreciate the OPTION clause, but the Multistatement TVF was fine with it.
+                            'But if there are several other callers of this TVF that are not experiencing an issue, then putting the RECOMPILE in the TVF might not be the way to go. Although, in that case you could create a wrapper TVF that encapsulates the SELECT * FROM dbo.fDE_myquery() OPTION (RECOMPILE);. This would appear to be a more flexible solution :). It would have to be a Multistatment TVF instead of the typically better Inline TVF as I just tried it and the Inline TVF does not seem to appreciate the OPTION clause, but the Multistatement TVF was fine with it.
 
 
-        db.Database.ExecuteSqlCommand("EXEC sp_recompile 'dbo.fSQL_GetDataTableFiltradoYPaginado';")
+                            db.Database.ExecuteSqlCommand("EXEC sp_recompile 'dbo.fSQL_GetDataTableFiltradoYPaginado';")
 
-        Dim qq = (From cdp In aaa
-                  From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
-                  From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
-                  From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
-                  From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
-                  From pd1 In db.ListasPreciosDetalles _
+                            Dim qq = (From cdp In aaa
+                                      From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
+                                      From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
+                                      From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
+                                      From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
+                                      From pd1 In db.ListasPreciosDetalles _
                           .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                  From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
-                  From pd2 In db.ListasPreciosDetalles _
+                                      From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
+                                      From pd2 In db.ListasPreciosDetalles _
                           .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                                  And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                  Where 1 = 1 _
+                                      Where 1 = 1 _
                         And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                         And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
-                  Select New asas() With {
+                                      Select New asas() With {
                       .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
                       .IdCartaDePorte = cdp.IdCartaDePorte,
                       .FechaDescarga = cdp.FechaDescarga,
@@ -503,72 +528,72 @@ Public Class ConsultasLinq
                       .IdClienteEntregador = If(cdp.IdClienteEntregador, 0),
                       .tarifcombo = pd1.PrecioComboCaladaMasBalanza
                     }).ToList
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
 
 
 
 
 
 
-        'Dim a = qq.FirstOrDefault
+                            'Dim a = qq.FirstOrDefault
 
 
-        'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
-
-
-
-
-        'Dim qq2 = qq.ToList
-        Dim aa = qq
-        Dim filtr As Integer
-        If False Then
-            'que pasa con las cartas que tienen varios subnumerodefacturacion y el 0 anulado? y no se puede tirar un listado viendo el subnumerodefac?
-
-
-            aa = qq.Where(Function(i) False Or (If(i.ExcluirDeSubcontratistas, "NO") = "NO" And If(i.SubnumeroDeFacturacion, 0) <= 0))
-            filtr = qq.Count - aa.Count
-        Else
-
-        End If
+                            'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
 
 
 
 
+                            'Dim qq2 = qq.ToList
+                            Dim aa = qq
+                            Dim filtr As Integer
+                            If False Then
+                                'que pasa con las cartas que tienen varios subnumerodefacturacion y el 0 anulado? y no se puede tirar un listado viendo el subnumerodefac?
 
-        If ModoExportacion = "Buques" Then
 
-            Dim q7 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta, -1, 0, -1, db)
+                                aa = qq.Where(Function(i) False Or (If(i.ExcluirDeSubcontratistas, "NO") = "NO" And If(i.SubnumeroDeFacturacion, 0) <= 0))
+                                filtr = qq.Count - aa.Count
+                            Else
 
-            'From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Puerto).DefaultIfEmpty
-            'Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto
-            'Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo
+                            End If
 
-            Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q7
-                       From art In db.Articulos.Where(Function(i) i.IdArticulo = If(cdp.IdArticulo, 0)).DefaultIfEmpty
-                       From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Puerto, 0)).DefaultIfEmpty
-                       From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista1, 0)).DefaultIfEmpty
-                       From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista2, 0)).DefaultIfEmpty
-                       From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
-                       From pd1 In db.ListasPreciosDetalles _
+
+
+
+
+                            If ModoExportacion = "Buques" Then
+
+                                Dim q7 = LogicaFacturacion.ListaEmbarquesQueryable(SC, fechadesde, fechahasta, -1, 0, -1, db)
+
+                                'From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = cdp.Puerto).DefaultIfEmpty
+                                'Join dest In db.WilliamsDestinos On dest.IdWilliamsDestino Equals cdp.Puerto
+                                'Join art In db.Articulos On art.IdArticulo Equals cdp.IdArticulo
+
+                                Dim ooo = (From cdp As ProntoMVC.Data.Models.CartasPorteMovimiento In q7
+                                           From art In db.Articulos.Where(Function(i) i.IdArticulo = If(cdp.IdArticulo, 0)).DefaultIfEmpty
+                                           From destino In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Puerto, 0)).DefaultIfEmpty
+                                           From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista1, 0)).DefaultIfEmpty
+                                           From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(destino.Subcontratista2, 0)).DefaultIfEmpty
+                                           From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
+                                           From pd1 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
                             And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
                         .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                       From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
-                       From pd2 In db.ListasPreciosDetalles _
+                                           From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
+                                           From pd2 In db.ListasPreciosDetalles _
                         .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) _
                                And (i.IdCliente Is Nothing Or i.IdCliente = cdp.IdExportadorOrigen)) _
                         .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                       Select New asas With {
+                                           Select New asas With {
                     .NumeroCartaDePorte = cdp.NumeroCDPMovimiento,
                     .IdCartaDePorte = cdp.IdCartaDePorte,
                     .FechaDescarga = cdp.FechaIngreso,
@@ -596,18 +621,18 @@ Public Class ConsultasLinq
                 }).ToList
 
 
-            qq = qq.Union(ooo).ToList
+                                qq = qq.Union(ooo).ToList
 
-        End If
-
-
+                            End If
 
 
 
 
 
-        Dim q = From i In qq
-                Group By
+
+
+                            Dim q = From i In qq
+                                    Group By
                     i.IdCartaDePorte,
                     i.NumeroCartaDePorte,
                     i.FechaDescarga,
@@ -630,7 +655,7 @@ Public Class ConsultasLinq
                     i.Corredor,
                     i.IdClienteEntregador
                 Into Group
-                Select New With {
+                                    Select New With {
                     IdCartaDePorte,
                     NumeroCartaDePorte,
                     FechaDescarga,
@@ -656,31 +681,28 @@ Public Class ConsultasLinq
                     Corredor,
                     IdClienteEntregador
                      }
-        'IdListaPreciosDetalle1, IdListaPreciosDetalle2
+                            'IdListaPreciosDetalle1, IdListaPreciosDetalle2
 
 
-        'q = q.Where(Function(x) x.NumeroCartaDePorte = 557836815).Distinct()
-
-
-
-        If Debugger.IsAttached Or True Then
-            Try
-
-                q.ToList()
-
-                Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2, x.Subcontr1Desc, x.Subcontr2Desc).ToList
-                Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 & " " & x.Subcontr1Desc & " " & x.Subcontr1Desc  ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
-
-
-                ErrHandler2.WriteError(vbCrLf & Join(b.ToArray, vbCrLf))
-            Catch ex As Exception
-                ErrHandler2.WriteError(ex)
-            End Try
-
-        End If
+                            'q = q.Where(Function(x) x.NumeroCartaDePorte = 557836815).Distinct()
 
 
 
+                            If Debugger.IsAttached Or True Then
+                                Try
+
+                                    q.ToList()
+
+                                    Dim a = (From x In q Order By x.FechaDescarga, x.IdCartaDePorte Select x.NumeroCartaDePorte, x.IdCartaDePorte, x.tarif1, x.tarif2, x.Subcontr1Desc, x.Subcontr2Desc).ToList
+                                    Dim b = From x In a Select x.NumeroCartaDePorte.ToString & " " & x.IdCartaDePorte.ToString & " " & x.tarif1 & " " & x.tarif2 & " " & x.Subcontr1Desc & " " & x.Subcontr1Desc  ' & " " & x.IdListaPreciosDetalle1 & " " & x.IdListaPreciosDetalle2
+
+
+                                    ErrHandler2.WriteError(vbCrLf & Join(b.ToArray, vbCrLf))
+                                Catch ex As Exception
+                                    ErrHandler2.WriteError(ex)
+                                End Try
+
+                            End If
 
 
 
@@ -688,11 +710,14 @@ Public Class ConsultasLinq
 
 
 
-        'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
 
-        Dim q8 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
-                                       Group By
+
+
+                            'uso Group by, porque el distinct en vb.net es medio loco! (no anda igual que en c#)
+
+                            Dim q8 As List(Of infLiqui) = (From cdp In q
+                                                           Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
+                                                           Group By
                                 cdp.agrupVagon,
                                 cdp.DestinoDesc,
                                 cdp.Exporta,
@@ -701,7 +726,7 @@ Public Class ConsultasLinq
                                 cdp.NumeroCartaDePorte,
                                 cdp.NetoFinal
                                Into Group
-                                       Select New infLiqui With {
+                                                           Select New infLiqui With {
                                    .agrupVagon = agrupVagon,
                                    .DestinoDesc = DestinoDesc & " Calada y Desc. " & If(
                                        (Exporta = "SI") _
@@ -714,9 +739,9 @@ Public Class ConsultasLinq
                                 }).ToList.Distinct.ToList()
 
 
-        Dim q4 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
-                                       Group By
+                            Dim q4 As List(Of infLiqui) = (From cdp In q
+                                                           Where (idSubcontr = -1 Or cdp.Subcontr1 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
+                                                           Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
                                         cdp.Exporta,
@@ -725,7 +750,7 @@ Public Class ConsultasLinq
                                         cdp.NumeroCartaDePorte,
                                         cdp.NetoFinal
                                        Into Group
-                                       Select New infLiqui With {
+                                                           Select New infLiqui With {
                                            .agrupVagon = agrupVagon,
                                            .DestinoDesc = DestinoDesc & " Calada" & If(
                                                (Exporta = "SI") _
@@ -738,9 +763,9 @@ Public Class ConsultasLinq
                                         }).ToList.Distinct.ToList()
 
 
-        Dim q5 As List(Of infLiqui) = (From cdp In q
-                                       Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
-                                       Group By
+                            Dim q5 As List(Of infLiqui) = (From cdp In q
+                                                           Where (idSubcontr = -1 Or cdp.Subcontr2 = idSubcontr) And Not (cdp.Subcontr1 = cdp.Subcontr2 And If(cdp.tarifcombo, 0) <> 0)
+                                                           Group By
                                         cdp.agrupVagon,
                                         cdp.DestinoDesc,
                                         cdp.Exporta,
@@ -749,7 +774,7 @@ Public Class ConsultasLinq
                                         cdp.NumeroCartaDePorte,
                                         cdp.NetoFinal
                                        Into Group
-                                       Select New infLiqui With {
+                                                           Select New infLiqui With {
                                            .agrupVagon = agrupVagon,
                                            .DestinoDesc = DestinoDesc & " Descarga" & If(
                                                          (Exporta = "SI") _
@@ -762,25 +787,25 @@ Public Class ConsultasLinq
                                    }).ToList.Distinct.ToList()
 
 
-        Dim q6 As New List(Of infLiqui) '= q4.Union(q5)
-        q6.AddRange(q4)
-        q6.AddRange(q5)
-        q6.AddRange(q8)
+                            Dim q6 As New List(Of infLiqui) '= q4.Union(q5)
+                            q6.AddRange(q4)
+                            q6.AddRange(q5)
+                            q6.AddRange(q8)
 
 
-        Dim q3 = From i In q6
-                 Group i By agrupVagon = i.agrupVagon, DestinoDesc = i.DestinoDesc, SubcontrDesc = i.SubcontrDesc, Tarifa = i.Tarifa Into g = Group
-                 Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa,
+                            Dim q3 = From i In q6
+                                     Group i By agrupVagon = i.agrupVagon, DestinoDesc = i.DestinoDesc, SubcontrDesc = i.SubcontrDesc, Tarifa = i.Tarifa Into g = Group
+                                     Select agrupVagon = agrupVagon, DestinoDesc = DestinoDesc, SubcontrDesc = SubcontrDesc, Tarifa = Tarifa,
                  NetoPto = g.Sum(Function(i) i.NetoPto), Comision = g.Sum(Function(i) i.Comision), CantCartas = g.Count,
                  numeros = Left(vbCrLf + vbCrLf + vbCrLf + "[comienzo  " + String.Join(vbCrLf, g.Select(Function(i) i.numerocarta.ToString).ToList) + "  fin]", 30000)
-        'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
+                            'le meto esos vbCrLf para que no se vean los primeros renglones y así no me modifique automaticamente el ancho de la columna "oculta"
 
-        ErrHandler2.WriteError("     Excluidas por nofacturarasubcontratistas o duplicadas: " & filtr)
+                            ErrHandler2.WriteError("     Excluidas por nofacturarasubcontratistas o duplicadas: " & filtr)
 
 
-        Return q3.ToList
+                            Return q3.ToList
 
-    End Function
+                        End Function
 
 
 
