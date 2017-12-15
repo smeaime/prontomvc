@@ -539,7 +539,8 @@
                                             <asp:ListItem Value="1">Exento</asp:ListItem>
                                             <asp:ListItem Value="3">Inscripto</asp:ListItem>
                                             <asp:ListItem Value="2">Inscripto Conv.Mult.</asp:ListItem>
-                                            <asp:ListItem Value="4">No alcanzado</asp:ListItem>
+                                            <asp:ListItem Value="4">No Alcanzado</asp:ListItem>
+                                            <asp:ListItem Value="5">No Inscripto</asp:ListItem>
                                         </asp:RadioButtonList>
                                     </td>
                                 </tr>

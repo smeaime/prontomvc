@@ -3271,7 +3271,7 @@ usuario As String, ConexBDLmaster As String,
                                                            .CEE_CAU = cdp.CEE _
                                                    , .Contrato = cdp.Contrato _
                                                  , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-                                             , .NRecibo = If(cdp.NRecibo, 0).ToString(),
+                                             , .NRecibo = cdp.NRecibo,
                                                 .CalidadGranosDanadosRebaja = 0.01,
                                                         .CalidadGranosExtranosRebaja = 0.01,
                                                     .DestinoCodigoPostal = cdp.DestinoCodigoPostal _

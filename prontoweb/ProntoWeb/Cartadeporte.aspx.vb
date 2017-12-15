@@ -977,7 +977,7 @@ Partial Class CartadeporteABM
 
         Try
 
-            Dim usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(IdCartaDePorte, SC, ConexBDLmaster)
+            Dim usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(IdCartaDePorte, SC, ConexBDLmasterClientes)
             usuarioschat.DataSource = usuarios
             usuarioschat.DataTextField = ""
             usuarioschat.DataValueField = ""
