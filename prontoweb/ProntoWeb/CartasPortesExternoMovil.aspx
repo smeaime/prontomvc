@@ -2991,7 +2991,7 @@ Arroyo Seco (Sta. Fe) - René Favaloro 726 / (03402) 421-426 - 429-676 / arroyos
                                 "<br/><b>Neto</b>  " + a.NetoPto +
                                 "<br/><b>Arribo</b>  " + a.FechaArribo +
                                 "<br/><b>Descarga</b>  " + a.FechaDescarga +
-                                "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                                //"<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
                                 "<span/>";
 
                             $("#" + subgrid_id).append(html);

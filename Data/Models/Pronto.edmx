@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content lkjlkjlk -->
     <edmx:StorageModels>
-    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DemoProntoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_TempAutorizaciones">
           <Key>
             <PropertyRef Name="IdTempAutorizacion" />
@@ -716,8 +716,8 @@
           <Property Name="Campo" Type="varchar" MaxLength="40" />
           <Property Name="Valor" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasDePorteHistorico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasDePorteHistorico">
           <Key>
             <PropertyRef Name="IdCartaDePorte" />
@@ -874,8 +874,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasDePorteHistorico' no tiene 
           <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.CartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -2001,6 +2001,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaModificacionCuenta" Type="datetime" />
           <Property Name="IdUsuarioEnlazoRecepcion" Type="int" />
           <Property Name="FechaEnlazoRecepcion" Type="datetime" />
+          <Property Name="PorcentajePercepcion" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedoresPresupuestosObras">
           <Key>
@@ -3260,8 +3261,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.CartasPorteMovimientos' no tiene 
           <Property Name="FechaInicio" Type="datetime" />
           <Property Name="FechaFinalizacion" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.EjerciciosPeriodos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EjerciciosPeriodos">
           <Key>
             <PropertyRef Name="IdEjercicioPeriodo" />
@@ -5489,6 +5490,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="ServicioCobro" Type="varchar" MaxLength="10" />
           <Property Name="LoteServicioCobro" Type="varchar" MaxLength="15" />
           <Property Name="IdFacturaDirecta" Type="int" />
+          <Property Name="PorcentajePercepcion1" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion2" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion3" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion4" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion5" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion6" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion7" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion8" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion9" Type="numeric" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion10" Type="numeric" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="ReclamoComentarios">
           <Key>
@@ -6049,8 +6060,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.EjerciciosPeriodos' no tiene defi
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Codigo" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.Tree' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tree">
           <Key>
             <PropertyRef Name="IdItem" />
@@ -6262,8 +6273,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.Tree' no tiene definida ninguna c
           <Property Name="EmiteComision" Type="varchar" MaxLength="2" />
           <Property Name="IdsVendedoresAsignados" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.wGrillaPersistencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="wGrillaPersistencia">
           <Key>
             <PropertyRef Name="IdRenglon" />
@@ -6375,8 +6386,8 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.wGrillaPersistencia' no tiene def
           <Property Name="IdDestino" Type="int" />
           <Property Name="AgregaItemDeGastosAdministrativos" Type="varchar" MaxLength="2" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pronto.dbo.VistaCartasPorteMovimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VistaCartasPorteMovimientos">
           <Key>
             <PropertyRef Name="IdCDPMovimiento" />
@@ -18272,6 +18283,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <NavigationProperty Name="Obra" Relationship="DemoProntoModel.FK_Recibos_IdObra" FromRole="Recibo" ToRole="Obra" />
           <NavigationProperty Name="Vendedore" Relationship="DemoProntoModel.FK_Recibos_IdCobrador" FromRole="Recibo" ToRole="Vendedor" />
           <NavigationProperty Name="Vendedore1" Relationship="DemoProntoModel.FK_Recibos_IdVendedor" FromRole="Recibo" ToRole="Vendedor" />
+          <Property Name="PorcentajePercepcion1" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion2" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion3" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion4" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion5" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion6" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion7" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion8" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion9" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="PorcentajePercepcion10" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="RubrosContable">
           <Key>
@@ -19078,6 +19099,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <Property Name="IdUsuarioEnlazoRecepcion" Type="Int32" />
           <Property Name="FechaEnlazoRecepcion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DetalleRecepcione" Relationship="DemoProntoModel.FK_DetalleComprobantesProveedores_DetalleRecepciones" FromRole="DetalleComprobantesProveedore" ToRole="DetalleRecepcione" />
+          <Property Name="PorcentajePercepcion" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <EntityType Name="DetalleComprobantesProveedoresPresupuestosObra">
           <Key>
@@ -29513,6 +29535,16 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="Recibos">
             <EntityTypeMapping TypeName="DemoProntoModel.Recibo">
               <MappingFragment StoreEntitySet="Recibos">
+                <ScalarProperty Name="PorcentajePercepcion10" ColumnName="PorcentajePercepcion10" />
+                <ScalarProperty Name="PorcentajePercepcion9" ColumnName="PorcentajePercepcion9" />
+                <ScalarProperty Name="PorcentajePercepcion8" ColumnName="PorcentajePercepcion8" />
+                <ScalarProperty Name="PorcentajePercepcion7" ColumnName="PorcentajePercepcion7" />
+                <ScalarProperty Name="PorcentajePercepcion6" ColumnName="PorcentajePercepcion6" />
+                <ScalarProperty Name="PorcentajePercepcion5" ColumnName="PorcentajePercepcion5" />
+                <ScalarProperty Name="PorcentajePercepcion4" ColumnName="PorcentajePercepcion4" />
+                <ScalarProperty Name="PorcentajePercepcion3" ColumnName="PorcentajePercepcion3" />
+                <ScalarProperty Name="PorcentajePercepcion2" ColumnName="PorcentajePercepcion2" />
+                <ScalarProperty Name="PorcentajePercepcion1" ColumnName="PorcentajePercepcion1" />
                 <ScalarProperty Name="IdFacturaDirecta" ColumnName="IdFacturaDirecta" />
                 <ScalarProperty Name="LoteServicioCobro" ColumnName="LoteServicioCobro" />
                 <ScalarProperty Name="ServicioCobro" ColumnName="ServicioCobro" />
@@ -30218,6 +30250,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
           <EntitySetMapping Name="DetalleComprobantesProveedores">
             <EntityTypeMapping TypeName="DemoProntoModel.DetalleComprobantesProveedore">
               <MappingFragment StoreEntitySet="DetalleComprobantesProveedores">
+                <ScalarProperty Name="PorcentajePercepcion" ColumnName="PorcentajePercepcion" />
                 <ScalarProperty Name="FechaEnlazoRecepcion" ColumnName="FechaEnlazoRecepcion" />
                 <ScalarProperty Name="IdUsuarioEnlazoRecepcion" ColumnName="IdUsuarioEnlazoRecepcion" />
                 <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
@@ -33931,7 +33964,7 @@ advertencia 6002: La tabla o vista 'Pronto.dbo.VistaCartasPorteMovimientos' no t
         <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
         <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
         <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
         <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
       </edmx:DesignerInfoPropertySet>
     </edmx:Options>
