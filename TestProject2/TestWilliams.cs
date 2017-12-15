@@ -1011,9 +1011,14 @@ namespace ProntoMVC.Tests
 
 
 
-            string deviceId = "fqVODCwdcOo:APA91bEexJWImhHzaiXYLVTGj3T2mxZvQCZhcd_vtRGZutXTPslZ2voCpQomWbHHH2YQ4z8fgSNmF9YGpSK80GteJZiVhpt14sX6653g8AdKRg4SrOiFdzhmYzxkPXfX3DsAhAqS4DwZ";
+            
+
+
+            string[] deviceId = { "eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs" };
+
 
             var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
+            var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
             // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
@@ -1023,14 +1028,29 @@ namespace ProntoMVC.Tests
         }
 
 
-        public void enviarNotificacionUsuario(string usuario)
+        EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje,string titulo, string SC)
+        {
+            var s = new ServicioCartaPorte.servi();
+            string[] deviceIds =s.TraerTokensDelUsuario(usuario, SC);
+            var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo);
+        }
+
+        [TestMethod]
+        public void AsociarUsuarioConTokenFirebase(string usuario)
         {
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
             //            MandoMensajeAListadoDeSubscripciones(subs);
+            var s = new ServicioCartaPorte.servi();
+            s.AsociarUsuarioConTokenFirebase("APA91bEexJWImhHzaiXYLVTGj3T2mxZvQCZhcd_vtRGZutXTPslZ2voCpQomWbHHH2YQ4z8fgSNmF9YGpSK80GteJZiVhpt14sX6653g8AdKRg4SrOiFdzhmYzxkPXfX3DsAhAqS4DwZ"
+                                        , "Mariano", SC);
 
-            AsociarUsuarioConTokenFirebase()
 
+
+            s.TraerTokensDelUsuario(usuario, SC);
         }
+
+
+
 
 
 

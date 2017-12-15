@@ -7091,6 +7091,87 @@ Formato localidad-provincia	destination	x
 
 
 
+		public virtual string[] TraerTokensDelUsuario(string nombreusuario, string SC)
+		{
+
+
+
+			//asdasdasd
+
+			return null;
+
+		}
+
+
+
+
+			
+
+		public virtual void AsociarUsuarioConTokenFirebase(string sTicketDeGoogle,string nombreusuario, string SC)
+		{
+
+			/*
+
+			//estan como empleados los usuarios externos de williams?
+
+			var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+			using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+			{
+
+				db.Database.CommandTimeout = 200;
+
+				Reclamo rec;
+				CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+
+			   if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1)
+				{
+					rec = new Reclamo();
+					rec.Estado = 1;
+					rec.Descripcion = DescripcionReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC);
+
+					db.Reclamos.Add(rec);
+					db.SaveChanges();
+					carta.IdReclamo = rec.IdReclamo;
+
+
+
+
+					if (nombreusuarioDestino != "")
+					{
+						//por ahora zafo agregando un "comentario" vacío del destinatario para que esté participando del reclamo
+
+						var com2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+						com2.IdReclamo = rec.IdReclamo;
+						com2.IdEmpleado = 1;
+						com2.NombreUsuario = nombreusuarioDestino;
+						com2.Comentario = "";
+						com2.Fecha = DateTime.Now;
+						db.ReclamoComentarios.Add(com2);
+
+
+					}
+
+				}
+				else
+				{
+					rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC));
+				}
+
+
+
+				db.SaveChanges();
+
+				var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+				return usuariosParticipantes;
+
+			}
+
+			*/
+
+		}
+
 
 
 
