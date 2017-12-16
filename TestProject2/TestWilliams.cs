@@ -4651,8 +4651,9 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
             string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            string dirbinary = @"C:\Users\Mariano\AppData\Local\Google\Chrome\Application\chrome.exe";
 
-            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false);
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false, dirbinary);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -4666,7 +4667,7 @@ namespace ProntoMVC.Tests
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
             string dirMiRepo = @"C:\Users\Mariano\Documents\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug", true);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }

@@ -36,6 +36,7 @@ namespace ProntoWindowsService
                 switch (parameter)
                 {
                     case "--install":
+                        // ejecutar como administrador!!!!!
                         ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
                         break;
                     case "--uninstall":
