@@ -1,5 +1,5 @@
-cd C:\Users\Administrador\Documents\bdl\pronto\ProntoWindowsService\bin\Debug
-
+rem ejecutar como administrador!!!!!
+cd C:\Users\Mariano\Documents\pronto\ProntoWindowsService\bin\Debug
 
 net stop prontoagente 
 pause 
