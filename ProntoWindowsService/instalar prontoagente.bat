@@ -1,3 +1,4 @@
+rem ejecutar como administrador!!!!!
 cd E:\Sites\ProntoAgente\
 
 net stop prontoagente 

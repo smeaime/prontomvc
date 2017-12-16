@@ -1103,7 +1103,7 @@ namespace ProntoFlexicapture
 					//esto es durisimo
 
 					files = d.GetFiles("*.**", SearchOption.AllDirectories); //Getting Text files
-					// http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+																			 // http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
 
 					//d.EnumerateFiles()
 				}
@@ -1223,7 +1223,7 @@ namespace ProntoFlexicapture
 					//esto es durisimo
 
 					files = d.GetFiles("*.*", SearchOption.AllDirectories); //Getting Text files
-					// http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
+																			// http://stackoverflow.com/questions/12332451/list-all-files-and-directories-in-a-directory-subdirectories
 
 					//d.EnumerateFiles()
 				}
@@ -3046,7 +3046,7 @@ Additionally you can manage the priority of work processes and control whether t
 							IEngine engine = null;
 							hresult = InitializeEngine(serial, out engine);
 							Marshal.ThrowExceptionForHR(hresult); // por qué está esto? antes tambien pasaba y no me daba cuenta porque la capturaba? -no, lo que pasa es que ahora hresult está viniendo con algo.
-							//assert(engine != null);
+																  //assert(engine != null);
 							return engine;
 
 
@@ -6134,7 +6134,7 @@ Formato localidad-provincia	destination	x
 
 		public virtual string ReclamosComentarios_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters,
 														string FechaInicial, string FechaFinal, int puntovent, int idcarta,
-														string SC, string usuario, string SCbdlmaster,string usuariodestino)
+														string SC, string usuario, string SCbdlmaster, string usuariodestino)
 		{
 
 			// An ASHX is a generic HttpHandler. An ASMX file is a web service. ASHX is a good lean way to provide a response to AJAX calls, but if you want to provide a response which changes based on conditions (such as variable inputs) it can become a bit of a handful - lots of if else etc. ASMX can house mulitple methods which can take parameters.
@@ -6359,7 +6359,7 @@ Formato localidad-provincia	destination	x
 			DemoProntoEntities db = new DemoProntoEntities(scEF);
 			var carta = db.CartasDePortes.Find(idcarta);
 
-			
+
 			List<string> queusuarioshayEnestacarta = new List<string>();
 
 			if (carta == null) return null;
@@ -6925,9 +6925,9 @@ Formato localidad-provincia	destination	x
 				CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
 
-				
 
-				if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1) 
+
+				if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1)
 				{
 					rec = new Reclamo();
 					rec.Estado = 1;
@@ -6972,7 +6972,7 @@ Formato localidad-provincia	destination	x
 				db.ReclamoComentarios.Add(com);
 
 
-		   
+
 
 
 
@@ -7008,7 +7008,7 @@ Formato localidad-provincia	destination	x
 				Reclamo rec;
 				CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
-				rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC)) ;
+				rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC));
 
 				rec.Estado = 2;
 
@@ -7105,9 +7105,9 @@ Formato localidad-provincia	destination	x
 
 
 
-			
 
-		public virtual void AsociarUsuarioConTokenFirebase(string sTicketDeGoogle,string nombreusuario, string SC)
+
+		public virtual void AsociarUsuarioConTokenFirebase(string sTicketDeGoogle, string nombreusuario, string SC)
 		{
 
 			/*
@@ -8007,7 +8007,7 @@ Formato localidad-provincia	destination	x
 
 
 
-		public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless = true)
+		public void UrenportSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless = true, string dirBinary = "")
 		{
 
 
@@ -8023,6 +8023,7 @@ Formato localidad-provincia	destination	x
 
 			ChromeOptions chromeOptions = new ChromeOptions();
 			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
+			if (dirBinary != "") chromeOptions.BinaryLocation = dirBinary;
 			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
 			if (bHeadless) chromeOptions.AddArguments("--headless");
 			chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
@@ -8232,7 +8233,7 @@ __________________________
 
 
 
-		public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless=true)
+		public void CerealnetSelenium_ConChromeHeadless(string directorioDescarga, string dirDriver, bool bHeadless = true, string dirBinary = "")
 		{
 
 
@@ -8314,6 +8315,7 @@ __________________________
 			ChromeOptions chromeOptions = new ChromeOptions();
 			//chromeOptions.BinaryLocation   .setBinary("/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary");
 			//chromeOptions.BinaryLocation(@"C:\Program Files (x86)\Google\Chrome\Application");
+			if (dirBinary != "") chromeOptions.BinaryLocation = dirBinary;
 			if (bHeadless) chromeOptions.AddArguments("--headless");
 			chromeOptions.AddArguments("--disable-gpu", "--no-sandbox", "--disable-extensions");
 			//chromeOptions.AddArguments(@"--enable-logging --log-level=0 --user-data-dir=c:\");
