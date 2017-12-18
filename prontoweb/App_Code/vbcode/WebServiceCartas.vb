@@ -334,7 +334,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function CerrarReclamo(idCartaPorte As Integer) As String
+    Public Function CerrarReclamo(idCartaPorte As Integer, usuarioDestino As String) As String
 
 
         Try
@@ -360,7 +360,7 @@ Public Class WebServiceCartas
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
             Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.CerrarReclamo_DLL(idCartaPorte, usuario, Encriptar(scs))
+            Dim usuarios = s.CerrarReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
 
 
 
@@ -386,7 +386,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function AbrirReclamo(idCartaPorte As Integer) As String
+    Public Function AbrirReclamo(idCartaPorte As Integer, usuarioDestino As String) As String
 
 
         Try
@@ -412,7 +412,7 @@ Public Class WebServiceCartas
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
             Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.AbrirReclamo_DLL(idCartaPorte, usuario, Encriptar(scs))
+            Dim usuarios = s.AbrirReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
 
 
 
@@ -435,6 +435,68 @@ Public Class WebServiceCartas
 
 
     End Function
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function EstadoReclamo(idCartaPorte As Integer, usuarioDestino As String) As Integer
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+            Dim usuario = Membership.GetUser.UserName
+            Dim s = New ServicioCartaPorte.servi()
+            Dim ret = s.EstadoReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Return ret
+
+
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+
+
+
+
 
 
     <WebMethod(Description:="", EnableSession:=False)>

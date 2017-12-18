@@ -665,15 +665,15 @@
 
 
 
-                                        //                                        $("#optDivisionSyngenta").change(function () {
+                                                        //                                        $("#optDivisionSyngenta").change(function () {
 
-                                        //                                            $("#HiddenCasosEspeciales").val($("#optDivisionSyngenta").val());
+                                                        //                                            $("#HiddenCasosEspeciales").val($("#optDivisionSyngenta").val());
 
-                                        //                                        });
+                                                        //                                        });
 
-                                        function addslashes(str) {
-                                            return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-                                        }
+                                                        function addslashes(str) {
+                                                            return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                                                        }
 
 
 
@@ -683,16 +683,16 @@
 
 
 
-                                        String.prototype.escapeSpecialChars = function () {
-                                            return this.replace(/\\n/g, "\\n")
-                                                .replace(/\\'/g, "\\'")
-                                                .replace(/\\"/g, '\\"')
-                                                .replace(/\\&/g, "\\&")
-                                                .replace(/\\r/g, "\\r")
-                                                .replace(/\\t/g, "\\t")
-                                                .replace(/\\b/g, "\\b")
-                                                .replace(/\\f/g, "\\f");
-                                        };
+                                                        String.prototype.escapeSpecialChars = function () {
+                                                            return this.replace(/\\n/g, "\\n")
+                                                                .replace(/\\'/g, "\\'")
+                                                                .replace(/\\"/g, '\\"')
+                                                                .replace(/\\&/g, "\\&")
+                                                                .replace(/\\r/g, "\\r")
+                                                                .replace(/\\t/g, "\\t")
+                                                                .replace(/\\b/g, "\\b")
+                                                                .replace(/\\f/g, "\\f");
+                                                        };
 
 
 
@@ -701,191 +701,191 @@
 
 
 
-                                        function jsAcopiosPorCliente(textbox, combo) {
-                                            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+                                                        function jsAcopiosPorCliente(textbox, combo) {
+                                                            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
 
-                                            var $txttitular = $("#" + textbox.id + "")
-                                            var $select = $("#" + combo.id + "")
+                                                            var $txttitular = $("#" + textbox.id + "")
+                                                            var $select = $("#" + combo.id + "")
 
 
 
-                                            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
-                                            var myEscapedJSONString = myJSONString.escapeSpecialChars();
+                                                            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+                                                            var myEscapedJSONString = myJSONString.escapeSpecialChars();
 
-                                            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+                                                            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
 
 
-                                            $.ajax({
-                                                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
-                                                url: "WebServiceClientes.asmx/AcopiosPorCliente",
-                                                type: 'POST',
-                                                contentType: "application/json; charset=utf-8",
-                                                dataType: "json",
-                                                //dataType: "xml",
-                                                data: "{'NombreCliente':'" +
-                                                addslashes($txttitular.val()) +
-                                                "', 'SC':'" + aaa + "' }",
+                                                            $.ajax({
+                                                                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
+                                                                url: "WebServiceClientes.asmx/AcopiosPorCliente",
+                                                                type: 'POST',
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                //dataType: "xml",
+                                                                data: "{'NombreCliente':'" +
+                                                                addslashes($txttitular.val()) +
+                                                                "', 'SC':'" + aaa + "' }",
 
 
-                                                //data: {
-                                                //    NombreCliente: 'asdfasdf',
-                                                //    SC:  'asdfsadfsa' // $("#HFSC").val()
-                                                //},
-                                                success: function (data) {
+                                                                //data: {
+                                                                //    NombreCliente: 'asdfasdf',
+                                                                //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                                                                //},
+                                                                success: function (data) {
 
-                                                    var x = data.d;
+                                                                    var x = data.d;
 
-                                                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+                                                                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
 
-                                                    var guardoelactualId = $select.val()
-                                                    $select.find('option').remove();
+                                                                    var guardoelactualId = $select.val()
+                                                                    $select.find('option').remove();
 
 
 
-                                                    $.each(x, function (i, val) {
+                                                                    $.each(x, function (i, val) {
 
 
-                                                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+                                                                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
 
-                                                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
-                                                        //$("<option></option>")
-                                                        //    .val(val.idacopio).text(val.desc));
+                                                                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                                                                        //$("<option></option>")
+                                                                        //    .val(val.idacopio).text(val.desc));
 
-                                                    });
+                                                                    });
 
-                                                    $select.val(guardoelactualId)
+                                                                    $select.val(guardoelactualId)
 
-                                                    if (x.length > 1) combo.style.visibility = "visible";
-                                                    else combo.style.visibility = "hidden";
+                                                                    if (x.length > 1) combo.style.visibility = "visible";
+                                                                    else combo.style.visibility = "hidden";
 
-                                                },
-                                                error: function (xhr) {
-                                                    // alert("Something seems Wrong");
-                                                }
-                                            });
+                                                                },
+                                                                error: function (xhr) {
+                                                                    // alert("Something seems Wrong");
+                                                                }
+                                                            });
 
-                                        }
+                                                        }
 
 
-                                        function comboCasosEspeciales(textbox, combo) {
+                                                        function comboCasosEspeciales(textbox, combo) {
 
-                                            return
+                                                            return
 
-                                            if (textbox.value.indexOf("SYNGENTA") != -1) {
-                                                combo.style.visibility = "visible";
-                                                //                                                var temp = $(combo).val();
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
-                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
-                                                //                                                $(combo).val(temp);
+                                                            if (textbox.value.indexOf("SYNGENTA") != -1) {
+                                                                combo.style.visibility = "visible";
+                                                                //                                                var temp = $(combo).val();
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
+                                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
+                                                                //                                                $(combo).val(temp);
 
-                                                //                                                $("#theSelect option[value='Seeds']").attr('disabled', 'disabled')
-                                                //                                                $("#theSelect option[value='Agro']").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value='Seeds']").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value='Agro']").attr('disabled', 'disabled')
 
-                                                // $("#theSelect option[value='Agro']").removeAttr('disabled');
-                                                // $("#theSelect option:selected").attr('disabled', 'disabled')
+                                                                // $("#theSelect option[value='Agro']").removeAttr('disabled');
+                                                                // $("#theSelect option:selected").attr('disabled', 'disabled')
 
-                                                // $(combo).("option[value='401']").remove();
-                                                // document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
-                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
+                                                                // $(combo).("option[value='401']").remove();
+                                                                // document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
+                                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
 
 
-                                                //                                                combo.options[2].remove()
-                                                //                                                combo.options[3].remove()
-                                                //                                                combo.options[4].remove()
-                                                //combo.options[0].attr('disabled', 'disabled')
-                                                //$("#" + combo.id + " option[value='401']").remove();
-                                                $("#" + combo.id + " option").removeAttr('disabled');
-                                                $("#" + combo.id + " option").not("[value='Agro']").not("[value='Seeds']").attr('disabled', 'disabled')
+                                                                //                                                combo.options[2].remove()
+                                                                //                                                combo.options[3].remove()
+                                                                //                                                combo.options[4].remove()
+                                                                //combo.options[0].attr('disabled', 'disabled')
+                                                                //$("#" + combo.id + " option[value='401']").remove();
+                                                                $("#" + combo.id + " option").removeAttr('disabled');
+                                                                $("#" + combo.id + " option").not("[value='Agro']").not("[value='Seeds']").attr('disabled', 'disabled')
 
 
-                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
-                                                {
-                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
-                                                }
+                                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
+                                                                {
+                                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
+                                                                }
 
-                                            }
-                                            else if ((textbox.value.indexOf("A.C.A") != -1 || textbox.value.indexOf("LDC ARGENTINA S.A.") != -1) &&
-                                                // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11341
-                                                (textbox.id != "ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestinatario")) {
+                                                            }
+                                                            else if ((textbox.value.indexOf("A.C.A") != -1 || textbox.value.indexOf("LDC ARGENTINA S.A.") != -1) &&
+                                                                // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11341
+                                                                (textbox.id != "ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestinatario")) {
 
 
 
 
 
-                                                combo.style.visibility = "visible";
+                                                                combo.style.visibility = "visible";
 
-                                                // http://stackoverflow.com/questions/740195/adding-options-to-a-select-using-jquery-javascript
-                                                //                                                var o = new Option("option text", "value");
-                                                //                                                /// jquerify the DOM object 'o' so we can use the html method
-                                                //                                                $(o).html("option text");
-                                                //                                                $("#selectList").append(o);
+                                                                // http://stackoverflow.com/questions/740195/adding-options-to-a-select-using-jquery-javascript
+                                                                //                                                var o = new Option("option text", "value");
+                                                                //                                                /// jquerify the DOM object 'o' so we can use the html method
+                                                                //                                                $(o).html("option text");
+                                                                //                                                $("#selectList").append(o);
 
-                                                //document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
+                                                                //document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
 
-                                                //$("#" + combo.id + " option[value='401']").remove();
-                                                $("#" + combo.id + " option").removeAttr('disabled');
-                                                $("#" + combo.id + " option[value='Agro']").attr('disabled', 'disabled')
-                                                $("#" + combo.id + " option[value='Seeds']").attr('disabled', 'disabled')
+                                                                //$("#" + combo.id + " option[value='401']").remove();
+                                                                $("#" + combo.id + " option").removeAttr('disabled');
+                                                                $("#" + combo.id + " option[value='Agro']").attr('disabled', 'disabled')
+                                                                $("#" + combo.id + " option[value='Seeds']").attr('disabled', 'disabled')
 
 
-                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
-                                                {
-                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
-                                                }
+                                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
+                                                                {
+                                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
+                                                                }
 
-                                                //                                                $("#theSelect option[value=401]").attr('disabled', 'disabled')
-                                                //                                                $("#theSelect option[value=402]").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value=401]").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value=402]").attr('disabled', 'disabled')
 
 
-                                                //                                                var temp=$(combo).val();
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value=401>1Acopio  A.C.A.</option>');
-                                                //                                                $(combo).append('<option value=402>2Acopio  A.C.A.</option>');
-                                                //                                                $(combo).append('<option value=403>3Acopio  A.C.A.</option>');
-                                                //                                                $(combo).val(temp);
-                                            }
-                                            else {
-                                                //alert("a");
-                                                combo.style.visibility = "hidden";
-                                            }
-                                        }
+                                                                //                                                var temp=$(combo).val();
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value=401>1Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).append('<option value=402>2Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).append('<option value=403>3Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).val(temp);
+                                                            }
+                                                            else {
+                                                                //alert("a");
+                                                                combo.style.visibility = "hidden";
+                                                            }
+                                                        }
 
 
 
-                                        function jsVerificarSyngenta() {
+                                                        function jsVerificarSyngenta() {
 
-                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-                                            //a=document.getElementById(objID)
-                                            //alert(a.value);
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                                            //a=document.getElementById(objID)
+                                                            //alert(a.value);
 
-                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
-                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta");
+                                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+                                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta");
 
 
-                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
+                                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
 
-                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
+                                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
 
 
 
-                                            //alert(txttitular);
-                                            //                                            if (txttitular.indexOf("SYNGENTA") != -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
-                                            //                                            else if (txttitular.indexOf("A.C.A") != -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
-                                            //                                            else {
-                                            //                                                //alert("a");
-                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
-                                            //                                            }
+                                                            //alert(txttitular);
+                                                            //                                            if (txttitular.indexOf("SYNGENTA") != -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
+                                                            //                                            else if (txttitular.indexOf("A.C.A") != -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
+                                                            //                                            else {
+                                                            //                                                //alert("a");
+                                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
+                                                            //                                            }
 
-                                            //return false;
-                                        }
+                                                            //return false;
+                                                        }
 
 
 
@@ -921,31 +921,31 @@
                                     <script type="text/javascript">
 
 
-                                        function jsVerificarSyngentaIntermediario() {
+                                                        function jsVerificarSyngentaIntermediario() {
 
-                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-                                            //a=document.getElementById(objID)
-                                            //alert(a.value);
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                                            //a=document.getElementById(objID)
+                                                            //alert(a.value);
 
-                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtIntermediario");
-                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngentaIntermediario");
+                                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtIntermediario");
+                                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngentaIntermediario");
 
 
-                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
-                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
+                                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
+                                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
 
-                                            //alert(txttitular);
-                                            //                                            if (txttitular.indexOf("SYNGENTA") == -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
-                                            //                                            }
-                                            //                                            else {
-                                            //                                                //alert("a");
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
+                                                            //alert(txttitular);
+                                                            //                                            if (txttitular.indexOf("SYNGENTA") == -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
+                                                            //                                            }
+                                                            //                                            else {
+                                                            //                                                //alert("a");
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
 
-                                            //return false;
-                                        }
+                                                            //return false;
+                                                        }
 
 
                                     </script>
@@ -2828,10 +2828,10 @@
 
 .ui-jqgrid {font-size:0.4em}*/
                     </style>
-                    <span style="vertical-align:top">                    Chatear con</span>
+                    <span style="vertical-align: top">Chatear con</span>
                     <asp:ListBox ID="usuarioschat" runat="server"
                         DataTextField="Descripcion" DataValueField="Id">
-<%--                        <asp:ListItem Value="1" Text="nano"></asp:ListItem>
+                        <%--                        <asp:ListItem Value="1" Text="nano"></asp:ListItem>
                         <asp:ListItem Value="2" Text="luis titular"></asp:ListItem>
                         <asp:ListItem Value="3" Text="GROBO intermediario"></asp:ListItem>
                         <asp:ListItem Value="4" Text="asdasdnano"></asp:ListItem>--%>
@@ -2850,6 +2850,9 @@
 
                         <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar" type="button" value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
+                      
+                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo" type="button" value="cerrar" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
+                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo" type="button" value="abrir" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
 
 
                         <span>
@@ -2857,9 +2860,6 @@
                                 UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
 
-
-                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo" type="button" value="cerrar" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
-                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo" type="button" value="abrir" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
 
 
 
@@ -2884,16 +2884,46 @@
 
 
 
-                                                
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").attr("disabled", true);
                                                 $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", true); //que no se pueda enviar si no se eligió un usuario
-                            
+
                                                 $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").change(function () {
                                                     $("#Lista").trigger("reloadGrid");
                                                     $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", false);
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").attr("disabled", false);
+
+
+
+
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "WebServiceCartas.asmx/EstadoReclamo",
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
+                                                        data: JSON.stringify({
+                                                            idCartaPorte: qs["Id"],
+                                                            usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
+                                                        }),
+
+                                                        success: function (data) {
+                                                            if (data.d == 1) {
+                                                                desactivarChat();
+                                                            }
+                                                            else {
+                                                                activarChat();
+                                                            }
+                                                        }
+
+
+                                                    })
+
+
+
+
                                                 });
 
 
-                            
+
 
                                                 $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").click(function () {
                                                     //alert("hola")
@@ -2904,6 +2934,12 @@
                                                         idCartaPorte: qs["Id"],
                                                         sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
                                                         usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
+                                                    }
+
+
+
+                                                    var d = {
+                                                        idCartaPorte: qs["Id"]
                                                     }
 
 
@@ -2951,7 +2987,8 @@
                                                     //alert("hola")
 
                                                     var d = {
-                                                        idCartaPorte: qs["Id"]
+                                                        idCartaPorte: qs["Id"],
+                                                        usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
                                                     }
 
 
@@ -3013,7 +3050,8 @@
                                                     //alert("hola")
 
                                                     var d = {
-                                                        idCartaPorte: qs["Id"]
+                                                        idCartaPorte: qs["Id"],
+                                                        usuarioDestino: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val()
                                                     }
 
 
@@ -3128,30 +3166,30 @@
                 <asp:Panel ID="panelAdjunto" runat="server" Style="display: none">
                     <script type="text/javascript">
 
-                            //    http: //forums.asp.net/t/1048832.aspx
+                                                //    http: //forums.asp.net/t/1048832.aspx
 
-                            function BrowseFile() {
-                                var fileUpload = document.getElementById("<%=FileUpLoad2.ClientID %>");
+                                                function BrowseFile() {
+                                                    var fileUpload = document.getElementById("<%=FileUpLoad2.ClientID %>");
 
-                            var btnUpload = document.getElementById("<%=btnAdjuntoSubir.ClientID %>"); //linea mia
+                                                    var btnUpload = document.getElementById("<%=btnAdjuntoSubir.ClientID %>"); //linea mia
 
-                            fileUpload.click();
+                                                    fileUpload.click();
 
-                            var filePath = fileUpload.value;
+                                                    var filePath = fileUpload.value;
 
-                            btnUpload.click();  //linea mia
+                                                    btnUpload.click();  //linea mia
 
-                                /*
-                                // esto lo usa para grabar una lista de archivos
-            
-                                var filePath = fileUpload.value;
-    
-                                var j = listBox.options.length;
-                                listBox.options[j] = new Option();
-                                listBox.options[j].text = filePath.substr(filePath.lastIndexOf("\\") + 1);
-                                listBox.options[j].value = filePath;
-                                */
-                            }
+                                                    /*
+                                                    // esto lo usa para grabar una lista de archivos
+                                
+                                                    var filePath = fileUpload.value;
+                        
+                                                    var j = listBox.options.length;
+                                                    listBox.options[j] = new Option();
+                                                    listBox.options[j].text = filePath.substr(filePath.lastIndexOf("\\") + 1);
+                                                    listBox.options[j].value = filePath;
+                                                    */
+                                                }
                     </script>
                     <img src="../Imagenes/GmailAdjunto2.png" alt="" style="border-style: none; border-color: inherit; border-width: medium; vertical-align: middle; text-decoration: none; margin-left: 5px;" />
                     <asp:LinkButton ID="lnkAdjuntar" runat="server" Font-Bold="False" Font-Size="Small"
@@ -3207,25 +3245,25 @@
                                 Text='Duplicar' Font-Underline="false"> </asp:HyperLink>
                             <br />
                             <script type="text/javascript">
-                                function HandleIT() {
+                                                function HandleIT() {
 
-                                    PageMethods.btnDuplicar_Click();
-                                    function onSucess(result) {
-                                        alert(result);
-                                    }
-                                    function onError(result) {
-                                        alert('Something wrong.');
-                                    }
-                                }
+                                                    PageMethods.btnDuplicar_Click();
+                                                    function onSucess(result) {
+                                                        alert(result);
+                                                    }
+                                                    function onError(result) {
+                                                        alert('Something wrong.');
+                                                    }
+                                                }
 
-                                function aaa() {
-                                    alert('ssss');
-                                    $('HyperLink1').click();
-                                }
+                                                function aaa() {
+                                                    alert('ssss');
+                                                    $('HyperLink1').click();
+                                                }
 
-                                // http://stackoverflow.com/questions/1305954/asp-net-postback-with-javascript
-                                function jj() {
-                                    __doPostBack('<%= btnDuplicarEscondido.UniqueID %>', '')
+                                                // http://stackoverflow.com/questions/1305954/asp-net-postback-with-javascript
+                                                function jj() {
+                                                    __doPostBack('<%= btnDuplicarEscondido.UniqueID %>', '')
 
                                     //                                    $.ajax({
                                     //                                        type: "POST",
@@ -3300,94 +3338,94 @@
     <script type="text/javascript">
 
 
-        function getObj(objID) {
-            return document.getElementById(objID);
-        }
+                                function getObj(objID) {
+                                    return document.getElementById(objID);
+                                }
 
     </script>
     <script type="text/javascript">
-        function isNumber(n) {
-            return !isNaN(parseFloat(n)) && isFinite(n);
-        }
+                                function isNumber(n) {
+                                    return !isNaN(parseFloat(n)) && isFinite(n);
+                                }
 
-        function toNumber(n) {
-            if (isNumber(n)) return n;
+                                function toNumber(n) {
+                                    if (isNumber(n)) return n;
 
-            return 0;
-        }
+                                    return 0;
+                                }
 
-        function jsRecalcular() {
+                                function jsRecalcular() {
 
-            //alert("a");
-            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-            //a=document.getElementById(objID)
-            //alert(a.value);
-
-
-            //if (getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value > 0 && getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value > 0) {
-
-            brutoposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value
-            taraposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value;
-
-            brutodescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtBrutoDescarga").value;
-            taradescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtTaraDescarga").value;
+                                    //alert("a");
+                                    //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                    //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                    //a=document.getElementById(objID)
+                                    //alert(a.value);
 
 
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            //PESTAÑA POSICION
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
+                                    //if (getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value > 0 && getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value > 0) {
 
-            brutoposicion = +parseFloat(brutoposicion);
-            if (!isNumber(brutoposicion)) brutoposicion = 0;
+                                    brutoposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value
+                                    taraposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value;
 
-            taraposicion = +parseFloat(taraposicion);
-            if (!isNumber(taraposicion)) taraposicion = 0;
-
-            if (!(brutoposicion == 0 && taraposicion == 0)) // para que no me modifique el neto si no hay datos en el bruto NI en la tara
-            {
-                getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = brutoposicion - taraposicion;
-                if (taraposicion > brutoposicion) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = 0;
-            }
-
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            //PESTAÑA DESCARGA
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-
-            brutodescarga = +parseFloat(brutodescarga);
-            if (!isNumber(brutodescarga)) brutodescarga = 0;
-
-            taradescarga = +parseFloat(taradescarga);
-            if (!isNumber(taradescarga)) taradescarga = 0;
-
-            getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = brutodescarga - taradescarga;
-            if (taradescarga > brutodescarga) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = 0;
+                                    brutodescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtBrutoDescarga").value;
+                                    taradescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtTaraDescarga").value;
 
 
-            ///////////////////////////////////////////////////////////////////////////////
-            //neto final con mermas y sarasas
-            ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //PESTAÑA POSICION
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
 
-            netodescarga = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value);
-            humedad = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal").value);
-            fumigada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtFumigada").value);
-            secada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtSecada").value);
-            otrasmermas = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma").value);
+                                    brutoposicion = +parseFloat(brutoposicion);
+                                    if (!isNumber(brutoposicion)) brutoposicion = 0;
 
-            txtnetototal = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas");
+                                    taraposicion = +parseFloat(taraposicion);
+                                    if (!isNumber(taraposicion)) taraposicion = 0;
 
-            if (netodescarga > 0) {
-                txtnetototal.value = Math.round(netodescarga - humedad - fumigada - secada - otrasmermas);
-            }
+                                    if (!(brutoposicion == 0 && taraposicion == 0)) // para que no me modifique el neto si no hay datos en el bruto NI en la tara
+                                    {
+                                        getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = brutoposicion - taraposicion;
+                                        if (taraposicion > brutoposicion) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = 0;
+                                    }
 
-            ActualizarDiferencia();
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //PESTAÑA DESCARGA
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
 
-            return false;
-        }
+                                    brutodescarga = +parseFloat(brutodescarga);
+                                    if (!isNumber(brutodescarga)) brutodescarga = 0;
+
+                                    taradescarga = +parseFloat(taradescarga);
+                                    if (!isNumber(taradescarga)) taradescarga = 0;
+
+                                    getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = brutodescarga - taradescarga;
+                                    if (taradescarga > brutodescarga) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = 0;
+
+
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //neto final con mermas y sarasas
+                                    ///////////////////////////////////////////////////////////////////////////////
+
+                                    netodescarga = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value);
+                                    humedad = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal").value);
+                                    fumigada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtFumigada").value);
+                                    secada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtSecada").value);
+                                    otrasmermas = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma").value);
+
+                                    txtnetototal = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas");
+
+                                    if (netodescarga > 0) {
+                                        txtnetototal.value = Math.round(netodescarga - humedad - fumigada - secada - otrasmermas);
+                                    }
+
+                                    ActualizarDiferencia();
+
+                                    return false;
+                                }
 
     </script>
     <asp:UpdatePanel ID="UpdatePanelPreRedirectMsgbox" runat="server">

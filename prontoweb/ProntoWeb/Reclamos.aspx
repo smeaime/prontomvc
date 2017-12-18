@@ -1452,7 +1452,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte'
+                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte','estado'
 
 
 
@@ -1478,10 +1478,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-                        { name: 'cp', index: 'cp', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                        { name: 'cp', index: 'cp', align: 'left', width: 100, editable: false, hidden: false, sortable: false },
 
 
-                        { name: 'Titulo', index: 'Titulo', align: 'left', width: 100, editable: true, hidden: false, sortable: false },
+                        { name: 'Titulo', index: 'Titulo', align: 'left', width: 100, editable: false, hidden: false, sortable: false },
 
 
 
@@ -1489,6 +1489,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         { name: 'comentarios', index: 'comentarios', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
                         { name: 'usuarios', index: 'usuarios', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
                         { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+                        { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
 
 
                     ],

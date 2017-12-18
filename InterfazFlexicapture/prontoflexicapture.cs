@@ -6113,7 +6113,7 @@ Formato localidad-provincia	destination	x
 
                                 string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.NombreUsuario).Distinct()),
                                  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() , // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
-								"", // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
+								a.Estado.NullSafeToString() , // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),
 
@@ -6997,7 +6997,7 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual string[] CerrarReclamo_DLL(int idcarta, string nombreusuario, string SC)
+        public virtual int EstadoReclamo_DLL(int idcarta, string nombreusuario, string SC,string usuarioDestino)
         {
 
 
@@ -7013,7 +7013,35 @@ Formato localidad-provincia	destination	x
                 Reclamo rec;
                 CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
-                rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC));
+                rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC));
+
+                if (rec == null) return 0;
+                return rec.Estado ?? 0;
+                
+            }
+
+
+
+        }
+
+
+        public virtual string[] CerrarReclamo_DLL(int idcarta, string nombreusuario, string SC, string usuarioDestino)
+        {
+
+
+            //estan como empleados los usuarios externos de williams?
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+
+            using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+            {
+
+                db.Database.CommandTimeout = 200;
+
+                Reclamo rec;
+                CartasDePorte carta = db.CartasDePortes.Find(idcarta);
+
+                rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC));
 
                 rec.Estado = 2;
 
@@ -7031,7 +7059,7 @@ Formato localidad-provincia	destination	x
         }
 
 
-        public virtual string[] AbrirReclamo_DLL(int idcarta, string nombreusuario, string SC)
+        public virtual string[] AbrirReclamo_DLL(int idcarta, string nombreusuario, string SC, string usuarioDestino)
         {
 
 
@@ -7049,17 +7077,20 @@ Formato localidad-provincia	destination	x
                 Reclamo rec;
                 CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
-                if (carta.IdReclamo == null)
+                rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC));
+
+
+                if (rec == null)
                 {
                     rec = new Reclamo();
                     rec.Estado = 1;
-                    rec.Descripcion = DescripcionReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC);
+                    rec.Descripcion = DescripcionReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC);
                     db.Reclamos.Add(rec);
-                    carta.IdReclamo = rec.IdReclamo;
+                    //carta.IdReclamo = rec.IdReclamo;
                 }
                 else
                 {
-                    rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, nombreusuario, SC));
+
                 }
 
 
