@@ -92,3 +92,1419 @@ Log Entry :
 12/18/2017 10:02:44
 Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
 __________________________
+
+Log Entry : 
+12/18/2017 11:30:12
+Error in: . Error Message:System.Net.WebException: No es posible conectar con el servidor remoto ---> System.Net.Sockets.SocketException: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.66.3:80
+   en System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   en System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+12/18/2017 11:32:10
+Error in: . Error Message:System.Net.WebException: No es posible conectar con el servidor remoto ---> System.Net.Sockets.SocketException: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.66.3:80
+   en System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   en System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+12/18/2017 11:35:51
+Error in: . Error Message:System.Net.WebException: No es posible conectar con el servidor remoto ---> System.Net.Sockets.SocketException: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.66.3:80
+   en System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   en System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+12/18/2017 11:35:51
+Error in: . Error Message:Error al buscar los parametros.  Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.66.3:80
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:33
+Error in: . Error Message:Error al hacer el LocalReport.Render()  Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.66.3:80
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:33
+Error in: . Error Message:System.Net.WebException
+No es posible conectar con el servidor remoto
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5414
+   en CartaDePorteManager.generarNotasDeEntregaConReportViewer_ConServidorDeInformes(String SC, DateTime fechadesde, DateTime fechahasta, DataRow dr, enumCDPestado estado, Int64& lineasGeneradas, String& titulo, String logo, Int32 puntoventa, Int32& tiemposql, Int32& tiempoinforme, Boolean bDescargaHtml, GridView grid, Int64 maximumRows) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4684
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:34
+Error in: . Error Message:System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4066
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:34
+Error in: . Error Message:excel: C:\Users\Mariano\AppData\Local\Temp\Listado general 18dic.2017_113509_TLS.xls
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:34
+Error in: . Error Message:Error en EnviarMailFiltroPorId() System.Data.OleDb.OleDbException (0x80004005): Error de IErrorInfo.GetDescription con E_FAIL(0x80004005).
+   en System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
+   en System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   en System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   en System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   en System.Data.OleDb.OleDbConnection.Open()
+   en CartaDePorteManager.ExcelToHtml(String ArchivoExcelDestino, GridView grid, Int64 constwidth) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 4113
+   en CDPMailFiltrosManager2.EnviarMailFiltroPorRegistro_DLL(String SC, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String titulo, enumCDPestado estado, DataRow& dr, String& sError, Boolean bVistaPrevia, String SmtpServer, String SmtpUser, String SmtpPass, Int32 SmtpPort, String CCOaddress, String& sError2, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 21688
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:35
+Error in: . Error Message:Generando sincro para Rivara
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CHICLANA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALIBA S.A no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad WHEELWRIGHT no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HUGHES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HUMBOLDT no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LOS CARDOS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LOS CARDOS - STA FE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MARCOS JUAREZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA TRINIDAD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CRUZ ALTA (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CANALS (CDBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA INVENCIBLE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad General Lagos - Universal Grain no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad TOLEDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad RINCON DE NOGOYA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GOBERNADOR MANSILLA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MOLINO ARRECIFES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALEJO LEDESMA (CORDOBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GARIBALDI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GENERAL BALDISSERA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CORZUELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PAMPA LANDRIEL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLONIA VIDELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LAS PETACAS (SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LANDETA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA PUERTA (CBA-DPTO. RIO PRIMERO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLONIA ITALIANA(CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA RAMALLO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CAÑADA SECA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad BELL VILLE (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LOS SURGENTES (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad OLIVA (CBA.) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CAMILO ALDAO - CORDOBA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ROSARIO DEL TALA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GENERAL GALARZA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PASCANAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA PLAYOSA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN NICOLAS ( BS AS ) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HERMOSO CAMPO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PTA SERGRAIN SA - Baradero no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LAS VERTIENTES(CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA MANTERO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALEJANDRO ROCA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CAMPO LARGO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad Reconquista (Pta Buyatti ) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CENTENARIO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ARROYO DULCE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GENERAL D. CERRI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CAFFERATA (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA BRIANZA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA SAN MARCIAL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SALTO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALICIA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ZENON PEREYRA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN FRANCISCO - CBA. no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad FORTIN INCA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad FRANCISCO AYERZA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SEGUNDO POZO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA LIA  no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HERNANDO (CBA.) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad NOETINGER (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PRESIDENCIA ROQUE SAENZ PEÑA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA TIGRA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad P.R.SAENZ PEÑA (CHACO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MATILDE (SF) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad TABOSSI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COMODORO PY - NO USAR!! no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad TANDIL - LAGOMARSINO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad BASAVILBASO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MAGUIRE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN BASILIO (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CORONEL SEGUI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CABILDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA DULCE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad TRES ARROYOS - MONDELEZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PAJONAL(ENTRE.RIOS) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SALTO GRANDE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLONIA CASTELAR (SF) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MOQUEHUE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HIPOLITO BOUCHARD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GUIDE SA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLONIAS UNIDAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GENERAL PINEDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GRAL PINEDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad EL PARAISO (PDO. RAMALLO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LA CARLOTA (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad LOS QUIRQUINCHOS (SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad FIRMAT (SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PUERTO GRANEL SA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PTO SAN MARTIN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLAGUAY ESTE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad GALVEZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN MARCOS SUD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAGUIER no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CLASON (SF) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALIANZA CEREALES SRL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLONIA SAN JOSE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad POZO DEL MOLLE (SALTO-DPTO. SAN JAVIER) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN FRANCISCO (DPTO. SAN JUSTO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad ALTA GRACIA(CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VIAMONTE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CORONEL MARTINEZ DE HOZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PINZON no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad PALAVECINO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad NICOLAS BRUZONE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN MIGUEL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad COLOMBRES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad QUEBRACHO HERRADO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad SAN BERNARDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad VILLA ANGELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad QUIMILI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CASEROS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad Puerto San Martin Cles sa no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad CARRILOBO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad HINOJAL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:38
+Error in: . Error Message:La localidad MARIA TERESA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad QUETREQUEN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN CARLOS SUD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN CARLOS CENTRO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad DIAMANTE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EL FORTIN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BAUER Y SIGEL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RAICES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RELMO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA INVERNADA(CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad PEYRANO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAS PIEDRITAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LORO BLANCO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ISLA VERDE (DPTO. MARCOS JUAREZ) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA ELISA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CONCEPCION DEL BERMEJO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MISION LAISHI (FORMOSA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN FRANCISCO DE LAISHI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CHAZON no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BERNARDO DE IRIGOYEN (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad PORTEÑA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EMPALME VILLA CONSTITUCION no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ORDOÑEZ (CORDOBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad GENERAL ORTIZ DE OCAMPO (APEADERO FCGB) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MANFREDI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CALCHIN (CBA.) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad GODEKEN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BUSTINZA (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CORONEL ARNOLD (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad DOYLE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BALLESTEROS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CALCHIN OESTE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAS VARAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JUSTINIANO POSSE (CORDOBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CORREA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RAFAELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad VILLA DE MARIA DEL RIO SECO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LEONES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SASTRE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA CASTELLANOS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SANTA REGINA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RIVADAVIA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ROSARIO (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CARMEN DEL SAUCE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ALMAFUERTE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN ROMAN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JUNCAL(SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JUNCAL(SALTA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LOS CARDALES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA MANUELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MAIPU no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad DUFAUR no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad VILLA MINETTI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CUATRO BOCAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CUATRO BOCAS (ROSARIO DEL TALA-DPTO. TALA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LOS CONDORES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CULULU no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN CRISTOBAL no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA CELLO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LOMA ALTA(S.FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA SELVA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN JERONIMO SUD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SACANTA (CORDOBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JOAQUIN V. GONZALEZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA POSTA (CHUÑAGUASI-DPTO. SOBREMONTE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EL ALCALDE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad GENERAL SARMIENTO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CASAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ARMSTRONG no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TANCACHA  no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CORONEL RODOLFO S. DOMINGUEZ no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CORONDA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BERABEVU ( STAFE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CASILDA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RAFAEL GARCIA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TOSQUITA (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TINOCO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BOUWER no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN SALVADOR no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAS PAREJAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA JOSEFINA (SFE) SANTA FE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad PUJATO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MONTE MAIZ (CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TRES ISLETAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad DIEGO DE ROJAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad VILLA MUGUETA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ASCENSION no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA ANGELITA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CAÑADA DE GOMEZ (SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad IRENEO PORTELA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN JOSE DE LA ESQUINA ( STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAVALLE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JESUS MARIA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TRES ALGARROBOS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAPRIDA - BS AS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CAVANAGH no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad PIRANE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TRES ESTACAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN VICENTE (VILLA OCAMPO-DPTO. GRAL. OBLIGADO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EL DORADO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EL CRISPIN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LUXARDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAGUNA LARGA(CBA) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CORONEL DU GRATY no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ACOND. CLES. BAHIA SA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad GOYENA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN FRANCISCO DE SANTA FE no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BUCHARDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad HIPOLITO YRIGOYEN no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad POZO DEL MOLLE (CORDOBA - DPTO. RIO SEGUNDO) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CHAPUY no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAS JUNTURAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SAN MARCOS SIERRAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad JUBILEO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TARTAGAL (SF) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SANTA SYLVINA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad PUERTO IGUAZU no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COMECHINGONES (DPTO. RIO 1") no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad CHOROTIS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad O HIGGINS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad Cia. Molinera del Sur no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad BALLESTEROS SUD no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA SAN BARTOLOME no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LIBANO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ZAVALLA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad DIEGO DE ALVEAR (STA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA ANGELONI no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA LAGUNA (DPTO. GRAL. SAN MARTIN) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad RAMAYON no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LOS CISNES no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA SILVIO PELLICO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad HINOJO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SANTA TERESA (AARON CASTELLANOS-DPTO. GRAL. LOPEZ) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SIERRA DE LA VENTANA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad EL ARAZA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LA SARITA (SANTA FE) no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MIGUEL ESCALADA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MARCELINO ESCALADA no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad MIRAMAR no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad ESTACION CLUCELLAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LAS MARIANAS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad SMITH no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad COLONIA BAJO HONDO no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad LOS ALTOS no tiene codigo LosGrobo
+__________________________
+
+Log Entry : 
+12/18/2017 11:36:39
+Error in: . Error Message:La localidad TIMOTE no tiene codigo LosGrobo
+__________________________
