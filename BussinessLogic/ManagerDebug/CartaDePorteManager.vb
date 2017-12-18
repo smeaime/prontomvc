@@ -9945,6 +9945,8 @@ usuario As String, ConexBDLmaster As String,
         Dim myCartaDePorte As CartaDePorte
         myCartaDePorte = CartaDePorteDB.GetItem(SC, id)
 
+        If id = -1 Then Return myCartaDePorte
+
         With myCartaDePorte
             Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
             'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
