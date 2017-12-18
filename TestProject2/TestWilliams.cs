@@ -1120,17 +1120,18 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void AsociarUsuarioConTokenFirebase(string usuario)
+        public void _AsociarUsuarioConTokenFirebase()
         {
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
             //            MandoMensajeAListadoDeSubscripciones(subs);
             var s = new ServicioCartaPorte.servi();
-            s.AsociarUsuarioConTokenFirebase("APA91bEexJWImhHzaiXYLVTGj3T2mxZvQCZhcd_vtRGZutXTPslZ2voCpQomWbHHH2YQ4z8fgSNmF9YGpSK80GteJZiVhpt14sX6653g8AdKRg4SrOiFdzhmYzxkPXfX3DsAhAqS4DwZ"
+            s.AsociarUsuarioConTokenFirebase("eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs"
                                         , "Mariano", SC);
 
 
 
-            s.TraerTokensDelUsuario(usuario, SC);
+            var lista=s.TraerTokensDelUsuario(usuario, SC);
+            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC);
         }
 
 
@@ -2142,8 +2143,8 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void envioNotificacionesconMail_42871_2()
+        //[TestMethod]
+        public void _LENTO_envioNotificacionesconMail_42871_2()
         {
             ProntoWindowsService.Service1.Initialize();
             ProntoWindowsService.Service1.DoWorkCartasPorteNuevasParaElCliente();
@@ -5801,8 +5802,8 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void mapa_con_googlemaps_40288()
+        //[TestMethod]
+        public void _LENTO_mapa_con_googlemaps_40288()
         {
             //agregar en la grilla de localidades la edicion de lat y lng
 
@@ -10028,8 +10029,8 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void SincroTomasHnos_27154()
+        //[TestMethod]
+        public void _LENTO_SincroTomasHnos_27154()
         {
 
             string sErrores = "", sTitulo = "";
