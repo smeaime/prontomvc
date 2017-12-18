@@ -1,6 +1,7 @@
 
 
 
+
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
