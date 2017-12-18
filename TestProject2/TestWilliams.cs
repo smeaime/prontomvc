@@ -876,6 +876,95 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_46735_2()
+        {
+
+            /*
+
+            Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
+
+            Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
+
+            En titular / intermediario / remitnte / cliente observ.
+
+            */
+
+            var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
+            cliente = -1;
+
+
+            if (false)
+            {
+
+                var s = new ServicioCartaPorte.servi();
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
+                q1.Subcontratista1 = 10947;
+                q1.Subcontratista2 = 10947;
+
+                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
+                foreach (Data.Models.ListasPreciosDetalle ps in q2)
+                {
+                    ps.PrecioComboCaladaMasBalanza = 55;
+                }
+
+                db.SaveChanges();
+
+            }
+
+
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 5000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 1, 1),
+                        new DateTime(2017, 7, 31),
+                        0, cliente, ref sTitulo);
+
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
         [TestMethod]
         public void loginEnUrenport3_42773_5()
         {
@@ -924,7 +1013,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void should_be_able_to_run_test_with_configuration_from_file()
+        public void Tellerium_should_be_able_to_run_test_with_configuration_from_file()
         {
 
             string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
