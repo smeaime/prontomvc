@@ -835,7 +835,8 @@ Public Class WebServiceClientes
             SC = Encriptar(scWilliamsRelease())
             'dddddd()
         Else
-            SC = Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
+            SC = Encriptar(scLocal())
+            'Encriptar("Data Source=serversql3;Initial catalog=Williams;User ID=sa; Password=.SistemaPronto.;Connect Timeout=200")
         End If
 
         'ErrHandler2.WriteError("AcopiosPorCliente " & NombreCliente & " - " & Encriptar(SC))

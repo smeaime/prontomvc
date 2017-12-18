@@ -50,7 +50,7 @@
 
     <%-- El asuntito de la imagen del background http://www.daniweb.com/forums/thread57245.html# --%>
     <form id="form1" runat="server" defaultfocus="txtSuperbuscador" autocomplete="off"
-        class="bodyMasterPage"   style="height: 100%">
+        class="bodyMasterPage"   style="height: ">
         <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="server" LoadScriptsBeforeUI="False"
             EnablePageMethods="true" AsyncPostBackTimeout="360000" ScriptMode="Release">
             <CompositeScript>

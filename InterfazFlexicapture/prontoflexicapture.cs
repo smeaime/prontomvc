@@ -6345,6 +6345,7 @@ Formato localidad-provincia	destination	x
             var scEF = Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
             DemoProntoEntities db = new DemoProntoEntities(scEF);
             var carta = db.CartasDePortes.Find(idcarta);
+            if (carta == null) return "";
             var titulo = "CP " + carta.NumeroCartaDePorte + " " + usuario;
             return titulo;
         }
