@@ -1452,7 +1452,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte','estado'
+                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte', 'estado'
 
 
 
@@ -1505,7 +1505,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         var a = $("#Lista").jqGrid('getRowData', row_id);
 
 
-                     
+
                         var html = "<span style='font-size: 14px'> " +
                             "<br/><b>Reclamo</b>            " + a.IdReclamo +
                             "<br/><b>Titulo</b>       " + a.Titulo +
@@ -1716,8 +1716,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <%--    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--%>
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
 
@@ -1734,7 +1734,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
       <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
-        <h3>Firebase Cloud Messaging</h3>
+        
       </div>
     </div>
   </header>
@@ -1750,7 +1750,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <h4>Instance ID Token</h4>
             <p id="token" style="word-break: break-all;"></p>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                    onclick="deleteToken()">Delete Token</button>
+                    onclick="deleteToken()">Borrar Ticket</button>
           </div>
           <!-- div to display the UI to allow the request for permission to
                notify the user. This is shown if the app has not yet been
@@ -1759,7 +1759,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             <h4>Needs Permission</h4>
             <p id="token"></p>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-                    onclick="requestPermission()">Request Permission</button>
+                    onclick="requestPermission()">Pedir Permiso</button>
           </div>
           <!-- div to display messages received by this app. -->
           <div id="messages"></div>
