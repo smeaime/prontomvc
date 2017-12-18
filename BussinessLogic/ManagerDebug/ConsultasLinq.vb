@@ -309,6 +309,23 @@ Public Class ConsultasLinq
     End Class
 
 
+    'Dim clienteSyngenta As Integer = CartaDePorteManager.BuscarClientePorCUIT("30-64632845-0", SC, "")
+    'Dim clienteSyngenta As Integer = 4333
+
+
+    Shared Function ExportaEspecial(x As fSQL_GetDataTableFiltradoYPaginado_Result3) As String
+
+        Dim clienteSyngenta As Integer = 4333
+
+        'Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del 
+        'subcomisionista tome esa cp como elevacion.
+
+        Return IIf(((x.Vendedor = clienteSyngenta Or x.CuentaOrden1 = clienteSyngenta Or x.CuentaOrden2 = clienteSyngenta Or x.IdClienteAuxiliar = clienteSyngenta) And x.IdClienteEntregador > 0 And x.IdClienteEntregador <> 12454), "NO", x.Exporta)
+
+    End Function
+
+
+
     Public Shared Function LiquidacionSubcontratistas(ByVal SC As String,
           ByVal ColumnaParaFiltrar As String,
           ByVal TextoParaFiltrar As String,
@@ -335,6 +352,8 @@ Public Class ConsultasLinq
 
 
         'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
+        Dim clienteSyngenta As Integer = CartaDePorteManager.BuscarClientePorCUIT("30-64632845-0", SC, "")
+
 
         Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
@@ -397,8 +416,6 @@ Public Class ConsultasLinq
 
 
 
-        Dim clienteSyngenta As Integer = CartaDePorteManager.BuscarClientePorCUIT("30-64632845-0", SC, "")
-
 
 
 
@@ -406,10 +423,10 @@ Public Class ConsultasLinq
 
 
 
-        aaa = aaa.Where(Function(x) _
-                      (x.Vendedor = clienteSyngenta Or x.CuentaOrden1 = clienteSyngenta Or x.CuentaOrden2 = clienteSyngenta Or x.IdClienteAuxiliar = clienteSyngenta) And
-                        x.IdClienteEntregador > 0 And x.IdClienteEntregador <> 12454
-                      )
+        'aaa = aaa.Where(Function(x) _
+        '              (x.Vendedor = clienteSyngenta Or x.CuentaOrden1 = clienteSyngenta Or x.CuentaOrden2 = clienteSyngenta Or x.IdClienteAuxiliar = clienteSyngenta) And
+        '                x.IdClienteEntregador > 0 And x.IdClienteEntregador <> 12454
+        '              )
 
 
         'Select Case EsExporta() = "SI"
@@ -469,24 +486,24 @@ Public Class ConsultasLinq
 
                             db.Database.ExecuteSqlCommand("EXEC sp_recompile 'dbo.fSQL_GetDataTableFiltradoYPaginado';")
 
-                            Dim qq = (From cdp In aaa
-                                      From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
-                                      From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
-                                      From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
-                                      From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
-                                      From pd1 In db.ListasPreciosDetalles _
+        Dim qq = (From cdp In aaa
+                  From dest In db.WilliamsDestinos.Where(Function(i) i.IdWilliamsDestino = If(cdp.Destino, 0)).DefaultIfEmpty
+                  From clisub1 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr1, dest.Subcontratista1)).DefaultIfEmpty
+                  From clisub2 In db.Clientes.Where(Function(i) i.IdCliente = If(cdp.Subcontr2, dest.Subcontratista2)).DefaultIfEmpty
+                  From l1 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub1.IdListaPrecios).DefaultIfEmpty
+                  From pd1 In db.ListasPreciosDetalles _
                           .Where(Function(i) i.IdListaPrecios = l1.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                               And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                                      From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
-                                      From pd2 In db.ListasPreciosDetalles _
+                  From l2 In db.ListasPrecios.Where(Function(i) i.IdListaPrecios = clisub2.IdListaPrecios).DefaultIfEmpty
+                  From pd2 In db.ListasPreciosDetalles _
                           .Where(Function(i) i.IdListaPrecios = l2.IdListaPrecios And (i.IdArticulo = cdp.IdArticulo) And (i.IdDestinoDeCartaDePorte Is Nothing Or i.IdDestinoDeCartaDePorte = cdp.Destino) _
                                  And (i.IdCliente Is Nothing Or i.IdCliente = cdp.Vendedor Or i.IdCliente = cdp.Entregador Or i.IdCliente = cdp.CuentaOrden1 Or i.IdCliente = cdp.CuentaOrden2)) _
                           .OrderByDescending(Function(i) i.IdCliente).Take(1).DefaultIfEmpty()
-                                      Where 1 = 1 _
+                  Where 1 = 1 _
                         And (idSubcontr = -1 Or If(cdp.Subcontr1, dest.Subcontratista1) = idSubcontr Or If(cdp.Subcontr2, dest.Subcontratista2) = idSubcontr) _
                         And (puntoventa = -1 Or cdp.PuntoVenta = puntoventa)
-                                      Select New asas() With {
+                  Select New asas() With {
                       .NumeroCartaDePorte = cdp.NumeroCartaDePorte,
                       .IdCartaDePorte = cdp.IdCartaDePorte,
                       .FechaDescarga = cdp.FechaDescarga,
@@ -506,14 +523,14 @@ Public Class ConsultasLinq
                       .Subcontr1Desc = clisub1.RazonSocial,
                       .Subcontr2Desc = clisub2.RazonSocial,
                       .tarif1 = CDec(If(If(
-                      (cdp.Exporta = "SI") _
+                      (If(((cdp.Vendedor = clienteSyngenta Or cdp.CuentaOrden1 = clienteSyngenta Or cdp.CuentaOrden2 = clienteSyngenta Or cdp.IdClienteAuxiliar = clienteSyngenta) And cdp.IdClienteEntregador > 0 And cdp.IdClienteEntregador <> 12454), "NO", cdp.Exporta) = "SI") _
                           , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
                                   pd1.PrecioCaladaExportacion, pd1.PrecioVagonesCaladaExportacion) _
                           , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
                                   pd1.PrecioCaladaLocal, pd1.PrecioVagonesCalada)
                           ), 0)),
                       .tarif2 = CDec(If(If(
-                          (cdp.Exporta = "SI") _
+                          (If(((cdp.Vendedor = clienteSyngenta Or cdp.CuentaOrden1 = clienteSyngenta Or cdp.CuentaOrden2 = clienteSyngenta Or cdp.IdClienteAuxiliar = clienteSyngenta) And cdp.IdClienteEntregador > 0 And cdp.IdClienteEntregador <> 12454), "NO", cdp.Exporta) = "SI") _
                           , If(cdp.SubnumeroVagon <= 0 Or Not destinosapartados.Contains(cdp.Destino),
                                   If(pd2.PrecioDescargaExportacion = 0, pd2.PrecioCaladaExportacion, pd2.PrecioDescargaExportacion),
                                   If(pd2.PrecioVagonesBalanzaExportacion = 0, pd2.PrecioVagonesCaladaExportacion, pd2.PrecioVagonesBalanzaExportacion)
@@ -523,38 +540,38 @@ Public Class ConsultasLinq
                                   If(pd2.PrecioVagonesBalanza = 0, pd2.PrecioVagonesCalada, pd2.PrecioVagonesBalanza)
                                   )
                                   ), 0)),
-                      .Exporta = cdp.Exporta,
+                      .Exporta = If(((cdp.Vendedor = clienteSyngenta Or cdp.CuentaOrden1 = clienteSyngenta Or cdp.CuentaOrden2 = clienteSyngenta Or cdp.IdClienteAuxiliar = clienteSyngenta) And cdp.IdClienteEntregador > 0 And cdp.IdClienteEntregador <> 12454), "NO", cdp.Exporta),
                      .Corredor = cdp.Corredor,
                       .IdClienteEntregador = If(cdp.IdClienteEntregador, 0),
                       .tarifcombo = pd1.PrecioComboCaladaMasBalanza
                     }).ToList
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
-                            'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
+        'si te tarda mucho, puede ser por el parameter sniffing!!!!!! (en especial si en la consola de sql ejecuta rapido)
 
 
 
 
 
 
-                            'Dim a = qq.FirstOrDefault
+        'Dim a = qq.FirstOrDefault
 
 
-                            'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
+        'http://stackoverflow.com/questions/5568860/linq-to-sql-join-issues-with-firstordefault
 
 
 
 
-                            'Dim qq2 = qq.ToList
-                            Dim aa = qq
+        'Dim qq2 = qq.ToList
+        Dim aa = qq
                             Dim filtr As Integer
                             If False Then
                                 'que pasa con las cartas que tienen varios subnumerodefacturacion y el 0 anulado? y no se puede tirar un listado viendo el subnumerodefac?
