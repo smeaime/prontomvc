@@ -7043,6 +7043,8 @@ Formato localidad-provincia	destination	x
 
                 rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC));
 
+                if (rec == null) return null;
+                
                 rec.Estado = 2;
 
 
