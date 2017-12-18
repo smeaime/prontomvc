@@ -850,7 +850,7 @@ namespace ProntoWindowsService
             string dirbinary = ConfigurationManager.AppSettings["DirChromeBinary"] ?? ""; // DirApp2 + @"\Temp\Pegatinas\";
 
 
-            bool headless = false;
+            bool headless = true;
 
             while (true)
             {

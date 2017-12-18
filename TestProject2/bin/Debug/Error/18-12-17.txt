@@ -1,0 +1,94 @@
+
+Log Entry : 
+12/18/2017 09:58:02
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:02
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:02
+Error in: . Error Message:Microsoft.Reporting.WebForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl' has not been specified ---> System.IO.DirectoryNotFoundException: No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en Microsoft.Reporting.WebForms.LocalReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewerLINQ_Excel(ReportViewer& oReportViewer, String rdlFile, Object q, String& ArchivoExcelDestino, IEnumerable`1 parametros) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5060
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:10
+Error in: . Error Message:The report definition for report 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl' has not been specified
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:12
+Error in: . Error Message:No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl'.
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:57
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+12/18/2017 09:58:57
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+12/18/2017 09:59:27
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+12/18/2017 09:59:27
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+12/18/2017 10:00:23
+Error in: . Error Message:
+
+__________________________
+
+Log Entry : 
+12/18/2017 10:00:23
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+12/18/2017 10:02:44
+Error in: . Error Message:
+550864662 2282211 0,0000 0,0000  
+550986995 2283050 0,0000 0,0000  
+550876535 2283051 0,0000 0,0000  
+55089899 2283052 0,0000 0,0000  
+550788908 2283192 0,0000 0,0000  
+550929702 2284140 0,0000 0,0000  
+550986999 2284145 0,0000 0,0000  
+550858821 2284207 0,0000 0,0000  
+551230293 2303222 0,0000 0,0000  
+551255941 2303615 1,4300 1,4300 ZABALA - BARTOLESCHI ZABALA - BARTOLESCHI
+551415307 2313826 0,0000 0,0000  
+551215671 2315687 0,0000 0,0000 EN PUERTO SERVICIOS S.R.L. EN PUERTO SERVICIOS S.R.L.
+__________________________
+
+Log Entry : 
+12/18/2017 10:02:44
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
