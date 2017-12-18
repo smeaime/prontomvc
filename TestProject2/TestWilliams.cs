@@ -879,212 +879,14 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void liquidacionsubcon_46735_2()
-        {
 
-            /*
 
-            Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
 
-            Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
 
-            En titular / intermediario / remitnte / cliente observ.
 
-            */
 
-            var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
-            cliente = -1;
 
-
-            if (false)
-            {
-
-                var s = new ServicioCartaPorte.servi();
-                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-                DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-
-                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
-                q1.Subcontratista1 = 10947;
-                q1.Subcontratista2 = 10947;
-
-                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
-                foreach (Data.Models.ListasPreciosDetalle ps in q2)
-                {
-                    ps.PrecioComboCaladaMasBalanza = 55;
-                }
-
-                db.SaveChanges();
-
-            }
-
-
-
-
-
-
-
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-
-            ReportParameter p2 = null;
-            string sTitulo = "";
-
-            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
-                       "", "", "", 1, 5000,
-                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
-                       -1, -1,
-                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                        new DateTime(2016, 1, 1),
-                        new DateTime(2017, 7, 31),
-                        0, cliente, ref sTitulo);
-
-
-
-            ReportParameter[] p = new ReportParameter[5];
-            p[0] = new ReportParameter("Concepto1", "");
-            p[1] = new ReportParameter("titulo", "");
-            p[2] = new ReportParameter("Concepto2", "");
-            p[3] = new ReportParameter("Concepto1Importe", "-1");
-            p[4] = new ReportParameter("Concepto2Importe", "-1");
-
-
-            string output = "";
-
-            CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
-
-            System.Diagnostics.Process.Start(output);
-
-        }
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public void loginEnUrenport3_42773_5()
-        {
-            var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            string dirMiRepo = @"C:\Users\Mariano\Documents\";
-
-            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false);
-
-            //s.CerealnetSeleniumConPhantomJS(DirApp);
-        }
-
-
-
-        [TestMethod]
-        public void loginEnUrenport3_42773_6()
-        {
-
-
-            //            Comment 94 by ankitkoo...@gmail.com, Dec 5
-            //For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
-            //GitHub link to framework : https://github.com/cezarypiatek/Tellurium
-
-            //Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
-
-            //https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
-
-            //This class has the required implementation.
-
-            //con la nueva version del chromedriver, en modo headless no me baja el archivo. https://bugs.chromium.org/p/chromium/issues/detail?id=696481
-
-
-            var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            string dirMiRepo = @"C:\Users\Mariano\Documents\";
-
-            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
-
-            //s.CerealnetSeleniumConPhantomJS(DirApp);
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void Tellerium_should_be_able_to_run_test_with_configuration_from_file()
-        {
-
-            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            string dirMiRepo = @"C:\Users\Mariano\Documents\";
-            string testExecutionPath = @"C:\Users\Mariano\Documents\pronto\TestProject2";
-
-
-            //var testExecutionPath = TestContext.CurrentContext.TestDirectory;
-            var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(testExecutionPath);
-            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
-            {
-                //Perform test
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public void problemasPorElCambioDeNRecibo_46500()
-        {
-
-            //varios dejaron de andar porque no actualicé los modelos de LinqToSql y el del TypedDatatables
-
-            LogicaFacturacion.LeyendaSyngenta(2343, SC);
-
-
-
-            //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
-            //MostrarLinksAFamiliaDeDuplicados
-
-
-
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-            var output2 = SincronismosWilliamsManager.GenerarSincro("BTG PACTUAL [BIT]", ref sErrores, SC, "dominio", ref sTitulo,
-                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                                     "", -1, -1, -1, -1,
-                                     -1, -1, -1, -1,
-                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
-                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-
-            //wCartasDePorte_TX_InformesCorregidoTableAdapter
-
-        }
-
-
-
-
-
-
-
-
-
-        #region reclamos43063
+        #region reclamos43063_CHAT
 
 
 
@@ -1100,7 +902,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
 
 
             string[] deviceId = { "eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs" };
@@ -1116,7 +918,7 @@ namespace ProntoMVC.Tests
         }
 
 
-        
+
 
 
         [TestMethod]
@@ -1130,7 +932,7 @@ namespace ProntoMVC.Tests
 
 
 
-            var lista=s.TraerTokensDelUsuario(usuario, SC);
+            var lista = s.TraerTokensDelUsuario(usuario, SC);
             s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC);
         }
 
@@ -1382,12 +1184,20 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void cerrar_consulta_43063()
         {
-            int idcarta = 2633333;
 
+//            -En Reclamos no funciona "Ver Carta"(es porque lo desactivamos ?)
+//- "Cerrar" no hace nada
+//- "Abrir" tiene que ser para el chat con cada usuario
+
+
+            int idcarta = 2633333;
+            string usuariodestino = "RODRIGORIOS";
 
             var s = new ServicioCartaPorte.servi();
-            s.AbrirReclamo_DLL(idcarta, usuario, SC);
-            s.CerrarReclamo_DLL(idcarta, usuario, SC);
+            s.AbrirReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+            s.CerrarReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+            var bEstado=s.EstadoReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+
 
         }
 
@@ -1415,6 +1225,222 @@ namespace ProntoMVC.Tests
 
 
         #endregion
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_46735_2()
+        {
+
+            /*
+
+            Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
+
+            Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
+
+            En titular / intermediario / remitnte / cliente observ.
+
+            */
+
+            var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
+            cliente = -1;
+
+
+            if (false)
+            {
+
+                var s = new ServicioCartaPorte.servi();
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
+                q1.Subcontratista1 = 10947;
+                q1.Subcontratista2 = 10947;
+
+                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
+                foreach (Data.Models.ListasPreciosDetalle ps in q2)
+                {
+                    ps.PrecioComboCaladaMasBalanza = 55;
+                }
+
+                db.SaveChanges();
+
+            }
+
+
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 5000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 1, 1),
+                        new DateTime(2017, 7, 31),
+                        0, cliente, ref sTitulo);
+
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_5()
+        {
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true, @"C:\Users\Mariano\Documents\chrome64_49.0.2623.75\chrome.exe");
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_6()
+        {
+
+
+            //            Comment 94 by ankitkoo...@gmail.com, Dec 5
+            //For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
+            //GitHub link to framework : https://github.com/cezarypiatek/Tellurium
+
+            //Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
+
+            //https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
+
+            //This class has the required implementation.
+
+            //con la nueva version del chromedriver, en modo headless no me baja el archivo. https://bugs.chromium.org/p/chromium/issues/detail?id=696481
+
+
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void Tellerium_should_be_able_to_run_test_with_configuration_from_file()
+        {
+
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            string testExecutionPath = @"C:\Users\Mariano\Documents\pronto\TestProject2";
+
+
+            //var testExecutionPath = TestContext.CurrentContext.TestDirectory;
+            var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(testExecutionPath);
+            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
+            {
+                //Perform test
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void problemasPorElCambioDeNRecibo_46500()
+        {
+
+            //varios dejaron de andar porque no actualicé los modelos de LinqToSql y el del TypedDatatables
+
+            LogicaFacturacion.LeyendaSyngenta(2343, SC);
+
+
+
+            //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
+            //MostrarLinksAFamiliaDeDuplicados
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+            var output2 = SincronismosWilliamsManager.GenerarSincro("BTG PACTUAL [BIT]", ref sErrores, SC, "dominio", ref sTitulo,
+                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                     "", -1, -1, -1, -1,
+                                     -1, -1, -1, -1,
+                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //wCartasDePorte_TX_InformesCorregidoTableAdapter
+
+        }
+
+
+
+
+
+
+
+
+
+        
 
 
 
@@ -9447,8 +9473,8 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void exportacionPeroLlamandoAlAction_29439_2()
+        //[TestMethod]
+        public void _LENTO_exportacionPeroLlamandoAlAction_29439_2()
         {
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
@@ -9648,7 +9674,7 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void formato_mail_html_grobo_25065()
+        public void _LENTO_formato_mail_html_grobo_25065()
         {
 
             //aaaaaa
@@ -13138,8 +13164,8 @@ namespace ProntoMVC.Tests
         }
 
 
-        [TestMethod]
-        public void LocalidadAprox()
+        //[TestMethod]
+        public void _LENTO_LocalidadAprox()
         {
             SQLdinamico.BuscaIdLocalidadAproximado("IRENEO PORTELA - BS. AS.", SC, 7);
             SQLdinamico.BuscaIdLocalidadAproximado("RENEO PORTELA - BS. AS.", SC, 7);
