@@ -6904,11 +6904,16 @@ Formato localidad-provincia	destination	x
 
 
 
+        public virtual void EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje, string titulo, string SC)
+        {
+            var s = new ServicioCartaPorte.servi();
+            string[] deviceIds = s.TraerTokensDelUsuario(usuario, SC);
+            var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo);
+        }
 
 
 
-
-		public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC, string nombreusuarioDestino)
+        public virtual string[] GrabarComentario_DLL(int idcarta, string comentario, string nombreusuario, string SC, string nombreusuarioDestino)
 		{
 
 

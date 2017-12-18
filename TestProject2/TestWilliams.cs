@@ -1113,16 +1113,9 @@ namespace ProntoMVC.Tests
             // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
 
 
-
         }
 
 
-        public void EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje,string titulo, string SC)
-        {
-            var s = new ServicioCartaPorte.servi();
-            string[] deviceIds =s.TraerTokensDelUsuario(usuario, SC);
-            var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo);
-        }
         
 
 
