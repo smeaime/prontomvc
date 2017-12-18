@@ -9,8 +9,11 @@ Namespace Pronto.ERP.Dal
     Public Class CartaDePorteDB
 
         Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer) As CartaDePorte
+            If id = -1 Then Return New CartaDePorte
+            If id <= 0 Then Return Nothing
+
             Dim myCartaDePorte As CartaDePorte = Nothing
-            Dim myConnection As SqlConnection = New SqlConnection(encriptar(SC))
+            Dim myConnection As SqlConnection = New SqlConnection(Encriptar(SC))
             Try
                 Dim myCommand As SqlCommand = New SqlCommand("wCartasDePorte_T", myConnection)
                 myCommand.CommandType = CommandType.StoredProcedure

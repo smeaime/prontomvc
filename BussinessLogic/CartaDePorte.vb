@@ -307,7 +307,7 @@ Namespace Pronto.ERP.BO
 
         Public EntregaSAP As String
 
-        Public Situacion As Integer? = 0
+        Public Situacion As Integer? = 2 '"en posicion" como default
         Public SituacionAntesDeEditarManualmente As Integer? = 0
         Public FechaActualizacionAutomatica As DateTime = DateTime.MinValue
         Public FechaAutorizacion As DateTime = DateTime.MinValue
