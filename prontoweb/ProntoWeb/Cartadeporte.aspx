@@ -2828,6 +2828,7 @@
 
 .ui-jqgrid {font-size:0.4em}*/
                     </style>
+                    <br />
                     <span style="vertical-align: top">Chatear con</span>
                     <asp:ListBox ID="usuarioschat" runat="server"
                         DataTextField="Descripcion" DataValueField="Id">
@@ -2851,8 +2852,8 @@
                         <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar" type="button" value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
                       
-                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo" type="button" value="cerrar" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
-                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo" type="button" value="abrir" class="btn btn-primary" style="height: 40px; width: ; vertical-align: top;" />
+                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo" type="button" value="cerrar" class="btn btn-primary" style="height: 55px; width: ; vertical-align: top;" />
+                            <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo" type="button" value="abrir" class="btn btn-primary" style="height: 55px; width: ; vertical-align: top;" />
 
 
                         <span>
@@ -2867,6 +2868,25 @@
                         </span>
 
                         <script>
+
+
+                                                function activarChat() {
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').attr("disabled", false);
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", false);
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", false);
+                                                    $('#gbox_Lista').attr("disabled", false);
+                                                }
+
+                                                function desactivarChat() {
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar').attr("disabled", true);
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5').attr("disabled", true);
+                                                    $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_AsyncFileUpload3').attr("disabled", true);
+                                                    $('#gbox_Lista').attr("disabled", true);
+                                                }
 
 
 
@@ -2884,8 +2904,10 @@
 
 
 
-                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").attr("disabled", true);
-                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", true); //que no se pueda enviar si no se eligió un usuario
+                                                desactivarChat()
+
+                                                //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").attr("disabled", true);
+                                                //$("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnEnviar").attr("disabled", true); //que no se pueda enviar si no se eligió un usuario
 
                                                 $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").change(function () {
                                                     $("#Lista").trigger("reloadGrid");
@@ -2907,10 +2929,10 @@
 
                                                         success: function (data) {
                                                             if (data.d == 1) {
-                                                                desactivarChat();
+                                                                activarChat();
                                                             }
                                                             else {
-                                                                activarChat();
+                                                                desactivarChat();
                                                             }
                                                         }
 
