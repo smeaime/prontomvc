@@ -2710,7 +2710,7 @@
                                 <asp:DropDownList ID="cmbSituacion" runat="server" CssClass="CssCombo" Width="100px" Enabled="false">
                                     <asp:ListItem Value="0">Autorizado</asp:ListItem>
                                     <asp:ListItem Value="1">Demorado</asp:ListItem>
-                                    <asp:ListItem Value="2">Posicion</asp:ListItem>
+                                    <asp:ListItem Value="2"  Selected="True">Posicion</asp:ListItem>
                                     <asp:ListItem Value="3">Descargado</asp:ListItem>
                                     <asp:ListItem Value="4">A Descargar</asp:ListItem>
                                     <asp:ListItem Value="5">Rechazado</asp:ListItem>
@@ -2959,12 +2959,7 @@
                                                     }
 
 
-
-                                                    var d = {
-                                                        idCartaPorte: qs["Id"]
-                                                    }
-
-
+                                                    
                                                     $.ajax({
                                                         type: "POST",
                                                         //method: "POST",
