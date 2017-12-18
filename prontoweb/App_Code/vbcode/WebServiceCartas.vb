@@ -301,12 +301,16 @@ Public Class WebServiceCartas
         End If
 
 
+
+
+        Dim coment = "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>"
+
         Try
 
 
             Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
                                "Consulta por carta porte",
-                            "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
+                            coment,
                             ConfigurationManager.AppSettings("SmtpUser"),
                             ConfigurationManager.AppSettings("SmtpServer"),
                             ConfigurationManager.AppSettings("SmtpUser"),
@@ -318,6 +322,11 @@ Public Class WebServiceCartas
             ErrHandler2.WriteError(ex)
 
         End Try
+
+
+        s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", Encriptar(scs))
+
+
 
 
     End Function
