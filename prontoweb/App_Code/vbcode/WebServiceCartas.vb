@@ -220,20 +220,33 @@ Public Class WebServiceCartas
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            Dim MembershipCasillas = New Dictionary(Of String, String)
 
 
-
-            Dim casillas = Membership.GetAllUsers()
-
-
-            casillas.
-
-             If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-                esExterno
+            'Dim casillas As MembershipUserCollection = Membership. .GetAllUsers()
+            'casillas(0).
+            'For Each u In casillas
+            '    u
+            'Next
 
 
-                Dim s = New ServicioCartaPorte.servi()
-            s.GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs, usuarioDestino)
+            Dim usuario = Membership.GetUser.UserName
+
+            'habria que usar la otra bdlmaster tambien....
+
+            Dim esExterno As Boolean = False
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                esExterno = True
+            End If
+
+            Dim s = New ServicioCartaPorte.servi()
+            s.GrabarComentarioYNotificar(idCartaPorte, usuario, sComentario, scs, usuarioDestino, Nothing, esExterno,
+                                         ConfigurationManager.AppSettings("UrlDominio"),
+                                         ConfigurationManager.AppSettings("SmtpUser"),
+                                         ConfigurationManager.AppSettings("SmtpServer"),
+                                         ConfigurationManager.AppSettings("SmtpPass"),
+                                         ConfigurationManager.AppSettings("SmtpPort")
+                                         )
 
 
 
@@ -262,7 +275,7 @@ Public Class WebServiceCartas
 
 
 
-    'Private Function GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
+    'Private Function GrabarComentarioYNotificar(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
 
 
     '    Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
