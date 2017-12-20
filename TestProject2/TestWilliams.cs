@@ -906,11 +906,11 @@ namespace ProntoMVC.Tests
             int idcarta = 2633333;
 
             //Mariano saluda a Rogrigo
-            s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
+            //s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
 
 
-            //Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
-            s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
+            ////Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
+            //s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
 
 
             //var sss = Membership.GetAllUsers();
@@ -921,10 +921,11 @@ namespace ProntoMVC.Tests
 
             //deberia enviar el mail y la notificacion esa funcion
             s.GrabarComentarioYNotificar(idcarta, "Hola Rodrigo como estás", "Mariano", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
-                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"],
-                                                                  ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"],
-                                                              Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
+
+            s.GrabarComentarioYNotificar(idcarta, "Mariano cuando va a estar listo este tema???", "RODRIGORIOS", SC, scbdlmasterappconfig, "", true,
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
 
