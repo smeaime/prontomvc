@@ -28,26 +28,26 @@
     <%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <%--/////////////////////////////////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
     <%--////////////    jqgrid     //////////////////////////////////--%>
     <%--/////////////////////////////////////////////////////////////--%>
-    <script src="//cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
 
 
 
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
-    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
-    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
-    <link href="http://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/i18n/grid.locale-es.js"></script>
+    <link href="https://cdn.jsdelivr.net/jqgrid/4.5.4/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.contextmenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.searchFilter.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/jquery.tablednd.js"></script>
+    <link href="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/searchFilter.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/jqgrid/4.5.4/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
 
-    <script src="http://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jqgrid/4.5.4/jquery.jqGrid.min.js"></script>
 
 
 
@@ -2880,7 +2880,8 @@
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
-                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
+                                    usuarioDestino: ''
                                 }
 
 
@@ -2928,7 +2929,8 @@
 
                                 var d = {
                                     idCartaPorte: qs["Id"],
-                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val()
+                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
+                                    usuarioDestino: ''
                                 }
 
 
@@ -4859,14 +4861,18 @@
 
             $('#Lista').jqGrid({
                 //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                url: 'HandlerReclamos.ashx',
+                //url: 'HandlerReclamos.ashx',
+                url: "WebServiceCartas.asmx/ReclamosComentarios",
                 //postData: {},
                 postData: {
-                    'FechaInicial': function () { return $("#txtFechaDesde").val(); },
-                    'FechaFinal': function () { return $("#txtFechaHasta").val(); },
-                    'destino': function () { return $("txtDestino").val(); },
-                    'puntovent': function () { return $("#cmbPuntoVenta").val(); },
-                    'idcarta': qs["Id"]
+                    'filters': '', //filtersparam,
+                    'FechaInicial': '', // function () { return $("#txtFechaDesde").val(); },
+                    'FechaFinal': '', //function () { return $("#txtFechaHasta").val(); },
+                    'destino': '',//  function () { return $("txtDestino").val(); },
+                    'puntovent': 0, //function () { return $("#cmbPuntoVenta").val(); },
+                    'idcarta': qs["Id"],
+                    'nombreusuario':  '' //function () { return $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val() }
+
                 },
                 datatype: 'json',
                 mtype: 'POST',
