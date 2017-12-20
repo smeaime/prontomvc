@@ -891,6 +891,52 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void conversacion_43063()
+        {
+
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+
+            // Mariano elige una carta
+            int idcarta = 2633333;
+
+            //Mariano saluda a Rogrigo
+            s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
+
+
+            //Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
+
+
+            var sss = Membership.GetAllUsers();
+
+            Dictionary<string, string> asdasd = new Dictionary<string, string>() {
+                                              { "Mariano", "mscalella911@gmail.com"},
+                                              { "RODRIGORIOS", "gmalggievato@gmail.com"}
+            };
+
+            //deberia enviar el mail y la notificacion esa funcion
+            s.GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS", , false,
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"],
+                                                                  ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"],
+                                                                 ConfigurationManager.AppSettings["SmtpPort"])
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
         public void enviosPush__()
         {
             // https://firebase.google.com/docs/cloud-messaging/js/device-group?hl=es-419
@@ -908,10 +954,10 @@ namespace ProntoMVC.Tests
             string[] deviceId = { "fLTPu6cSIkk:APA91bFzQUwGEhSMKm7k_xwJO7CmviSxH9BxPoFle59XmvNz4w2rkqOlGE9HuDm-EFI3zPvhjJf7jKQa9V-EkNSGvDNsjCpNlM0BtlT-i9N6P-pQZ90Y_2vUPjo8fWiPD-O2WfLqHieE" 
                                   //"eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs"
             };
-            
+
 
             var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa nanooo", "Williams");
-           // var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
+            // var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
             // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
@@ -1187,9 +1233,9 @@ namespace ProntoMVC.Tests
         public void cerrar_consulta_43063()
         {
 
-//            -En Reclamos no funciona "Ver Carta"(es porque lo desactivamos ?)
-//- "Cerrar" no hace nada
-//- "Abrir" tiene que ser para el chat con cada usuario
+            //            -En Reclamos no funciona "Ver Carta"(es porque lo desactivamos ?)
+            //- "Cerrar" no hace nada
+            //- "Abrir" tiene que ser para el chat con cada usuario
 
 
             int idcarta = 2633333;
@@ -1198,7 +1244,7 @@ namespace ProntoMVC.Tests
             var s = new ServicioCartaPorte.servi();
             s.AbrirReclamo_DLL(idcarta, usuario, SC, usuariodestino);
             s.CerrarReclamo_DLL(idcarta, usuario, SC, usuariodestino);
-            var bEstado=s.EstadoReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+            var bEstado = s.EstadoReclamo_DLL(idcarta, usuario, SC, usuariodestino);
 
 
         }
@@ -1442,7 +1488,7 @@ namespace ProntoMVC.Tests
 
 
 
-        
+
 
 
 
