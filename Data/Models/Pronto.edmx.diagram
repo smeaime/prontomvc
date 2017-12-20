@@ -2475,7 +2475,7 @@
         <edmx:EntityTypeShape EntityType="DemoProntoModel.VistaCartasPorteMovimiento" Width="1.5" PointX="31.375" PointY="17.75" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_Rubros_Cuentas_IdCuentaCompras" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK_DetalleFacturasOrdenesCompra_DetalleOrdenesCompra" />
-        <edmx:EntityTypeShape EntityType="DemoProntoModel.ReclamoComentario" Width="1.5" PointX="33.625" PointY="50.625" />
+        <edmx:EntityTypeShape EntityType="DemoProntoModel.ReclamoComentario" Width="1.5" PointX="34.375" PointY="48.5" />
         <edmx:EntityTypeShape EntityType="DemoProntoModel.Reclamo" Width="1.5" PointX="31.375" PointY="30.25" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__CartasDeP__IdRec__09B62712" />
         <edmx:AssociationConnector Association="DemoProntoModel.FK__ReclamoCo__IdEmp__06D9BA67" />
