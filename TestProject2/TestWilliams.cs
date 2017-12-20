@@ -913,18 +913,18 @@ namespace ProntoMVC.Tests
             s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
 
 
-            var sss = Membership.GetAllUsers();
+            //var sss = Membership.GetAllUsers();
 
-            Dictionary<string, string> asdasd = new Dictionary<string, string>() {
+            Dictionary<string, string> membershipCasillas = new Dictionary<string, string>() {
                                               { "Mariano", "mscalella911@gmail.com"},
                                               { "RODRIGORIOS", "gmalggievato@gmail.com"}
             };
 
             //deberia enviar el mail y la notificacion esa funcion
-            s.GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS", , false,
+            s.GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS", membershipCasillas, false,
                                                                 ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"],
                                                                   ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"],
-                                                                 ConfigurationManager.AppSettings["SmtpPort"])
+                                                              Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
         }
