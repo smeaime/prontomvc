@@ -223,9 +223,18 @@ Public Class WebServiceCartas
 
 
 
+            Dim casillas = Membership.GetAllUsers()
 
 
-            GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs, usuarioDestino)
+            casillas.
+
+             If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                esExterno
+
+
+                Dim s = New ServicioCartaPorte.servi()
+            s.GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte, sComentario, scs, usuarioDestino)
+
 
 
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,85 +262,85 @@ Public Class WebServiceCartas
 
 
 
-    Private Function GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
+    'Private Function GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
 
 
-        Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
-        Dim usuario = Membership.GetUser.UserName
-        Dim s = New ServicioCartaPorte.servi()
-        Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs), usuarioDestino)
-
-
-
-
-        Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
-        Dim casillas = ""
-        For Each u In usuarios
-            If u Is Nothing Then Continue For
-            If u = usuario Then Continue For
-            If Membership.GetUser(u) Is Nothing Then Continue For
-            casillas += Membership.GetUser(u).Email + ","
-        Next
-
-
-        If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-            'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
-
-            Dim De As String
-            Dim CCOaddress As String
-            Select Case carta.PuntoVenta
-                Case 1
-                    De = "buenosaires@williamsentregas.com.ar"
-                    CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                Case 2
-                    De = "sanlorenzo@williamsentregas.com.ar"
-                    CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                Case 3
-                    De = "arroyoseco@williamsentregas.com.ar"
-                    CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                Case 4
-                    De = "bahiablanca@williamsentregas.com.ar"
-                    CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                Case Else
-                    De = "buenosaires@williamsentregas.com.ar"
-                    CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-            End Select
-
-            casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
-
-            'como es un externo, como hago con la notificacion al usuario interno?
-        End If
+    '    Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+    '    Dim usuario = Membership.GetUser.UserName
+    '    Dim s = New ServicioCartaPorte.servi()
+    '    Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs), usuarioDestino)
 
 
 
 
-        Dim coment = "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>"
-
-        Try
-
-
-            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
-                               "Consulta por carta porte",
-                            coment,
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpServer"),
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpPass"),
-                              "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
-
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-
-        End Try
+    '    Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
+    '    Dim casillas = ""
+    '    For Each u In usuarios
+    '        If u Is Nothing Then Continue For
+    '        If u = usuario Then Continue For
+    '        If Membership.GetUser(u) Is Nothing Then Continue For
+    '        casillas += Membership.GetUser(u).Email + ","
+    '    Next
 
 
-        s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", Encriptar(scs))
+    '    If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+    '        'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+
+    '        Dim De As String
+    '        Dim CCOaddress As String
+    '        Select Case carta.PuntoVenta
+    '            Case 1
+    '                De = "buenosaires@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+    '            Case 2
+    '                De = "sanlorenzo@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+    '            Case 3
+    '                De = "arroyoseco@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+    '            Case 4
+    '                De = "bahiablanca@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+    '            Case Else
+    '                De = "buenosaires@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+    '        End Select
+
+    '        casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+
+    '        'como es un externo, como hago con la notificacion al usuario interno?
+    '    End If
 
 
 
 
-    End Function
+    '    Dim coment = "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>"
+
+    '    Try
+
+
+    '        Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
+    '                           "Consulta por carta porte",
+    '                        coment,
+    '                        ConfigurationManager.AppSettings("SmtpUser"),
+    '                        ConfigurationManager.AppSettings("SmtpServer"),
+    '                        ConfigurationManager.AppSettings("SmtpUser"),
+    '                        ConfigurationManager.AppSettings("SmtpPass"),
+    '                          "",
+    '                       Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
+
+    '    Catch ex As Exception
+    '        ErrHandler2.WriteError(ex)
+
+    '    End Try
+
+
+    '    s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", Encriptar(scs))
+
+
+
+
+    'End Function
 
 
 
