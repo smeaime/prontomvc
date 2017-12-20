@@ -1,8 +1,10 @@
 ﻿{
   "compilerOptions": {
+    "target": "es6",
+    "module": "system",
+    "moduleResolution": "node",
     "allowJs": true,
     "noEmit": true,
-    "module": "system",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
@@ -12,7 +14,7 @@
     "scripts"
   ],
   "exclude": [
-
+    "node_modules"
   ],
   "typeAcquisition": {
     "enable": true

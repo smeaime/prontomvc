@@ -1,4 +1,3 @@
 ﻿select * from GoogleToken
 
-
-wCartasDePorte_T -1
+--wCartasDePorte_T -1

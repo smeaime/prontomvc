@@ -905,11 +905,13 @@ namespace ProntoMVC.Tests
 
 
 
-            string[] deviceId = { "eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs" };
+            string[] deviceId = { "fLTPu6cSIkk:APA91bFzQUwGEhSMKm7k_xwJO7CmviSxH9BxPoFle59XmvNz4w2rkqOlGE9HuDm-EFI3zPvhjJf7jKQa9V-EkNSGvDNsjCpNlM0BtlT-i9N6P-pQZ90Y_2vUPjo8fWiPD-O2WfLqHieE" 
+                                  //"eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs"
+            };
+            
 
-
-            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
-            var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
+            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa nanooo", "Williams");
+           // var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
             // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo

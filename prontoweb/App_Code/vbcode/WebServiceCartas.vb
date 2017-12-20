@@ -298,6 +298,8 @@ Public Class WebServiceCartas
             End Select
 
             casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+
+            'como es un externo, como hago con la notificacion al usuario interno?
         End If
 
 
@@ -792,11 +794,14 @@ Public Class WebServiceCartas
 
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
             Dim usuario = ""
+            usuario = Membership.GetUser.UserName
+
             Dim s = New ServicioCartaPorte.servi()
 
 
             If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-                usuario = Membership.GetUser.UserName
+                'el usuario es  externo
+                nombreusuario = usuario
             End If
 
 
