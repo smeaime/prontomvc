@@ -6998,7 +6998,104 @@ Formato localidad-provincia	destination	x
 
 
 
-        public virtual int EstadoReclamo_DLL(int idcarta, string nombreusuario, string SC,string usuarioDestino)
+
+
+        public virtual void GrabarComentarioYEnviarMailNotificacionSegunUsuariosDelReclamo
+            (int idCartaPorte, string usuarioOrigen, string sComentario, string scs, string usuarioDestino, Dictionary<string, string> MembershipCasillas,
+            bool esExternoUsuarioOrigen, string UrlDominio, string SmtpUser, string SmtpServer, string SmtpPass, int SmtpPort)
+        {
+            var carta = CartaDePorteManager.GetItem(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scs), idCartaPorte);
+
+            var s = new ServicioCartaPorte.servi();
+
+            string[] usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuarioOrigen, ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scs), usuarioDestino);
+
+
+            string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
+
+
+            object casillas = "";
+            foreach (string u in usuarios)
+            {
+                if ((u == null))
+                {
+                    continue;
+                }
+
+                if ((u == usuarioOrigen))
+                {
+                    continue;
+                }
+
+                if ((MembershipCasillas[u] == null))
+                {
+                    continue;
+                }
+
+                casillas += MembershipCasillas[u] + ",";
+            }
+
+
+            if (esExternoUsuarioOrigen)
+            {
+                // como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+                string De;
+                string CCOaddress;
+                switch (carta.PuntoVenta)
+                {
+                    case 1:
+                        De = "buenosaires@williamsentregas.com.ar";
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar";
+                        break;
+                    case 2:
+                        De = "sanlorenzo@williamsentregas.com.ar";
+                        CCOaddress = "descargas-sl@williamsentregas.com.ar";
+                        break;
+                    case 3:
+                        De = "arroyoseco@williamsentregas.com.ar";
+                        CCOaddress = "descargas-as@williamsentregas.com.ar";
+                        break;
+                    case 4:
+                        De = "bahiablanca@williamsentregas.com.ar";
+                        CCOaddress = "descargas-bb@williamsentregas.com.ar";
+                        break;
+                    default:
+                        De = "buenosaires@williamsentregas.com.ar";
+                        CCOaddress = "descargas-ba@williamsentregas.com.ar";
+                        break;
+                }
+                casillas = (casillas + De);
+                // ConfigurationManager.AppSettings("ErrorMail")
+                // como es un externo, como hago con la notificacion al usuario interno?
+            }
+
+            string coment = ("Comentario de "
+                        + (usuarioOrigen + (": <br/>"
+                        + (sComentario + ("<br/><br/> " + ("<a href=\'"
+                        + (linkAlReclamo + "\'>Link al comentario</a>")))))));
+            try
+            {
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
+                    SmtpUser, SmtpServer,
+                    SmtpUser, SmtpPass, "",
+                    SmtpPort);
+            }
+            catch (Exception ex)
+            {
+                ErrHandler2.WriteError(ex);
+            }
+
+
+
+            s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scs));
+        }
+
+
+
+
+
+
+        public virtual int EstadoReclamo_DLL(int idcarta, string nombreusuario, string SC, string usuarioDestino)
         {
 
 
@@ -7018,7 +7115,7 @@ Formato localidad-provincia	destination	x
 
                 if (rec == null) return 0;
                 return rec.Estado ?? 0;
-                
+
             }
 
 
@@ -7045,7 +7142,7 @@ Formato localidad-provincia	destination	x
                 rec = db.Reclamos.Find(IdReclamoSegunCartaYUsuario(idcarta, usuarioDestino, SC));
 
                 if (rec == null) return null;
-                
+
                 rec.Estado = 2;
 
 
@@ -7176,6 +7273,11 @@ Formato localidad-provincia	destination	x
 
                 GoogleToken token = new GoogleToken();
 
+
+
+                //sacar el token de la tabla. haciendo esto cada vez que se loguea un usuario, me aseguro de que no se compartan los dispositivos -como máximo, debería haber uno solo
+                var repetidos = db.GoogleTokens.Where(x => x.NombreUsuario == nombreusuario);
+                db.GoogleTokens.RemoveRange(repetidos);
 
 
                 token.NombreUsuario = nombreusuario;
