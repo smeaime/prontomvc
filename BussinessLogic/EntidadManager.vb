@@ -93,6 +93,7 @@ Namespace Pronto.ERP.Bll
 
 
 
+            'mail asincronico?
 
 
             De = De.Replace(";", ",")
