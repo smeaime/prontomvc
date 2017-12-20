@@ -7053,8 +7053,7 @@ Formato localidad-provincia	destination	x
 
 
 
-
-				var usuariosParticipantes = db.ReclamoComentarios.Where(x => x.IdReclamo == rec.IdReclamo).Select(x => x.NombreUsuario).Distinct().ToArray();
+				var usuariosParticipantes = rec.ReclamoComentarios.Select(x => x.NombreUsuario).Distinct().ToArray();
 				return usuariosParticipantes;
 
 			}
@@ -7072,11 +7071,11 @@ Formato localidad-provincia	destination	x
 			bool esExternoUsuarioOrigen, string UrlDominio, string SmtpUser, string SmtpServer, string SmtpPass, int SmtpPort)
 		{
 
-			var carta = CartaDePorteManager.GetItem(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCpronto), idCartaPorte);
 
+		 
 			var s = new ServicioCartaPorte.servi();
 
-			string[] usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuarioOrigen, ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scs), usuarioDestino);
+			string[] usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuarioOrigen, SCpronto, usuarioDestino);
 
 
 			string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
@@ -7095,11 +7094,12 @@ Formato localidad-provincia	destination	x
 			BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
 
 			// solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-			var q = (from p in dbmaster.UserDatosExtendidos
-					 join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-					 join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
-					 //where queusuarioshayEnestacarta.Contains(p.RazonSocial)
-					 select {  .UserName,u. }).ToList();  //.ToDictionary();
+			var usuariosCasillas = (from p in dbmaster.UserDatosExtendidos
+									join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
+									join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+									where usuarios.Contains(u.UserName)
+									select m.Email ).ToList();
+									//select new { u.UserName, m.Email }).ToList(); //.ToDictionary(x=>x.UserName,x=>x.Email);  
 
 
 
@@ -7110,7 +7110,7 @@ Formato localidad-provincia	destination	x
 
 
 			string casillas = "";
-			foreach (string u in usuarios)
+			foreach (string u in usuariosCasillas)
 			{
 				if ((u == null))
 				{
@@ -7122,50 +7122,50 @@ Formato localidad-provincia	destination	x
 					continue;
 				}
 
-				if ((MembershipCasillas[u] == null))
-				{
-					continue;
-				}
 
-				casillas += MembershipCasillas[u] + ",";
+				casillas += u + ",";
 			}
 
 
 
-			
+
+			var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCpronto));
+			CartasDePorte carta;
+			using (DemoProntoEntities db = new DemoProntoEntities(scEF))
+			{
+				carta = db.CartasDePortes.Find(idCartaPorte);
+			}
 
 
 			if (esExternoUsuarioOrigen)
 			{
 				// como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
-				string De;
-				string CCOaddress;
+				string Para;
 				switch (carta.PuntoVenta)
 				{
 					case 1:
-						De = "buenosaires@williamsentregas.com.ar";
-						CCOaddress = "descargas-ba@williamsentregas.com.ar";
+                        Para = "buenosaires@williamsentregas.com.ar";
 						break;
 					case 2:
-						De = "sanlorenzo@williamsentregas.com.ar";
-						CCOaddress = "descargas-sl@williamsentregas.com.ar";
+                        Para = "sanlorenzo@williamsentregas.com.ar";
 						break;
 					case 3:
-						De = "arroyoseco@williamsentregas.com.ar";
-						CCOaddress = "descargas-as@williamsentregas.com.ar";
+                        Para = "arroyoseco@williamsentregas.com.ar";
 						break;
 					case 4:
-						De = "bahiablanca@williamsentregas.com.ar";
-						CCOaddress = "descargas-bb@williamsentregas.com.ar";
+                        Para = "bahiablanca@williamsentregas.com.ar";
 						break;
 					default:
-						De = "buenosaires@williamsentregas.com.ar";
-						CCOaddress = "descargas-ba@williamsentregas.com.ar";
+                        Para = "buenosaires@williamsentregas.com.ar";
 						break;
 				}
-				casillas = (casillas + De);
+				casillas = (casillas + Para);
 				// ConfigurationManager.AppSettings("ErrorMail")
-				// como es un externo, como hago con la notificacion al usuario interno?
+				
+                
+                
+                // como es un externo, como hago con la notificacion al usuario interno?
+                usuarioDestino ???
 			}
 
 			string coment = ("Comentario de "
@@ -7186,7 +7186,7 @@ Formato localidad-provincia	destination	x
 
 
 
-			s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", ProntoFuncionesGeneralesCOMPRONTO.Encriptar(scs));
+			s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", SCpronto);
 		}
 
 
