@@ -155,6 +155,32 @@ namespace ProntoMVC.TestsMVC
 
 
 
+        [TestMethod]
+        public void probar_rms_pendientes_y_partial_del_vale()
+        {
+
+/*
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+            var res = c.Index() as ViewResult;
+            */
+
+
+            var c = new ValeSalidaController();
+            GetMockedControllerGenerico(c);
+            var res = c.Edit(-1) as ViewResult;
+
+
+
+        }
+
+
+
+
+
+
+
+
 
         [TestMethod]
         public void envio_rms_por_mail()

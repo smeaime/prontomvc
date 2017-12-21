@@ -956,7 +956,7 @@ namespace ProntoMVC.Tests
             };
 
 
-            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa nanooo", "Williams");
+            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa nanooo", "Williams", "", "");
             // var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
 
             // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
@@ -981,7 +981,7 @@ namespace ProntoMVC.Tests
 
 
             var lista = s.TraerTokensDelUsuario(usuario, SC);
-            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC);
+            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC,"","");
         }
 
 
