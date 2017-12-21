@@ -34,7 +34,7 @@ Partial Class Login
 
 
         If Request.Browser("IsMobileDevice") = "true" Then
-            Response.Redirect("LoginMobile.aspx")
+            Response.Redirect("LoginMobile.aspx") hay que pasarle el returnurl
         End If
 
 
