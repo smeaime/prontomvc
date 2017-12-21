@@ -6998,9 +6998,10 @@ Formato localidad-provincia	destination	x
 				CartasDePorte carta = db.CartasDePortes.Find(idcarta);
 
 
+                if (nombreusuarioDestino == "") nombreusuarioDestino = nombreusuario; //como el titulo del reclamo es segun el nombre del externo, hago esta truchada
 
 
-				if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1)
+                if (IdReclamoSegunCartaYUsuario(carta.IdCartaDePorte, nombreusuarioDestino, SC) == -1)
 				{
 					rec = new Reclamo();
 					rec.Estado = 1;
@@ -7160,13 +7161,14 @@ Formato localidad-provincia	destination	x
 						break;
 				}
 				casillas = (casillas + Para);
-				// ConfigurationManager.AppSettings("ErrorMail")
-				
-                
-                
+                // ConfigurationManager.AppSettings("ErrorMail")
+
+
+
                 // como es un externo, como hago con la notificacion al usuario interno?
-                usuarioDestino ???
-			}
+                usuarioDestino = usuarios.Where(x => x != usuarioOrigen).FirstOrDefault();
+
+            }
 
 			string coment = ("Comentario de "
 						+ (usuarioOrigen + (": <br/>"
