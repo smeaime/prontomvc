@@ -903,7 +903,7 @@ namespace ProntoMVC.Tests
 
 
             // Mariano elige una carta
-            int idcarta = 2633333;
+            int idcarta = 2633335;
 
             //Mariano saluda a Rogrigo
             //s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
@@ -920,11 +920,11 @@ namespace ProntoMVC.Tests
             //};
 
             //deberia enviar el mail y la notificacion esa funcion
-            s.GrabarComentarioYNotificar(idcarta, "Hola Rodrigo como estás", "Mariano", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
                                                                 ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
-            s.GrabarComentarioYNotificar(idcarta, "Mariano cuando va a estar listo este tema???", "RODRIGORIOS", SC, scbdlmasterappconfig, "", true,
+            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???",  SC, scbdlmasterappconfig, "", true,
                                                     ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
@@ -975,7 +975,7 @@ namespace ProntoMVC.Tests
             //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
             //            MandoMensajeAListadoDeSubscripciones(subs);
             var s = new ServicioCartaPorte.servi();
-            s.AsociarUsuarioConTokenFirebase("eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs"
+            s.AsociarUsuarioConTokenFirebase("fLTPu6cSIkk:APA91bFzQUwGEhSMKm7k_xwJO7CmviSxH9BxPoFle59XmvNz4w2rkqOlGE9HuDm-EFI3zPvhjJf7jKQa9V-EkNSGvDNsjCpNlM0BtlT-i9N6P-pQZ90Y_2vUPjo8fWiPD-O2WfLqHieE"
                                         , "Mariano", SC);
 
 
