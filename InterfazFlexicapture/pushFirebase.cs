@@ -19,7 +19,7 @@ namespace Sch_WCFApplication
     public class PushNotification
     {
 
-        public PushNotification(string[] deviceIds, string mensaje, string titulo)
+        public PushNotification(string[] deviceIds, string mensaje, string titulo, string clickaction,string icono)
         {
             try
             {
@@ -71,10 +71,16 @@ namespace Sch_WCFApplication
 
                         title = titulo,
 
-                        icon = "myicon"
+                        icon = icono, // "http://www.williamsentregas.com.ar/img/logotw.png",
+
+                        click_action= clickaction
 
                     }
                 };
+
+                // TODO: como formatear el mensaje para mandar un link?
+                //-tenes q manosear el setBackgroundMessageHandler en el worker "firebase-messaging-sw.js"!!!! -seguro??? mmm
+
 
                 var serializer = new JavaScriptSerializer();
 

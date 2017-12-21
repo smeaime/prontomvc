@@ -6972,11 +6972,11 @@ Formato localidad-provincia	destination	x
 
 
 
-		public virtual void EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje, string titulo, string SC)
+		public virtual void EnviarNotificacionALosDispositivosDelUsuario(string usuario, string mensaje, string titulo, string SC, string click_action,string icono)
 		{
 			var s = new ServicioCartaPorte.servi();
 			string[] deviceIds = s.TraerTokensDelUsuario(usuario, SC);
-			var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo);
+			var c = new Sch_WCFApplication.PushNotification(deviceIds, mensaje, titulo, click_action,icono);
 		}
 
 
@@ -7079,20 +7079,21 @@ Formato localidad-provincia	destination	x
 			string[] usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuarioOrigen, SCpronto, usuarioDestino);
 
 
-			string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
+            //tiene que ser el dominio de clientes!!!
+            //string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
+            string linkAlReclamo = "http://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 
 
 
 
-			
 
 
 
 
 
-			
 
-			BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
+
+            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
 
 			// solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
 			var usuariosCasillas = (from p in dbmaster.UserDatosExtendidos
@@ -7170,13 +7171,36 @@ Formato localidad-provincia	destination	x
 
             }
 
-			string coment = ("Comentario de "
-						+ (usuarioOrigen + (": <br/>"
-						+ (sComentario + ("<br/><br/> " + ("<a href=\'"
-						+ (linkAlReclamo + "\'>Link al comentario</a>")))))));
-			try
-			{
-				Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
+			string coment = "Comentario de "
+						+ usuarioOrigen + " en CP " + carta.NumeroCartaDePorte.ToString() + ": < br/>"
+						+ sComentario + "<br/><br/> " + 
+                        "<a href=\'" + linkAlReclamo + "\'>Link al comentario</a>";
+
+
+            string coment2 = "Comentario de "
+                        + usuarioOrigen +  " en CP " + carta.NumeroCartaDePorte.ToString() +  ": "
+                        + sComentario ;
+
+
+
+
+            try
+            {
+
+                //convertir comentario de html a text
+                s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "http://www.williamsentregas.com.ar/img/logotw.png");
+            }
+            catch (Exception ex)
+            {
+                ErrHandler2.WriteError(ex);
+            }
+
+
+
+            try
+            {
+                //async....  https://stackoverflow.com/questions/3408397/asynchronously-sending-emails-in-c
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
 					SmtpUser, SmtpServer,
 					SmtpUser, SmtpPass, "",
 					SmtpPort);
@@ -7186,9 +7210,6 @@ Formato localidad-provincia	destination	x
 				ErrHandler2.WriteError(ex);
 			}
 
-
-
-			s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", SCpronto);
 		}
 
 
@@ -7377,7 +7398,7 @@ Formato localidad-provincia	destination	x
 
 
 				//sacar el token de la tabla. haciendo esto cada vez que se loguea un usuario, me aseguro de que no se compartan los dispositivos -como máximo, debería haber uno solo
-				var repetidos = db.GoogleTokens.Where(x => x.NombreUsuario == nombreusuario);
+				var repetidos = db.GoogleTokens.Where(x => x.Token == sTicketDeGoogle);
 				db.GoogleTokens.RemoveRange(repetidos);
 
 

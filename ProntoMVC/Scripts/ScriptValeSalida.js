@@ -1,3 +1,17 @@
+
+$(function () {
+    inicializar();
+});
+
+
+function inicializar() {
+}
+
+
+
+
+
+
 $(function () {
     $("#loading").hide();
 
