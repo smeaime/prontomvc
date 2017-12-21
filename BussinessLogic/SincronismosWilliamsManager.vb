@@ -14261,6 +14261,9 @@ Namespace Pronto.ERP.Bll
             '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
             '63	ObsAna	100	Observaciones Analisis		Izquierda	945
 
+
+            Dim bvolatil = False
+
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
@@ -14672,10 +14675,17 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
 
 
+
                     Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
-                    sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
-                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
-                    cc = Nothing
+
+                    If bvolatil Then
+                        sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                        sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+
+                    Else
+                        sb &= cero.ToString.PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                        sb &= cero.ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+                    End If
 
 
 
@@ -14890,15 +14900,16 @@ Namespace Pronto.ERP.Bll
                     'una con la merma volátil y otra con el neto deducida la merma ( tal cual la planilla de descargas Excel) es decir los kilos netos final.
 
 
-                    Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
+                    If bvolatil Then
 
-                    sb &= Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    'sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    sb &= Int(Val(.NetoProc)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        'sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        sb &= Int(Val(.NetoProc)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                    End If
 
 
 
-
+                    cc = Nothing
 
 
                     PrintLine(nF, sb)
@@ -24211,6 +24222,9 @@ Namespace Pronto.ERP.Bll
             Return vFileName
 
         End Function
+
+
+
         Public Shared Function Sincronismo_AmaggiCalidades(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, SC As String) As String
 
             '            Nombre(RESULTA.TXT)
