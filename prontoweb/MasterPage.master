@@ -730,7 +730,7 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                                                     } else {
                                                         // Show permission request.
                                                         console.log('No Instance ID token available. Request permission to generate one.');
-                                                        // Show permission UI.
+                                                        //// Show permission UI.
                                                         updateUIForPushPermissionRequired();
                                                         setTokenSentToServer(false);
                                                     }
