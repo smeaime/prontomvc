@@ -1818,6 +1818,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 // [START_EXCLUDE]
                 // Update the UI to include the received message.
                 appendMessage(payload);
+
+
+
+
                 // [END_EXCLUDE]
             });
             // [END receive_message]
@@ -1960,6 +1964,20 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 dataElement.textContent = JSON.stringify(payload, null, 2);
                 messagesElement.appendChild(dataHeaderELement);
                 messagesElement.appendChild(dataElement);
+
+
+
+                // Customize notification here
+                const notificationTitle = 'Background Message Title';
+                const notificationOptions = {
+                    body: JSON.stringify(payload, null, 2),
+                    icon: '/firebase-logo.png'
+                };
+
+                return self.registration.showNotification(notificationTitle,
+                    notificationOptions);
+
+
             }
             // Clear the messages element of all children.
             function clearMessages() {
