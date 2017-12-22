@@ -157,6 +157,10 @@ Partial Class SeleccionarEmpresa
                 Dim conexbase = BDLMasterEmpresasManagerMigrar.ConexionDeLaUnicaBaseDelUsuario(ConexBDLmaster, Session(SESSIONPRONTO_UserId))
                 Dim idempresa = BDLMasterEmpresasManagerMigrar.IdEmpresaDeLaUnicaBaseDelUsuario(ConexBDLmaster, Session(SESSIONPRONTO_UserId))
 
+
+                If Request.QueryString("ReturnUrl") IsNot Nothing Then Response.Redirect(Request.QueryString("ReturnUrl"))
+
+
                 If BDLMasterEmpresasManager.EmpresaPropietariaDeLaBase(conexbase) = "Williams" Then
                     'Server.Transfer(String.Format("CartasDePortes.aspx?tipo=Descargas"))
                     Server.Transfer("~/ProntoWeb/CartasDePortes.aspx?tipo=Todas")
@@ -396,6 +400,13 @@ Partial Class SeleccionarEmpresa
                 BDLMasterEmpresasManagerMigrar.UltimaVezAccedida(Session(SESSIONPRONTO_UserId), Session(SESSIONPRONTO_NombreEmpresa)) = Now
 
 
+
+
+                If Request.QueryString("ReturnUrl") IsNot Nothing Then Response.Redirect(Request.QueryString("ReturnUrl"))
+
+
+
+
                 If EstaEsteRol("Cliente") And False Then
                     'el proveedor no debe ver el mapa...
                     Response.Redirect("~/ProntoWeb/Presupuestos.aspx?tipo=AConfirmarEnObra.aspx")
@@ -434,7 +445,7 @@ Partial Class SeleccionarEmpresa
             ErrHandler2.WriteError(ex)
             ' MsgBoxAjaxAndRedirect(Me, "El usuario no tiene empresa asignada", "ProntoWeb/Principal.aspx")
 
-            Response.Redirect("~/ProntoWeb/Principal.aspx")
+            'Response.Redirect("~/ProntoWeb/Principal.aspx")
         End Try
 
         'Response.Redirect("~/ProntoWeb/SelleccionarEmpresa.aspx")
