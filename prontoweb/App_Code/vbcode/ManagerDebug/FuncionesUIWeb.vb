@@ -4501,7 +4501,8 @@ Public Module ProntoFuncionesUIWeb
                 'en la bdlMaster no hay conexion para este usuario+empresa
                 '-pero el usuario ya está logueado... a donde lo redirigimos?
 
-                Server.Transfer("~/SeleccionarEmpresa.aspx")
+
+                Server.Transfer("~/SeleccionarEmpresa.aspx" + HttpContext.Current.Request.Url.Query)
 
             End If
             usuario.StringConnection = s
@@ -4568,7 +4569,7 @@ Public Module ProntoFuncionesUIWeb
                     '//////////////////////////////////////////////////////////////////
 
                 Else
-                    Server.Transfer("~/Login.aspx")
+                    Server.Transfer("~/Login.aspx" + HttpContext.Current.Request.Url.Query)
                 End If
             End If
         Else

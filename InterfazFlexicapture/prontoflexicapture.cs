@@ -7172,7 +7172,7 @@ Formato localidad-provincia	destination	x
             }
 
 			string coment = "Comentario de "
-						+ usuarioOrigen + " en CP " + carta.NumeroCartaDePorte.ToString() + ": < br/>"
+						+ usuarioOrigen + " en CP " + carta.NumeroCartaDePorte.ToString() + ": <br/>"
 						+ sComentario + "<br/><br/> " + 
                         "<a href=\'" + linkAlReclamo + "\'>Link al comentario</a>";
 
@@ -7186,9 +7186,17 @@ Formato localidad-provincia	destination	x
 
             try
             {
+                foreach (string n in usuarios.ToList())
+                {
+                    if ((n == usuarioOrigen))
+                    {
+                        continue;
+                    }
 
-                //convertir comentario de html a text
-                s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "http://www.williamsentregas.com.ar/img/logotw.png");
+                    //convertir comentario de html a text
+                    s.EnviarNotificacionALosDispositivosDelUsuario(n, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "http://www.williamsentregas.com.ar/img/logotw.png");
+
+                }
             }
             catch (Exception ex)
             {
@@ -7203,7 +7211,7 @@ Formato localidad-provincia	destination	x
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
 					SmtpUser, SmtpServer,
 					SmtpUser, SmtpPass, "",
-					SmtpPort);
+					SmtpPort,1,"","","Williams Entregas");
 			}
 			catch (Exception ex)
 			{
