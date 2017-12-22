@@ -42,7 +42,7 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
         If HFSC.Value = "" Then
-            Response.Redirect("~/SeleccionarEmpresa.aspx")
+            Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
         End If
 
 
