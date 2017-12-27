@@ -11368,6 +11368,12 @@ usuario As String, ConexBDLmaster As String,
             End If
 
 
+            ddddddd
+
+
+
+
+
 
             Dim pat As String = .Patente.Replace(" ", "")
             If Not (pat.Length = 6 Or pat.Length = 7 Or pat.Length = 0) Then
