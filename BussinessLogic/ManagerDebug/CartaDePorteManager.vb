@@ -21266,6 +21266,9 @@ Public Class CDPMailFiltrosManager2
 
 
 
+        sdfgsdfgdsfgsdfgsdfg
+
+
         Select Case puntoventa
             Case 1
 
@@ -21294,7 +21297,8 @@ Public Class CDPMailFiltrosManager2
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
                         "Oficina Arroyo Seco<br/>" + vbCrLf +
                         "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf +
-                        "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+                        "Tel: 03402 421426 / 429676<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+
 
             Case 4
 

@@ -532,6 +532,13 @@ Partial Class SincronismosAutomaticos
 
     End Function
 
+
+
+
+
+
+    'hay que pasar esta funcion a la dll? modificar para usar EnviarSincro()
+
     Function Enviar(sincro As String, sEmail As String, ByRef sErr As String, bvistaPrevia As Boolean) As String
 
 
