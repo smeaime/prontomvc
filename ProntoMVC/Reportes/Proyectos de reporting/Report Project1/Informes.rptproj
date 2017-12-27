@@ -1,629 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ToolsVersion="2.0">
-  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
-  <DataSources>
-    <ProjectItem>
-      <Name>DataSourceProduccion.rds</Name>
-      <FullPath>DataSourceProduccion.rds</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>DemoPronto.rds</Name>
-      <FullPath>DemoPronto.rds</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>TestHarcodeada.rds</Name>
-      <FullPath>TestHarcodeada.rds</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>TestPCMariano.rds</Name>
-      <FullPath>TestPCMariano.rds</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>WilliamsTest.rds</Name>
-      <FullPath>WilliamsTest.rds</FullPath>
-    </ProjectItem>
-  </DataSources>
-  <DataSets>
-    <ProjectItem>
-      <Name>IVA Ventas.rsd</Name>
-      <FullPath>IVA Ventas.rsd</FullPath>
-    </ProjectItem>
-  </DataSets>
-  <Reports>
-    <ProjectItem>
-      <Name>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</Name>
-      <FullPath>Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</Name>
-      <FullPath>Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Analisis de cobranzas.rdl</Name>
-      <FullPath>Analisis de cobranzas.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Balance2.rdl</Name>
-      <FullPath>Balance2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Caja ingresos.rdl</Name>
-      <FullPath>Caja ingresos.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cardex.rdl</Name>
-      <FullPath>Cardex.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Carta Porte - Buques.rdl</Name>
-      <FullPath>Carta Porte - Buques.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Carta Porte - ControlesDiarios.rdl</Name>
-      <FullPath>Carta Porte - ControlesDiarios.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Carta Porte - Situacion.rdl</Name>
-      <FullPath>Carta Porte - Situacion.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado Ganancias.rdl</Name>
-      <FullPath>Certificado Ganancias.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado IIBB Detalle.rdl</Name>
-      <FullPath>Certificado IIBB Detalle.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado IIBB.rdl</Name>
-      <FullPath>Certificado IIBB.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado IVA 2.rdl</Name>
-      <FullPath>Certificado IVA 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado IVA Detalle.rdl</Name>
-      <FullPath>Certificado IVA Detalle.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado IVA.rdl</Name>
-      <FullPath>Certificado IVA.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Certificado SUSS.rdl</Name>
-      <FullPath>Certificado SUSS.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cheques anulados.rdl</Name>
-      <FullPath>Cheques anulados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Comprobante Proveedores.rdl</Name>
-      <FullPath>Comprobante Proveedores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Creditos Vencidos a Fecha.rdl</Name>
-      <FullPath>Creditos Vencidos a Fecha.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Balance.rdl</Name>
-      <FullPath>Cubo Balance.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Egresos Proyectados 2.rdl</Name>
-      <FullPath>Cubo Egresos Proyectados 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Gastos Detallados 2.rdl</Name>
-      <FullPath>Cubo Gastos Detallados 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Ingresos Egresos Por Obra 3.rdl</Name>
-      <FullPath>Cubo Ingresos Egresos Por Obra 3.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Posicion Financiera.rdl</Name>
-      <FullPath>Cubo Posicion Financiera.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Presupuesto Financiero.rdl</Name>
-      <FullPath>Cubo Presupuesto Financiero.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Cubo Stock 2.rdl</Name>
-      <FullPath>Cubo Stock 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Desarrollo y seguimiento por item de ordenes de compra.rdl</Name>
-      <FullPath>Desarrollo y seguimiento por item de ordenes de compra.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Desarrollo y seguimiento por item de requerimiento.rdl</Name>
-      <FullPath>Desarrollo y seguimiento por item de requerimiento.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Comprobante Proveedores.rdl</Name>
-      <FullPath>Detalle Comprobante Proveedores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Factura Venta.rdl</Name>
-      <FullPath>Detalle Factura Venta.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Nota Credito Imputaciones.rdl</Name>
-      <FullPath>Detalle Nota Credito Imputaciones.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Nota Credito.rdl</Name>
-      <FullPath>Detalle Nota Credito.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Nota Debito.rdl</Name>
-      <FullPath>Detalle Nota Debito.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Cuentas 2.rdl</Name>
-      <FullPath>Detalle Orden Pago Cuentas 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Cuentas.rdl</Name>
-      <FullPath>Detalle Orden Pago Cuentas.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Impuestos.rdl</Name>
-      <FullPath>Detalle Orden Pago Impuestos.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Imputaciones 2.rdl</Name>
-      <FullPath>Detalle Orden Pago Imputaciones 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Imputaciones.rdl</Name>
-      <FullPath>Detalle Orden Pago Imputaciones.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Valores 2.rdl</Name>
-      <FullPath>Detalle Orden Pago Valores 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Orden Pago Valores.rdl</Name>
-      <FullPath>Detalle Orden Pago Valores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Pedido.rdl</Name>
-      <FullPath>Detalle Pedido.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Cuentas 2.rdl</Name>
-      <FullPath>Detalle Recibo Cuentas 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Cuentas.rdl</Name>
-      <FullPath>Detalle Recibo Cuentas.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Impuestos 2.rdl</Name>
-      <FullPath>Detalle Recibo Impuestos 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Imputaciones 2.rdl</Name>
-      <FullPath>Detalle Recibo Imputaciones 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Imputaciones.rdl</Name>
-      <FullPath>Detalle Recibo Imputaciones.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Valores 2.rdl</Name>
-      <FullPath>Detalle Recibo Valores 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Recibo Valores.rdl</Name>
-      <FullPath>Detalle Recibo Valores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Detalle Remito.rdl</Name>
-      <FullPath>Detalle Remito.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Deuda Vencida a Fecha.rdl</Name>
-      <FullPath>Deuda Vencida a Fecha.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Diario.rdl</Name>
-      <FullPath>Diario.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Estadistica de ventas por rubro - Articulo.rdl</Name>
-      <FullPath>Estadistica de ventas por rubro - Articulo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Factura Venta.rdl</Name>
-      <FullPath>Factura Venta.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Gasto Bancario.rdl</Name>
-      <FullPath>Gasto Bancario.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Generacion SICORE.rdl</Name>
-      <FullPath>Generacion SICORE.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Informe de materiales recibidos.rdl</Name>
-      <FullPath>Informe de materiales recibidos.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>IVA Compras.rdl</Name>
-      <FullPath>IVA Compras.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>IVA Ventas.rdl</Name>
-      <FullPath>IVA Ventas.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Liquidación de Subcontratistas 2.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Liquidación de Subcontratistas 3.rdl</Name>
-      <FullPath>Liquidación de Subcontratistas 3.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado de comprobantes de venta ingresados.rdl</Name>
-      <FullPath>Listado de comprobantes de venta ingresados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado de ordenes de compra.rdl</Name>
-      <FullPath>Listado de ordenes de compra.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado de ordenes de pago.rdl</Name>
-      <FullPath>Listado de ordenes de pago.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado de pedidos.rdl</Name>
-      <FullPath>Listado de pedidos.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original)  .rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original)  .rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original)  para Corredores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) Amaggi.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto 2 .rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) Olavarria.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) Olavarria.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</Name>
-      <FullPath>Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>MapaArgentinaProcedenciaCartasPorte.rdl</Name>
-      <FullPath>MapaArgentinaProcedenciaCartasPorte.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Mayor.rdl</Name>
-      <FullPath>Mayor.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Movimientos por partida.rdl</Name>
-      <FullPath>Movimientos por partida.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Nota Credito.rdl</Name>
-      <FullPath>Nota Credito.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Nota Debito.rdl</Name>
-      <FullPath>Nota Debito.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Notas de pedidos con items dados por cumplido.rdl</Name>
-      <FullPath>Notas de pedidos con items dados por cumplido.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Orden Pago.rdl</Name>
-      <FullPath>Orden Pago.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Orden Pago2.rdl</Name>
-      <FullPath>Orden Pago2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Ordenes de compra pendientes de facturar.rdl</Name>
-      <FullPath>Ordenes de compra pendientes de facturar.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Pedidos pendientes de recibir.rdl</Name>
-      <FullPath>Pedidos pendientes de recibir.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Proveedores - Listado de comprobantes detallado.rdl</Name>
-      <FullPath>Proveedores - Listado de comprobantes detallado.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Proveedores - Resumen de compras.rdl</Name>
-      <FullPath>Proveedores - Resumen de compras.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Ranking de ventas por cliente.rdl</Name>
-      <FullPath>Ranking de ventas por cliente.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Ranking proveedores.rdl</Name>
-      <FullPath>Ranking proveedores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Recepcion.rdl</Name>
-      <FullPath>Recepcion.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Recibo.rdl</Name>
-      <FullPath>Recibo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Remitos de venta pendientes de facturar.rdl</Name>
-      <FullPath>Remitos de venta pendientes de facturar.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Reporte de seguimiento por IP.rdl</Name>
-      <FullPath>Reporte de seguimiento por IP.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Requerimientos pendientes de asignacion.rdl</Name>
-      <FullPath>Requerimientos pendientes de asignacion.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Requerimientos pendientes sin pedido.rdl</Name>
-      <FullPath>Requerimientos pendientes sin pedido.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</Name>
-      <FullPath>Resumen Cuenta Corriente Acreedores Por Mayor.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Resumen Cuenta Corriente Acreedores.rdl</Name>
-      <FullPath>Resumen Cuenta Corriente Acreedores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Resumen Cuenta Corriente Deudores.rdl</Name>
-      <FullPath>Resumen Cuenta Corriente Deudores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Saldos a fecha.rdl</Name>
-      <FullPath>Saldos a fecha.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Saldos Clientes.rdl</Name>
-      <FullPath>Saldos Clientes.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Saldos Proveedores.rdl</Name>
-      <FullPath>Saldos Proveedores.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Salida Materiales.rdl</Name>
-      <FullPath>Salida Materiales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Salidas de materiales.rdl</Name>
-      <FullPath>Salidas de materiales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Seguimiento Compras.rdl</Name>
-      <FullPath>Seguimiento Compras.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo BLD demorados.rdl</Name>
-      <FullPath>Sincronismo BLD demorados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo BLD.rdl</Name>
-      <FullPath>Sincronismo BLD.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo DOW2.rdl</Name>
-      <FullPath>Sincronismo DOW2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Sincronismo YPF.rdl</Name>
-      <FullPath>Sincronismo YPF.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Stock a fecha.rdl</Name>
-      <FullPath>Stock a fecha.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Subdiario.rdl</Name>
-      <FullPath>Subdiario.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Transporte de mercaderia.rdl</Name>
-      <FullPath>Transporte de mercaderia.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Vales emitidos no retirados.rdl</Name>
-      <FullPath>Vales emitidos no retirados.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Valores a depositar.rdl</Name>
-      <FullPath>Valores a depositar.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Valores diferidos pendientes.rdl</Name>
-      <FullPath>Valores diferidos pendientes.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Controles de Kilos Clientes.rdl</Name>
-      <FullPath>Williams - Controles de Kilos Clientes.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Controles Diarios.rdl</Name>
-      <FullPath>Williams - Controles Diarios.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Listado de Clientes incompletos.rdl</Name>
-      <FullPath>Williams - Listado de Clientes incompletos.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Nidera con SQL.rdl</Name>
-      <FullPath>Williams - Nidera con SQL.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Nidera con Webservice sin parametros.rdl</Name>
-      <FullPath>Williams - Nidera con Webservice sin parametros.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Resumen de Totales Generales (Facturacion).rdl</Name>
-      <FullPath>Williams - Resumen de Totales Generales (Facturacion).rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Resumen de Totales Generales 2.rdl</Name>
-      <FullPath>Williams - Resumen de Totales Generales 2.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Resumen de Totales Generales.rdl</Name>
-      <FullPath>Williams - Resumen de Totales Generales.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Sincro LaBiznaga.rdl</Name>
-      <FullPath>Williams - Sincro LaBiznaga.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Williams - Sincro LaBiznaga2.rdl</Name>
-      <FullPath>Williams - Sincro LaBiznaga2.rdl</FullPath>
-    </ProjectItem>
-  </Reports>
-  <Configurations>
-    <Configuration>
-      <Name>Debug</Name>
-      <Platform>Win32</Platform>
-      <Options>
-        <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://sqlmvc/ReportServer</TargetServerURL>
-        <TargetFolder>Pronto informes</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-      </Options>
-    </Configuration>
-    <Configuration>
-      <Name>DebugLocal</Name>
-      <Platform>Win32</Platform>
-      <Options>
-        <OutputPath>bin\DebugLocal</OutputPath>
-        <TargetServerVersion>SSRS2008</TargetServerVersion>
-        <TargetServerURL>http://desktop-clvul7u/ReportServer</TargetServerURL>
-        <TargetFolder>Pronto informes</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-      </Options>
-    </Configuration>
-    <Configuration>
-      <Name>Release</Name>
-      <Platform>Win32</Platform>
-      <Options>
-        <OutputPath>bin\Release</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
-        <TargetFolder>Pronto informes</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>Pronto informes</TargetReportPartFolder>
-      </Options>
-    </Configuration>
-    <Configuration>
-      <Name>DebugWilly</Name>
-      <Options>
-        <OutputPath>bin\Debug</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
-        <TargetFolder>Pronto informes</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-      </Options>
-    </Configuration>
-    <Configuration>
-      <Name>DebugServer3</Name>
-      <Options>
-        <OutputPath>bin\DebugServer3</OutputPath>
-        <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
-        <TargetFolder>Pronto informes</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <OverwriteDatasets>true</OverwriteDatasets>
-        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-      </Options>
-    </Configuration>
-  </Configurations>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <FullPath>Debug</FullPath>
+    <Platform>Win32</Platform>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>True</OverwriteDataSources>
+    <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+    <TargetReportFolder>Pronto informes</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://sqlmvc/ReportServer</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
+    <FullPath>DebugLocal</FullPath>
+    <Platform>Win32</Platform>
+    <OutputPath>bin\DebugLocal</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>True</OverwriteDataSources>
+    <TargetServerVersion>SSRS2008</TargetServerVersion>
+    <TargetReportFolder>Pronto informes</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://desktop-clvul7u/ReportServer</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <FullPath>Release</FullPath>
+    <Platform>Win32</Platform>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>True</OverwriteDataSources>
+    <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+    <TargetReportFolder>Pronto informes</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Pronto informes</TargetReportPartFolder>
+    <TargetServerURL>http://bdlconsultores.sytes.net:10080/ReportServer</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugWilly' ">
+    <FullPath>DebugWilly</FullPath>
+    <Platform>Win32</Platform>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>True</OverwriteDataSources>
+    <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+    <TargetReportFolder>Pronto informes</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugServer3' ">
+    <FullPath>DebugServer3</FullPath>
+    <Platform>Win32</Platform>
+    <OutputPath>bin\DebugServer3</OutputPath>
+    <ErrorLevel>2</ErrorLevel>
+    <OverwriteDatasets>True</OverwriteDatasets>
+    <OverwriteDataSources>True</OverwriteDataSources>
+    <TargetServerVersion>SSRS2008R2</TargetServerVersion>
+    <TargetReportFolder>Pronto informes</TargetReportFolder>
+    <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+    <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
+    <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+    <TargetServerURL>http://serversql3/ReportServer</TargetServerURL>
+  </PropertyGroup>
+  <PropertyGroup>
+    <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+    <DataSources>@(DataSource)</DataSources>
+    <DataSets>@(DataSet)</DataSets>
+    <Reports>@(Report)</Reports>
+  </PropertyGroup>
+  <ItemGroup>
+    <DataSet Include="IVA Ventas.rsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <DataSource Include="DataSourceProduccion.rds" />
+    <DataSource Include="DemoPronto.rds" />
+    <DataSource Include="TestHarcodeada.rds" />
+    <DataSource Include="TestPCMariano.rds" />
+    <DataSource Include="WilliamsTest.rds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Report Include="Adjuntos de Facturacion (a impresora de matriz de puntos)  ReportServer.rdl" />
+    <Report Include="Adjuntos de Facturacion Acondicionadoras (a impresora de matriz de puntos)  ReportServer.rdl" />
+    <Report Include="Analisis de cobranzas.rdl" />
+    <Report Include="Balance2.rdl" />
+    <Report Include="Caja ingresos.rdl" />
+    <Report Include="Cardex.rdl" />
+    <Report Include="Carta Porte - Buques.rdl" />
+    <Report Include="Carta Porte - ControlesDiarios.rdl" />
+    <Report Include="Carta Porte - Situacion.rdl" />
+    <Report Include="Certificado Ganancias.rdl" />
+    <Report Include="Certificado IIBB Detalle.rdl" />
+    <Report Include="Certificado IIBB.rdl" />
+    <Report Include="Certificado IVA 2.rdl" />
+    <Report Include="Certificado IVA Detalle.rdl" />
+    <Report Include="Certificado IVA.rdl" />
+    <Report Include="Certificado SUSS.rdl" />
+    <Report Include="Cheques anulados.rdl" />
+    <Report Include="Comprobante Proveedores.rdl" />
+    <Report Include="Creditos Vencidos a Fecha.rdl" />
+    <Report Include="Cubo Balance.rdl" />
+    <Report Include="Cubo Egresos Proyectados 2.rdl" />
+    <Report Include="Cubo Gastos Detallados 2.rdl" />
+    <Report Include="Cubo Ingresos Egresos Por Obra 3.rdl" />
+    <Report Include="Cubo Posicion Financiera.rdl" />
+    <Report Include="Cubo Presupuesto Financiero.rdl" />
+    <Report Include="Cubo Stock 2.rdl" />
+    <Report Include="Desarrollo y seguimiento por item de ordenes de compra.rdl" />
+    <Report Include="Desarrollo y seguimiento por item de requerimiento.rdl" />
+    <Report Include="Detalle Comprobante Proveedores.rdl" />
+    <Report Include="Detalle Factura Venta.rdl" />
+    <Report Include="Detalle Nota Credito Imputaciones.rdl" />
+    <Report Include="Detalle Nota Credito.rdl" />
+    <Report Include="Detalle Nota Debito.rdl" />
+    <Report Include="Detalle Orden Pago Cuentas 2.rdl" />
+    <Report Include="Detalle Orden Pago Cuentas.rdl" />
+    <Report Include="Detalle Orden Pago Impuestos.rdl" />
+    <Report Include="Detalle Orden Pago Imputaciones 2.rdl" />
+    <Report Include="Detalle Orden Pago Imputaciones.rdl" />
+    <Report Include="Detalle Orden Pago Valores 2.rdl" />
+    <Report Include="Detalle Orden Pago Valores.rdl" />
+    <Report Include="Detalle Pedido.rdl" />
+    <Report Include="Detalle Recibo Cuentas 2.rdl" />
+    <Report Include="Detalle Recibo Cuentas.rdl" />
+    <Report Include="Detalle Recibo Impuestos 2.rdl" />
+    <Report Include="Detalle Recibo Imputaciones 2.rdl" />
+    <Report Include="Detalle Recibo Imputaciones.rdl" />
+    <Report Include="Detalle Recibo Valores 2.rdl" />
+    <Report Include="Detalle Recibo Valores.rdl" />
+    <Report Include="Detalle Remito.rdl" />
+    <Report Include="Deuda Vencida a Fecha.rdl" />
+    <Report Include="Diario.rdl" />
+    <Report Include="Estadistica de ventas por rubro - Articulo.rdl" />
+    <Report Include="Factura Venta.rdl" />
+    <Report Include="Gasto Bancario.rdl" />
+    <Report Include="Generacion SICORE.rdl" />
+    <Report Include="Informe de materiales recibidos.rdl" />
+    <Report Include="IVA Compras.rdl" />
+    <Report Include="IVA Ventas.rdl" />
+    <Report Include="Liquidación de Subcontratistas 2.rdl" />
+    <Report Include="Liquidación de Subcontratistas 3.rdl" />
+    <Report Include="Listado de comprobantes de venta ingresados.rdl" />
+    <Report Include="Listado de ordenes de compra.rdl" />
+    <Report Include="Listado de ordenes de pago.rdl" />
+    <Report Include="Listado de pedidos.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original)  .rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original)  para Corredores.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) Amaggi.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Cresud backup.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Cresud.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Dow.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Grobo 2.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Grobo y Recibo.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Grobo.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - Multigrain.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto  - SpeedAgro.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto 2 .rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto Buscador sin Webservice.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto con numero recibo.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) con foto Webservice.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) Olavarria.rdl" />
+    <Report Include="Listado general de Cartas de Porte (simulando original) para html con imagenes.rdl" />
+    <Report Include="MapaArgentinaProcedenciaCartasPorte.rdl" />
+    <Report Include="Mayor.rdl" />
+    <Report Include="Movimientos por partida.rdl" />
+    <Report Include="Nota Credito.rdl" />
+    <Report Include="Nota Debito.rdl" />
+    <Report Include="Notas de pedidos con items dados por cumplido.rdl" />
+    <Report Include="Orden Pago.rdl" />
+    <Report Include="Orden Pago2.rdl" />
+    <Report Include="Ordenes de compra pendientes de facturar.rdl" />
+    <Report Include="Pedidos pendientes de recibir.rdl" />
+    <Report Include="Proveedores - Listado de comprobantes detallado.rdl" />
+    <Report Include="Proveedores - Resumen de compras.rdl" />
+    <Report Include="Ranking de ventas por cliente.rdl" />
+    <Report Include="Ranking proveedores.rdl" />
+    <Report Include="Recepcion.rdl" />
+    <Report Include="Recibo.rdl" />
+    <Report Include="Remitos de venta pendientes de facturar.rdl" />
+    <Report Include="Reporte de seguimiento por IP.rdl" />
+    <Report Include="Requerimientos pendientes de asignacion.rdl" />
+    <Report Include="Requerimientos pendientes sin pedido.rdl" />
+    <Report Include="Resumen Cuenta Corriente Acreedores Por Mayor.rdl" />
+    <Report Include="Resumen Cuenta Corriente Acreedores.rdl" />
+    <Report Include="Resumen Cuenta Corriente Deudores.rdl" />
+    <Report Include="Saldos a fecha.rdl" />
+    <Report Include="Saldos Clientes.rdl" />
+    <Report Include="Saldos Proveedores.rdl" />
+    <Report Include="Salida Materiales.rdl" />
+    <Report Include="Salidas de materiales.rdl" />
+    <Report Include="Seguimiento Compras.rdl" />
+    <Report Include="Sincronismo BLD demorados.rdl" />
+    <Report Include="Sincronismo BLD.rdl" />
+    <Report Include="Sincronismo DOW2.rdl" />
+    <Report Include="Sincronismo YPF.rdl" />
+    <Report Include="Stock a fecha.rdl" />
+    <Report Include="Subdiario.rdl" />
+    <Report Include="Transporte de mercaderia.rdl" />
+    <Report Include="Vales emitidos no retirados.rdl" />
+    <Report Include="Valores a depositar.rdl" />
+    <Report Include="Valores diferidos pendientes.rdl" />
+    <Report Include="Williams - Controles de Kilos Clientes.rdl" />
+    <Report Include="Williams - Controles Diarios.rdl" />
+    <Report Include="Williams - Listado de Clientes incompletos.rdl" />
+    <Report Include="Williams - Nidera con SQL.rdl" />
+    <Report Include="Williams - Nidera con Webservice sin parametros.rdl" />
+    <Report Include="Williams - Resumen de Totales Generales (Facturacion).rdl" />
+    <Report Include="Williams - Resumen de Totales Generales 2.rdl" />
+    <Report Include="Williams - Resumen de Totales Generales.rdl" />
+    <Report Include="Williams - Sincro LaBiznaga.rdl" />
+    <Report Include="Williams - Sincro LaBiznaga2.rdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>
