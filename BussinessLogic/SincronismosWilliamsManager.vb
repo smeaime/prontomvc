@@ -2024,7 +2024,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Function EnviarSincro(sincro As String, sEmail As String, ByRef sErr As String, bvistaPrevia As Boolean) As String
+        Public Shared Function EnviarSincro(sincro As String, sEmail As String, ByRef sErr As String, bvistaPrevia As Boolean) As String
 
 
             '            ' Los mails salen desde la cuenta general de Bs As , cuando tienen que salir desde la general de 
@@ -27361,7 +27361,7 @@ Namespace Pronto.ERP.Bll
 
 
                     '2Carta  porte  nro 
-                    ForzarPrefijo5(.NumeroCartaDePorte)
+                    'ForzarPrefijo5(.NumeroCartaDePorte)
                     'sb &= SEPARADOR & _cc(Right(.NumeroCartaDePorte.ToString, 8))  'sacar el 5 de adelante (bastará con tomar 8 digitos)
                     sb &= SEPARADOR & _cc(.NumeroCartaDePorte.ToString)
 
