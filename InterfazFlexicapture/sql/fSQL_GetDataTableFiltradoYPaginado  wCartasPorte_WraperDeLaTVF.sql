@@ -392,11 +392,11 @@ where 1=1
 
 			@estado=0 OR @estado is null
 			OR
-			(@estado=1 AND  	 ISNULL(cdp.Anulada,'NO')<>'SI'  )
+			(@estado=1 AND  	 ISNULL(cdp.Anulada,'NO')<>'SI'  ) -- todas menos las rechazadas
 			OR
 			(
 			@estado=2  AND (cdp.Vendedor IS NULL OR cdp.Corredor IS NULL OR cdp.Entregador IS NULL OR cdp.IdArticulo IS NULL) 
-			AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI'
+			AND ISNULL(IdFacturaImputada,0)=0 AND ISNULL(cdp.Anulada,'NO')<>'SI'  --incompletas
 			)
             OR
 			(
