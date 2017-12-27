@@ -1388,6 +1388,8 @@ namespace ProntoFlexicapture
 
 			catch (Exception)
 			{
+                 // por q llega acá con id -1??? -porque no se grabó, quizás porque no es válida la carta
+
 				Log("trate de grabar con id " + cdp.Id);
 
 				throw;
@@ -2511,6 +2513,12 @@ namespace ProntoFlexicapture
 					Debug.Print(ms + " " + warn);
 				}
 
+                /*
+                 * en los casos de a.c.a me tira:
+                Error in: . Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+                    habría q eludir esa validacion
+                   */
+                   
 				MarcarCartaComoProcesada(ref cdp, nombreusuario, SC);
 
 

@@ -877,6 +877,22 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void OCR_validacion_de_A_C_A_47215()
+        {
+
+            /*
+                                             * en los casos de a.c.a me tira:
+            Error in: . Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+                habría q eludir esa validacion
+
+            */
+        }
+
+
+
+
+
 
 
         [TestMethod]
@@ -912,10 +928,30 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void ServicioWebServiceDescargas_FYO_y_BLD_47213()
+        public void ServicioWebServiceDescargas_BLD_47213()
         {
 
             //¿habrá alguna diferencia entre el ListadoSegunCliente y el listado normal? andy sospecha del robot
+
+            //La carta Id = 3222062 no aparece, al usar obtenerDescargas_v3 con estos paramtros:
+            //Andres
+            //Andre5!
+            //1
+            //2017 / 12 / 23
+            //2017 / 12 / 23
+            //
+            // -creo que es porque el netofinal está en 0 (aún cuando está cargado el netosinmerma y la fecha de descarga)
+            // -pero entonces debería aparecer como de posicion, no?
+            // http://iismvc/Williams/ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v3?usuario=Andres&password=Andre5!&cuit=1&fechadesde=2017-12-23T00:00:00&fechahasta=2017-12-23T00:00:00
+            // al regrabarla, le calcula bien el netofinal
+            // -y entonces cómo solucionarlo? agregando una validacion que si la fechaDescarga está puesta, tambien el NetoFinal? Y por qué solo usa la fecha
+            // para mostrar la pestaña de descarga, cuando la funcion sql usa el peso en lugar de la fecha?
+            // Al margen de esto... cómo es que se dieron cuenta, si despues de todo, el informe muestra lo mismo que el servicio? -deben haber usado de referencia el sincronismo, no?
+
+
+
+
+
 
 
 
@@ -924,23 +960,21 @@ namespace ProntoMVC.Tests
             //string dirMiRepo = @"C:\Users\Mariano\Documents\";
             //s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
 
-
-
             //le tendria que pasar el directorio del chrome viejo
-            ProntoWindowsService.Service1.Initialize();
-            ProntoWindowsService.Service1.DoWorkSoloPegatinas();
+            //ProntoWindowsService.Service1.Initialize();
+            //ProntoWindowsService.Service1.DoWorkSoloPegatinas();
 
 
 
 
-            string usuario = "Mariano"; //"fyo";
-            string clave = "pirulo!"; // "76075";
-            string cuit = "30703605105";
+            string usuario = "Andres"; //"fyo";
+            string clave = "Andre5!"; // "76075";
+            string cuit = "1";
 
             // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
             var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
-                                            new DateTime(2016, 1, 1),
-                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha,
+                                            new DateTime(2017, 12, 23),
+                                            new DateTime(2017, 12, 23), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                                             SC, DirApp, scbdlmasterappconfig);
 
 
