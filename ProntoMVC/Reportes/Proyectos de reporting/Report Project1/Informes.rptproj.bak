@@ -599,7 +599,6 @@
     </Configuration>
     <Configuration>
       <Name>DebugWilly</Name>
-      <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
@@ -614,7 +613,6 @@
     </Configuration>
     <Configuration>
       <Name>DebugServer3</Name>
-      <Platform>Win32</Platform>
       <Options>
         <OutputPath>bin\DebugServer3</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
