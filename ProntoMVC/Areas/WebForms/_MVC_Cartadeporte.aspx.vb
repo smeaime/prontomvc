@@ -102,7 +102,7 @@ Partial Class CartadeporteABM
 
         SC = usuario.StringConnection
         If SC = "" Then
-            Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
+            Response.Redirect("~/SeleccionarEmpresa.aspx")
         End If
 
 
