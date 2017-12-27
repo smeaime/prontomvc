@@ -879,6 +879,88 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroDiazRiganti_47179()
+        {
+
+            string sErrores = "", sTitulo = "";
+            // LinqCartasPorteDataContext db = null;
+
+
+
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                    "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void ServicioWebServiceDescargas_FYO_y_BLD_47213()
+        {
+
+            ////Trust all certificates
+            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
+            //var cerealnet = new WS_CartasDePorteClient();
+
+            string usuario = "Mariano"; //"fyo";
+            string clave = "pirulo!"; // "76075";
+            string cuit = "30703605105";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2016, 1, 1),
+                                            new DateTime(2017, 1, 1), CartaDePorteManager.enumCDPestado.DescargasDeHoyMasTodasLasPosicionesEnRangoFecha,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+        [TestMethod]
+        public void MandarmeLosSincrosAutomaticos_tema_de_la_firma_47212()
+        {
+
+            var s = CDPMailFiltrosManager2.AgregarFirmaHtml(1);
+
+            string sErr = "";
+            SincronismosWilliamsManager.EnviarSincro("TOMASHNOS", "nano@gggg", ref sErr, true);
+
+
+        }
 
 
 
@@ -924,7 +1006,7 @@ namespace ProntoMVC.Tests
                                                                 ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
-            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???",  SC, scbdlmasterappconfig, "", true,
+            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, "", true,
                                                     ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
@@ -981,7 +1063,7 @@ namespace ProntoMVC.Tests
 
 
             var lista = s.TraerTokensDelUsuario(usuario, SC);
-            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC,"","");
+            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC, "", "");
         }
 
 
@@ -13978,16 +14060,6 @@ namespace ProntoMVC.Tests
 
         }
 
-
-
-        [TestMethod]
-        public void MandarmeLosSincrosAutomaticos()
-        {
-            //aaaaaa
-
-
-
-        }
 
 
 
