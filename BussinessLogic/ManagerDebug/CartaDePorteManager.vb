@@ -11360,15 +11360,22 @@ usuario As String, ConexBDLmaster As String,
 
             If .NetoFinalIncluyendoMermas > 0 Then
                 If .FechaDescarga = #12:00:00 AM# Then
-                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
+                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el neto final de la descarga)"
                     ms &= vbCrLf   'return false
                 End If
 
 
             End If
 
+            If .NetoFinalIncluyendoMermas = 0 Then
+                If .FechaDescarga <> #12:00:00 AM# Then
+                    ms &= "Se necesita el neto final de la descarga (porque se ingresó la fecha de descarga)"
+                    ms &= vbCrLf   'return false
+                End If
 
-            ddddddd
+
+            End If
+
 
 
 
