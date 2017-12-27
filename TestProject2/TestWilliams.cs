@@ -915,10 +915,23 @@ namespace ProntoMVC.Tests
         public void ServicioWebServiceDescargas_FYO_y_BLD_47213()
         {
 
-            ////Trust all certificates
-            //System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+            //¿habrá alguna diferencia entre el ListadoSegunCliente y el listado normal? andy sospecha del robot
 
-            //var cerealnet = new WS_CartasDePorteClient();
+
+
+            //var s = new ServicioCartaPorte.servi();
+            //string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            //string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            //s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+
+
+            //le tendria que pasar el directorio del chrome viejo
+            ProntoWindowsService.Service1.Initialize();
+            ProntoWindowsService.Service1.DoWorkSoloPegatinas();
+
+
+
 
             string usuario = "Mariano"; //"fyo";
             string clave = "pirulo!"; // "76075";
