@@ -16145,7 +16145,6 @@ usuario As String, ConexBDLmaster As String,
 
 
                     cp.cartaporte = If(dbc.NumeroCartaDePorte, 0)
-                    cp.brutodest = dbc.BrutoFinal
 
 
                     Select Case dbc.CalidadDesc
@@ -16264,9 +16263,22 @@ usuario As String, ConexBDLmaster As String,
                     cp.horadescarga = "" ' If(dbc.Hora, "")
 
 
-                    cp.netodest = dbc.NetoFinal
+
+
+
+
+                    cp.brutoproc = If(dbc.BrutoPto, 0)
+                    cp.taraproc = If(dbc.TaraPto, 0)
                     cp.netoproc = dbc.NetoPto
+
+                    cp.brutodest = dbc.BrutoFinal
                     cp.taradest = dbc.TaraFinal
+                    cp.netodest = dbc.NetoFinal
+
+                    cp.OtrasMermas = If(dbc.Merma, 0)
+                    cp.NetoFinal = If(dbc.NetoProc, 0)
+
+
 
 
 
@@ -16289,12 +16301,8 @@ usuario As String, ConexBDLmaster As String,
                     cp.CTG = If(dbc.CTG, DateTime.MinValue)
                     cp.CupoTurno = dbc.Turno
                     cp.HoraArribo = If(dbc.FechaArribo, 0)
-                    cp.brutoproc = If(dbc.BrutoPto, 0)
-                    cp.taraproc = If(dbc.TaraPto, 0)
                     cp.Humedad = If(dbc.Humedad, 0)
                     cp.MermaHumedad = If(dbc.HumedadDesnormalizada, 0)
-                    cp.OtrasMermas = If(dbc.Merma, 0)
-                    cp.NetoFinal = If(dbc.NetoFinal, 0)
                     cp.ClienteObserv = dbc.ClienteAuxiliarDesc
                     cp.CorredorObs = dbc.CorredorDesc
                     cp.cuitchofer = dbc.ChoferCUIT
@@ -16931,6 +16939,10 @@ usuario As String, ConexBDLmaster As String,
 
 
     End Function
+
+
+
+
     Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
