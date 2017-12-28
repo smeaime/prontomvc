@@ -2631,7 +2631,7 @@ usuario As String, ConexBDLmaster As String,
                                                    .FechaModificacion = cdp.FechaModificacion,
                                                    .FechaDescarga = cdp.FechaDescarga,
                                                    .Observaciones = cdp.Observaciones,
-                                                   .NetoFinalSinMermas = cdp.NetoFinal,
+                                                   .NetoFinalDespuesDeRestadasMermas = cdp.NetoFinal,
                                                    .TitularDesc = clitit.RazonSocial,
                                                    .IntermediarioDesc = cliint.RazonSocial,
                                                    .RComercialDesc = clircom.RazonSocial,
@@ -10731,7 +10731,7 @@ usuario As String, ConexBDLmaster As String,
 
 
                 If .Exporta And False Then 'por ahora, desactivar los movimientos automaticos. El informe tambien revisa la tabla de Cartas
-                    CDPStockMovimientoManager.Save(SC, CartaDePorteId, .Titular, .Entregador, .IdArticulo, .NetoFinalIncluyendoMermas, True, .Destino)
+                    CDPStockMovimientoManager.Save(SC, CartaDePorteId, .Titular, .Entregador, .IdArticulo, .NetoFinalAntesDeRestarMermas, True, .Destino)
                 End If
 
 
@@ -11358,7 +11358,7 @@ usuario As String, ConexBDLmaster As String,
             End If
 
 
-            If .NetoFinalIncluyendoMermas > 0 Then
+            If .NetoFinalAntesDeRestarMermas > 0 Then
                 If .FechaDescarga = #12:00:00 AM# Then
                     ms &= "Se necesita la fecha de la descarga (porque se ingresó el neto final de la descarga)"
                     ms &= vbCrLf   'return false
@@ -11367,7 +11367,7 @@ usuario As String, ConexBDLmaster As String,
 
             End If
 
-            If .NetoFinalIncluyendoMermas = 0 Then
+            If .NetoFinalAntesDeRestarMermas = 0 Then
                 If .FechaDescarga <> #12:00:00 AM# Then
                     ms &= "Se necesita el neto final de la descarga (porque se ingresó la fecha de descarga)"
                     ms &= vbCrLf   'return false
@@ -11606,7 +11606,7 @@ usuario As String, ConexBDLmaster As String,
 
 
             Dim sClientesExigentes As String
-            If .NetoFinalIncluyendoMermas > 0 And UsaClientesQueExigenDatosDeDescargaCompletos(SC, myCartaDePorte, sClientesExigentes) Then
+            If .NetoFinalAntesDeRestarMermas > 0 And UsaClientesQueExigenDatosDeDescargaCompletos(SC, myCartaDePorte, sClientesExigentes) Then
                 'Está en descarga y usa clientes exigentes: se debe hacer validacion completa
 
 
@@ -11638,11 +11638,11 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                If iisNull(.NetoFinalIncluyendoMermas, 0) <= 0 Or
+                If iisNull(.NetoFinalAntesDeRestarMermas, 0) <= 0 Or
                     iisNull(.TaraFinal, 0) <= 0 Or
                     iisNull(.BrutoFinal, 0) <= 0 Or
                     iisNull(.NetoPto, 0) <= 0 Or
-                    iisNull(.NetoFinalSinMermas, 0) <= 0 Then
+                    iisNull(.NetoFinalDespuesDeRestadasMermas, 0) <= 0 Then
 
                     ms &= "Hay pesajes sin completar. " & K
                     ms &= vbCrLf   'return false
@@ -11829,7 +11829,7 @@ usuario As String, ConexBDLmaster As String,
 
 
     Public Shared Function GetEstado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte) As enumCDPestado
-        If myCartaDePorte.NetoFinalIncluyendoMermas > 0 Then
+        If myCartaDePorte.NetoFinalAntesDeRestarMermas > 0 Then
             Return enumCDPestado.DescargasSinFacturar
         Else
             Return enumCDPestado.Posicion

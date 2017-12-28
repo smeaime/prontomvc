@@ -527,7 +527,7 @@ Namespace Pronto.ERP.BO
             End Set
         End Property
 
-        Public Property NetoFinalSinMermas() As Double
+        Public Property NetoFinalDespuesDeRestadasMermas() As Double
             Get
                 Return _NetoProc
             End Get
@@ -602,7 +602,7 @@ Namespace Pronto.ERP.BO
             End Set
         End Property
 
-        Public Property NetoFinalIncluyendoMermas() As Double
+        Public Property NetoFinalAntesDeRestarMermas() As Double
             Get
                 Return _NetoFinal
             End Get

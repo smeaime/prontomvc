@@ -290,7 +290,7 @@ Partial Class CartadeporteABMExternoMovil
                 BloqueosDeEdicion(myCartaDePorte)
 
 
-                If myCartaDePorte.NetoFinalIncluyendoMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
+                If myCartaDePorte.NetoFinalAntesDeRestarMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
                     TabContainer2.ActiveTabIndex = 1
                 Else
                     TabContainer2.ActiveTabIndex = 0
@@ -1560,7 +1560,7 @@ Partial Class CartadeporteABMExternoMovil
 
             .NRecibo = StringToDecimal(txtNRecibo.Text)
             .CalidadDe = BuscaIdCalidadPreciso(TextBoxCalidad.Text, SC)
-            .NetoFinalIncluyendoMermas = StringToDecimal(txtNetoDescarga.Text)
+            .NetoFinalAntesDeRestarMermas = StringToDecimal(txtNetoDescarga.Text)
             .TaraFinal = StringToDecimal(txtTaraDescarga.Text)
             .BrutoFinal = StringToDecimal(txtBrutoDescarga.Text)
 
@@ -1572,7 +1572,7 @@ Partial Class CartadeporteABMExternoMovil
             .Merma = StringToDecimal(txtMerma.Text)
 
 
-            .NetoFinalSinMermas = StringToDecimal(txtNetoFinalTotalMenosMermas.Text)
+            .NetoFinalDespuesDeRestadasMermas = StringToDecimal(txtNetoFinalTotalMenosMermas.Text)
 
 
             .Cosecha = cmbCosecha.SelectedValue
@@ -2009,11 +2009,11 @@ Partial Class CartadeporteABMExternoMovil
                 If .CalidadDe > 0 Then TextBoxCalidad.Text = NombreCalidad(SC, .CalidadDe)
 
 
-                txtNetoDescarga.Text = IIf(.NetoFinalIncluyendoMermas = 0, "", .NetoFinalIncluyendoMermas)
+                txtNetoDescarga.Text = IIf(.NetoFinalAntesDeRestarMermas = 0, "", .NetoFinalAntesDeRestarMermas)
                 txtTaraDescarga.Text = IIf(.TaraFinal = 0, "", .TaraFinal)
                 txtBrutoDescarga.Text = IIf(.BrutoFinal = 0, "", .BrutoFinal)
 
-                txtNetoFinalTotalMenosMermas.Text = .NetoFinalSinMermas
+                txtNetoFinalTotalMenosMermas.Text = .NetoFinalDespuesDeRestadasMermas
 
                 txtFumigada.Text = .Fumigada
                 'txtSecada.Text = .Secada

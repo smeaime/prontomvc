@@ -3810,7 +3810,7 @@ Partial Class CartasDePorteImportador
             End If
 
 
-            If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
+            If .NetoFinalDespuesDeRestadasMermas > 0 Or .NetoFinalAntesDeRestarMermas > 0 Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
                 'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
                 ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
@@ -4048,7 +4048,7 @@ Partial Class CartasDePorteImportador
 
             actualizar(.BrutoFinal, dr.Item("column12"))
             actualizar(.TaraFinal, dr.Item("column13"))
-            actualizar(.NetoFinalIncluyendoMermas, dr.Item("column14"))
+            actualizar(.NetoFinalAntesDeRestarMermas, dr.Item("column14"))
 
 
 
@@ -4057,7 +4057,7 @@ Partial Class CartasDePorteImportador
             actualizar(.HumedadDesnormalizada, dr.Item("column16"))
             If .HumedadDesnormalizada = 0 And .Humedad <> 0 And .IdArticulo > 0 Then
                 Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, .IdArticulo, .Humedad)
-                .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalIncluyendoMermas
+                .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalAntesDeRestarMermas
             End If
 
             '.Merma = 0 'la piso, por si ya se importó antes
@@ -4070,10 +4070,10 @@ Partial Class CartasDePorteImportador
 
 
 
-            actualizar(.NetoFinalSinMermas, dr.Item("column17"))
-            If .NetoFinalSinMermas = 0 Then
+            actualizar(.NetoFinalDespuesDeRestadasMermas, dr.Item("column17"))
+            If .NetoFinalDespuesDeRestadasMermas = 0 Then
                 'recalcular()
-                .NetoFinalSinMermas = .NetoFinalIncluyendoMermas - .HumedadDesnormalizada
+                .NetoFinalDespuesDeRestadasMermas = .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada
             Else
                 'que pasa si lo que viene en el excel es distinto de lo calculado?
             End If
@@ -4100,7 +4100,7 @@ Partial Class CartasDePorteImportador
 
             'con el chkAyer tambien debo modificar la fecha de arribo???
             actualizar(.FechaDescarga, iisValidSqlDate(TextoAFecha(iisNull(dr.Item("FechaDescarga"), _
-                                    IIf(.NetoFinalIncluyendoMermas > 0, IIf(chkAyer.Checked, DateAdd(DateInterval.Day, -1, Today), Today), Nothing)))))
+                                    IIf(.NetoFinalAntesDeRestarMermas > 0, IIf(chkAyer.Checked, DateAdd(DateInterval.Day, -1, Today), Today), Nothing)))))
 
 
             'If iisNull(.FechaArribo, #12:00:00 AM#) = #12:00:00 AM# Then
@@ -4123,8 +4123,8 @@ Partial Class CartasDePorteImportador
 
             actualizar(.Observaciones, dr.Item("column25"))
 
-            If .NetoFinalSinMermas <> .NetoFinalIncluyendoMermas - .HumedadDesnormalizada And iisNull(dr.Item("column17"), 0) <> 0 Then
-                .Observaciones &= " (AVISO: renglon importado con incoherencias entre la merma y los netos -->  Neto importado: " & .NetoFinalSinMermas & "     Neto calculado:" & .NetoFinalIncluyendoMermas - .HumedadDesnormalizada & " =" & .NetoFinalIncluyendoMermas & "-" & .HumedadDesnormalizada & "   )"
+            If .NetoFinalDespuesDeRestadasMermas <> .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada And iisNull(dr.Item("column17"), 0) <> 0 Then
+                .Observaciones &= " (AVISO: renglon importado con incoherencias entre la merma y los netos -->  Neto importado: " & .NetoFinalDespuesDeRestadasMermas & "     Neto calculado:" & .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada & " =" & .NetoFinalAntesDeRestarMermas & "-" & .HumedadDesnormalizada & "   )"
             End If
 
 
