@@ -3,7 +3,7 @@
         ViewBag.Title = "Requerimientos (pendientes)";
     }
 
-    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>    
+    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>
 
     <div style=" padding-left: 15px;  padding-right: 15px ;">
         <div>
@@ -59,6 +59,16 @@
         </ul>
     </div>
 
+
+    <style>
+        .ui-dialog-titlebar {
+            /*display: none;*/
+        }
+
+        .ui-dialog-content {
+            padding: 0 0 0 0;
+        }
+    </style>
     <div id="frmVale"></div>
 
     <script type="text/javascript">
@@ -66,14 +76,18 @@
 
     $(document).ready(function () {
 
+
+
+
+
         $('#Vale').on('click', function () {
             $("#frmVale").dialog({
                 autoOpen: true,
                 position: { my: "center", at: "100", of: window },
-                height: 800,
-                width: 1000,
+                height: 750,
+                width: 900,
                 resizable: true,
-                title: 'Vale',
+                //title: 'Vale',
                 modal: true,
                 open: function () {
                     $("#frmVale").html("");
@@ -95,7 +109,7 @@
                     if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
 
 
-                 
+
                     $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
                         try {
                             $("#frmVale").html(partialView);
@@ -119,9 +133,9 @@
                     //    //addUserInfo();
                     //    $(this).dialog("close");
                     //},
-                    "Cancelar": function () {
-                        $(this).dialog("close");
-                    }
+                    //"Cancelar": function () {
+                    //    $(this).dialog("close");
+                    //}
                 }
             });
             return false;
@@ -504,4 +518,3 @@
     });
 
     </script>
-    
