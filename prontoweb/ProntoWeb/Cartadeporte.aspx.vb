@@ -39,6 +39,12 @@ Partial Class CartadeporteABM
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
+
+        'explota porque el usuariocliente estaba siendo redirigido a produccion, donde no tiene usuario Membership.GetUser().UserName
+
+
+
+
         'Me.EnableViewState = False 'todo: debug
         'todo: está bien que deje habilitado el viewstate para el objetito CartaPorte, pero
         'sacarlo para los controles
