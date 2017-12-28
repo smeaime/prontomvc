@@ -6481,7 +6481,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -6510,7 +6510,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
         }
@@ -9206,7 +9206,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -9236,7 +9236,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -9262,7 +9262,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -9292,7 +9292,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -11000,7 +11000,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11028,7 +11028,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -11210,7 +11210,7 @@ namespace ProntoMVC.Tests
             carta.PuntoVenta = 1;
             carta.Cosecha = "2016/17";
             carta.IdArticulo = 5;
-            carta.NetoFinalIncluyendoMermas = 30160;
+            carta.NetoFinalAntesDeRestarMermas = 30160;
             carta.Merma = 0;
             carta.Humedad = 0;
             carta.HumedadDesnormalizada = 0;
@@ -11272,7 +11272,7 @@ namespace ProntoMVC.Tests
             carta.PuntoVenta = 1;
             carta.Cosecha = "2016/17";
             carta.IdArticulo = 4;
-            carta.NetoFinalSinMermas = 30160;
+            carta.NetoFinalDespuesDeRestadasMermas = 30160;
             carta.Merma = 0;
             carta.Humedad = 0;
             carta.HumedadDesnormalizada = 0;
@@ -11337,7 +11337,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11366,7 +11366,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
         }
@@ -11689,7 +11689,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11717,7 +11717,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -11946,7 +11946,7 @@ namespace ProntoMVC.Tests
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11975,7 +11975,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -13624,7 +13624,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -13652,7 +13652,7 @@ namespace ProntoMVC.Tests
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
