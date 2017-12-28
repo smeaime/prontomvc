@@ -347,7 +347,7 @@ Public Class FertilizanteManager
             'End If
 
 
-            'If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
+            'If .NetoFinalDespuesDeRestadasMermas > 0 Or .NetoFinalAntesDeRestarMermas > 0 Then
             '    'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
             '    'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
             '    ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")

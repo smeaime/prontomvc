@@ -2249,7 +2249,7 @@ namespace ProntoFlexicapture
 
 
 				bool bPisar = false;
-				if (cdp.NetoFinalIncluyendoMermas == 0) bPisar = true;
+				if (cdp.NetoFinalAntesDeRestarMermas == 0) bPisar = true;
 
 
 
@@ -2307,9 +2307,9 @@ namespace ProntoFlexicapture
 
 						cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
 						cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
-						cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+						cdp.NetoFinalDespuesDeRestadasMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
 
-						cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+						cdp.NetoFinalAntesDeRestarMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
 
 
 
@@ -2411,9 +2411,9 @@ namespace ProntoFlexicapture
 
 					cdp.BrutoFinal = Conversion.Val(PesoBrutoDescarga.Replace(".", "").Replace(",", ""));
 					cdp.TaraFinal = Conversion.Val(PesoTaraDescarga.Replace(".", "").Replace(",", ""));
-					cdp.NetoFinalSinMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
+					cdp.NetoFinalDespuesDeRestadasMermas = Conversion.Val(PesoNetoDescarga.Replace(".", "").Replace(",", ""));
 
-					cdp.NetoFinalIncluyendoMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
+					cdp.NetoFinalAntesDeRestarMermas = Conversion.Val(PesoNetoFinal.Replace(".", "").Replace(",", ""));
 
 
 					cdp.NRecibo = Recibo;
@@ -2450,11 +2450,11 @@ namespace ProntoFlexicapture
 
 
 
-				if (cdp.NetoFinalIncluyendoMermas > 0)
+				if (cdp.NetoFinalAntesDeRestarMermas > 0)
 				{
 					if (cdp.FechaDescarga == DateTime.MinValue)
 					{
-						cdp.NetoFinalIncluyendoMermas = 0;
+						cdp.NetoFinalAntesDeRestarMermas = 0;
 					}
 
 				}

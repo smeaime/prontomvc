@@ -1,4 +1,4 @@
-$(function () {
+function inicializar() {
     $("#loading").hide();
 
     'use strict';
@@ -71,7 +71,7 @@ $(function () {
             value = Number(value);
             var Cantidad = value;
             //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
-        } 
+        }
         return [true];
     };
 
@@ -83,31 +83,85 @@ $(function () {
 
         if (colName == "Codigo") {
             $.post(ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',  // ?term=' + val
-                    { term: val }, // JSON.stringify(val)},
-                    function (data) {
-                        if (data.length > 0) {
-                            var ui = data[0];
+                { term: val }, // JSON.stringify(val)},
+                function (data) {
+                    if (data.length > 0) {
+                        var ui = data[0];
 
-                            sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
+                        sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
 
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                        data['IdArticulo'] = ui.id;
+                        data['Codigo'] = ui.codigo;
+                        data['Articulo'] = ui.title;
+                        data['IdUnidad'] = ui.IdUnidad;
+                        data['Unidad'] = ui.Unidad;
+                        data['IdDetalleValeSalida'] = data['IdDetalleValeSalida'] || 0;
+
+                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                        FinRefresco();
+                    }
+                    else {
+                        alert("No existe el código");
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+                        data['Articulo'] = "";
+                        data['IdArticulo'] = 0;
+                        data['Codigo'] = "";
+                        data['Cantidad'] = 0;
+
+                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                    }
+                }
+            );
+        }
+
+        else if (colName == "Articulo") {
+            $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',
+                { term: val }, // JSON.stringify(val)},
+                function (data) {
+                    if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
+                        var ui = data[0];
+
+                        sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
+
+                        if (ui.value == "No se encontraron resultados") {
                             var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                             var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
 
-                            data['IdArticulo'] = ui.id;
-                            data['Codigo'] = ui.codigo;
-                            data['Articulo'] = ui.title;
-                            data['IdUnidad'] = ui.IdUnidad;
-                            data['Unidad'] = ui.Unidad;
-                            data['IdDetalleValeSalida'] = data['IdDetalleValeSalida'] || 0;
+                            data['Articulo'] = "";
+                            data['IdArticulo'] = 0;
+                            data['Codigo'] = "";
+                            data['Cantidad'] = 0;
 
                             $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-
-                            FinRefresco();
+                            return;
                         }
-                        else {
-                            alert("No existe el código");
-                            var ui = data[0];
-                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
+
+                        data['IdArticulo'] = ui.id;
+                        data['Codigo'] = ui.codigo;
+                        data['Articulo'] = ui.value;
+                        data['IdUnidad'] = ui.IdUnidad;
+                        data['Unidad'] = ui.Unidad;
+                        data['IdDetalleValeSalida'] = data['IdDetalleValeSalida'] || 0;
+
+                        $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+
+                        FinRefresco();
+                    }
+                    else {
+                        alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
+                        var ui = data[0];
+                        var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+                        if (true) {
 
                             var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
                             data['Articulo'] = "";
@@ -116,66 +170,12 @@ $(function () {
                             data['Cantidad'] = 0;
 
                             $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
+                        } else {
+                            $('#Lista').jqGrid('restoreRow', dataIds[iRow - 1]);
                         }
+                        // hay que cancelar la grabacion
                     }
-            );
-        }
-
-        else if (colName == "Articulo") {
-            $.post(ROOT + 'Articulo/GetArticulosAutocomplete2',
-                    { term: val }, // JSON.stringify(val)},
-                    function (data) {
-                        if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
-                            var ui = data[0];
-
-                            sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
-
-                            if (ui.value == "No se encontraron resultados") {
-                                var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-                                var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-                                data['Articulo'] = "";
-                                data['IdArticulo'] = 0;
-                                data['Codigo'] = "";
-                                data['Cantidad'] = 0;
-
-                                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-                                return;
-                            }
-
-                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-                            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-
-                            data['IdArticulo'] = ui.id;
-                            data['Codigo'] = ui.codigo;
-                            data['Articulo'] = ui.value;
-                            data['IdUnidad'] = ui.IdUnidad;
-                            data['Unidad'] = ui.Unidad;
-                            data['IdDetalleValeSalida'] = data['IdDetalleValeSalida'] || 0;
-
-                            $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-
-                            FinRefresco();
-                        }
-                        else {
-                            alert("No existe el artículo " + val); // se está bancando que no sea identica la descripcion
-                            var ui = data[0];
-                            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
-                            if (true) {
-
-                                var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
-                                data['Articulo'] = "";
-                                data['IdArticulo'] = 0;
-                                data['Codigo'] = "";
-                                data['Cantidad'] = 0;
-
-                                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
-                            } else {
-                                $('#Lista').jqGrid('restoreRow', dataIds[iRow - 1]);
-                            }
-                            // hay que cancelar la grabacion
-                        }
-                    }
+                }
             );
 
         }
@@ -203,122 +203,122 @@ $(function () {
         mtype: 'POST',
         colNames: ['', 'IdDetalleValeSalida', 'IdArticulo', 'IdUnidad', 'Codigo', 'Artículo', 'Cantidad', 'Un.', 'Cump.', 'Est.', 'Nro.RM', 'Item RM', 'Tipo RM'],
         colModel: [
-                    { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
-                    { name: 'IdDetalleValeSalida', index: 'IdDetalleValeSalida', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
-                    { name: 'IdArticulo', index: 'IdArticulo', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
-                    { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
-                    {
-                        name: 'Codigo', index: 'Codigo', width: 200, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
-                        editoptions: {
-                            dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
-                            dataInit: function (elem) {
-                                var NoResultsLabel = "No se encontraron resultados";
-                                $(elem).autocomplete({
-                                    source: ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',
-                                    minLength: 0,
-                                    select: function (event, ui) {
-                                        if (ui.item.label === NoResultsLabel) {
-                                            event.preventDefault();
-                                            return;
-                                        }
-                                        event.preventDefault();
-                                        $(elem).val(ui.item.label);
-                                        var rowid = $('#Lista').getGridParam('selrow');
-                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#Lista').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
-                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
-                                        CalcularItem(1, "Cantidad");
-                                    },
-                                    focus: function (event, ui) {
-                                        if (ui.item.label === NoResultsLabel) {
-                                            event.preventDefault();
-                                        }
-                                    }
-                                })
-                                .data("ui-autocomplete")._renderItem = function (ul, item) {
-                                    return $("<li></li>")
-                                        .data("ui-autocomplete-item", item)
-                                        .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + "</b></span></a>")
-                                        .appendTo(ul);
-                                };
+            { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
+            { name: 'IdDetalleValeSalida', index: 'IdDetalleValeSalida', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
+            { name: 'IdArticulo', index: 'IdArticulo', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+            { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+            {
+                name: 'Codigo', index: 'Codigo', width: 200, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                editoptions: {
+                    dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
+                    dataInit: function (elem) {
+                        var NoResultsLabel = "No se encontraron resultados";
+                        $(elem).autocomplete({
+                            source: ROOT + 'Articulo/GetCodigosArticulosAutocomplete2',
+                            minLength: 0,
+                            select: function (event, ui) {
+                                if (ui.item.label === NoResultsLabel) {
+                                    event.preventDefault();
+                                    return;
+                                }
+                                event.preventDefault();
+                                $(elem).val(ui.item.label);
+                                var rowid = $('#Lista').getGridParam('selrow');
+                                $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                $('#Lista').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
+                                $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                CalcularItem(1, "Cantidad");
                             },
-                        }
+                            focus: function (event, ui) {
+                                if (ui.item.label === NoResultsLabel) {
+                                    event.preventDefault();
+                                }
+                            }
+                        })
+                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                return $("<li></li>")
+                                    .data("ui-autocomplete-item", item)
+                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + "</b></span></a>")
+                                    .appendTo(ul);
+                            };
                     },
-                    {
-                        name: 'Articulo', index: 'Articulo', align: 'left', width: 500, hidden: false, editable: true, edittype: 'text', editrules: { required: true },
-                        editoptions: {
-                            dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
-                            dataInit: function (elem) {
-                                var NoResultsLabel = "No se encontraron resultados";
-                                $(elem).autocomplete({
-                                    source: ROOT + 'Articulo/GetArticulosAutocomplete2',
-                                    minLength: 0,
-                                    select: function (event, ui) {
-                                        if (ui.item.label === NoResultsLabel) {
-                                            event.preventDefault();
-                                            return;
-                                        }
-                                        event.preventDefault();
-                                        $(elem).val(ui.item.label);
-                                        var rowid = $('#Lista').getGridParam('selrow');
-                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
-                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
-                                    },
-                                    focus: function (event, ui) {
-                                        if (ui.item.label === NoResultsLabel) {
-                                            event.preventDefault();
-                                        }
-                                    }
-                                })
-                                .data("ui-autocomplete")._renderItem = function (ul, item) {
-                                    return $("<li></li>")
-                                        .data("ui-autocomplete-item", item)
-                                        .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + "</b></span></a>")
-                                        //.append("<a>" + item.value + "<br>" + item.title + "</a>")
-                                        .appendTo(ul);
-                                };
+                }
+            },
+            {
+                name: 'Articulo', index: 'Articulo', align: 'left', width: 500, hidden: false, editable: true, edittype: 'text', editrules: { required: true },
+                editoptions: {
+                    dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
+                    dataInit: function (elem) {
+                        var NoResultsLabel = "No se encontraron resultados";
+                        $(elem).autocomplete({
+                            source: ROOT + 'Articulo/GetArticulosAutocomplete2',
+                            minLength: 0,
+                            select: function (event, ui) {
+                                if (ui.item.label === NoResultsLabel) {
+                                    event.preventDefault();
+                                    return;
+                                }
+                                event.preventDefault();
+                                $(elem).val(ui.item.label);
+                                var rowid = $('#Lista').getGridParam('selrow');
+                                $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
                             },
-                        }
+                            focus: function (event, ui) {
+                                if (ui.item.label === NoResultsLabel) {
+                                    event.preventDefault();
+                                }
+                            }
+                        })
+                            .data("ui-autocomplete")._renderItem = function (ul, item) {
+                                return $("<li></li>")
+                                    .data("ui-autocomplete-item", item)
+                                    .append("<a><span style='display:inline-block;width:500px;font-size:12px'><b>" + item.value + "</b></span></a>")
+                                    //.append("<a>" + item.value + "<br>" + item.title + "</a>")
+                                    .appendTo(ul);
+                            };
                     },
-                    {
-                        name: 'Cantidad', index: 'Cantidad', width: 70, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
-                        editoptions: {
-                            maxlength: 20, defaultValue: '0.00',
-                            dataEvents: [
-                                { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
-                                {
-                                    type: 'keypress',
-                                    fn: function (e) {
-                                        var key = e.charCode || e.keyCode;
-                                        if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                                        if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-                                    }
-                                }]
-                        }
-                    },
-                    {
-                        name: 'Unidad', index: 'Unidad', align: 'left', width: 45, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
-                        editoptions: {
-                            dataUrl: ROOT + 'Unidad/GetUnidades2',
-                            dataInit: function (elem) { $(elem).width(40); },
-                            dataEvents: [
-                                { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
-                                {
-                                    type: 'change', fn: function (e) {
-                                        var rowid = $('#Lista').getGridParam('selrow');
-                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', this.value);
-                                    }
-                                }]
-                        },
-                    },
-                    { name: 'Cumplido', index: 'Cumplido', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
-                    { name: 'Estado', index: 'Estado', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
-                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', width: 100, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
-                    { name: 'ItemRM', index: 'ItemRM', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
-                    { name: 'TipoRequerimiento', index: 'TipoRequerimiento', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } }
+                }
+            },
+            {
+                name: 'Cantidad', index: 'Cantidad', width: 70, align: 'right', editable: true, editrules: { custom: true, custom_func: CalcularItem, required: false, number: true }, edittype: 'text', label: 'TB',
+                editoptions: {
+                    maxlength: 20, defaultValue: '0.00',
+                    dataEvents: [
+                        { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                        {
+                            type: 'keypress',
+                            fn: function (e) {
+                                var key = e.charCode || e.keyCode;
+                                if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
+                            }
+                        }]
+                }
+            },
+            {
+                name: 'Unidad', index: 'Unidad', align: 'left', width: 45, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                editoptions: {
+                    dataUrl: ROOT + 'Unidad/GetUnidades2',
+                    dataInit: function (elem) { $(elem).width(40); },
+                    dataEvents: [
+                        { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                        {
+                            type: 'change', fn: function (e) {
+                                var rowid = $('#Lista').getGridParam('selrow');
+                                $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', this.value);
+                            }
+                        }]
+                },
+            },
+            { name: 'Cumplido', index: 'Cumplido', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
+            { name: 'Estado', index: 'Estado', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
+            { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', width: 100, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
+            { name: 'ItemRM', index: 'ItemRM', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } },
+            { name: 'TipoRequerimiento', index: 'TipoRequerimiento', width: 50, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled' } }
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
@@ -343,9 +343,9 @@ $(function () {
         gridComplete: function () {
             calculaTotalImputaciones();
         },
-        loadComplete: function () { 
+        loadComplete: function () {
             //AgregarItemVacio(jQuery("#Lista"));
-            AgregarRenglonesEnBlanco({ "IdDetalleValeSalida": "0", "IdArticulo": "0", "Articulo": "" },"#Lista");
+            AgregarRenglonesEnBlanco({ "IdDetalleValeSalida": "0", "IdArticulo": "0", "Articulo": "" }, "#Lista");
         },
         pager: $('#ListaPager'),
         rowNum: 100,
@@ -374,19 +374,19 @@ $(function () {
     //$('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
     jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                                    {
-                                        caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
-                                        onClickButton: function () {
-                                            AgregarItemVacio(jQuery("#Lista"));
-                                        },
-                                    });
+        {
+            caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
+            onClickButton: function () {
+                AgregarItemVacio(jQuery("#Lista"));
+            },
+        });
     jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-                                    {
-                                        caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
-                                        onClickButton: function () {
-                                            EliminarSeleccionados(jQuery("#Lista"));
-                                        },
-                                    });
+        {
+            caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+            onClickButton: function () {
+                EliminarSeleccionados(jQuery("#Lista"));
+            },
+        });
     jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -521,8 +521,21 @@ $(function () {
             }
         });
     });
+}
+
+
+
+$(function () {
+
+    inicializar();
+
 
 });
+
+
+
+
+
 
 calculaTotalImputaciones = function () {
     var Cantidad = 0, TotalCantidad = 0;

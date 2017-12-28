@@ -379,7 +379,7 @@ Public Class LogicaImportador
             End If
 
 
-            If .NetoFinalSinMermas > 0 Or .NetoFinalIncluyendoMermas > 0 Then
+            If .NetoFinalDespuesDeRestadasMermas > 0 Or .NetoFinalAntesDeRestarMermas > 0 Then
                 'http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=9095
                 'MsgBoxAjax(Me, "La Carta " & numeroCarta & " no puede ser importada, porque ya existe como facturada o rechazada")
                 ErrHandler2.WriteAndRaiseError("La Carta " & numeroCarta & " " & IIf(vagon = 0, "", vagon) & " está en estado <descarga> y no se le pueden pisar datos. ")
@@ -707,7 +707,7 @@ Public Class LogicaImportador
 
             actualizar(.BrutoFinal, dr.Item("column12"))
             actualizar(.TaraFinal, dr.Item("column13"))
-            actualizar(.NetoFinalIncluyendoMermas, dr.Item("column14"))
+            actualizar(.NetoFinalAntesDeRestarMermas, dr.Item("column14"))
 
 
 
@@ -722,7 +722,7 @@ Public Class LogicaImportador
 
             If .HumedadDesnormalizada = 0 And .Humedad <> 0 And .IdArticulo > 0 Then
                 Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, .IdArticulo, .Humedad)
-                .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalIncluyendoMermas
+                .HumedadDesnormalizada = porcentajemerma / 100 * .NetoFinalAntesDeRestarMermas
             End If
 
 
@@ -738,10 +738,10 @@ Public Class LogicaImportador
 
 
 
-            actualizar(.NetoFinalSinMermas, dr.Item("column17"))
-            If .NetoFinalSinMermas = 0 Then
+            actualizar(.NetoFinalDespuesDeRestadasMermas, dr.Item("column17"))
+            If .NetoFinalDespuesDeRestadasMermas = 0 Then
                 'recalcular()
-                .NetoFinalSinMermas = .NetoFinalIncluyendoMermas - .HumedadDesnormalizada
+                .NetoFinalDespuesDeRestadasMermas = .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada
             Else
                 'que pasa si lo que viene en el excel es distinto de lo calculado?
             End If
@@ -785,11 +785,11 @@ Public Class LogicaImportador
                 actualizar(.FechaDescarga,
                            iisValidSqlDate(TextoAFecha(
                                                     iisNull(dr.Item("FechaDescarga"),
-                                                        IIf(.NetoFinalIncluyendoMermas > 0,
+                                                        IIf(.NetoFinalAntesDeRestarMermas > 0,
                                                             IIf(chkAyer.Checked,
                                                                 DateAdd(DateInterval.Day, -1, Today),
                                                                 Today) _
-                                                            , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalIncluyendoMermas
+                                                            , Nothing)))))  'si la fechadescarga está en null, me fijo si hay NetoFinalAntesDeRestarMermas
 
             Catch ex As Exception
                 ErrHandler2.WriteError(ex)
@@ -826,8 +826,8 @@ Public Class LogicaImportador
 
             actualizar(.Observaciones, dr.Item("column25"))
 
-            If .NetoFinalSinMermas <> .NetoFinalIncluyendoMermas - .HumedadDesnormalizada And iisNull(dr.Item("column17"), 0) <> 0 Then
-                .Observaciones &= " (AVISO: renglon importado con incoherencias entre la merma y los netos -->  Neto importado: " & .NetoFinalSinMermas & "     Neto calculado:" & .NetoFinalIncluyendoMermas - .HumedadDesnormalizada & " =" & .NetoFinalIncluyendoMermas & "-" & .HumedadDesnormalizada & "   )"
+            If .NetoFinalDespuesDeRestadasMermas <> .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada And iisNull(dr.Item("column17"), 0) <> 0 Then
+                .Observaciones &= " (AVISO: renglon importado con incoherencias entre la merma y los netos -->  Neto importado: " & .NetoFinalDespuesDeRestadasMermas & "     Neto calculado:" & .NetoFinalAntesDeRestarMermas - .HumedadDesnormalizada & " =" & .NetoFinalAntesDeRestarMermas & "-" & .HumedadDesnormalizada & "   )"
             End If
 
 
@@ -2238,15 +2238,15 @@ Public Class ExcelImportadorManager
                         If actua(.TaraFinal, Decimal.Parse(Val(r(30)))) Then log += "TaraFinal; "
                         '.TaraFinal = Val(r(30))
 
-                        'If actua(.NetoFinalIncluyendoMermas, Val(r(31))) Then log += "NetoFinal; "
+                        'If actua(.NetoFinalAntesDeRestarMermas, Val(r(31))) Then log += "NetoFinal; "
                         If actua(.NetoFinal, Decimal.Parse(Val(r(31)))) Then log += "NetoFinal; "
-                        '.NetoFinalIncluyendoMermas = Val(r(31))
+                        '.NetoFinalAntesDeRestarMermas = Val(r(31))
 
                         If actua(.Merma, Decimal.Parse(Val(r(32)))) Then log += "Merma; "
                         '.Merma = Val(r(32))
-                        'If actua(.NetoFinalSinMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
+                        'If actua(.NetoFinalDespuesDeRestadasMermas, Val(r(33))) Then log += "NetoFinalMenosMermas; "
                         If actua(.NetoProc, Decimal.Parse(Val(r(33)))) Then log += "NetoFinalMenosMermas; "
-                        '.NetoFinalSinMermas = Val(r(33))
+                        '.NetoFinalDespuesDeRestadasMermas = Val(r(33))
 
 
 
@@ -3566,7 +3566,7 @@ Public Class ExcelImportadorManager
                             Dim kiloshumedad As Double = 0
                             If porcentajehum > 0 Then
                                 Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
-                                kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalSinMermas
+                                kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalDespuesDeRestadasMermas
                             End If
 
                             cdp.Humedad = porcentajehum
@@ -3915,7 +3915,7 @@ Public Class ExcelImportadorManager
                 Dim kiloshumedad As Long = 0
                 If Rubro = 2 And porcentajehum > 0 Then
                     Dim porcentajemerma = CartaDePorteManager.BuscaMermaSegunHumedadArticulo(SC, cdp.IdArticulo, porcentajehum)
-                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalIncluyendoMermas
+                    kiloshumedad = porcentajemerma / 100 * cdp.NetoFinalAntesDeRestarMermas
                     cdp.Humedad = porcentajehum
                     cdp.HumedadDesnormalizada = kiloshumedad
                 End If
