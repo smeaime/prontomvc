@@ -9,8 +9,7 @@ $(document).ready(function () {
 
 
 
-
-    $('#Vale').on('click', function () {
+       $("#Vale").click(function () {    //$('#Vale').on('click', function () {
         $("#frmVale").dialog({
             autoOpen: true,
             position: { my: "center", at: "100", of: window },
