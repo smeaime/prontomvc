@@ -3,6 +3,7 @@
         ViewBag.Title = "Requerimientos (pendientes)";
     }
 
+    <script src="@Url.Content("~/Scripts/ScriptRMsPendientesDeAsignar.js?1518")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>
 
     <div style=" padding-left: 15px;  padding-right: 15px ;">
@@ -80,71 +81,7 @@
 
 
 
-        $('#Vale').on('click', function () {
-            $("#frmVale").dialog({
-                autoOpen: true,
-                position: { my: "center", at: "100", of: window },
-                height: 750,
-                width: 900,
-                resizable: true,
-                //title: 'Vale',
-                modal: true,
-                open: function () {
-                    $("#frmVale").html("");
 
-                    var $grid = $("#ListaReq"), i, n;
-                    var ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
-                    if ((ListaReq == null) || (ListaReq.length == 0)) {
-                        ListaReq = [rowIdContextMenu];
-                        if ((ListaReq == null) || (ListaReq.length == 0)) {
-                            alert("No hay rms elegidas " + rowIdContextMenu);
-                            return;
-                        }
-                    }
-
-                    var ListaReq1 = "";
-                    for (i = 0, n = ListaReq.length; i < n; i++) {
-                        ListaReq1 = ListaReq1 + ListaReq[i] + ",";
-                    }
-                    if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
-
-
-
-                    $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
-                        try {
-                            $("#frmVale").html(partialView);
-                        }
-                        catch (err) {
-                        }
-                        inicializar();
-
-                        RefrescaAnchoJqgrids();
-                        deshabilitarPanelesDerecho();
-
-                      
-
-
-
-                    }).then(function () {
-                        //alert("hola")
-                        jQuery("#Lista").jqGrid().setGridParam({
-                            url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
-                            data: { idDetalleRequerimientos: ListaReq }
-                        }).trigger("reloadGrid");
-                        });
-                },
-                buttons: {
-                    //"Add User": function () {
-                    //    //addUserInfo();
-                    //    $(this).dialog("close");
-                    //},
-                    //"Cancelar": function () {
-                    //    $(this).dialog("close");
-                    //}
-                }
-            });
-            return false;
-        });
 
         $("#Vale2").click(function () {
             var $grid = $("#ListaReq");
