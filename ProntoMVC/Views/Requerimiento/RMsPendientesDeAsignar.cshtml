@@ -44,24 +44,42 @@
     </div>
 
     <div class="contextMenu" id="myMenu1" style="display:none">
-        <ul style="width: 400px">
+
+
+        <style>
+
+            .price-features li span {
+                padding: 0 0 0 0 !important;
+                border: 0;
+                display: block;
+                margin: 0 0 0 0;
+                height: 30px;
+            }
+
+        </style>
+
+
+        <ul style="width: 400px"  class="price-features">
             <li id="add">
                 @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-                <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
+                <span id="Vale" style="font-size:11px; height: 30px; font-family:Verdana">Generar Vale salida (stock)</span>
             </li>
             <li id="edit">
                 @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
-                <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
+                <span id="ParaCompras" style="font-size:11px; height: 30px; font-family:Verdana">Liberar para Compras</span>
             </li>
             <li id="del">
                 @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+                <span id="DarPorCumplido" style="font-size:11px; height: 30px; font-family:Verdana">Dar por cumplido</span>
             </li>
         </ul>
     </div>
 
 
     <style>
+
+
+
         .ui-dialog-titlebar {
             /*display: none;*/
         }
