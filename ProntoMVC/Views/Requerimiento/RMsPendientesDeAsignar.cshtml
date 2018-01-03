@@ -121,12 +121,17 @@
                         RefrescaAnchoJqgrids();
                         deshabilitarPanelesDerecho();
 
-                        jQuery("#Lista").jqGrid().setGridParam({
-                            url: '@Url.Action("DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos", "ValeSalida")',
-                            data: { idDetalleRequerimientos: ListaReq }
-                        }).trigger("reloadGrid")
+                      
 
-                    });
+
+
+                    }).then(function () {
+                        //alert("hola")
+                        jQuery("#Lista").jqGrid().setGridParam({
+                            url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
+                            data: { idDetalleRequerimientos: ListaReq }
+                        }).trigger("reloadGrid");
+                        });
                 },
                 buttons: {
                     //"Add User": function () {

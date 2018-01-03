@@ -1,7 +1,9 @@
-﻿$(function () {
+$(function () {
     $("#loading").hide();
 
+    
     'use strict';
+
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic;
     var headerRow, rowHight, resizeSpanHeight;
