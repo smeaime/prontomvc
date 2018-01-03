@@ -819,6 +819,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery.table2excel.js" />
     <Content Include="Scripts\ScriptComprobanteProveedor2.js" />
+    <Content Include="Scripts\ScriptRMsPendientesDeAsignar.js" />
     <Content Include="Scripts\ScriptRequerimiento2.js" />
     <Content Include="Scripts\ScriptValeSalida.js" />
     <Content Include="Scripts\ScriptResumenConciliacion.js" />
@@ -908,7 +909,6 @@
     <Content Include="Views\SalidaMateriales\Edit.cshtml" />
     <Content Include="Views\SalidaMateriales\Index.cshtml" />
     <Content Include="Scripts\ScriptComprobanteProveedorFondoFijoFF.js" />
-    <Content Include="Scripts\ScriptRequerimiento.js" />
     <Content Include="Scripts\jquery-grid\css\ellipsis-xbl.xml" />
     <Content Include="Scripts\jquery-grid\css\ui.jqgrid.css" />
     <Content Include="Scripts\jquery-grid\css\ui.multiselect.css" />
