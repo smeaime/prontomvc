@@ -346,6 +346,7 @@ function inicializar() {
         loadComplete: function () {
             //AgregarItemVacio(jQuery("#Lista"));
             AgregarRenglonesEnBlanco({ "IdDetalleValeSalida": "0", "IdArticulo": "0", "Articulo": "" }, "#Lista");
+            //CargarDetalle();
         },
         pager: $('#ListaPager'),
         rowNum: 100,
@@ -370,7 +371,11 @@ function inicializar() {
         // caption: '<b>DETALLE DE ARTICULOS</b>',
         cellEdit: true,
         cellsubmit: 'clientArray'
-    });
+    })
+        //.then(function () {
+                  //CargarDetalle();
+          //      });
+
     //$('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
     jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',

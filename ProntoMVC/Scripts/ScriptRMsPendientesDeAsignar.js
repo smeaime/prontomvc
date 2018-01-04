@@ -3,6 +3,22 @@
 
 
 
+var ListaReq;
+var ListaReq1 = "";
+
+function CargarDetalle (){
+
+                    $("#Lista").jqGrid().setGridParam({
+                        url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
+                        postData: { //idDetalleRequerimientos' : ListaReq },
+                                    'idDetalleRequerimientosString' : ListaReq1 },
+                        datatype: 'json',
+                        traditional: true, //problemas al usar arrays en los parametros
+                        ajaxDelOptions: {traditional: true},
+                        mtype: 'POST' 
+                    }).trigger("reloadGrid");
+        
+}
 
 
 $(document).ready(function () {
@@ -22,7 +38,7 @@ $(document).ready(function () {
                 $("#frmVale").html("");
 
                 var $grid = $("#ListaReq"), i, n;
-                var ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
+                ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
                 if ((ListaReq == null) || (ListaReq.length == 0)) {
                     ListaReq = [rowIdContextMenu];
                     if ((ListaReq == null) || (ListaReq.length == 0)) {
@@ -31,7 +47,7 @@ $(document).ready(function () {
                     }
                 }
 
-                var ListaReq1 = "";
+                ListaReq1 = ""
                 for (i = 0, n = ListaReq.length; i < n; i++) {
                     ListaReq1 = ListaReq1 + ListaReq[i] + ",";
                 }
@@ -61,10 +77,7 @@ $(document).ready(function () {
 
                 }).then(function () {
                     //alert("hola")
-                    jQuery("#Lista").jqGrid().setGridParam({
-                        url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
-                        data: { idDetalleRequerimientos: ListaReq }
-                    }).trigger("reloadGrid");
+                  CargarDetalle();
                 });
             },
             buttons: {
