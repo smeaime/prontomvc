@@ -1,3 +1,13 @@
+    var CalcularItem = function (value, colname) {
+        if (colname === "Cantidad") {
+            var rowid = $('#Lista').getGridParam('selrow');
+            value = Number(value);
+            var Cantidad = value;
+            //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
+        }
+        return [true];
+    };
+    
 function inicializar() {
     $("#loading").hide();
 
@@ -65,15 +75,7 @@ function inicializar() {
         grid.jqGrid('setCell', Id, 'Cantidad', 0);
     };
 
-    var CalcularItem = function (value, colname) {
-        if (colname === "Cantidad") {
-            var rowid = $('#Lista').getGridParam('selrow');
-            value = Number(value);
-            var Cantidad = value;
-            //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
-        }
-        return [true];
-    };
+
 
     function RefrescarRestoDelRenglon(rowid, name, val, iRow, iCol) {
         var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
