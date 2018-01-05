@@ -301,6 +301,7 @@ namespace ProntoMVC.Controllers
             {
                 var detvale = new DetalleValesSalida();
                 detvale.IdArticulo = detrm.IdArticulo;
+                detvale.Articulo = detrm.Articulo;
                 detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
                 detvale.Cantidad = detrm.Cantidad;
                 vale.DetalleValesSalidas.Add(detvale);
@@ -320,8 +321,8 @@ namespace ProntoMVC.Controllers
                             NumeroValeSalida=0,//  a.ValesSalida.NumeroValeSalida,
                             NumeroRequerimiento= "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
                             NumeroItem= "", //a.DetalleRequerimiento.NumeroItem,
-                            ArticuloCodigo = "", //= a.Articulo.Codigo,
-                            ArticuloDescripcion ="", //= a.Articulo.Descripcion,
+                            ArticuloCodigo = a.Articulo.Codigo,
+                            ArticuloDescripcion = a.Articulo.Descripcion,
                             a.Cantidad,
                             Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
                             Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
