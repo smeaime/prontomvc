@@ -8,6 +8,8 @@ var ListaReq1 = "";
 
 function CargarDetalle (){
 
+                    //$("#Lista").html("");
+                    
                     $("#Lista").jqGrid().setGridParam({
                         url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
                         postData: { //idDetalleRequerimientos' : ListaReq },
@@ -77,7 +79,8 @@ $(document).ready(function () {
 
                 }).then(function () {
                     //alert("hola")
-                  CargarDetalle();
+
+                  //CargarDetalle();
                 });
             },
             buttons: {
