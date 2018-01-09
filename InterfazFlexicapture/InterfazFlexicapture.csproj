@@ -242,7 +242,7 @@
     <Content Include="sql\restoreDB.sql" />
     <Content Include="sql\resumen de totales estadisticas [wCartasDePorte_TX_ResumenDeTotalesEstadisticas]  [wCartasDePorte_TX_DetalleDeTotalesEstadisticas].sql" />
     <Content Include="sql\superbuscador  generico %28inlcluyendo rms etc%29 wFuncionBusqueda wBusqueda   .sql" />
-    <Content Include="sql\Tree_TX_Generar y Tree_TX_Arbol.sql" />
+    <Content Include="sql\Tree_TX_Generar y Tree_TX_Arbol y Tree_TX_Actualizar.sql" />
     <Content Include="sql\wCartasPorte_LiquidacionSubcontratistas.sql" />
     <Content Include="sql\wDuplicarBase.sql" />
   </ItemGroup>
