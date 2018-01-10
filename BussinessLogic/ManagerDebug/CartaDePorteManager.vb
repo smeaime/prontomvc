@@ -5031,9 +5031,16 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
 
 
+
+            .HyperlinkTarget = "_blank"
+
+
+
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
 
                 .DataSources.Clear()
 
@@ -5131,6 +5138,8 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
     Public Shared Function RebindReportViewer_Servidor_SalidaNormal(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter)) As String
 
@@ -5157,6 +5166,9 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = True
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5254,6 +5266,9 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
+
+
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
@@ -5281,6 +5296,10 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5474,6 +5493,9 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
+
+
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, strSQL As String, SC As String,
                                      Optional ByVal bDescargaExcel As Boolean = False,
@@ -5533,6 +5555,11 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5780,11 +5807,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-
-
-
-
-
     Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, strSQL As String, SC As String,
                                     ByRef ArchivoExcelDestino As String,
@@ -5796,6 +5818,9 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -10366,7 +10391,7 @@ usuario As String, ConexBDLmaster As String,
         Try
 
 
-            If Not IsValid(SC, myCartaDePorte, ms) Then
+            If Not IsValidCarta(SC, myCartaDePorte, ms) Then
                 ErrHandler2.WriteError(ms)
                 Return -1
             End If
@@ -10467,6 +10492,11 @@ usuario As String, ConexBDLmaster As String,
 
                     Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
 
+
+                    oCarta.NumeroCartaEnTextoParaBusqueda = oCarta.NumeroCartaDePorte & " " & oCarta.NumeroSubfijo & "-" & oCarta.SubnumeroVagon
+                    oCarta.SubnumeroVagonEnTextoParaBusqueda = oCarta.SubnumeroVagon
+
+
                     oCarta.NRecibo = .NRecibo 'y si me desembarazo de CartaDePorteDB.Save y su molesto wCartasDePorte_A?....
 
                     oCarta.CalidadGranosQuemados = CDec(iisNull(.CalidadGranosQuemados, 0))
@@ -10508,8 +10538,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                    oCarta.NumeroCartaEnTextoParaBusqueda = oCarta.NumeroCartaDePorte & " " & oCarta.NumeroSubfijo & "-" & oCarta.SubnumeroVagon
-                    oCarta.SubnumeroVagonEnTextoParaBusqueda = oCarta.SubnumeroVagon
 
 
                     oCarta.CalidadGranosExtranosRebaja = .CalidadGranosExtranosRebaja
@@ -11220,7 +11248,7 @@ usuario As String, ConexBDLmaster As String,
     End Function
 
 
-    Public Shared Function IsValid(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
+    Public Shared Function IsValidCarta(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
 
         With myCartaDePorte
             'validarUnicidad()
@@ -11447,6 +11475,12 @@ usuario As String, ConexBDLmaster As String,
                     End If
                 End If
             End If
+
+
+
+
+            If .NumeroCartaEnTextoParaBusqueda Is Nothing Then .NumeroCartaEnTextoParaBusqueda = cpnumero.ToString
+
 
 
 

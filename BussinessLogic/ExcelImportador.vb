@@ -853,7 +853,7 @@ Public Class LogicaImportador
 
 
             Dim ms As String
-            If CartaDePorteManager.IsValid(SC, myCartaDePorte, ms) Then
+            If CartaDePorteManager.IsValidCarta(SC, myCartaDePorte, ms) Then
                 '                Try
 
 
@@ -3626,7 +3626,7 @@ Public Class ExcelImportadorManager
 
                 Try
                     Dim ms As String
-                    Dim valid = CartaDePorteManager.IsValid(SC, cdp, ms)
+                    Dim valid = CartaDePorteManager.IsValidCarta(SC, cdp, ms)
                     ', IdUsuario As Integer, UserName As String
                     'If CartaDePorteManager.Save(SC, cdp, Session(SESSIONPRONTO_glbIdUsuario), Session(SESSIONPRONTO_UserName)) = -1 Then
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
@@ -4101,11 +4101,11 @@ Public Class ExcelImportadorManager
 
                 Try
                     Dim ms As String
-                    Dim valid = CartaDePorteManager.IsValid(SC, cdp, ms)
+                    Dim valid = CartaDePorteManager.IsValidCarta(SC, cdp, ms)
                     If InStr(ms, "A.C.A") Then
                         'si se queja porque le falta el acopio, le asigno un default
                         cdp.EnumSyngentaDivision = "OTROS"
-                        valid = CartaDePorteManager.IsValid(SC, cdp, ms)
+                        valid = CartaDePorteManager.IsValidCarta(SC, cdp, ms)
                     End If
 
                     If CartaDePorteManager.Save(SC, cdp, glbIdUsuario, UserName) = -1 Then
