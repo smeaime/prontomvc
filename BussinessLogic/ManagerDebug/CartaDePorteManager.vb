@@ -5402,7 +5402,7 @@ usuario As String, ConexBDLmaster As String,
                 '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
                 '                                         grant execute on wCart... to public
                 '
-                ' 3  Unauthorized                   (puede ser lo del loopback -no podes usar alias en el dominio, tenes que poner el nombre de la maquina)
+                ' 3  Unauthorized                   (puede ser lo del "loopback check" (o double hop?  A double-hop issue occurs when the SQL Database and the SQL Reporting Services are on two different servers.) -no podes usar alias en el dominio, tenes que poner el nombre de la maquina)
                 '                                   ¿sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
                 '                                   ¿es por la cuenta windows que usa repservices o por la cuenta sql que usa el datasource del informe?
                 '                                   ¿será por la cuenta built-in que usa el reporting para correr? -en williams uso "Network Service" para correr el servicio, y el usuario "bdl" para las credenciales
