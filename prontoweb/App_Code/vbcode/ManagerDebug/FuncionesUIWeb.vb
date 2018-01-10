@@ -727,6 +727,9 @@ Public Module ProntoFuncionesUIWeb
             .Visible = True
 
 
+            .HyperlinkTarget = "_blank"
+
+
             ErrHandler2.WriteError(ArchivoExcelDestino + "  Informe: " + titulo)
 
 
@@ -735,7 +738,6 @@ Public Module ProntoFuncionesUIWeb
                 .EnableHyperlinks = True
 
 
-                .HyperlinkTarget = "_blank"
 
 
 
@@ -1012,6 +1014,9 @@ Public Module ProntoFuncionesUIWeb
             .Visible = True
 
 
+            .HyperlinkTarget = "_blank"
+
+
             ErrHandler2.WriteError(ArchivoExcelDestino + "  Informe: " + titulo)
 
 
@@ -1021,7 +1026,6 @@ Public Module ProntoFuncionesUIWeb
 
 
 
-                .HyperlinkTarget = "_blank"
 
 
 
