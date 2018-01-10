@@ -460,6 +460,9 @@ Public Module ProntoFuncionesUIWeb
 
 
 
+            .HyperlinkTarget = "_blank"
+
+
 
             ' ReportViewerRemoto.ShowParameterPrompts = false
 
@@ -730,6 +733,11 @@ Public Module ProntoFuncionesUIWeb
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
+                .HyperlinkTarget = "_blank"
+
+
 
                 .DataSources.Clear()
 
@@ -1010,6 +1018,13 @@ Public Module ProntoFuncionesUIWeb
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
+
+                .HyperlinkTarget = "_blank"
+
+
+
 
                 .DataSources.Clear()
 
