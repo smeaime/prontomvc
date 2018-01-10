@@ -455,7 +455,7 @@ namespace ProntoMVC.Tests
                 {
                     string ms = "", warn = "";
 
-                    CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+                    CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
 
                     Console.Write(ms);
 
@@ -520,7 +520,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -531,7 +531,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -887,6 +887,16 @@ namespace ProntoMVC.Tests
                 habría q eludir esa validacion
 
             */
+
+
+
+
+            sdfsdfsdfsdfsf
+
+                [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+       [14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+
+
         }
 
 
@@ -11737,7 +11747,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -11748,7 +11758,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -12547,7 +12557,7 @@ namespace ProntoMVC.Tests
 
             carta.FacturarAManual = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -12559,7 +12569,7 @@ namespace ProntoMVC.Tests
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -12640,7 +12650,7 @@ namespace ProntoMVC.Tests
 
             carta.Exporta = false;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -12652,7 +12662,7 @@ namespace ProntoMVC.Tests
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -13104,7 +13114,7 @@ namespace ProntoMVC.Tests
 
             carta.Exporta = false;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -13116,7 +13126,7 @@ namespace ProntoMVC.Tests
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -13806,7 +13816,7 @@ namespace ProntoMVC.Tests
 
 
 
-            bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            bool esvalido = CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             Assert.AreEqual(true, esvalido);
             int id = CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreNotEqual(-1, id);
@@ -13893,7 +13903,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -13904,7 +13914,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);

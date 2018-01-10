@@ -2118,6 +2118,7 @@ namespace ProntoFlexicapture
 
 
 
+ssss
 
 
 			ErrHandler2.WriteError("Procesó carta: titular " + Titular);
@@ -2482,7 +2483,7 @@ namespace ProntoFlexicapture
 				// quizas no era valido y no lo dejó grabar
 
 				int id;
-				var valid = CartaDePorteManager.IsValid(SC, ref cdp, ref ms, ref warn);
+				var valid = CartaDePorteManager.IsValidCarta(SC, ref cdp, ref ms, ref warn);
 				if (valid && (numeroCarta >= 10000000 && numeroCarta < 999999999))
 				{
 					string err = "";
