@@ -1321,6 +1321,9 @@ Public Module ProntoFuncionesUIWeb
             .Visible = True
 
 
+            .HyperlinkTarget = "_blank"
+
+
 
             'ReportViewerRemoto.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
             .ServerReport.ReportServerUrl = New Uri(ConfigurationManager.AppSettings("ReportServer"))
