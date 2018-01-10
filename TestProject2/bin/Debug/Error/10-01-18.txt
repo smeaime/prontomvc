@@ -11,3 +11,77 @@ Error in: . Error Message:System.Net.WebException: Error de la solicitud con el 
    en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
    en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
 __________________________
+
+Log Entry : 
+01/10/2018 03:27:09
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+01/10/2018 03:33:32
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+01/10/2018 03:38:14
+Error in: . Error Message:
+550864662 2282211 0,0000 0,0000  
+550986995 2283050 0,0000 0,0000  
+550876535 2283051 0,0000 0,0000  
+55089899 2283052 0,0000 0,0000  
+550788908 2283192 0,0000 0,0000  
+550929702 2284140 0,0000 0,0000  
+550986999 2284145 0,0000 0,0000  
+550858821 2284207 0,0000 0,0000  
+551230293 2303222 0,0000 0,0000  
+551255941 2303615 1,4300 1,4300 ZABALA - BARTOLESCHI ZABALA - BARTOLESCHI
+551415307 2313826 0,0000 0,0000  
+551215671 2315687 0,0000 0,0000 EN PUERTO SERVICIOS S.R.L. EN PUERTO SERVICIOS S.R.L.
+__________________________
+
+Log Entry : 
+01/10/2018 03:38:14
+Error in: . Error Message:     Excluidas por nofacturarasubcontratistas o duplicadas: 0
+__________________________
+
+Log Entry : 
+01/10/2018 03:57:56
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
+
+Log Entry : 
+01/10/2018 04:03:13
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________
