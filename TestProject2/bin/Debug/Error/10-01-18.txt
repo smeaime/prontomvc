@@ -1,0 +1,13 @@
+
+Log Entry : 
+01/10/2018 02:17:27
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5317
+__________________________

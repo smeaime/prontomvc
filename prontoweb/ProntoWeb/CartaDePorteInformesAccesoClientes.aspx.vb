@@ -76,101 +76,108 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-            If Not IsPostBack Then 'es decir, si es la primera vez que se carga
-                '////////////////////////////////////////////
-                '////////////////////////////////////////////
-                'PRIMERA CARGA
-                'inicializacion de varibles y preparar pantalla
-                '////////////////////////////////////////////
-                '////////////////////////////////////////////
+        If Not IsPostBack Then 'es decir, si es la primera vez que se carga
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
+            'PRIMERA CARGA
+            'inicializacion de varibles y preparar pantalla
+            '////////////////////////////////////////////
+            '////////////////////////////////////////////
 
 
-                Me.Title = "Informes de CDPs"
+            Me.Title = "Informes de CDPs"
 
 
-                Try
-                    BindTypeDropDown()
-                Catch ex As Exception
-                    MandarMailDeError(ex)
-                End Try
+            Try
+                BindTypeDropDown()
+            Catch ex As Exception
+                MandarMailDeError(ex)
+            End Try
 
 
 
 
-                refrescaPeriodo()
+            refrescaPeriodo()
 
 
-                'agregar al where que aparezca la razon social de este cliente
-                Dim rs As String
-                Try
-                    rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
-                Catch ex As Exception
-                    ErrHandler2.WriteError(ex)
-                    rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
-                End Try
+            'agregar al where que aparezca la razon social de este cliente
+            Dim rs As String
+            Try
+                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+            Catch ex As Exception
+                ErrHandler2.WriteError(ex)
+                rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+            End Try
 
 
-                If rs <> "" Then
-                    Dim idcli = BuscaIdClientePreciso(rs, HFSC.Value)
-                    If idcli = -1 Then
+            If rs <> "" Then
+                Dim idcli = BuscaIdClientePreciso(rs, HFSC.Value)
+                If idcli = -1 Then
 
-                        MsgBoxAjax(Me, "No existe el cliente: " & rs)
-                        Exit Sub
-                    End If
+                    MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                    Exit Sub
                 End If
-
-
-                lblRazonSocial.Text = rs
-
-
-
-                Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
-                'If clientes.Count > 0 Then
-
-                '    chkTitular.Checked = False
-                '    chkTitular.Visible = False
-                '    chkIntermediario.Checked = False
-                '    chkIntermediario.Visible = False
-                '    chkRemComercial.Checked = False
-                '    chkRemComercial.Visible = False
-                '    chkClienteAuxiliar.Checked = False
-                '    chkClienteAuxiliar.Visible = False
-                '    chkCorredor.Checked = False
-                '    chkCorredor.Visible = False
-                '    chkDestinatario.Checked = False
-                '    chkDestinatario.Visible = False
-                '    cmbCriterioWHERE.Visible = False
-
-                'End If
-
-
-
-
-                BloqueosDeEdicion()
-
             End If
 
 
-            Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
-            tx.Visible = False
+            lblRazonSocial.Text = rs
 
 
 
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnDescargaSincro)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenes)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesPDF)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesTiffReducido)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExcel)
-            AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
+            'agregar harcodeo de bld
+            If True Then
+                chkRemComercial.Checked = False
+            End If
 
-            AutoCompleteExtender2.ContextKey = HFSC.Value
-            AutoCompleteExtender21.ContextKey = HFSC.Value
-            AutoCompleteExtender24.ContextKey = HFSC.Value
-            AutoCompleteExtender25.ContextKey = HFSC.Value
-            AutoCompleteExtender26.ContextKey = HFSC.Value
-            AutoCompleteExtender27.ContextKey = HFSC.Value
-            AutoCompleteExtender3.ContextKey = HFSC.Value
-            AutoCompleteExtender4.ContextKey = HFSC.Value
+
+
+            Dim clientes As List(Of String) = TraerCUITClientesSegunUsuario(Session(SESSIONPRONTO_UserName), HFSC.Value, ConexBDLmaster).Where(Function(x) x <> "").ToList  'c.ToList()
+            'If clientes.Count > 0 Then
+
+            '    chkTitular.Checked = False
+            '    chkTitular.Visible = False
+            '    chkIntermediario.Checked = False
+            '    chkIntermediario.Visible = False
+            '    chkRemComercial.Checked = False
+            '    chkRemComercial.Visible = False
+            '    chkClienteAuxiliar.Checked = False
+            '    chkClienteAuxiliar.Visible = False
+            '    chkCorredor.Checked = False
+            '    chkCorredor.Visible = False
+            '    chkDestinatario.Checked = False
+            '    chkDestinatario.Visible = False
+            '    cmbCriterioWHERE.Visible = False
+
+            'End If
+
+
+
+
+            BloqueosDeEdicion()
+
+        End If
+
+
+        Dim tx As TextBox = Me.Master.FindControl("txtSuperbuscador")
+        tx.Visible = False
+
+
+
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnDescargaSincro)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenes)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesPDF)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnImagenesTiffReducido)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExcel)
+        AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnTexto)
+
+        AutoCompleteExtender2.ContextKey = HFSC.Value
+        AutoCompleteExtender21.ContextKey = HFSC.Value
+        AutoCompleteExtender24.ContextKey = HFSC.Value
+        AutoCompleteExtender25.ContextKey = HFSC.Value
+        AutoCompleteExtender26.ContextKey = HFSC.Value
+        AutoCompleteExtender27.ContextKey = HFSC.Value
+        AutoCompleteExtender3.ContextKey = HFSC.Value
+        AutoCompleteExtender4.ContextKey = HFSC.Value
 
 
     End Sub
@@ -266,7 +273,7 @@ Partial Class CartaDePorteInformesAccesoClientes
         cmbPuntoVenta.SelectedIndex = 0
 
         Try
-            If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()) .PuntoVentaAsociado > 0 Then
+            If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()).PuntoVentaAsociado > 0 Then
                 Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
                 BuscaIDEnCombo(cmbPuntoVenta, pventa)
                 'BuscaTextoEnCombo(cmbPuntoVenta, pventa)
@@ -355,6 +362,13 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
     Sub AsignaInformeAlReportViewer(Optional ByVal bDescargaExcel As Boolean = False)
+
+
+
+
+
+
+
 
         '        Log(Entry)
         '04/21/2014 12:37:52
@@ -576,50 +590,50 @@ Partial Class CartaDePorteInformesAccesoClientes
 
             Dim yourParams As ReportParameter() = New ReportParameter(9) {}
 
-                yourParams(0) = New ReportParameter("webservice", "")
-                yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
-                yourParams(2) = New ReportParameter("idArticulo", -1)
-                yourParams(3) = New ReportParameter("idDestino", -1)
-                yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
-                yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
-                yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
-                yourParams(7) = New ReportParameter("Consulta", strSQL)
-                yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(HFSC.Value))
-                yourParams(9) = New ReportParameter("titulo", "Informe")
+            yourParams(0) = New ReportParameter("webservice", "")
+            yourParams(1) = New ReportParameter("sServidor", ConfigurationManager.AppSettings("UrlDominio"))
+            yourParams(2) = New ReportParameter("idArticulo", -1)
+            yourParams(3) = New ReportParameter("idDestino", -1)
+            yourParams(4) = New ReportParameter("desde", New DateTime(2012, 11, 1)) ' txtFechaDesde.Text)
+            yourParams(5) = New ReportParameter("hasta", New DateTime(2012, 11, 1)) ', txtFechaHasta.Text)
+            yourParams(6) = New ReportParameter("quecontenga", "ghkgk")
+            yourParams(7) = New ReportParameter("Consulta", strSQL)
+            yourParams(8) = New ReportParameter("sServidorSQL", Encriptar(HFSC.Value))
+            yourParams(9) = New ReportParameter("titulo", "Informe")
 
 
-                RebindReportViewer_Servidor_SalidaNormal(ReportViewer2, "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams)
+            RebindReportViewer_Servidor_SalidaNormal(ReportViewer2, "Listado general de Cartas de Porte (simulando original) con foto 2", yourParams)
 
 
 
+        End If
+
+
+
+
+
+
+        If output = "" Then Return
+
+        Try
+            Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
+            If MyFile1.Exists Then
+                Response.ContentType = "application/octet-stream"
+                Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
+                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
+                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
+                Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+                Response.End()
+            Else
+                MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
             End If
-
-
-
-
-
-
-            If output = "" Then Return
-
-            Try
-                Dim MyFile1 = New FileInfo(output) 'quizás si me fijo de nuevo, ahora verifica que el archivo existe...
-                If MyFile1.Exists Then
-                    Response.ContentType = "application/octet-stream"
-                    Response.AddHeader("Content-Disposition", "attachment; filename=" & MyFile1.Name)
-                    'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                    'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
-                    'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(Button6)
-                    Response.TransmitFile(output) 'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                    Response.End()
-                Else
-                    MsgBoxAjax(Me, "No se pudo generar el sincronismo. Consulte al administrador")
-                End If
-            Catch ex As Exception
-                'ErrHandler2.WriteAndRaiseError(ex.tostring)
-                ErrHandler2.WriteError(ex.ToString)
-                'MsgBoxAjax(Me, ex.tostring)
-                Return
-            End Try
+        Catch ex As Exception
+            'ErrHandler2.WriteAndRaiseError(ex.tostring)
+            ErrHandler2.WriteError(ex.ToString)
+            'MsgBoxAjax(Me, ex.tostring)
+            Return
+        End Try
 
     End Sub
 
@@ -962,9 +976,9 @@ Partial Class CartaDePorteInformesAccesoClientes
             Dim streamids As String()
             Dim mimeType, encoding, extension As String
 
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       "Excel", Nothing, mimeType, encoding, _
-                         extension, _
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                       "Excel", Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
@@ -1165,15 +1179,15 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
 
-            dt = DataTablePorCliente(HFSC.Value, _
-                        "", "", "", 1, 0, _
-                        estadofiltro, rs, idVendedor, idCorredor, _
-                        idDestinatario, idIntermediario, _
-                        idRComercial, idArticulo, idProcedencia, idDestino, _
-                        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                        DropDownList2.Text, _
-                        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            dt = DataTablePorCliente(HFSC.Value,
+                        "", "", "", 1, 0,
+                        estadofiltro, rs, idVendedor, idCorredor,
+                        idDestinatario, idIntermediario,
+                        idRComercial, idArticulo, idProcedencia, idDestino,
+                        IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
+                                        DropDownList2.Text,
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                        Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
                         cmbPuntoVenta.SelectedValue, txtQueContenga.Text, Membership.GetUser.UserName, ConexBDLmaster, chkTitular.Checked, chkIntermediario.Checked, chkRemComercial.Checked, chkClienteAuxiliar.Checked, chkCorredor.Checked, chkDestinatario.Checked)
 
 
