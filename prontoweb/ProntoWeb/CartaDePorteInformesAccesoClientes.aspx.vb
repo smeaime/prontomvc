@@ -125,9 +125,15 @@ Partial Class CartaDePorteInformesAccesoClientes
 
 
             'agregar harcodeo de bld
-            If True Then
+            If Membership.GetUser.UserName = "BLD" Then
+                chkTitular.Checked = False
                 chkRemComercial.Checked = False
+                chkIntermediario.Checked = False
+                chkCorredor.Checked = True
             End If
+
+
+
 
 
 

@@ -282,7 +282,7 @@
                                                     <asp:LoginName ID="LoginName1" runat="server" Font-Bold="false" CssClass="margender" />
                                                     |
                                                     <asp:LoginStatus ID="LoginStatus1" runat="server" Font-Bold="false" ForeColor="white"
-                                                        LogoutAction="RedirectToLoginPage" LogoutPageUrl="~/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
+                                                        LogoutAction="Redirect" LogoutPageUrl="/Login.aspx" OnLoggedOut="LoginStatus1_LoggedOut"
                                                         TabIndex="-1" LogoutText="Salir" Font-Underline="False" CssClass="margender" />
                                                 </LoggedInTemplate>
                                             </asp:LoginView>
