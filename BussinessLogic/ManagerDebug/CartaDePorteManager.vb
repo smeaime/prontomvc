@@ -5393,13 +5393,23 @@ usuario As String, ConexBDLmaster As String,
 
 
                 'errores
-                '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
-                '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+                ' 1  rsCredentialsNotSpecified       porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+                '
+                ' 2  rsProcessingAborted             porque la cuenta que corre el repservice no tiene permisos: 
                 '                                         GRANT  Execute on [dbo].your_object to [public]
                 '                                         REVOKE Execute on [dbo].your_object to [public]
                 '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
                 '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
                 '                                         grant execute on wCart... to public
+                '
+                ' 3  Unauthorized                   (puede ser lo del loopback -no podes usar alias en el dominio, tenes que poner el nombre de la maquina)
+                '                                   ¿sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+                '                                   ¿es por la cuenta windows que usa repservices o por la cuenta sql que usa el datasource del informe?
+                '                                   ¿será por la cuenta built-in que usa el reporting para correr? -en williams uso "Network Service" para correr el servicio, y el usuario "bdl" para las credenciales
+                '                                   habilitar errores remotos del reporting services. agregar usuario/permisos en la base sql para el usuario windows que ejecuta el informa
+                '                                   revisar el log de errores de reporting. C:\Program Files\Microsoft SQL Server Reporting Services\SSRS\LogFiles
+                '                                   ¿es la autorizacion que tenes que darle al usuario desde el portal web administrativo de reporting?
+                '                                   ¿sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"? qué pása si sacas ese datasource?
 
 
                 Dim inner As Exception = e.InnerException
