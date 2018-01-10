@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Arc
 		prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql = prontoweb\Documentos\estadisticas descarga wCartasDePorte_TX_EstadisticasDeDescarga.sql
 		..\ProntoWeb\Documentos\Factura_Williams.dot = ..\ProntoWeb\Documentos\Factura_Williams.dot
 		ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql = ProntoMVC\Documentos\sql\fSQL_GetDataTableFiltradoYPaginado  wCartasPorte_WraperDeLaTVF.sql
-		..\ProntoWeb\Documentos\dev\instalacion.docx = ..\ProntoWeb\Documentos\dev\instalacion.docx
 		..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql = ..\ProntoWeb\Documentos\dev\Nuevas_Tablas WEB.sql
 		..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql = ..\ProntoWeb\Documentos\dev\Nuevos_SP WEB desarrollo.sql
 		Novedades\Nuevos_SP.sql = Novedades\Nuevos_SP.sql
@@ -455,6 +454,9 @@ Global
 		{AD47E999-E287-4218-AA37-C6C22B899D33} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 		{D36118EC-8AAB-4E61-B264-5D29A5232BDC} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
 		{715BC03D-B453-4269-B1F4-08EDEF0BE038} = {A7AAB93D-0E57-4580-96C8-51710EF8D2FA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23837A52-CC9B-448A-AD1E-8C84C8E2594F}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ProntoMVC.vsmdi
