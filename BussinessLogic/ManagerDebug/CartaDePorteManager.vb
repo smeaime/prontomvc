@@ -11479,7 +11479,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-            If .NumeroCartaEnTextoParaBusqueda Is Nothing Then .NumeroCartaEnTextoParaBusqueda = cpnumero.ToString
 
 
 
