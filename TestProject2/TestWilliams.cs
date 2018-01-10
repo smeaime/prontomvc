@@ -891,10 +891,10 @@ namespace ProntoMVC.Tests
 
 
 
-            sdfsdfsdfsdfsf
 
-                [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
-       [14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+
+       //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+       //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
 
 
         }

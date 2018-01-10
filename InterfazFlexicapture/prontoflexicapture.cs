@@ -2118,7 +2118,7 @@ namespace ProntoFlexicapture
 
 
 
-ssss
+
 
 
 			ErrHandler2.WriteError("Procesó carta: titular " + Titular);
