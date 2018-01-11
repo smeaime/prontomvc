@@ -140,7 +140,7 @@ namespace ProntoMVC.Controllers
 
             if (mIdProveedor > 0)
             {
-                if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") != "SI") { sErrorMsg += "\n" + "Proveedor inhabilitado"; }
+                if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") == "NO") { sErrorMsg += "\n" + "Proveedor inhabilitado"; }
 
                 Recepcione Recepcion = db.Recepciones.Where(c => (c.IdProveedor ?? 0) == mIdProveedor && (c.NumeroRecepcion1 ?? 0) == mNumero1 && (c.NumeroRecepcion2 ?? 0) == mNumero2).FirstOrDefault();
                 if (Recepcion != null) { sErrorMsg += "\n" + "Recepcion ya ingresada"; }
@@ -464,13 +464,15 @@ namespace ProntoMVC.Controllers
                                         {
                                             Articulo.CostoReposicion = mCostoReposicion;
                                             Articulo.CostoReposicionDolar = mCostoReposicionDolar;
-                                            Articulo.FechaUltimoCostoReposicion = mFechaUltimoCostoReposicion;
+                                            Articulo.FechaUltimoCostoReposicion = mFechaRecepcion;
                                             db.Entry(Articulo).State = System.Data.Entity.EntityState.Modified;
                                         }
                                     }
                                 }
                             }
                             db.SaveChanges();
+
+                            db.Tree_TX_Actualizar("RecepcionesAgrupadas", Recepcion.IdRecepcion, "Recepcion");
                         }
                         scope.Complete();
                         scope.Dispose();

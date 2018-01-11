@@ -1237,17 +1237,17 @@ function validatePwd() {
     var pass = $("#password").val();
     //var idusuario = $("#Aux1").val();
     var idusuario = $("#mySelect").val();
+    var ret = false;
 
     if ($.isNumeric(idusuario)) {
-
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
             url: ROOT + 'Empleado/BuscarPass/',
             data: { id: idusuario, pass: pass },
             dataType: "text",
+            async: false,
             success: function (data) {
-
                 var combo = $("#Aux0").val();
                 var post = $("#Aux10").val();
 
@@ -1259,7 +1259,7 @@ function validatePwd() {
                     // $("#Cumplido").val("AN");
 
                     window.location.href = ROOT + 'Pedido/Anular/' + $("#IdPedido").val();
-
+                    ret = true;
 
                     // $.post(  ROOT + 'Pedido/Anular/', href= "Url.Action("Anular", new { id = $("IdPedido") Model.IdPedido })"
                     //                                                       type: "GET",
@@ -1281,8 +1281,6 @@ function validatePwd() {
                         $('#dialog-motivo').dialog('open');
                     }
 
-
-
                     // si us�s una funcion de callback, pasale los parametros. Quiero decir: que el dialog no tenga que saber c�mo implementarla!
                     // http://stackoverflow.com/questions/939032/jquery-pass-more-parameters-into-callback
 
@@ -1290,7 +1288,7 @@ function validatePwd() {
 
                     // esperar hasta que vuelva para habilitar la pantalla
 
-
+                    ret = true;
                 }
                 else {
                     alert('Password incorrecta');
@@ -1299,10 +1297,7 @@ function validatePwd() {
                     $("#Aux3").val("");
                 }
             }
-
         });
-
-
         //alert('ok');
     }
     else {
@@ -1310,6 +1305,7 @@ function validatePwd() {
     }
 
     $("#dialog-password").dialog('close');
+    return ret;
 }
 
 

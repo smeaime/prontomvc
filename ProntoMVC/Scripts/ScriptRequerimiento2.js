@@ -82,7 +82,7 @@
                         if (data.length > 0) {
                             var ui = data[0];
 
-                            sacarDeEditMode3(lastSelectediRow,lastSelectediCol);
+                            jQuery('#Lista').jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
 
                             var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
                             var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
@@ -93,6 +93,12 @@
                             data['IdUnidad'] = ui.IdUnidad;
                             data['Unidad'] = ui.Unidad;
                             data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
+                            data['IdControlCalidad'] = ui.IdControlCalidad;
+                            data['DescripcionControlCalidad'] = ui.ControlCalidad;
+                            data['OrigenDescripcion'] = ui.IdCuantificacion;
+                            if (ui.IdCuantificacion == 1) { data['TiposDeDescripcion'] = "Solo material"; };
+                            if (ui.IdCuantificacion == 2) { data['TiposDeDescripcion'] = "Solo observaciones"; };
+                            if (ui.IdCuantificacion == 3) { data['TiposDeDescripcion'] = "Material + observaciones"; };
 
                             $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -122,7 +128,7 @@
                         if (val != "No se encontraron resultados" && (data.length == 1 || data.length > 1)) { // qué pasa si encuentra más de uno?????
                             var ui = data[0];
 
-                            sacarDeEditMode3(lastSelectediRow, lastSelectediCol);
+                            jQuery('#Lista').jqGrid('restoreCell', lastSelectediRow, lastSelectediCol, true);
 
                             if (ui.value == "No se encontraron resultados") {
                                 var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
@@ -146,6 +152,12 @@
                             data['IdUnidad'] = ui.IdUnidad;
                             data['Unidad'] = ui.Unidad;
                             data['IdDetalleRequerimiento'] = data['IdDetalleRequerimiento'] || 0;
+                            data['IdControlCalidad'] = ui.IdControlCalidad;
+                            data['DescripcionControlCalidad'] = ui.ControlCalidad;
+                            data['OrigenDescripcion'] = ui.IdCuantificacion;
+                            if (ui.IdCuantificacion == 1) { data['TiposDeDescripcion'] = "Solo material"; };
+                            if (ui.IdCuantificacion == 2) { data['TiposDeDescripcion'] = "Solo observaciones"; };
+                            if (ui.IdCuantificacion == 3) { data['TiposDeDescripcion'] = "Material + observaciones"; };
 
                             $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); // vuelvo a grabar el renglon
 
@@ -173,8 +185,26 @@
             );
 
         }
-        else if (colName == "Cantidad") { }
+        else if (colName == "Cantidad") {
+            var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+            var data = $('#Lista').jqGrid('getRowData', dataIds[iRow - 1]);
 
+            if (data['NumeroItem'] == "") {
+                data['NumeroItem'] = ProximoItem();
+                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data); 
+            }
+            if (data['FechaEntrega'] == "") {
+                var now = new Date();
+                var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+                data['FechaEntrega'] = currentDate;
+                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data);
+            }
+            if (data['OrigenDescripcion'] == "") {
+                data['OrigenDescripcion'] = "1";
+                data['TiposDeDescripcion'] = "Solo material";
+                $('#Lista').jqGrid('setRowData', dataIds[iRow - 1], data);
+            }
+        }
         else {
             FinRefresco()
         }
@@ -184,6 +214,11 @@
         calculaTotal();
         //RefrescarOrigenDescripcion();
         AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Articulo": "" }, "#Lista");
+    }
+
+    function ProximoItem() {
+        var items = jQuery("#Lista").jqGrid('getCol', 'NumeroItem', false, 'max')
+        return (items || 0) + 1;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -242,7 +277,7 @@
                         }
                     },
                     {
-                        name: 'Unidad', index: 'Unidad', align: 'left', width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        name: 'Unidad', index: 'Unidad', align: 'left', width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
                         editoptions: {
                             dataUrl: ROOT + 'Unidad/GetUnidades2',
                             dataInit: function (elem) { $(elem).width(40); },
@@ -257,7 +292,7 @@
                         },
                     },
                     {
-                        name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
+                        name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', 
                         editoptions: {
                             dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }],
                             dataInit: function (elem) {
@@ -342,7 +377,7 @@
                         },
                     },
                     {
-                        name: 'TiposDeDescripcion', index: 'TiposDeDescripcion', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        name: 'TiposDeDescripcion', index: 'TiposDeDescripcion', align: 'left', width: 200, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, 
                         editoptions: {
                             dataUrl: ROOT + 'Articulo/GetTiposDeDescripcion',
                             dataInit: function (elem) { $(elem).width(145); },
@@ -363,38 +398,40 @@
                     },
                     { name: 'Cumplido', index: 'Cumplido', width: 60, align: 'center', editable: true, hidden: false, editoptions: { disabled: 'disabled', defaultValue: 0 }, label: 'TB' },
                     {
-                        name: 'DescripcionControlCalidad', index: 'ControlCalidad', align: 'center', label: '',  width: 100, editable: true, edittype: 'select', editrules: { required: false },
+                        name: 'DescripcionControlCalidad', index: 'DescripcionControlCalidad', align: 'center', label: '', width: 100, editable: true, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             dataUrl: ROOT + 'ControlCalidad/ControlCalidades',
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    $('#IdControlCalidad').val(this.value);
-                                }
-                            }]
-                        }
-                    },
-                    {
-                        name: 'AgregarAdjunto', index: 'AgregarAdjunto', label: 'TB', align: 'left', width: 90, editable: true, edittype: 'file',
-                        editoptions: {
-                            enctype: "multipart/form-data", dataEvents: [{
-                                type: 'change', fn: function (e) {
-                                    var i, data;
-                                    var thisval = $(e.target).val();
-                                    var thisval2 = thisval.replace(/C:\\fakepath\\/i, '')
                                     var rowid = $('#Lista').getGridParam('selrow');
-                                    data = $('#Lista').jqGrid('getRowData', rowid);
-
-                                    for (i = 1; i <= 10; i++) {
-                                        if (data['ArchivoAdjunto'+i].length == 0) {
-                                            $('#Lista').jqGrid('setCell', rowid, 'ArchivoAdjunto'+i, thisval2);
-                                            break
-                                        }
-                                    }
-                                    if (i > 10) { alert("No hay mas adjuntos disponibles") }
+                                    $('#Lista').jqGrid('setCell', rowid, 'IdControlCalidad', this.value);
                                 }
                             }]
                         }
                     },
+                    { name: 'AgregarAdjunto', index: 'AgregarAdjunto', align: 'left', width: 100, hidden: true, sortable: false, editable: true },
+                    //{
+                    //    name: 'AgregarAdjunto', index: 'AgregarAdjunto', label: 'TB', align: 'left', width: 90, editable: true, edittype: 'file',
+                    //    editoptions: {
+                    //        enctype: "multipart/form-data", dataEvents: [{
+                    //            type: 'change', fn: function (e) {
+                    //                var i, data;
+                    //                var thisval = $(e.target).val();
+                    //                var thisval2 = thisval.replace(/C:\\fakepath\\/i, '')
+                    //                var rowid = $('#Lista').getGridParam('selrow');
+                    //                data = $('#Lista').jqGrid('getRowData', rowid);
+
+                    //                for (i = 1; i <= 10; i++) {
+                    //                    if (data['ArchivoAdjunto'+i].length == 0) {
+                    //                        $('#Lista').jqGrid('setCell', rowid, 'ArchivoAdjunto'+i, thisval2);
+                    //                        break
+                    //                    }
+                    //                }
+                    //                if (i > 10) { alert("No hay mas adjuntos disponibles") }
+                    //            }
+                    //        }]
+                    //    }
+                    //},
                     {
                         name: 'ArchivoAdjunto1', index: 'ArchivoAdjunto1', width: 300, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: { dataEvents: [{ type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } }, ] },
@@ -583,37 +620,43 @@
         },
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas', 'Pedidos', 'Recepciones', 'Salidas',
-                   'Libero', 'Solicito', 'Sector', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Fechas liberacion', 'Observaciones', 'Lugar de entrega', '', '', 'Web'],
+        colNames: ['', '', 'IdRequerimiento', 'Numero', 'Fecha', 'Vs', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas', 'Pedidos', 'Recepciones',
+                   'Salidas', 'Items', 'Liberado por', 'Fecha aprobacion', 'Solicito', 'Sector', 'Equipos destino', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Tipo compra',
+                   'Comprador', 'Fechas liberacion para compra', 'Detalle imputacion', 'Observaciones', 'Circ. firmas completo', 'Firmas'],
         colModel: [
                     { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
                     { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 80, editable: false, frozen: true, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
                     { name: 'FechaRequerimiento', index: 'FechaRequerimiento', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false },
+                    { name: 'NumeradorEliminacionesFirmas', index: 'NumeradorEliminacionesFirmas', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Recepcionado', index: 'Recepcionado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Entregado', index: 'Entregado', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Impresa', index: 'Impresa', align: 'center', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Obra.NumeroObra', index: 'Obra.NumeroObra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Obra', index: 'Obra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Presupuestos', index: 'Presupuestos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Comparativas', index: 'Comparativas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Pedidos', index: 'Pedidos', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Recepciones', index: 'Recepciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Salidas', index: 'Salidas', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Libero', index: 'Libero', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: [''] } },
-                    { name: 'Solicito', index: 'Solicito', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CantidadItems', index: 'CantidadItems', width: 50, align: 'right', editable: false, frozen: true, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'LiberadoPor', index: 'LiberadoPor', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: [''] } },
+                    { name: 'FechaAprobacion', index: 'FechaAprobacion', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false },
+                    { name: 'SolicitadaPor', index: 'SolicitadaPor', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                     { name: 'Sector', index: 'Sector', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Usuario_anulo', index: 'Usuario_anulo', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Fecha_anulacion', index: 'Fecha_anulacion', align: 'center', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Motivo_anulacion', index: 'Motivo_anulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Fechas_liberacion', index: 'Fechas_liberacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'LugarEntrega', index: 'LugarEntrega', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, hidden: true, search: true, searchoptions: { sopt: ['cn'] } },
-                    { name: 'Web', index: 'Web', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
+                    { name: 'EquipoDestino', index: 'EquipoDestino', width: 100, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'UsuarioAnulacion', index: 'UsuarioAnulacion', align: 'left', width: 0, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false, frozen: false },
+                    { name: 'MotivoAnulacion', index: 'MotivoAnulacion', width: 300, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'TipoCompra', index: 'TipoCompra', width: 200, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Comprador', index: 'Comprador', width: 150, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'FechasLiberacionCompra', index: 'FechasLiberacionCompra', width: 200, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'DetalleImputacion', index: 'DetalleImputacion', width: 200, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Observaciones', index: 'Observaciones', width: 300, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', width: 80, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Firmas', index: 'Firmas', width: 300, align: 'left', editable: false, search: true, searchoptions: { sopt: ['cn'] } }
 
         ],
         ondblClickRow: function (id) {
@@ -694,12 +737,10 @@
 
     function copiarArticulo(id) {
         try {
-            jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+            jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
         } catch (e) {
             LogJavaScript("Error en Script copiarArticulo   ", e);
         }
-
-        sacarDeEditMode();
 
         GrabarGrillaLocal()
 
@@ -755,15 +796,15 @@
         // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
         //resetAltRows.call(this);
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
-        RefrescarOrigenDescripcion();
+        //RefrescarOrigenDescripcion();
 
         AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
     }
 
     function copiarRM(id) {
-        jQuery('#Lista').jqGrid('saveCell', lastRowIndex, lastColIndex);
+        var longitud, i;
 
-        sacarDeEditMode();
+        jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
 
         GrabarGrillaLocal()
 
@@ -773,12 +814,30 @@
         var dropmodel = $("#ListaDrag2").jqGrid('getGridParam', 'colModel');
         var grid;
         try {
-            $("#Observaciones").val(getdata['Observaciones']);
-            $("#LugarEntrega").val(getdata['LugarEntrega']);
-            $("#IdObra").val(getdata['IdObra']);
-            $("#IdSector").val(getdata['IdSector']);
-
             IdRequerimiento = getdata['IdRequerimiento'];
+
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Requerimiento/RequerimientoSinFormato/',
+                data: { IdRequerimiento: IdRequerimiento },
+                dataType: "Json",
+                success: function (data) {
+                    i = 0;
+                    $("#Observaciones").val(data[i].Observaciones);
+                    $("#LugarEntrega").val(data[i].LugarEntrega);
+                    $("#IdObra").val(data[i].IdObra);
+                    $("#Obra").val(data[i].Obra);
+                    $("#IdSector").val(data[i].IdSector);
+                    $("#Sector").val(data[i].Sector);
+                    $("#Detalle").val(data[i].Detalle);
+                    $("#IdTipoCompra").val(data[i].IdTipoCompra);
+                    $("#TipoCompra").val(data[i].TipoCompra);
+                    $("#IdEquipoDestino").val(data[i].IdEquipoDestino);
+                    $("#EquipoDestino").val(data[i].EquipoDestino);
+                }
+            });
+
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
@@ -789,16 +848,29 @@
                     var prox = ProximoNumeroItem();
                     var longitud = data.length;
                     for (var i = 0; i < data.length; i++) {
+                        tmpdata['IdDetalleRequerimiento'] = 0;
                         tmpdata['IdArticulo'] = data[i].IdArticulo;
                         tmpdata['Codigo'] = data[i].Codigo;
-                        tmpdata['Descripcion'] = data[i].Descripcion;
+                        tmpdata['Articulo'] = data[i].Articulo;
                         tmpdata['IdUnidad'] = data[i].IdUnidad;
                         tmpdata['Unidad'] = data[i].Unidad;
-                        tmpdata['IdDetalleRequerimiento'] = 0;
-
-                        tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
-                        tmpdata['Cantidad'] = data[i].Cantidad;
+                        tmpdata['Cantidad'] = data[i].CantidadPendiente;
                         tmpdata['Observaciones'] = data[i].Observaciones;
+                        tmpdata['OrigenDescripcion'] = data[i].OrigenDescripcion;
+                        tmpdata['TiposDeDescripcion'] = data[i].TiposDeDescripcion;
+                        tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
+                        tmpdata['DescripcionControlCalidad'] = data[i].DescripcionControlCalidad;
+                        tmpdata['ArchivoAdjunto1'] = data[i].ArchivoAdjunto1;
+                        tmpdata['ArchivoAdjunto2'] = data[i].ArchivoAdjunto2;
+                        tmpdata['ArchivoAdjunto3'] = data[i].ArchivoAdjunto3;
+                        tmpdata['ArchivoAdjunto4'] = data[i].ArchivoAdjunto4;
+                        tmpdata['ArchivoAdjunto5'] = data[i].ArchivoAdjunto5;
+                        tmpdata['ArchivoAdjunto6'] = data[i].ArchivoAdjunto6;
+                        tmpdata['ArchivoAdjunto7'] = data[i].ArchivoAdjunto7;
+                        tmpdata['ArchivoAdjunto8'] = data[i].ArchivoAdjunto8;
+                        tmpdata['ArchivoAdjunto9'] = data[i].ArchivoAdjunto9;
+                        tmpdata['ArchivoAdjunto10'] = data[i].ArchivoAdjunto10;
+
                         tmpdata['NumeroItem'] = prox;
 
                         var now = new Date();
@@ -813,7 +885,7 @@
                         if (segundorenglon.indexOf("dnd") != -1) {
                             $("#Lista").jqGrid('delRowData', segundorenglon);
                         }
-                        var pos = TraerPosicionLibre();
+                        var pos = TraerPosicionLibreRM();
                         if (pos == null) {
                             $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
                         }
@@ -821,8 +893,8 @@
                             $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
                         }
                     }
-                    RefrescarOrigenDescripcion();
-
+                    //RefrescarOrigenDescripcion();
+                    //BorrarRenglonesVacios();
                     AgregarRenglonesEnBlanco({ "IdDetalleRequerimiento": "0", "IdArticulo": "0", "Cantidad": "0", "Descripcion": "" });
                 }
             });
@@ -836,6 +908,40 @@
     //    TraerNumeroComprobante()
     //});
 
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        url: ROOT + 'Home/UploadFiles',
+        autoUpload: true,
+        done: function (e, data) {
+            //var i = ProximoAdjuntoLibre();
+            //if (i == 0) {
+            //    alert("No hay mas adjuntos disponibles");
+            //    return
+            //}
+            //$("#ArchivoAdjunto" + i).val(data.result.name)
+
+            var i, data, data2;
+            var rowid = $('#Lista').getGridParam('selrow');
+
+            if (rowid == null) {
+                alert("No selecciono el item donde agregar el adjunto");
+                return
+            }
+
+            data2 = $('#Lista').jqGrid('getRowData', rowid);
+
+            for (i = 1; i <= 10; i++) {
+                if (data2['ArchivoAdjunto'+i].length == 0) {
+                    $('#Lista').jqGrid('setCell', rowid, 'ArchivoAdjunto' + i, data.result.name);
+                    break
+                }
+            }
+            if (i > 10) { alert("No hay mas adjuntos disponibles para el item seleccionado") }
+        }
+    }).on('fileuploadprogressall', function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('.progress .progress-bar').css('width', progress + '%');
+    });
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
@@ -883,6 +989,9 @@
                     cm = colModel[j]
                     if (cm.label === 'TB') {
                         valor = data[cm.name];
+                        if (valor.substring(0, 2) == "<a") {
+                            valor = valor.split(">")[1].split("<")[0]
+                            };
                         data1 = data1 + '"' + cm.index + '":"' + valor + '",';
                     }
                 }
@@ -901,7 +1010,7 @@
     }
 
     $('#grabar2').click(function () {
-        CalcularTotales()
+        calculaTotal()
 
         var cabecera = SerializaForm();
 
@@ -1132,3 +1241,46 @@ function cleanString(st) {
     return str;
 }
 
+function GrabarGrillaLocal() {
+    var $this = $('#Lista')
+    var ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+
+    for (i = 0; i < l; i++) {
+        try {
+            var rowdata = $('#Lista').jqGrid('saveRow', ids[i]);
+        } catch (e) {
+            $('#Lista').jqGrid('restoreRow', ids[i]);
+            continue;
+        }
+    }
+}
+
+function BorrarRenglonesVacios() {
+    var grid = jQuery("#Lista")
+    var rows = $("#Lista").getGridParam("reccount");
+    var dataIds = $('#Lista').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+
+        if (data['Articulo'] == "") {
+            var item = $($("#Lista")[0].rows[1]).attr("id")
+            $("#Lista").jqGrid('delRowData', item);
+        }
+    }
+}
+
+function TraerPosicionLibreRM() {
+    var grid = jQuery("#Lista")
+    var rows = $("#Lista").getGridParam("reccount");
+    var dataIds = $('#Lista').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+        var desc = data['Articulo'];
+        if (desc == "") break;
+    }
+
+    if (i == 0) return null;
+    if (i == dataIds.length) i = dataIds.length - 1;
+
+    return $($("#Lista")[0].rows[i]).attr("id");
+}
