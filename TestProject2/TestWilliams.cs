@@ -3359,7 +3359,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -4139,7 +4139,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Se_pisan_las_observaciones_en_el_robot_43069()
         {
-            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+
+            
 
             string ms = "";
 
@@ -4603,7 +4606,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -4670,9 +4673,9 @@ namespace ProntoMVC.Tests
 
             //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
 
-            //string archivoExcel = @"C:\bdl\pronto\docstest\Posicion-170626-1330.xls";
-            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
-            //string archivoExcel = @"C:\bdl\pronto\docstest\New folder\urenport_09ago2017_085016.xls";
+            //string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\Posicion-170626-1330.xls";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+            //string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\urenport_09ago2017_085016.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -4766,7 +4769,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            string archivoExcel = @"C:\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
             var s = new ServicioCartaPorte.servi();
 
@@ -4793,7 +4796,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void _zxinf_referencias()
         {
-            var dd = CartaDePorteManager.ReadBarcode1D_ZXing(@"C:\bdl\pronto\docstest\000555094127-cp.jpg", 0);
+            var dd = CartaDePorteManager.ReadBarcode1D_ZXing(@"C:\Users\Mariano\Documents\pronto\docstest\000555094127-cp.jpg", 0);
         }
 
 
@@ -8549,7 +8552,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @"C:\bdl\pronto\docstest\1271214feb2017.tif";
+            zipFile = @"C:\Users\Mariano\Documents\pronto\docstest\1271214feb2017.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13465,7 +13468,7 @@ namespace ProntoMVC.Tests
         void VaciarDirectorioTemp()
         {
 
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\bdl\pronto\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Mariano\Documents\pronto\prontoweb\Temp");
 
             foreach (FileInfo file in di.GetFiles())
             {
