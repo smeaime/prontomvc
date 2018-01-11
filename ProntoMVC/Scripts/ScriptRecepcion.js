@@ -110,9 +110,9 @@
                     { name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdDetallePedido', index: 'IdDetallePedido', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', width: 80, align: 'right', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
-                    { name: 'ItemRM', index: 'ItemRM', width: 30, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'ItemRM', index: 'ItemRM', width: 50, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
                     { name: 'NumeroPedido', index: 'NumeroPedido', width: 80, align: 'right', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
-                    { name: 'ItemPE', index: 'ItemPE', width: 30, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
+                    { name: 'ItemPE', index: 'ItemPE', width: 50, align: 'center', editable: false, editoptions: { disabled: 'disabled', defaultValue: 0 } },
                     {
                         name: 'Codigo', index: 'Codigo', width: 120, align: 'center', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -313,17 +313,6 @@
     jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
 
-
-
-
-
-
-
-
-
-
-
-
     $("#ListaDrag").jqGrid({
         url: ROOT + 'Pedido/PedidosPendientes_DynamicGridData',
         //postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteRecepcion': "SI" },
@@ -331,7 +320,7 @@
         mtype: 'POST',
         colNames: ['', 'IdDetallePedido', 'IdPedido', 'IdProveedor', 'IdObra', 'IdArticulo', 'IdUnidad', 'Numero Pedido', 'Sub', 'Item PE', 'Fecha pedido', 'Proveedor', 'Obra', 'Comprador',
                    'Solicito RM', 'Fecha entrega', 'Codigo', 'Descripcion', 'Observaciones RM', 'Observaciones PE', 'Cantidad', 'Un.', 'Entregado', 'Pendiente', 'Numero RM', 'Item RM', 'Cump',
-                   'Tipo compra', 'Firmas', 'Control de calidad'],
+                   'Tipo compra', 'Circ. Compl. Firmas', 'Control de calidad'],
         colModel: [
                     { name: 'ver', index: 'ver', hidden: true, width: 50 },
                     { name: 'IdDetallePedido', index: 'IdDetallePedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
@@ -343,7 +332,7 @@
                     { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'SubNumero', index: 'SubNumero', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'ItemPE', index: 'ItemPE', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'FechaPedido', index: 'FechaPedido', width: 70, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
                     { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false, hidden: false },
                     { name: 'Comprador', index: 'Comprador', align: 'left', width: 130, editable: false, hidden: false },
@@ -358,10 +347,10 @@
                     { name: 'Entregado', index: 'Entregado', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'Pendiente', index: 'Pendiente', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'ItemRM', index: 'ItemRM', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                    { name: 'ItemRM', index: 'ItemRM', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'TipoCompra', index: 'TipoCompra', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
                     { name: 'ControlCalidad', index: 'ControlCalidad', align: 'left', width: 150, editable: false, hidden: false }
         ],
         ondblClickRow: function (id) {
@@ -371,66 +360,36 @@
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-
-
-
-
-
-        
         pager: $('#ListaDragPager'),
     rowNum: 15,
     rowList: [10, 20, 50],
-    sortname: 'FechaPedido', // 'FechaRecibo,NumeroRecibo',
+    sortname: 'NumeroPedido', // 'FechaRecibo,NumeroRecibo',
     sortorder: 'desc',
     viewrecords: true,
-    emptyrecords: 'No hay registros para mostrar', //,
-
-
-    ///////////////////////////////
+    emptyrecords: 'No hay registros para mostrar', 
     width: 'auto', // 'auto',
     autowidth: true,
     shrinkToFit: false,
-    //////////////////////////////
-
     height: $(window).height() - ALTOLISTADO, // '100%'
     altRows: false,
     footerrow: false, //true,
-    userDataOnFooter: true
-    // ,caption: '<b>ORDENES DE COMPRA</b>'
-
-, gridview: true
-, multiboxonly: true
-, multipleSearch: true
-
-
-
+    userDataOnFooter: true,
+    gridview: true,
+    multiboxonly: true,
+    multipleSearch: true
     })
-    
-
-    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager',
- { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
- {
-     //sopt: ["cn"]
-     //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-     width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
- }
-);
-
-
+    jQuery("#ListaDrag").jqGrid('navGrid', '#ListaDragPager', { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        {
+            //sopt: ["cn"]
+            //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+        }
+    );
     jQuery("#ListaDrag").filterToolbar({
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
     }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-
-
-
-
-
-
-
 
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP

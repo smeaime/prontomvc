@@ -1116,6 +1116,7 @@ namespace ProntoMVC.Controllers
         {
 
             var q = (from item in db.Articulos
+                     from b in db.ControlesCalidads.Where(o => o.IdControlCalidad == item.IdControlCalidad).DefaultIfEmpty()
                      where item.Codigo.StartsWith(term)
                      orderby item.Codigo
                      select new
@@ -1127,12 +1128,17 @@ namespace ProntoMVC.Controllers
                          iva = item.AlicuotaIVA,
                          IdUnidad = item.IdUnidad,
                          Unidad = item.Unidad.Abreviatura,
-                         CostoReposicion = (item.CostoReposicion ?? 0).ToString()
+                         CostoReposicion = (item.CostoReposicion ?? 0).ToString(),
+                         IdControlCalidad = (item.IdControlCalidad ?? 0).ToString(),
+                         ControlCalidad = b != null ? b.Descripcion : "",
+                         IdCuantificacion = item.IdCuantificacion,
+                         IdCuenta = item.IdCuenta,
+                         IdPresupuestoObraRubro = item.IdPresupuestoObraRubro,
                      }).Take(MAXLISTA).ToList();
 
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
-                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", title = "", iva = (decimal?)0, IdUnidad = (int?)0, Unidad = "", CostoReposicion = "0" });
+                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", title = "", iva = (decimal?)0, IdUnidad = (int?)0, Unidad = "", CostoReposicion = "0", IdControlCalidad = "0", ControlCalidad = "", IdCuantificacion = (int?)0, IdCuenta = (int?)0, IdPresupuestoObraRubro = (int?)0 });
             }
 
             var a = Json(q, JsonRequestBehavior.AllowGet);
@@ -1160,6 +1166,7 @@ namespace ProntoMVC.Controllers
             var s2 = parametros.ControlCalidadDefault;
 
             var q = (from item in db.Articulos
+                     from b in db.ControlesCalidads.Where(o => o.IdControlCalidad == item.IdControlCalidad).DefaultIfEmpty()
                      where item.Descripcion.ToLower().Contains(term.ToLower())   //.StartsWith(term.ToLower())
                      //            where SqlFunctions.StringConvert((decimal?)item.IdArticulo).Contains(term) ||
 
@@ -1172,12 +1179,17 @@ namespace ProntoMVC.Controllers
                          iva = item.AlicuotaIVA,
                          IdUnidad = item.IdUnidad ?? mvarIdUnidadCU,
                          Unidad = item.Unidad.Abreviatura ?? mvarIdUnidadCUdesc,
-                         CostoReposicion = (item.CostoReposicion ?? 0).ToString()
+                         CostoReposicion = (item.CostoReposicion ?? 0).ToString(),
+                         IdControlCalidad = (item.IdControlCalidad ?? 0).ToString(),
+                         ControlCalidad = b != null ? b.Descripcion : "",
+                         IdCuantificacion = item.IdCuantificacion,
+                         IdCuenta = item.IdCuenta,
+                         IdPresupuestoObraRubro = item.IdPresupuestoObraRubro,
                      }).Take(MAXLISTA).ToList();
 
             if (q.Count == 0 && term != "No se encontraron resultados")
             {
-                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "", CostoReposicion = "0" });
+                q.Add(new { id = 0, value = "No se encontraron resultados", codigo = "", iva = (decimal?)0, IdUnidad = 0, Unidad = "", CostoReposicion = "0", IdControlCalidad = "0", ControlCalidad = "", IdCuantificacion = (int?)0, IdCuenta = (int?)0, IdPresupuestoObraRubro = (int?)0 });
             }
             return Json(q, JsonRequestBehavior.AllowGet);
         }

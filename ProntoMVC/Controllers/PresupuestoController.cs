@@ -934,34 +934,40 @@ namespace ProntoMVC.Controllers
             var data = (from a in Det
                         select new
                         {
-                            a.IdDetallePresupuesto,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.IdDetalleRequerimiento,
-                            a.NumeroItem,
-                            a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
-                            a.Cantidad,
-                            a.Unidad.Abreviatura,
-                            a.Articulo.Codigo,
-                            a.Articulo.Descripcion,
-                            a.FechaEntrega,
-                            a.Observaciones,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            IdDetallePresupuesto = a.IdDetallePresupuesto,
+                            IdArticulo = a.IdArticulo,
+                            IdUnidad = a.IdUnidad,
+                            IdDetalleRequerimiento = a.IdDetalleRequerimiento,
+                            OrigenDescripcion = a.OrigenDescripcion,
+                            NumeroItem = a.NumeroItem,
+                            NumeroObra = a.DetalleRequerimiento.Requerimientos.Obra.NumeroObra,
+                            Cantidad = a.Cantidad,
+                            CantidadPendiente = (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)),
+                            Unidad = a.Unidad.Abreviatura,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion,
+                            Observaciones = a.Observaciones,
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            FechaEntrega = a.FechaEntrega,
+                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
                             NumeroItemRM = a.DetalleRequerimiento.NumeroItem,
                             a.Adjunto,
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-
-                            a.Precio,
-                            a.PorcentajeBonificacion,
-                            a.PorcentajeIva,
-                            a.ImporteBonificacion,
-                            a.ImporteIva,
-                            a.ImporteTotalItem
-
-
-
+                            ArchivoAdjunto1 = a.ArchivoAdjunto1,
+                            ArchivoAdjunto2 = a.ArchivoAdjunto2,
+                            ArchivoAdjunto3 = a.ArchivoAdjunto3,
+                            ArchivoAdjunto4 = a.ArchivoAdjunto4,
+                            ArchivoAdjunto5 = a.ArchivoAdjunto5,
+                            ArchivoAdjunto6 = a.ArchivoAdjunto6,
+                            ArchivoAdjunto7 = a.ArchivoAdjunto7,
+                            ArchivoAdjunto8 = a.ArchivoAdjunto8,
+                            ArchivoAdjunto9 = a.ArchivoAdjunto9,
+                            ArchivoAdjunto10 = a.ArchivoAdjunto10,
+                            Precio = a.Precio,
+                            PorcentajeBonificacion = a.PorcentajeBonificacion,
+                            PorcentajeIva = a.PorcentajeIva,
+                            ImporteBonificacion = a.ImporteBonificacion,
+                            ImporteIva = a.ImporteIva,
+                            ImporteTotalItem = a.ImporteTotalItem
                         }).OrderBy(p => p.NumeroItem).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
