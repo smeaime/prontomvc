@@ -155,7 +155,29 @@ namespace ProntoMVC.TestsMVC
 
 
 
-            abrir el vale (de los item de rms pendientes) en otra ventana?
+
+        [TestMethod]
+        public void probar_context_del_rms_pendientesGenerarValesAlmacen2222()
+        {
+
+            // a veces no desaparecen desde web. desaparecen si lo hago desde el prontovb6?
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.GenerarValesAlmacen((new int[] { 48862 }).ToList(), "administrador", "");
+
+
+            //abrir el vale(de los item de rms pendientes) en otra ventana? cómo le pasaría los parametros? por la url ?
+
+
+            //    cómo hago un test de ui mvc?
+
+
+
+        }
+
+
 
 
 
