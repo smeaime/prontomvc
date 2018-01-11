@@ -68,6 +68,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 
+using Tellurium.MvcPages;
+using Tellurium.MvcPages.Configuration;
+using Tellurium.MvcPages.SeleniumUtils;
+
+
+
+
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
 
@@ -448,7 +455,7 @@ namespace ProntoMVC.Tests
                 {
                     string ms = "", warn = "";
 
-                    CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+                    CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
 
                     Console.Write(ms);
 
@@ -513,7 +520,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -524,7 +531,7 @@ namespace ProntoMVC.Tests
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -547,7 +554,7 @@ namespace ProntoMVC.Tests
             int registrosf = 0;
 
 
-            string[] sincros = { "Beraza", "Granar" };
+            string[] sincros = { "BTG PACTUAL[BIT]", "Beraza", "Granar" };
             //            string[] sincros = { "Beraza", "Zeni" };
 
 
@@ -570,6 +577,9 @@ namespace ProntoMVC.Tests
 
 
         }
+
+
+
 
         [TestMethod]
         public void mail_de_error()
@@ -867,6 +877,778 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void OCR_validacion_de_A_C_A_47215()
+        {
+
+            /*
+                                             * en los casos de a.c.a me tira:
+            Error in: . Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+                habría q eludir esa validacion
+
+            */
+
+
+
+
+
+
+       //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+       //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroDiazRiganti_47179()
+        {
+
+            string sErrores = "", sTitulo = "";
+            // LinqCartasPorteDataContext db = null;
+
+
+
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                    "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void ServicioWebServiceDescargas_BLD_47213()
+        {
+
+            //¿habrá alguna diferencia entre el ListadoSegunCliente y el listado normal? andy sospecha del robot
+
+            //La carta Id = 3222062 no aparece, al usar obtenerDescargas_v3 con estos paramtros:
+            //Andres
+            //Andre5!
+            //1
+            //2017 / 12 / 23
+            //2017 / 12 / 23
+            //
+            // -creo que es porque el netofinal está en 0 (aún cuando está cargado el netosinmerma y la fecha de descarga)
+            // -pero entonces debería aparecer como de posicion, no?
+            // http://iismvc/Williams/ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v3?usuario=Andres&password=Andre5!&cuit=1&fechadesde=2017-12-23T00:00:00&fechahasta=2017-12-23T00:00:00
+            // al regrabarla, le calcula bien el netofinal
+            // -y entonces cómo solucionarlo? agregando una validacion que si la fechaDescarga está puesta, tambien el NetoFinal? Y por qué solo usa la fecha
+            // para mostrar la pestaña de descarga, cuando la funcion sql usa el peso en lugar de la fecha?
+            // Al margen de esto... cómo es que se dieron cuenta, si despues de todo, el informe muestra lo mismo que el servicio? -deben haber usado de referencia el sincronismo, no?
+
+
+
+
+
+
+
+
+            //var s = new ServicioCartaPorte.servi();
+            //string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            //string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            //s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+            //le tendria que pasar el directorio del chrome viejo
+            //ProntoWindowsService.Service1.Initialize();
+            //ProntoWindowsService.Service1.DoWorkSoloPegatinas();
+
+
+
+
+            string usuario = "Andres"; //"fyo";
+            string clave = "Andre5!"; // "76075";
+            string cuit = "1";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2017, 12, 23),
+                                            new DateTime(2017, 12, 23), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+        [TestMethod]
+        public void MandarmeLosSincrosAutomaticos_tema_de_la_firma_47212()
+        {
+
+            var s = CDPMailFiltrosManager2.AgregarFirmaHtml(1);
+
+            string sErr = "";
+            SincronismosWilliamsManager.EnviarSincro("TOMASHNOS", "nano@gggg", ref sErr, true);
+
+
+        }
+
+
+
+
+
+
+
+        #region reclamos43063_CHAT
+
+
+
+        [TestMethod]
+        public void conversacion_43063()
+        {
+
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+
+            // Mariano elige una carta
+            int idcarta = 2633335;
+
+            //Mariano saluda a Rogrigo
+            //s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
+
+
+            ////Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
+            //s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
+
+
+            //var sss = Membership.GetAllUsers();
+            //Dictionary<string, string> membershipCasillas = new Dictionary<string, string>() {
+            //                                  { "Mariano", "mscalella911@gmail.com"},
+            //                                  { "RODRIGORIOS", "gmalggievato@gmail.com"}
+            //};
+
+            //deberia enviar el mail y la notificacion esa funcion
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, "", true,
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void enviosPush__()
+        {
+            // https://firebase.google.com/docs/cloud-messaging/js/device-group?hl=es-419
+            //Administra grupos de dispositivos
+            //Antes de enviar mensajes a un grupo de dispositivos, debes:
+            //Obtener los tokens de registro de cada dispositivo que desees agregar al grupo.
+            //Crear la notification_key, que identifica el grupo de dispositivos mediante la asignación de un grupo específico(por lo general, un usuario) a 
+            //todos los tokens de registro relacionados del grupo.Puedes crear claves de notificación en el servidor de apps o en las apps cliente de Android.
+
+
+
+
+
+
+            string[] deviceId = { "fLTPu6cSIkk:APA91bFzQUwGEhSMKm7k_xwJO7CmviSxH9BxPoFle59XmvNz4w2rkqOlGE9HuDm-EFI3zPvhjJf7jKQa9V-EkNSGvDNsjCpNlM0BtlT-i9N6P-pQZ90Y_2vUPjo8fWiPD-O2WfLqHieE" 
+                                  //"eq8033Zs2MQ:APA91bEw8zTPtAR1b_vj_z1qWE7Rrrbm95OgnMtYueab-W3q-z6cVokHmCXOG1fBLl9hKBasrssrNyKtiKw3ENdprmnIwYfVdLPEyLeDmgOq412Ddk8_bwQS6IyTSLqFQfVcf4jwfkAs"
+            };
+
+
+            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa nanooo", "Williams", "", "");
+            // var d = new Sch_WCFApplication.PushNotification(deviceId[0], "holaaaaaa", "titulo");
+
+            // cómo mandar al servidor un mensaje para que el servidor asocie mi ticket de subscripcion con mi nombre de usuario?
+            // -lo tenés que hacer vos a mano en el sendTokenToServer del codigo de ejemplo
+
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void _AsociarUsuarioConTokenFirebase()
+        {
+            //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
+            //            MandoMensajeAListadoDeSubscripciones(subs);
+            var s = new ServicioCartaPorte.servi();
+            s.AsociarUsuarioConTokenFirebase("fLTPu6cSIkk:APA91bFzQUwGEhSMKm7k_xwJO7CmviSxH9BxPoFle59XmvNz4w2rkqOlGE9HuDm-EFI3zPvhjJf7jKQa9V-EkNSGvDNsjCpNlM0BtlT-i9N6P-pQZ90Y_2vUPjo8fWiPD-O2WfLqHieE"
+                                        , "Mariano", SC);
+
+
+
+            var lista = s.TraerTokensDelUsuario(usuario, SC);
+            s.EnviarNotificacionALosDispositivosDelUsuario(usuario, "asdfaaf", "tit", SC, "", "");
+        }
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void TienePermisosParaEstaCarta_43063()
+        {
+
+            CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
+
+            //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+            //    btnsituacion.Visible = False
+
+
+
+        }
+
+
+        [TestMethod]
+        public void TienePermisosParaEsteArchivo_43063()
+        {
+
+            // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
+            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf", SC, scbdlmasterappconfig);
+            //Busco en q comentario esta el archivo
+            //    busco el reclamo del comentario, y la carta del comentario
+            //    veo si tiene permiso para esa carta
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void bajarArchivo_43063()
+        {
+
+            int idcarta = 2633399;
+
+            //http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
+
+            //var s = new ServicioCartaPorte.servi();
+            //s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
+            //GrabarComentarioArchivo_DLL
+        }
+
+
+
+
+        [TestMethod]
+        public void EnviarMailALosQueParticipanEnElReclamo_43063()
+        {
+
+            // podria pasarle a la funcion el listado de usuarios+mails....
+            // o tambien, pasarle la conexion a la bdlmaster y hacer a mano la busqueda...
+
+            //sfasdf
+            //asdasdfasdfasdf
+
+            //            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
+            //                   "asuntoasuntoasunto 2",
+            //                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpServer"],
+            //                ConfigurationManager.AppSettings["SmtpUser"],
+            //                ConfigurationManager.AppSettings["SmtpPass"],
+            //                  "",
+            //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
+
+
+
+
+        [TestMethod]
+        public void ListadoDeUltimosReclamosDeEsteUsuario_43063()
+        {
+
+
+            /*
+                        verMisChats
+
+                    AgregarChat(idusuario, idreclamo, comentario)
+
+                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
+
+                    SubirArchivo
+
+                    ColaDeMails o SignalR
+                    */
+
+
+
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+                                //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+            var s = new ServicioCartaPorte.servi();
+            string ret = s.ReclamosMaestro_DynamicGridData("IdReclamo", "desc", 1, 999999, true, filtro, "", "", 0, 0, SC, "", "");
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
+            //Debugger.
+            Assert.IsTrue(listado.records > 0);
+
+        }
+
+
+
+
+        [TestMethod]
+        public void ListadoDeComentariosPorCartaYUsuario_43063()
+        {
+
+            /*
+                        verMisChats
+
+                    AgregarChat(idusuario, idreclamo, comentario)
+
+                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
+
+                    SubirArchivo
+
+                    ColaDeMails o SignalR
+                    */
+
+
+
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+                                //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+
+            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+            DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+
+
+            int idcarta = 2633399;
+
+
+            var rec = new Reclamo();
+            rec.Estado = 22;
+            rec.Descripcion = "asdfasdf";
+            db.Reclamos.Add(rec);
+            db.SaveChanges();
+
+            var comentario = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+            comentario.IdReclamo = rec.IdReclamo;
+            comentario.IdEmpleado = 1;
+            comentario.Comentario = "hola hola";
+            db.ReclamoComentarios.Add(comentario);
+
+            var comentario2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
+            comentario2.IdReclamo = rec.IdReclamo;
+            comentario2.IdEmpleado = 10;
+            comentario2.Comentario = "q haces";
+            db.ReclamoComentarios.Add(comentario2);
+
+
+            db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
+
+            db.SaveChanges();
+
+
+            //haria falta aclarar el usuario tambien
+
+            var s = new ServicioCartaPorte.servi();
+            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "", "");
+            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
+            Assert.IsTrue(listado.records > 0);
+
+        }
+
+
+
+        [TestMethod]
+        public void IdReclamoSegunCartaYUsuario_43063()
+        {
+
+            int idcarta = 2633333;
+
+
+            var s = new ServicioCartaPorte.servi();
+
+
+            s.IdReclamoSegunCartaYUsuario(idcarta, "", SC);
+
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void ListarUsuariosDeEstaCartaConLosQueSePuedaChatear_43063()
+        {
+            int idcarta = 2633333;
+
+
+            var s = new ServicioCartaPorte.servi();
+
+            //Tendría que poder usarse la segunda bdlmaster(la de externos). Cómo hacemos entonces????
+
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC, "carlitos"); //cómo abro un chat con usuarios especificos?
+
+
+            var usuarios = s.UsuariosExternosQuePuedenChatearEnEstaCarta(idcarta, SC, scbdlmasterappconfig);
+
+            // crear un chat con el primero de la lista
+            // listar despues los comentarios de esa carta 
+            // y despues listar los comentarios del usuario
+
+            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
+                                //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
+            string ret = s.ReclamosComentarios_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "", "");
+
+
+
+            string ret2 = s.ReclamosMaestro_DynamicGridData("IdReclamo", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void cerrar_consulta_43063()
+        {
+
+            //            -En Reclamos no funciona "Ver Carta"(es porque lo desactivamos ?)
+            //- "Cerrar" no hace nada
+            //- "Abrir" tiene que ser para el chat con cada usuario
+
+
+            int idcarta = 2633333;
+            string usuariodestino = "RODRIGORIOS";
+
+            var s = new ServicioCartaPorte.servi();
+            s.AbrirReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+            s.CerrarReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+            var bEstado = s.EstadoReclamo_DLL(idcarta, usuario, SC, usuariodestino);
+
+
+        }
+
+
+
+        [TestMethod]
+        public void agregar_comentario_43063()
+        {
+
+            // http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
+            // http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
+
+
+            int idcarta = 2633399;
+
+
+            var s = new ServicioCartaPorte.servi();
+            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC, "carlitos"); //cómo abro un chat con usuarios especificos?
+                                                                                               //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
+
+
+
+        }
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void liquidacionsubcon_46735_2()
+        {
+
+            /*
+
+            Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
+
+            Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
+
+            En titular / intermediario / remitnte / cliente observ.
+
+            */
+
+            var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
+            cliente = -1;
+
+
+            if (false)
+            {
+
+                var s = new ServicioCartaPorte.servi();
+                var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
+                DemoProntoEntities db = new DemoProntoEntities(scEF);
+
+
+                var q1 = db.WilliamsDestinos.Where(x => x.Subcontratista1 == 10947 || x.Subcontratista2 == 10947).FirstOrDefault(); // ramirez jose luis
+                q1.Subcontratista1 = 10947;
+                q1.Subcontratista2 = 10947;
+
+                var q2 = db.ListasPreciosDetalles.Where(x => x.ListasPrecio.Descripcion == "RAMIREZ JOSE LUIS - Precios").ToList(); // ramirez jose luis
+                foreach (Data.Models.ListasPreciosDetalle ps in q2)
+                {
+                    ps.PrecioComboCaladaMasBalanza = 55;
+                }
+
+                db.SaveChanges();
+
+            }
+
+
+
+
+
+
+
+            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
+
+            ReportParameter p2 = null;
+            string sTitulo = "";
+
+            var q = ConsultasLinq.LiquidacionSubcontratistas(SC,
+                       "", "", "", 1, 5000,
+                        CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, "", -1, -1,
+                       -1, -1,
+                       -1, -1, -1, -1, CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                        new DateTime(2016, 1, 1),
+                        new DateTime(2017, 7, 31),
+                        0, cliente, ref sTitulo);
+
+
+
+            ReportParameter[] p = new ReportParameter[5];
+            p[0] = new ReportParameter("Concepto1", "");
+            p[1] = new ReportParameter("titulo", "");
+            p[2] = new ReportParameter("Concepto2", "");
+            p[3] = new ReportParameter("Concepto1Importe", "-1");
+            p[4] = new ReportParameter("Concepto2Importe", "-1");
+
+
+            string output = "";
+
+            CartaDePorteManager.RebindReportViewerLINQ_Excel
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+
+            System.Diagnostics.Process.Start(output);
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_5()
+        {
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true, @"C:\Users\Mariano\Documents\chrome64_49.0.2623.75\chrome.exe");
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+        [TestMethod]
+        public void loginEnUrenport3_42773_6()
+        {
+
+
+            //            Comment 94 by ankitkoo...@gmail.com, Dec 5
+            //For people who are searching for a Solution for C#. A very elegant solution has been provided by Cezary Piątek in his Tellurium framework. 
+            //GitHub link to framework : https://github.com/cezarypiatek/Tellurium
+
+            //Please refer to the class : Tellurium.MvcPages.SeleniumUtils.ChromeRemoteInterface.ChromeRemoteInterface
+
+            //https://github.com/cezarypiatek/Tellurium/blob/master/Src/MvcPages/SeleniumUtils/ChromeRemoteInterface/ChromeRemoteInterface.cs
+
+            //This class has the required implementation.
+
+            //con la nueva version del chromedriver, en modo headless no me baja el archivo. https://bugs.chromium.org/p/chromium/issues/detail?id=696481
+
+
+            var s = new ServicioCartaPorte.servi();
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+            //s.CerealnetSeleniumConPhantomJS(DirApp);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void Tellerium_should_be_able_to_run_test_with_configuration_from_file()
+        {
+
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            string testExecutionPath = @"C:\Users\Mariano\Documents\pronto\TestProject2";
+
+
+            //var testExecutionPath = TestContext.CurrentContext.TestDirectory;
+            var browserAdapterConfig = BrowserAdapterConfig.FromAppConfig(testExecutionPath);
+            using (var browser = BrowserAdapter.Create(browserAdapterConfig))
+            {
+                //Perform test
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void problemasPorElCambioDeNRecibo_46500()
+        {
+
+            //varios dejaron de andar porque no actualicé los modelos de LinqToSql y el del TypedDatatables
+
+            LogicaFacturacion.LeyendaSyngenta(2343, SC);
+
+
+
+            //        CartaDePorteManager.ListaDeLinks(lista, oCP.SubnumeroDeFacturacion)
+            //MostrarLinksAFamiliaDeDuplicados
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+            var output2 = SincronismosWilliamsManager.GenerarSincro("BTG PACTUAL [BIT]", ref sErrores, SC, "dominio", ref sTitulo,
+                                     CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                     "", -1, -1, -1, -1,
+                                     -1, -1, -1, -1,
+                                     CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                                     new DateTime(2014, 1, 20), new DateTime(2014, 1, 28),
+                                     -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+
+            //wCartasDePorte_TX_InformesCorregidoTableAdapter
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         [TestMethod]
         public void SincroChiambretto_46876()
@@ -927,7 +1709,7 @@ namespace ProntoMVC.Tests
 
             System.Diagnostics.Process.Start(output);
         }
-        
+
 
 
 
@@ -941,7 +1723,7 @@ namespace ProntoMVC.Tests
             var cp = CartaDePorteManager.GetItem(SC, 46464);
             cp.NRecibo = "0068989864";
             string ms = "";
-            CartaDePorteManager.Save(SC, cp, 1, "",  true  ,ref ms);
+            CartaDePorteManager.Save(SC, cp, 1, "", true, ref ms);
 
             var cp2 = CartaDePorteManager.GetItem(SC, 46464);
 
@@ -965,47 +1747,47 @@ namespace ProntoMVC.Tests
             No se pudo crear la factura para FUTUROS Y OPCIONES.COM; verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no se haya disparado el error **listacdp vacia** o no haya otro cliente con el mismo nombre
 
 
-Facturas generadas  Cliente Total   IVA IBrutos1    IBrutos2 IBrutos3    Certif IIBB
-A - 0020 - 00009403 FUTUROS Y OPCIONES.COM 41003.50    7116.31 0.00    0.00    0.00
+    Facturas generadas  Cliente Total   IVA IBrutos1    IBrutos2 IBrutos3    Certif IIBB
+    A - 0020 - 00009403 FUTUROS Y OPCIONES.COM 41003.50    7116.31 0.00    0.00    0.00
 
-Es con el unico corredor que todos los meses pasa lo mismo.
+    Es con el unico corredor que todos los meses pasa lo mismo.
 
 
 
 
 
             Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)15
-__________________________
+    06/05/2017 11:24:15
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:Cartas sin automatico encontrado (pero este es el modo no automatico!!!)15
+    __________________________
 
             __________________________
 
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 378
-__________________________
+    Log Entry : 
+    06/05/2017 11:24:15
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:entro en PostProcesos 378
+    __________________________
 
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 378
-__________________________
+    Log Entry : 
+    06/05/2017 11:24:15
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaCasosQueSuperenUnMontoDeterminado 378
+    __________________________
 
-Log Entry : 
-06/05/2017 11:24:15
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 378
+    Log Entry : 
+    06/05/2017 11:24:15
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:despues de EmparcharClienteSeparadoParaFacturasQueSuperanCantidadDeRenglones 378
 
                 __________________________
 
-Log Entry:
+    Log Entry:
             06 / 05 / 2017 11:24:33
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:La factura para 13648 tiene 63 renglones y el 
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:La factura para 13648 tiene 63 renglones y el 
             máximo es 20
             __________________________
 
             Log Entry:
             06 / 05 / 2017 11:24:33
-Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la 
+    Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados. Error Message:No se pudo crear la 
             factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  Excede el máximo 
             de renglones <br/>No se pudo crear la factura para <a href="Cliente.aspx?Id=13648" target="_blank">FUTUROS Y OPCIONES .COM</a>;  verificar IVA y CUIT, o que la carta no estuviese imputada anteriormente; Verificar que no  se haya disparado el error 'listacdp vacia' o no haya otro cliente con el mismo nombre <br/>
 
@@ -1110,7 +1892,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
             System.Web.SessionState.HttpSessionState Session = null; // new System.Web.SessionState.HttpSessionState();
-            //Session[SESSIONPRONTO_glbIdUsuario] = 1;
+                                                                     //Session[SESSIONPRONTO_glbIdUsuario] = 1;
 
 
 
@@ -1140,7 +1922,7 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
                                                    cuantosrenglones, PuntoVenta,
                                                     desde,
                                                     hasta,
-                                                     sLista, "", optFacturarA, optFacturarA==4 ? txtFacturarATerceros : ""
+                                                     sLista, "", optFacturarA, optFacturarA == 4 ? txtFacturarATerceros : ""
                                                      , SC, "", "",
                                                     "", "", "", "",
                                                     "", "", txtBuscar, "",
@@ -1320,200 +2102,6 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
 
 
-
-
-
-
-        [TestMethod]
-        public void enviosPush__()
-        {
-            string deviceId = "asdfsadf";
-
-            var c = new Sch_WCFApplication.PushNotification(deviceId, "holaaaaaa", "titulo");
-
-        }
-
-
-        public void enviarNotificacionUsuario(string usuario)
-        {
-            //            var subs = BuscoLasSubscripcionesDelUsuario(usuario);
-            //            MandoMensajeAListadoDeSubscripciones(subs);
-
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void TienePermisosParaEstaCarta_43063()
-        {
-
-            CartaDePorteManager.TienePermisosParaEstaCarta("Mariano", 6546464, SC, scbdlmasterappconfig);
-
-            //If Not(Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-            //    btnsituacion.Visible = False
-
-
-
-        }
-
-
-        [TestMethod]
-        public void TienePermisosParaEsteArchivo_43063()
-        {
-
-            // http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
-            CartaDePorteManager.TienePermisosParaEsteArchivo("Mariano", "lala.pdf", SC, scbdlmasterappconfig);
-            //Busco en q comentario esta el archivo
-            //    busco el reclamo del comentario, y la carta del comentario
-            //    veo si tiene permiso para esa carta
-
-        }
-
-
-
-
-
-        [TestMethod]
-        public void bajarArchivo_43063()
-        {
-
-            int idcarta = 2633399;
-
-            //http://localhost:50769/ProntoWeb/CartaPorteDescargarArchivo.aspx?Id=lala.pdf  
-
-            //var s = new ServicioCartaPorte.servi();
-            //s.BajarArchivo_DLL( "asarararasa.pdf" , usuario, SC);
-            //GrabarComentarioArchivo_DLL
-        }
-
-
-
-
-        [TestMethod]
-        public void EnviarMailALosQueParticipanEnElReclamo()
-        {
-
-            // podria pasarle a la funcion el listado de usuarios+mails....
-            // o tambien, pasarle la conexion a la bdlmaster y hacer a mano la busqueda...
-
-            //sfasdf
-            //asdasdfasdfasdf
-
-            //            Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
-            //                   "asuntoasuntoasunto 2",
-            //                "cuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpocuerpo cuerpocuerpocuerpocuerpo",
-            //                ConfigurationManager.AppSettings["SmtpUser"],
-            //                ConfigurationManager.AppSettings["SmtpServer"],
-            //                ConfigurationManager.AppSettings["SmtpUser"],
-            //                ConfigurationManager.AppSettings["SmtpPass"],
-            //                  "",
-            //               Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
-
-        }
-
-
-        
-        [TestMethod]
-        public void cerrar_consulta_43063()
-        {
-            int idcarta = 2633333;
-
-
-            var s = new ServicioCartaPorte.servi();
-            s.AbrirReclamo_DLL(idcarta, usuario, SC);
-            s.CerrarReclamo_DLL(idcarta, usuario, SC);
-
-        }
-
-
-
-        [TestMethod]
-        public void agregar_comentario_43063()
-        {
-
-            // http://localhost:50769/ProntoWeb/ReclamosPorUsuarioMovil.aspx?Id=2633399
-            // http://localhost:50769/ProntoWeb/CartaDePorte.aspx?Id=2633399
-
-
-            int idcarta = 2633399;
-
-
-            var s = new ServicioCartaPorte.servi();
-            s.GrabarComentario_DLL(idcarta, "este es mi comentario", usuario, SC);
-            //s.UploadComentario_DLL();            // y si directamente comparto una url?... -pero cómo darle acceso a esa url al usuario externo?????
-
-
-        }
-
-
-
-        [TestMethod]
-        public void consultas_conversaciones_chats_bld_43063()
-        {
-
-            /*
-                        verMisChats
-
-                    AgregarChat(idusuario, idreclamo, comentario)
-
-                    quienes escuchan el chat? quiero decir, a quien les llega el mail / notificacion
-
-                    SubirArchivo
-
-                    ColaDeMails o SignalR
-                    */
-
-
-
-
-            string filtro = ""; // "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
-            //string output = @"C:\Users\Mariano\Downloads\Informe" + DateTime.Now.ToString("ddMMMyyyy_HHmmss") + ".xls";
-
-            var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
-            DemoProntoEntities db = new DemoProntoEntities(scEF);
-
-            ReportViewer ReporteLocal = new Microsoft.Reporting.WebForms.ReportViewer();
-
-
-
-            int idcarta = 2633399;
-
-
-            var rec = new Reclamo();
-            rec.Estado = 22;
-            rec.Descripcion = "asdfasdf";
-            db.Reclamos.Add(rec);
-            db.SaveChanges();
-
-            var comentario = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-            comentario.IdReclamo = rec.IdReclamo;
-            comentario.IdEmpleado = 1;
-            comentario.Comentario = "hola hola";
-            db.ReclamoComentarios.Add(comentario);
-
-            var comentario2 = new ReclamoComentario(); // db.ReclamoComentarios.FirstOrDefault().IdReclamo;
-            comentario2.IdReclamo = rec.IdReclamo;
-            comentario2.IdEmpleado = 10;
-            comentario2.Comentario = "q haces";
-            db.ReclamoComentarios.Add(comentario2);
-
-
-            db.CartasDePortes.Find(idcarta).IdReclamo = rec.IdReclamo;
-
-            db.SaveChanges();
-
-
-            var s = new ServicioCartaPorte.servi();
-            string ret = s.Reclamos_DynamicGridData("Fecha", "asc", 1, 999999, true, filtro, "", "", 0, idcarta, SC, "", "");
-            System.Web.Script.Serialization.JavaScriptSerializer jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            jqGridJson listado = jsonSerializer.Deserialize<jqGridJson>(ret);
-            Assert.IsTrue(listado.records > 0);
-
-        }
 
 
 
@@ -1722,28 +2310,28 @@ Error in: https://prontoweb.williamsentregas.com.ar/ProntoWeb/CDPFacturacion.asp
 
             Log Entry:
             11 / 15 / 2017 17:35:53
-Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+    Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Falta elegir a qué acopio corresponde el remitente comercial
 
 
             __________________________
 
             Log Entry:
             11 / 15 / 2017 17:35:54
-Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
+    Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)
 
 
             __________________________
 
             Log Entry:
             11 / 15 / 2017 17:35:56
-Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+    Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
 
 
             __________________________
 
             Log Entry:
             11 / 15 / 2017 17:35:56
-Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
+    Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituaciones. Error Message:La patente del acoplado es inválida 
 
             */
 
@@ -1768,8 +2356,8 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
 
 
 
-        [TestMethod]
-        public void envioNotificacionesconMail_42871_2()
+        //[TestMethod]
+        public void _LENTO_envioNotificacionesconMail_42871_2()
         {
             ProntoWindowsService.Service1.Initialize();
             ProntoWindowsService.Service1.DoWorkCartasPorteNuevasParaElCliente();
@@ -1849,13 +2437,13 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
                         //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
                         //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
                     where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
-                            && (usus.Contains(x.Vendedor ?? -1)
-                                    || usus.Contains(x.Entregador ?? -1)
-                                    || usus.Contains(x.CuentaOrden1 ?? -1)
-                                    || usus.Contains(x.CuentaOrden2 ?? -1)
-                                    || ususCorredores.Contains(x.Corredor ?? -1)
-                                ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
-                           )
+                    && (usus.Contains(x.Vendedor ?? -1)
+                            || usus.Contains(x.Entregador ?? -1)
+                            || usus.Contains(x.CuentaOrden1 ?? -1)
+                            || usus.Contains(x.CuentaOrden2 ?? -1)
+                            || ususCorredores.Contains(x.Corredor ?? -1)
+                        ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                   )
                     select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
                     )
                     .SelectMany(x => x)
@@ -2705,11 +3293,11 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
             /*
 
             Te tenemos que pedir que cuando se carguen camiones de SYNGENTA y se coloque en la solapa de entregador a otro, para lo que es la liquidacion del subcomisionista tome esa cp como elevacion.
-            
+
             Solo tiene que afectar a eso. No tiene que afectar al envio de descarga al cliente y vista de la cp en nuetro sistema.
-            
+
             En titular / intermediario / remitnte / cliente observ.
-                
+
             */
 
             var cliente = SQLdinamico.BuscaIdClientePreciso("SYNGENTA AGRO S.A.", SC);
@@ -4357,9 +4945,11 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
         public void loginEnUrenport3_42773_4()
         {
             var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas\";
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            string dirbinary = @"C:\Users\Mariano\AppData\Local\Google\Chrome\Application\chrome.exe";
 
-            s.UrenportSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
+            s.UrenportSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", false, dirbinary);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -4370,9 +4960,10 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
         public void loginEnUrenport3_42773_3()
         {
             var s = new ServicioCartaPorte.servi();
-            string dir = DirApp + @"\Temp\Pegatinas\";
+            string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            string dirMiRepo = @"C:\Users\Mariano\Documents\";
 
-            s.CerealnetSelenium_ConChromeHeadless(dir, @"c:\bdl\pronto\InterfazFlexicapture\");
+            s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug", true);
 
             //s.CerealnetSeleniumConPhantomJS(DirApp);
         }
@@ -4583,12 +5174,12 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
 
                     sleep(15)
 
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		 
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
                     os.system(bashCommand)
 
@@ -4596,12 +5187,12 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
                     #browser.quit()
                     bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
                     os.system(bashCommand)
-		
+
                     bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
                     os.system(bashCommand)
-		
+
                     sleep(2)
-		
+
                     bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
                     os.system(bashCommand)
 
@@ -4841,8 +5432,8 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
             var hasta = new DateTime(2017, 5, 12);
             var desdeAnt = new DateTime(2015, 11, 1); //nov
             var hastaAnt = new DateTime(2016, 5, 31); //mayo
-            //desde = desdeAnt;
-            //hasta = hastaAnt;
+                                                      //desde = desdeAnt;
+                                                      //hasta = hastaAnt;
 
             var MinimoNeto = 0;
             var topclie = 99999;
@@ -4936,7 +5527,7 @@ Error in: http://iismvc/Williams/ProntoWeb/WebServiceCartas.asmx/GrabarSituacion
 
             /*
             . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
-La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
+    La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
     u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
             interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
              * 
@@ -5052,23 +5643,23 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
 
             /*
             En ningún caso pone bien la merma en KG
-Por ejemplo, estoy poniendo:
+    Por ejemplo, estoy poniendo:
 
-* SOJA
-* 30000KG neto descarga
-* 1.5% cuerpos extraños/materias
+    * SOJA
+    * 30000KG neto descarga
+    * 1.5% cuerpos extraños/materias
 
-La rebaja la calcula bien: 0.5% pero me pone 1KG de merma.
-Deberían ser 150KG
+    La rebaja la calcula bien: 0.5% pero me pone 1KG de merma.
+    Deberían ser 150KG
 
-Cuando hay "tramos" de mermas no está calculando bien la rebaja.
-Ejemplo:
+    Cuando hay "tramos" de mermas no está calculando bien la rebaja.
+    Ejemplo:
 
-* SOJA
-* 30000KG neto descarga
-* 6.5% cuerpos extraños/materias
+    * SOJA
+    * 30000KG neto descarga
+    * 6.5% cuerpos extraños/materias
 
-Debería ser 6.75% de rebaja y viene 7.25%
+    Debería ser 6.75% de rebaja y viene 7.25%
 
             */
         }
@@ -5424,8 +6015,8 @@ Debería ser 6.75% de rebaja y viene 7.25%
 
 
 
-        [TestMethod]
-        public void mapa_con_googlemaps_40288()
+        //[TestMethod]
+        public void _LENTO_mapa_con_googlemaps_40288()
         {
             //agregar en la grilla de localidades la edicion de lat y lng
 
@@ -5599,8 +6190,8 @@ Debería ser 6.75% de rebaja y viene 7.25%
             var hasta = new DateTime(2017, 5, 31);
             var desdeAnt = new DateTime(2015, 11, 1); //nov
             var hastaAnt = new DateTime(2016, 5, 31); //mayo
-            //desde = desdeAnt;
-            //hasta = hastaAnt;
+                                                      //desde = desdeAnt;
+                                                      //hasta = hastaAnt;
 
             var MinimoNeto = 0;
             var topclie = 99999;
@@ -5835,7 +6426,7 @@ Debería ser 6.75% de rebaja y viene 7.25%
 
             /*
             . El Web Service no devolverá ningún dato que haga referencia en cuanto a si se procesó bien o tuvo errores la interface.
-La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
+    La interface será procesa por Syngenta y si la misma no puede ser procesada correctamente por contener errores en los datos 
     u otra validación; se enviara un mail con el detalle del procesamiento y error al mail indicado por el entregador para esta 
             interface como así también dicho mail será enviado de la misma forma al responsable de Canje por parte de Syngenta.
              * 
@@ -5888,8 +6479,8 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             string ms = "";
 
             string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\docstest\PORTE050041ramallo175.txt";  // tabs
-            // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
-            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+                                                                                                                      // string archivoExcel = @"C:\Users\Administrador\Documents\bdl\pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+                                                                                                                      //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
 
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -5900,7 +6491,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -5929,7 +6520,7 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
         }
@@ -6195,14 +6786,14 @@ La interface será procesa por Syngenta y si la misma no puede ser procesada cor
             /*
 
         Log Entry : 
-05/11/2017 13:34:06
-Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
-Out of memory.
-   at System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
-   at System.Drawing.Image.FromFile(String filename)
-   at CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6555
-   at CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6058
-System.Drawing
+    05/11/2017 13:34:06
+    Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
+    Out of memory.
+    at System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+    at System.Drawing.Image.FromFile(String filename)
+    at CartaDePorteManager.ResizeImage_ToTIFF(String image, Int32 width, Int32 height, String newimagename, String sDirVirtual, String DirApp) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6555
+    at CartaDePorteManager.DescargarImagenesAdjuntas_TIFF(DataTable dt, String SC, Boolean bJuntarCPconTK, String DirApp, Boolean reducir) in C:\Users\Administrador\Documents\bdl\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:line 6058
+    System.Drawing
 
             */
 
@@ -6435,7 +7026,7 @@ System.Drawing
 
             ProntoCSharp.FuncionesUIWebCSharpEnDllAparte.KeepSelection(GridView2);
 
- RestoreSelection(GridView2)
+    RestoreSelection(GridView2)
             //            System.NullReferenceException
             //Message:	Object reference not set to an instance of an object.
 
@@ -7033,7 +7624,7 @@ System.Drawing
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
             dr["ModoImpresion"] = "Speed"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
-            //dr["ModoImpresion"] = "ExcHc";
+                                           //dr["ModoImpresion"] = "ExcHc";
 
 
             //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
@@ -7421,7 +8012,7 @@ System.Drawing
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
             dr["ModoImpresion"] = "Amaggi"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
-            //dr["ModoImpresion"] = "ExcHc";
+                                            //dr["ModoImpresion"] = "ExcHc";
 
 
             //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
@@ -7610,7 +8201,7 @@ System.Drawing
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30708142391"));
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30164632845")); // este pasa por verdadero. está bien? no le encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
             Assert.IsTrue(FuncionesGenericasCSharp.CUITValido("30700809818")); // este pasa por verdadero. está bien? no le encontré cuit existente, pero tampoco a las otras 9 variantes de digito verificador
-            // no hay algun servicio web de la afip para buscar cuits?
+                                                                               // no hay algun servicio web de la afip para buscar cuits?
 
 
 
@@ -8218,20 +8809,20 @@ System.Drawing
           Se tiene que poder ver todos los campos sin tener que andar moviéndose en la pantalla para los costados.
              * Lo que quieren es que las columnas de la grilla del módulo sean las definidas en el excel (más la fecha y hora de la última modificación).
 
-Por otro lado, dicen que intentemos utilizar la mayor porción de pantalla posible. Con respecto a esto, por el ancho estamos usando toda la pantalla por lo cual si con las nuevas columnas quedan muchas columnas a la derecha, podríamos achicar la tipografía.
-Por el alto, se puede agrandar? En mi pantalla usa 380 pixeles cuando podría ser algo más grande.
+    Por otro lado, dicen que intentemos utilizar la mayor porción de pantalla posible. Con respecto a esto, por el ancho estamos usando toda la pantalla por lo cual si con las nuevas columnas quedan muchas columnas a la derecha, podríamos achicar la tipografía.
+    Por el alto, se puede agrandar? En mi pantalla usa 380 pixeles cuando podría ser algo más grande.
              1h
 
 
             3 Que el robot filtre también la información de los otros entregadores y que figure 
              el entregador en nuestro sistema. ( ver ejemplo en el Excel que adjuntamos para el punto 1)
              * Sucede que en el excel que descarga el robot hay cartas de porte de multiples entregadores pero en la columna "CUIT_ENTREGADOR" siempre viene el CUIT de Williams.
-Se pueden identificar los entregadores por la razón social que aparece en la columna "ENTREGADOR".
-Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Williams pintados de amarillo.
+    Se pueden identificar los entregadores por la razón social que aparece en la columna "ENTREGADOR".
+    Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Williams pintados de amarillo.
             2h
              * 
 
-            
+
              * 
             5  Al exportar a Excel tiene que tirar el mismo excel que te adjunto en el punto 1. Los otros datos en todo caso que estén
             3h
@@ -8625,7 +9216,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -8655,7 +9246,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -8681,7 +9272,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -8711,7 +9302,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -8784,41 +9375,41 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         public void ServicioWebDescargas_29771()
         {
             /*   
-   1) Error bloqueante al proceso de importación
-   • La hora (un String) tiene más de 10 caracteres, esto entra en conflicto con las definición del campo 
-   en la base de datos para CerealNet (VARCHAR(10) ). Por lo que pude ver, Williams a veces 
-   está informando una fecha en este campo, otras veces no informa nada. 
-   CerealNet lo manda vacio a este campo y si bien en Williams rompe el proceso de importación 
-   no usamos este campo para nada. En pocas palabras podríamos no darle importancia a este campo y seguir adelante.
+    1) Error bloqueante al proceso de importación
+    • La hora (un String) tiene más de 10 caracteres, esto entra en conflicto con las definición del campo 
+    en la base de datos para CerealNet (VARCHAR(10) ). Por lo que pude ver, Williams a veces 
+    está informando una fecha en este campo, otras veces no informa nada. 
+    CerealNet lo manda vacio a este campo y si bien en Williams rompe el proceso de importación 
+    no usamos este campo para nada. En pocas palabras podríamos no darle importancia a este campo y seguir adelante.
 
-   2) Una vez sorteado ese error me encontré con
+    2) Una vez sorteado ese error me encontré con
 
-   • KGDescarga (netodest) no se está informando.
-   • En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
-   • Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
-   • Los CodigoOnccaProducto (codmerca) no se está informando
-   • La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
+    • KGDescarga (netodest) no se está informando.
+    • En la mayoría de las veces no está informando el CUIT remitente y CUIT remitente comercial. Esto se usa para el mapeo de la empresa compradora.
+    • Los CUITs los informa con guiones (20-12123123-2) cuando debería informarlo sin guiones (20121231232)
+    • Los CodigoOnccaProducto (codmerca) no se está informando
+    • La cosecha a veces no se informa y cuando se informa tiene el formato “20xx/yy” cuando debería ser “xxyy”. Ej.: Se informa 2015/16, debería informar 1516
 
-   • No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
-   • CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
-   • Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
-   • No está informando las mermas.
-   • No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion).
+    • No está informando el campo CodigoOnccaLocalidadProcedencia (codonccalocalproc)
+    • CodigoOnccaPuerto (codonccapuerto), CodigoOnccaLocalidadPuerto (codonccalocalidadpuerto) y CodigoOnccaProvinciaPuerto (codonccaprovinciapuerto) no se está informando.
+    • Cuando se informa el CuitPuerto (cuitpuerto) informa un número entero (parecería ser un código de 2 dígitos) en vez de un CUIT.
+    • No está informando las mermas.
+    • No se está informando fecha de descarga (fechadescarga) y fecha de posición (fechaposicion).
 
              * 
              * 
-   • El campo calidad lo está informando mal. Debería ser:
-   Valor informado	Valor esperado
-   COND. CAMARA	CC
-   GRADO 1	G1
-   FUERA DE STANDARD	FE
-   GRADO 2	G2
-   CONFORME	??????
-   CONDICIONAL X M.E	??????
-   FUERA DE BASE	??????
+    • El campo calidad lo está informando mal. Debería ser:
+    Valor informado	Valor esperado
+    COND. CAMARA	CC
+    GRADO 1	G1
+    FUERA DE STANDARD	FE
+    GRADO 2	G2
+    CONFORME	??????
+    CONDICIONAL X M.E	??????
+    FUERA DE BASE	??????
 
-   Vale destacar que sacando el error bloqueante no se pudo importar ninguna descarga correctamente al sistema.
-   Todo esto sale de probar en todas las descargas (200) que se pudo importar con el rango de fecha 01/01/2010 al 01/01/2017
+    Vale destacar que sacando el error bloqueante no se pudo importar ninguna descarga correctamente al sistema.
+    Todo esto sale de probar en todas las descargas (200) que se pudo importar con el rango de fecha 01/01/2010 al 01/01/2017
              * */
 
 
@@ -9069,8 +9660,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
-        [TestMethod]
-        public void exportacionPeroLlamandoAlAction_29439_2()
+        //[TestMethod]
+        public void _LENTO_exportacionPeroLlamandoAlAction_29439_2()
         {
             string filtro = "{\"groupOp\":\"OR\",\"rules\":[{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"MOL. CAÑUELAS - ZARATE\"},{\"field\":\"DestinoDesc\",\"op\":\"eq\",\"data\":\"TERMINAL 6\"}]}";
 
@@ -9270,7 +9861,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
         [TestMethod]
-        public void formato_mail_html_grobo_25065()
+        public void _LENTO_formato_mail_html_grobo_25065()
         {
 
             //aaaaaa
@@ -9285,7 +9876,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             var dr = CDPMailFiltrosManager2.TraerMetadata(SC, -1).NewRow();
 
             dr["ModoImpresion"] = "GrobHc"; // este es el excel angosto con adjunto html angosto ("Listado general de Cartas de Porte (simulando original) con foto 2 .rdl"). Lo que quieren es el excel ANCHO manteniendo el MISMO html. 
-            //dr["ModoImpresion"] = "ExcHc";
+                                            //dr["ModoImpresion"] = "ExcHc";
 
 
             //ElseIf iisNull(.Item("ModoImpresion"), "") = "ExcHtm" Then
@@ -9651,8 +10242,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
 
 
-        [TestMethod]
-        public void SincroTomasHnos_27154()
+        //[TestMethod]
+        public void _LENTO_SincroTomasHnos_27154()
         {
 
             string sErrores = "", sTitulo = "";
@@ -10419,7 +11010,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            // Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            // Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -10447,7 +11038,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -10629,7 +11220,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta.PuntoVenta = 1;
             carta.Cosecha = "2016/17";
             carta.IdArticulo = 5;
-            carta.NetoFinalIncluyendoMermas = 30160;
+            carta.NetoFinalAntesDeRestarMermas = 30160;
             carta.Merma = 0;
             carta.Humedad = 0;
             carta.HumedadDesnormalizada = 0;
@@ -10691,7 +11282,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta.PuntoVenta = 1;
             carta.Cosecha = "2016/17";
             carta.IdArticulo = 4;
-            carta.NetoFinalSinMermas = 30160;
+            carta.NetoFinalDespuesDeRestadasMermas = 30160;
             carta.Merma = 0;
             carta.Humedad = 0;
             carta.HumedadDesnormalizada = 0;
@@ -10756,7 +11347,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -10785,7 +11376,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
         }
@@ -11108,7 +11699,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11136,7 +11727,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -11156,7 +11747,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -11167,7 +11758,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -11354,7 +11945,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             string ms = "";
 
             string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
-            //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+                                                                                  //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
 
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -11365,7 +11956,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             //carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             //carta.NobleGrado = 2;
             //CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            //Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            //Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -11394,7 +11985,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -11952,7 +12543,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
             //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
             carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
-            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+                                                                                               //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
             carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
             carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
             carta.IdArticulo = 22;
@@ -11966,7 +12557,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             carta.FacturarAManual = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -11978,7 +12569,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -12047,7 +12638,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
             //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
             carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
-            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+                                                                                               //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
             carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
             carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
             carta.IdArticulo = 22;
@@ -12059,7 +12650,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             carta.Exporta = false;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -12071,7 +12662,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -12511,7 +13102,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta.NumeroCartaDePorte = 600000000 + (new Random()).Next(800000);
             //carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-51651431-7", SC, ""); //PUNTE
             carta.Titular = CartaDePorteManager.BuscarClientePorCUIT("30-55549549-4", SC, ""); //BRAGADENSE
-            //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
+                                                                                               //carta.CuentaOrden2 = CartaDePorteManager.BuscarClientePorCUIT("30-53772127-4", SC, ""); //TOMAS HNOS
             carta.Corredor = 121; // CartaDePorteManager.BuscarVendedorPorCUIT()
             carta.Entregador = CartaDePorteManager.BuscarClientePorCUIT("30-71161551-9", SC, ""); // amaggi // usar un cliente que sea exportador;
             carta.IdArticulo = 22;
@@ -12523,7 +13114,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
 
             carta.Exporta = false;
 
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
 
@@ -12535,7 +13126,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta2.IdClienteAFacturarle = -1;
             carta2.Exporta = true;
 
-            CartaDePorteManager.IsValid(SC, ref carta2, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta2, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta2, 1, "lalala", true, ref ms);
 
 
@@ -12760,8 +13351,8 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
         }
 
 
-        [TestMethod]
-        public void LocalidadAprox()
+        //[TestMethod]
+        public void _LENTO_LocalidadAprox()
         {
             SQLdinamico.BuscaIdLocalidadAproximado("IRENEO PORTELA - BS. AS.", SC, 7);
             SQLdinamico.BuscaIdLocalidadAproximado("RENEO PORTELA - BS. AS.", SC, 7);
@@ -13043,7 +13634,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
 
 
 
@@ -13071,7 +13662,7 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             carta = CartaDePorteManager.GetItemPorNumero(SC, 549768066, 0, 0);
             carta.NobleGrado = 2;
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
-            Assert.AreEqual(30000, carta.NetoFinalIncluyendoMermas);
+            Assert.AreEqual(30000, carta.NetoFinalAntesDeRestarMermas);
         }
 
 
@@ -13132,19 +13723,19 @@ Adjunto un ejemplo que tiene cartas de porte de 8 entregadores que no son Willia
             /*
             Mariano, yo me estoy tirando los reportes y me salen igual que a ellos.
 
-Lo que dicen es que cuando sacan los reportes, salen así:
+    Lo que dicen es que cuando sacan los reportes, salen así:
 
-Fecha: del 27/7 al 31/10
-Saldo Inicial: 19.999.120 kg
-Movimientos: hay cinco en el período que suman 147.940 kg entre el 27/7 y el 1/9
-Saldo Final: 20.147.060 kg
+    Fecha: del 27/7 al 31/10
+    Saldo Inicial: 19.999.120 kg
+    Movimientos: hay cinco en el período que suman 147.940 kg entre el 27/7 y el 1/9
+    Saldo Final: 20.147.060 kg
 
-Fecha: del 31/10 al 31/10
-Saldo Inicial: 19.999.120 kg
-Movimientos: no hay movimientos ese día
-Saldo Final: 19.999.120 kg
+    Fecha: del 31/10 al 31/10
+    Saldo Inicial: 19.999.120 kg
+    Movimientos: no hay movimientos ese día
+    Saldo Final: 19.999.120 kg
 
-Entiendo que está mal el saldo inicial en el segundo caso.
+    Entiendo que está mal el saldo inicial en el segundo caso.
             */
 
             int pv = 2;
@@ -13173,19 +13764,19 @@ Entiendo que está mal el saldo inicial en el segundo caso.
         public void RecibidorOficial_15188()
         {
             /*
-            	- Se agregan 4 campos:
-Recibidor Oficial (Tilde)
-Estado: Combo con las opciones "Recibo" (por defecto) y "Rechazo"
-Motivo Rechazo: VACIO / REGRESA ORIGEN / ACONDICIONA / CAMBIA CP 
-Nombre de acondicionador: listado de clientes de Williams
+                - Se agregan 4 campos:
+    Recibidor Oficial (Tilde)
+    Estado: Combo con las opciones "Recibo" (por defecto) y "Rechazo"
+    Motivo Rechazo: VACIO / REGRESA ORIGEN / ACONDICIONA / CAMBIA CP 
+    Nombre de acondicionador: listado de clientes de Williams
 
-- Los campos tienen que quedar habilitados si el camion está rechazado
+    - Los campos tienen que quedar habilitados si el camion está rechazado
 
-- Si se rechaza el camion debe exigir una opción en Motivo Rechazo (distinta de vacio)
+    - Si se rechaza el camion debe exigir una opción en Motivo Rechazo (distinta de vacio)
 
-- Armar un informe igual al de Listado General, agregando al final estos 4 datos
+    - Armar un informe igual al de Listado General, agregando al final estos 4 datos
 
-- A parte de sobre el reporte, el completar alguno de estos datos no tiene que influir en el resto 
+    - A parte de sobre el reporte, el completar alguno de estos datos no tiene que influir en el resto 
              * del sistema (inclusive los pueden cargar antes de rechazarlo)
             */
 
@@ -13225,7 +13816,7 @@ Nombre de acondicionador: listado de clientes de Williams
 
 
 
-            bool esvalido = CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            bool esvalido = CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             Assert.AreEqual(true, esvalido);
             int id = CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
             Assert.AreNotEqual(-1, id);
@@ -13250,7 +13841,7 @@ Nombre de acondicionador: listado de clientes de Williams
             string sErrores = "", sTitulo = "";
 
             var sql = CartaDePorteManager.GetDataTableFiltradoYPaginado(SC, "",
-   "", "", 0, 0, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+    "", "", 0, 0, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
                      "", -1, -1,
                 -1, -1,
                 -1, -1, -1, -1,
@@ -13295,7 +13886,7 @@ Nombre de acondicionador: listado de clientes de Williams
              Esto es porque el que está en la pestaña Calidad es el número (1, 2, 3; que es lo que piden ellos) y lo 
              que está en en la pestaña de descarga es un texto (que puede ser "GRADO 1" o "FUERA DE BASE" o "COND. CAMARA" por ejemplo).
                 Por eso es el dato del Grado de la pestaña Calidad el que se envía.
-            
+
              * 
              * Piden que cuando cargan "GRADO 1", el sistema ponga 1 en grado en la pestaña de calidad
              * 
@@ -13303,7 +13894,7 @@ Nombre de acondicionador: listado de clientes de Williams
 
                 El campo lo siguen usando porque tienen otras opciones de calidad que no se reflejan en ningun otro lado de la CP.
 
-Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vienen casos 
+    Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vienen casos 
               de que está en un lugar y no en otro y tenemos que rastrear por que.
             */
 
@@ -13312,7 +13903,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC);
             carta.NobleGrado = 2;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 1", SC), carta.CalidadDe);
@@ -13323,7 +13914,7 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
             carta.CalidadDe = SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC);
             carta.NobleGrado = 3;
-            CartaDePorteManager.IsValid(SC, ref carta, ref ms, ref warn);
+            CartaDePorteManager.IsValidCarta(SC, ref carta, ref ms, ref warn);
             CartaDePorteManager.Save(SC, carta, 1, "lalala", true, ref ms);
 
             Assert.AreEqual(SQLdinamico.BuscaIdCalidadPreciso("GRADO 2", SC), carta.CalidadDe);
@@ -13526,16 +14117,6 @@ Hagamoslo tambien con la pegatina, asi hay un mismo criterio y despues no nos vi
 
         }
 
-
-
-        [TestMethod]
-        public void MandarmeLosSincrosAutomaticos()
-        {
-            //aaaaaa
-
-
-
-        }
 
 
 

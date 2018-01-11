@@ -1,0 +1,58 @@
+
+Log Entry : 
+12/27/2017 13:55:19
+Error in: . Error Message:hilo #9: ssdssss
+__________________________
+
+Log Entry : 
+12/27/2017 13:55:19
+Error in: . Error Message:hilo #9: Empieza
+__________________________
+
+Log Entry : 
+12/27/2017 13:55:19
+Error in: . Error Message:hilo #9: CONEXION: metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string="data source=DESKTOP-TVDQV7C;initial catalog=Williams;persist security info=True;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework"
+__________________________
+
+Log Entry : 
+12/27/2017 13:56:02
+Error in: . Error Message:hilo #9: System.InvalidOperationException: unknown error: unrecognized Chrome version: HeadlessChrome/63.0.3239.84
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.16299 x86_64)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   en OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   en OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver, Boolean bHeadless, String dirBinary) en C:\Users\Mariano\Documents\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 8353
+   en ProntoWindowsService.Service1.DoWorkSoloPegatinas() en C:\Users\Mariano\Documents\pronto\ProntoWindowsService\Service1.cs:línea 887
+__________________________
+
+Log Entry : 
+12/27/2017 13:56:02
+Error in: . Error Message:System.InvalidOperationException
+unknown error: unrecognized Chrome version: HeadlessChrome/63.0.3239.84
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.16299 x86_64)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   en OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   en OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   en OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver, Boolean bHeadless, String dirBinary) en C:\Users\Mariano\Documents\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 8353
+   en ProntoWindowsService.Service1.DoWorkSoloPegatinas() en C:\Users\Mariano\Documents\pronto\ProntoWindowsService\Service1.cs:línea 887
+WebDriver
+__________________________
+
+Log Entry : 
+12/27/2017 13:56:58
+Error in: . Error Message:hilo #9: ssdssss
+__________________________
+
+Log Entry : 
+12/27/2017 13:56:58
+Error in: . Error Message:hilo #9: Empieza
+__________________________
+
+Log Entry : 
+12/27/2017 13:56:58
+Error in: . Error Message:hilo #9: CONEXION: metadata=res://*/Models.Pronto.csdl|res://*/Models.Pronto.ssdl|res://*/Models.Pronto.msl;provider=System.Data.SqlClient;provider connection string="data source=DESKTOP-TVDQV7C;initial catalog=Williams;persist security info=True;user id=sa;password=.SistemaPronto.;multipleactiveresultsets=True;App=EntityFramework"
+__________________________

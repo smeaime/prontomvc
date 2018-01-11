@@ -208,7 +208,7 @@ Public Module SQLdinamico
 
             'Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 5 IdLocalidad, nombre FROM Localidades WHERE ltrim(nombre)<>'' AND dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") < " & distancia _
             '      & "  order by dbo.LevenshteinDistance(nombre,'" & Replace(ClienteRazonSocial, "'", "''") & "'," & distancia & ") " & " asc", 100)
-            Dim ds3 = EntidadManager.ExecDinamico(SC, strsql3)
+            Dim ds3 = EntidadManager.ExecDinamico(SC, strsql3, 5)
 
 
 

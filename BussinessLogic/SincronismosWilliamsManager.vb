@@ -2024,6 +2024,174 @@ Namespace Pronto.ERP.Bll
 
 
 
+        Public Shared Function EnviarSincro(sincro As String, sEmail As String, ByRef sErr As String, bvistaPrevia As Boolean) As String
+
+
+            '            ' Los mails salen desde la cuenta general de Bs As , cuando tienen que salir desde la general de 
+            '            'cada sucursal, te paso un ejemplo todos los que pasamos anoche salieron a dos direcciones cualquiera y a 
+            '            'ningun mail de los clientes (que no estaban) ; fijate que todos los sincros salieron a la direccion de Maxi la de arroyo. (adjunto los mails)
+
+            '            Try
+
+            '                If Not IsValidEmail(sEmail) And False Then
+            '                    sErr = sincro & ": La casilla de correo es inválida"
+            '                    Return sErr
+            '                End If
+
+
+
+            '                SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+
+
+
+            '                Dim idVendedor = BuscaIdClientePreciso(txtTitular.Text, HFSC.Value)
+            '                Dim idCorredor = BuscaIdVendedorPreciso(txtCorredor.Text, HFSC.Value)
+            '                Dim idIntermediario = BuscaIdClientePreciso(txtIntermediario.Text, HFSC.Value)
+            '                Dim idRComercial = BuscaIdClientePreciso(txtRcomercial.Text, HFSC.Value)
+            '                Dim idClienteAuxiliar = BuscaIdClientePreciso(txtPopClienteAuxiliar.Text, HFSC.Value)
+            '                Dim idDestinatario = BuscaIdClientePreciso(txtDestinatario.Text, HFSC.Value)
+            '                Dim idArticulo = BuscaIdArticuloPreciso(txt_AC_Articulo.Text, HFSC.Value)
+            '                Dim idProcedencia = BuscaIdLocalidadPreciso(txtProcedencia.Text, HFSC.Value)
+            '                Dim idDestino = BuscaIdWilliamsDestinoPreciso(txtDestino.Text, HFSC.Value)
+
+
+            '                'si los filtros estan vacíos, debería deshabilitar esta descarga. Cómo manejar estos casos, más allá de los automaticos?
+            '                If idVendedor <= 0 _
+            '                 And idCorredor <= 0 _
+            '                 And idIntermediario <= 0 _
+            '                 And idRComercial <= 0 _
+            '                 And idClienteAuxiliar <= 0 _
+            '                 And idDestinatario <= 0 _
+            '                 And idArticulo <= 0 _
+            '                 And idProcedencia <= 0 _
+            '                 And idDestino <= 0 _
+            '                 Then
+            '                    sErr += vbCrLf + "No se puede enviar el sincro si no se aplican filtros" + vbCrLf
+            '                    Return sErr
+            '                End If
+
+
+
+            '                Dim estadofiltro As CartaDePorteManager.enumCDPestado
+            '                Select Case cmbEstado.Text  '
+            '                    Case "TodasMenosLasRechazadas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.TodasMenosLasRechazadas
+            '                    Case "Incompletas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.Incompletas
+            '                    Case "Posición"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.Posicion
+            '                    Case "Descargas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.DescargasMasFacturadas
+            '                    Case "Facturadas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.Facturadas
+            '                    Case "NoFacturadas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.NoFacturadas
+            '                    Case "Rechazadas"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.Rechazadas
+            '                    Case "EnNotaCredito"
+            '                        estadofiltro = CartaDePorteManager.enumCDPestado.FacturadaPeroEnNotaCredito
+            '                    Case Else
+            '                        'Return
+            '                End Select
+
+
+            '                Dim sArchivo = SincronismosWilliamsManager.GenerarSincro(sincro, sErr,
+            '                                                             HFSC.Value, ConfigurationManager.AppSettings("UrlDominio"),
+            '                                                             "", estadofiltro, "", idVendedor, idCorredor,
+            '                                                            idDestinatario, idIntermediario,
+            '                                                            idRComercial, idArticulo, idProcedencia, idDestino,
+            '                                                            IIf(cmbCriterioWHERE.SelectedValue = "todos",
+            '                                                                CartaDePorteManager.FiltroANDOR.FiltroAND,
+            '                                                              CartaDePorteManager.FiltroANDOR.FiltroOR),
+            '                                                            DropDownList2.Text,
+            '                                                             globalDesde, globalHasta,
+            '                                                               cmbPuntoVenta.SelectedValue, optDivisionSyngenta.SelectedValue, , , , idClienteAuxiliar
+            ')
+
+            '                If sArchivo <> "" And verificarTamañoArchivo(sArchivo) Then
+
+
+
+            '                    Dim dest As String = IIf(bvistaPrevia, txtRedirigirA.Text, sEmail + "," + txtRedirigirA.Text)
+            '                    Dim puntoventa As Integer = cmbPuntoVenta.SelectedValue
+            '                    Dim De, CCOaddress As String
+
+            '                    Select Case puntoventa
+            '                        Case 1
+            '                            De = "buenosaires@williamsentregas.com.ar"
+            '                            CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+            '                        Case 2
+            '                            De = "sanlorenzo@williamsentregas.com.ar"
+            '                            CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+            '                        Case 3
+            '                            De = "arroyoseco@williamsentregas.com.ar"
+            '                            CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+            '                        Case 4
+            '                            De = "bahiablanca@williamsentregas.com.ar"
+            '                            CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+            '                        Case Else
+            '                            De = "buenosaires@williamsentregas.com.ar"
+            '                            CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+            '                    End Select
+
+            '                    Dim cuerpo = ""
+            '                    cuerpo = CDPMailFiltrosManager2.AgregarFirmaHtml(puntoventa)
+
+
+
+            '                    If False Then
+
+            '                        EnviarEmail(dest, "Sincro automático " + sincro, cuerpo,
+            '                           De,
+            '                            ConfigurationManager.AppSettings("SmtpServer"),
+            '                          ConfigurationManager.AppSettings("SmtpUser"),
+            '                          ConfigurationManager.AppSettings("SmtpPass"),
+            '                         sArchivo,
+            '                            ConfigurationManager.AppSettings("SmtpPort"), , CCOaddress, , "Williams Entregas")
+
+            '                    Else
+
+
+            '                        MandaEmail_Nuevo(dest, "Sincro automático " + sincro, cuerpo,
+            '                           De,
+            '                            ConfigurationManager.AppSettings("SmtpServer"),
+            '                          ConfigurationManager.AppSettings("SmtpUser"),
+            '                          ConfigurationManager.AppSettings("SmtpPass"),
+            '                         sArchivo,
+            '                            ConfigurationManager.AppSettings("SmtpPort"), , CCOaddress, , "Williams Entregas", , True)
+            '                    End If
+
+
+
+
+
+            '                    If (sincro.ToUpper = "SYNGENTA") Then
+            '                        EnviarSyngenta()
+            '                        sErr += vbCrLf + "Enviado a Syngenta Webservice" + vbCrLf
+            '                    End If
+
+
+
+
+            '                End If
+
+            '            Catch ex As Exception
+            '                ErrHandler2.WriteError(ex)
+            '                MandarMailDeError(ex)
+            '                sErr += ex.ToString
+            '            End Try
+
+            '            Return sErr
+
+
+
+
+        End Function
+
+
+
+
+
         Public Shared Function ExcelToCSV_SincroBLD(ByVal fileExcelName As String, ByVal MAXCOLS As Integer) As String
             'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
@@ -14261,6 +14429,9 @@ Namespace Pronto.ERP.Bll
             '62	MovStock	1	Señal 1=Movió mercadería       0=No movió mercadería	*	Izquierda	944
             '63	ObsAna	100	Observaciones Analisis		Izquierda	945
 
+
+            Dim bvolatil = False
+
             Dim sErroresProcedencia, sErroresDestinos As String
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
@@ -14672,10 +14843,17 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(cadenavacia)).ToString.PadLeft(10) 'KgsDesca	STRING(10)	Kilogramos Descarte (Sin Decimales))    746)    755
 
 
+
                     Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
-                    sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
-                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
-                    cc = Nothing
+
+                    If bvolatil Then
+                        sb &= String.Format("{0:F2}", cc.CalidadMermaVolatil).PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                        sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+
+                    Else
+                        sb &= cero.ToString.PadLeft(10) 'PorVolat	STRING(10)	Porcentaje volátil (dos (2) decimales))    756)    765
+                        sb &= cero.ToString.PadLeft(10) 'KgsVolat	STRING(10)	Kilogramos volátil (sin decimales))    766)    775
+                    End If
 
 
 
@@ -14890,15 +15068,16 @@ Namespace Pronto.ERP.Bll
                     'una con la merma volátil y otra con el neto deducida la merma ( tal cual la planilla de descargas Excel) es decir los kilos netos final.
 
 
-                    Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
+                    If bvolatil Then
 
-                    sb &= Int(Val(cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    'sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
-                    sb &= Int(Val(.NetoProc)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        'sb &= Int(Val(.NetoProc - cp2.CalidadMermaVolatilMerma)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                        sb &= Int(Val(.NetoProc)).ToString.PadLeft(10) 'KgsZaran	STRING(10)	Kilos zarandeo (sin decimales))    726)    735
+                    End If
 
 
 
-
+                    cc = Nothing
 
 
                     PrintLine(nF, sb)
@@ -20902,7 +21081,8 @@ Namespace Pronto.ERP.Bll
                 Case "NAON"
                     Return "100067"
                 Case "G.VILL"
-                    Return "100106"
+                    '                    Return "100106"
+                    Return "100168"
                 Case "IRIARTE"
                     Return "100056"
 
@@ -24210,6 +24390,9 @@ Namespace Pronto.ERP.Bll
             Return vFileName
 
         End Function
+
+
+
         Public Shared Function Sincronismo_AmaggiCalidades(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, SC As String) As String
 
             '            Nombre(RESULTA.TXT)
@@ -27178,8 +27361,9 @@ Namespace Pronto.ERP.Bll
 
 
                     '2Carta  porte  nro 
-                    ForzarPrefijo5(.NumeroCartaDePorte)
-                    sb &= SEPARADOR & _cc(Right(.NumeroCartaDePorte.ToString, 8))  'sacar el 5 de adelante (bastará con tomar 8 digitos)
+                    'ForzarPrefijo5(.NumeroCartaDePorte)
+                    'sb &= SEPARADOR & _cc(Right(.NumeroCartaDePorte.ToString, 8))  'sacar el 5 de adelante (bastará con tomar 8 digitos)
+                    sb &= SEPARADOR & _cc(.NumeroCartaDePorte.ToString)
 
 
                     '3Fecha emision  
@@ -27338,13 +27522,13 @@ Namespace Pronto.ERP.Bll
                     '40Observaciones  
                     sb &= SEPARADOR & _cc(Left(.Observaciones.ToString, 100).Replace(",", " "))
 
-                    'Entregador                              	Siempre la leyenda: “Williams Entregas S.A.
+                    '41 Entregador                              	Siempre la leyenda: “Williams Entregas S.A.
                     Dim wily = "Williams Entregas S.A."
                     Dim wilycuit = "30707386076"
                     sb &= SEPARADOR & _cc(wily)
 
-                    'Raz. Soc Cuenta y Orden
-                    'sb &= SEPARADOR & ""
+                    '42 Raz. Soc Cuenta y Orden
+                    sb &= SEPARADOR & _cc(.RComercialDesc)
 
 
 
