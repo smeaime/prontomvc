@@ -781,13 +781,22 @@ Partial Class MasterPage
     '///////////////////////////////////////////////////////
 
 
+
     Protected Sub LoginStatus1_LoggedOut(ByVal sender As Object, ByVal e As System.EventArgs)
         Session("IdUser") = Nothing
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
         Session.Clear()
-        'FormsAuthentication.RedirectToLoginPage();
+        'FormsAuthentication.RedirectToLoginPage()
+
+        '      Me esta redirigiendo a "account\login"
+        ' Poniendo LogoutAction="Redirect" y la url del login, funca
+
+
     End Sub
+
+
+
 
     Private Sub ListadoEmpresasPorUsuarioMenu()
         'Dim nodoRequerimineto As TreeNode = Me.TreeView.Nodes(0).ChildNodes(0)
@@ -1119,7 +1128,7 @@ Partial Class MasterPage
 
     Protected Sub lnkEmpresa_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkEmpresa.Click
         Session(SESSIONPRONTO_NombreEmpresa) = ""
-        Response.Redirect("~/SeleccionarEmpresa.aspx")
+        Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
         'ssss()
         'jjjjj()
     End Sub

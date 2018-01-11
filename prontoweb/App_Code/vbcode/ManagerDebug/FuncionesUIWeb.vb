@@ -460,6 +460,9 @@ Public Module ProntoFuncionesUIWeb
 
 
 
+            .HyperlinkTarget = "_blank"
+
+
 
             ' ReportViewerRemoto.ShowParameterPrompts = false
 
@@ -724,12 +727,19 @@ Public Module ProntoFuncionesUIWeb
             .Visible = True
 
 
+            .HyperlinkTarget = "_blank"
+
+
             ErrHandler2.WriteError(ArchivoExcelDestino + "  Informe: " + titulo)
 
 
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
+
+
 
                 .DataSources.Clear()
 
@@ -1004,12 +1014,21 @@ Public Module ProntoFuncionesUIWeb
             .Visible = True
 
 
+            .HyperlinkTarget = "_blank"
+
+
             ErrHandler2.WriteError(ArchivoExcelDestino + "  Informe: " + titulo)
 
 
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
+
+
+
+
 
                 .DataSources.Clear()
 
@@ -1319,6 +1338,9 @@ Public Module ProntoFuncionesUIWeb
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = True
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -1963,6 +1985,33 @@ Public Module ProntoFuncionesUIWeb
 
     End Function
 
+
+
+    Function ConexBDLmasterClientes() As String
+        Dim sCadena As String
+
+
+        If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+            sCadena = "LocalSqlServer"
+
+            Try
+                Return Encriptar(System.Configuration.ConfigurationManager.ConnectionStrings(sCadena).ConnectionString)
+            Catch ex As Exception
+                ErrHandler2.WriteError("No se pudo conectar a la BDLmaster." & ex.ToString)
+                Throw
+            End Try
+
+        Else
+            'scs = scWilliamsRelease
+            Dim scs = "Data Source=172.31.44.132;Initial Catalog=BDLMasterClientes;Uid=pronto; PWD=MeDuV8NSlxRlnYxhMFL3; Connect Timeout=60"
+
+            Return Encriptar(scs)
+        End If
+
+
+
+
+    End Function
 
 
     Class UsuarioSesion
@@ -4474,7 +4523,8 @@ Public Module ProntoFuncionesUIWeb
                 'en la bdlMaster no hay conexion para este usuario+empresa
                 '-pero el usuario ya está logueado... a donde lo redirigimos?
 
-                Server.Transfer("~/SeleccionarEmpresa.aspx")
+
+                Server.Transfer("~/SeleccionarEmpresa.aspx" + HttpContext.Current.Request.Url.Query)
 
             End If
             usuario.StringConnection = s
@@ -4541,7 +4591,7 @@ Public Module ProntoFuncionesUIWeb
                     '//////////////////////////////////////////////////////////////////
 
                 Else
-                    Server.Transfer("~/Login.aspx")
+                    Server.Transfer("~/Login.aspx" + HttpContext.Current.Request.Url.Query)
                 End If
             End If
         Else

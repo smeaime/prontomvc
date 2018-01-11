@@ -2631,7 +2631,7 @@ usuario As String, ConexBDLmaster As String,
                                                    .FechaModificacion = cdp.FechaModificacion,
                                                    .FechaDescarga = cdp.FechaDescarga,
                                                    .Observaciones = cdp.Observaciones,
-                                                   .NetoFinalSinMermas = cdp.NetoFinal,
+                                                   .NetoFinalDespuesDeRestadasMermas = cdp.NetoFinal,
                                                    .TitularDesc = clitit.RazonSocial,
                                                    .IntermediarioDesc = cliint.RazonSocial,
                                                    .RComercialDesc = clircom.RazonSocial,
@@ -3271,7 +3271,7 @@ usuario As String, ConexBDLmaster As String,
                                                            .CEE_CAU = cdp.CEE _
                                                    , .Contrato = cdp.Contrato _
                                                  , .PuntoVenta = If(cdp.PuntoVenta, 0) _
-                                             , .NRecibo = If(cdp.NRecibo, 0).ToString(),
+                                             , .NRecibo = cdp.NRecibo,
                                                 .CalidadGranosDanadosRebaja = 0.01,
                                                         .CalidadGranosExtranosRebaja = 0.01,
                                                     .DestinoCodigoPostal = cdp.DestinoCodigoPostal _
@@ -5031,9 +5031,16 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
 
 
+
+            .HyperlinkTarget = "_blank"
+
+
+
             With .LocalReport
                 .ReportPath = rdlFile
                 .EnableHyperlinks = True
+
+
 
                 .DataSources.Clear()
 
@@ -5131,6 +5138,8 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
     Public Shared Function RebindReportViewer_Servidor_SalidaNormal(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter)) As String
 
@@ -5157,6 +5166,9 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = True
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5254,6 +5266,9 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
+
+
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, parametros As IEnumerable(Of ReportParameter),
                                     ByRef ArchivoExcelDestino As String, bDescargaHtml As Boolean) As String
@@ -5281,6 +5296,10 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5393,13 +5412,23 @@ usuario As String, ConexBDLmaster As String,
 
 
                 'errores
-                '   rsCredentialsNotSpecified     porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
-                '   rsProcessingAborted           porque la cuenta que corre el repservice no tiene permisos: 
+                ' 1  rsCredentialsNotSpecified       porque el datasource TestHarcodeada tiene las credenciales no configuradas para windows integrated
+                '
+                ' 2  rsProcessingAborted             porque la cuenta que corre el repservice no tiene permisos: 
                 '                                         GRANT  Execute on [dbo].your_object to [public]
                 '                                         REVOKE Execute on [dbo].your_object to [public]
                 '                                         grant execute on wCar...  to [NT AUTHORITY\NETWORK SERVICE]
                 '                                         grant execute on wCar...  to [NT AUTHORITY\ANONYMOUS LOGON]
                 '                                         grant execute on wCart... to public
+                '
+                ' 3  Unauthorized                   (puede ser lo del "loopback check" (o double hop?  A double-hop issue occurs when the SQL Database and the SQL Reporting Services are on two different servers.) -no podes usar alias en el dominio, tenes que poner el nombre de la maquina)
+                '                                   ¿sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"?
+                '                                   ¿es por la cuenta windows que usa repservices o por la cuenta sql que usa el datasource del informe?
+                '                                   ¿será por la cuenta built-in que usa el reporting para correr? -en williams uso "Network Service" para correr el servicio, y el usuario "bdl" para las credenciales
+                '                                   habilitar errores remotos del reporting services. agregar usuario/permisos en la base sql para el usuario windows que ejecuta el informa
+                '                                   revisar el log de errores de reporting. C:\Program Files\Microsoft SQL Server Reporting Services\SSRS\LogFiles
+                '                                   ¿es la autorizacion que tenes que darle al usuario desde el portal web administrativo de reporting?
+                '                                   ¿sera porque el informe tiene el datasource TestHarcodeada con credenciales NO en "integrated security"? qué pása si sacas ese datasource?
 
 
                 Dim inner As Exception = e.InnerException
@@ -5464,6 +5493,9 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
+
+
+
     Public Shared Function RebindReportViewer_ServidorExcel(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, strSQL As String, SC As String,
                                      Optional ByVal bDescargaExcel As Boolean = False,
@@ -5523,6 +5555,11 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -5770,11 +5807,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-
-
-
-
-
     Public Shared Function RebindReportViewer_ServidorExcel_SinSanata(ByRef oReportViewer As Microsoft.Reporting.WebForms.ReportViewer,
                                                                 ByVal rdlFile As String, strSQL As String, SC As String,
                                     ByRef ArchivoExcelDestino As String,
@@ -5786,6 +5818,9 @@ usuario As String, ConexBDLmaster As String,
             .Reset()
             .ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote
             .Visible = False
+
+
+            .HyperlinkTarget = "_blank"
 
 
 
@@ -9945,6 +9980,8 @@ usuario As String, ConexBDLmaster As String,
         Dim myCartaDePorte As CartaDePorte
         myCartaDePorte = CartaDePorteDB.GetItem(SC, id)
 
+        If id = -1 Then Return myCartaDePorte
+
         With myCartaDePorte
             Dim db As New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(Encriptar(SC)))
             'Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
@@ -10354,7 +10391,7 @@ usuario As String, ConexBDLmaster As String,
         Try
 
 
-            If Not IsValid(SC, myCartaDePorte, ms) Then
+            If Not IsValidCarta(SC, myCartaDePorte, ms) Then
                 ErrHandler2.WriteError(ms)
                 Return -1
             End If
@@ -10455,6 +10492,11 @@ usuario As String, ConexBDLmaster As String,
 
                     Dim oCarta = (From i In db.CartasDePortes Where i.IdCartaDePorte = CartaDePorteId).SingleOrDefault
 
+
+                    oCarta.NumeroCartaEnTextoParaBusqueda = oCarta.NumeroCartaDePorte & " " & oCarta.NumeroSubfijo & "-" & oCarta.SubnumeroVagon
+                    oCarta.SubnumeroVagonEnTextoParaBusqueda = oCarta.SubnumeroVagon
+
+
                     oCarta.NRecibo = .NRecibo 'y si me desembarazo de CartaDePorteDB.Save y su molesto wCartasDePorte_A?....
 
                     oCarta.CalidadGranosQuemados = CDec(iisNull(.CalidadGranosQuemados, 0))
@@ -10496,8 +10538,6 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                    oCarta.NumeroCartaEnTextoParaBusqueda = oCarta.NumeroCartaDePorte & " " & oCarta.NumeroSubfijo & "-" & oCarta.SubnumeroVagon
-                    oCarta.SubnumeroVagonEnTextoParaBusqueda = oCarta.SubnumeroVagon
 
 
                     oCarta.CalidadGranosExtranosRebaja = .CalidadGranosExtranosRebaja
@@ -10729,7 +10769,7 @@ usuario As String, ConexBDLmaster As String,
 
 
                 If .Exporta And False Then 'por ahora, desactivar los movimientos automaticos. El informe tambien revisa la tabla de Cartas
-                    CDPStockMovimientoManager.Save(SC, CartaDePorteId, .Titular, .Entregador, .IdArticulo, .NetoFinalIncluyendoMermas, True, .Destino)
+                    CDPStockMovimientoManager.Save(SC, CartaDePorteId, .Titular, .Entregador, .IdArticulo, .NetoFinalAntesDeRestarMermas, True, .Destino)
                 End If
 
 
@@ -11208,7 +11248,7 @@ usuario As String, ConexBDLmaster As String,
     End Function
 
 
-    Public Shared Function IsValid(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
+    Public Shared Function IsValidCarta(ByVal SC As String, ByRef myCartaDePorte As CartaDePorte, Optional ByRef ms As String = "", Optional ByRef sWarnings As String = "") As Boolean 'esta funcion no solo está validando, tambien corrige cosas menores...
 
         With myCartaDePorte
             'validarUnicidad()
@@ -11356,14 +11396,27 @@ usuario As String, ConexBDLmaster As String,
             End If
 
 
-            If .NetoFinalIncluyendoMermas > 0 Then
+            If .NetoFinalAntesDeRestarMermas > 0 Then
                 If .FechaDescarga = #12:00:00 AM# Then
-                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el peso final de la descarga)"
+                    ms &= "Se necesita la fecha de la descarga (porque se ingresó el neto final de la descarga)"
                     ms &= vbCrLf   'return false
                 End If
 
 
             End If
+
+            If .NetoFinalAntesDeRestarMermas = 0 Then
+                If .FechaDescarga <> #12:00:00 AM# Then
+                    ms &= "Se necesita el neto final de la descarga (porque se ingresó la fecha de descarga)"
+                    ms &= vbCrLf   'return false
+                End If
+
+
+            End If
+
+
+
+
 
 
 
@@ -11422,6 +11475,11 @@ usuario As String, ConexBDLmaster As String,
                     End If
                 End If
             End If
+
+
+
+
+
 
 
 
@@ -11591,7 +11649,7 @@ usuario As String, ConexBDLmaster As String,
 
 
             Dim sClientesExigentes As String
-            If .NetoFinalIncluyendoMermas > 0 And UsaClientesQueExigenDatosDeDescargaCompletos(SC, myCartaDePorte, sClientesExigentes) Then
+            If .NetoFinalAntesDeRestarMermas > 0 And UsaClientesQueExigenDatosDeDescargaCompletos(SC, myCartaDePorte, sClientesExigentes) Then
                 'Está en descarga y usa clientes exigentes: se debe hacer validacion completa
 
 
@@ -11623,11 +11681,11 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-                If iisNull(.NetoFinalIncluyendoMermas, 0) <= 0 Or
+                If iisNull(.NetoFinalAntesDeRestarMermas, 0) <= 0 Or
                     iisNull(.TaraFinal, 0) <= 0 Or
                     iisNull(.BrutoFinal, 0) <= 0 Or
                     iisNull(.NetoPto, 0) <= 0 Or
-                    iisNull(.NetoFinalSinMermas, 0) <= 0 Then
+                    iisNull(.NetoFinalDespuesDeRestadasMermas, 0) <= 0 Then
 
                     ms &= "Hay pesajes sin completar. " & K
                     ms &= vbCrLf   'return false
@@ -11814,7 +11872,7 @@ usuario As String, ConexBDLmaster As String,
 
 
     Public Shared Function GetEstado(ByVal SC As String, ByVal myCartaDePorte As CartaDePorte) As enumCDPestado
-        If myCartaDePorte.NetoFinalIncluyendoMermas > 0 Then
+        If myCartaDePorte.NetoFinalAntesDeRestarMermas > 0 Then
             Return enumCDPestado.DescargasSinFacturar
         Else
             Return enumCDPestado.Posicion
@@ -12869,6 +12927,7 @@ usuario As String, ConexBDLmaster As String,
         Public SubNumeroFacturacion
     End Class
 
+
     Shared Function FamiliaDeDuplicadosDeCartasPorte(ByVal SC As String, ByVal oCP As CartaDePorte) As IQueryable(Of CartasDePorte)
         Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
@@ -12901,8 +12960,6 @@ usuario As String, ConexBDLmaster As String,
         Next
 
     End Function
-
-
 
 
 
@@ -16131,7 +16188,6 @@ usuario As String, ConexBDLmaster As String,
 
 
                     cp.cartaporte = If(dbc.NumeroCartaDePorte, 0)
-                    cp.brutodest = dbc.BrutoFinal
 
 
                     Select Case dbc.CalidadDesc
@@ -16250,9 +16306,22 @@ usuario As String, ConexBDLmaster As String,
                     cp.horadescarga = "" ' If(dbc.Hora, "")
 
 
-                    cp.netodest = dbc.NetoFinal
+
+
+
+
+                    cp.brutoproc = If(dbc.BrutoPto, 0)
+                    cp.taraproc = If(dbc.TaraPto, 0)
                     cp.netoproc = dbc.NetoPto
+
+                    cp.brutodest = dbc.BrutoFinal
                     cp.taradest = dbc.TaraFinal
+                    cp.netodest = dbc.NetoFinal
+
+                    cp.OtrasMermas = If(dbc.Merma, 0)
+                    cp.NetoFinal = If(dbc.NetoProc, 0)
+
+
 
 
 
@@ -16275,12 +16344,8 @@ usuario As String, ConexBDLmaster As String,
                     cp.CTG = If(dbc.CTG, DateTime.MinValue)
                     cp.CupoTurno = dbc.Turno
                     cp.HoraArribo = If(dbc.FechaArribo, 0)
-                    cp.brutoproc = If(dbc.BrutoPto, 0)
-                    cp.taraproc = If(dbc.TaraPto, 0)
                     cp.Humedad = If(dbc.Humedad, 0)
                     cp.MermaHumedad = If(dbc.HumedadDesnormalizada, 0)
-                    cp.OtrasMermas = If(dbc.Merma, 0)
-                    cp.NetoFinal = If(dbc.NetoFinal, 0)
                     cp.ClienteObserv = dbc.ClienteAuxiliarDesc
                     cp.CorredorObs = dbc.CorredorDesc
                     cp.cuitchofer = dbc.ChoferCUIT
@@ -16917,6 +16982,10 @@ usuario As String, ConexBDLmaster As String,
 
 
     End Function
+
+
+
+
     Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
@@ -21265,6 +21334,9 @@ Public Class CDPMailFiltrosManager2
 
 
 
+
+
+
         Select Case puntoventa
             Case 1
 
@@ -21293,7 +21365,8 @@ Public Class CDPMailFiltrosManager2
                 a += "<br/><b>Williams Entregas S.A</b><br/>" + vbCrLf +
                         "Oficina Arroyo Seco<br/>" + vbCrLf +
                         "Rene Favaloro 726 (Arroyo Seco)<br/>" + vbCrLf +
-                        "Tel: 03402 437283 / 437287<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+                        "Tel: 03402 421426 / 429676<br/>arroyoseco@williamsentregas.com.ar" + vbCrLf
+
 
             Case 4
 

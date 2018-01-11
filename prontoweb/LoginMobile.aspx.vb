@@ -705,7 +705,7 @@ Partial Class Login
 
 
             If empresa = "" Then
-                Response.Redirect("~/SeleccionarEmpresa.aspx")
+                Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
             Else
 
                 BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(Request.QueryString("Empresa"), Session, ConexBDLmaster, Me)
@@ -720,7 +720,7 @@ Partial Class Login
             empresa = Mid(Session(SESSIONPRONTO_MiRequestUrl), InStr(Session(SESSIONPRONTO_MiRequestUrl), "empresa=") + 8)
             Session(SESSIONPRONTO_MiRequestUrl) = ""
             If empresa = "" Then
-                Response.Redirect("~/SeleccionarEmpresa.aspx")
+                Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
             Else
                 BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(empresa, Session, ConexBDLmaster, Me)
 
@@ -744,7 +744,7 @@ Partial Class Login
             empresa = Request.QueryString("Empresa")
             Session(SESSIONPRONTO_MiRequestUrl) = ""
             If empresa = "" Then
-                Response.Redirect("~/SeleccionarEmpresa.aspx")
+                Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
             Else
                 BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(empresa, Session, ConexBDLmaster, Me)
 

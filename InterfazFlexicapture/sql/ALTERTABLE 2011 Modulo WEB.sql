@@ -1,5 +1,7 @@
 
 
+
+
 ALTER TABLE  WilliamsMailFiltros  ADD
 	 PuntoVenta int null
 GO
@@ -98,11 +100,11 @@ go
 
 
 alter table Clientes ADD
-         SeLeFacturaCartaPorteComoTitular 	varchar(2) NULL,
-         SeLeFacturaCartaPorteComoIntermediario varchar(2) NULL,
-         SeLeFacturaCartaPorteComoRemcomercial varchar(2) NULL,
-         SeLeFacturaCartaPorteComoCorredor varchar(2) NULL,
-         SeLeFacturaCartaPorteComoDestinatario varchar(2) NULL
+		 SeLeFacturaCartaPorteComoTitular 	varchar(2) NULL,
+		 SeLeFacturaCartaPorteComoIntermediario varchar(2) NULL,
+		 SeLeFacturaCartaPorteComoRemcomercial varchar(2) NULL,
+		 SeLeFacturaCartaPorteComoCorredor varchar(2) NULL,
+		 SeLeFacturaCartaPorteComoDestinatario varchar(2) NULL
 go
 
 
@@ -218,7 +220,7 @@ alter table cartasdeporte ADD
 	CalidadMermaChamicoBonifica_o_Rebaja  varchar(2) NULL,
 	CalidadMermaZarandeo numeric(18,2) NULL,
 	CalidadMermaZarandeoBonifica_o_Rebaja varchar(2) NULL,
-    FueraDeEstandar varchar(2) NULL
+	FueraDeEstandar varchar(2) NULL
 go
 
 
@@ -259,8 +261,8 @@ go
 
 
 alter table Clientes ADD
-         SeLeFacturaCartaPorteComoDestinatarioExportador 	varchar(2) NULL,
-         SeLeDerivaSuFacturaAlCorredorDeLaCarta		varchar(2) NULL
+		 SeLeFacturaCartaPorteComoDestinatarioExportador 	varchar(2) NULL,
+		 SeLeDerivaSuFacturaAlCorredorDeLaCarta		varchar(2) NULL
 go
 
 
@@ -468,15 +470,15 @@ go
 
 
 alter table cartasdeporte ADD
-    CobraAcarreo varchar(2) NULL,
-    LiquidaViaje varchar(2) NULL
+	CobraAcarreo varchar(2) NULL,
+	LiquidaViaje varchar(2) NULL
 go
 
 
 
 
 alter table clientes ADD
-    HabilitadoParaCartaPorte varchar(2) NULL
+	HabilitadoParaCartaPorte varchar(2) NULL
 go
 
 
@@ -487,9 +489,9 @@ go
 
 
 alter table ExcelImportador ADD
-        CTG						VARCHAR (50)	NULL,
-        KmARecorrer				VARCHAR (50)	NULL,
-        TarifaTransportista   	VARCHAR (50)	NULL
+		CTG						VARCHAR (50)	NULL,
+		KmARecorrer				VARCHAR (50)	NULL,
+		TarifaTransportista   	VARCHAR (50)	NULL
 GO
 
 
@@ -515,7 +517,7 @@ alter table CartasDePorte ADD
 go
 
 alter table Clientes ADD
-         SeLeFacturaCartaPorteComoClienteAuxiliar 	varchar(2) NULL
+		 SeLeFacturaCartaPorteComoClienteAuxiliar 	varchar(2) NULL
 go
 
 alter table WilliamsMailFiltros ADD
@@ -538,7 +540,7 @@ alter table  bdlmaster.dbo.UserDatosExtendidos ADD
 go
 
 alter table Pedidos ADD
-         ConfirmadoPorWeb varchar(2) NULL
+		 ConfirmadoPorWeb varchar(2) NULL
 go
 
 
@@ -550,7 +552,7 @@ go
 
 
 alter table Clientes ADD
-         EsAcondicionadoraDeCartaPorte varchar(2) NULL
+		 EsAcondicionadoraDeCartaPorte varchar(2) NULL
 go
 
 
@@ -718,13 +720,13 @@ alter table CartasDePorte ADD
 go
 
 alter table Clientes ADD
-         EsEntregador 	varchar(2) NULL
+		 EsEntregador 	varchar(2) NULL
 go
 
 
 
 alter table PuntosVenta ADD
-         AgentePercepcionIIBB 	varchar(2) NULL
+		 AgentePercepcionIIBB 	varchar(2) NULL
 go
 
 
@@ -1072,8 +1074,8 @@ go
 
 
 alter table ExcelImportador ADD
-        Exporta VARCHAR (10)	NULL,
-        SubnumeroDeFacturacion VARCHAR (10)	NULL
+		Exporta VARCHAR (10)	NULL,
+		SubnumeroDeFacturacion VARCHAR (10)	NULL
 go
 
 
@@ -1313,27 +1315,27 @@ go
 ----//////////////////////////////////////////////////////////////////////////////
 
 CREATE TABLE [dbo].FertilizantesCupos (
-    [IdFertilizanteCupo]                                INT             IDENTITY (1, 1) PRIMARY KEY,
-    [Numero]											BIGINT          NULL,
+	[IdFertilizanteCupo]                                INT             IDENTITY (1, 1) PRIMARY KEY,
+	[Numero]											BIGINT          NULL,
 
 
 	
 --Nº CUPO
 
 
-    [IdUsuarioIngreso]                              INT             NULL,
-    [FechaIngreso]                                  DATETIME        NULL,
-    [Anulada]                                       VARCHAR (2)     NULL,
-    [IdUsuarioAnulo]                                INT             NULL,
-    [FechaAnulacion]                                DATETIME        NULL,
-    [FechaTimeStamp]                                ROWVERSION      NULL,
+	[IdUsuarioIngreso]                              INT             NULL,
+	[FechaIngreso]                                  DATETIME        NULL,
+	[Anulada]                                       VARCHAR (2)     NULL,
+	[IdUsuarioAnulo]                                INT             NULL,
+	[FechaAnulacion]                                DATETIME        NULL,
+	[FechaTimeStamp]                                ROWVERSION      NULL,
 
 
 
 
 
 	--Fecha
-    [FechaCupo]                                  DATETIME        NULL,
+	[FechaCupo]                                  DATETIME        NULL,
 --Cliente
 --C/ORDEN
 --CUIT
@@ -1341,17 +1343,17 @@ CREATE TABLE [dbo].FertilizantesCupos (
 --DNI /CUIL
 	TipoEgresoIngreso							VARCHAR(1) NULL,
 
-    [Cliente]	                                    INT             NULL,
-    [CuentaOrden]									INT             NULL,
-    [IdChofer]                                      INT             NULL,
+	[Cliente]	                                    INT             NULL,
+	[CuentaOrden]									INT             NULL,
+	[IdChofer]                                      INT             NULL,
 
 
 
 
 
 
-    [Chasis]                                      VARCHAR (20)    NULL,
-    [Acoplado]                                      VARCHAR (20)    NULL,
+	[Chasis]                                      VARCHAR (20)    NULL,
+	[Acoplado]                                      VARCHAR (20)    NULL,
 
 
 --Chasis
@@ -1359,18 +1361,18 @@ CREATE TABLE [dbo].FertilizantesCupos (
 
 
 	
-    [IdTransportista]                               INT             NULL,
+	[IdTransportista]                               INT             NULL,
 --Transporte
 --CUIT
 --Localidad Transp
-    [IdLocalidadTransportista]                                       INT             NULL,
+	[IdLocalidadTransportista]                                       INT             NULL,
 --Recorrido
    Recorrido									INT             NULL,
  --Destino de la mercaderia
-    [Destino]                                       INT             NULL,
+	[Destino]                                       INT             NULL,
 --Codigo de San
 --Contrato
-    [Contrato]                                      VARCHAR (20)    NULL,
+	[Contrato]                                      VARCHAR (20)    NULL,
 
 
 
@@ -1391,22 +1393,22 @@ CREATE TABLE [dbo].FertilizantesCupos (
 --%
 
 
-    [IdArticulo]                                    INT             NULL,
+	[IdArticulo]                                    INT             NULL,
 
-    Puro                                       VARCHAR (2)     NULL,
-    Mezcla                                       VARCHAR (2)     NULL,
+	Puro                                       VARCHAR (2)     NULL,
+	Mezcla                                       VARCHAR (2)     NULL,
 
 
-    [IdArticuloComponente1]                             INT             NULL,
-    [Porcentaje1]	                                    NUMERIC (18, 2) NULL,
-    [IdArticuloComponente2]                             INT             NULL,
-    [Porcentaje2]	                                    NUMERIC (18, 2) NULL,
-    [IdArticuloComponente3]                             INT             NULL,
-    [Porcentaje3]	                                    NUMERIC (18, 2) NULL,
-    [IdArticuloComponente4]                             INT             NULL,
-    [Porcentaje4]	                                    NUMERIC (18, 2) NULL,
-    [IdArticuloComponente5]                             INT             NULL,
-    [Porcentaje5]	                                    NUMERIC (18, 2) NULL,
+	[IdArticuloComponente1]                             INT             NULL,
+	[Porcentaje1]	                                    NUMERIC (18, 2) NULL,
+	[IdArticuloComponente2]                             INT             NULL,
+	[Porcentaje2]	                                    NUMERIC (18, 2) NULL,
+	[IdArticuloComponente3]                             INT             NULL,
+	[Porcentaje3]	                                    NUMERIC (18, 2) NULL,
+	[IdArticuloComponente4]                             INT             NULL,
+	[Porcentaje4]	                                    NUMERIC (18, 2) NULL,
+	[IdArticuloComponente5]                             INT             NULL,
+	[Porcentaje5]	                                    NUMERIC (18, 2) NULL,
 
 
 	--Forma de despacho (granel,bls, bigbag)
@@ -1416,19 +1418,19 @@ CREATE TABLE [dbo].FertilizantesCupos (
 --OBSERVACIONES
 
 
-    [Cantidad]                                      NUMERIC (12, 2) NULL,
+	[Cantidad]                                      NUMERIC (12, 2) NULL,
 
-    [Observaciones]                                 VARCHAR (200)   NULL,
-
-
+	[Observaciones]                                 VARCHAR (200)   NULL,
 
 
-    [PathImagen]                                    VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [PathImagen2]                                   VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [AgrupadorDeTandaPeriodos]                      INT             NULL,
-    [ClaveEncriptada]                               VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [NumeroCartaEnTextoParaBusqueda]                VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [SubnumeroVagonEnTextoParaBusqueda]             VARCHAR (50)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+
+
+	[PathImagen]                                    VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[PathImagen2]                                   VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[AgrupadorDeTandaPeriodos]                      INT             NULL,
+	[ClaveEncriptada]                               VARCHAR (150)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[NumeroCartaEnTextoParaBusqueda]                VARCHAR (20)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[SubnumeroVagonEnTextoParaBusqueda]             VARCHAR (50)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 
 
 
@@ -1539,25 +1541,25 @@ go
 
 Update CartasDePorte  
 set ConDuplicados =    
-        (  
-        	select count(*) from cartasdeporte as Q2   
-        		where    
-        			Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   
-        			Q2.NumeroSubFijo=NumeroSubFijo AND   
-        			Q2.SubNumeroVagon=SubNumeroVagon  
-        			and Anulada<>'SI'  
-        )
+		(  
+			select count(*) from cartasdeporte as Q2   
+				where    
+					Q2.NumeroCartaDePorte=NumeroCartaDePorte AND   
+					Q2.NumeroSubFijo=NumeroSubFijo AND   
+					Q2.SubNumeroVagon=SubNumeroVagon  
+					and Anulada<>'SI'  
+		)
 select Q.NumeroCartaDePorte,Q.NumeroSubFijo,Q.SubNumeroVagon  
-        from  cartasdeporte as Q  
-        inner join    
-        (  
-        select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
-        from cartasdeporte  
-        where Anulada<>'SI'  
-        group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
-        having     COUNT(NumeroCartaDePorte) > 1  
-        ) as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       
-        REPES.SubNumeroVagon=Q.SubNumeroVagon  
+		from  cartasdeporte as Q  
+		inner join    
+		(  
+		select NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
+		from cartasdeporte  
+		where Anulada<>'SI'  
+		group by NumeroCartaDePorte,NumeroSubFijo,SubNumeroVagon  
+		having     COUNT(NumeroCartaDePorte) > 1  
+		) as REPES on REPES.NumeroCartaDePorte=Q.NumeroCartaDePorte AND REPES.NumeroSubFijo=Q.NumeroSubFijo AND       
+		REPES.SubNumeroVagon=Q.SubNumeroVagon  
 go
 
 select conduplicados from cartasdeporte
@@ -1990,7 +1992,7 @@ go
 
 alter table localidades ADD
 	lat decimal(15, 12)  NULL   ,
-    lng decimal(15, 12)  NULL   
+	lng decimal(15, 12)  NULL   
 go
 
 
@@ -2061,8 +2063,8 @@ INSERT  INTO CartaPorteRubrosCalidad ( Descripcion)  VALUES  (  'Descuento Final
 --select idcartadeporte, numerocartadeporte,idfacturaimputada, fechaingreso, fechadescarga from cartasdeporte where iddetallefactura=1 order by idcartadeporte desc
 
 CREATE TABLE [dbo].[ColaCorreosComprobantes] (
-    [IdTipoComprobante] INT NOT NULL,
-    [IdComprobante]     INT NOT NULL
+	[IdTipoComprobante] INT NOT NULL,
+	[IdComprobante]     INT NOT NULL
 );
 go
 
@@ -2092,7 +2094,7 @@ go
 
 
 
-update
+
 select * from listaspreciosdetalle where idlistaprecios=2219
 
 
@@ -2181,6 +2183,39 @@ sp_help cartasdeporte
 ALTER TABLE  cartasdeporte  ALTER COLUMN  
 	 NRecibo VARCHAR(15) NULL  --de int a string   
 GO
+
+
+
+
+ALTER TABLE  Reclamos  ADD 
+	 AuxInt1	int NULL,
+	 AuxInt2	int NULL,
+	 AuxString1 VARCHAR(50) NULL,
+	 AuxString2 VARCHAR(50) NULL
+GO
+
+
+
+
+
+
+create TABLE GoogleToken
+(
+	 IdGoogleToken int IDENTITY (1, 1) PRIMARY KEY,
+	 Token VARCHAR(200),
+	 NombreUsuario VARCHAR(128),
+	 
+--	constraint U_CartasDePorteReglasDeFacturacion unique NONCLUSTERED (IdCliente,PuntoVenta)
+)
+
+GO
+
+
+
+
+
+
+
 
 
 
