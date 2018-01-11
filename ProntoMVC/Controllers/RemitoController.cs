@@ -149,7 +149,7 @@ namespace ProntoMVC.Controllers
             if (Remitos > 0) { sErrorMsg += "\n" + "El remito ya existe."; }
 
             if (mIdCliente > 0) { if ((db.Clientes.Where(x => x.IdCliente == mIdCliente).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") == "NO") { sErrorMsg += "\n" + "Cliente inhabilitado"; } }
-            if (mIdProveedor > 0) { if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") != "SI") { sErrorMsg += "\n" + "Proveedor inhabilitado"; } }
+            if (mIdProveedor > 0) { if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") == "NO") { sErrorMsg += "\n" + "Proveedor inhabilitado"; } }
 
             //If Not IsNumeric(dcfields(5).BoundText) And dcfields(5).Visible And mvarTransportistaConEquipos Then
             //   MsgBox "Debe ingresar el equipo de transporte", vbExclamation

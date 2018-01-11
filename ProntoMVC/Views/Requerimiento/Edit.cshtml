@@ -88,8 +88,7 @@
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll; top: 50px;padding-left: 25px; padding-right: 25px; overflow-x: hidden;">
                     <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
                         <div class="span8">
-                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
+                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                                 <span class="span1" style="padding-top: 15px; width: 240px">Requerimiento </span>
                                 @Html.TextBoxFor(model => model.NumeroRequerimiento, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span3", @readonly = "readonly" })
                             </div>
@@ -115,51 +114,36 @@
                     <div>@Html.Hidden("FechaAnulacion", Model.FechaAnulacion)</div>
                     <div>@Html.Hidden("UsuarioAnulacion", Model.UsuarioAnulacion)</div>
                     <div>@Html.Hidden("MotivoAnulacion", Model.MotivoAnulacion)</div>
-                    <div>@Html.Hidden("NumeroRequerimiento", Model.NumeroRequerimiento)</div>
                     <div class="row-fluid">
-                        <div class="span3 lightblue">
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.FechaRequerimiento, "Fecha")
-                            @* @Html.TextBoxFor(model => model.FechaRequerimiento, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })*@
-                            @Html.TextBox("FechaRequerimiento", Model.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"), new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
-                            @*, { "type", "date" }, { "data-datepicker", "datepicker" }*@
+                            @Html.TextBoxFor(model => model.FechaRequerimiento, new Dictionary<string, object> { { "class", "span12" }, { "placeholder", "dd/mm/yyyy" } })
                             @Html.ValidationMessageFor(model => model.FechaRequerimiento)
-                        </div>
-                        <!--/span-->
-                        <div class="span6 lightblue">
-                            @Html.Hidden("IdObra", Model.IdObra)
-                            @Html.LabelFor(model => model.IdObra, "Obra")
-                            @*                @Html.DropDownList("IdObra", null, "", new { @class = "span12" })*@
-                            @Html.TextBoxFor(m => m.Obra.Descripcion, new { id = "DescripcionObra", @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.IdObra)
-                            <script type="text/jscript">
-                                $("#DescripcionObra").autocomplete({
-                                    source: '@Url.Action("GetObrasAutocomplete2", "Articulo")',
-                                    minLength: 0,
-                                    messages: { noResults: "", results: function () { } },
-                                    select: proveedorSeleccionado,
-                                    autoFocus: true
-
+                            <script>
+                                $("#FechaRequerimiento").datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    dateFormat: 'dd/mm/yy'
+                                    //numberOfMonths: 2,
                                 });
-
-                                function proveedorSeleccionado(event, ui) {
-                                    ActualizarObra(ui.item);
-                                    ///////////////////////
-                                    event.preventDefault();
-                                }
-
-                                function ActualizarObra(item) {
-                                    $("#IdObra").val(item.id);
-                                    //                        $("#CodigoProveedor").val(item.codigo || "");
-                                    $("#DescripcionObra").val(item.value || "");
-                                    //                        $("#IdCodigoIva").val(item.idCodigoIva);
-                                }
                             </script>
                         </div>
                         <!--/span-->
                         <div class="span3 lightblue">
+                            @Html.LabelFor(model => model.IdObra, "Obra")
+                            @Html.DropDownList("IdObra", null, "", new { @class = "span12", @style = "height: 15px;   line-height: 14px;" })
+                            @Html.ValidationMessageFor(model => model.IdObra)
+                        </div>
+                        <!--/span-->
+                        <div class="span2 lightblue">
                             @Html.LabelFor(model => model.IdSector, "Sector")
                             @Html.DropDownList("IdSector", null, "", new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdSector)
+                        </div>
+                        <div class="span5 lightblue">
+                            @Html.LabelFor(model => model.Detalle)
+                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.Detalle)
                         </div>
                     </div>
                     <!--/row-->
@@ -198,7 +182,6 @@
                                 }
                             </form>
                         </div>
-
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.Aprobo, ". ")
                             @if (Model.Aprobo != null && ViewBag.MostrarAnularLiberacion)
@@ -350,23 +333,14 @@
                                 })
                             </script>
                         </div>
-
-                        <div class="span5 lightblue">
-                            @Html.LabelFor(model => model.Detalle)
-                            @Html.TextBoxFor(model => model.Detalle, new { @class = "span12" })
-                            @Html.ValidationMessageFor(model => model.Detalle)
-                        </div>
                         <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row-fluid">
-                        <div class="span6 lightblue">
+                        <div class="span5 lightblue">
                             @Html.LabelFor(model => model.IdEquipoDestino, "Equipo destino")
                             @Html.DropDownList("IdEquipoDestino", null, "", new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdEquipoDestino)
                         </div>
-                        <!--/row-->
                     </div>
+                    <!--/row-->
                     <div id="RManulada" class="row-fluid" style="display: none; font-weight: bold; background-color: red">
                     </div>
                     <br />
@@ -457,6 +431,12 @@
                             <div id="ListaPager1" class="scroll">
                             </div>
                             <div style="margin-top: 4px">
+                                <span class="btn btn-success fileinput-button  pull-left">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Agregar adjuntos...</span>
+                                    <input id="fileupload" type="file" name="files[]" multiple>
+                                </span>
+
                                 @*<input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
                                 <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
                                 <input type="button" class="btn btn-small" id="delData" value="Borrar" />
@@ -540,7 +520,7 @@
                             @using (Html.BeginForm("SubirPlantilla", "Requerimiento", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <input type="file" name="file" />
-                                    <input type="submit" class="btn" value="Subir" />
+                                <input type="submit" class="btn" value="Subir" />
                             }
                         </div>
                     </div>
@@ -582,6 +562,59 @@
             RefrescaAnchoGrillaDetalle();
             $("#conscroll").height($(window).height() - 120);
         });
+
+        $("#anular").click(function () {
+            $("#dialog-password").dialog({
+                buttons: {
+                    'Aceptar': function () {
+                        var idAux = $("#Aux1").val();
+                        var usuario = $("#mySelect > option:selected").html();
+                        var IdRequerimiento = $("#IdRequerimiento").val();
+                        var ok = validatePwd();
+                        
+                        if (ok && idAux > 0) {
+                            $.getJSON(ROOT + 'Requerimiento/ValidarAnulacion?IdRequerimiento='+IdRequerimiento, {
+                            }, function (json) {
+                                if (json.length > 0){
+                                    alert("Los items "+json+" tienen pedidos asignados!")
+                                }
+                                else{
+                                    $("#Cumplido").val("AN");
+                                    $("#FechaAnulacion").val(Hoy());
+                                    $("#UsuarioAnulacion").val(idAux);
+                                    $("#MotivoAnulacion").val($("#motivo2").val());
+
+                                    $('#grabar2').click();
+                                }
+                            });
+
+                        }
+                    },
+                    'Cancelar': function () {
+                        $(this).dialog('close');
+                    }
+                },
+                open: function () {
+                    $('#motivoanulacion').show();
+                }
+            });
+            $('#dialog-password').dialog('open');
+            $('#mySelect').prop("disabled", false);
+            CargarUsuariosConPermisoDeAnulacion();
+        });
+
+        function CargarUsuariosConPermisoDeAnulacion() {
+            var combo = $("#mySelect")
+            combo.find("option:gt(0)").remove();
+            combo.find("option:first").text("Cargando...");
+            $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=3', {
+            }, function (json) {
+                combo.find("option:first").text("");
+                for (var i = 0; i < json.length; i++) {
+                    $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
+                }
+            });
+        }
 
         function RefrescaAnchoGrillaDetalle() {
             // $("#Lista").setGridWidth($(window).width());

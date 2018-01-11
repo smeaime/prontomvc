@@ -995,35 +995,20 @@ namespace ProntoMVC.Controllers
 
 
 
-
-
-
-
         public virtual FileResult Log()
         {
             // TambienLogDelPronto()
 
-
-
             DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\Error"); // (ErrHandler.DirectorioErrores)
             FileSystemInfo[] files = di.GetFileSystemInfos(); // agarro el directorio con los logs de errores
-
 
             var orderedFiles = files.OrderByDescending(f => f.LastWriteTime).Select(f => f.FullName);
 
             string output = orderedFiles.First();
 
-
-
-
-
-
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, output);
-
         }
-
-
 
 
 
