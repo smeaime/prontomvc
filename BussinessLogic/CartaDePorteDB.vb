@@ -9,8 +9,11 @@ Namespace Pronto.ERP.Dal
     Public Class CartaDePorteDB
 
         Public Shared Function GetItem(ByVal SC As String, ByVal id As Integer) As CartaDePorte
+            If id = -1 Then Return New CartaDePorte
+            If id <= 0 Then Return Nothing
+
             Dim myCartaDePorte As CartaDePorte = Nothing
-            Dim myConnection As SqlConnection = New SqlConnection(encriptar(SC))
+            Dim myConnection As SqlConnection = New SqlConnection(Encriptar(SC))
             Try
                 Dim myCommand As SqlCommand = New SqlCommand("wCartasDePorte_T", myConnection)
                 myCommand.CommandType = CommandType.StoredProcedure
@@ -185,7 +188,7 @@ Namespace Pronto.ERP.Dal
                     myCommand.Parameters.AddWithValue("@IdUbicacion", IdNull(myCartaDePorte.IdUbicacion))
                     myCommand.Parameters.AddWithValue("@Cantidad", myCartaDePorte.Cantidad)
                     myCommand.Parameters.AddWithValue("@Cupo", myCartaDePorte.Cupo)
-                    myCommand.Parameters.AddWithValue("@NetoProc", myCartaDePorte.NetoFinalSinMermas)
+                    myCommand.Parameters.AddWithValue("@NetoProc", myCartaDePorte.NetoFinalDespuesDeRestadasMermas)
                     myCommand.Parameters.AddWithValue("@Calidad", "") 'OBSOLETO myCartaDePorte.Calidad)
                     myCommand.Parameters.AddWithValue("@BrutoPto", myCartaDePorte.BrutoPto)
                     myCommand.Parameters.AddWithValue("@TaraPto", myCartaDePorte.TaraPto)
@@ -193,7 +196,7 @@ Namespace Pronto.ERP.Dal
                     myCommand.Parameters.AddWithValue("@Acoplado", myCartaDePorte.Acoplado)
                     myCommand.Parameters.AddWithValue("@Humedad", myCartaDePorte.Humedad)
                     myCommand.Parameters.AddWithValue("@Merma", myCartaDePorte.Merma)
-                    myCommand.Parameters.AddWithValue("@NetoFinal", myCartaDePorte.NetoFinalIncluyendoMermas)
+                    myCommand.Parameters.AddWithValue("@NetoFinal", myCartaDePorte.NetoFinalAntesDeRestarMermas)
                     myCommand.Parameters.AddWithValue("@FechaDeCarga", fechaNETtoSQL(myCartaDePorte.FechaDeCarga, System.DBNull.Value))
                     myCommand.Parameters.AddWithValue("@FechaVencimiento", fechaNETtoSQL(myCartaDePorte.FechaVencimiento, System.DBNull.Value))
                     myCommand.Parameters.AddWithValue("@CEE", myCartaDePorte.CEE)
@@ -218,7 +221,7 @@ Namespace Pronto.ERP.Dal
                     myCommand.Parameters.AddWithValue("@Tarifa", myCartaDePorte.TarifaTransportista)
                     myCommand.Parameters.AddWithValue("@FechaDescarga", fechaNETtoSQL(myCartaDePorte.FechaDescarga, System.DBNull.Value))
                     myCommand.Parameters.AddWithValue("@Hora", iisValidSqlDate(myCartaDePorte.Hora, System.DBNull.Value))
-                    myCommand.Parameters.AddWithValue("@NRecibo", myCartaDePorte.NRecibo)
+                    myCommand.Parameters.AddWithValue("@NRecibo", 0) 'no importa, lo actualizo con EF
                     myCommand.Parameters.AddWithValue("@CalidadDe", IdNull(myCartaDePorte.CalidadDe))
                     myCommand.Parameters.AddWithValue("@TaraFinal", myCartaDePorte.TaraFinal)
                     myCommand.Parameters.AddWithValue("@BrutoFinal", myCartaDePorte.BrutoFinal)
@@ -452,7 +455,7 @@ Namespace Pronto.ERP.Dal
                         myCartaDePorte.Cupo = myDataRecord.GetString(myDataRecord.GetOrdinal("Cupo"))
                     End If
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("NetoProc")) Then
-                        myCartaDePorte.NetoFinalSinMermas = myDataRecord.GetDecimal(myDataRecord.GetOrdinal("NetoProc"))
+                        myCartaDePorte.NetoFinalDespuesDeRestadasMermas = myDataRecord.GetDecimal(myDataRecord.GetOrdinal("NetoProc"))
                     End If
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("Calidad")) Then
                         'myCartaDePorte.Calidad = "" 'OBSOLETO myDataRecord.GetString(myDataRecord.GetOrdinal("Calidad"))
@@ -476,7 +479,7 @@ Namespace Pronto.ERP.Dal
                         myCartaDePorte.Merma = myDataRecord.GetDecimal(myDataRecord.GetOrdinal("Merma"))
                     End If
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("NetoFinal")) Then
-                        myCartaDePorte.NetoFinalIncluyendoMermas = myDataRecord.GetDecimal(myDataRecord.GetOrdinal("NetoFinal"))
+                        myCartaDePorte.NetoFinalAntesDeRestarMermas = myDataRecord.GetDecimal(myDataRecord.GetOrdinal("NetoFinal"))
                     End If
 
                     If Not myDataRecord.IsDBNull(myDataRecord.GetOrdinal("FechaDeCarga")) Then

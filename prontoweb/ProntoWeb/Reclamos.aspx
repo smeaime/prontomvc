@@ -43,6 +43,32 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         Situación de CPs
     </div>--%>
 
+
+
+    <script>
+
+        //if ('serviceWorker' in navigator) {
+        //    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        //        // Registration was successful
+        //        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        //        registration.pushManager.subscribe({
+        //            userVisibleOnly: true
+        //        }).then(function (sub) {
+        //            console.log('endpoint:', sub.endpoint);
+        //        }).catch(function (e) {
+
+        //        });
+        //    }).catch(function (err) {
+        //        // registration failed :(
+        //        console.log('ServiceWorker registration failed: ', err);
+        //    });
+        //}
+
+
+    </script>
+
+
+
     <br />
 
     <style>
@@ -89,32 +115,34 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         <a href="javascript:void(0)" id="m1">Get Selected id's</a> <a href="javascript:void(0)"
             id="m1s">Select(Unselect) row 13</a>--%>
 
-        <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
-            <ContentTemplate>
+        <div style="visibility: hidden; display: none">
 
-                <table style="color: black;">
-                    <tr>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
-                        <td class="" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
-                                CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="true">
-                                <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
+            <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
+                <ContentTemplate>
 
-                                <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="11"
-                                    Selected="True" />
+                    <table style="color: black;">
+                        <tr>
+                            <td class="EncabezadoCell" style="width: 160px; height: 18px;">Estado</td>
+                            <td class="" style="width: 400px; height: 18px;">
+                                <asp:DropDownList ID="cmbEstado" runat="server" Style="text-align: right; margin-left: 0px;"
+                                    CssClass="CssCombo" ToolTip="Estado de la carta de porte" Font-Size="Small" Height="22px" Width="350px" Enabled="true">
+                                    <%--dejo el combito deshablitado porque las funciones no tienen todavia el parametro de "estado", estan harcodeadas en "11" --%>
 
-                                <asp:ListItem Text="Todas (menos las rechazadas)" Value="1" />
-                                <asp:ListItem Text="Incompletas" Value="2" />
-                                <asp:ListItem Text="Posición" Value="3" />
-                                <asp:ListItem Text="Descargas" Value="4" />
-                                <asp:ListItem Text="Facturadas" Value="6" />
-                                <asp:ListItem Text="No facturadas" Value="7" />
-                                <asp:ListItem Text="Rechazadas" Value="8" />
-                                <asp:ListItem Text="sin liberar en Nota de crédito" Value="9" />
-                            </asp:DropDownList>
+                                    <asp:ListItem Text="DESCARGAS de hoy + POSICIONES filtradas" Value="11"
+                                        Selected="True" />
+
+                                    <asp:ListItem Text="Todas (menos las rechazadas)" Value="1" />
+                                    <asp:ListItem Text="Incompletas" Value="2" />
+                                    <asp:ListItem Text="Posición" Value="3" />
+                                    <asp:ListItem Text="Descargas" Value="4" />
+                                    <asp:ListItem Text="Facturadas" Value="6" />
+                                    <asp:ListItem Text="No facturadas" Value="7" />
+                                    <asp:ListItem Text="Rechazadas" Value="8" />
+                                    <asp:ListItem Text="sin liberar en Nota de crédito" Value="9" />
+                                </asp:DropDownList>
 
 
-<%--                            Enum enumCDPestado
+                                <%--                            Enum enumCDPestado
 0        Todas
 1        TodasMenosLasRechazadas
 2        Incompletas
@@ -130,95 +158,95 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     End Enum--%>
 
 
-                        </td>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
-                        <td class="EncabezadoCell" style="width: 400px; height: 18px;">
-                            <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
-                                Visible="true">
-                                <asp:ListItem Text="Hoy" Selected="True" />
-                                <asp:ListItem Text="Ayer" />
-                                <%--<asp:ListItem Text="Esta semana" />
+                            </td>
+                            <td class="EncabezadoCell" style="width: 160px; height: 18px;">Período descarga</td>
+                            <td class="EncabezadoCell" style="width: 400px; height: 18px;">
+                                <asp:DropDownList ID="cmbPeriodo" runat="server" AutoPostBack="true" Height="22px" Style="color: black;"
+                                    Visible="true">
+                                    <asp:ListItem Text="Hoy" Selected="True" />
+                                    <asp:ListItem Text="Ayer" />
+                                    <%--<asp:ListItem Text="Esta semana" />
                         <asp:ListItem Text="Semana pasada" />--%>
-                                <asp:ListItem Text="Este mes" />
-                                <asp:ListItem Text="Mes anterior" />
-                                <asp:ListItem Text="Cualquier fecha" />
-                                <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
-                                <asp:ListItem Text="Personalizar" />
-                            </asp:DropDownList>
-                            <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
-                                TabIndex="2" AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
-                                Enabled="True">
-                            </cc1:CalendarExtender>
-                            <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
-                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
-                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                                Enabled="True">
-                            </cc1:MaskedEditExtender>
-                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
+                                    <asp:ListItem Text="Este mes" />
+                                    <asp:ListItem Text="Mes anterior" />
+                                    <asp:ListItem Text="Cualquier fecha" />
+                                    <%--    <asp:ListItem Text="Filtrar por Mes/Año" />--%>
+                                    <asp:ListItem Text="Personalizar" />
+                                </asp:DropDownList>
+                                <asp:TextBox ID="txtFechaDesde" runat="server" Width="100px" MaxLength="1" autocomplete="off" Style="color: black;"
+                                    TabIndex="2" AutoPostBack="false"></asp:TextBox>
+                                <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaDesde"
+                                    Enabled="True">
+                                </cc1:CalendarExtender>
+                                <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" ErrorTooltipEnabled="True"
+                                    Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaDesde" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True">
+                                </cc1:MaskedEditExtender>
+                                <%-- <cc1:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtFechaDesde"
                                 WatermarkText="desde" WatermarkCssClass="watermarked" />--%>
-                            <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
-                                AutoPostBack="false"></asp:TextBox>
-                            <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
-                                Enabled="True">
-                            </cc1:CalendarExtender>
-                            <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
-                                Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
-                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
-                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
-                                Enabled="True">
-                            </cc1:MaskedEditExtender>
-                            <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
+                                <asp:TextBox ID="txtFechaHasta" runat="server" Width="100px" MaxLength="1" TabIndex="2" Style="color: black;"
+                                    AutoPostBack="false"></asp:TextBox>
+                                <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaHasta"
+                                    Enabled="True">
+                                </cc1:CalendarExtender>
+                                <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" ErrorTooltipEnabled="True"
+                                    Mask="99/99/9999" MaskType="Date" TargetControlID="txtFechaHasta" CultureAMPMPlaceholder=""
+                                    CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                    CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                    Enabled="True">
+                                </cc1:MaskedEditExtender>
+                                <%-- <cc1:TextBoxWatermarkExtender ID="TBWE3" runat="server" TargetControlID="txtFechaHasta"
                                 WatermarkText="hasta" WatermarkCssClass="watermarked"  />--%>
-                        </td>
+                            </td>
 
-                    </tr>
-                    <tr>
-                        <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
-                        </td>
-                        <td class="EncabezadoCell">
-                            <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
-                        </td>
+                        </tr>
+                        <tr>
+                            <td class="EncabezadoCell" style="width: 160px; height: 18px;">Punto venta
+                            </td>
+                            <td class="EncabezadoCell">
+                                <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssTextBox" Width="128px" Style="color: black;" />
+                            </td>
 
-                    </tr>
+                        </tr>
 
-                    <tr>
-                        <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
-                        </td>
-                        <td class="EncabezadoCell" style="width: 250px; height: 18px;">
-                            <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
-                                autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
-                            <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
-                                OnClientItemSelected="RefrescaGrilla()"
-                                CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
-                                ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
-                                UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
-                                DelimiterCharacters="" Enabled="True">
-                            </cc1:AutoCompleteExtender>
-                    </tr>
+                        <tr>
+                            <td class="EncabezadoCell" style="width: 100px; height: 18px;">Destino
+                            </td>
+                            <td class="EncabezadoCell" style="width: 250px; height: 18px;">
+                                <asp:TextBox ID="txtDestino" runat="server" Text='<%# Bind("DestinoDesc") %>' AutoPostBack="false" Style="color: black;"
+                                    autocomplete="off" CssClass="CssTextBox" Width="200px"></asp:TextBox>
+                                <cc1:AutoCompleteExtender CompletionInterval="100" ID="AutoCompleteExtender26" runat="server"
+                                    OnClientItemSelected="RefrescaGrilla()"
+                                    CompletionSetCount="12" TargetControlID="txtDestino" MinimumPrefixLength="1"
+                                    ServiceMethod="GetCompletionList" ServicePath="WebServiceWilliamsDestinos.asmx"
+                                    UseContextKey="True" FirstRowSelected="True" CompletionListCssClass="AutoCompleteScroll"
+                                    DelimiterCharacters="" Enabled="True">
+                                </cc1:AutoCompleteExtender>
+                        </tr>
 
-                </table>
+                    </table>
 
-            </ContentTemplate>
-        </asp:UpdatePanel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
 
-        <br />
+            <br />
 
-        <%--<button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
+            <%--<button type="button" id="btnMostrarMenu" value="" class="" style="height: 50px; width: 70px; margin-left: 4px">
             <i class="fa fa-bars fa-2x"></i>
         </button>--%>
 
 
 
-        <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
-            Width="150" Height="40" />
+            <asp:Button ID="btnExportarGrilla" Text="EXCEL" runat="server" Visible="false" CssClass="btn btn-primary"
+                Width="150" Height="40" />
 
 
-        <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary"  />
+            <input type="button" id="btnExportarGrillaAjax2" value="Excel" class="btn btn-primary" />
 
-<%--
+            <%--
     <input type="button" id="btnExportarGrillaAjax" value="Excel BLD demorados" class="btn btn-primary" />
 
 
@@ -232,15 +260,18 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
         <input type="button" id="btnsituacion" value="Cambiar situación" class="btn btn-primary" />
 
---%>
-        <br />
-        <div id="Salida2"></div>
-        <asp:Literal ID="salida" runat="server"></asp:Literal>
+            --%>
+            <br />
+            <div id="Salida2"></div>
+            <asp:Literal ID="salida" runat="server"></asp:Literal>
 
 
-        <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
+            <%--<input type="text" class="span4" id="text1" name="agent" value=""  "/>--%>
 
-        <br />
+            <br />
+
+        </div>
+
         <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 12px;" width="700px">
         </table>
         <div id="ListaPager" class="scroll" style="text-align: center; height: 30px">
@@ -468,611 +499,51 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     <script type="text/javascript">
 
-        "use strict";
+            "use strict";
 
-        $(function () {
-            //$('#MenuPrincipal').fadeOut(); 
-            $('#MenuPrincipal').hide();
+            $(function () {
+                //$('#MenuPrincipal').fadeOut(); 
+                //$('#MenuPrincipal').hide();
 
-            $("#searchmodfbox_Lista").parent().css('z-index', 50);
+                //$("#searchmodfbox_Lista").parent().css('z-index', 50);
 
 
-        });
-
-
-        //$('#btnMostrarMenu').click(function () {
-        //    $('#MenuPrincipal').show();
-        //})
-
-
-
-        $('#btnExportarGrillaAjax3').click(function () {
-
-            var d = {
-                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
-            }
-
-            if (typeof d.filters === "undefined") d.filters = "";
-
-            $.ajax({
-                type: "POST",
-                //method: "POST",
-                url: "SituacionCalidad.aspx/ExportarGrillaNormal3",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-
-                data: JSON.stringify(d),
-
-                success: function (data) {
-                    //alert(data.d);
-                    window.open(data.d);
-                }
-
-
-                ,
-                beforeSend: function () {
-                    //$('.loading').html('some predefined loading img html');
-                    $("#loading").show();
-                    $('#grabar2').attr("disabled", true).val("Espere...");
-
-                },
-                complete: function () {
-                    $("#loading").hide();
-                }
-
-
-            })
-
-
-        })
-
-
-        $('#btnExportarGrillaAjax2').click(function () {
-
-            var d = {
-                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
-            }
-
-            if (typeof d.filters === "undefined") d.filters = "";
-
-            $.ajax({
-                type: "POST",
-                //method: "POST",
-                url: "SituacionCalidad.aspx/ExportarGrillaNormal",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-
-                data: JSON.stringify(d),
-
-                success: function (data) {
-                    //alert(data.d);
-                    window.open(data.d);
-                }
-
-
-                ,
-                beforeSend: function () {
-                    //$('.loading').html('some predefined loading img html');
-                    $("#loading").show();
-                    $('#grabar2').attr("disabled", true).val("Espere...");
-
-                },
-                complete: function () {
-                    $("#loading").hide();
-                }
-
-
-            })
-
-
-        })
-
-        $('#btnExportarGrillaAjax').click(function () {
-
-            var d = {
-                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
-            }
-
-            if (typeof d.filters === "undefined") d.filters = "";
-
-            $.ajax({
-                type: "POST",
-                //method: "POST",
-                url: "SituacionCalidad.aspx/ExportarGrilla",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-
-                data: JSON.stringify(d),
-
-                success: function (data) {
-                    //alert(data.d);
-                    window.open(data.d);
-                }
-
-
-                ,
-                beforeSend: function () {
-                    //$('.loading').html('some predefined loading img html');
-                    $("#loading").show();
-                    $('#grabar2').attr("disabled", true).val("Espere...");
-
-                },
-                complete: function () {
-                    $("#loading").hide();
-                }
-
-
-            })
-
-
-        })
-
-
-        $('#btnPanelInformeAjax').click(function () {
-
-            var d = {
-                filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
-                fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
-                fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
-                destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
-            }
-
-            if (typeof d.filters === "undefined") d.filters = "";
-
-            $.ajax({
-                type: "POST",
-                //method: "POST",
-                url: "SituacionCalidad.aspx/PanelInforme",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-
-                data: JSON.stringify(d),
-
-                success: function (data) {
-                    // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
-                    $("#Salida2").html("").append(data.d)
-
-                    $('#titDemorado').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-                    $('#titAutorizado').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-                    $('#titPosicion').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-
-
-                    $('#titADescargar').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-                    $('#titDescargado').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-
-                    $('#titDesviado').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-
-                    $('#titCPcambiar').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-
-                    $('#titSinCupo').click(function () {
-                        //modificar el filtro para que incluya demorado y rechazado
-                        var myfilter = { groupOp: "OR", rules: [] };
-                        myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
-
-                        jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-                    })
-                    //alert(data.d);
-
-                }
-
-
-                ,
-                beforeSend: function () {
-                    //$('.loading').html('some predefined loading img html');
-                    $("#loading").show();
-                    $('#grabar2').attr("disabled", true).val("Espere...");
-
-                },
-                complete: function () {
-                    $("#loading").hide();
-                }
-
-
-            })
-
-
-        })
-
-
-
-
-
-
-        function filtrarArticulosDefault_35603() {
-            var myfilter = { groupOp: "OR", rules: [] };
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Maiz" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Soja" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Pan" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Duro" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Sorgo Granifero" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Alto Oleico" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Confitero" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Forrajera" });
-            myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Cervecera" });
-
-            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
-
-
-            //Los aceites y Pellets y Harinas dejar como están.
-
-        }
-
-
-        function jqGridFilter(filtersparam, grid) {
-            grid.setGridParam({
-                postData: {
-                    filters: filtersparam,
-                    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
-                },
-                search: true
             });
-            grid.trigger("reloadGrid");
-        }
 
 
-        $("#text1").autocomplete({
-            source: function (request, response) {
+            //$('#btnMostrarMenu').click(function () {
+            //    $('#MenuPrincipal').show();
+            //})
+
+
+
+            $('#btnExportarGrillaAjax3').click(function () {
+
+                var d = {
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+                if (typeof d.filters === "undefined") d.filters = "";
+
                 $.ajax({
                     type: "POST",
-                    url: "WebServiceClientes.asmx/WilliamsDestinoGetWilliamsDestinos",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrillaNormal3",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
 
-                    data: JSON.stringify({ term: request.term }),
+                    data: JSON.stringify(d),
 
                     success: function (data) {
-                        //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
-                        //the next line should use $.map(data and not $.map(response
-                        var a = $.parseJSON(data.d);
-                        response($.map(a, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.id
-                            }
-                        }));
-                    }
-
-                })
-            }
-        });
-
-
-        function jsAcopiosPorCliente(textbox, combo) {
-            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
-
-            var $txttitular = $("#" + textbox.id + "")
-            var $select = $("#" + combo.id + "")
-
-
-
-            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
-            var myEscapedJSONString = myJSONString.escapeSpecialChars();
-
-            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
-
-
-
-
-
-
-
-            $.ajax({
-                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
-                url: "WebServiceClientes.asmx/AcopiosPorCliente",
-                type: 'POST',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                //dataType: "xml",
-                data: "{'NombreCliente':'" +
-                       addslashes($txttitular.val()) +
-                     "', 'SC':'" + aaa + "' }",
-
-
-                //data: {
-                //    NombreCliente: 'asdfasdf',
-                //    SC:  'asdfsadfsa' // $("#HFSC").val()
-                //},
-                success: function (data) {
-
-                    var x = data.d;
-
-                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
-
-                    var guardoelactualId = $select.val()
-                    $select.find('option').remove();
-
-
-
-                    $.each(x, function (i, val) {
-
-
-                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
-
-                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
-                        //$("<option></option>")
-                        //    .val(val.idacopio).text(val.desc));
-
-                    });
-
-                    $select.val(guardoelactualId)
-
-                    if (x.length > 1) combo.style.visibility = "visible";
-                    else combo.style.visibility = "hidden";
-
-                },
-                error: function (xhr) {
-                    // alert("Something seems Wrong");
-                }
-            });
-
-        }
-
-
-
-
-
-        var $grid = "";
-        var lastSelectedId;
-        var lastSelectediCol;
-        var lastSelectediRow;
-        var lastSelectediCol2;
-        var lastSelectediRow2;
-        var inEdit;
-        var selICol;
-        var selIRow;
-        var gridCellWasClicked = false;
-        var grillaenfoco = false;
-        var getColumnIndexByName = function (grid, columnName) {
-            var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
-            for (i = 0; i < l; i++) {
-                if (cm[i].name === columnName) {
-                    return i; // return the index
-                }
-            }
-            return -1;
-        };
-        var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
-
-        $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
-
-        $.extend($.jgrid.inlineEdit, {
-            keys: true
-        });
-
-
-
-
-        function sacarDeEditMode() {
-
-            // grabando o deshaciendo???
-            //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-            try {
-                jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
-
-            } catch (e) {
-
-            }
-
-            // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
-            // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
-
-
-
-            var ids = $('#Lista').getDataIDs();
-            for (var i = 0, il = ids.length; i < il; i++) {
-                $('#Lista').jqGrid('restoreRow', ids[i]);
-            }
-
-
-
-            //        var $this = $('#Lista'), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
-            //        for (i = l - 1; i >= 0; i--) {
-            //                $('#Lista').jqGrid('restoreRow', ids[i]);
-            //        }
-
-
-        }
-
-        function RefrescarFondoRenglon(grilla) {
-
-            var iCol = getColumnIndexByName($(grilla), 'Situacion'),
-                       cRows = grilla.rows.length, iRow, row, className;
-
-            for (iRow = 0; iRow < cRows; iRow++) {
-                row = grilla.rows[iRow];
-                className = row.className;
-                if ($.inArray('jqgrow', className.split(' ')) > 0) {
-                    var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
-
-                    //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
-                    if (x == "Autorizado") {
-                        if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
-                            row.className = className + ' myAltRowClassAutorizado';
-                        }
-                    }
-                    else if (x == "Demorado") {
-                        if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
-                            row.className = className + ' myAltRowClassDemorado';
-                        }
-                    }
-                    else if (x == "Rechazado") {
-                        if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
-                            row.className = className + ' myAltRowClassRechazado';
-                        }
+                        //alert(data.d);
+                        window.open(data.d);
                     }
 
 
-                }
-            }
-
-        }
-
-
-
-
-        function GrabarFila(gridId) {
-
-            $grid = $('#Lista');
-
-            var saveparameters = {
-                "successfunc": null,
-                "url": 'clientArray',
-                "extraparam": {},
-                //                "aftersavefunc": function (response) {
-                //                    alert('saved');
-                //                },
-                "errorfunc": null,
-                "afterrestorefunc": null,
-                "restoreAfterError": true,
-                "mtype": "POST"
-            }
-
-            //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
-            //$('#Lista').jqGrid('saveRow', gridId, saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
-
-            sacarDeEditMode();
-            var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
-
-            //var dataIds = $('#Lista').jqGrid('getDataIDs');
-            //for (i = 0; i < dataIds.length; i++) {
-            //    try {
-            //        //Save row only to the grid
-            //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
-            //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-            //    }
-            //    catch (ex) {
-            //        //If you are using editRules it might end up with exception
-            //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
-            //    }
-            //}
-
-            var datos = {}; //= $("#formid").serializeObject();
-            var err;
-
-
-            datos.idcarta = gridId;
-            datos.idsituacion = dataFromTheRow.Situacion;
-            if (datos.idsituacion == "") datos.idsituacion = -1;
-            datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
-
-
-            err = ""
-            //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
-            //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
-            //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
-
-            if (err != "") {
-                alert('No se pudo grabar el registro.\n' + err);
-            } else {
-                //$('html, body').css('cursor', 'wait');
-
-
-
-
-
-
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    url: "WebServiceCartas.asmx/GrabarSituacion",
-                    dataType: 'json',
-                    data: JSON.stringify({
-                        idcarta: gridId,
-                        idsituacion: datos.idsituacion,
-                        sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
-                    }),
-                    success: function (result) {
-                        if (result) {
-                            $grid.jqGrid('setRowData', gridId, { act: "" });
-                            var rowid = $('#Lista').getGridParam('selrow');
-                            var valor = result.IdCartasDePorteControlDescarga;
-                            if (valor == "") { valor = "0"; }
-                            $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
-
-                            RefrescarFondoRenglon(document.getElementById('Lista'));
-                        } else {
-                            alert('No se pudo grabar el registro.');
-                        }
-                    },
-                    error: function (xhr, textStatus, exceptionThrown) {
-                        try {
-                            var errorData = $.parseJSON(xhr.responseText);
-                            var errorMessages = [];
-                            for (var key in errorData) { errorMessages.push(errorData[key]); }
-                            $('html, body').css('cursor', 'auto');
-                            $('#grabar2').attr("disabled", false).val("Aceptar");
-                            $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                            $("#mensajeAlerta").show();
-                            alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
-                        } catch (e) {
-                            $('html, body').css('cursor', 'auto');
-                            $('#grabar2').attr("disabled", false).val("Aceptar");
-                            $("#textoMensajeAlerta").html(xhr.responseText);
-                            $("#mensajeAlerta").show();
-                        }
-                    },
+                    ,
                     beforeSend: function () {
                         //$('.loading').html('some predefined loading img html');
                         $("#loading").show();
@@ -1083,912 +554,256 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         $("#loading").hide();
                     }
 
-                });
-            };
-        };
 
-        function EliminarFila(gridId) {
-            $grid = $('#Lista');
-            var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
-            var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
-            if (idprincipal <= 0) {
-                $grid.jqGrid('delRowData', gridId);
-            } else {
+                })
+
+
+            })
+
+
+            $('#btnExportarGrillaAjax2').click(function () {
+
+                var d = {
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+                if (typeof d.filters === "undefined") d.filters = "";
+
                 $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    url: "WebServiceClientes.asmx/DestinoDelete",
-                    dataType: 'json',
-                    data: JSON.stringify({ id: idprincipal }),
-                    success: function (result) {
-                        if (result) {
-                            $grid.jqGrid('delRowData', gridId);
-                        } else {
-                            alert('No se pudo eliminar el registro.');
-                        }
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrillaNormal",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        //alert(data.d);
+                        window.open(data.d);
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
                     },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })
+
+
+            })
+
+            $('#btnExportarGrillaAjax').click(function () {
+
+                var d = {
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+                if (typeof d.filters === "undefined") d.filters = "";
+
+                $.ajax({
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/ExportarGrilla",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        //alert(data.d);
+                        window.open(data.d);
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })
+
+
+            })
+
+
+            $('#btnPanelInformeAjax').click(function () {
+
+                var d = {
+                    filters: jQuery('#Lista').getGridParam("postData").filters,  // si viene en undefined es porque no se puso ningun filtro
+                    fechadesde: $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(),
+                    fechahasta: $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(),
+                    destino: $("#ctl00_ContentPlaceHolder1_txtDestino").val()
+                }
+
+                if (typeof d.filters === "undefined") d.filters = "";
+
+                $.ajax({
+                    type: "POST",
+                    //method: "POST",
+                    url: "SituacionCalidad.aspx/PanelInforme",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+
+                    data: JSON.stringify(d),
+
+                    success: function (data) {
+                        // http://stackoverflow.com/questions/10439798/how-to-laod-raw-html-using-jquery-ajax-call-to-asp-net-webmethod
+                        $("#Salida2").html("").append(data.d)
+
+                        $('#titDemorado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "1" });
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "5" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+                        $('#titAutorizado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "0" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+                        $('#titPosicion').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "2" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+
+
+                        $('#titADescargar').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "4" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+                        $('#titDescargado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "3" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+
+                        $('#titDesviado').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "6" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+
+                        $('#titCPcambiar').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "7" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+
+                        $('#titSinCupo').click(function () {
+                            //modificar el filtro para que incluya demorado y rechazado
+                            var myfilter = { groupOp: "OR", rules: [] };
+                            myfilter.rules.push({ field: "Situacion", op: "eq", data: "8" });
+
+                            jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+                        })
+                        //alert(data.d);
+
+                    }
+
+
+                    ,
+                    beforeSend: function () {
+                        //$('.loading').html('some predefined loading img html');
+                        $("#loading").show();
+                        $('#grabar2').attr("disabled", true).val("Espere...");
+
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+
+
+                })
+
+
+            })
+
+
+
+
+
+
+            function filtrarArticulosDefault_35603() {
+                var myfilter = { groupOp: "OR", rules: [] };
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Maiz" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Soja" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Pan" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Trigo Duro" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Sorgo Granifero" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Alto Oleico" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Girasol Confitero" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Forrajera" });
+                myfilter.rules.push({ field: "Producto", op: "eq", data: "Cebada Cervecera" });
+
+                jqGridFilter(JSON.stringify(myfilter), $('#Lista'));
+
+
+                //Los aceites y Pellets y Harinas dejar como están.
+
+            }
+
+
+            function jqGridFilter(filtersparam, grid) {
+                grid.setGridParam({
+                    postData: {
+                        filters: filtersparam,
+                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); }
+                    },
+                    search: true
                 });
-            };
-        };
-
-
-
-
-        //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
-        //document.body.onclick = saveEditedCell; // attach to current document.
-
-        //function saveEditedCell(evt) {
-        //    var target = $(evt.target);
-
-        //    if ($grid) {
-        //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
-        //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
-        //        {
-        //            gridCellWasClicked = false;
-        //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
-        //        }
-        //    }
-
-        //    //$grid = "";
-        //    gridCellWasClicked = false;
-
-        //    if (jQuery("#Lista").find(target).length) {
-        //        $grid = $('#Lista');
-        //        grillaenfoco = true;
-        //    }
-        //    if (grillaenfoco) {
-        //        gridCellWasClicked = true;
-        //        lastSelectediRow2 = lastSelectediRow;
-        //        lastSelectediCol2 = lastSelectediCol;
-        //    }
-        //};
-
-
-
-        function MarcarSeleccionadosParaEliminar(grid) {
-            var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
-            var i, Id;
-            for (i = selectedIds.length - 1; i >= 0; i--) {
-                Id = selectedIds[i];
-                var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
-                grid.jqGrid('setRowData', Id, { act: se });
-                //grid.jqGrid('delRowData', selectedIds[i]);
-            }
-        };
-
-        function AgregarItemVacio(grid) {
-            var colModel = grid.jqGrid('getGridParam', 'colModel');
-            var dataIds = grid.jqGrid('getDataIDs');
-            var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
-            var se = "<input style='height:22px;width:60px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
-            var data, j, cm;
-
-            if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
-
-            if (false) {
-                data = '{';
-                for (j = 1; j < colModel.length; j++) {
-                    cm = colModel[j];
-                    data = data + '"' + cm.index + '":' + '"",';
-                }
-                data = data.substring(0, data.length - 1) + '}';
-            }
-            else {
-
-                data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
-
-            }
-            //  grid.jqGrid("addRowData", "empty_" + i, );
-
-            data = data.replace(/(\r\n|\n|\r)/gm, "");
-            grid.jqGrid('addRowData', Id, data, "last");
-            grid.jqGrid('setRowData', Id, { act: se });
-        };
-
-
-
-
-
-        function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
-
-
-            nombregrilla = nombregrilla || "#Lista";
-            var grid = jQuery(nombregrilla)
-            var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
-
-            var rows = grid.getGridParam("reccount") || 0;
-
-
-            // jQuery("#Lista").jqGrid('getGridParam', 'records')
-            var emptyRows;       // -data.rows.length; // pageSize - data.rows.length;
-
-            //alert(rows)
-            if (rows < 3) emptyRows = 3 - rows;
-            else emptyRows = 1;
-
-
-            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-            //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
-
-            var rowsLlenas = 0;
-
-            var dataIds = grid.jqGrid('getDataIDs');
-            for (var i = 0; i < dataIds.length; i++) {
-
-                var data = grid.jqGrid('getRowData', dataIds[i]);
-
-
-                var desc = data['Descripcion'];
-                // alert(desc);
-                if (desc == "") continue;
-
-                if (data['NumeroItem'] == "") {
-                    data['NumeroItem'] = ProximoNumeroItem();
-                    grid.jqGrid('setRowData', dataIds[i], data);
-                }
-
-                rowsLlenas++;
+                grid.trigger("reloadGrid");
             }
 
 
-
-
-            // alert(rowsLlenas);
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            if (!renglonVacio) {
-                //    alert('ssss');
-                renglonVacio = {};
-            }
-
-
-            var gridceil
-
-            if (emptyRows > 0 && (rowsLlenas == rows || rows < 3)) {
-                //   alert(emptyRows);
-                for (var i = 1; i <= emptyRows; i++) {
-                    //                    // adjust the counts at lower right
-                    //                    grid.jqGrid("setGridParam", {
-                    //                        reccount: grid.jqGrid("getGridParam", "reccount") - emptyRows,
-                    //                        records: grid.jqGrid("getGridParam", "records") - emptyRows
-                    //                    });
-                    //                    grid[0].updatepager();
-
-
-
-
-                    // grid.jqGrid("addRowData", "empty_" + i, {});
-
-
-
-                    gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
-
-
-                    grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
-                    //  grid.jqGrid("addRowData", "empty_" + i, { "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
-
-                }
-
-            }
-            rows = grid.getGridParam("reccount");
-
-
-            //alert(rows);
-
-            grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
-        }
-
-
-        // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
-        //getColumnIndexByName = function (grid, columnName) {
-        //    var cm = grid.jqGrid('getGridParam', 'colModel');
-        //    for (var i = 0, l = cm.length; i < l; i++) {
-        //        if (cm[i].name === columnName) {
-        //            return i; // return the index
-        //        }
-        //    }
-        //    return -1;
-        //},
-        //getTextFromCell = function (cellNode) {
-        //    return cellNode.childNodes[0].nodeName === "INPUT" ?
-        //            cellNode.childNodes[0].value :
-        //            cellNode.textContent || cellNode.innerText;
-        //},
-        //calculateTotal = function () {
-        //    var totalAmount = 0, totalTax = 0,
-        //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
-        //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
-        //        totalAmount += Number(getTextFromCell(this));
-        //    });
-
-        //    i = getColumnIndexByName(grid, 'tax');
-        //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
-        //        totalTax += Number(getTextFromCell(this));
-        //    });
-
-        //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
-        //};
-
-
-
-
-
-        $('#ctl00_ContentPlaceHolder1_cmbPuntoVenta').change(function () {
-            $('#Lista').trigger("reloadGrid")
-        });
-
-
-        $('#ctl00_ContentPlaceHolder1_txtDestino').change(function () {
-            $('#Lista').trigger("reloadGrid")
-        });
-
-
-
-
-        $('#ctl00_ContentPlaceHolder1_txtFechaDesde').keypress(function (e) {
-            var key = e.which;
-            if (key == 13)  // the enter key code
-            {
-                $('#Lista').trigger("reloadGrid")
-                return false;
-            }
-        });
-
-        $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
-            $('#Lista').trigger("reloadGrid")
-        });
-
-
-
-
-
-        $('#ctl00_ContentPlaceHolder1_txtFechaHasta').keypress(function (e) {
-            var key = e.which;
-            if (key == 13)  // the enter key code
-            {
-                $('#Lista').trigger("reloadGrid")
-                return false;
-            }
-        });
-
-        $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
-            $('#Lista').trigger("reloadGrid")
-        });
-
-
-
-
-
-
-        $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
-            $('#Lista').trigger("reloadGrid")
-        });
-
-
-        function RefrescaGrilla() {
-            $('#Lista').trigger("reloadGrid");
-        }
-
-
-        $().ready(function () {
-            'use strict';
-
-            var UltimoIdArticulo;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            $('#Lista').jqGrid({
-                //url: ROOT + 'CotizacionWilliamsDestino/Cotizaciones/',
-                url: 'HandlerCartaPorte.ashx',
-                //postData: {},
-                postData: {
-                    'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
-                    'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
-                    'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
-                    'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
-                    'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); }
-        },
-                datatype: 'json',
-                mtype: 'POST',
-
-
-
-
-                // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
-
-                colNames: ['[Grabar]', 'Id', 'Nro CP', 'Situación', 'infohtml'
-
-
-
-                       , 'Obs Situacion',
-                       'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                       'Destinatario', 'Destino', 'IdDestino', 'Patente',
-                       'Kilos Procedencia', 'Arribo', 'Descarga', 'Punto Venta'
-
-                ],
-
-
-
-                //colNames: ['[Grabar]', 'Id', 'Nro CP', 'Turno',
-
-                //        'Situacion',
-                //            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
-                //            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
-                //            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
-                //            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
-                //],
-
-                colModel: [
-{
-    name: 'act', index: 'act', align: 'center', width: 60, editable: false, hidden: true, sortable: false,
-    search: false,
-},
-
-{ name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 100, editable: false, hidden: true },
-
-{
-    name: 'NumeroCartaEnTextoParaBusqueda', index: 'NumeroCartaEnTextoParaBusqueda', width: 90, align: 'left', sorttype: "text", sortable: false
-, editable: false, editrules: { required: false, number: true }, edittype: 'text',
-
-    searchoptions: { sopt: ['bw', 'cn', 'eq'] },
-
-
-    editoptions: {
-        maxlength: 20, defaultValue: '0.00',
-        dataEvents: [
-        {
-            type: 'keypress',
-            fn: function (e) {
-                var key = e.charCode || e.keyCode;
-                if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
-                if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
-            }
-        }]
-    }
-},
-
-// { name: 'Turno', index: ' Turno', align: 'left', width: 20, editable: false, hidden: false, edittype: 'text', searchoptions: { sopt: ['bw', 'cn', 'eq'] }, },
-
-
-
-
-
-{
-    name: 'Situacion', index: 'Situacion', align: 'left', width: 120, hidden: false, editable: false, edittype: 'select', sortable: false,
-    editoptions: {
-        //defaultValue: OrigenDescripcionDefault,
-        //value: "0:Autorizado; 6:Desviado" 
-        value: "0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
-    },
-    // http://stackoverflow.com/questions/5328072/can-jqgrid-support-dropdowns-in-the-toolbar-filter-fields
-    formatter: 'select', stype: 'select',
-    searchoptions: {
-        sopt: ['eq'],
-        value: ":Todos; 0:Autorizado; 1:Demorado; 2:Posicion; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
-    }
-
-
-},
-
-
-
-                            { name: 'infohtml', index: 'infohtml', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
-
-
-
-                            { name: 'ObservacionesSituacion', index: 'ObservacionesSituacion', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
-
-
-
-
-
-{
-    name: 'Producto', index: 'Producto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetProductos",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-
-},
-{
-    name: 'TitularDesc', index: 'TitularDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
-
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-
-},
-{
-    name: 'IntermediarioDesc', index: 'IntermediarioDesc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-},
-{
-    name: 'RComercialDesc', index: 'RComercialDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
-
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-
-},
-
-
-{
-    name: 'CorredorDesc', index: 'CorredorDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetCorredores",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-},
-
-
-{
-    name: 'DestinatarioDesc', index: 'DestinatarioDesc', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true
-
-
-, searchoptions: {
-    //    sopt:['eq'], 
-    dataInit: function (elem) {
-        var NoResultsLabel = "No se encontraron resultados";
-
-
-        $(elem).autocomplete({
-
-            select: function (event, ui) {
-                $(elem).trigger('change');
-            },
-
-
-            source: function (request, response) {
-                $.ajax({
-                    type: "POST",
-                    url: "WebServiceClientes.asmx/GetClientes",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-
-                    data: JSON.stringify({
-                        term: request.term
-                        //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                    }),
-
-
-                    success: function (data2) {
-                        var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //    var ui = data[0];
-
-                        //    if (ui.id == "") {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //        $("#Descripcion").val("");
-                        //        return;
-                        //    }
-                        //    $("#IdWilliamsDestino").val(ui.id);
-
-                        //    UltimoIdArticulo = ui.id;
-                        //}
-                        //else {
-                        //    alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //}
-
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.value,
-                                value: item.value //item.id
-                                , id: item.id
-                            }
-                        }));
-
-                    }
-
-
-
-                })
-
-
-            }
-
-
-        });
-
-
-
-
-
-
-    }
-}
-
-},
-
-{
-    name: 'DestinoDesc', index: 'DestinoDesc',
-    formoptions: { rowpos: 5, colpos: 2, label: "Descripción" }, align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true,
-    searchoptions: {
-        //    sopt:['eq'], 
-        dataInit: function (elem) {
-            var NoResultsLabel = "No se encontraron resultados";
-
-
-            $(elem).autocomplete({
-
-                select: function (event, ui) {
-                    $(elem).trigger('change');
-                },
-
-
+            $("#text1").autocomplete({
                 source: function (request, response) {
                     $.ajax({
                         type: "POST",
@@ -1996,356 +811,590 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
 
-                        data: JSON.stringify({
-                            term: request.term
-                            //, idpuntoventa: function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); }
-                        }),
+                        data: JSON.stringify({ term: request.term }),
 
-
-                        //success: function (data2) {
-                        //    var data = JSON.parse(data2.d) // por qué tengo que usar parse?
-
-                        //    if (data.length == 1 || data.length > 1) { // qué pasa si encuentra más de uno?????
-                        //        var ui = data[0];
-
-                        //        if (ui.id == "") {
-                        //            alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //            $("#Descripcion").val("");
-                        //            return;
-                        //        }
-                        //        $("#IdWilliamsDestino").val(ui.id);
-
-                        //        UltimoIdArticulo = ui.id;
-                        //    }
-                        //    else {
-                        //        alert("No existe el artículo"); // se está bancando que no sea identica la descripcion
-                        //    }
-
-                        //    response($.map(data, function (item) {
-                        //        return {
-                        //            label: item.value,
-                        //            value: item.value //item.id
-                        //            , id: item.id
-                        //        }
-                        //    }));
-
-                        //}
-
-
+                        success: function (data) {
+                            //check what data contains. it should contain a string like "['val1','val2','val3','val4']"
+                            //the next line should use $.map(data and not $.map(response
+                            var a = $.parseJSON(data.d);
+                            response($.map(a, function (item) {
+                                return {
+                                    label: item.value,
+                                    value: item.id
+                                }
+                            }));
+                        }
 
                     })
-
-
                 }
+            });
 
 
+            function jsAcopiosPorCliente(textbox, combo) {
+                //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+
+                var $txttitular = $("#" + textbox.id + "")
+                var $select = $("#" + combo.id + "")
+
+
+
+                var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+                var myEscapedJSONString = myJSONString.escapeSpecialChars();
+
+                var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+
+
+
+
+
+
+
+                $.ajax({
+                    // url: "/CartaDePorte.aspx/AcopiosPorCliente",
+                    url: "WebServiceClientes.asmx/AcopiosPorCliente",
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    //dataType: "xml",
+                    data: "{'NombreCliente':'" +
+                    addslashes($txttitular.val()) +
+                    "', 'SC':'" + aaa + "' }",
+
+
+                    //data: {
+                    //    NombreCliente: 'asdfasdf',
+                    //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                    //},
+                    success: function (data) {
+
+                        var x = data.d;
+
+                        //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+
+                        var guardoelactualId = $select.val()
+                        $select.find('option').remove();
+
+
+
+                        $.each(x, function (i, val) {
+
+
+                            $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+
+                            //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                            //$("<option></option>")
+                            //    .val(val.idacopio).text(val.desc));
+
+                        });
+
+                        $select.val(guardoelactualId)
+
+                        if (x.length > 1) combo.style.visibility = "visible";
+                        else combo.style.visibility = "hidden";
+
+                    },
+                    error: function (xhr) {
+                        // alert("Something seems Wrong");
+                    }
+                });
+
+            }
+
+
+
+
+
+            var $grid = "";
+            var lastSelectedId;
+            var lastSelectediCol;
+            var lastSelectediRow;
+            var lastSelectediCol2;
+            var lastSelectediRow2;
+            var inEdit;
+            var selICol;
+            var selIRow;
+            var gridCellWasClicked = false;
+            var grillaenfoco = false;
+            var getColumnIndexByName = function (grid, columnName) {
+                var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
+                for (i = 0; i < l; i++) {
+                    if (cm[i].name === columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            };
+            var saveIcon = '<span class="ui-state-default" style="border:0"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span></span>'
+
+            $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
+
+            $.extend($.jgrid.inlineEdit, {
+                keys: true
             });
 
 
 
 
+            function sacarDeEditMode() {
 
+                // grabando o deshaciendo???
+                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+                try {
+                    jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
 
-        }
-    }
+                } catch (e) {
 
-},
-{ name: 'Destino', index: 'Destino', align: 'left', width: 100, hidden: true, editable: false, edittype: 'text', sortable: false },
+                }
 
-
-
-
-
-
-
-                            { name: 'Patente', index: 'Patente', align: 'left', width: 100, hidden: false, editable: false, edittype: 'text', sortable: true },
-
-
-
-                            { name: 'NetoPto', index: 'NetoPto', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: true },
-
-
-                            //{ name: 'NetoProc', index: 'NetoProc', align: 'left', width: 60, hidden: false, editable: false, edittype: 'text', sortable: false }
-
-
-                            {
-                                name: 'FechaArribo', index: 'FechaArribo', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
-                                editoptions: {
-                                    size: 10,
-                                    maxlengh: 10,
-                                    dataInit: function (element) {
-                                        $(element).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            constrainInput: false,
-                                            showOn: 'button',
-                                            buttonText: '...'
-                                        });
-                                    }
-                                },
-                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-                                //, formatter: 'date'
-                                , sorttype: 'date'
-
-
-                                , searchoptions: {
-                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-                                    dataInit: function (elem) {
-                                        $(elem).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            showButtonPanel: true
-                                        })
-                                    }
-                                }
-                            },
+                // jQuery('#Lista').jqGrid('editCell', lastRowIndex, lastColIndex);
+                // jQuery('#Lista').jqGrid("setCell", rowid, "amount", val, "");
 
 
 
-                            {
-                                name: 'FechaDescarga', index: 'FechaDescarga', width: 100, sortable: true, align: 'right', editable: false, sortable: true,
-                                editoptions: {
-                                    size: 10,
-                                    maxlengh: 10,
-                                    dataInit: function (element) {
-                                        $(element).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            constrainInput: false,
-                                            showOn: 'button',
-                                            buttonText: '...'
-                                        });
-                                    }
-                                },
-                                formatoptions: { newformat: "dd/mm/yy" }, datefmt: 'dd/mm/yy'
-                                //, formatter: 'date'
-                                , sorttype: 'date'
+                var ids = $('#Lista').getDataIDs();
+                for (var i = 0, il = ids.length; i < il; i++) {
+                    $('#Lista').jqGrid('restoreRow', ids[i]);
+                }
 
 
-                                , searchoptions: {
-                                    sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'],
-                                    dataInit: function (elem) {
-                                        $(elem).datepicker({
-                                            dateFormat: 'dd/mm/yy',
-                                            showButtonPanel: true
-                                        })
-                                    }
-                                }
-                            },
+
+                //        var $this = $('#Lista'), ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+                //        for (i = l - 1; i >= 0; i--) {
+                //                $('#Lista').jqGrid('restoreRow', ids[i]);
+                //        }
+
+
+            }
+
+            function RefrescarFondoRenglon(grilla) {
+
+                var iCol = getColumnIndexByName($(grilla), 'Situacion'),
+                    cRows = grilla.rows.length, iRow, row, className;
+
+                for (iRow = 0; iRow < cRows; iRow++) {
+                    row = grilla.rows[iRow];
+                    className = row.className;
+                    if ($.inArray('jqgrow', className.split(' ')) > 0) {
+                        var x = ($(row.cells[iCol]))[0].childNodes[0].data; //.children("input:checked");
+
+                        //Autorizado: verde        Demorado: rojo            Rechazado: Violeta 
+                        if (x == "Autorizado") {
+                            if ($.inArray('myAltRowClassAutorizado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassAutorizado';
+                            }
+                        }
+                        else if (x == "Demorado") {
+                            if ($.inArray('myAltRowClassDemorado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassDemorado';
+                            }
+                        }
+                        else if (x == "Rechazado") {
+                            if ($.inArray('myAltRowClassRechazado', className.split(' ')) === -1) {
+                                row.className = className + ' myAltRowClassRechazado';
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
 
 
 
 
-                            { name: 'PuntoVenta', index: 'PuntoVenta', align: 'left', width: 50, hidden: false, editable: false, edittype: 'text', sortable: true },
+            function GrabarFila(gridId) {
+
+                $grid = $('#Lista');
+
+                var saveparameters = {
+                    "successfunc": null,
+                    "url": 'clientArray',
+                    "extraparam": {},
+                    //                "aftersavefunc": function (response) {
+                    //                    alert('saved');
+                    //                },
+                    "errorfunc": null,
+                    "afterrestorefunc": null,
+                    "restoreAfterError": true,
+                    "mtype": "POST"
+                }
+
+                //jQuery('#Lista').jqGrid('restoreCell', lastRowIndex, lastColIndex, true);
+                //$('#Lista').jqGrid('saveRow', gridId, saveparameters, 'clientArray'); //si esta en inline mode, quizas salta un error!
+
+                sacarDeEditMode();
+                var dataFromTheRow = $grid.jqGrid('getRowData', gridId), i;
+
+                //var dataIds = $('#Lista').jqGrid('getDataIDs');
+                //for (i = 0; i < dataIds.length; i++) {
+                //    try {
+                //        //Save row only to the grid
+                //        //$('#Lista').jqGrid('saveRow', dataIds[i], false, 'clientArray');
+                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                //    }
+                //    catch (ex) {
+                //        //If you are using editRules it might end up with exception
+                //        $('#Lista').jqGrid('restoreRow', dataIds[i]);
+                //    }
+                //}
+
+                var datos = {}; //= $("#formid").serializeObject();
+                var err;
+
+
+                datos.idcarta = gridId;
+                datos.idsituacion = dataFromTheRow.Situacion;
+                if (datos.idsituacion == "") datos.idsituacion = -1;
+                datos.sObservacionesSituacion = dataFromTheRow.ObservacionesSituacion;
+
+
+                err = ""
+                //if (datos.Fecha == "" || datos.Fecha == undefined) err = err + "Falta definir la fecha.\n"
+                //if (datos.IdWilliamsDestino == "" || datos.IdWilliamsDestino == undefined) err = err + "Falta el destino.\n"
+                //if (datos.TotalDescargaDia == "" || datos.TotalDescargaDia == undefined) err = err + "Faltan los kilos de descarga\n"
+
+                if (err != "") {
+                    alert('No se pudo grabar el registro.\n' + err);
+                } else {
+                    //$('html, body').css('cursor', 'wait');
 
 
 
 
 
 
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        url: "WebServiceCartas.asmx/GrabarSituacion",
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            idcarta: gridId,
+                            idsituacion: datos.idsituacion,
+                            sObservacionesSituacion: dataFromTheRow.ObservacionesSituacion
+                        }),
+                        success: function (result) {
+                            if (result) {
+                                $grid.jqGrid('setRowData', gridId, { act: "" });
+                                var rowid = $('#Lista').getGridParam('selrow');
+                                var valor = result.IdCartasDePorteControlDescarga;
+                                if (valor == "") { valor = "0"; }
+                                $('#Lista').jqGrid('setCell', rowid, ' IdCartasDePorteControlDescarga', valor);
 
-
-
-                ],
-
-
-
-                loadComplete: function () {
-                    // http://stackoverflow.com/questions/6575192/jqgrid-change-background-color-of-row-based-on-row-cell-value-by-column-name
-
-                    RefrescarFondoRenglon(this);
-
-
-                    //no se por qué no me está andando en el RmsPendientesDeAsignar.cshtml
-                    /*
-                      $("tr.jqgrow", this).contextMenu('myMenu1', {
-                        bindings: {
-                            'edit': function (trigger) {
-                                // trigger is the DOM element ("tr.jqgrow") which are triggered
-                                //   grid.editGridRow(trigger.id, editSettings);
-                            },
-                            'del': function (trigger) {
-                                if ($('#del').hasClass('ui-state-disabled') === false) {
-                                    // disabled item can do be choosed
-                                    //      grid.delGridRow(trigger.id, delSettings);
-                                }
+                                RefrescarFondoRenglon(document.getElementById('Lista'));
+                            } else {
+                                alert('No se pudo grabar el registro.');
                             }
                         },
-                        onContextMenu: function (event) {
-                            rowIdContextMenu = $(event.target).closest("tr.jqgrow").attr("id");
-                            //grid.setSelection(rowId);
-                            // disable menu for rows with even rowids
-                            //$('#del').attr("disabled", Number(rowId) % 2 === 0);
-                            //if (Number(rowId) % 2 === 0) {
-                            //    $('#del').attr("disabled", "disabled").addClass('ui-state-disabled');
-                            //} else {
-                            //    $('#del').removeAttr("disabled").removeClass('ui-state-disabled');
-                            //}
-                            return true;
+                        error: function (xhr, textStatus, exceptionThrown) {
+                            try {
+                                var errorData = $.parseJSON(xhr.responseText);
+                                var errorMessages = [];
+                                for (var key in errorData) { errorMessages.push(errorData[key]); }
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+                                $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                                $("#mensajeAlerta").show();
+                                alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
+                            } catch (e) {
+                                $('html, body').css('cursor', 'auto');
+                                $('#grabar2').attr("disabled", false).val("Aceptar");
+                                $("#textoMensajeAlerta").html(xhr.responseText);
+                                $("#mensajeAlerta").show();
+                            }
                         },
-                        //http://stackoverflow.com/questions/8451982/custom-values-to-context-menu-items-in-jqgrid
-                        menuStyle: {
-                            backgroundColor: '#fcfdfd',
-                            border: '1px solid #a6c9e2',
-                            maxWidth: '600px', // to be sure
-                            width: '100%' // to have good width of the menu
+                        beforeSend: function () {
+                            //$('.loading').html('some predefined loading img html');
+                            $("#loading").show();
+                            $('#grabar2').attr("disabled", true).val("Espere...");
+
                         },
-                        itemHoverStyle: {
-                            border: '1px solid #79b7e7',
-                            color: '#1d5987',
-                            backgroundColor: '#d0e5f5'
+                        complete: function () {
+                            $("#loading").hide();
                         }
+
                     });
+                };
+            };
 
-                    */
-
-
-                },
-
-
-
-
-                onCellSelect: function (rowid, iCol, cellcontent, e) {
-                    var $this = $(this);
-                    var iRow = $('#' + $.jgrid.jqID(rowid))[0].rowIndex;
-                    lastSelectedId = rowid;
-                    lastSelectediCol = iCol;
-                    lastSelectediRow = iRow;
-                },
-                afterEditCell: function (id, name, val, iRow, iCol) {
-                    //if (name == 'Fecha') {
-                    //    jQuery("#" + iRow + "_Fecha", "#Lista").datepicker({ dateFormat: "dd/mm/yy" });
-                    //}
-                    var se = "<input style='height:22px;width:55px;' type='button' value='Grabar' onclick=\"GrabarFila('" + id + "');\"  />";
-                    jQuery("#Lista").jqGrid('setRowData', id, { act: se });
-                },
-
-
-
-                subGridRowExpanded: function (subgrid_id, row_id) {
-                    //var html = "<span>Some HTML text which corresponds the row with id=" +
-                    //    row_id + "</span><br/>";
-
-                    //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+            function EliminarFila(gridId) {
+                $grid = $('#Lista');
+                var dataFromTheRow = $grid.jqGrid('getRowData', gridId);
+                var idprincipal = dataFromTheRow[' IdCartasDePorteControlDescarga'];
+                if (idprincipal <= 0) {
+                    $grid.jqGrid('delRowData', gridId);
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        url: "WebServiceClientes.asmx/DestinoDelete",
+                        dataType: 'json',
+                        data: JSON.stringify({ id: idprincipal }),
+                        success: function (result) {
+                            if (result) {
+                                $grid.jqGrid('delRowData', gridId);
+                            } else {
+                                alert('No se pudo eliminar el registro.');
+                            }
+                        },
+                    });
+                };
+            };
 
 
 
 
+            //window.parent.document.body.onclick = saveEditedCell; // attach to parent window if any
+            //document.body.onclick = saveEditedCell; // attach to current document.
 
-                    var a = $("#Lista").jqGrid('getRowData', row_id);
+            //function saveEditedCell(evt) {
+            //    var target = $(evt.target);
+
+            //    if ($grid) {
+            //        var isCellClicked = $grid.find(target).length; // check if click is inside jqgrid
+            //        if (gridCellWasClicked && !isCellClicked) // check if a valid click
+            //        {
+            //            gridCellWasClicked = false;
+            //            $grid.jqGrid("saveCell", lastSelectediRow2, lastSelectediCol2);
+            //        }
+            //    }
+
+            //    //$grid = "";
+            //    gridCellWasClicked = false;
+
+            //    if (jQuery("#Lista").find(target).length) {
+            //        $grid = $('#Lista');
+            //        grillaenfoco = true;
+            //    }
+            //    if (grillaenfoco) {
+            //        gridCellWasClicked = true;
+            //        lastSelectediRow2 = lastSelectediRow;
+            //        lastSelectediCol2 = lastSelectediCol;
+            //    }
+            //};
 
 
 
-                    //$("#" + subgrid_id).append(dataFromTheRow.infohtml);
-                    //$("#" + subgrid_id).append(dataFromTheRow.Producto);
+            function MarcarSeleccionadosParaEliminar(grid) {
+                var selectedIds = grid.jqGrid('getGridParam', 'selarrrow');
+                var i, Id;
+                for (i = selectedIds.length - 1; i >= 0; i--) {
+                    Id = selectedIds[i];
+                    var se = "<input style='height:22px;width:20px;' type='button' value='B' onclick=\"EliminarFila('" + Id + "');\"  />";
+                    grid.jqGrid('setRowData', Id, { act: se });
+                    //grid.jqGrid('delRowData', selectedIds[i]);
+                }
+            };
+
+            function AgregarItemVacio(grid) {
+                var colModel = grid.jqGrid('getGridParam', 'colModel');
+                var dataIds = grid.jqGrid('getDataIDs');
+                var Id = (grid.jqGrid('getGridParam', 'records') + 1) * -1;
+                var se = "<input style='height:22px;width:60px;' type='button' value='Grabar' onclick=\"GrabarFila('" + Id + "');\"  />";
+                var data, j, cm;
+
+                if (lastSelectediRow2 != undefined) { lastSelectediRow2 = lastSelectediRow2 + 1; }
+
+                if (false) {
+                    data = '{';
+                    for (j = 1; j < colModel.length; j++) {
+                        cm = colModel[j];
+                        data = data + '"' + cm.index + '":' + '"",';
+                    }
+                    data = data.substring(0, data.length - 1) + '}';
+                }
+                else {
+
+                    data = " { \"act\": \"\" , \"IdCartasDePorteControlDescarga\": \"0\", \"Fecha\": \"\" , \"Descripcion\": \"\"   , \"IdWilliamsDestino\": \"0\", \"TotalDescargaDia\": \"0\" , \"IdPuntoVenta\": \"1\" } ";
+
+                }
+                //  grid.jqGrid("addRowData", "empty_" + i, );
+
+                data = data.replace(/(\r\n|\n|\r)/gm, "");
+                grid.jqGrid('addRowData', Id, data, "last");
+                grid.jqGrid('setRowData', Id, { act: se });
+            };
 
 
 
-                    // value: "0:Autorizado; 1:Demorado; 2:Posición; 3:Descargado; 4:A Descargar; 5:Rechazado;6:Desviado;7:CP p/cambiar;8:Sin Cupo;9:Calado"
 
-                    //alert(a.Situacion);
 
-                    var situacionDesc = "";
-                    switch (parseInt(a.Situacion)) {
-                        case 0:
-                            situacionDesc = "Autorizado";
-                            break;
-                        case 1:
-                            situacionDesc = "Demorado";
-                            break;
-                        case 2:
-                            situacionDesc = "Posición";
-                            break;
-                        case 3:
-                            situacionDesc = "Descargado";
-                            break;
-                        case 4:
-                            situacionDesc = "A Descargar";
-                            break;
-                        case 5:
-                            situacionDesc = "Rechazado";
-                            break;
-                        case 6:
-                            situacionDesc = "Desviado";
-                            break;
-                        case 7:
-                            situacionDesc = "CP p/cambiar";
-                            break;
-                        case 8:
-                            situacionDesc = "Sin Cupo";
-                            break;
-                        case 9:
-                            situacionDesc = "Calado";
-                            break;
-                        default:
-                            situacionDesc = "";
+            function AgregarRenglonesEnBlanco(renglonVacio, nombregrilla) {
+
+
+                nombregrilla = nombregrilla || "#Lista";
+                var grid = jQuery(nombregrilla)
+                var pageSize = parseInt(grid.jqGrid("getGridParam", "rowNum"))
+
+                var rows = grid.getGridParam("reccount") || 0;
+
+
+                // jQuery("#Lista").jqGrid('getGridParam', 'records')
+                var emptyRows;       // -data.rows.length; // pageSize - data.rows.length;
+
+                //alert(rows)
+                if (rows < 3) emptyRows = 3 - rows;
+                else emptyRows = 1;
+
+
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+                //pasa q tengo q ver cuántos de los renglones existentes ya están vacíos!!!
+
+                var rowsLlenas = 0;
+
+                var dataIds = grid.jqGrid('getDataIDs');
+                for (var i = 0; i < dataIds.length; i++) {
+
+                    var data = grid.jqGrid('getRowData', dataIds[i]);
+
+
+                    var desc = data['Descripcion'];
+                    // alert(desc);
+                    if (desc == "") continue;
+
+                    if (data['NumeroItem'] == "") {
+                        data['NumeroItem'] = ProximoNumeroItem();
+                        grid.jqGrid('setRowData', dataIds[i], data);
+                    }
+
+                    rowsLlenas++;
+                }
+
+
+
+
+                // alert(rowsLlenas);
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                if (!renglonVacio) {
+                    //    alert('ssss');
+                    renglonVacio = {};
+                }
+
+
+                var gridceil
+
+                if (emptyRows > 0 && (rowsLlenas == rows || rows < 3)) {
+                    //   alert(emptyRows);
+                    for (var i = 1; i <= emptyRows; i++) {
+                        //                    // adjust the counts at lower right
+                        //                    grid.jqGrid("setGridParam", {
+                        //                        reccount: grid.jqGrid("getGridParam", "reccount") - emptyRows,
+                        //                        records: grid.jqGrid("getGridParam", "records") - emptyRows
+                        //                    });
+                        //                    grid[0].updatepager();
+
+
+
+
+                        // grid.jqGrid("addRowData", "empty_" + i, {});
+
+
+
+                        gridceil = Math.ceil(Math.random() * 1000000); // ojo con esto, si usas el mismo id, la edicion de un renglon se va a pasar a otro al instante!, y no vas a entender q está pasando 
+
+
+                        grid.jqGrid("addRowData", "empty_" + gridceil, renglonVacio);
+                        //  grid.jqGrid("addRowData", "empty_" + i, { "IdDetalleComprobanteProveedor": "0", "IdCuenta": "0", "Precio": "0", "Descripcion": "" });
 
                     }
 
+                }
+                rows = grid.getGridParam("reccount");
 
 
+                //alert(rows);
 
-                    var html = "<span style='font-size: 14px'> " +
-                        "<br/><b>Situación</b>      " + situacionDesc +
-                        "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
-                        "<br/><b>Producto</b>       " + a.Producto +
-                        "<br/><b>Titular</b>            " + a.TitularDesc +
-                        "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
-                        "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
-                        "<br/><b>Corredor</b>            " + a.CorredorDesc +
-                        "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
-                        "<br/><b>Destino</b>  " + a.DestinoDesc +
-                        "<br/><b>Patente</b>  " + a.Patente +
-                        "<br/><b>Neto</b>  " + a.NetoPto +
-                        "<br/><b>Arribo</b>  " + a.FechaArribo +
-                        "<br/><b>Descarga</b>  " + a.FechaDescarga +
-                        "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
-                        "<span/>";
-
-                    $("#" + subgrid_id).append(html);
+                grid.jqGrid('setGridHeight', Math.max(140, rows * 45), true);
+            }
 
 
-                },
+            // Esto es para obtener el contenido de una celda en modo edicion. Ojo que las funciones estan como declarativas (,)
+            //getColumnIndexByName = function (grid, columnName) {
+            //    var cm = grid.jqGrid('getGridParam', 'colModel');
+            //    for (var i = 0, l = cm.length; i < l; i++) {
+            //        if (cm[i].name === columnName) {
+            //            return i; // return the index
+            //        }
+            //    }
+            //    return -1;
+            //},
+            //getTextFromCell = function (cellNode) {
+            //    return cellNode.childNodes[0].nodeName === "INPUT" ?
+            //            cellNode.childNodes[0].value :
+            //            cellNode.textContent || cellNode.innerText;
+            //},
+            //calculateTotal = function () {
+            //    var totalAmount = 0, totalTax = 0,
+            //        i = getColumnIndexByName(grid, 'amount'); // nth-child need 1-based index so we use (i+1) below
+            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+            //        totalAmount += Number(getTextFromCell(this));
+            //    });
 
-                onSelectRow: function (rowId) {
-                    // $("#Lista").jqGrid('toggleSubGridRow', rowId);
-                },
+            //    i = getColumnIndexByName(grid, 'tax');
+            //    $("tbody > tr.jqgrow > td:nth-child(" + (i + 1) + ")", grid[0]).each(function () {
+            //        totalTax += Number(getTextFromCell(this));
+            //    });
 
-
-
-
-                pager: $('#ListaPager'),
-                rowNum: 1000,
-                rowList: [10, 20, 50, 100, 500, 1000],
-                sortname: 'IdCartaDePorte',  //'FechaDescarga', //'NumeroCartaDePorte',
-                sortorder: 'desc',
-                viewrecords: true,
-                multiselect: true,
-                shrinkToFit: false,
-                width: 'auto',
-                height: 460, // $(window).height() - 250, // '100%'
-                altRows: false,
-                footerrow: false,
-                userDataOnFooter: true,
-                //caption: '<b>Control de Descargas</b>',
-                cellEdit: true,
-                cellsubmit: 'clientArray',
-                dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+            //    grid.jqGrid('footerData', 'set', { name: 'TOTAL', amount: totalAmount, tax: totalTax });
+            //};
 
 
 
 
-                //recordtext: "{2} cartas</span>",
-                //pgtext: "Pag. {0} de {1}",
-                toppager: true,
-                subGrid: true,
-                multiselectWidth: 40,
-                subGridWidth: 40,
+            $('#ctl00_ContentPlaceHolder1_cmbPuntoVenta').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
+
+
+            $('#ctl00_ContentPlaceHolder1_txtDestino').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
 
 
 
-                gridview: true
-               , multiboxonly: true
-               , multipleSearch: true
+
+            $('#ctl00_ContentPlaceHolder1_txtFechaDesde').keypress(function (e) {
+                var key = e.which;
+                if (key == 13)  // the enter key code
+                {
+                    $('#Lista').trigger("reloadGrid")
+                    return false;
+                }
+            });
+
+            $('#ctl00_ContentPlaceHolder1_txtFechaDesde').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
 
 
+
+
+
+            $('#ctl00_ContentPlaceHolder1_txtFechaHasta').keypress(function (e) {
+                var key = e.which;
+                if (key == 13)  // the enter key code
+                {
+                    $('#Lista').trigger("reloadGrid")
+                    return false;
+                }
+            });
+
+            $('#ctl00_ContentPlaceHolder1_txtFechaHasta').change(function () {
+                $('#Lista').trigger("reloadGrid")
             });
 
 
@@ -2353,74 +1402,240 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+            $('#ctl00_ContentPlaceHolder1_cmbPeriodo').change(function () {
+                $('#Lista').trigger("reloadGrid")
+            });
 
 
-            jQuery('#Lista').jqGrid('gridResize');
-
-            jQuery("#Lista").jqGrid('bindKeys');
-
-            jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-             { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
-             {
-                 //sopt: ["cn"]
-                 //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
-                 zIndex: 50, width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
-
-             }
-                // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
-            );
-
-            //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
-            //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
-
-
-
-            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-            //                                {
-            //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
-            //                                    onClickButton: function () {
-            //                                        AgregarItemVacio(jQuery("#Lista"));
-            //                                    },
-            //                                });
-            //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
-            //                                {
-            //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
-            //                                    onClickButton: function () {
-            //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
-            //                                    },
-            //                                });
-
-
-
-            jQuery("#Lista").filterToolbar({
-                stringResult: true, searchOnEnter: true,
-                defaultSearch: 'cn',
-                enableClear: false
-            }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-            //$('#Lista').jqGrid('setGridWidth', '1000');
-            $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
-
-        });
-
-
-
-        $(window).resize(function () {
-            $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
-            //RefrescaAnchoJqgrids();
-        });
-
-
-        var getColumnIndexByName = function (grid, columnName) {
-            var cm = grid.jqGrid('getGridParam', 'colModel'), i = 0, l = cm.length;
-            for (; i < l; i++) {
-                if (cm[i].name === columnName) {
-                    return i; // return the index
-                }
+            function RefrescaGrilla() {
+                $('#Lista').trigger("reloadGrid");
             }
-            return -1;
-        };
+
+
+            $().ready(function () {
+                'use strict';
+
+                var UltimoIdArticulo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                $('#Lista').jqGrid({
+                    //url: 'HandlerCartaPorte.ashx',
+                    url: "WebServiceCartas.asmx/ReclamosMaestro",
+                    //postData: {},
+                    postData: {
+                        'filters': '',
+                        'idcarta': 2122,
+                        'FechaInicial': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaDesde").val(); },
+                        'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
+                        'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
+                        'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
+                        'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); },
+                        'nombreusuario': 'adasddas'
+                    },
+                    datatype: 'json',
+                    mtype: 'POST',
+
+
+
+
+                    // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
+
+                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte', 'estado'
+
+
+
+
+                    ],
+
+
+
+                    //colNames: ['[Grabar]', 'Id', 'Nro CP', 'Turno',
+
+                    //        'Situacion',
+                    //            'Producto', 'Titular', 'Intermediario', 'R Comercial', 'Corredor',
+                    //            'Destinatario', 'Destino', 'IdDestino', 'Entregador', 'Procedencia',
+                    //            'Kilos Procedencia', 'Obs Situacion', 'Arribo', 'Descarga', 'Punto Venta',
+                    //            'Fecha actualizacion', 'Patente', 'Kilos Descargados'
+                    //],
+
+                    colModel: [
+
+
+                        { name: 'act', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: true },
+                        { name: 'IdReclamo', index: 'IdReclamo', align: 'left', width: 100, editable: false, hidden: false },
+
+
+
+                        { name: 'cp', index: 'cp', align: 'left', width: 100, editable: false, hidden: false, sortable: false },
+
+
+                        { name: 'Titulo', index: 'Titulo', align: 'left', width: 100, editable: false, hidden: false, sortable: false },
+
+
+
+                        { name: 'fecha', index: 'fecha', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
+                        { name: 'comentarios', index: 'comentarios', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
+                        { name: 'usuarios', index: 'usuarios', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
+                        { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+                        { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+
+
+                    ],
+
+
+                    subGridRowExpanded: function (subgrid_id, row_id) {
+                        //var html = "<span>Some HTML text which corresponds the row with id=" +
+                        //    row_id + "</span><br/>";
+
+                        //var html = '<ul data-dtr-index="0" class="dtr-details"><li data-dtr-index="4" data-dt-row="0" data-dt-column="4"><span class="dtr-title"><a href="">Titular</a></span> <span class="dtr-data"><span>Martignone Adolfo Y Cia  S C A </span></span></li><li data-dtr-index="5" data-dt-row="0" data-dt-column="5"><span class="dtr-title">Intermed.</span> <span class="dtr-data"><span></span></span></li><li data-dtr-index="6" data-dt-row="0" data-dt-column="6"><span class="dtr-title">Remitente Comercial</span> <span class="dtr-data"><span>Granos Olavarria S A </span></span></li><li data-dtr-index="7" data-dt-row="0" data-dt-column="7"><span class="dtr-title"><a href="">Corredor</a></span> <span class="dtr-data"><span>Futuros Y Opciones Com S A </span></span></li><li data-dtr-index="8" data-dt-row="0" data-dt-column="8"><span class="dtr-title">Esp.</span> <span class="dtr-data"><span>Soja Sustentable Usa</span></span></li><li data-dtr-index="9" data-dt-row="0" data-dt-column="9"><span class="dtr-title"><a href="">Destino</a><img title="Orden:Asc" src="/WebResource.axd?d=olQ67zyJIM4n9M_oCjYGRrTv0D-PJFdyCfA8P30v3DAazZ2pPF9qhxbM3BGjwDU_sj9fOg-6w-QRXWlBrrBXHMoHlpC6GPd2JFlMFkPtMfvCFUjqHNl-emkH6wLPSw2q0&amp;t=636426523640000000" alt="Orden:Asc" align="absbottom"></span> <span class="dtr-data">FCA VICENTIN</span></li><li data-dtr-index="10" data-dt-row="0" data-dt-column="10"><span class="dtr-title">Destinat.</span> <span class="dtr-data"><span>Vicentin S A I C</span></span></li><li data-dtr-index="11" data-dt-row="0" data-dt-column="11"><span class="dtr-title">Analisis</span> <span class="dtr-data"><span>DÑ:12.00% HD:13.20%  </span></span></li><li data-dtr-index="12" data-dt-row="0" data-dt-column="12"><span class="dtr-title">Patente</span> <span class="dtr-data">ERT783</span></li><li data-dtr-index="13" data-dt-row="0" data-dt-column="13"><span class="dtr-title">Obs Pto</span> <span class="dtr-data">&nbsp;</span></li><li data-dtr-index="14" data-dt-row="0" data-dt-column="14"><span class="dtr-title">Procedencia</span> <span class="dtr-data"><span>Villa Lila</span></span></li><li data-dtr-index="15" data-dt-row="0" data-dt-column="15"><span class="dtr-title">Entreg</span> <span class="dtr-data"><span>Wil</span></span></li><li data-dtr-index="16" data-dt-row="0" data-dt-column="16"><span class="dtr-title">Entreg CP</span> <span class="dtr-data"><span></span></span></li></ul>'
+
+
+                        var a = $("#Lista").jqGrid('getRowData', row_id);
+
+
+
+                        var html = "<span style='font-size: 14px'> " +
+                            "<br/><b>Reclamo</b>            " + a.IdReclamo +
+                            "<br/><b>Titulo</b>       " + a.Titulo +
+                            "<br/><b>fecha</b>            " + a.TitularDesc +
+                            "<br/><b>usuarios</b>            " + a.usuarios +
+                            "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                            "<span/>";
+
+                        $("#" + subgrid_id).append(html);
+
+
+                    },
+
+                    onSelectRow: function (rowId) {
+                        // $("#Lista").jqGrid('toggleSubGridRow', rowId);
+                    },
+
+
+
+
+                    pager: $('#ListaPager'),
+                    rowNum: 1000,
+                    rowList: [10, 20, 50, 100, 500, 1000],
+                    sortname: 'IdReclamo',  //'FechaDescarga', //'NumeroCartaDePorte',
+                    sortorder: 'desc',
+                    viewrecords: true,
+                    multiselect: true,
+                    shrinkToFit: false,
+                    width: 'auto',
+                    height: 460, // $(window).height() - 250, // '100%'
+                    altRows: false,
+                    footerrow: false,
+                    userDataOnFooter: true,
+                    //caption: '<b>Control de Descargas</b>',
+                    cellEdit: true,
+                    cellsubmit: 'clientArray',
+                    dataUrl: "WebServiceClientes.asmx/EmpleadoEditGridData",
+
+
+
+
+                    //recordtext: "{2} cartas</span>",
+                    //pgtext: "Pag. {0} de {1}",
+                    toppager: true,
+                    subGrid: true,
+                    multiselectWidth: 40,
+                    subGridWidth: 40,
+
+
+
+                    gridview: true
+                    , multiboxonly: true
+                    , multipleSearch: true
+
+
+                });
+
+
+
+
+
+
+
+
+                jQuery('#Lista').jqGrid('gridResize');
+
+                jQuery("#Lista").jqGrid('bindKeys');
+
+                jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                    { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+                    {
+                        //sopt: ["cn"]
+                        //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+                        zIndex: 50, width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+
+                    }
+                    // http://stackoverflow.com/questions/11228764/jqgrid-setting-zindex-for-alertmod
+                );
+
+                //jQuery("#Lista").jqGrid('navGrid', '#ListaPager',
+                //    { search: false, refresh: false, add: false, edit: false, del: false }, {}, {}, {}, {});
+
+
+
+                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                //                                {
+                //                                    caption: "", buttonicon: "ui-icon-plus", title: "Agregar",
+                //                                    onClickButton: function () {
+                //                                        AgregarItemVacio(jQuery("#Lista"));
+                //                                    },
+                //                                });
+                //jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
+                //                                {
+                //                                    caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
+                //                                    onClickButton: function () {
+                //                                        MarcarSeleccionadosParaEliminar(jQuery("#Lista"));
+                //                                    },
+                //                                });
+
+
+
+                jQuery("#Lista").filterToolbar({
+                    stringResult: true, searchOnEnter: true,
+                    defaultSearch: 'cn',
+                    enableClear: false
+                }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+                //$('#Lista').jqGrid('setGridWidth', '1000');
+                //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+
+            });
+
+
+
+            $(window).resize(function () {
+                //$('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+                //RefrescaAnchoJqgrids();
+            });
+
+
+            var getColumnIndexByName = function (grid, columnName) {
+                var cm = grid.jqGrid('getGridParam', 'colModel'), i = 0, l = cm.length;
+                for (; i < l; i++) {
+                    if (cm[i].name === columnName) {
+                        return i; // return the index
+                    }
+                }
+                return -1;
+            };
 
 
 
@@ -2451,4 +1666,336 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <asp:HiddenField ID="HFSC" runat="server" />
     <asp:HiddenField ID="HFIdObra" runat="server" />
     <asp:HiddenField ID="HFTipoFiltro" runat="server" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%--   /////////////////////////////////////////////////////////////////////        
+ /////////////////////////////////////////////////////////////////////    --%>
+    <%--   /////////////////////////////////////////////////////////////////////        
+ /////////////////////////////////////////////////////////////////////    --%>
+    <%--   /////////////////////////////////////////////////////////////////////        
+ /////////////////////////////////////////////////////////////////////    --%>
+    <%--   /////////////////////////////////////////////////////////////////////        
+ /////////////////////////////////////////////////////////////////////    --%>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyD_KzMypOaPPCUl42hvR3BEkB9ZHCU9Nuc",
+                authDomain: "pronto-f87bf.firebaseapp.com",
+                databaseURL: "https://pronto-f87bf.firebaseio.com",
+                projectId: "pronto-f87bf",
+                storageBucket: "pronto-f87bf.appspot.com",
+                messagingSenderId: "741177410808"
+            };
+            firebase.initializeApp(config);
+    </script>
+
+
+
+
+
+
+
+    <%--    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--%>
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+
+    <link rel="manifest" href="./manifest.json">
+
+
+
+
+
+
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <!-- Header section containing title -->
+    <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+        
+        </div>
+      </div>
+    </header>
+
+
+        <!-- Container for the Table of content -->
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                <!-- div to display the generated Instance ID token -->
+                <div id="token_div" style="display: none;">
+                    <h4>Ticket de Dispositivo</h4>
+                    <p id="token" style="word-break: break-all;"></p>
+
+
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                        onclick="deleteToken()">
+                        Borrar Ticket</button>
+                </div>
+                <!-- div to display the UI to allow the request for permission to
+               notify the user. This is shown if the app has not yet been
+               granted permission to notify. -->
+                <div id="permission_div" style="display: none;">
+                    <h4></h4>
+                    <p id="token"></p>
+
+                    <input type="button" value="Habilitar Notificaciones!"   onclick="requestPermission()"/></input>
+
+                  <%--  <button class=""
+                        onclick="requestPermission()">
+                        Habilitar Notificaciones!</button>--%>
+                </div>
+                <!-- div to display messages received by this app. -->
+                <div id="messages"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    
+    <script>
+            // [START get_messaging_object]
+            // Retrieve Firebase Messaging object.
+            const messaging = firebase.messaging();
+            // [END get_messaging_object]
+            // IDs of divs that display Instance ID token UI or request permission UI.
+            const tokenDivId = 'token_div';
+            const permissionDivId = 'permission_div';
+            // [START refresh_token]
+            // Callback fired if Instance ID token is updated.
+            messaging.onTokenRefresh(function () {
+                messaging.getToken()
+                    .then(function (refreshedToken) {
+                        console.log('Token refreshed.');
+                        // Indicate that the new Instance ID token has not yet been sent to the
+                        // app server.
+                        setTokenSentToServer(false);
+                        // Send Instance ID token to app server.
+                        sendTokenToServer(refreshedToken);
+                        // [START_EXCLUDE]
+                        // Display new Instance ID token and clear UI of all previous messages.
+                        resetUI();
+                        // [END_EXCLUDE]
+                    })
+                    .catch(function (err) {
+                        console.log('Unable to retrieve refreshed token ', err);
+                        showToken('Unable to retrieve refreshed token ', err);
+                    });
+            });
+            // [END refresh_token]
+            // [START receive_message]
+            // Handle incoming messages. Called when:
+            // - a message is received while the app has focus
+            // - the user clicks on an app notification created by a sevice worker
+            //   `messaging.setBackgroundMessageHandler` handler.
+            messaging.onMessage(function (payload) {
+                console.log("Message received. ", payload);
+                // [START_EXCLUDE]
+                // Update the UI to include the received message.
+                appendMessage(payload);
+
+
+
+
+                // [END_EXCLUDE]
+            });
+            // [END receive_message]
+            function resetUI() {
+                clearMessages();
+                showToken('loading...');
+                // [START get_token]
+                // Get Instance ID token. Initially this makes a network call, once retrieved
+                // subsequent calls to getToken will return from cache.
+                messaging.getToken()
+                    .then(function (currentToken) {
+                        if (currentToken) {
+                            sendTokenToServer(currentToken);
+                            updateUIForPushEnabled(currentToken);
+                        } else {
+                            // Show permission request.
+                            console.log('No Instance ID token available. Request permission to generate one.');
+                            // Show permission UI.
+                            updateUIForPushPermissionRequired();
+                            setTokenSentToServer(false);
+                        }
+                    })
+                    .catch(function (err) {
+                        console.log('An error occurred while retrieving token. ', err);
+                        showToken('Error retrieving Instance ID token. ', err);
+                        setTokenSentToServer(false);
+                    });
+            }
+            // [END get_token]
+            function showToken(currentToken) {
+                // Show token in console and UI.
+                var tokenElement = document.querySelector('#token');
+                tokenElement.textContent = currentToken;
+            }
+            // Send the Instance ID token your application server, so that it can:
+            // - send messages back to this app
+            // - subscribe/unsubscribe the token from topics
+            function sendTokenToServer(currentToken) {
+                if (!isTokenSentToServer()) {
+                    console.log('Sending token to server...');
+                    // TODO(developer): Send the current token to your server.
+
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+
+
+                    var d = {
+                        token: currentToken
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        //method: "POST",
+                        url: "WebServiceCartas.asmx/AsociarUsuarioConTokenFirebase",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+
+                        data: JSON.stringify(d),
+
+                        success: function (data) {
+                            setTokenSentToServer(true);
+                        }
+                    })
+
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////
+
+
+
+                } else {
+                    console.log('Token already sent to server so won\'t send it again ' +
+                        'unless it changes');
+                }
+            }
+            function isTokenSentToServer() {
+                return window.localStorage.getItem('sentToServer') == 1;
+            }
+            function setTokenSentToServer(sent) {
+                window.localStorage.setItem('sentToServer', sent ? 1 : 0);
+            }
+            function showHideDiv(divId, show) {
+                const div = document.querySelector('#' + divId);
+                if (show) {
+                    div.style = "display: visible";
+                } else {
+                    div.style = "display: none";
+                }
+            }
+            function requestPermission() {
+                console.log('Requesting permission...');
+                // [START request_permission]
+                messaging.requestPermission()
+                    .then(function () {
+                        console.log('Notification permission granted.');
+                        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+                        // [START_EXCLUDE]
+                        // In many cases once an app has been granted notification permission, it
+                        // should update its UI reflecting this.
+                        resetUI();
+                        // [END_EXCLUDE]
+                    })
+                    .catch(function (err) {
+                        console.log('Unable to get permission to notify.', err);
+                    });
+                // [END request_permission]
+            }
+            function deleteToken() {
+                // Delete Instance ID token.
+                // [START delete_token]
+                messaging.getToken()
+                    .then(function (currentToken) {
+                        messaging.deleteToken(currentToken)
+                            .then(function () {
+                                console.log('Token deleted.');
+                                setTokenSentToServer(false);
+                                // [START_EXCLUDE]
+                                // Once token is deleted update UI.
+                                resetUI();
+                                // [END_EXCLUDE]
+                            })
+                            .catch(function (err) {
+                                console.log('Unable to delete token. ', err);
+                            });
+                        // [END delete_token]
+                    })
+                    .catch(function (err) {
+                        console.log('Error retrieving Instance ID token. ', err);
+                        showToken('Error retrieving Instance ID token. ', err);
+                    });
+            }
+            // Add a message to the messages element.
+            function appendMessage(payload) {
+                const messagesElement = document.querySelector('#messages');
+                const dataHeaderELement = document.createElement('h5');
+                const dataElement = document.createElement('pre');
+                dataElement.style = 'overflow-x:hidden;'
+                dataHeaderELement.textContent = 'Received message:';
+                dataElement.textContent = JSON.stringify(payload, null, 2);
+                messagesElement.appendChild(dataHeaderELement);
+                messagesElement.appendChild(dataElement);
+
+
+
+                // Customize notification here
+                const notificationTitle = 'Background Message Title';
+                const notificationOptions = {
+                    body: JSON.stringify(payload, null, 2),
+                    icon: '/firebase-logo.png'
+                };
+
+                return self.registration.showNotification(notificationTitle,
+                    notificationOptions);
+
+
+            }
+            // Clear the messages element of all children.
+            function clearMessages() {
+                const messagesElement = document.querySelector('#messages');
+                while (messagesElement.hasChildNodes()) {
+                    messagesElement.removeChild(messagesElement.lastChild);
+                }
+            }
+            function updateUIForPushEnabled(currentToken) {
+                showHideDiv(tokenDivId, true);
+                showHideDiv(permissionDivId, false);
+                showToken(currentToken);
+            }
+            function updateUIForPushPermissionRequired() {
+                showHideDiv(tokenDivId, false);
+                showHideDiv(permissionDivId, true);
+            }
+            resetUI();
+    </script>
+
+
+
 </asp:Content>

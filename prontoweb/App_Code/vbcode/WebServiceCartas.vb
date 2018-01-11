@@ -198,7 +198,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function GrabarComentario(idCartaPorte As Integer, sComentario As String) As String
+    Public Function GrabarComentario(idCartaPorte As Integer, sComentario As String, usuarioDestino As String) As String
 
 
         Try
@@ -220,66 +220,35 @@ Public Class WebServiceCartas
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            Dim MembershipCasillas = New Dictionary(Of String, String)
 
-            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+
+            'Dim casillas As MembershipUserCollection = Membership. .GetAllUsers()
+            'casillas(0).
+            'For Each u In casillas
+            '    u
+            'Next
+
+
             Dim usuario = Membership.GetUser.UserName
-            Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs))
 
+            'habria que usar la otra bdlmaster tambien....
 
-            Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
-            Dim casillas = ""
-            For Each u In usuarios
-                If u Is Nothing Then Continue For
-                If u = usuario Then Continue For
-                casillas += Membership.GetUser(u).Email + ","
-            Next
-
-
+            Dim esExterno As Boolean = False
             If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
-                'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
-
-                Dim De As String
-                Dim CCOaddress As String
-                Select Case carta.PuntoVenta
-                    Case 1
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                    Case 2
-                        De = "sanlorenzo@williamsentregas.com.ar"
-                        CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
-                    Case 3
-                        De = "arroyoseco@williamsentregas.com.ar"
-                        CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
-                    Case 4
-                        De = "bahiablanca@williamsentregas.com.ar"
-                        CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
-                    Case Else
-                        De = "buenosaires@williamsentregas.com.ar"
-                        CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
-                End Select
-
-                casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+                esExterno = True
             End If
 
+            Dim s = New ServicioCartaPorte.servi()
+            s.GrabarComentarioYNotificar(idCartaPorte, usuario, sComentario, Encriptar(scs), ConexBDLmasterClientes, usuarioDestino, esExterno,
+                                         ConfigurationManager.AppSettings("UrlDominio"),
+                                         ConfigurationManager.AppSettings("SmtpUser"),
+                                         ConfigurationManager.AppSettings("SmtpServer"),
+                                         ConfigurationManager.AppSettings("SmtpPass"),
+                                         ConfigurationManager.AppSettings("SmtpPort")
+                                         )
 
-            Try
 
-
-                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
-                               "Consulta por carta porte",
-                            "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>",
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpServer"),
-                            ConfigurationManager.AppSettings("SmtpUser"),
-                            ConfigurationManager.AppSettings("SmtpPass"),
-                              "",
-                           Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
-
-            Catch ex As Exception
-                ErrHandler2.WriteError(ex)
-
-            End Try
 
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -302,8 +271,94 @@ Public Class WebServiceCartas
     End Function
 
 
+
+
+
+
+    'Private Function GrabarComentarioYNotificar(idCartaPorte As Integer, sComentario As String, scs As String, usuarioDestino As String)
+
+
+    '    Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+    '    Dim usuario = Membership.GetUser.UserName
+    '    Dim s = New ServicioCartaPorte.servi()
+    '    Dim usuarios As String() = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuario, Encriptar(scs), usuarioDestino)
+
+
+
+
+    '    Dim linkAlReclamo = ConfigurationManager.AppSettings("UrlDominio") + "/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString
+    '    Dim casillas = ""
+    '    For Each u In usuarios
+    '        If u Is Nothing Then Continue For
+    '        If u = usuario Then Continue For
+    '        If Membership.GetUser(u) Is Nothing Then Continue For
+    '        casillas += Membership.GetUser(u).Email + ","
+    '    Next
+
+
+    '    If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+    '        'como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
+
+    '        Dim De As String
+    '        Dim CCOaddress As String
+    '        Select Case carta.PuntoVenta
+    '            Case 1
+    '                De = "buenosaires@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+    '            Case 2
+    '                De = "sanlorenzo@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-sl@williamsentregas.com.ar" ' & CCOaddress
+    '            Case 3
+    '                De = "arroyoseco@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-as@williamsentregas.com.ar" '& CCOaddress
+    '            Case 4
+    '                De = "bahiablanca@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-bb@williamsentregas.com.ar" ' & CCOaddress
+    '            Case Else
+    '                De = "buenosaires@williamsentregas.com.ar"
+    '                CCOaddress = "descargas-ba@williamsentregas.com.ar" ' & CCOaddress
+    '        End Select
+
+    '        casillas += De 'ConfigurationManager.AppSettings("ErrorMail")
+
+    '        'como es un externo, como hago con la notificacion al usuario interno?
+    '    End If
+
+
+
+
+    '    Dim coment = "Comentario de " + usuario + ": <br/>" + sComentario + "<br/><br/> " + "<a href='" + linkAlReclamo + "'>Link al comentario</a>"
+
+    '    Try
+
+
+    '        Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas,
+    '                           "Consulta por carta porte",
+    '                        coment,
+    '                        ConfigurationManager.AppSettings("SmtpUser"),
+    '                        ConfigurationManager.AppSettings("SmtpServer"),
+    '                        ConfigurationManager.AppSettings("SmtpUser"),
+    '                        ConfigurationManager.AppSettings("SmtpPass"),
+    '                          "",
+    '                       Convert.ToInt16(ConfigurationManager.AppSettings("SmtpPort")),,,,,,)
+
+    '    Catch ex As Exception
+    '        ErrHandler2.WriteError(ex)
+
+    '    End Try
+
+
+    '    s.EnviarNotificacionALosDispositivosDelUsuario(usuarioDestino, coment, "consulta", Encriptar(scs))
+
+
+
+
+    'End Function
+
+
+
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function CerrarReclamo(idCartaPorte As Integer) As String
+    Public Function CerrarReclamo(idCartaPorte As Integer, usuarioDestino As String) As String
 
 
         Try
@@ -329,7 +384,7 @@ Public Class WebServiceCartas
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
             Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.CerrarReclamo_DLL(idCartaPorte, usuario, Encriptar(scs))
+            Dim usuarios = s.CerrarReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
 
 
 
@@ -355,7 +410,7 @@ Public Class WebServiceCartas
 
 
     <WebMethod(Description:="", EnableSession:=False)>
-    Public Function AbrirReclamo(idCartaPorte As Integer) As String
+    Public Function AbrirReclamo(idCartaPorte As Integer, usuarioDestino As String) As String
 
 
         Try
@@ -381,7 +436,7 @@ Public Class WebServiceCartas
             Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
             Dim usuario = Membership.GetUser.UserName
             Dim s = New ServicioCartaPorte.servi()
-            Dim usuarios = s.AbrirReclamo_DLL(idCartaPorte, usuario, Encriptar(scs))
+            Dim usuarios = s.AbrirReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
 
 
 
@@ -404,6 +459,68 @@ Public Class WebServiceCartas
 
 
     End Function
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function EstadoReclamo(idCartaPorte As Integer, usuarioDestino As String) As Integer
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idCartaPorte)
+            Dim usuario = Membership.GetUser.UserName
+            Dim s = New ServicioCartaPorte.servi()
+            Dim ret = s.EstadoReclamo_DLL(idCartaPorte, usuario, Encriptar(scs), usuarioDestino)
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Return ret
+
+
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+
+
+
+
 
 
     <WebMethod(Description:="", EnableSession:=False)>
@@ -493,6 +610,261 @@ Public Class WebServiceCartas
 
 
     End Function
+
+
+
+
+
+
+
+
+
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    Public Function AsociarUsuarioConTokenFirebase(token As String) As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim usuario = Membership.GetUser().UserName
+
+
+            Dim s = New ServicioCartaPorte.servi()
+            s.AsociarUsuarioConTokenFirebase(token, usuario, Encriptar(scs))
+
+
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '<WebMethod(Description:="", EnableSession:=False)>
+    '<System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    'Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+    '                                 FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+    '    ReclamosMaestro(sidx, sord, page, rows, _search, "",
+    '                                 FechaInicial, FechaFinal, puntovent, idcarta, nombreusuario)
+
+
+    '    'https://stackoverflow.com/questions/1522585/can-web-methods-be-overloaded  -parece que no....
+
+    'End Sub
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim SCbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString)
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
+            Dim usuario = ""
+            Dim s = New ServicioCartaPorte.servi()
+
+
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                usuario = Membership.GetUser.UserName
+            End If
+
+
+            Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), usuario, SCbdlmaster)
+            'Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
+
+
+
+
+
+            ' https://stackoverflow.com/questions/19563641/how-to-get-json-response-from-a-3-5-asmx-web-service
+
+            Context.Response.Clear()
+            Context.Response.ContentType = "application/json"
+            'HelloWorldData Data = New HelloWorldData()
+            'Data.Message = "HelloWorld"
+            'Context.Response.Write(js.Serialize(Data));
+            Context.Response.Write(ret)
+            '            Return ret
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '<WebMethod(Description:="", EnableSession:=False)>
+    '<System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    'Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+    '                                 FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+    '    ReclamosMaestro(sidx, sord, page, rows, _search, "",
+    '                                 FechaInicial, FechaFinal, puntovent, idcarta, nombreusuario)
+
+
+    '    'https://stackoverflow.com/questions/1522585/can-web-methods-be-overloaded  -parece que no....
+
+    'End Sub
+
+
+
+    <WebMethod(Description:="", EnableSession:=False)>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
+    Public Sub ReclamosComentarios(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
+                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                'scs = scWilliamsRelease
+                scs = scWilliamsDebug
+            End If
+
+
+            Dim SCbdlmaster = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString)
+
+
+
+
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim carta = CartaDePorteManager.GetItem(Encriptar(scs), idcarta)
+            Dim usuario = ""
+            usuario = Membership.GetUser.UserName
+
+            Dim s = New ServicioCartaPorte.servi()
+
+
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
+                'el usuario es  externo
+                nombreusuario = usuario
+            End If
+
+
+            'Dim ret = s.ReclamosMaestro_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), usuario, SCbdlmaster)
+            'Dim ret = s.ReclamosComentarios_DynamicGridData(sidx, sord, page, rows, _search, filters, "", "", 0, idcarta, Encriptar(scs), "", SCbdlmaster)
+
+
+
+            Dim ret = s.ReclamosComentarios_DynamicGridData(
+                                        sidx, sord, page,
+                                        rows, _search, filters, FechaInicial, FechaFinal, Convert.ToInt32(puntovent),
+                                        Convert.ToInt32(idcarta),
+                                        Encriptar(scs), usuario, SCbdlmaster, nombreusuario)
+
+
+
+
+            ' https://stackoverflow.com/questions/19563641/how-to-get-json-response-from-a-3-5-asmx-web-service
+
+            Context.Response.Clear()
+            Context.Response.ContentType = "application/json"
+            'HelloWorldData Data = New HelloWorldData()
+            'Data.Message = "HelloWorld"
+            'Context.Response.Write(js.Serialize(Data));
+            Context.Response.Write(ret)
+            '            Return ret
+
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Sub
+
+
+
+
+
 
 
 End Class

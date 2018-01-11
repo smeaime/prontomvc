@@ -838,7 +838,7 @@ namespace ProntoWindowsService
 
             bool bSignaled = false;
 
-            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado=null, resultado2=null;
+            List<ProntoMVC.Data.FuncionesGenericasCSharp.Resultados> resultado = null, resultado2 = null;
 
             var s = new ServicioCartaPorte.servi();
 
@@ -847,6 +847,10 @@ namespace ProntoWindowsService
             string dir1 = ConfigurationManager.AppSettings["DirDescargas"] ?? ""; //  DirApp1 + @"\Temp\Pegatinas\";
             string dir2 = ConfigurationManager.AppSettings["DirDescargas_Test"] ?? ""; // DirApp2 + @"\Temp\Pegatinas\";
 
+            string dirbinary = ConfigurationManager.AppSettings["DirChromeBinary"] ?? ""; // DirApp2 + @"\Temp\Pegatinas\";
+
+
+            bool headless = true;
 
             while (true)
             {
@@ -872,17 +876,17 @@ namespace ProntoWindowsService
 
                     if (dir1 != "")
                     {
-                        s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        s.UrenportSelenium_ConChromeHeadless(dir1, DirChromeDriver, headless, dirbinary);
                         ClassFlexicapture.Log(idthread + " Bajado 1");
-                        s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver);
+                        s.CerealnetSelenium_ConChromeHeadless(dir1, DirChromeDriver, headless, dirbinary);
                         ClassFlexicapture.Log(idthread + " Bajado 2");
                     }
 
                     if (dir2 != "")
                     {
-                        s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        s.UrenportSelenium_ConChromeHeadless(dir2, DirChromeDriver, headless, dirbinary);
                         ClassFlexicapture.Log(idthread + " Bajado 1");
-                        s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver);
+                        s.CerealnetSelenium_ConChromeHeadless(dir2, DirChromeDriver, headless, dirbinary);
                         ClassFlexicapture.Log(idthread + " Bajado 2");
                     }
 
@@ -1572,7 +1576,7 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-        public static void  TandaNotificacionesCamiones(string SC, string scBdlMaster, string idthread)
+        public static void TandaNotificacionesCamiones(string SC, string scBdlMaster, string idthread)
         {
 
             try
@@ -1631,14 +1635,14 @@ FCESupport\FCESupportImpl.h, 42.
                         from x in db.CartasDePortes
                             //from c1 in db.Clientes.Where(c => c.IdCliente == x.Vendedor)
                             //from c2 in db.Clientes.Where(c => c.IdCliente == x.Entregador)
-                    where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
-                                && (usus.Contains(x.Vendedor ?? -1)
-                                        || usus.Contains(x.Entregador ?? -1)
-                                        || usus.Contains(x.CuentaOrden1 ?? -1)
-                                        || usus.Contains(x.CuentaOrden2 ?? -1)
-                                        || ususCorredores.Contains(x.Corredor ?? -1)
-                                    ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
-                               )
+                        where ((x.FechaModificacion ?? x.FechaArribo) > FechaNot
+                                    && (usus.Contains(x.Vendedor ?? -1)
+                                            || usus.Contains(x.Entregador ?? -1)
+                                            || usus.Contains(x.CuentaOrden1 ?? -1)
+                                            || usus.Contains(x.CuentaOrden2 ?? -1)
+                                            || ususCorredores.Contains(x.Corredor ?? -1)
+                                        ) // pero y si el cliente ya las vio?   UltimaFechaDeLoginDelCliente
+                                   )
                         select new int[] { x.Vendedor ?? -1, x.Entregador ?? -1, x.CuentaOrden1 ?? -1, x.CuentaOrden2 ?? -1, x.Corredor ?? -1 }
                         )
                         .SelectMany(x => x)
@@ -1703,8 +1707,8 @@ FCESupport\FCESupportImpl.h, 42.
 
 
 
-                
-               
+
+
             }
 
             catch (Exception x)

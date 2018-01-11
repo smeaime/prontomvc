@@ -237,7 +237,7 @@ Partial Class FacturaABM
     Sub BloqueosDeEdicion(ByVal myFactura As Pronto.ERP.BO.Factura)
 
 
-        If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+        If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()) .PuntoVentaAsociado > 0 Then
             Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
             If iisNull(pventa, 0) <> 0 Then
                 'NumeroPuntoVentaSegunSucursalWilliams                  () 

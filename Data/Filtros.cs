@@ -443,7 +443,7 @@ namespace Filtrador
 
 
 
-            
+
             string sqlquery = (oq).ToTraceString();
             var result = oq.ToTraceString();
             List<ObjectParameter> ps = oq.Parameters.ToList();
@@ -596,9 +596,42 @@ namespace Filtrador
             // to be able to use ToString() below which is NOT exist in the LINQ to Entity
 
 
-            List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
 
-            return pagedQuery;
+
+            try
+            {
+                List<T> pagedQuery = filteredQuery.OrderBy(sidx + " " + sord).Skip((page - 1) * rows).Take(rows).ToList();
+
+                return pagedQuery;
+            }
+            catch (Exception e)
+
+
+            {
+
+
+                //                arreglar el ErrHandlerParaData
+
+
+
+                //                        System.Data.Entity.Core.EntityCommandExecutionException: An error occurred while executing the command definition.
+                //                        See the inner exception for details. --->System.Data.SqlClient.SqlException: Incorrect syntax near OFFSET
+                //                          Invalid usage of the option NEXT in the FETCH statement.
+                //                          -Verificar que ProviderManifestToken del .EDMX está en 2008 (para que no use OFFSET)
+
+
+
+
+
+
+                throw;
+            }
+
+
+
+
+
+
 
             ////////////////////////////////////////////   FIN DE LO QUE HAY QUE COPIAR       ////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -975,4 +1008,101 @@ namespace Filtrador
 
         }
     }
+}
+
+
+
+
+
+
+
+
+public class ErrHandlerParaData
+{
+
+    /*
+
+  public static string WriteError(string errorMessage)
+  {
+
+
+          // http://www.dotnetcurry.com/ShowArticle.aspx?ID=94
+          string nombre;
+          string nombreLargo;
+          try
+          {
+              Console.WriteLine(errorMessage);
+              if ((System.Web.HttpContext.Current == null))
+              {
+                  // esta funcion tendr�a que recibir el DirApp?
+                  // Path.GetTempPath()
+                  object p = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                  nombre = ("\\Error\\"
+                              + (DateTime.Today.ToString("dd-MM-yy") + ".txt"));
+                  nombreLargo = (p + nombre);
+                  // Path.Combine(p, "AggregatorItems.xml")
+                  // Return Nothing 'donde escribo el archivo????????
+              }
+              else
+              {
+                  nombre = (DirectorioErrores
+                              + (DateTime.Today.ToString("dd-MM-yy") + ".txt"));
+                  nombreLargo = System.Web.HttpContext.Current.Server.MapPath(nombre);
+              }
+
+              if (!File.Exists(nombreLargo))
+              {
+                  try
+                  {
+                      File.Create(nombreLargo).Close();
+                  }
+                  catch (Exception ex)
+                  {
+                      // si no est� creado el directorio "Error", lo graba en el de la aplicacion, pero con hora, por si ya existe otro
+                      nombreLargo = System.Web.HttpContext.Current.Server.MapPath(("~/"
+                                      + (DateTime.Now.ToString + ".txt")));
+                      File.Create(nombreLargo).Close();
+                  }
+
+              }
+
+              Using;
+              ((StreamWriter)(w)) = File.AppendText(nombreLargo);
+              w.WriteLine((Constants.vbCrLf + "Log Entry : "));
+              w.WriteLine("{0}", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture));
+              string s = "";
+              try
+              {
+                  if (System.Web.HttpContext.Current)
+                  {
+                      IsNot;
+                      null;
+                      s = System.Web.HttpContext.Current.Request.Url.ToString();
+                  }
+
+              }
+              catch (Exception ex)
+              {
+              }
+
+              string err = ("Error in: "
+                          + (s + (". Error Message:" + errorMessage)));
+              w.WriteLine(err);
+              w.WriteLine("__________________________");
+              w.Flush();
+              w.Close();
+              Debug.Print(err);
+          }
+          catch (Exception ex)
+          {
+              // Excepci�n del tipo 'System.UnauthorizedAccessException'
+              return null;
+          }
+
+          return nombreLargo;
+      }
+
+
+}
+*/
 }

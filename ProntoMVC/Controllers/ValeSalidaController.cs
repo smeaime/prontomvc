@@ -80,7 +80,7 @@ namespace ProntoMVC.Controllers
 
         void CargarViewBag(ValesSalida o)
         {
-            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre",o.Aprobo);
+            ViewBag.Aprobo = new SelectList(db.Empleados, "IdEmpleado", "Nombre", o.Aprobo);
             ViewBag.IdObra = new SelectList(db.Obras, "IdObra", "NumeroObra", o.IdObra);
         }
 
@@ -280,8 +280,18 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "SolicitudMateriales.pdf");
         }
 
-        public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(List<int> idDetalleRequerimientos)
+
+
+
+
+
+        public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string idDetalleRequerimientosString)
         {
+
+            List<int> idDetalleRequerimientos = idDetalleRequerimientosString.Split(',').Select(Int32.Parse).ToList();
+
+
+            if (idDetalleRequerimientos == null) return null;
 
             var vale = new ValesSalida();
 
@@ -291,36 +301,39 @@ namespace ProntoMVC.Controllers
             {
                 var detvale = new DetalleValesSalida();
                 detvale.IdArticulo = detrm.IdArticulo;
+                detvale.Articulo = detrm.Articulo;
                 detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
                 detvale.Cantidad = detrm.Cantidad;
                 vale.DetalleValesSalidas.Add(detvale);
             }
 
             var data = (from a in vale.DetalleValesSalidas
-                        //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+                            //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                            //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleValeSalida,
                             a.IdValeSalida,
                             a.IdArticulo,
                             a.IdUnidad,
-                            a.ValesSalida.IdObra,
+                            IdObra=0,//a.ValesSalida.IdObra,
                             a.IdDetalleRequerimiento,
-                            a.ValesSalida.NumeroValeSalida,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            a.DetalleRequerimiento.NumeroItem,
+                            NumeroValeSalida=0,//  a.ValesSalida.NumeroValeSalida,
+                            NumeroRequerimiento= "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            NumeroItem= "", //a.DetalleRequerimiento.NumeroItem,
                             ArticuloCodigo = a.Articulo.Codigo,
                             ArticuloDescripcion = a.Articulo.Descripcion,
                             a.Cantidad,
                             Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
                             Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
-                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
-                            Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
+                            Entregado = "", //db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
+                            Pendiente = "", //(a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
                             a.Partida
                         }).OrderBy(p => p.IdDetalleValeSalida).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+
 
         public virtual JsonResult DetValesSalidaSinFormato(int? IdValeSalida, int? IdDetalleValeSalida)
         {
@@ -347,7 +360,7 @@ namespace ProntoMVC.Controllers
                             a.Cantidad,
                             Unidad = b != null ? b.Abreviatura : "",
                             Obra = c != null ? c.NumeroObra : "",
-                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida==a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
+                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
                             Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
                             a.Partida
                         }).OrderBy(p => p.IdDetalleValeSalida).ToList();
@@ -457,24 +470,24 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleValeSalida.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                   "<a href="+ Url.Action("Edit",new {id = a.IdValeSalida} ) + "  >Editar</>" ,
                                 a.IdDetalleValeSalida.NullSafeToString(),
-                                a.IdValeSalida.NullSafeToString(), 
-                                a.IdArticulo.NullSafeToString(), 
-                                a.NumeroValeSalida.NullSafeToString(), 
+                                a.IdValeSalida.NullSafeToString(),
+                                a.IdArticulo.NullSafeToString(),
+                                a.NumeroValeSalida.NullSafeToString(),
                                 a.FechaValeSalida == null || a.FechaValeSalida.ToString() == "" ? "" : Convert.ToDateTime(a.FechaValeSalida.NullSafeToString()).ToString("dd/MM/yyyy"),
-                                a.ArticuloCodigo.NullSafeToString(), 
-                                a.ArticuloDescripcion.NullSafeToString(), 
-                                a.Cantidad.NullSafeToString(), 
-                                a.Unidad.NullSafeToString(), 
-                                a.Entregado.NullSafeToString(), 
-                                a.Pendiente.NullSafeToString(), 
-                                a.Obra.NullSafeToString(), 
-                                a.Aprobo.NullSafeToString(), 
-                                a.Ubicacion.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(), 
-                                a.ObservacionesRM.NullSafeToString(), 
+                                a.ArticuloCodigo.NullSafeToString(),
+                                a.ArticuloDescripcion.NullSafeToString(),
+                                a.Cantidad.NullSafeToString(),
+                                a.Unidad.NullSafeToString(),
+                                a.Entregado.NullSafeToString(),
+                                a.Pendiente.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.Ubicacion.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.ObservacionesRM.NullSafeToString(),
                                 a.EquipoDestino.NullSafeToString()
                             }
                         }).ToArray()

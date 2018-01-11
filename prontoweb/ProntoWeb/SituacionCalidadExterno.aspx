@@ -2296,7 +2296,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         "<br/><b>Neto</b>  " + a.NetoPto +
                         "<br/><b>Arribo</b>  " + a.FechaArribo +
                         "<br/><b>Descarga</b>  " + a.FechaDescarga +
-                        "<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                        //"<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
                         "<span/>";
 
                     $("#" + subgrid_id).append(html);
