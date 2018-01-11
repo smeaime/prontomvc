@@ -2604,7 +2604,7 @@ Partial Class CartadeporteABMExternoMovil
                     '//////////////////////////////////////////////////
 
                     Dim ms, advertencias As String
-                    If CartaDePorteManager.IsValid(SC, myCartaDePorte, ms, advertencias) Then
+                    If CartaDePorteManager.IsValidCarta(SC, myCartaDePorte, ms, advertencias) Then
 
                         Dim b As Boolean = False
                         Try
