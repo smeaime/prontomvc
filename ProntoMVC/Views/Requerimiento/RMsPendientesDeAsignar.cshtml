@@ -3,7 +3,8 @@
         ViewBag.Title = "Requerimientos (pendientes)";
     }
 
-    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>    
+    <script src="@Url.Content("~/Scripts/ScriptRMsPendientesDeAsignar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ScriptValeSalida.js?1518")" type="text/javascript"></script>
 
     <div style=" padding-left: 15px;  padding-right: 15px ;">
         <div>
@@ -43,22 +44,50 @@
     </div>
 
     <div class="contextMenu" id="myMenu1" style="display:none">
-        <ul style="width: 400px">
+
+
+        <style>
+
+            .price-features li span {
+                padding: 0 0 0 0 !important;
+                border: 0;
+                display: block;
+                margin: 0 0 0 0;
+                height: 30px;
+            }
+
+        </style>
+
+
+        <ul style="width: 400px"  class="price-features">
             <li id="add">
                 @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
-                <span id="Vale" style="font-size:11px; font-family:Verdana">Generar Vale salida (stock)</span>
+                <span id="Vale" style="font-size:11px; height: 30px; font-family:Verdana">Generar Vale salida (stock)</span>
             </li>
             <li id="edit">
                 @*<span class="ui-icon ui-icon-pencil" style="float:left"></span>*@
-                <span id="ParaCompras" style="font-size:11px; font-family:Verdana">Liberar para Compras</span>
+                <span id="ParaCompras" style="font-size:11px; height: 30px; font-family:Verdana">Liberar para Compras</span>
             </li>
             <li id="del">
                 @*<span class="ui-icon ui-icon-trash" style="float:left"></span>*@
-                <span id="DarPorCumplido" style="font-size:11px; font-family:Verdana">Dar por cumplido</span>
+                <span id="DarPorCumplido" style="font-size:11px; height: 30px; font-family:Verdana">Dar por cumplido</span>
             </li>
         </ul>
     </div>
 
+
+    <style>
+
+
+
+        .ui-dialog-titlebar {
+            /*display: none;*/
+        }
+
+        .ui-dialog-content {
+            padding: 0 0 0 0;
+        }
+    </style>
     <div id="frmVale"></div>
 
     <script type="text/javascript">
@@ -66,69 +95,11 @@
 
     $(document).ready(function () {
 
-        $('#Vale').on('click', function () {
-            $("#frmVale").dialog({
-                autoOpen: true,
-                position: { my: "center", at: "100", of: window },
-                height: 800,
-                width: 1000,
-                resizable: true,
-                title: 'Vale',
-                modal: true,
-                open: function () {
-                    $("#frmVale").html("");
 
-                    var $grid = $("#ListaReq"), i, n;
-                    var ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
-                    if ((ListaReq == null) || (ListaReq.length == 0)) {
-                        ListaReq = [rowIdContextMenu];
-                        if ((ListaReq == null) || (ListaReq.length == 0)) {
-                            alert("No hay rms elegidas " + rowIdContextMenu);
-                            return;
-                        }
-                    }
 
-                    var ListaReq1 = "";
-                    for (i = 0, n = ListaReq.length; i < n; i++) {
-                        ListaReq1 = ListaReq1 + ListaReq[i] + ",";
-                    }
-                    if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
 
-<<<<<<< HEAD
-=======
 
-                    //$(this).load('@Url.Action("PartialPage1", "Requerimiento")');
->>>>>>> ac089a287aa9d8d474602fd1f3fb11dacf9cd039
-                    $.get('@Url.Action("PartialPage1", "Requerimiento")', { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
-                        try {
-                            $("#frmVale").html(partialView);
-                        }
-                        catch (err) {
-                        }
-                        inicializar();
 
-                        RefrescaAnchoJqgrids();
-                        deshabilitarPanelesDerecho();
-
-                        jQuery("#ListaReq").jqGrid().setGridParam({
-                            url: '@Url.Action("DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos", "ValeSalida")',
-                            data: { idDetalleRequerimientos: ListaReq }
-                        }).trigger("reloadGrid")
-
-                    });
-                },
-                buttons: {
-                    //"Add User": function () {
-                    //    //addUserInfo();
-                    //    $(this).dialog("close");
-                    //},
-                    "Cancelar": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-            return false;
-        });
 
         $("#Vale2").click(function () {
             var $grid = $("#ListaReq");
@@ -506,5 +477,4 @@
         pageLayout.hide('south');
     });
 
-</script>
-    
+    </script>

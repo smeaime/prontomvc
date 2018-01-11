@@ -48,7 +48,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-    <DataObjectAttribute()> _
+    <DataObjectAttribute()>
     Public Class EntidadManager
 
 
@@ -93,6 +93,7 @@ Namespace Pronto.ERP.Bll
 
 
 
+            'mail asincronico?
 
 
             De = De.Replace(";", ",")
@@ -546,8 +547,8 @@ Namespace Pronto.ERP.Bll
         'End Function
 
 
-        Public Shared Function LogPronto(ByVal SC As String, ByVal Id As Long, ByVal sTipoEntidadVARCHAR5 As String, Optional ByVal sNombreUsuario As String = "", _
-                                Optional str3 As String = "", Optional str4 As String = "", Optional str5 As String = "", _
+        Public Shared Function LogPronto(ByVal SC As String, ByVal Id As Long, ByVal sTipoEntidadVARCHAR5 As String, Optional ByVal sNombreUsuario As String = "",
+                                Optional str3 As String = "", Optional str4 As String = "", Optional str5 As String = "",
                                 Optional num1 As Integer = 0, Optional num2 As Integer = 0, Optional num3 As Integer = 0
                             )
 
@@ -569,9 +570,9 @@ Namespace Pronto.ERP.Bll
 
 
             Try
-                EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(Id <= 0, "ALTA", "MODIF"), _
+                EntidadManager.Tarea(SC, "Log_InsertarRegistro", IIf(Id <= 0, "ALTA", "MODIF"),
                               Id, 0, Now, 0, sTipoEntidadVARCHAR5,
-                              "", sNombreUsuario, str3, str4, str5, _
+                              "", sNombreUsuario, str3, str4, str5,
                             DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value, DBNull.Value,
                             num1, num2, num3, DBNull.Value, DBNull.Value)
 
@@ -704,18 +705,18 @@ Namespace Pronto.ERP.Bll
 
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetListCombo(ByVal SC As String, ByVal Tabla As String) As System.Data.DataSet
             Return GeneralDB.TraerDatos(SC, "w" & Tabla & "_TL")
         End Function
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetList(ByVal SC As String, ByVal Tabla As String, ByVal Parametros As Object) As System.Data.DataSet
             Return GeneralDB.TraerDatos(SC, "w" & Tabla & "_TT", Parametros)
         End Function
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
-        Public Shared Function TraerDatos(ByVal SC As String, ByVal Nombre As String, _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
+        Public Shared Function TraerDatos(ByVal SC As String, ByVal Nombre As String,
                     ByVal ParamArray Parametros() As Object) As System.Data.DataSet
             Return GeneralDB.TraerDatos(SC, Nombre, Parametros)
         End Function
@@ -723,14 +724,14 @@ Namespace Pronto.ERP.Bll
 
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function TraerFiltrado(ByVal SC As String, ByVal enumNombreSP_Completo As enumSPs, ByVal ParamArray Parametros() As Object) As System.Data.DataTable
             Return GeneralDB.TraerDatos(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
         End Function
 
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetListTX(ByVal SC As String, ByVal Tabla As String, ByVal TX As String, ByVal ParamArray Parametros() As Object) As System.Data.DataSet
             'Try
             'Return GeneralDB.TraerDatos(SC, "w" & Tabla & "_" & TX, Parametros)
@@ -741,12 +742,12 @@ Namespace Pronto.ERP.Bll
 
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetStoreProcedure(ByVal SC As String, ByVal enumNombreSP_Completo As enumSPs, ByVal ParamArray Parametros() As Object) As System.Data.DataTable
             Return GeneralDB.TraerDatos(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
         End Function
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetStoreProcedure(ByVal SC As String, ByVal sStoreProcedure As String, ByVal ParamArray Parametros() As Object) As System.Data.DataTable
 
             'Return GeneralDB.TraerDatos(SC, sStoreProcedure, Parametros).Tables(0)
@@ -809,7 +810,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetStoreProcedureTop1(ByVal SC As String, ByVal enumNombreSP_Completo As enumSPs, ByVal ParamArray Parametros() As Object) As System.Data.DataRow
             Dim d As DataTable = GeneralDB.TraerDatos(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
             If d.Rows.Count > 0 Then
@@ -820,7 +821,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetStoreProcedureTop1(ByVal SC As String, ByVal sStoreProcedure As String, ByVal ParamArray Parametros() As Object) As System.Data.DataRow
             Try
                 Dim dt = GeneralDB.TraerDatos(SC, sStoreProcedure, Parametros)
@@ -845,7 +846,7 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function ExecDinamico(ByVal SC As String, ByVal sComandoDinamico As String, Optional ByVal timeoutSegundos As Integer = 0) As System.Data.DataTable
 
 
@@ -976,7 +977,7 @@ Namespace Pronto.ERP.Bll
         End Function
 
 
-        <DataObjectMethod(DataObjectMethodType.Select, True)> _
+        <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function GetItem(ByVal SC As String, ByVal Tabla As String, ByVal Id As Integer) As System.Data.DataRow
             'Try
             ' Return GeneralDB.TraerDatos(SC, "w" & Tabla & "_T", CType(Id, Object)).Tables(0).Rows(0)
@@ -1376,8 +1377,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function CircuitoFirmasCompleto(ByVal SC As String, ByVal Comprobante As EnumFormularios, _
-                                              ByVal IdComprobante As Long, _
+        Public Shared Function CircuitoFirmasCompleto(ByVal SC As String, ByVal Comprobante As EnumFormularios,
+                                              ByVal IdComprobante As Long,
                                               Optional ByVal Importe As Double = Nothing) As Boolean
 
 
@@ -1691,7 +1692,7 @@ Salida:
 
                         If mresul Then
                             mcae = .FERespuestaDetalleCae
-                            mdescripcion = Chr(10) + "CAE: " + .FERespuestaDetalleCae + Chr(10) + "MOTIVO " + .FERespuestaDetalleMotivo + _
+                            mdescripcion = Chr(10) + "CAE: " + .FERespuestaDetalleCae + Chr(10) + "MOTIVO " + .FERespuestaDetalleMotivo +
                                            Chr(10) + "PROCESO " + .FERespuestaReproceso + Chr(10) + "NUMERO: " + Str(.FERespuestaDetalleCbt_desde)
                             With origen.Registro
                                 .Fields("CAE").Value = mcae
@@ -1828,11 +1829,11 @@ Salida:
                                         .bITEMpro_qty = ors.Fields("Cantidad").Value
                                         .bITEMpro_umed = 7
                                         .bITEMIva_id = 1
-                                        .bITEMimp_total = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) * _
-                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) * _
+                                        .bITEMimp_total = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) *
+                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) *
                                                                       (1 - (IIf(IsNull(ors.Fields("Bonificacion").Value), 0, ors.Fields("Bonificacion").Value) / 100)), 2)
-                                        .bITEMimp_bonif = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) * _
-                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) * _
+                                        .bITEMimp_bonif = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) *
+                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) *
                                                                       IIf(IsNull(ors.Fields("Bonificacion").Value), 0, ors.Fields("Bonificacion").Value) / 100, 2)
                                         mnumeroitem = mnumeroitem + 1
                                     End If
@@ -1858,7 +1859,7 @@ Salida:
 
                         If mresul Then
                             mcae = .bRespuestaCAE
-                            mdescripcion = Chr(10) + "CAE: " + .bRespuestaCAE + Chr(10) + "REPROCESO " + .bRespuestaReproceso + _
+                            mdescripcion = Chr(10) + "CAE: " + .bRespuestaCAE + Chr(10) + "REPROCESO " + .bRespuestaReproceso +
                                            Chr(10) + "Evento " + .bEventMsg + Chr(10) + "Observacion: " + .bRespuestaOBS
                             With origen.Registro
                                 .Fields("CAE").Value = mcae
@@ -1910,9 +1911,9 @@ Salida:
                     mpaisdestino = ors.Fields("PaisCodigo2").Value
                     mcuitpais = ors.Fields("CuitPais").Value
                     mcliente = IIf(IsNull(ors.Fields("RazonSocial").Value), "", ors.Fields("RazonSocial").Value)
-                    mdomicilio = IIf(IsNull(ors.Fields("Direccion").Value), "", ors.Fields("Direccion").Value & " ") & _
-                                IIf(IsNull(ors.Fields("Localidad").Value), "", ors.Fields("Localidad").Value & " ") & _
-                                IIf(IsNull(ors.Fields("Provincia").Value), "", ors.Fields("Provincia").Value & " ") & _
+                    mdomicilio = IIf(IsNull(ors.Fields("Direccion").Value), "", ors.Fields("Direccion").Value & " ") &
+                                IIf(IsNull(ors.Fields("Localidad").Value), "", ors.Fields("Localidad").Value & " ") &
+                                IIf(IsNull(ors.Fields("Provincia").Value), "", ors.Fields("Provincia").Value & " ") &
                                 IIf(IsNull(ors.Fields("Pais").Value), "", ors.Fields("Pais").Value)
                 End If
                 ors.Close()
@@ -2018,8 +2019,8 @@ Salida:
                                         .xITEMPro_qty = ors.Fields("Cantidad").Value
                                         .xITEMPro_umed = mUnidadesCodigoAFIP
                                         .xITEMPro_precio_uni = ors.Fields("PrecioUnitario").Value
-                                        .xITEMPro_precio_item = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) * _
-                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) * _
+                                        .xITEMPro_precio_item = Math.Round(IIf(IsNull(ors.Fields("Cantidad").Value), 0, ors.Fields("Cantidad").Value) *
+                                                                      IIf(IsNull(ors.Fields("PrecioUnitario").Value), 0, ors.Fields("PrecioUnitario").Value) *
                                                                       (1 - (IIf(IsNull(ors.Fields("Bonificacion").Value), 0, ors.Fields("Bonificacion").Value) / 100)), 2)
                                         mnumeroitem = mnumeroitem + 1
                                     End If
@@ -2036,7 +2037,7 @@ Salida:
 
                         If mresul Then
                             mcae = .xRespuestaCAE
-                            mdescripcion = Chr(10) + "CAE: " + .xRespuestaCAE + Chr(10) + "REPROCESO " + .xRespuestaReproceso + _
+                            mdescripcion = Chr(10) + "CAE: " + .xRespuestaCAE + Chr(10) + "REPROCESO " + .xRespuestaReproceso +
                                            Chr(10) + "Evento " + .xEventMsg + Chr(10) + "Observacion: " + .xRespuestaMotivos_obs
                             With origen.Registro
                                 .Fields("CAE").Value = mcae
@@ -2193,17 +2194,17 @@ Salida:
         End Function
 
 
-        Public Shared Function ImprimirWordDOT_VersionDLL(ByVal mPlantilla As String, _
-                                                          ByRef Yo As Object, _
-                                                          ByVal SC As String, _
-                                                          ByVal SessionDummy As Object, _
-                                                          ByRef ResponseDummy As Object, _
-                                                          ByVal Id As Long, _
-                                                          Optional ByVal Arg3 As Object = Nothing, _
-                                                          Optional ByVal Arg4 As Object = Nothing, _
-                                                          Optional ByVal Arg5 As Object = Nothing, _
-                                                          Optional ByVal outputFileName As String = "", _
-                                                          Optional ByVal Arg6 As Object = Nothing, _
+        Public Shared Function ImprimirWordDOT_VersionDLL(ByVal mPlantilla As String,
+                                                          ByRef Yo As Object,
+                                                          ByVal SC As String,
+                                                          ByVal SessionDummy As Object,
+                                                          ByRef ResponseDummy As Object,
+                                                          ByVal Id As Long,
+                                                          Optional ByVal Arg3 As Object = Nothing,
+                                                          Optional ByVal Arg4 As Object = Nothing,
+                                                          Optional ByVal Arg5 As Object = Nothing,
+                                                          Optional ByVal outputFileName As String = "",
+                                                          Optional ByVal Arg6 As Object = Nothing,
                                                           Optional ByVal Arg7 As Object = Nothing) As String
 
             If Id < 1 Then Return Nothing
@@ -2275,8 +2276,8 @@ Salida:
                 Try
                     oDoc = oW.Documents.Add(plant)
                 Catch ex As Exception
-                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
-                                          "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
+                                          "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
                 End Try
@@ -2285,8 +2286,8 @@ Salida:
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                     'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                     'http://forums.asp.net/t/1232621.aspx
-                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
-                                          "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
+                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " &
+                                          "esté mal el impersonate (no dejarlo en true vacío, ponerle el " &
                                           "usuario y el pass) " & IsNothing(oW) & "  Plantilla: " & plant & "")
 
                     'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
@@ -2373,9 +2374,9 @@ Salida:
                         'verificar q la ruta existe, sino se queda muy colgado
                         .SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
                     Catch ex As Exception
-                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
-                            "Tiró 'El comando falló' o 'Command fail'? " & _
-                            "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
+                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message &
+                            "Tiró 'El comando falló' o 'Command fail'? " &
+                            "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" &
                             "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
                         Throw
                     End Try
@@ -2387,13 +2388,13 @@ Salida:
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
             Catch ex As Exception
-                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
-                "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
-                "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
-                ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
-                " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " & _
-                " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " & _
-                " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " & _
+                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf &
+                "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " &
+                "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " &
+                ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " &
+                " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " &
+                " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " &
+                " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " &
                 " una llamada a Emision, es que ni siquiera se lo pudo llamar")
 
                 'MsgBoxAjax(Yo, ex.Message & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
@@ -2438,17 +2439,17 @@ Salida:
 
         End Function
 
-        Public Shared Function ImprimirWordDOT_VersionDLL_PDF(ByVal mPlantilla As String, _
-                                                              ByRef Yo As Object, _
-                                                              ByVal SC As String, _
-                                                              ByVal SessionDummy As Object, _
-                                                              ByRef ResponseDummy As Object, _
-                                                              ByVal Id As Long, _
-                                                              Optional ByVal Arg3 As Object = Nothing, _
-                                                              Optional ByVal Arg4 As Object = Nothing, _
-                                                              Optional ByVal Arg5 As Object = Nothing, _
-                                                              Optional ByVal outputFileName As String = "", _
-                                                              Optional ByVal Arg6 As Object = Nothing, _
+        Public Shared Function ImprimirWordDOT_VersionDLL_PDF(ByVal mPlantilla As String,
+                                                              ByRef Yo As Object,
+                                                              ByVal SC As String,
+                                                              ByVal SessionDummy As Object,
+                                                              ByRef ResponseDummy As Object,
+                                                              ByVal Id As Long,
+                                                              Optional ByVal Arg3 As Object = Nothing,
+                                                              Optional ByVal Arg4 As Object = Nothing,
+                                                              Optional ByVal Arg5 As Object = Nothing,
+                                                              Optional ByVal outputFileName As String = "",
+                                                              Optional ByVal Arg6 As Object = Nothing,
                                                               Optional ByVal Arg7 As Object = Nothing) As String
 
             If Id < 1 Then Return Nothing
@@ -2524,12 +2525,12 @@ Salida:
                     oW = CreateObject("Word.Application")
                     oW.Visible = False
                 Catch ex As Exception
-                    ErrHandler2.WriteError(ex.Message & "Explota al crear el word.Application. Verificar permisos) " & _
-                        " 8)	Habilitar permisos para Interop Office (en IIS7 en lugar de usar la cuenta 'Network Service'  usa() 'IIS APPPOOL\DefaultAppPool') " & _
-                        "a.	1. In DCOMCNFG, right click on the My Computer and select properties.  " & _
-                        "b.	2. Choose the COM Securities tab " & _
-                        "c.	3. In Access Permissions, click 'Edit Defaults' and add 'Network Service' (o 'Servicio de red',  o la 'IIS APPPOOL\DefaultAppPool' si usa II7 ) to it and give it 'Allow local access' permission. Do the same for <Machine_name>\Users. " & _
-                        "d.	4. In launch and Activation Permissions, click 'Edit Defaults' and add Network Service to it and give it 'Local launch' and 'Local Activation' permission. Do the same for <Machine_name>\Users " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota al crear el word.Application. Verificar permisos) " &
+                        " 8)	Habilitar permisos para Interop Office (en IIS7 en lugar de usar la cuenta 'Network Service'  usa() 'IIS APPPOOL\DefaultAppPool') " &
+                        "a.	1. In DCOMCNFG, right click on the My Computer and select properties.  " &
+                        "b.	2. Choose the COM Securities tab " &
+                        "c.	3. In Access Permissions, click 'Edit Defaults' and add 'Network Service' (o 'Servicio de red',  o la 'IIS APPPOOL\DefaultAppPool' si usa II7 ) to it and give it 'Allow local access' permission. Do the same for <Machine_name>\Users. " &
+                        "d.	4. In launch and Activation Permissions, click 'Edit Defaults' and add Network Service to it and give it 'Local launch' and 'Local Activation' permission. Do the same for <Machine_name>\Users " &
                         "e.	Press OK and thats it. i can run my application now. ")
 
                     Throw
@@ -2543,8 +2544,8 @@ Salida:
                 Try
                     oDoc = oW.Documents.Add(plant)
                 Catch ex As Exception
-                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " & _
-                                          "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " & _
+                    ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
+                                          "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
                 End Try
@@ -2553,18 +2554,18 @@ Salida:
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
                     'http://social.msdn.microsoft.com/Forums/en/vbgeneral/thread/5deb3d3a-552c-4dfd-8d94-236b8a441daf
                     'http://forums.asp.net/t/1232621.aspx
-                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " & _
-                                            "esté mal el impersonate (no dejarlo en true vacío, ponerle el " & _
-                                            "usuario y el pass)  " & _
-                                            " no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " & _
-                                            "            NetworkService por la de Administrador para sacarte los problemas del Interop de Office  " & _
-                                            "1 metete en el administrador del iis " & _
-                                            "2 en los grupos de aplicaciones " & _
-                                            "3 elegi el grupo que este usando el sitio " & _
-                                            "4 y en configuracion avanzada " & _
-                                            "5:                  elegi 'Identidad' " & _
-                                            "6:                  cuenta personalizada " & _
-                                            "7 y asignale algun usuario con permisos de administrador " & _
+                    ErrHandler2.WriteError("!!!! ALERTA !!!! ALERTA !!!!!!!!!!! oDoc está en NOTHING!!! Muy probable que " &
+                                            "esté mal el impersonate (no dejarlo en true vacío, ponerle el " &
+                                            "usuario y el pass)  " &
+                                            " no impersones desde el web.config, hacelo en el IIS con el ApplicationPool correspondiente, y cambiale la cuenta de  " &
+                                            "            NetworkService por la de Administrador para sacarte los problemas del Interop de Office  " &
+                                            "1 metete en el administrador del iis " &
+                                            "2 en los grupos de aplicaciones " &
+                                            "3 elegi el grupo que este usando el sitio " &
+                                            "4 y en configuracion avanzada " &
+                                            "5:                  elegi 'Identidad' " &
+                                            "6:                  cuenta personalizada " &
+                                            "7 y asignale algun usuario con permisos de administrador " &
                                              IsNothing(oW) & "  Plantilla: " & plant)
 
                     'Parece ser que puede ser por el impersonate… ERA ESO!!!! No me dejaba poner el 
@@ -2656,9 +2657,9 @@ Salida:
                         'verificar q la ruta existe, sino se queda muy colgado
                         .SaveAs(output, wrdFormatDocument) 'adherir extension ".doc"
                     Catch ex As Exception
-                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message & _
-                            "Tiró 'El comando falló' o 'Command fail'? " & _
-                            "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" & _
+                        ErrHandler2.WriteError("Explotó el .SaveAs()  " & IsNothing(oDoc) & " " & output & " " & wrdFormatDocument & ex.Message &
+                            "Tiró 'El comando falló' o 'Command fail'? " &
+                            "Revisá http://social.msdn.microsoft.com/Forums/en/netfx64bit/thread/65a355ce-49c1-47f1-8c12-d9cf5f23c53e" &
                             "y http://support.microsoft.com/default.aspx?scid=kb;EN-US;244264")
                         Throw
                     End Try
@@ -2670,13 +2671,13 @@ Salida:
                 'ProntoFuncionesUIWeb.Current_Alert("Ahora se va a transmitir")
 
             Catch ex As Exception
-                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf & _
-                "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " & _
-                "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " & _
-                ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " & _
-                " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " & _
-                " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " & _
-                " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " & _
+                ErrHandler2.WriteError(ex.Message & " Archivo Plantilla: " & plant & vbCrLf &
+                "Figura en el log una llamada a Emision() o explotó antes? Verificar que la DLL ComPronto esté bien referenciada en la " &
+                "plantilla. no solamente basta con ver que esten bien las referencias! A veces, aunque figuren bien " &
+                ", el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la llamada a Emision , o " &
+                " que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), " &
+                " o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se " &
+                " llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro. Si no figura en el log " &
                 " una llamada a Emision, es que ni siquiera se lo pudo llamar")
 
                 'MsgBoxAjax(Yo, ex.Message & ". Verificar que la DLL ComPronto esté bien referenciada en la plantilla, o que la macro no está explotando por las suyas (dentro de la ejecucion normal, algun campo sin llenar), o esté bien puesta la ruta a la plantilla, o habilitadas las macros. Ejecutar la misma linea con que se llamó en Word, y ver si no está explotando dentro de la ejecucion normal de la macro")
@@ -2753,13 +2754,13 @@ Salida:
             'hago un UNION de las facturas anuladas y de las notas de credito
             '-no, las de nota de credito ya no se liberan automaticamente. Quedan imputadas y se liberan explicitamente.
 
-            Dim s1 = _
-        " select idcartadeporte,idfacturaimputada from  cartasdeporte " & _
-        " where idfacturaimputada in   " & _
-        "		(                    " & _
-        "            select idfactura from facturas " & _
-        "                where ANULADA='SI' and  " & _
-        "                LEFT(CAST(Observaciones AS nvarchar(100)),23) <>' -- NO LIBERAR CDPS -- '  " & _
+            Dim s1 =
+        " select idcartadeporte,idfacturaimputada from  cartasdeporte " &
+        " where idfacturaimputada in   " &
+        "		(                    " &
+        "            select idfactura from facturas " &
+        "                where ANULADA='SI' and  " &
+        "                LEFT(CAST(Observaciones AS nvarchar(100)),23) <>' -- NO LIBERAR CDPS -- '  " &
         "       )"
 
             Dim dt As DataTable = EntidadManager.ExecDinamico(SC, s1)
@@ -2784,14 +2785,14 @@ Salida:
 
 
 
-                Dim strsql = _
-        " update cartasdeporte " & _
-        " set IdFacturaImputada = 0" & _
-        " where idfacturaimputada in   " & _
-        "		(                    " & _
-        "            select idfactura from facturas " & _
-        "                where ANULADA='SI' and  " & _
-        "                LEFT(CAST(Observaciones AS nvarchar(100)),23) <>' -- NO LIBERAR CDPS -- '  " & _
+                Dim strsql =
+        " update cartasdeporte " &
+        " set IdFacturaImputada = 0" &
+        " where idfacturaimputada in   " &
+        "		(                    " &
+        "            select idfactura from facturas " &
+        "                where ANULADA='SI' and  " &
+        "                LEFT(CAST(Observaciones AS nvarchar(100)),23) <>' -- NO LIBERAR CDPS -- '  " &
         "       )"
                 EntidadManager.ExecDinamico(SC, strsql)
 
@@ -2807,10 +2808,10 @@ Salida:
             'hacer tambien el update de buques
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
-            Dim buques As List(Of CartasPorteMovimiento) = (From i In db.CartasPorteMovimientos _
-                         Join f In db.linqFacturas On i.IdFacturaImputada Equals f.IdFactura _
-                         Where f.Anulada = "SI" _
-                         Select i).ToList
+            Dim buques As List(Of CartasPorteMovimiento) = (From i In db.CartasPorteMovimientos
+                                                            Join f In db.linqFacturas On i.IdFacturaImputada Equals f.IdFactura
+                                                            Where f.Anulada = "SI"
+                                                            Select i).ToList
             ' And i.Anulada <> "SI" _
 
             For Each b As CartasPorteMovimiento In buques
@@ -2861,10 +2862,10 @@ Salida:
 
             Dim db As New LinqCartasPorteDataContext(Encriptar(SC))
 
-            Dim listaCartasImputadasAlaFactura As IQueryable(Of CartasDePorte) = From e In db.CartasDePortes _
-                                          Where e.IdFacturaImputada = IdFactura _
-                                          Order By e.NumeroCartaDePorte Ascending _
-                                          Select e
+            Dim listaCartasImputadasAlaFactura As IQueryable(Of CartasDePorte) = From e In db.CartasDePortes
+                                                                                 Where e.IdFacturaImputada = IdFactura
+                                                                                 Order By e.NumeroCartaDePorte Ascending
+                                                                                 Select e
 
             Return listaCartasImputadasAlaFactura.ToList
 
@@ -2881,7 +2882,7 @@ Salida:
         Private key() As Byte = {}
         Private IV() As Byte = {&H12, &H34, &H56, &H78, &H90, &HAB, &HCD, &HEF}
 
-        Public Function Decrypt(ByVal stringToDecrypt As String, _
+        Public Function Decrypt(ByVal stringToDecrypt As String,
             ByVal sEncryptionKey As String) As String
             Dim inputByteArray(stringToDecrypt.Length) As Byte
             Try
@@ -2889,7 +2890,7 @@ Salida:
                 Dim des As New DESCryptoServiceProvider()
                 inputByteArray = Convert.FromBase64String(stringToDecrypt)
                 Dim ms As New MemoryStream()
-                Dim cs As New CryptoStream(ms, des.CreateDecryptor(key, IV), _
+                Dim cs As New CryptoStream(ms, des.CreateDecryptor(key, IV),
                     CryptoStreamMode.Write)
                 cs.Write(inputByteArray, 0, inputByteArray.Length)
                 cs.FlushFinalBlock()
@@ -2900,15 +2901,15 @@ Salida:
             End Try
         End Function
 
-        Public Function Encrypt(ByVal stringToEncrypt As String, _
+        Public Function Encrypt(ByVal stringToEncrypt As String,
             ByVal SEncryptionKey As String) As String
             Try
                 key = System.Text.Encoding.UTF8.GetBytes(Left(SEncryptionKey, 8))
                 Dim des As New DESCryptoServiceProvider()
-                Dim inputByteArray() As Byte = Encoding.UTF8.GetBytes( _
+                Dim inputByteArray() As Byte = Encoding.UTF8.GetBytes(
                     stringToEncrypt)
                 Dim ms As New MemoryStream()
-                Dim cs As New CryptoStream(ms, des.CreateEncryptor(key, IV), _
+                Dim cs As New CryptoStream(ms, des.CreateEncryptor(key, IV),
                     CryptoStreamMode.Write)
                 cs.Write(inputByteArray, 0, inputByteArray.Length)
                 cs.FlushFinalBlock()
@@ -3006,8 +3007,14 @@ Salida:
                         File.Create(nombreLargo).Close()
                     Catch ex As Exception
                         'si no está creado el directorio "Error", lo graba en el de la aplicacion, pero con hora, por si ya existe otro
-                        nombreLargo = System.Web.HttpContext.Current.Server.MapPath("~/" & DateTime.Now.ToString & ".txt")
-                        File.Create(nombreLargo).Close()
+
+
+                        If System.Web.HttpContext.Current IsNot Nothing Then
+                            nombreLargo = System.Web.HttpContext.Current.Server.MapPath("~/" & DateTime.Now.ToString & ".txt")
+                            File.Create(nombreLargo).Close()
+                        Else
+                            Return Nothing
+                        End If
                     End Try
                 End If
 

@@ -1,0 +1,270 @@
+
+Log Entry : 
+12/12/2017 14:13:09
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 14:46:56
+Error in: . Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en LogicaFacturacion.LeyendaSyngenta(Int32 idfactura, String SC) en C:\Users\Mariano\Documents\pronto\BussinessLogic\LogicaFacturacion.vb:línea 5421
+EntityFramework
+__________________________
+
+Log Entry : 
+12/12/2017 14:46:56
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ObservacionesAFIP'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+ClientConnectionId:db97e958-8f29-43af-941a-144d62c4a95f
+Error Number:207,State:1,Class:16
+__________________________
+
+Log Entry : 
+12/12/2017 14:46:56
+Error in: . Error Message:2343
+__________________________
+
+Log Entry : 
+12/12/2017 14:46:56
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 14:47:15
+Error in: . Error Message:No se está eligiendo bien el sincroBTG
+__________________________
+
+Log Entry : 
+12/12/2017 14:51:29
+Error in: . Error Message:System.Data.Entity.Core.EntityCommandExecutionException
+An error occurred while executing the command definition. See the inner exception for details.
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+   en System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__2()
+   en System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass3.<GetResults>b__1()
+   en System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   en System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   en System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   en System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__1[TResult](IEnumerable`1 sequence)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   en System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
+   en System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   en System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   en LogicaFacturacion.LeyendaSyngenta(Int32 idfactura, String SC) en C:\Users\Mariano\Documents\pronto\BussinessLogic\LogicaFacturacion.vb:línea 5421
+EntityFramework
+__________________________
+
+Log Entry : 
+12/12/2017 14:51:29
+Error in: . Error Message:System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ObservacionesAFIP'.
+   en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   en System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   en System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   en System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
+ClientConnectionId:29c0e265-3a5f-4d27-a0a5-d0b60791e515
+Error Number:207,State:1,Class:16
+__________________________
+
+Log Entry : 
+12/12/2017 14:51:29
+Error in: . Error Message:2343
+__________________________
+
+Log Entry : 
+12/12/2017 14:51:29
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 14:51:31
+Error in: . Error Message:No se está eligiendo bien el sincroBTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:07:38
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:07:41
+Error in: . Error Message:No se está eligiendo bien el sincroBTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:10:13
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:10:16
+Error in: . Error Message:No se está eligiendo bien el sincroBTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:10:58
+Error in: . Error Message:Generando sincro para BTG
+__________________________
+
+Log Entry : 
+12/12/2017 15:17:49
+Error in: . Error Message:Generando sincro para BTG PACTUAL[BIT]
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:09
+Error in: . Error Message:Generando sincro para BTG PACTUAL [BIT]
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino VILLA LIA 
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino COLOMBRES
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino PTA SERGRAIN SA - Baradero
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino MOLINO JUAN SEMINO SA ( CARCARANA )
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino GUIDE SA
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino General Lagos - Universal Grain
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino TANDIL - LAGOMARSINO
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino MOLINO ARRECIFES
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino TRES ARROYOS - MONDELEZ
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino GENERAL D. CERRI
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino ACOND. CLES. BAHIA SA
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino PUERTO GRANEL SA
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino BRANDSEN - Miralejos
+__________________________
+
+Log Entry : 
+12/12/2017 15:19:46
+Error in: . Error Message:Falta el codigo ONCCA para el destino Cia. Molinera del Sur
+__________________________
+
+Log Entry : 
+12/12/2017 16:58:10
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalDelete(String path, Boolean checkHost)
+   en System.IO.File.Delete(String path)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\Users\Mariano\Documents\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 7961
+mscorlib
+__________________________
+
+Log Entry : 
+12/12/2017 17:03:57
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalDelete(String path, Boolean checkHost)
+   en System.IO.File.Delete(String path)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\Users\Mariano\Documents\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 7961
+mscorlib
+__________________________
+
+Log Entry : 
+12/12/2017 17:04:30
+Error in: . Error Message:System.IO.FileNotFoundException: No se pudo encontrar el archivo 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'.
+Nombre de archivo: 'C:\bdl\pronto\prontoweb\Temp\Pegatinas\urenport.xls'
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.File.InternalMove(String sourceFileName, String destFileName, Boolean checkHost)
+   en System.IO.File.Move(String sourceFileName, String destFileName)
+   en ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) en C:\Users\Mariano\Documents\pronto\InterfazFlexicapture\prontoflexicapture.cs:línea 8018
+__________________________

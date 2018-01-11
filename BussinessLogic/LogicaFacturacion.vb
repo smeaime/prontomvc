@@ -3048,7 +3048,7 @@ Public Class LogicaFacturacion
                                                       , .Destino = If(c.IdDestino, -1),
                                                 .Titular = If(c.IdTitular, -1),
                                             .Entregador = If(c.IdDestinatario, -1),
-                                            .NetoFinalIncluyendoMermas = c.KgNetos,
+                                            .NetoFinalAntesDeRestarMermas = c.KgNetos,
                                                     .TarifaCobradaAlCliente = c.TarifaFacturada,
                                                     .Corredor = If(c.IdCorredor, -1),
                                                          .CuentaOrden1 = If(c.IdIntermediario, -1),
@@ -4562,7 +4562,7 @@ Public Class LogicaFacturacion
 
                             .Destino = i.Destino
                             .IdArticulo = i.IdArticulo
-                            .NetoFinalIncluyendoMermas = i.NetoFinal
+                            .NetoFinalAntesDeRestarMermas = i.NetoFinal
                             .AgregaItemDeGastosAdministrativos = (i.AgregaItemDeGastosAdministrativos.ToString = "SI")
 
                             .FechaDescarga = i.FechaDescarga
@@ -5032,8 +5032,8 @@ Public Class LogicaFacturacion
                 Select New grup With {
                         .cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = -1,
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
         ElseIf optFacturarA >= 4 And agruparArticulosPor = "Destino+Destinatario" Then
@@ -5044,8 +5044,8 @@ Public Class LogicaFacturacion
                 Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                      & SEPAR & NombreCliente(SC, Entregador),
-                                     .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                     .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                    .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
         ElseIf optFacturarA >= 4 And agruparArticulosPor = "Destino+Titular" Then
@@ -5055,8 +5055,8 @@ Public Class LogicaFacturacion
                 Select New With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular,
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                                  & SEPAR & NombreCliente(SC, Titular),
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
 
@@ -5072,8 +5072,8 @@ Public Class LogicaFacturacion
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & sBusqueda _
                                         & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2,
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
         ElseIf optFacturarA <> 3 And agruparArticulosPor = "Destino+RComercial/Interm+Destinat(CANJE)" Then
@@ -5088,8 +5088,8 @@ Public Class LogicaFacturacion
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & sBusqueda _
                                         & SEPAR & NombreCliente(SC, Entregador) & Space(80) & "    __" & CuentaOrden1 & " " & CuentaOrden2,
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
 
@@ -5102,8 +5102,8 @@ Public Class LogicaFacturacion
                                 .ObservacionItem = TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino) _
                                         & SEPAR & NombreCliente(SC, Titular) _
                                         & SEPAR & NombreCliente(SC, Entregador),
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
 
@@ -5116,8 +5116,8 @@ Public Class LogicaFacturacion
                 Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = -1, .Titular = Titular,
                                 .ObservacionItem = NombreCliente(SC, Titular) _
                                         & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
 
         ElseIf optFacturarA = 1 Then
@@ -5128,8 +5128,8 @@ Public Class LogicaFacturacion
                 Select New grup With {.cartas = Group, .IdArticulo = IdArticulo, .Destino = Destino, .Entregador = Entregador, .Titular = -1,
                                       .ObservacionItem = NombreCliente(SC, Entregador) _
                                                     & SEPAR & TablaSelect(SC, "Descripcion", "WilliamsDestinos", "IdWilliamsDestino", Destino),
-                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000),
-                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalIncluyendoMermas / 1000 * i.TarifaCobradaAlCliente)
+                                .NetoFinal = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000),
+                                .total = Group.Sum(Function(i As Pronto.ERP.BO.CartaDePorte) i.NetoFinalAntesDeRestarMermas / 1000 * i.TarifaCobradaAlCliente)
                              }
             '                                   , .cartas = Group.Select(Function(c) c.Id) _
 

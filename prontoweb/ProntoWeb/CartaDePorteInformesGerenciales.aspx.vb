@@ -115,6 +115,7 @@ Partial Class CartaDePorteInformesGerenciales
     End Sub
 
 
+
     Sub BloqueosDeEdicion()
         '////////////////////////////////////////////
         '////////////////////////////////////////////
@@ -126,9 +127,9 @@ Partial Class CartaDePorteInformesGerenciales
         Dim p = BDLmasterPermisosManager.Fetch(ConexBDLmaster, Session(SESSIONPRONTO_UserId), BDLmasterPermisosManager.EntidadesPermisos.CDPs_Facturacion)
 
 
-        Dim admins = New String() {"mariano", "andres", "hwilliams", "twilliams2"}
+        Dim admins = New String() {"mariano", "hwilliams", "twilliams2"}
         'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=21999
-        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "mgarcia2", "jtropea2"}
+        Dim encargados = New String() {"cflores", "dberzoni", "gradice", "mcabrera", "lcesar", "jtropea", "mgarcia", "mgarcia2", "jtropea2", "andres"}
 
         If Not admins.Union(encargados).Contains(Session(SESSIONPRONTO_UserName).ToString().ToLower()) Then
             MsgBoxAjaxAndRedirect(Me, "No tenés acceso a esta página", String.Format("Principal.aspx"))
@@ -432,7 +433,7 @@ Partial Class CartaDePorteInformesGerenciales
         cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
         cmbPuntoVenta.SelectedIndex = 0
 
-        If EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado > 0 Then
+        If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()) .PuntoVentaAsociado > 0 Then
             Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
             BuscaTextoEnCombo(cmbPuntoVenta, pventa)
             If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
