@@ -83,7 +83,8 @@ namespace ProntoMVC.Controllers
             }
             else
             {
-                o = db.Facturas.Include(x => x.DetalleFacturas).Include(x => x.Cliente).SingleOrDefault(x => x.IdFactura == id);
+                //o = db.Facturas.Include(x => x.DetalleFacturas).Include(x => x.Cliente).SingleOrDefault(x => x.IdFactura == id);
+                o = db.Facturas.Find(id);
                 CargarViewBag(o);
                 Session.Add("Factura", o);
                 return View(o);

@@ -3,25 +3,17 @@
     ViewBag.Title = "Pedido " + ((Model.IdPedido <= 0) ? "Nuevo" : Model.NumeroPedido.NullSafeToString()); ;
 }
 
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formid" }))
 {
-
     @Html.ValidationSummary(true)
 
     <script src="@Url.Content("~/Scripts/ScriptPedido.js?1529")" type="text/javascript"></script>       @*aparentemente tengo que llamarla despues de cargar las div*@
 
     <script>
-
         function deshabilitar() {
-
             // $("*").attr("disabled", "disabled");
             $("#formid *").not("#Lista").not(".ui-jqgrid").not("#lImprimir").not("#anular").not("#AnularFirmas").attr("disabled", "disabled");
-
-
             // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
-
-
             $.blockUI.defaults.css.cursor = 'default';
             $.blockUI.defaults.overlayCSS.cursor = 'default';
 
@@ -30,10 +22,6 @@
             //                    message: "", //"<h1>Being processed...</h1>",
             //                    css: { border: "3px solid #a00" }
             //                });
-
-
-
-
 
             $("#Lista").block({ // para que solo bloquee el contenido y me deje scrollear, saqué el 'closest'
                 message: "", //"<h1>Being processed...</h1>",
@@ -78,9 +66,6 @@
                 }
             });
             //panelLayout(""
-
-
-
         }
     </script>
 
@@ -90,8 +75,6 @@
             vertical-align: middle !important;
         }
     </style>
-
-
 
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
         <div class="modal" id="loading">
@@ -119,6 +102,7 @@
         </style>
         <style>
             .ui-jqgrid tr.footrow-ltr td {
+                font-weight: bold;
                 border-right-color: transparent !important;
                 border: 0 transparent !important;
             }
@@ -152,51 +136,6 @@
                 margin-right: 0px;
             }
         </style>
-        @if (false)
-        {
-
-            <style>
-                /* jqGrid builds some additional divs over the main grid table. The outer div has the class ui-jqgrid. So if you need to remove right and left border existing over the whole grid you can use the following CSS: */
-
-                .ui-jqgrid {
-                    border-right-width: 0px;
-                    border-left-width: 0px;
-                }
-
-                    /* If you need to remove all grid's borders you can use
-
-                .ui-jqgrid { border-width: 0px; }
-                If you want additionally remove vertical border between the cells in the grid you can use */
-
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-
-
-
-
-                    /*To remove horizontal border between the rows you can use */
-
-                    .ui-jqgrid tr.ui-row-ltr td {
-                        /* border-right-color: transparent; */
-                        border-right-color: #E4E4E4;
-                    }
-                /*To remove vertical borders between the column headers you can use */
-
-                th.ui-th-column {
-                    /*    border-right-color: transparent !important; */
-                    border-right-color: rgb(234, 234, 234) !important;
-                }
-                /* or alternatively (without the usage of !important) */
-
-                .ui-jqgrid-labels .ui-th-column {
-                    /* border-right-color: transparent;*/
-                    border-right-color: #E4E4E4;
-                }
-            </style>
-        }
         <style>
             /*  http://stackoverflow.com/questions/13103544/how-to-restrict-jqgrid-textarea-height-in-grid-only */
             tr.jqgrow > td.textInDiv > div {
@@ -212,9 +151,6 @@
             }
         </style>
 
-
-
-
         <form class="form-horizontal">
             <div id="cuerpomaspie" class="" style="padding-bottom:2px; position: relative;  " @*Height of the footer *@>
                 <div id="conscroll" style="height: 600px; margin-bottom: 40px; overflow-y: scroll;
@@ -224,12 +160,8 @@
                     @*  <div class="span12">
                         </div>*@
                     <div class="row-fluid" style="margin-bottom: 15px; margin-top: 5px;">
-
                         <div class="span6">
-                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400;
-                            text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
-
-
+                            <div class="" style='font-size: 34px; margin-top: 5px; height: 45px; font-weight: 400; text-shadow: 0 1px 0  lightgray; font-family: "Segoe UI Web Regular", "Segoe UI", "Lucida", Tahoma, Arial,"sans-serif"'>
                                 <span class="span1" style="padding-top: 15px; width: 110px">Pedido </span>
                                 @Html.TextBoxFor(model => model.NumeroPedido, new { style = "height: 50px ;  font-weight: 400; text-shadow: 0 1px 0  lightgray; font-size: 34px; border: 0; padding: 0 ; text-align: right; background: transparent;  font-family: 'Segoe UI Web Regular', 'Segoe UI', 'Lucida', Tahoma, Arial,'sans-serif';                    -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;                   ", @class = "span3", @readonly = "readonly" })
                                 <span class="" style="padding-top: 15px; width: 10px">/ </span>
@@ -241,20 +173,18 @@
                         </div>
                         <script>
                             $(function () {
-
                                 function resizeInput() {
                                     // $(this).attr('size', $(this).val().length + 2);
                                     $(this).css('width', $(this).val().length * 32);
                                 }
 
-
                                 $('#SubNumero').keyup(resizeInput).each(resizeInput);
 
                                 $('#NumeroPedido').css('width', $('#NumeroPedido').val().length * 21);
-
                             })
                         </script>
                     </div>
+
                     <div class="accordion" id="accordionA">
                         <div class="accordion-group  accordion-caret " style="border: 0px; padding: 0px;">
                             <div class="accordion-heading" style="border: 0px; padding: 0px;">
@@ -280,23 +210,13 @@
                                                     dateFormat: 'dd/mm/yy'
                                                     //numberOfMonths: 2,
                                                 });
-
-
-
                                             </script>
                                         </div>
                                         <!--/span-->
-                                        @*   <div class="span1 lightblue">
-                                                @Html.HiddenFor(model => model.IdProveedor)
-                                                @Html.LabelFor(model => model.Proveedor.CodigoProveedor, "Codigo")
-                                                @Html.TextBoxFor(m => m.Proveedor.CodigoProveedor, new { id = "CodigoProveedor", @class = "span12" })
-                                            </div>*@
-                                        <div class="span9 lightblue">
+                                        <div class="span5 lightblue">
                                             @Html.LabelFor(model => model.IdProveedor, "Proveedor") @*para que quede el espacio*@
                                             @Html.TextBoxFor(m => m.Proveedor.RazonSocial, new { id = "DescripcionProveedor", @class = "span12" })
                                             <script type="text/jscript">
-
-
                                                 $("#CodigoProveedor").autocomplete({
                                                     source: '@Url.Action("GetCodigosProveedorAutocomplete", "Proveedor")', minLength: 0,
                                                     messages: { noResults: "", results: function () { } },
@@ -313,16 +233,7 @@
 
                                                 });
 
-
-
-
-
-
-
-
-
                                                 function proveedorSeleccionado(event, ui) {
-
                                                     ActualizarProveedor(ui.item);
                                                     ///////////////////////
                                                     event.preventDefault();
@@ -333,7 +244,6 @@
                                                     $("#CodigoProveedor").val(item.codigo || "");
                                                     $("#DescripcionProveedor").val(item.value || "");
                                                     $("#IdCodigoIva").val(item.idCodigoIva);
-
                                                     $("#Proveedor_Email").val(item.Email || "");
                                                     $("#Proveedor_Telefono").val(item.Telefono || "");
                                                     $("#Proveedor_Direccion").val(item.Direccion || "");
@@ -343,14 +253,9 @@
                                                     $("#Proveedor_Cuit").val(item.Cuit) || "";
                                                     $("#IdCondicionVenta").val(item.IdCondicionVenta);
                                                     $("#IdListaPrecios").val(item.IdListaPrecios);
-
-
-
                                                     $("#Proveedor_EsAgenteRetencionIVA").val(item.EsAgenteRetencionIVA || "");
                                                     $("#Proveedor_BaseMinimaParaPercepcionIVA").val(item.BaseMinimaParaPercepcionIVA) || "";
                                                     $("#Proveedor_PorcentajePercepcionIVA").val(item.PorcentajePercepcionIVA) || "";
-
-
                                                     $("#IdIBCondicionPorDefecto").val(item.IdIBCondicionPorDefecto);
                                                     $("#IdIBCondicionPorDefecto2").val(item.IdIBCondicionPorDefecto2);
                                                     $("#IdIBCondicionPorDefecto3").val(item.IdIBCondicionPorDefecto3);
@@ -360,12 +265,10 @@
                                                     $('#Proveedor_IBCondicionCat2_AlicuotaPercepcion').val(item.AlicuotaPercepcion2);
                                                     $('#Proveedor_IBCondicionCat3_AlicuotaPercepcion').val(item.AlicuotaPercepcion3);
 
-
                                                     ActualizarPercepcionIIBB();
                                                     // ActualizarListaPuntoVenta();
                                                     // ActualizarPuntoVenta();
                                                 }
-
 
                                                 function ActualizarPercepcionIIBB() {
                                                     var mvarIBCondicion, mvarPercepcionIIBB, mvarId;
@@ -373,54 +276,14 @@
                                                     mvarIBCondicion = $("#Proveedor_IBCondicion"); // IBCondicion del Proveedor elegido
                                                     mvarPercepcionIIBB = $("#PercepcionIIBB"); // PercepcionIIBB de parametros generales -los parametros generales los debo incluir en el model, o en el viewmodel? -agregalos al viewbag...
 
-
-
                                                     if (mvarIBCondicion == 1 || mvarIBCondicion == 4 || (mvarId < 0 && mvarPercepcionIIBB != "SI")) {
-
                                                         $("#IdIBCondicionPorDefecto").prop('disabled', true);
                                                         $("#IdIBCondicionPorDefecto2").prop('disabled', true);
                                                         $("#IdIBCondicionPorDefecto3").prop('disabled', true);
-
-                                                        //            dcfields(4).Enabled = False
-                                                        //            dcfields(5).Enabled = False
-                                                        //            dcfields(6).Enabled = False
-                                                        //            .Fields("IdIBCondicion").Value = Null
-                                                        //            .Fields("IdIBCondicion2").Value = Null
-                                                        //            .Fields("IdIBCondicion3").Value = Null
-                                                        //            With Check1(0)
-                                                        //               .Value = 0
-                                                        //               .Enabled = False
-                                                        //            End With
-                                                        //            With Check1(1)
-                                                        //               .Value = 0
-                                                        //               .Enabled = False
-                                                        //            End With
-                                                        //            With Check1(2)
-                                                        //               .Value = 0
-                                                        //               .Enabled = False
-                                                        //            End With
                                                     } else {
                                                         $("#IdIBCondicionPorDefecto").prop('disabled', false);
                                                         $("#IdIBCondicionPorDefecto2").prop('disabled', false);
                                                         $("#IdIBCondicionPorDefecto3").prop('disabled', false);
-                                                        //            Check1(0).Enabled = True
-                                                        //            If IsNull(.Fields("IdIBCondicion").Value) Then
-                                                        //               .Fields("IdIBCondicion").Value = mvarIdIBCondicion
-                                                        //               If mvarIdIBCondicion <> 0 Then Check1(0).Value = 1
-                                                        //            End If
-                                                        //            If Check1(0).Value = 1 Then dcfields(4).Enabled = True Else dcfields(4).Enabled = False
-                                                        //            Check1(1).Enabled = True
-                                                        //            If IsNull(.Fields("IdIBCondicion2").Value) And mvarIdIBCondicion2 <> 0 Then
-                                                        //               .Fields("IdIBCondicion2").Value = mvarIdIBCondicion2
-                                                        //               If mvarIdIBCondicion2 <> 0 Then Check1(1).Value = 1
-                                                        //            End If
-                                                        //            If Check1(1).Value = 1 Then dcfields(5).Enabled = True Else dcfields(5).Enabled = False
-                                                        //            Check1(2).Enabled = True
-                                                        //            If IsNull(.Fields("IdIBCondicion3").Value) And mvarIdIBCondicion3 <> 0 Then
-                                                        //               .Fields("IdIBCondicion3").Value = mvarIdIBCondicion3
-                                                        //               If mvarIdIBCondicion3 <> 0 Then Check1(2).Value = 1
-                                                        //            End If
-                                                        //            If Check1(2).Value = 1 Then dcfields(6).Enabled = True Else dcfields(6).Enabled = False
                                                     }
                                                 }
 
@@ -440,7 +303,6 @@
                                                     })
                                                 }
 
-
                                                 function ActualizarDatosProveedor(cadenaAutoComplete) {
                                                     // var code = "OPELMEC";
                                                     // simulo un ingreso y clic en el autocomplete (tiene que tener puesto el autofocus: true)
@@ -452,24 +314,21 @@
                                                     $(".ui-menu-item:first a").click();
                                                     // '@Url.Action("GetCodigosProveedorAutocomplete", "Proveedor")'
                                                 };
-
-
                                             </script>
                                         </div>
-                                        <div class="span1 pull-right" style="text-align: center">
+                                        <div class="span1 lightblue" style="text-align: center">                                            @*<div class="span1 pull-right" style="text-align: center">*@
                                             @Html.Hidden("PedidoExterior", Model.PedidoExterior)
                                             @Html.LabelFor(model => model.PedidoExterior, "Exterior")
                                             @Html.CheckBox("PedidoExteriorCheck", Model.PedidoExterior == "SI")
                                         </div>
                                         <script>
                                             $('#PedidoExteriorCheck').change(function () {
-                                                $.get(ROOT + 'Pedido/ProximoNumero?bEsExterior='
-                                    + ($('#PedidoExteriorCheck').attr("checked") == "checked")
-                                    , function (data) {
-                                        $("#NumeroPedido").val(data);
-                                        $("#PedidoExterior").val(($('#PedidoExteriorCheck').attr("checked") == "checked") ? "SI" : "NO");
+                                                $.get(ROOT + 'Pedido/ProximoNumero?bEsExterior=' + ($('#PedidoExteriorCheck').attr("checked") == "checked"),
+                                                function (data) {
+                                                    $("#NumeroPedido").val(data);
+                                                    $("#PedidoExterior").val(($('#PedidoExteriorCheck').attr("checked") == "checked") ? "SI" : "NO");
 
-                                    });
+                                                });
                                             });
 
                                         </script>
@@ -487,21 +346,10 @@
                                                         $("#Comprador_Email").val(data[0].Email || "");
                                                     });
                                                 }
-
                                                 $("#IdComprador").change(function () {
-
                                                     TraerDatosComprador($("#IdComprador").val());
                                                 });
-
-
-
                                             </script>
-                                        </div>
-                                        <!--/span-->
-                                        <div class="span2 lightblue">
-                                            @Html.LabelFor(model => model.LugarEntrega, "Email")
-                                            @Html.TextBoxFor(model => model.Comprador.Email, new { @class = "span12", @readonly = "readonly" })
-                                            @Html.ValidationMessageFor(model => model.LugarEntrega)
                                         </div>
                                         <!--/span-->
                                         <div class="span2 lightblue">
@@ -509,17 +357,13 @@
                                             @Html.DropDownList("IdCondicionCompra", null, String.Empty, new { @class = "span12" })
                                             @Html.ValidationMessageFor(model => model.IdCondicionCompra)
                                             <script>
-
-
-
                                                 $("#IdCondicionCompra").change(function () {
                                                     $("#DetalleCondicionCompra").val($("#IdCondicionCompra option:selected").text());
-
                                                 })
                                             </script>
                                         </div>
                                         <!--/span-->
-                                        <div class="span6 lightblue">
+                                        <div class="span4 lightblue">
                                             @Html.LabelFor(model => model.DetalleCondicionCompra, "Aclaracion sobre las condiciones de compra")
                                             @Html.TextBoxFor(model => model.DetalleCondicionCompra, new { @class = "span12" })
                                             @Html.ValidationMessageFor(model => model.DetalleCondicionCompra)
@@ -537,8 +381,6 @@
                                             @Html.Label("Autorizaciones")
                                             <form>
                                                 @{
-
-// con jquery se llama despues a  "Requerimiento/Autorizaciones" para tildar y a Aprobado() para el primer check
                                                     <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox"
                                                            title="" />
 
@@ -559,28 +401,14 @@
                                                 <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular liberación" : "Anular firmas") " class="btn btn-link" />
                                             }
                                             <script>
-
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                ////////////////////////////////////   usar el mismo jqdialog  pasandole callbacks    ////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 $(function () {
                                                     $('#AnularFirmas').click(function () {
-
-
                                                         var IdAprobo = $("#Aprobo > option:selected").attr("value");
                                                         var Aprobo = $("#Aprobo > option:selected").html();
                                                         $("#Aux1").val(IdAprobo);
                                                         $("#Aux2").val(Aprobo);
                                                         $("#Aux3").val("");
                                                         $("#Aux10").val("");
-
 
                                                         $("#dialog-password").dialog({
                                                             buttons: {
@@ -609,31 +437,15 @@
                                                         //deshabilitar el combo (solo puede anular la liberacion el que lo liberó)
                                                         $('#mySelect').prop("disabled", true);
 
-
-
-
                                                         if (IdAprobo == "") {
                                                             $("#mySelect").val([]);
                                                         }
                                                         else {
                                                             $('#mySelect').val(IdAprobo);
                                                         }
-
-
-
-
-
-
-
                                                     })
 
-
-
-
-
-
                                                     function anularfirma() {
-
                                                         $.ajax({
                                                             type: 'POST',
                                                             contentType: 'application/json; charset=utf-8',
@@ -652,19 +464,12 @@
                                                         })
                                                     }
 
-
-
-
-
                                                     $("#Aprobo").change(function (event) {
                                                         //            alert("change");
                                                         //        event.preventDefault();
                                                         //        event.stopPropagation();
                                                         aprobar();
                                                     });
-
-
-
 
                                                     function aprobar() {
                                                         var IdAprobo = $("#Aprobo > option:selected").attr("value");
@@ -683,18 +488,13 @@
                                                                     validatePwd2(
 
                                                                 function () {
-
                                                                     var combo = $("#Aux0").val();
                                                                     var idusuario = $("#Aux1").val();
                                                                     var post = $("#Aux10").val();
                                                                     $('#' + combo).val(idusuario);
                                                                     $("#Aux3").val(idusuario);
-
-
-                                                                    // ok
                                                                 },
                                                                  function () {
-
                                                                      alert('Password incorrecta');
 
                                                                      var combo = $("#Aux0").val();
@@ -708,12 +508,7 @@
                                                                     $(this).dialog('close');
                                                                 }
                                                             },
-
                                                             open: function () {
-
-                                                                //alert("hay que volver a llenar el mySelect"); //porque el anular lo rellena con otra lista
-                                                                // pasar la eleccion del combo DESPUES de que hizo la llamada a CargarEmpleadosParaAprobar, como callback
-
                                                                 var callbackfunction = function () {
                                                                     var combo = $("#dialog-password").data('Combo')
                                                                     var idusuario = $("#Aux1").val();
@@ -747,27 +542,19 @@
                                                         $('#dialog-password').dialog('open');
                                                         $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
                                                     }
-
-
-
-
                                                 })
                                             </script>
                                         </div>
-                                        <!--/span-->
-                                        <!--/span-->
                                     </div>
-                                    <!--/row-->
-                                    <!--/row-->
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="accordion" id="accordion2">
                         <div class="accordion-group accordion-caret " style="border: 0px; padding: 0px;">
                             <div class="accordion-heading" style="border: 0px; padding: 0px;">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"
-                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="border: 0px; padding: 0px; color: #9C0000; font-size: 12px">
                                     DATOS DEL PROVEEDOR
                                 </a>
                             </div>
@@ -780,14 +567,11 @@
                                             @Html.TextBoxFor(model => model.Proveedor.Direccion, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Aprobo)
                                         </div>
-                                        <!--/span-->
                                         <div class="span7 lightblue">
                                             @Html.LabelFor(model => model.Proveedor.Localidad.Nombre, "Localidad")
                                             @Html.TextBoxFor(model => model.Proveedor.Localidad.Nombre, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Proveedor.Localidad)
                                         </div>
-                                        <!--/span-->
-                                        <!--/span-->
                                     </div>
                                     <div class="row-fluid">
                                         <div class="span5 lightblue">
@@ -795,14 +579,11 @@
                                             @Html.TextBoxFor(model => model.Proveedor.Provincia.Nombre, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Aprobo)
                                         </div>
-                                        <!--/span-->
                                         <div class="span7 lightblue">
                                             @Html.LabelFor(model => model.Proveedor.Telefono1, "Telefono")
                                             @Html.TextBoxFor(model => model.Proveedor.Telefono1, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Proveedor.Localidad)
                                         </div>
-                                        <!--/span-->
-                                        <!--/span-->
                                     </div>
                                     <div class="row-fluid">
                                         <div class="span5 lightblue">
@@ -810,16 +591,12 @@
                                             @Html.TextBoxFor(model => model.Proveedor.Email, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Aprobo)
                                         </div>
-                                        <!--/span-->
                                         <div class="span7 lightblue">
                                             @Html.LabelFor(model => model.Proveedor.IdCodigoIva, "Condicion IVA")
                                             @Html.DropDownList("IdCodigoIva", null, new { @class = "span12", @readonly = true, @disabled = "disabled" })
                                             @Html.ValidationMessageFor(model => model.Proveedor.DescripcionIva)
                                         </div>
-                                        <!--/span-->
-                                        <!--/span-->
                                     </div>
-                                    <!--/row-->
                                     <div class="row-fluid">
                                         <div class="span6 lightblue">
                                             @Html.LabelFor(model => model.Contacto, "Contacto")
@@ -827,17 +604,15 @@
                                             @Html.ValidationMessageFor(model => model.Contacto)
                                         </div>
                                     </div>
-                                    <!--/row-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--/row-->
+
                     <div class="accordion" id="accordion6">
                         <div class="accordion-group accordion-caret " style="border: 0">
                             <div class="accordion-heading" style="">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapse6"
-                                   style="border: 0px; padding: 0px; color: #9C0000; font-size: 10px">DETALLE</a>
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapse6" style="border: 0px; padding: 0px; color: #9C0000; font-size: 10px">DETALLE</a>
                             </div>
                             <div id="collapse6" class="accordion-body collapse in" style="border: 0px; padding: 0px;">
                                 @*si agregas 'in' y pones class="accordion-body collapse in" empieza abierto*@
@@ -850,24 +625,18 @@
                                                     .ui-jqdialog td {
                                                         border: 0px !important;
                                                     }
-
                                                     .ui-jqdialog table {
                                                         border: 0px !important;
                                                     }
-
                                                     .ui-jqdialog .ui-jqdialog-titlebar {
                                                         padding: 0;
                                                         position: relative;
                                                     }
-
-
                                                     .ui-jqdialog-titlebar {
                                                         height: 15px;
                                                     }
-
                                                     .ui-jqdialog button {
                                                     }
-
                                                     /*   http://stackoverflow.com/questions/14954587/jqgrid-for-twitter-bootstrap  */
                                                     input.ui-pg-input {
                                                         width: auto;
@@ -875,115 +644,88 @@
                                                         margin: 0px;
                                                         line-height: normal;
                                                     }
-
-
-
                                                     select.ui-pg-selbox {
                                                         width: auto;
                                                         padding: 0px;
                                                         margin: 0px;
                                                         line-height: normal;
                                                     }
-
                                                     .ui-widget select {
                                                         margin-bottom: 0px !important; /* para que en la edicion inline de la grilla no me haga mas alto el renglon   */
                                                     }
-
-
-
-
                                                     .ui-widget-content button {
                                                         background: rgb(231, 231, 231);
                                                         color: black !important;
                                                     }
-
                                                     .ui-jqgrid tr.footrow-ltr {
-                                                        font-size: 9px;
+                                                        font-size: 15px;
                                                     }
-
-
                                                     .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
                                                         height: 32px;
                                                     }
-
-
-
                                                     .ui-jqgrid tr.ui-row-ltr td {
                                                         /* lineas de las grillas verticales*/ /*
                                                                             border-right-style: none;
                                                                             border-left-style: none;
                                                                             */
                                                     }
-
                                                     .ui-icon, .ui-widget-content .ui-icon {
                                                         /* background-image:
                                                         none; */
                                                     }
-
                                                     /* el padding... http://stackoverflow.com/questions/17732147/how-to-add-class-to-a-cell-in-jqgrid*/
                                                     .ui-jqgrid tr.jqgrow td {
                                                         padding-left: 8px;
                                                         padding-right: 8px;
                                                     }
-
                                                     .ui-widget-content hr {
                                                         border: 0 !important; /* el borde molesto en el form de detalle de la jqgrid antes de los botones de aceptar/cancelar */
                                                     }
-
-
                                                     .AltoRenglones tr.jqgrow td /* .ui-jqgrid tr.jqgrow td */ {
                                                         height: 36px; /* jugar entre .AltoRenglones y el style de font de la grilla */
                                                     }
                                                 </style>
-                                                <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"
-                                                       style="font-size: ; ">
-                                                    @*/* jugar entre .AltoRenglones y el style de font de la grilla */*@
+                                                <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0" style="font-size: ; ">
                                                 </table>
                                             </div>
                                         </div>
-                                        @* <div id="ListaPager" class="scroll">
-                                            </div>*@
                                         @if (System.Diagnostics.Debugger.IsAttached && false)
                                         {
                                             <input type="button" class="btn btn-small" id="addDataSinPopup" value="+ Agregar"
                                                    onclick="var id;id = Math.ceil(Math.random() * 1000000);$('#Lista').jqGrid('addRowData',id, {});" />
                                         }
-                                        <input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
+                                        @*<input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
                                         <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
-                                        <input type="button" class="btn btn-small" id="delData" value="Borrar" />
-                                        <div class="btn-group">
-                                            <button class="btn dropdown-toggle btn-small " data-toggle="dropdown">
-                                                más <span class="caret "></span>
-                                            </button>
-                                            <ul class="dropdown-menu ">
-                                                @*      <input type="button" class="btn btn-small  pull-right" id="asignarBonif" value="Asignar bonificacion unitario" />
-                                                    <input type="button" class="btn btn-small  pull-right" id="asignarIVA" value="Asignar IVA" />
-                                                    <input type="button" class="btn btn-small  pull-right" id="asignarPrecio" value="Asignar precio unitario" />
-                                                    <input type="button" class="btn btn-small  pull-right" id="asignarPrecio" value="renumerar items" />
-                                                    <input type="button" class="btn btn-small  pull-right" id="asignarPrecio" value="duplicar" />
-                                                    <input type="button" class="btn btn-small  pull-right" id="asignarPrecio" value="asignar" />*@
-                                                <li><a id="asignarBonif" href="#">Asignar bonificacion unitario</a></li>
-                                                <li><a id="asignarPrecio" href="#">Asignar precio unitario</a></li>
-                                                <li><a id="asignarIVA" href="#">Asignar IVA</a></li>
-                                                <li><a id="asignarFechaNecesidad" href="#">Asignar fecha necesidad</a></li>
-                                                <li><a id="asignarFechaEntrega" href="#">Asignar fecha entrega</a></li>
-                                                <li><a id="Renumerar" href="#">Renumerar items</a></li>
-                                                <li><a id="DuplicarItems" href="#">Duplicar</a></li>
-                                            </ul>
+                                        <input type="button" class="btn btn-small" id="delData" value="Borrar" />*@
+                                        <div style="margin-top: 4px">
+                                            <span class="btn btn-success fileinput-button  pull-left">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                <span>Agregar adjuntos...</span>
+                                                <input id="fileupload" type="file" name="files[]" multiple>
+                                            </span>
+                                            <div class="btn-group">
+                                                <button class="btn dropdown-toggle btn-small " data-toggle="dropdown">
+                                                    más <span class="caret "></span>
+                                                </button>
+                                                <ul class="dropdown-menu ">
+                                                    <li><a id="asignarBonif" href="#">Asignar bonificacion unitario</a></li>
+                                                    <li><a id="asignarPrecio" href="#">Asignar precio unitario</a></li>
+                                                    <li><a id="asignarIVA" href="#">Asignar IVA</a></li>
+                                                    <li><a id="asignarFechaNecesidad" href="#">Asignar fecha necesidad</a></li>
+                                                    <li><a id="asignarFechaEntrega" href="#">Asignar fecha entrega</a></li>
+                                                    <li><a id="Renumerar" href="#">Renumerar items</a></li>
+                                                    <li><a id="DuplicarItems" href="#">Duplicar</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
+
                                         <div id="dialog" title="" style="">
                                             <label for="InputFechaEntrega" id="labeldialog">
                                                 Fecha de entrega
                                             </label>
                                             <input type="text" id="InputFechaEntrega" value="" />
                                             <script>
-
                                                 $(function () {
-
-
-
-
-
                                                     $("#dialog").dialog({
                                                         autoOpen: false,
                                                         modal: true,
@@ -1001,11 +743,8 @@
                                                         }
                                                     });
 
-
                                                     function PisarFechaEntrega(nombre) {
-
                                                         var f = $("#InputFechaEntrega").val();
-
                                                         var $grid = $("#Lista");
                                                         var righe = $grid.jqGrid("getGridParam", "selarrrow");
                                                         if ((righe == null) || (righe.length == 0)) {
@@ -1013,19 +752,14 @@
                                                             // return false;
                                                         }
 
-
                                                         for (var i = 0; i < righe.length; i++) {
                                                             var Id = righe[i];
 
                                                             var rowData = $grid.jqGrid('getRowData', Id);
                                                             rowData[nombre] = f;
                                                             $grid.jqGrid('setRowData', Id, rowData);
-
                                                         }
                                                     }
-
-
-
 
                                                     $("#asignarPrecio").click(function () {
                                                         $("#InputFechaEntrega").val('');
@@ -1043,7 +777,6 @@
                                                         });
                                                         $("#dialog").dialog("open");
                                                     });
-
 
                                                     $("#asignarIVA").click(function () {
                                                         $("#InputFechaEntrega").val('');
@@ -1112,21 +845,12 @@
                                                             }
                                                         });
                                                         $("#dialog").dialog("open");
-
                                                     });
 
-
-
-
-
                                                     $("#DuplicarItems").click(function () {
-
                                                         var $grid = $("#Lista");
-
                                                         var rowid = $grid.jqGrid('getGridParam', 'selrow');
                                                         var rowdata = $('#Lista').jqGrid('saveRow', rowid);
-
-
 
                                                         copyData = $grid.jqGrid('getRowData', rowid);
                                                         copyData['field_id'] = '';
@@ -1134,32 +858,22 @@
                                                         $grid.jqGrid('addRowData', '', copyData);
 
                                                         renumerar();
-
-
                                                     });
 
-
                                                     $("#Renumerar").click(function () {
-
                                                         renumerar();
                                                     });
 
-
                                                     function renumerar() {
                                                         var $grid = $("#Lista");
-
                                                         var righe = $grid.jqGrid('getDataIDs');
-
                                                         for (var i = 0; i < righe.length; i++) {
                                                             var Id = righe[i];
-
                                                             var rowData = $grid.jqGrid('getRowData', Id);
                                                             rowData['NumeroItem'] = i + 1;
                                                             $grid.jqGrid('setRowData', Id, rowData);
-
                                                         }
                                                     }
-
                                                 });
 
                                             </script>
@@ -1176,7 +890,6 @@
                                             }
                                         </style>
                                         @*<input type="button" class="btn btn-small" id="" value="Buscar" onclick="conmutarPanelesDerecho();   pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />*@
-                                        <br />
                                         <br />
                                         <div class="row-fluid">
                                             <div class="span6 lightblue">
@@ -1197,57 +910,54 @@
                                                         line-height: 18px;
                                                         padding: 0;
                                                         margin: 0;
-                                                        font-size: 10px;
+                                                        font-size: 15px;
+                                                        font-weight: bold;
                                                     }
-
-                                                        .subtotales input[readonly] {
-                                                            background: transparent;
-                                                            border: 0;
+                                                    .subtotales input[readonly] {
+                                                        background: transparent;
+                                                        border: 0;
+                                                        font-size: 15px;
+                                                        font-weight: bold;
                                                         }
-
                                                     .subtotales select {
                                                         /* height : 16px; */
                                                         min-height: 18px !important;
                                                         line-height: 18px;
                                                         padding: 0;
                                                         margin: 0;
-                                                        font-size: 10px;
+                                                        font-size: 15px;
                                                     }
-
                                                     table td {
                                                         padding: 0px;
                                                         border: solid 1px;
                                                         border-color: transparent;
+                                                        font-size: 15px;
                                                     }
                                                 </style>
-                                                <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0"
-                                                       cellpadding="0" style="margin: 0px 0px 0px 0px; height: ; padding: 0px; border-style: none;
-                                                border-width: thin; border-spacing: 0px; font-size: xx-small">
+                                                <table id="Totales" class="subtotales span12" width="" border="0" cellspacing="0" cellpadding="0" style="margin: 0px 0px 0px 0px; height: ; padding: 0px; border-style: none;
+                                                        border-width: thin; border-spacing: 0px">
                                                     <tr class="">
-                                                        <td width="100" colspan="2">
+                                                        <td width="100" colspan="2" style="font-size: 12px;">
                                                             SUBTOTAL
                                                         </td>
                                                         <td width="100" align="">
-                                                            <input type="text" name="Subtotal1" id="Subtotal1" style="width: 85%; text-align: right;"
-                                                                   readonly="readonly" />
+                                                            <input type="text" name="Subtotal1" id="Subtotal1" style="width: 85%; text-align: right;" readonly="readonly" />
                                                         </td>
-                                                        <td width="100" class="subtotales">
+                                                        <td width="100" class="subtotales" style="font-size: 12px;">
                                                             MONEDA
                                                         </td>
                                                         <td width="100" style="height: 15px; line-height: 14px;" class="">
-                                                            @Html.DropDownList("IdMoneda", null, "",
-                            new { @class = "span12 ", @style = "height: 15px;   line-height: 14px;" })
+                                                            @Html.DropDownList("IdMoneda", null, "", new { @class = "span12 ", @style = "height: 15px;   line-height: 14px;" })
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="100" colspan="2">
+                                                        <td width="100" colspan="2" style="font-size: 12px;">
                                                             BONIFICACION ITEMS
                                                         </td>
                                                         <td width="100">
-                                                            <input type="text" name="TotalBonificacionItems" id="TotalBonificacionItems" style="width: 85%;
-                                                            text-align: right;" readonly="readonly" />
+                                                            <input type="text" name="TotalBonificacionItems" id="TotalBonificacionItems" style="width: 85%; text-align: right;" readonly="readonly" />
                                                         </td>
-                                                        <td width="100">
+                                                        <td width="100" style="font-size: 12px;">
                                                             CONV.PESOS
                                                         </td>
                                                         <td width="100">
@@ -1255,7 +965,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="100">
+                                                        <td width="100" style="font-size: 12px;">
                                                             BONIF GLOBAL
                                                         </td>
                                                         <td width="100" class="span2 subtotales">
@@ -1266,10 +976,9 @@
                                                             </script>
                                                         </td>
                                                         <td width="100">
-                                                            <input type="text" name="TotalBonificacionGlobal" id="TotalBonificacionGlobal" style="width: 85%;
-                                                            text-align: right;" readonly="readonly" />
+                                                            <input type="text" name="TotalBonificacionGlobal" id="TotalBonificacionGlobal" style="width: 85%; text-align: right;" readonly="readonly" />
                                                         </td>
-                                                        <td width="100">
+                                                        <td width="100" style="font-size: 12px;">
                                                             COTIZ DOLAR
                                                         </td>
                                                         <td width="100">
@@ -1277,30 +986,27 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="100" colspan="2">
+                                                        <td width="100" colspan="2" style="font-size: 12px;">
                                                             SUBTOTAL
                                                         </td>
                                                         <td width="100">
-                                                            <input type="text" name="Subtotal2" id="Subtotal2" style="width: 85%; text-align: right;"
-                                                                   readonly="readonly" />
+                                                            <input type="text" name="Subtotal2" id="Subtotal2" style="width: 85%; text-align: right;" readonly="readonly" />
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="100" colspan="2">
+                                                        <td width="100" colspan="2" style="font-size: 12px;">
                                                             IVA
                                                         </td>
                                                         <td width="100">
-                                                            <input type="text" name="TotalIva" id="TotalIva" style="width: 85%; text-align: right;"
-                                                                   readonly="readonly" />
+                                                            <input type="text" name="TotalIva" id="TotalIva" style="width: 85%; text-align: right;" readonly="readonly" />
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="100" colspan="2">
+                                                        <td width="100" colspan="2" style="font-weight: bold;">
                                                             TOTAL
                                                         </td>
                                                         <td width="100">
-                                                            <input type="text" name="Total" id="Total" style="width: 85%; text-align: right;"
-                                                                   readonly="readonly" />
+                                                            <input type="text" name="Total" id="Total" style="width: 85%; text-align: right; background: rgb(236, 236, 236);" readonly="readonly" />
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -1312,6 +1018,7 @@
                         </div>
                     </div>
                     <br />
+
                     <div class="accordion" id="accordion4">
                         <div class="accordion-group accordion-caret " style="border: 0px; padding: 0px;">
                             <div class="accordion-heading" style="border: 0px; padding: 0px;">
@@ -1403,288 +1110,98 @@
                     </div>
                     @* "row-fluid navbar navbar-fixed-bottom background: rgba(234, 234, 234, 0.84);" *@
                 </div>
-                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236);
-                width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
+                <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                     <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;" />
                     <div class="row-fluid " style="padding: 11px 0px 0px 0px">
-                        <div class="span3 pull-left">
-                            <div>
-                                @if ((TempData["Alerta"] ?? "").ToString().Contains("Grabado"))
-                                {
-                                    <div class="alert fade in span12  alert-success" id="mensajeAlerta" style="display: none;
-                                    font-size: small; height: 30px; overflow: hidden;">
-                                        @*                            <button type="button" class="close" style="height: 40px; width: 40px; font-size: x-large;">
-                                            &times;</button>*@ << @Html.Raw(TempData["Alerta"].ToString())
-                                            @*@TempData["Alerta"].NullSafeToString()*@
-                                        </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="span8">
-                            <span>
-                                @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
-                            </span>
-                            @if (Model.FechaAnulacion == null)
+                        <div class="span12 lightblue">
+                            @if (Model.Cumplido != "SI" || Model.Aprobo > 0)
                             {
-
-                                if (Model.IdPedido <= 0)
-                                {
-                                }
-                                else
-                                {
-
-                                    if (Model.Aprobo != null)
-                                    {
-                                        <div class="btn-group dropup">
-                                            <a class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdPedido })">
-                                                <i class="icon-print"></i>&nbsp;Imprimir
-                                            </a>
-                                            <button class="btn dropdown-toggle btn-large" data-toggle="dropdown">
-                                                <span class="caret "></span>
-                                            </button>
-                                            <ul class="dropdown-menu ">
-                                                <li>
-                                                    <a class="" href="@Url.Action("Imprimir", new { @id = Model.IdPedido, @bAgruparItems = true })">
-                                                        <i class="icon-print"></i>&nbsp;Agrupar items
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
-
-                                    if (false)
-                                    {
-                                        <a id="anular2" class="btn btn-link " style="color: Black" href="@Url.Action("Anular", new { @id = Model.IdPedido })">
-                                            <i class=""></i>&nbsp;Anular orig
-                                        </a>
-                                    }
-
-
-                                    <input type="button" id="anular" value="Anular" class="btn btn-large pull-right" />
-                                    <script>
-
-
-                                        $(function () {
-                                            $("#anular").click(function () {
-
-                                                // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=10950
-
-
-
-                                                $("#dialog-password").dialog({
-                                                    buttons: {
-                                                        'Aceptar': function () {
-                                                            //alert('hola');
-                                                            // $(this).dialog('close');
-                                                            // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
-                                                            //                                                    validatePwd2(anularfirma, function () { });
-                                                            //                                                    $(this).dialog('close');
-
-                                                            window.location.href = ROOT + 'Pedido/Anular/' + $("#IdPedido").val();
-                                                        },
-                                                        'Cancelar': function () {
-                                                            $(this).dialog('close');
-                                                        }
-                                                    },
-                                                    open: function () {
-
-                                                    }
-                                                });
-
-                                                //                                    $("#Aux1").val("");
-                                                //                                    $("#Aux2").val("");
-                                                //                                    $("#Aux3").val("");
-                                                //                                    $("#Aux10").val("anularPED");
-                                                $('#dialog-password').dialog('open');
-                                                $('#mySelect').prop("disabled", false);
-
-
-                                                CargarUsuariosConPermisoDeAnulacion();
-
-                                            });
-
-
-
-
-
-
-
-
-
-
-                                            function CargarUsuariosConPermisoDeAnulacion() {
-                                                var combo = $("#mySelect")
-                                                combo.find("option:gt(0)").remove();
-                                                combo.find("option:first").text("Cargando...");
-
-                                                $.getJSON(ROOT + 'Articulo/GetStoreProc?sp=Empleados_TX_ParaAnularPorFormulario&p1=4', {
-                                                    //country_id: $(this).val()
-                                                }, function (json) {
-                                                    combo.find("option:first").text("");
-                                                    for (var i = 0; i < json.length; i++) {
-                                                        $("<option/>").attr("value", json[i].value).text(json[i].title).appendTo(combo);
-                                                    }
-                                                });
-
-                                            }
-
-
-                                        })
-                                    </script>
-                                }
-
-                                if (Model.Aprobo == null)
-                                {
-
-                                    <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary   pull-right " />
-                                }
-                                else
-                                {
-                                    <span class="label label-info">Liberado</span>
-
-                                }
-
+                                <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                             }
-                            else
+                            @if (Model.IdPedido > 0 && (Model.Aprobo ?? 0) <= 0)
                             {
-                                <span class="label error-info">ANULADA</span>
-                                <script>
-                                    $(function () {
-                                        deshabilitar();
-                                    })
-                                </script>
+                                <input type="button" id="anular" value="Anular" class="btn  btn-large btn-primary" />
                             }
-                        </div>
-                        <div class="span1">
+                            @if (Model.IdPedido > 0)
+                            {
+                                <a id="lImprimir" class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdPedido, @bAgruparItems = true })"><i class="icon-print"></i>&nbsp;Imprimir</a>
+                            }
+                            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link pull-right" })
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <!--/.fluid-container-->
-                                                    <script type="text/javascript">
 
+    <script type="text/javascript">
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
 
-                                                        $(window).resize(function () {
-                                                            RefrescaAnchoGrillaDetalle();
+            $("#conscroll").height($(window).height() - 120);
+        });
 
-                                                            $("#conscroll").height($(window).height() - 120);
-                                                        });
+        function RefrescaAnchoGrillaDetalle() {
+            $("#Lista").setGridWidth($("#divGrilla").width());
+        }
 
+        $(function () {
+            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault
+            // vuelvo a llenar el mySelect (se hace por primera vez en el Layout) porque no sé qué pasa que algo me lo vacía
+            $.post(ROOT + 'Empleado/EmpleadosParaComboSectorCompras/',
+            function (data) {
+                var select = $('#mySelect').empty();
+                for (var i = 0; i < data.length; i++) {
+                    select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
+                }
+            }, "json");
 
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Pedido/Autorizaciones/',
+                data: { IdPedido: $("#IdPedido").val() },
+                dataType: "Json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var j = i + 1;
+                        $("#chk" + j).attr('checked', true);
+                        $("#chk" + j).attr('title', data[i].Nombre);
+                    }
+                }
+            });
+            Aprobado();
 
-                                                        function RefrescaAnchoGrillaDetalle() {
-                                                            // $("#Lista").setGridWidth($(window).width());
-                                                            // la zona de drop se te complica si estas arrastrando un renglon muy largo de una grilla ancha sobre una grilla angosta
+            function Aprobado() {
+                if ($('#Aprobo').val() != "") {
+                    //if ($('#FechaAprobacion').val() != null) {
+                    $("#chk0").attr('checked', true);
+                    var Aprobo = $("#Aprobo > option:selected").html();
+                    $("#chk0").attr('title', Aprobo);
+                }
+                else {
+                    $("#chk0").attr('checked', false);
+                    $("#chk0").attr('title', "");
+                }
+            }
 
-                                                            $("#Lista").setGridWidth($("#divGrilla").width());
+            $(function () {
+                if ($("#Aprobo").val() > 0 || $("#FechaAnulacion").val() > 0) {
+                    //si está aprobada, bloqueo los controles y la grilla
+                    deshabilitar();
+                }
 
-                                                            //        $("#ListaDrag").setGridWidth(jQuery("#ListaDrag").parent().width());
-                                                            //        $("#ListaDrag2").setGridWidth(jQuery("#ListaDrag").parent().width());
-                                                        }
+                pageLayout.hide('south');
+            });
+        })
 
+        $(window).resize(function () {
+            RefrescaAnchoGrillaDetalle();
+            $("#conscroll").height($(window).height() - 120);
+        });
 
-                                                        $(function () {
-
-
-                                                            //            $("body").on({
-                                                            //                ajaxStart: function () {
-                                                            //                    $(this).addClass("loading");
-                                                            //                },
-                                                            //                ajaxStop: function () {
-                                                            //                    $(this).removeClass("loading");
-                                                            //                }
-                                                            //            });
-
-
-                                                            var OrigenDescripcionDefault = 0; // ViewBag.OrigenDescripcionDefault
-
-
-
-
-
-
-
-
-                                                            // vuelvo a llenar el mySelect (se hace por primera vez en el Layout) porque no sé qué pasa que algo me lo vacía
-                                                            $.post(ROOT + 'Empleado/EmpleadosParaComboSectorCompras/',
-                                                            function (data) {
-                                                                var select = $('#mySelect').empty();
-                                                                for (var i = 0; i < data.length; i++) {
-                                                                    select.append('<option value="' + data[i].IdEmpleado + '">' + data[i].Nombre + '</option>');
-                                                                }
-                                                            }, "json");
-
-
-
-                                                            $.ajax({
-                                                                type: "GET",
-                                                                contentType: "application/json; charset=utf-8",
-                                                                url: ROOT + 'Pedido/Autorizaciones/',
-                                                                data: { IdPedido: $("#IdPedido").val() },
-                                                                dataType: "Json",
-                                                                success: function (data) {
-                                                                    for (var i = 0; i < data.length; i++) {
-                                                                        var j = i + 1;
-                                                                        $("#chk" + j).attr('checked', true);
-                                                                        $("#chk" + j).attr('title', data[i].Nombre);
-                                                                    }
-
-
-                                                                }
-                                                            });
-                                                            Aprobado();
-
-                                                            function Aprobado() {
-                                                                if ($('#Aprobo').val() != "") {
-                                                                    //if ($('#FechaAprobacion').val() != null) {
-                                                                    $("#chk0").attr('checked', true);
-                                                                    var Aprobo = $("#Aprobo > option:selected").html();
-                                                                    $("#chk0").attr('title', Aprobo);
-                                                                }
-                                                                else {
-                                                                    $("#chk0").attr('checked', false);
-                                                                    $("#chk0").attr('title', "");
-                                                                }
-                                                            }
-
-
-
-
-
-
-
-
-                                                            $(function () {
-
-                                                                if ($("#Aprobo").val() > 0 || $("#FechaAnulacion").val() > 0) {
-                                                                    //si está aprobada, bloqueo los controles y la grilla
-                                                                    deshabilitar();
-                                                                }
-
-
-                                                                pageLayout.hide('south');
-                                                                //pageLayout.show('south');
-
-
-                                                            });
-
-
-                                                        })
-
-
-
-
-
-                                                        $(window).resize(function () {
-                                                            RefrescaAnchoGrillaDetalle();
-                                                            $("#conscroll").height($(window).height() - 120);
-                                                        });
-
-                                                        $(function () {
-                                                            mostrarPanelesDerecho();
-
-                                                        })
-                                                    </script>
-                                                    }
+        $(function () {
+            mostrarPanelesDerecho();
+        })
+    </script>
+}

@@ -98,6 +98,7 @@ namespace ProntoMVC.Controllers
             ViewBag.IdSolicito = new SelectList(db.Empleados.Where(x => (x.Activo ?? "SI") == "SI").OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.IdSolicito);
             ViewBag.IdSector = new SelectList(db.Sectores.OrderBy(x => x.Descripcion), "IdSector", "Descripcion", o.IdSector);
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, 0, -1).Count();
+            ViewBag.IdObra = new SelectList(db.Obras.Where(x => (x.Activa ?? "SI") == "SI").OrderBy(x => x.Descripcion), "IdObra", "Descripcion", o.IdObra);
 
             Parametros parametros = db.Parametros.Find(1);
             ViewBag.PercepcionIIBB = parametros.PercepcionIIBB;
@@ -240,7 +241,11 @@ namespace ProntoMVC.Controllers
 
                 x.Adjunto = x.Adjunto ?? "NO";
 
-                if (x.FechaEntrega == new DateTime(2001, 1, 1)) x.FechaEntrega = null;
+                //if (x.FechaEntrega == new DateTime(2001, 1, 1)) x.FechaEntrega = null;
+                if (x.FechaEntrega == null)
+                {
+                    sErrorMsg += "\n" + "No ingreso la fecha de entrega de " + db.Articulos.Find(x.IdArticulo).Descripcion;
+                }
                 if (x.FechaEntrega < o.FechaRequerimiento && x.FechaEntrega != null)
                 {
                     sErrorMsg += "\n" + "La fecha de entrega de " + db.Articulos.Find(x.IdArticulo).Descripcion + " es anterior a la del requerimiento";
@@ -254,6 +259,7 @@ namespace ProntoMVC.Controllers
                 //comparar con el original
                 if (x.IdDetalleRequerimiento > 0)
                 {
+                    if ((o.Cumplido ?? "NO") == "AN" && (x.Cumplido ?? "NO") != "AN") { x.Cumplido = "AN"; }
                     var detOriginal = db.DetalleRequerimientos.Find(x.IdDetalleRequerimiento);
                     if (detOriginal.Cumplido == "SI" && x.Cantidad != detOriginal.Cantidad)
                     {
@@ -310,6 +316,21 @@ namespace ProntoMVC.Controllers
 
                     ValidaryReformatearRequerimiento(requerimiento);
 
+                    if ((requerimiento.Aprobo ?? 0) > 0 && (requerimiento.CircuitoFirmasCompleto ?? "") != "SI")
+                    {
+                        var data = (from a in db.DetalleAutorizaciones
+                                    from b in db.Autorizaciones.Where(o => o.IdAutorizacion == a.IdAutorizacion).DefaultIfEmpty()
+                                    select new
+                                    {
+                                        IdAutorizacion = a.IdAutorizacion,
+                                        IdFormulario = (b.IdFormulario ?? 0)
+                                    }).Where(a => a.IdFormulario == 3).AsQueryable();
+                        if (data.Count() == 0)
+                        {
+                            requerimiento.CircuitoFirmasCompleto = "SI";
+                        }
+                    }
+                    
                     if (requerimiento.IdRequerimiento > 0)
                     {
                         var originalrequerimiento = db.Requerimientos.Where(p => p.IdRequerimiento == requerimiento.IdRequerimiento).Include(p => p.DetalleRequerimientos).SingleOrDefault();
@@ -375,18 +396,6 @@ namespace ProntoMVC.Controllers
 
                     db.wActualizacionesVariasPorComprobante(103, requerimiento.IdRequerimiento, tipomovimiento);
                     db.Tree_TX_Actualizar("RequerimientosAgrupados", requerimiento.IdRequerimiento, "Requerimiento");
-
-                    try
-                    {
-                        // esto tarda 30 segundos en autotrol!!!
-                        List<Tablas.Tree> Tree = TablasDAL.ArbolRegenerar(this.Session["BasePronto"].ToString(), oStaticMembershipService);
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrHandler.WriteError(ex);
-                        //                        throw;
-                    }
-                    // TODO: acá se regenera el arbol???
 
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
@@ -687,6 +696,41 @@ namespace ProntoMVC.Controllers
             public string Observaciones { get; set; }
             public string CircuitoFirmasCompleto { get; set; }
             public string Firmas { get; set; }
+        }
+
+        public class DetalleRequerimientos2
+        {
+            public int IdDetalleRequerimiento { get; set; }
+            public int? IdRequerimiento { get; set; }
+            public int? IdArticulo { get; set; }
+            public int? IdUnidad { get; set; }
+            public int? IdControlCalidad { get; set; }
+            public int? OrigenDescripcion { get; set; }
+            public int? NumeroRequerimiento { get; set; }
+            public DateTime? FechaRequerimiento { get; set; }
+            public int? NumeroItem { get; set; }
+            public decimal? Cantidad { get; set; }
+            public decimal? CantidadPendiente { get; set; }
+            public string Unidad { get; set; }
+            public string Codigo { get; set; }
+            public string Articulo { get; set; }
+            public string Observaciones { get; set; }
+            public string TiposDeDescripcion { get; set; }
+            public DateTime? FechaEntrega { get; set; }
+            public string Cumplido { get; set; }
+            public string DescripcionControlCalidad { get; set; }
+            public string ArchivoAdjunto1 { get; set; }
+            public string ArchivoAdjunto2 { get; set; }
+            public string ArchivoAdjunto3 { get; set; }
+            public string ArchivoAdjunto4 { get; set; }
+            public string ArchivoAdjunto5 { get; set; }
+            public string ArchivoAdjunto6 { get; set; }
+            public string ArchivoAdjunto7 { get; set; }
+            public string ArchivoAdjunto8 { get; set; }
+            public string ArchivoAdjunto9 { get; set; }
+            public string ArchivoAdjunto10 { get; set; }
+            public int? Aprobo { get; set; }
+            public string CircuitoFirmasCompleto { get; set; }
         }
 
         public virtual ActionResult Requerimientos_DynamicGridData
@@ -1148,118 +1192,99 @@ namespace ProntoMVC.Controllers
 
         public virtual ActionResult RequerimientosComprables_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-            string campo = "true";
-            int pageSize = rows;// ?? 20;
-            int currentPage = page;// ?? 1;
-
-            //int totalRecords = 0;
-            int totalPages = 0;
-
-            var Req = db.Requerimientos.AsQueryable();
-            Req = Req.Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI")).AsQueryable();
-
             int totalRecords = 0;
+            int pageSize = rows;
 
-            // IQueryable<Data.Models.Remito> aaaa = db.Remitos.Take(19);
-            // ObjectQuery<Data.Models.Requerimiento> set = Req as ObjectQuery<Data.Models.Requerimiento>;
-            //var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
-            //                 sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req.ToList());
-
-            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable(
-                             sidx, sord, page, rows, _search, filters, db, ref totalRecords, Req);
-
-            //    var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.Requerimiento>
-            //                        (Req as ObjectQuery<Data.Models.Requerimiento>
-            //                        , sidx, sord, page, rows, _search, filters, ref totalRecords);
-            // .Where(x => (PendienteFactura != "SI" || (PendienteFactura == "SI" && x.PendienteFacturar > 0)))
-
-            try
-            {
-                //var Req1 = from a in Req.Where(campo) select a.IdRequerimiento;
-
-                //totalRecords = Req1.Count();
-                totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            }
-            catch (Exception)
-            {
-                //                throw;
-            }
-
-            var data = (from a in pagedQuery
-                        select new
+            var data = (from a in db.Requerimientos
+                        from b in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.IdSolicito).DefaultIfEmpty()
+                        from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.IdTipoCompra).DefaultIfEmpty()
+                        select new Requerimientos2
                         {
                             IdRequerimiento = a.IdRequerimiento,
                             NumeroRequerimiento = a.NumeroRequerimiento,
                             FechaRequerimiento = a.FechaRequerimiento,
+                            NumeradorEliminacionesFirmas = a.NumeradorEliminacionesFirmas.ToString(),
                             Cumplido = a.Cumplido,
                             Recepcionado = a.Recepcionado,
                             Entregado = a.Entregado,
                             Impresa = a.Impresa,
                             Detalle = a.Detalle,
-                            NumeroObra = a.Obra.NumeroObra,
-                            Presupuestos = a.Presupuestos,
-                            Comparativas = a.Comparativas,
-                            Pedidos = a.Pedidos,
-                            Recepciones = a.Recepciones,
-                            Salidas = a.SalidasMateriales,
-                            Libero = (a.AproboRequerimiento != null) ? a.AproboRequerimiento.Nombre : "",
-                            Solicito = (a.SolicitoRequerimiento != null) ? a.SolicitoRequerimiento.Nombre : "",
-                            Sector = (a.Sectores != null) ? a.Sectores.Descripcion : "",
-                            Usuario_anulo = a.UsuarioAnulacion,
-                            Fecha_anulacion = a.FechaAnulacion,
-                            Motivo_anulacion = a.MotivoAnulacion,
-                            Fechas_liberacion = a.FechasLiberacion,
+                            Obra = a.Obra.NumeroObra + " " + a.Obra.Descripcion,
+                            Presupuestos = "", //ModelDefinedFunctions.Pedidos_Requerimientos(a.IdPedido).ToString(),
+                            Comparativas = "",
+                            Pedidos = "",
+                            Recepciones = "",
+                            Salidas = "",
+                            CantidadItems = a.DetalleRequerimientos.Count(),
+                            LiberadoPor = b != null ? b.Nombre : "",
+                            FechaAprobacion = a.FechaAprobacion,
+                            SolicitadaPor = c != null ? c.Nombre : "",
+                            Sector = a.Sectores.Descripcion,
+                            EquipoDestino = "",
+                            UsuarioAnulacion = a.UsuarioAnulacion,
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion ?? "",
+                            TipoCompra = d != null ? d.Descripcion : "",
+                            Comprador = "",
+                            FechasLiberacionCompra = "",
+                            DetalleImputacion = a.DetalleImputacion,
                             Observaciones = a.Observaciones,
-                            LugarEntrega = a.LugarEntrega,
-                            IdObra = a.IdObra,
-                            IdSector = a.IdSector,
-                            a.ConfirmadoPorWeb
-                        })//.Where(campo)
-                          //.OrderBy(sidx + " " + sord)
-                          //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-                        .ToList();
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
+                            Firmas = "",
+                        }).Where(a => (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && a.LiberadoPor.Length > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI").OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2> (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdRequerimiento.ToString(),
-                            cell = new string[] {
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>" ,
+                            cell = new string[] { 
                                 "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
-                                a.IdRequerimiento.ToString(),
-                                a.NumeroRequerimiento.ToString(),
-                                a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Cumplido,
-                                a.Recepcionado,
-                                a.Entregado,
-                                a.Impresa,
-                                a.Detalle,
-                                a.NumeroObra,
-                                a.Presupuestos,
-                                a.Comparativas,
-                                a.Pedidos,
-                                a.Recepciones,
-                                a.Salidas,
-                                a.Libero,
-                                a.Solicito,
-                                a.Sector,
-                                a.Usuario_anulo,
-                                a.Fecha_anulacion.ToString(),
-                                a.Motivo_anulacion,
-                                a.Fechas_liberacion,
-                                a.Observaciones,
-                                a.LugarEntrega,
-                                a.IdObra.ToString(),
-                                a.IdSector.ToString(),
-                                a.ConfirmadoPorWeb.NullSafeToString()
+                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
+                                a.IdRequerimiento.ToString(), 
+                                a.NumeroRequerimiento.NullSafeToString(), 
+                                a.FechaRequerimiento==null ? "" :  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.NumeradorEliminacionesFirmas.NullSafeToString(), 
+                                a.Cumplido.NullSafeToString(), 
+                                a.Recepcionado.NullSafeToString(), 
+                                a.Entregado.NullSafeToString(), 
+                                a.Impresa.NullSafeToString(), 
+                                a.Detalle.NullSafeToString(), 
+                                a.Obra.NullSafeToString(), 
+                                a.Presupuestos.NullSafeToString(), 
+                                a.Comparativas.NullSafeToString(), 
+                                a.Pedidos.NullSafeToString(), 
+                                a.Recepciones.NullSafeToString(), 
+                                a.Salidas.NullSafeToString(), 
+                                a.CantidadItems.NullSafeToString(), 
+                                a.LiberadoPor.NullSafeToString(), 
+                                a.FechaAprobacion.NullSafeToString(), 
+                                a.SolicitadaPor.NullSafeToString(), 
+                                a.Sector.NullSafeToString(), 
+                                a.EquipoDestino.NullSafeToString(), 
+                                a.UsuarioAnulacion.NullSafeToString(), 
+                                a.FechaAnulacion.NullSafeToString(), 
+                                a.MotivoAnulacion.NullSafeToString(), 
+                                a.TipoCompra.NullSafeToString(), 
+                                a.Comprador.NullSafeToString(), 
+                                a.FechasLiberacionCompra.NullSafeToString(), 
+                                a.DetalleImputacion.NullSafeToString(), 
+                                a.Observaciones.NullSafeToString(), 
+                                a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                a.Firmas.NullSafeToString()
                             }
                         }).ToArray()
             };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
@@ -1406,6 +1431,53 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult RequerimientoSinFormato(int IdRequerimiento)
+        {
+            var rm = db.Requerimientos.Where(p => p.IdRequerimiento == IdRequerimiento).AsQueryable();
+
+            var data = (from a in rm
+                        from b in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.IdSolicito).DefaultIfEmpty()
+                        from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.IdTipoCompra).DefaultIfEmpty()
+                        select new
+                        {
+                            IdRequerimiento = a.IdRequerimiento,
+                            IdObra = a.IdObra,
+                            IdSector = a.IdSector,
+                            IdTipoCompra = a.IdTipoCompra,
+                            IdEquipoDestino = a.IdEquipoDestino,
+                            IdSolicito = a.IdSolicito,
+                            Aprobo = a.Aprobo,
+                            NumeroRequerimiento = a.NumeroRequerimiento,
+                            FechaRequerimiento = a.FechaRequerimiento,
+                            NumeradorEliminacionesFirmas = a.NumeradorEliminacionesFirmas.ToString(),
+                            Cumplido = a.Cumplido,
+                            Recepcionado = a.Recepcionado,
+                            Entregado = a.Entregado,
+                            Impresa = a.Impresa,
+                            Detalle = a.Detalle,
+                            Obra = a.Obra.NumeroObra + " " + a.Obra.Descripcion,
+                            CantidadItems = a.DetalleRequerimientos.Count(),
+                            LiberadoPor = b != null ? b.Nombre : "",
+                            FechaAprobacion = a.FechaAprobacion,
+                            SolicitadaPor = c != null ? c.Nombre : "",
+                            Sector = a.Sectores.Descripcion,
+                            EquipoDestino = "",
+                            UsuarioAnulacion = a.UsuarioAnulacion,
+                            FechaAnulacion = a.FechaAnulacion,
+                            MotivoAnulacion = a.MotivoAnulacion ?? "",
+                            TipoCompra = d != null ? d.Descripcion : "",
+                            Comprador = "",
+                            FechasLiberacionCompra = "",
+                            DetalleImputacion = a.DetalleImputacion,
+                            Observaciones = a.Observaciones,
+                            CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
+                            Firmas = "",
+                        }).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult DetRequerimientos(string sidx, string sord, int? page, int? rows, int? IdRequerimiento)
         {
             int IdRequerimiento1 = IdRequerimiento ?? 0;
@@ -1462,7 +1534,7 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
                             cell = new string[] {
-                                string.Empty, //  "<input style='height:22px;width:20px;' id='fileupload' type='file' name='files[]' multiple value='A' onclick=\"Adjunto;\"  />",
+                                string.Empty,
                                 a.IdDetalleRequerimiento.ToString(),
                                 a.IdRequerimiento.NullSafeToString(),
                                 a.IdArticulo.ToString(),
@@ -1479,125 +1551,115 @@ namespace ProntoMVC.Controllers
                                 a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.Cumplido,
                                 a.DescripcionControlCalidad.NullSafeToString(),
-                                string.Empty,
-                                a.ArchivoAdjunto1,
-                                a.ArchivoAdjunto2,
-                                a.ArchivoAdjunto3,
-                                a.ArchivoAdjunto4,
-                                a.ArchivoAdjunto5,
-                                a.ArchivoAdjunto6,
-                                a.ArchivoAdjunto7,
-                                a.ArchivoAdjunto8,
-                                a.ArchivoAdjunto9,
-                                a.ArchivoAdjunto10
+                                "", //"<input id='fileupload' type='file' name='files[]' multiple />",  //"<input style='height:22px;width:20px;' id='fileupload'+  type='file' name='files[]' multiple value='A' onclick=\"Adjunto;\"  />",
+                                (a.ArchivoAdjunto1==null || a.ArchivoAdjunto1.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto1} ) + ">" + a.ArchivoAdjunto1 + "</>",
+                                (a.ArchivoAdjunto2==null || a.ArchivoAdjunto2.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto2} ) + ">" + a.ArchivoAdjunto2 + "</>",
+                                (a.ArchivoAdjunto3==null || a.ArchivoAdjunto3.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto3} ) + ">" + a.ArchivoAdjunto3 + "</>",
+                                (a.ArchivoAdjunto4==null || a.ArchivoAdjunto4.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto4} ) + ">" + a.ArchivoAdjunto4 + "</>",
+                                (a.ArchivoAdjunto5==null || a.ArchivoAdjunto5.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto5} ) + ">" + a.ArchivoAdjunto5 + "</>",
+                                (a.ArchivoAdjunto6==null || a.ArchivoAdjunto6.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto6} ) + ">" + a.ArchivoAdjunto6 + "</>",
+                                (a.ArchivoAdjunto7==null || a.ArchivoAdjunto7.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto7} ) + ">" + a.ArchivoAdjunto7 + "</>",
+                                (a.ArchivoAdjunto8==null || a.ArchivoAdjunto8.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto8} ) + ">" + a.ArchivoAdjunto8 + "</>",
+                                (a.ArchivoAdjunto9==null || a.ArchivoAdjunto9.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto9} ) + ">" + a.ArchivoAdjunto9 + "</>",
+                                (a.ArchivoAdjunto10==null || a.ArchivoAdjunto10.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto10} ) + ">" + a.ArchivoAdjunto10 + "</>"
                          }
                         }).ToArray()
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult DetRequerimientosComprables_DynamicGridData
-            (string sidx, string sord, int page, int rows, bool _search, string filters, int? IdRequerimiento)
+        public virtual ActionResult DetRequerimientosComprables_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, int? IdRequerimiento)
         {
             int IdRequerimiento1 = IdRequerimiento ?? -1;
-            IQueryable<Data.Models.DetalleRequerimiento> DetReq = db.DetalleRequerimientos
-                            .Include(x => x.Requerimientos)
-                            .Where(r => r.Cumplido == null || (r.Cumplido != "AN" && r.Cumplido != "SI"))
-                            .Where(p => p.IdRequerimiento == IdRequerimiento1 || IdRequerimiento1 == -1).AsQueryable();
-            bool Eliminado = false;
-
-            string campo = "true";
-
-            DetReq = DetReq.Where(a =>
-                                (a.Cantidad -
-                                 db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento
-                                                                && ((x.Cumplido ?? "NO") != "AN"))
-                                                        .Sum(z => z.Cantidad)
-                                 ) > 0
-                                 );
-
-            DetReq = DetReq.Where(campo);
 
             int totalRecords = 0;
+            int pageSize = rows;
 
-            //IQueryable<Data.Models.DetalleRequerimiento> aaaa = ;
-            //ObjectQuery<Data.Models.DetalleRequerimiento> set = aaaa as ObjectQuery<Data.Models.DetalleRequerimiento>;
-            //var pagedQuery = Filters.FiltroGenerico_PasandoQueryEntera<Data.Models.DetalleRequerimiento>
-            //                    (DetReq as ObjectQuery<Data.Models.DetalleRequerimiento   >
-            //                    , sidx, sord, page, rows, _search, filters, ref totalRecords);
-            //var pagedQuery = Filters.FiltroGenerico_UsandoStoreOLista(
-            //    sidx, sord, page, rows, _search, filters, db, ref totalRecords, DetReq.ToList());
-
-            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable(
-                sidx, sord, page, rows, _search, filters, db, ref totalRecords, DetReq);
-
-            int pageSize = rows; //?? 20;
-            //            int totalRecords = DetReq.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            int currentPage = page; // ?? 1;
-
-            var data = (from a in pagedQuery
-                        select new
+            var data = (from a in db.DetalleRequerimientos
+                        select new DetalleRequerimientos2
                         {
-                            a.IdDetalleRequerimiento,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.NumeroItem,
-                            a.Cantidad,
-                            (a.Unidad ?? new Unidad()).Abreviatura,
-                            (a.Articulo ?? new Articulo()).Codigo,
-                            (a.Articulo ?? new Articulo()).Descripcion,
-                            a.FechaEntrega,
-                            a.Observaciones,
-                            a.Adjunto,
-                            a.ArchivoAdjunto1,
-                            a.ArchivoAdjunto2,
-                            a.ArchivoAdjunto3,
-                            a.Cumplido,
-                            a.OrigenDescripcion,
-                            a.IdRequerimiento,
-                            a.Requerimientos.NumeroRequerimiento
-                        })
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-                        .ToList();
+                            IdDetalleRequerimiento = a.IdDetalleRequerimiento,
+                            IdRequerimiento = a.IdRequerimiento,
+                            IdArticulo = a.IdArticulo,
+                            IdUnidad = a.IdUnidad,
+                            IdControlCalidad = a.IdControlCalidad,
+                            OrigenDescripcion = a.OrigenDescripcion,
+                            NumeroRequerimiento = a.Requerimientos.NumeroRequerimiento,
+                            FechaRequerimiento = a.Requerimientos.FechaRequerimiento,
+                            NumeroItem = a.NumeroItem,
+                            Cantidad = a.Cantidad,
+                            CantidadPendiente = (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)),
+                            Unidad = a.Unidad.Abreviatura,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion,
+                            Observaciones = a.Observaciones,
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            FechaEntrega = a.FechaEntrega,
+                            Cumplido = a.Cumplido,
+                            DescripcionControlCalidad = (a.ControlCalidad == null) ? "" : a.ControlCalidad.Descripcion,
+                            ArchivoAdjunto1 = a.ArchivoAdjunto1,
+                            ArchivoAdjunto2 = a.ArchivoAdjunto2,
+                            ArchivoAdjunto3 = a.ArchivoAdjunto3,
+                            ArchivoAdjunto4 = a.ArchivoAdjunto4,
+                            ArchivoAdjunto5 = a.ArchivoAdjunto5,
+                            ArchivoAdjunto6 = a.ArchivoAdjunto6,
+                            ArchivoAdjunto7 = a.ArchivoAdjunto7,
+                            ArchivoAdjunto8 = a.ArchivoAdjunto8,
+                            ArchivoAdjunto9 = a.ArchivoAdjunto9,
+                            ArchivoAdjunto10 = a.ArchivoAdjunto10,
+                            Aprobo = a.Requerimientos.Aprobo,
+                            CircuitoFirmasCompleto = a.Requerimientos.CircuitoFirmasCompleto
+                        }).Where(a => (IdRequerimiento1 <= 0 || a.IdRequerimiento == IdRequerimiento1) && (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && (a.Aprobo ?? 0) > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)) > 0).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<DetalleRequerimientos2>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
             var jsonData = new jqGridJson()
             {
                 total = totalPages,
-                page = currentPage,
+                page = page,
                 records = totalRecords,
-                rows = (from a in data
+                rows = (from a in pagedQuery
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] {
-                                string.Empty,
-                                a.IdDetalleRequerimiento.ToString(),
-                                a.IdArticulo.ToString(),
-                                a.IdUnidad.ToString(),
-                                //Eliminado.ToString(),
-                                a.NumeroItem.ToString(), 
-                                //a.Cantidad.ToString(), // - loquefigureenpedidos 
-                                (a.Cantidad -
-                                 db.DetallePedidos.Where(x=>x.IdDetalleRequerimiento==a.IdDetalleRequerimiento
-                                                                && ((x.Cumplido ?? "NO" )!="AN"))
-                                                        .Sum(z=>z.Cantidad)
-                                 ).NullSafeToString(),
-                                a.Abreviatura,
-                                a.Codigo,
-                                "",
-                                a.Descripcion,
-                                a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Observaciones,
-                                a.Cumplido,
-                                a.ArchivoAdjunto1,
-                                a.OrigenDescripcion.ToString(),
-                                a.IdRequerimiento.NullSafeToString(),
-                                a.NumeroRequerimiento.NullSafeToString(),
-                                "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + " target='' >Editar</>"
-                        }
+                            cell = new string[] { 
+                                a.IdDetalleRequerimiento.ToString(), 
+                                a.IdRequerimiento.NullSafeToString(), 
+                                a.IdArticulo.NullSafeToString(), 
+                                a.IdUnidad.NullSafeToString(), 
+                                a.IdControlCalidad.NullSafeToString(), 
+                                a.OrigenDescripcion.NullSafeToString(), 
+                                a.NumeroRequerimiento.NullSafeToString(), 
+                                a.FechaRequerimiento.NullSafeToString(), 
+                                a.NumeroItem.NullSafeToString(), 
+                                a.Cantidad.NullSafeToString(), 
+                                a.CantidadPendiente.NullSafeToString(),
+                                a.Unidad.NullSafeToString(), 
+                                a.Codigo.NullSafeToString(), 
+                                a.Articulo.NullSafeToString(), 
+                                a.Observaciones.NullSafeToString(), 
+                                a.TiposDeDescripcion.NullSafeToString(), 
+                                a.FechaEntrega.NullSafeToString(), 
+                                a.Cumplido.NullSafeToString(), 
+                                a.DescripcionControlCalidad.NullSafeToString(), 
+                                a.ArchivoAdjunto1.NullSafeToString(), 
+                                a.ArchivoAdjunto2.NullSafeToString(), 
+                                a.ArchivoAdjunto3.NullSafeToString(), 
+                                a.ArchivoAdjunto4.NullSafeToString(), 
+                                a.ArchivoAdjunto5.NullSafeToString(), 
+                                a.ArchivoAdjunto6.NullSafeToString(), 
+                                a.ArchivoAdjunto7.NullSafeToString(), 
+                                a.ArchivoAdjunto8.NullSafeToString(), 
+                                a.ArchivoAdjunto9.NullSafeToString(), 
+                                a.ArchivoAdjunto10.NullSafeToString(), 
+                                a.Aprobo.NullSafeToString(), 
+                                a.CircuitoFirmasCompleto.NullSafeToString()
+                            }
                         }).ToArray()
             };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
@@ -1751,30 +1813,37 @@ namespace ProntoMVC.Controllers
                         select new
                         {
                             IdDetalleRequerimiento = a.IdDetalleRequerimiento,
+                            IdRequerimiento = a.IdRequerimiento,
                             IdArticulo = a.IdArticulo,
                             IdUnidad = a.IdUnidad,
+                            IdControlCalidad = a.IdControlCalidad,
+                            OrigenDescripcion = a.OrigenDescripcion,
                             NumeroItem = a.NumeroItem,
-                            // Cantidad = a.Cantidad,
-                            Cantidad = ((a.Cantidad ?? 0) -
-                                 (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento
-                                                                && ((x.Cumplido ?? "NO") != "AN"))
-                                                        .Sum(z => z.Cantidad) ?? 0)
-                                 ),
+                            Cantidad = a.Cantidad,
+                            CantidadPendiente = ((a.Cantidad ?? 0) - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)),
                             Unidad = a.Unidad.Abreviatura,
                             Codigo = a.Articulo.Codigo,
-                            Descripcion = a.Articulo.Descripcion,
-                            FechaEntrega = a.FechaEntrega,
+                            Articulo = a.Articulo.Descripcion,
                             Observaciones = a.Observaciones,
-                            Adjunto = a.Adjunto,
+                            TiposDeDescripcion = (a.OrigenDescripcion ?? 1) == 1 ? "Solo material" : ((a.OrigenDescripcion ?? 1) == 2 ? "Solo observaciones" : ((a.OrigenDescripcion ?? 1) == 3 ? "Material + observaciones" : "")),
+                            FechaEntrega = a.FechaEntrega,
+                            Cumplido = a.Cumplido,
+                            DescripcionControlCalidad = (a.ControlCalidad == null) ? "" : a.ControlCalidad.Descripcion,
                             ArchivoAdjunto1 = a.ArchivoAdjunto1,
                             ArchivoAdjunto2 = a.ArchivoAdjunto2,
                             ArchivoAdjunto3 = a.ArchivoAdjunto3,
+                            ArchivoAdjunto4 = a.ArchivoAdjunto4,
+                            ArchivoAdjunto5 = a.ArchivoAdjunto5,
+                            ArchivoAdjunto6 = a.ArchivoAdjunto6,
+                            ArchivoAdjunto7 = a.ArchivoAdjunto7,
+                            ArchivoAdjunto8 = a.ArchivoAdjunto8,
+                            ArchivoAdjunto9 = a.ArchivoAdjunto9,
+                            ArchivoAdjunto10 = a.ArchivoAdjunto10,
                             NumeroRequerimiento = a.Requerimientos.NumeroRequerimiento,
                             NumeroObra = a.Requerimientos.Obra.NumeroObra,
                             PorcentajeIva = a.Articulo.AlicuotaIVA,
-                            OrigenDescripcion = a.OrigenDescripcion,
-                            Cumplido = a.Cumplido
                         }).OrderBy(p => p.NumeroItem).ToList();
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -2183,6 +2252,38 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdRequerimiento = IdRequerimiento, ex = "" });
         }
 
-    }
+        public virtual FileResult ArchivosAdjuntos(String filename = "") 
+        {
+            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string plantilla = Path.Combine(Server.MapPath("~/Adjuntos"), filename);
 
+            System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);
+
+            //if (!MyFile2.Exists)
+            //{
+            //    plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+            //}
+
+            byte[] contents = System.IO.File.ReadAllBytes(plantilla);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, filename);
+        }
+
+        public JsonResult ValidarAnulacion(int IdRequerimiento)
+        {
+            string Errores = "";
+
+            var regs = db.DetalleRequerimientos.Where(x => x.IdRequerimiento == IdRequerimiento).ToList();
+
+            foreach (Data.Models.DetalleRequerimiento det in regs)
+            {
+                if ((det.Cumplido ?? "NO") != "NO")
+                {
+                    Errores = Errores + "[ " + det.NumeroItem.ToString() + " ] ";
+                }
+            }
+            return Json(Errores, JsonRequestBehavior.AllowGet);
+        }
+    
+    
+    }
 }
