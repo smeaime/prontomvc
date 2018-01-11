@@ -155,6 +155,12 @@ namespace ProntoMVC.TestsMVC
 
 
 
+            abrir el vale (de los item de rms pendientes) en otra ventana?
+
+
+
+
+
         [TestMethod]
         public void probar_rms_pendientes_y_partial_del_vale()
         {
