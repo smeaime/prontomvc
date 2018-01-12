@@ -40,6 +40,8 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
+
+
         public virtual ViewResult Edit(int id)
         {
             ValesSalida o;
@@ -77,6 +79,57 @@ namespace ProntoMVC.Controllers
                 return View(o);
             }
         }
+
+
+
+
+        public virtual ViewResult Edit(int id,string ItemsDeRm)
+        {
+            ValesSalida o;
+
+            try
+            {
+                if (!PuedeLeer(enumNodos.ValesSalida))
+                {
+                    o = new ValesSalida();
+                    CargarViewBag(o);
+                    ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
+                    return View(o);
+                }
+            }
+            catch (Exception)
+            {
+                o = new ValesSalida();
+                CargarViewBag(o);
+                ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
+                return View(o);
+            }
+
+            if (id <= 0)
+            {
+                o = new ValesSalida();
+                inic(ref o);
+                CargarViewBag(o);
+                return View(o);
+            }
+            else
+            {
+                o = db.ValesSalidas.Include(x => x.DetalleValesSalidas).SingleOrDefault(x => x.IdValeSalida == id);
+                CargarViewBag(o);
+                Session.Add("ValeSalida", o);
+                return View(o);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
         void CargarViewBag(ValesSalida o)
         {
