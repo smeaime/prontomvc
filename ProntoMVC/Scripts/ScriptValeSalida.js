@@ -490,7 +490,14 @@ function inicializar() {
                 if (result) {
                     $('#Lista').trigger('reloadGrid');
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "ValeSalida/Edit/" + result.IdValeSalida);
+
+                    if (url.contains("ItemsRm")) {
+                        window.location = ROOT + "Requerimiento/RMsPendientesDeAsignar";
+                    }
+                    else {
+                        window.location = (ROOT + "ValeSalida/Edit/" + result.IdValeSalida);
+                    }
+
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');

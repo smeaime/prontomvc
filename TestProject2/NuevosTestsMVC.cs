@@ -172,9 +172,11 @@ namespace ProntoMVC.TestsMVC
 
 
             //    cómo hago un test de ui mvc?
+            // edit(int id [el parametro default del ruteador], string rmitems)
+            http://localhost:40053/SalidaMateriales/Edit/-1?ItemsDeRm=12,3444,8797,8888
 
-
-
+            llamada al action
+                @Url.Action("SalidaMateriales", new { @id = Model.IdRequerimiento })
         }
 
 

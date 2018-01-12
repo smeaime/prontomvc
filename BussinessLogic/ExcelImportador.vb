@@ -1955,8 +1955,8 @@ Public Class ExcelImportadorManager
 
 
 
-        Dim IdDestinoSantaclaraMRP = BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC) ' 39 ' BuscarDestinoPorCUIT("30500858628", SC, "", "")
-        Dim IdDestinoSantaclaraVicentin = BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( VICENTIN )", SC) '329 'BuscarDestinoPorCUIT("30500959629", SC, "", "")
+        Dim IdDestinoSantaclaraMRP = 39 'BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC) ' 39 ' BuscarDestinoPorCUIT("30500858628", SC, "", "")
+        Dim IdDestinoSantaclaraVicentin = 329 ' BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( VICENTIN )", SC) '329 'BuscarDestinoPorCUIT("30500959629", SC, "", "")
 
 
 
