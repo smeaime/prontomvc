@@ -502,7 +502,7 @@ Partial Class CDPDestinos
                 'Metodo con datatable
                 Dim dt = TraerMetadata(HFSC.Value)
                 Dim dr = dt.NewRow
-                dr.Item("Descripcion") = TextoWebControl(.FindControl("txtNewDescripcion"))
+                dr.Item("Descripcion") = TextoWebControl(.FindControl("txtNewDescripcion")).Replace(vbTab, " ")
                 dr.Item("Subcontratista1") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtNewSubcontratista1")), HFSC.Value))
                 dr.Item("Subcontratista2") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtNewSubcontratista2")), HFSC.Value))
                 dr.Item("CodigoONCAA") = TextoWebControl(.FindControl("txtNewCodigoONCAA"))
@@ -564,7 +564,7 @@ Partial Class CDPDestinos
             Dim dt = TraerMetadata(HFSC.Value, Id)
             Dim dr = dt.rows(0)
 
-            dr.Item("Descripcion") = TextoWebControl(.FindControl("txtDescripcion"))
+            dr.Item("Descripcion") = TextoWebControl(.FindControl("txtDescripcion")).Replace(vbTab, " ")
             dr.Item("Subcontratista1") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtSubcontratista1")), HFSC.Value))
             dr.Item("Subcontratista2") = IdNull(BuscaIdClientePreciso(TextoWebControl(.FindControl("txtSubcontratista2")), HFSC.Value))
             dr.Item("CodigoONCAA") = TextoWebControl(.FindControl("txtCodigoONCAA"))
