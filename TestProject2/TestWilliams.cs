@@ -874,6 +874,42 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void regla_robot_47322()
+        {
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+
+
+            //le esta metiendo un "non breaking space" C2 A0
+
+
+            var id = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC); // esto tiene espacios
+            var id2 = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC);//esto tiene nonbreakingspace
+                                                                                       //If.Destino <= 0 Then
+                                                                                       //    'primero busco la equivalencia con excepcion prefijada
+                                                                                       //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
+                                                                                       //        log += "Destino; "
+
+
+
+
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+
+
+        }
+
 
 
 
@@ -893,8 +929,8 @@ namespace ProntoMVC.Tests
 
 
 
-       //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
-       //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+            //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+            //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
 
 
         }
@@ -4142,7 +4178,7 @@ namespace ProntoMVC.Tests
             string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
 
 
-            
+
 
             string ms = "";
 
