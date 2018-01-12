@@ -551,7 +551,7 @@ Public Module SQLdinamico
     Function BuscaIdWilliamsDestinoPreciso(ByVal Destino As String, ByVal SC As String) As Integer
         If Destino = "" Then Return -1
 
-        de donde salió con tabs?????
+        'de donde salió con tabs????? -de la gridview?
 
         Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='" & Destino & "'")
 
