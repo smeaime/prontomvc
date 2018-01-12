@@ -552,8 +552,12 @@ Public Module SQLdinamico
         If Destino = "" Then Return -1
 
         'de donde salió con tabs????? -de la gridview?
+        'le esta metiendo un "non breaking space" C2 A0
+        'Print  Replace('FABRICA SANTA CLARA ( MRP )', char(160), '') --esto tiene espacios normales
+        'Print  REPLACE('FABRICA SANTA CLARA ( MRP )', char(160), ' ') --esto tiene nonbreakspace
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='" & Destino & "'")
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE REPLACE(Descripcion, char(160), ' ') =REPLACE('" & Destino & "', char(160), ' ')  ")
+
 
         If ds.Rows.Count < 1 Then Return -1
 
