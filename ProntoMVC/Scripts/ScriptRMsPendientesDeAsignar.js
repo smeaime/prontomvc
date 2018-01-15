@@ -329,7 +329,7 @@ $(document).ready(function () {
         else {
             // opcion redirigiendo al alta de Vale
 
-            window.location.href = ROOT + "ValeSalida/Edit/-1?ItemsDeRm=" + ListaReq1
+            window.location.href = ROOT + "ValeSalida/EditPendientesRm/-1?ItemsDeRm=" + ListaReq1
 
         }
 
