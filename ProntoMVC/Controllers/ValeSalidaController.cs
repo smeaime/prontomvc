@@ -339,91 +339,67 @@ namespace ProntoMVC.Controllers
 
 
 
-
-        public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string idDetalleRequerimientosString)
+        public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida, string idDetalleRequerimientosString)
         {
 
-            List<int> idDetalleRequerimientos = idDetalleRequerimientosString.Split(',').Select(Int32.Parse).ToList();
+            if ((idDetalleRequerimientosString ?? "") != "")
 
-
-            if (idDetalleRequerimientos == null) return null;
-
-            var vale = new ValesSalida();
-
-            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
-
-            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
             {
-                var detvale = new DetalleValesSalida();
-                detvale.IdArticulo = detrm.IdArticulo;
-                detvale.Articulo = detrm.Articulo;
-                detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
-                detvale.Cantidad = detrm.Cantidad;
-                vale.DetalleValesSalidas.Add(detvale);
+
+
+
+                List<int> idDetalleRequerimientos = idDetalleRequerimientosString.Split(',').Select(Int32.Parse).ToList();
+
+
+                if (idDetalleRequerimientos == null) return null;
+
+                var vale = new ValesSalida();
+
+                var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+                foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                {
+                    var detvale = new DetalleValesSalida();
+                    detvale.IdArticulo = detrm.IdArticulo;
+                    detvale.Articulo = detrm.Articulo;
+                    detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
+                    detvale.Cantidad = detrm.Cantidad;
+                    vale.DetalleValesSalidas.Add(detvale);
+                }
+
+                var data2 = (from a in vale.DetalleValesSalidas
+                                //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                                //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+                            select new
+                            {
+                                a.IdDetalleValeSalida,
+                                a.IdValeSalida,
+                                a.IdArticulo,
+                                a.IdUnidad,
+                                IdObra = 0,//a.ValesSalida.IdObra,
+                                a.IdDetalleRequerimiento,
+                                NumeroValeSalida = 0,//  a.ValesSalida.NumeroValeSalida,
+                                NumeroRequerimiento = "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                                NumeroItem = "", //a.DetalleRequerimiento.NumeroItem,
+                                ArticuloCodigo = a.Articulo.Codigo,
+                                ArticuloDescripcion = a.Articulo.Descripcion,
+                                a.Cantidad,
+                                Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
+                                Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
+                                Entregado = "", //db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
+                                Pendiente = "", //(a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
+                                a.Partida
+                            }).OrderBy(p => p.IdDetalleValeSalida).ToList();
+
+                return Json(data2, JsonRequestBehavior.AllowGet);
+
+
             }
 
-            var data = (from a in vale.DetalleValesSalidas
-                            //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                            //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleValeSalida,
-                            a.IdValeSalida,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            IdObra=0,//a.ValesSalida.IdObra,
-                            a.IdDetalleRequerimiento,
-                            NumeroValeSalida=0,//  a.ValesSalida.NumeroValeSalida,
-                            NumeroRequerimiento= "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            NumeroItem= "", //a.DetalleRequerimiento.NumeroItem,
-                            ArticuloCodigo = a.Articulo.Codigo,
-                            ArticuloDescripcion = a.Articulo.Descripcion,
-                            a.Cantidad,
-                            Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
-                            Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
-                            Entregado = "", //db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
-                            Pendiente = "", //(a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
-                            a.Partida
-                        }).OrderBy(p => p.IdDetalleValeSalida).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
 
 
 
-        public virtual JsonResult DetValesSalidaSinFormato(int? IdValeSalida, int? IdDetalleValeSalida)
-        {
-            int IdValeSalida1 = IdValeSalida ?? 0;
-            int IdDetalleValeSalida1 = IdDetalleValeSalida ?? 0;
-            var Det = db.DetalleValesSalidas.Where(p => (IdValeSalida1 <= 0 || p.IdValeSalida == IdValeSalida1) && (IdDetalleValeSalida1 <= 0 || p.IdDetalleValeSalida == IdDetalleValeSalida1)).AsQueryable();
 
-            var data = (from a in Det
-                        from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleValeSalida,
-                            a.IdValeSalida,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            a.ValesSalida.IdObra,
-                            a.IdDetalleRequerimiento,
-                            a.ValesSalida.NumeroValeSalida,
-                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            a.DetalleRequerimiento.NumeroItem,
-                            ArticuloCodigo = a.Articulo.Codigo,
-                            ArticuloDescripcion = a.Articulo.Descripcion,
-                            a.Cantidad,
-                            Unidad = b != null ? b.Abreviatura : "",
-                            Obra = c != null ? c.NumeroObra : "",
-                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
-                            Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
-                            a.Partida
-                        }).OrderBy(p => p.IdDetalleValeSalida).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida)
-        {
             int IdValeSalida1 = IdValeSalida ?? 0;
             var Det = db.DetalleValesSalidas.Where(p => p.IdValeSalida == IdValeSalida1).AsQueryable();
             int pageSize = rows ?? 20;
@@ -479,6 +455,41 @@ namespace ProntoMVC.Controllers
             };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public virtual JsonResult DetValesSalidaSinFormato(int? IdValeSalida, int? IdDetalleValeSalida)
+        {
+            int IdValeSalida1 = IdValeSalida ?? 0;
+            int IdDetalleValeSalida1 = IdDetalleValeSalida ?? 0;
+            var Det = db.DetalleValesSalidas.Where(p => (IdValeSalida1 <= 0 || p.IdValeSalida == IdValeSalida1) && (IdDetalleValeSalida1 <= 0 || p.IdDetalleValeSalida == IdDetalleValeSalida1)).AsQueryable();
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                        from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+                        select new
+                        {
+                            a.IdDetalleValeSalida,
+                            a.IdValeSalida,
+                            a.IdArticulo,
+                            a.IdUnidad,
+                            a.ValesSalida.IdObra,
+                            a.IdDetalleRequerimiento,
+                            a.ValesSalida.NumeroValeSalida,
+                            a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            a.DetalleRequerimiento.NumeroItem,
+                            ArticuloCodigo = a.Articulo.Codigo,
+                            ArticuloDescripcion = a.Articulo.Descripcion,
+                            a.Cantidad,
+                            Unidad = b != null ? b.Abreviatura : "",
+                            Obra = c != null ? c.NumeroObra : "",
+                            Entregado = db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
+                            Pendiente = (a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
+                            a.Partida
+                        }).OrderBy(p => p.IdDetalleValeSalida).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         public virtual ActionResult ValesSalidaPendientesDeSalidaMateriales(string sidx, string sord, int? page, int? rows)
         {
