@@ -204,16 +204,11 @@ function inicializar() {
     // funciona ese url+postData condicionales? (para que dependiendo de uno u otro, se cargue el detalle) -no me convendría llamar a la misma funcion?
 
     $('#Lista').jqGrid({
-        url: function () { if (qs["ItemsDeRms"] != "") ROOT + 'ValeSalida/DetValesSalida/' else  ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos' },
-        postData: function () {
-            if (qs["ItemsDeRms"] != "")
-                return { 'IdValeSalida': function () { return $("#IdValeSalida").val(); } }
-            else
-                return { 'idDetalleRequerimientosString': ListaReq1 }
-        }
-
-
-
+        url: ROOT + 'ValeSalida/DetValesSalida/',
+        postData: {
+                'IdValeSalida':                     function () { return $("#IdValeSalida").val(); } ,
+                'idDetalleRequerimientosString':    qs["ItemsDeRm"] 
+        },
 
         datatype: 'json',
         mtype: 'POST',
