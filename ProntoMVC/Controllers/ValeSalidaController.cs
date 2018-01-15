@@ -83,7 +83,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual ViewResult Edit(int id,string ItemsDeRm)
+        public virtual ViewResult EditPendientesRm(int id,string ItemsDeRm)
         {
             ValesSalida o;
 
@@ -94,7 +94,9 @@ namespace ProntoMVC.Controllers
                     o = new ValesSalida();
                     CargarViewBag(o);
                     ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
-                    return View(o);
+
+                    return View("Edit", o);
+
                 }
             }
             catch (Exception)
@@ -102,7 +104,7 @@ namespace ProntoMVC.Controllers
                 o = new ValesSalida();
                 CargarViewBag(o);
                 ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
-                return View(o);
+                return View("Edit", o);
             }
 
             if (id <= 0)
@@ -110,14 +112,14 @@ namespace ProntoMVC.Controllers
                 o = new ValesSalida();
                 inic(ref o);
                 CargarViewBag(o);
-                return View(o);
+                return View("Edit", o);
             }
             else
             {
                 o = db.ValesSalidas.Include(x => x.DetalleValesSalidas).SingleOrDefault(x => x.IdValeSalida == id);
                 CargarViewBag(o);
                 Session.Add("ValeSalida", o);
-                return View(o);
+                return View("Edit", o);
             }
         }
 
