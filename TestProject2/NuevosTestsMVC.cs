@@ -166,7 +166,7 @@ namespace ProntoMVC.TestsMVC
             GetMockedControllerGenerico(c);
 
             var cr = new RequerimientoController();
-            GetMockedControllerGenerico(c);
+            GetMockedControllerGenerico(cr);
 
             /*
             Requerimiento rm = new Requerimiento();
