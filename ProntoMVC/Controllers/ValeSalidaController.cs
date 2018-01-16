@@ -398,16 +398,9 @@ namespace ProntoMVC.Controllers
                                 Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
                                 a.Cumplido,
                                 a.Estado,
-                                NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                                ItemRM = a.DetalleRequerimiento.Item,
-                                TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
-                                //NumeroValeSalida = 0,//  a.ValesSalida.NumeroValeSalida,
-                                //NumeroRequerimiento = "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                                //NumeroItem = "", //a.DetalleRequerimiento.NumeroItem,
-                                //Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
-                                //Entregado = "", //db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
-                                //Pendiente = "", //(a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
-                                //a.Partida
+                                //NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                                //ItemRM = a.DetalleRequerimiento.Item,
+                                //TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
                             }).OrderBy(p => p.IdDetalleValeSalida).ToList();
 
 
@@ -432,9 +425,9 @@ namespace ProntoMVC.Controllers
                             a.Unidad.NullSafeToString(),
                             a.Cumplido.NullSafeToString(),
                             a.Estado.NullSafeToString(),
-                            a.NumeroRequerimiento.NullSafeToString(),
-                            a.ItemRM.NullSafeToString(),
-                            a.TipoRequerimiento.NullSafeToString()
+                            //a.NumeroRequerimiento.NullSafeToString(),
+                            //a.ItemRM.NullSafeToString(),
+                            //a.TipoRequerimiento.NullSafeToString()
                             }
                             }).ToArray()
                 };
