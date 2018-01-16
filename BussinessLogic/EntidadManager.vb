@@ -2207,6 +2207,11 @@ Salida:
                                                           Optional ByVal Arg6 As Object = Nothing,
                                                           Optional ByVal Arg7 As Object = Nothing) As String
 
+
+            Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
+            ErrHandler2.WriteError(sStringVBA)
+
+
             If Id < 1 Then Return Nothing
 
             'Verificar:
@@ -2267,7 +2272,14 @@ Salida:
             'Dim oBooks As Excel.Workbooks 'haciendolo así, no queda abierto el proceso en el servidor http://support.microsoft.com/?kbid=317109
 
             Try
-                oW = CreateObject("Word.Application")
+
+                Try
+                    oW = CreateObject("Word.Application")
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex.Message & "Explota en el CreateObject")
+                    Throw
+                End Try
+
                 oW.Visible = False
                 'estaría bueno que si acá tarda mucho, salga
                 'puede colgarse en este Add o en el Run. Creo que se cuelga en el Add si no tiene
@@ -2281,6 +2293,10 @@ Salida:
                                           "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
                     Throw
                 End Try
+
+
+                ErrHandler2.WriteError("llamada al  oW.Documents.Add(plant) con exito")
+
 
                 If IsNothing(oDoc) Then
                     'why the methord "Microsoft.Office.Interop.Word.ApplicationClass.Documents.Add" Returns null in .net web page
@@ -2314,10 +2330,8 @@ Salida:
 
                     'ejecuto la macro. ZONA DE RIESGO (porque VBA puede tirar un error y no volver)
 
-                    Dim sStringVBA = "Emision """ & DebugCadenaImprimible(ClaseMigrar.ReEncriptaParaPronto(SC)) & """," & Id & "," & iisNull(Arg3, "Nothing") & "," & iisNull(Arg4, "Nothing") & "," & iisNull(Arg5, "Nothing") & "," & iisNull(Arg6, "Nothing") & "," & iisNull(Arg7, "Nothing")
 
                     'Debug.Print(sStringVBA)
-                    'ErrHandler2.WriteError(sStringVBA)
 
                     'Acá es el cuelgue clásico: no solamente basta con ver que esten bien las referencias! A veces,
                     'aunque figuren bien, el Inter25 explota. Así que no tenés otra manera de probarlo que ejecutando la
