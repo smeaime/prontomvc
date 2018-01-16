@@ -156,6 +156,60 @@ namespace ProntoMVC.TestsMVC
 
 
 
+
+        [TestMethod]
+        public void sssss()
+        {
+            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+            var c = new  ValeSalidaController();
+            GetMockedControllerGenerico(c);
+
+            var cr = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            /*
+            Requerimiento rm = new Requerimiento();
+            var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            rm.Aprobo = 700;
+            rm.IdObra = 1;
+            rmdet.IdArticulo = 5128;
+            rmdet.Cantidad = 12;
+            rmdet.IdUnidad = 33;
+            rmdet.NumeroItem = 1;
+            rmdet.OrigenDescripcion = 1;
+            rmdet.IdControlCalidad = 1;
+            rmdet.FechaEntrega = DateTime.Today;
+            rm.DetalleRequerimientos.Add(rmdet);
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult result = c.BatchUpdate(rm);
+            */
+
+
+            // ¿tiene sentido paginar las grillas de detalle? se hace más facil la edicion de la grilla si se carga completa?
+
+            JsonResult result3 = (JsonResult)cr.RequerimientosPendientesAsignar_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
+            jqGridJson listado3 = (jqGridJson)result3.Data;
+
+
+            JsonResult result2 = (JsonResult)c.DetValesSalida ("NumeroRequerimiento", "desc", 0, 50, -1 , "9021,9022");
+            jqGridJson listado2 = (jqGridJson)result2.Data;
+
+            //habria problemas con los TipoDesignacion del detalle no? -si
+
+
+
+
+
+
+            Assert.IsTrue(listado2.records > 0);
+
+        }
+
+
+
+
+
         [TestMethod]
         public void probar_context_del_rms_pendientesGenerarValesAlmacen2222()
         {
