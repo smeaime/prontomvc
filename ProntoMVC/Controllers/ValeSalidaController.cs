@@ -265,7 +265,7 @@ namespace ProntoMVC.Controllers
 
                         /////////////////////////////////////////////////////////////////////////////
                         /////////////////////////////////////////////////////////////////////////////
-
+                        /*
                         var reqs = from x in ValeSalida.DetalleValesSalidas select x.IdDetalleRequerimiento;
 
                         bool ActivarSolicitudMateriales = (db.Parametros.FirstOrDefault().ActivarSolicitudMateriales == "SI");
@@ -280,7 +280,7 @@ namespace ProntoMVC.Controllers
                             EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
                         }
 
-
+                        */
                         /////////////////////////////////////////////////////////////////////////////
                         /////////////////////////////////////////////////////////////////////////////
 
