@@ -219,7 +219,7 @@ namespace ProntoMVC.TestsMVC
             var c = new RequerimientoController();
             GetMockedControllerGenerico(c);
 
-            c.GenerarValesAlmacen((new int[] { 48862 }).ToList(), "administrador", "");
+            c.GenerarValesAlmacen((new int[] { 42499 }).ToList(), "administrador", "");
 
 
             //abrir el vale(de los item de rms pendientes) en otra ventana? cómo le pasaría los parametros? por la url ?
