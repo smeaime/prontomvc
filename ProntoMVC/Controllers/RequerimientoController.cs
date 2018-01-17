@@ -2122,6 +2122,12 @@ namespace ProntoMVC.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+
+
+
+
+
+
         public JsonResult GenerarValesAlmacen(List<int> idDetalleRequerimientos, string user, string pass)
         {
             bool mvarOK;
@@ -2226,6 +2232,11 @@ namespace ProntoMVC.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
 
         ValesSalida CrearValeSegunItemDeRM(List<int> idDetalleRequerimientos, string user, string pass)
         {
