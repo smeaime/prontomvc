@@ -261,6 +261,31 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+
+
+                        /////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////
+
+                        var reqs = from x in ValeSalida.DetalleValesSalidas select x.IdDetalleRequerimiento;
+
+                        bool ActivarSolicitudMateriales = (db.Parametros.FirstOrDefault().ActivarSolicitudMateriales == "SI");
+                        foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                        {
+                            if (ActivarSolicitudMateriales)
+                            {
+                                detrm.TipoDesignacion = "STK";
+                                db.SaveChanges();
+                            }
+
+                            EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
+                        }
+
+
+                        /////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////
+
+
+
                         scope.Complete();
                         scope.Dispose();
                     }
@@ -357,6 +382,34 @@ namespace ProntoMVC.Controllers
             if ((idDetalleRequerimientosString ?? "") != "")
 
             {
+
+
+
+                /*
+                // acá tenemos otro formulario modal, UN ALTA DE VALE!!!
+                var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos, user, pass);
+
+                var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
+                c.db = db;
+                c.oStaticMembershipService = oStaticMembershipService;
+                c.BatchUpdate(vale);
+                c = null;
+
+                string ss = db.Parametros.FirstOrDefault().ActivarSolicitudMateriales;
+                bool ActivarSolicitudMateriales = (ss == "SI");
+
+                foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                {
+                    if (ActivarSolicitudMateriales)
+                    {
+                        detrm.TipoDesignacion = "STK";
+                        db.SaveChanges();
+                    }
+
+                    EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
+                }
+                */
+
 
 
 
