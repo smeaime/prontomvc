@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archivos Compartidos", "Archivos Compartidos", "{A7AAB93D-0E57-4580-96C8-51710EF8D2FA}"
 	ProjectSection(SolutionItems) = preProject
@@ -82,7 +82,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC", "ProntoMVC\Pron
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "prontoweb", "prontoweb\", "{00E21C39-77D5-4A7E-AB17-FBFFBF74FF1C}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7"
 		ProjectReferences = "{2f9b9020-304c-44a6-bcc4-9e434c687d31}|ProntoMVC.Data.dll;{cca1e32e-7c60-4312-b521-11a6e4ccfca2}|InterfazFlexicapture.dll;{AB8BB713-FFA1-4440-B49B-1857E61367C9}|BusinessLogic.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50769"
 		Debug.AspNetCompiler.PhysicalPath = "prontoweb\"
@@ -164,7 +164,8 @@ Global
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|Windows-x64.Build.0 = Debug|Any CPU
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|Windows-x86.Build.0 = Debug|Any CPU
-		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|x86.ActiveCfg = Debug|x86
+		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.Debug|x86.Build.0 = Debug|x86
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|Android.ActiveCfg = DebugLocal|Any CPU
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|Android.Build.0 = DebugLocal|Any CPU
 		{AB8BB713-FFA1-4440-B49B-1857E61367C9}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
@@ -236,6 +237,7 @@ Global
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|Windows-x86.Build.0 = Debug|Any CPU
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E3DDBC8-E035-452F-9984-06E02E173E73}.Debug|x86.Build.0 = Debug|Any CPU
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Android.ActiveCfg = DebugServer3|Any CPU
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Android.Build.0 = DebugServer3|Any CPU
 		{4E3DDBC8-E035-452F-9984-06E02E173E73}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
@@ -387,6 +389,7 @@ Global
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Debug|Windows-x86.Build.0 = Debug|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.Debug|x86.Build.0 = Debug|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.DebugLocal|Android.ActiveCfg = DebugServer3|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.DebugLocal|Android.Build.0 = DebugServer3|Any CPU
 		{CCA1E32E-7C60-4312-B521-11A6E4CCFCA2}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
@@ -462,6 +465,7 @@ Global
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Windows-x86.Build.0 = Debug|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|x86.Build.0 = Debug|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Android.ActiveCfg = DebugServer3|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Android.Build.0 = DebugServer3|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
@@ -530,8 +534,6 @@ Global
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Windows-x64.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|Windows-x86.ActiveCfg = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|x86.ActiveCfg = Debug
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|x86.Build.0 = Debug
-		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.Debug|x86.Deploy.0 = Debug
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugLocal|Android.ActiveCfg = DebugLocal
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
 		{4E7AC3B5-C7E4-4A81-8539-ECE39D8794AC}.DebugLocal|iOS.ActiveCfg = DebugLocal
