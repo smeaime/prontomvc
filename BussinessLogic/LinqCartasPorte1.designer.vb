@@ -1676,7 +1676,7 @@ Partial Public Class CartasPorteMovimiento
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", CanBeNull:=true, IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
 	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FechaTimeStamp() As System.Data.Linq.Binary
 		Get
@@ -24159,7 +24159,7 @@ Partial Public Class CartasDePorte
 		End Set
 	End Property
 	
-	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
+	<Global.System.Data.Linq.Mapping.ColumnAttribute(Storage:="_FechaTimeStamp", AutoSync:=AutoSync.Always, DbType:="rowversion", CanBeNull:=true, IsDbGenerated:=true, IsVersion:=true, UpdateCheck:=UpdateCheck.Never),  _
 	 Global.System.Runtime.Serialization.DataMemberAttribute(Order:=9)>  _
 	Public Property FechaTimeStamp() As System.Data.Linq.Binary
 		Get
