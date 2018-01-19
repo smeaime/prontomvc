@@ -181,10 +181,14 @@ function getBaseURL() {
     var baseURL = url.substring(0, url.indexOf('/', 14)); // qué quiere decir el 14? -desde dónde empieza...
 
     if (url.indexOf('bdlconsultores') != -1) {
-        return "http://prontotesting.williamsentregas.com.ar/ProntoWilliams/";
+        return "https://prontotesting.williamsentregas.com.ar/ProntoWilliams/";
     }
     else if (url.indexOf('prontotesting') != -1 || url.indexOf('190.12.108.166') != -1) {
-        return "http://prontotesting.williamsentregas.com.ar/";
+        return "https://prontotesting.williamsentregas.com.ar/";
+    }
+
+    else if (url.indexOf('prontoclientes') != -1 ) {
+        return "https://prontoclientes.williamsentregas.com.ar/";
     }
     else if (url.indexOf('williamsentregas') != -1) {
         return "https://prontoweb.williamsentregas.com.ar/";
