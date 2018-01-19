@@ -1691,6 +1691,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
  /////////////////////////////////////////////////////////////////////    --%>
 
 
+    <%--  
+   
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-auth.js"></script>
@@ -1715,15 +1717,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-
-    <%--    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--%>
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
 
     <link rel="manifest" href="./manifest.json">
-
-
 
 
 
@@ -1762,9 +1759,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     <input type="button" value="Habilitar Notificaciones!" onclick="requestPermission()" /></input>
 
-                  <%--  <button class=""
-                        onclick="requestPermission()">
-                        Habilitar Notificaciones!</button>--%>
                 </div>
                 <!-- div to display messages received by this app. -->
                 <div id="messages"></div>
@@ -1772,9 +1766,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
     </div>
-
-
-
 
     <script>
 
@@ -2004,6 +1995,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     </script>
 
-
+    --%>
 
 </asp:Content>
