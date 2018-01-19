@@ -43,6 +43,9 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BusinessLogic", "BussinessLogic\BusinessLogic.vbproj", "{AB8BB713-FFA1-4440-B49B-1857E61367C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Test", "TestProject2\ProntoMVC.Test.csproj", "{4E3DDBC8-E035-452F-9984-06E02E173E73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{17487390-6297-4D1C-8B73-57B636F0C114} = {17487390-6297-4D1C-8B73-57B636F0C114}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProntoMVC.Data", "Data\ProntoMVC.Data.csproj", "{2F9B9020-304C-44A6-BCC4-9E434C687D31}"
 EndProject
