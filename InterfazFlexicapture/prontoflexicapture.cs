@@ -63,7 +63,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 //using Microsoft.AspNet.SignalR.Client;
 
-
+using System.Data.Entity.SqlServer;
 
 
 
@@ -6670,8 +6670,24 @@ Formato localidad-provincia	destination	x
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
+
+            Entidad.ToList();
+
             var data = (from a in Entidad
-                        select a
+                        select new
+                        {
+                            a.IdReclamo,
+                            Numero = Convert.ToInt64(a.Descripcion.Substring(3, 9)),
+                            a.Descripcion,
+                            Fecha = (a.ReclamoComentarios.LastOrDefault() ?? new ProntoMVC.Data.Models.ReclamoComentario()).Fecha.NullSafeToString(),
+                            Comentarios = string.Join("<br/>", a.ReclamoComentarios.Select(x => x.Comentario)),
+                            Usuarios = string.Join("<br/>", a.ReclamoComentarios.Select(x => x.NombreUsuario).Distinct()),
+
+                            
+                            a.Estado
+
+                        }
+
                         )//.Where(campo).OrderBy(sidx + " " + sord)
                         .ToList();
 
@@ -6692,8 +6708,10 @@ Formato localidad-provincia	destination	x
 
 
 
-                                 "<a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(x=>x.NumeroCartaDePorte==Convert.ToInt64(a.Descripcion.Substring(3,9))).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +
-                                    (db.CartasDePortes.Where(x=>x.NumeroCartaDePorte==Convert.ToInt64(a.Descripcion.Substring(3,9))).FirstOrDefault()
+                                 "<a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(
+                                                x=> x.NumeroCartaDePorte ==  a.Numero   ).FirstOrDefault()
+                                                ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +
+                                    (db.CartasDePortes.FirstOrDefault()
                                         ?? new CartasDePorte()
                                         ).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
 
@@ -6705,13 +6723,15 @@ Formato localidad-provincia	destination	x
 								//"", //(a.IdEmpleado==1) ? "" : a.Comentario,
 							   a.Descripcion, //a.Comentario,  // (a.IdEmpleado!=1) ? "" : a.Comentario ,
 
-							   (a.ReclamoComentarios.LastOrDefault() ?? new ReclamoComentario()).Fecha.NullSafeToString(),
+		                        a.Fecha      ,
 							   // "<a href=\"CartaDePorte.aspx?Id=" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).SingleOrDefault().NullSafeToString() + "\"  target=\"_blank\" >" +  a.CartasDePortes.Select(x=>x.IdCartaDePorte).NullSafeToString().ToString() + "</>" ,
 
-								string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.Comentario)),
+								
 
-                                string.Join( "<br/>", a.ReclamoComentarios.Select(x=>x.NombreUsuario).Distinct()),
-                                 (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() , // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
+                                a.Comentarios,
+                                a.Usuarios,
+
+                                 (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() , // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
 								a.Estado.NullSafeToString() , // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),
