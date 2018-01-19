@@ -160,7 +160,7 @@
     </Reference>
     <Reference Include="ProntoMVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ProntoMVC\bin\ProntoMVC.dll</HintPath>
+      <HintPath>..\ProntoMVC\obj\Debug\ProntoMVC.dll</HintPath>
     </Reference>
     <Reference Include="Repositorio">
       <HintPath>..\Repositorio\bin\Debug\Repositorio.dll</HintPath>
