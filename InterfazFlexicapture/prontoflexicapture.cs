@@ -6673,17 +6673,20 @@ Formato localidad-provincia	destination	x
 
             Entidad.ToList();
 
+
+            long l;
+
             var data = (from a in Entidad
                         select new
                         {
                             a.IdReclamo,
-                            Numero = Convert.ToInt64(a.Descripcion.Substring(3, 9)),
+                            Numero = a.Descripcion.Length > 9 ? ( Int64.TryParse(a.Descripcion.Substring(3, 9), out l) ? l : 0  ) : 0,
                             a.Descripcion,
                             Fecha = (a.ReclamoComentarios.LastOrDefault() ?? new ProntoMVC.Data.Models.ReclamoComentario()).Fecha.NullSafeToString(),
                             Comentarios = string.Join("<br/>", a.ReclamoComentarios.Select(x => x.Comentario)),
                             Usuarios = string.Join("<br/>", a.ReclamoComentarios.Select(x => x.NombreUsuario).Distinct()),
 
-                            
+
                             a.Estado
 
                         }
@@ -6708,10 +6711,11 @@ Formato localidad-provincia	destination	x
 
 
 
-                                 "<a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(
-                                                x=> x.NumeroCartaDePorte ==  a.Numero   ).FirstOrDefault()
-                                                ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +
-                                    (db.CartasDePortes.FirstOrDefault()
+                                 "<a href=\"CartaDePorte.aspx?Id=" +  
+                                    (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero   ).FirstOrDefault()
+                                        ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString()
+                                        + "\"  target=\"_blank\" >" +
+                                    (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero   ).FirstOrDefault()
                                         ?? new CartasDePorte()
                                         ).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
 
