@@ -5962,7 +5962,7 @@
       <Nullable>true</Nullable>
       <DefaultValue>
         <Values>
-          <Value>http:\\prontoclientes.williamsentregas.com.ar</Value>
+          <Value>https:\\prontoclientes.williamsentregas.com.ar</Value>
         </Values>
       </DefaultValue>
       <AllowBlank>true</AllowBlank>
