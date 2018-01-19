@@ -629,7 +629,7 @@ Public Class CartaDePorteManager
         Catch ex As Exception
             '            Log(Entry)
             '04/10/2014 08:57:49
-            'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
+            'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
             '   en ExecDinamico. - System.Data.SqlClient.SqlException: Timeout expired.  The timeout period elapsed prior 
             '   to completion of the operation or the server is not responding.
             '   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
