@@ -6688,7 +6688,18 @@ Formato localidad-provincia	destination	x
                                 "", //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
 								
 								a.IdReclamo.ToString(),
-                                 "<a href=\"CartaDePorte.aspx?Id=" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
+
+
+
+
+                                 "<a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(x=>x.NumeroCartaDePorte==Convert.ToInt64(a.Descripcion.Substring(3,9))).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +
+                                    (db.CartasDePortes.Where(x=>x.NumeroCartaDePorte==Convert.ToInt64(a.Descripcion.Substring(3,9))).FirstOrDefault()
+                                        ?? new CartasDePorte()
+                                        ).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
+
+
+                                 //"<a href=\"CartaDePorte.aspx?Id=" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() + "\"  target=\"_blank\" >" +  (a.CartasDePortes.FirstOrDefault() ?? new CartasDePorte()).NumeroCartaDePorte.NullSafeToString().ToString() + "</>" ,
+
 								//"",  // a.NombreUsuario.NullSafeToString() + "<br/> " + a.Fecha.GetValueOrDefault().ToShortTimeString()  + "<br/> "  + a.Fecha.GetValueOrDefault().ToShortDateString(),
 
 								//"", //(a.IdEmpleado==1) ? "" : a.Comentario,
@@ -7092,6 +7103,15 @@ Formato localidad-provincia	destination	x
             //string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
             string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 
+
+
+            BDLMasterEntities dbmasterExternos = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
+
+
+            bool ElDestinatarioEsInterno = false;
+            //hagamos la simple: si tiene usuario en la externa, es "externo"
+            ElDestinatarioEsInterno = !dbmasterExternos.aspnet_Users.Any(u => u.LoweredUserName == usuarioDestino.ToLower());
+
             if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 
 
@@ -7106,12 +7126,11 @@ Formato localidad-provincia	destination	x
 
 
 
-            BDLMasterEntities dbmaster = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
 
             // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
-            var usuariosCasillas = (from p in dbmaster.UserDatosExtendidos
-                                    join u in dbmaster.aspnet_Users on p.UserId equals u.UserId
-                                    join m in dbmaster.aspnet_Membership on p.UserId equals m.UserId
+            var usuariosCasillas = (from p in dbmasterExternos.UserDatosExtendidos
+                                    join u in dbmasterExternos.aspnet_Users on p.UserId equals u.UserId
+                                    join m in dbmasterExternos.aspnet_Membership on p.UserId equals m.UserId
                                     where usuarios.Contains(u.UserName)
                                     select m.Email).ToList();
             //select new { u.UserName, m.Email }).ToList(); //.ToDictionary(x=>x.UserName,x=>x.Email);  
@@ -7207,7 +7226,7 @@ Formato localidad-provincia	destination	x
                     }
 
                     //convertir comentario de html a text
-                    s.EnviarNotificacionALosDispositivosDelUsuario(n, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "http://www.williamsentregas.com.ar/img/logotw.png");
+                    s.EnviarNotificacionALosDispositivosDelUsuario(n, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "https://prontoweb.williamsentregas.com.ar/Imagenes/logotw.png"); //  "http://www.williamsentregas.com.ar/img/logotw.png");
 
                 }
             }
