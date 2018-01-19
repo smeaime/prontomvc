@@ -2521,7 +2521,7 @@ namespace ProntoMVC.Tests
             {
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
                                "Notificación Williams",
-                               "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                               "Tenés actuatalizaciones de camiones informados en https://prontoclientes.williamsentregas.com.ar",
                                ConfigurationManager.AppSettings["SmtpUser"],
                                ConfigurationManager.AppSettings["SmtpServer"],
                                ConfigurationManager.AppSettings["SmtpUser"],
@@ -6826,7 +6826,7 @@ namespace ProntoMVC.Tests
 
         Log Entry : 
     05/11/2017 13:34:06
-    Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
+    Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
     Out of memory.
     at System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
     at System.Drawing.Image.FromFile(String filename)
