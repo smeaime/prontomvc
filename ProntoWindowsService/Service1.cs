@@ -1684,7 +1684,7 @@ FCESupport\FCESupportImpl.h, 42.
                 {
                     Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
                                    "Notificación Williams",
-                                   "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                                   "Tenés actuatalizaciones de camiones informados en https://prontoclientes.williamsentregas.com.ar",
                                    ConfigurationManager.AppSettings["SmtpUser"],
                                    ConfigurationManager.AppSettings["SmtpServer"],
                                    ConfigurationManager.AppSettings["SmtpUser"],

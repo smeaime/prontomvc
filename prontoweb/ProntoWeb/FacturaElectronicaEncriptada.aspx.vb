@@ -83,7 +83,7 @@ Partial Class FacturaElectronicaEncriptada
 
         If False Then 'parche porque no anda el openxml en produccion pero sí en clientes
 
-            Response.Redirect(Request.Url.ToString.Replace("https://prontoweb.williamsentregas.com.ar", "http://prontoclientes.williamsentregas.com.ar"))
+            Response.Redirect(Request.Url.ToString.Replace("https://prontoweb.williamsentregas.com.ar", "https://prontoclientes.williamsentregas.com.ar"))
             Return
 
         End If
