@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0e1e4abd-e305-481c-a2a8-2e58d772460c" activeEnvironment="Default" name="webservice de williams (no syngenta)" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1c0b532b-299f-4392-801a-7376422844a1" wsaVersion="NONE" name="wsCartaPorteExternoSoap" type="wsdl" bindingName="{http://microsoft.com/webservices/}wsCartaPorteExternoSoap" soapVersion="1_1" anonymous="optional" definition="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint></con:endpoints><con:operation id="cb792727-770b-4c74-8806-de48e4a0911e" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas" name="obtenerDescargas" bindingOperationName="obtenerDescargas" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="07af755f-ee87-4f34-a79a-4394a439f62e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargas>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerDescargas"/></con:call></con:operation><con:operation id="4817dd0b-a3e0-4133-a1e4-1b23359ecb4b" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas_v2" name="obtenerDescargas_v2" bindingOperationName="obtenerDescargas_v2" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3e107738-bc7c-4a1d-b660-8503d29224b9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargas_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v2>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerDescargas_v2"/></con:call></con:operation><con:operation id="3dd9e3d0-7b5f-47a4-a6ef-82b6bd633cf6" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas_v3" name="obtenerDescargas_v3" bindingOperationName="obtenerDescargas_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="53c92db3-88ae-4511-a683-5af4101a53f6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+
+
+  <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <obtenerDescargas_v3 xmlns="http://microsoft.com/webservices/">
+
+      <usuario>DASERAGRO</usuario>
+
+      <password>DASERAGRO%</password>
+
+      <cuit>30707491937</cuit>
+
+      <fechadesde>2018-01-18T00:00:00</fechadesde>
+
+      <fechahasta>2018-01-22T00:00:00</fechahasta>
+
+    </obtenerDescargas_v3>
+
+  </s:Body>
+
+</s:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerDescargas_v3"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9c3e38a9-33a2-466e-87a3-d82529fa04b0" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" bindingOperationName="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5d36dbd6-504c-4eee-82a5-fe46ba7eb416" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"/></con:call></con:operation><con:operation id="f0c91738-e332-46f4-bed0-8debed7d8ba1" isOneWay="false" action="http://microsoft.com/webservices/obtenerPosiciones_v2" name="obtenerPosiciones_v2" bindingOperationName="obtenerPosiciones_v2" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="071f6a3f-92e9-4c1b-857b-20011df72bbf" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerPosiciones_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v2>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerPosiciones_v2"/></con:call></con:operation><con:operation id="9ccd250e-1647-4bc8-828c-4fe33d67570b" isOneWay="false" action="http://microsoft.com/webservices/obtenerPosiciones_v3" name="obtenerPosiciones_v3" bindingOperationName="obtenerPosiciones_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0637c681-cbf1-4d55-9f34-f5f760e50db6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerPosiciones_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v3>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>
+
+
+
+
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/obtenerPosiciones_v3"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="6ec140fb-210e-49e4-b5ca-c96642d05105" wsaVersion="NONE" name="wsCartaPorteExternoSoap12" type="wsdl" bindingName="{http://microsoft.com/webservices/}wsCartaPorteExternoSoap12" soapVersion="1_2" anonymous="optional" definition="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx?WSDL"><con:part><con:url>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://microsoft.com/webservices/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://microsoft.com/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/webservices/">
+      <s:element name="obtenerDescargas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerDescargasResult" type="tns:respuestaEntrega"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="respuestaEntrega">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="codigoResultado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="descargas" nillable="true" type="tns:cartaPorte"/>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="descripcion" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cartaPorte">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="brutodest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CPoriginal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="calidad" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="cartaporte" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codmerca" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalidadpuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovincialproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovinciapuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccapuerto" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codpostalprocedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contrato" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cosecha" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitcorredor" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitentregador" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitexport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitinter" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitpuerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremitente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuittitu" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="entregador" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechadescarga" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechaposicion" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="horadescarga" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="intermediario" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="listaAnalisis" type="tns:ArrayOfAnalisis"/>
+          <s:element minOccurs="0" maxOccurs="1" name="localidaddestino" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="mercaderia" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netodest" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netoproc" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomExport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomRemic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomcorre" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nroRecibo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observaciones" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="patente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="procedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="puerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="remitente" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="taradest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="titular" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="vagon" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnalisis">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="analisis" nillable="true" type="tns:analisis"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="analisis">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="rubro" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="kilosMermas" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="porcentajeAnalisis" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="porcentajeMerma" type="s:decimal"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtenerDescargas_v2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargas_v2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerDescargas_v2Result" type="tns:respuestaEntrega_v2_00"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="respuestaEntrega_v2_00">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="codigoResultado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="descargas" nillable="true" type="tns:cartaPorte_v2_00"/>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="descripcion" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cartaPorte_v2_00">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="brutodest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CPoriginal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="calidad" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="cartaporte" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codmerca" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalidadpuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovincialproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovinciapuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccapuerto" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codpostalprocedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contrato" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cosecha" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitcorredor" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitentregador" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitexport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitinter" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitpuerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremitente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuittitu" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="entregador" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechadescarga" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechaposicion" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="horadescarga" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="intermediario" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="listaAnalisis" type="tns:ArrayOfAnalisis"/>
+          <s:element minOccurs="0" maxOccurs="1" name="localidaddestino" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="mercaderia" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netodest" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netoproc" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomExport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomRemic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomcorre" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nroRecibo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observaciones" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="patente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="procedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="puerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="remitente" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="taradest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="titular" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="vagon" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CEE" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechaEmisionCarga" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechavencimiento" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CTG" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CupoTurno" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HoraArribo" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="brutoproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="taraproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Humedad" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="MermaHumedad" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OtrasMermas" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="NetoFinal" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ClienteObserv" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CorredorObs" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitchofer" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Chofer" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuittransportista" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="transportista" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="acoplado" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="kmarecorrer" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="tarifa" type="s:decimal"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Establecimiento" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="IdPosicionEstado" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PosicionEstado" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtenerPosiciones_v2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerPosiciones_v2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerPosiciones_v2Result" type="tns:respuestaEntrega_v2_00"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargas_v3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargas_v3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerDescargas_v3Result" type="tns:respuestaEntrega_v3"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="respuestaEntrega_v3">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="codigoResultado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="descargas" nillable="true" type="tns:cartaPorte_v3"/>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="descripcion" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cartaPorte_v3">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="brutodest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CPoriginal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="calidad" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="cartaporte" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codmerca" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalidadpuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccalocalproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovincialproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccaprovinciapuerto" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="codonccapuerto" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codpostalprocedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contrato" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cosecha" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitcorredor" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitentregador" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitexport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitinter" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitpuerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitremitente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuittitu" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="entregador" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechadescarga" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechaposicion" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="horadescarga" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="intermediario" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="listaAnalisis" type="tns:ArrayOfAnalisis"/>
+          <s:element minOccurs="0" maxOccurs="1" name="localidaddestino" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="mercaderia" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netodest" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="netoproc" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomExport" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomRemic" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomcorre" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nroRecibo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observaciones" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="observado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="patente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="procedencia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="puerto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="remitente" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="taradest" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="titular" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="vagon" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CEE" type="s:long"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechaEmisionCarga" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="fechavencimiento" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CTG" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CupoTurno" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HoraArribo" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="brutoproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="taraproc" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Humedad" type="s:decimal"/>
+          <s:element minOccurs="1" maxOccurs="1" name="MermaHumedad" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OtrasMermas" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="NetoFinal" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ClienteObserv" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CorredorObs" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuitchofer" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Chofer" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cuittransportista" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="transportista" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="acoplado" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="kmarecorrer" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="tarifa" type="s:decimal"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Establecimiento" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="IdPosicionEstado" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PosicionEstado" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SojaSustentableCodCondicion" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SojaSustentableCondicion" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SojaSustentableNroEstablecimientoDeProduccion" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtenerPosiciones_v3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerPosiciones_v3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerPosiciones_v3Result" type="tns:respuestaEntrega_v3"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="cuit" type="s:string"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechadesde" type="s:dateTime"/>
+            <s:element minOccurs="1" maxOccurs="1" name="fechahasta" type="s:dateTime"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3Result" type="tns:respuestaEntrega_v3"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="respuestaEntrega" nillable="true" type="tns:respuestaEntrega"/>
+      <s:element name="respuestaEntrega_v2_00" nillable="true" type="tns:respuestaEntrega_v2_00"/>
+      <s:element name="respuestaEntrega_v3" nillable="true" type="tns:respuestaEntrega_v3"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="obtenerDescargasSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerDescargas"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerDescargasResponse"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2SoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerDescargas_v2"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2SoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerDescargas_v2Response"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2SoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerPosiciones_v2"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2SoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerPosiciones_v2Response"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3SoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerDescargas_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3SoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerDescargas_v3Response"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3SoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerPosiciones_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3SoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerPosiciones_v3Response"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3SoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3SoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3Response"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasHttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasHttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2HttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2HttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v2_00"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2HttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2HttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v2_00"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3HttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3HttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3HttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3HttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpGetIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpGetOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasHttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasHttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2HttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v2HttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v2_00"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2HttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v2HttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v2_00"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3HttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargas_v3HttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3HttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerPosiciones_v3HttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpPostIn">
+    <wsdl:part name="usuario" type="s:string"/>
+    <wsdl:part name="password" type="s:string"/>
+    <wsdl:part name="cuit" type="s:string"/>
+    <wsdl:part name="fechadesde" type="s:string"/>
+    <wsdl:part name="fechahasta" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpPostOut">
+    <wsdl:part name="Body" element="tns:respuestaEntrega_v3"/>
+  </wsdl:message>
+  <wsdl:portType name="wsCartaPorteExternoSoap">
+    <wsdl:operation name="obtenerDescargas">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasSoapIn"/>
+      <wsdl:output message="tns:obtenerDescargasSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v2SoapIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v2SoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v2SoapIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v2SoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v3SoapIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v3SoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v3SoapIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v3SoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3SoapIn"/>
+      <wsdl:output message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3SoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsCartaPorteExternoHttpGet">
+    <wsdl:operation name="obtenerDescargas">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasHttpGetIn"/>
+      <wsdl:output message="tns:obtenerDescargasHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v2HttpGetIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v2HttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v2HttpGetIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v2HttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v3HttpGetIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v3HttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v3HttpGetIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v3HttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpGetIn"/>
+      <wsdl:output message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpGetOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="wsCartaPorteExternoHttpPost">
+    <wsdl:operation name="obtenerDescargas">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasHttpPostIn"/>
+      <wsdl:output message="tns:obtenerDescargasHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v2HttpPostIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v2HttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v2HttpPostIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v2HttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargas_v3HttpPostIn"/>
+      <wsdl:output message="tns:obtenerDescargas_v3HttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <wsdl:documentation>Devuelve un listado de posiciones</wsdl:documentation>
+      <wsdl:input message="tns:obtenerPosiciones_v3HttpPostIn"/>
+      <wsdl:output message="tns:obtenerPosiciones_v3HttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <wsdl:documentation>Devuelve un listado de descargas</wsdl:documentation>
+      <wsdl:input message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpPostIn"/>
+      <wsdl:output message="tns:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3HttpPostOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsCartaPorteExternoSoap" type="tns:wsCartaPorteExternoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerDescargas">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerDescargas" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerDescargas_v2" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerPosiciones_v2" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerDescargas_v3" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerPosiciones_v3" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <soap:operation soapAction="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsCartaPorteExternoSoap12" type="tns:wsCartaPorteExternoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerDescargas">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerDescargas" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerDescargas_v2" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerPosiciones_v2" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerDescargas_v3" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerPosiciones_v3" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <soap12:operation soapAction="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsCartaPorteExternoHttpGet" type="tns:wsCartaPorteExternoHttpGet">
+    <http:binding verb="GET"/>
+    <wsdl:operation name="obtenerDescargas">
+      <http:operation location="/obtenerDescargas"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <http:operation location="/obtenerDescargas_v2"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <http:operation location="/obtenerPosiciones_v2"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <http:operation location="/obtenerDescargas_v3"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <http:operation location="/obtenerPosiciones_v3"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <http:operation location="/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsCartaPorteExternoHttpPost" type="tns:wsCartaPorteExternoHttpPost">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="obtenerDescargas">
+      <http:operation location="/obtenerDescargas"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v2">
+      <http:operation location="/obtenerDescargas_v2"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v2">
+      <http:operation location="/obtenerPosiciones_v2"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargas_v3">
+      <http:operation location="/obtenerDescargas_v3"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPosiciones_v3">
+      <http:operation location="/obtenerPosiciones_v3"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3">
+      <http:operation location="/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsCartaPorteExterno">
+    <wsdl:port name="wsCartaPorteExternoSoap" binding="tns:wsCartaPorteExternoSoap">
+      <soap:address location="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="wsCartaPorteExternoSoap12" binding="tns:wsCartaPorteExternoSoap12">
+      <soap12:address location="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="wsCartaPorteExternoHttpGet" binding="tns:wsCartaPorteExternoHttpGet">
+      <http:address location="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="wsCartaPorteExternoHttpPost" binding="tns:wsCartaPorteExternoHttpPost">
+      <http:address location="https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint></con:endpoints><con:operation id="d4bd1eec-80f1-4f03-aae7-53f98cb1e950" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas" name="obtenerDescargas" bindingOperationName="obtenerDescargas" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ace1f664-7a92-407d-a2c5-11f3c27ef191" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargasRequest"/></con:call></con:operation><con:operation id="30df4f11-206b-4319-910a-6e7c13621c29" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas_v2" name="obtenerDescargas_v2" bindingOperationName="obtenerDescargas_v2" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7f947373-cf51-4d11-83c5-8ad773b76faf" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v2>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargas_v2Request"/></con:call></con:operation><con:operation id="6003ab1c-dd99-415a-8672-cf00515427cc" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargas_v3" name="obtenerDescargas_v3" bindingOperationName="obtenerDescargas_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="21755953-de67-4fc3-8381-a06d9865a147" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargas_v3Request"/></con:call></con:operation><con:operation id="60739498-8852-429a-8495-01bc1a4fd1c8" isOneWay="false" action="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" bindingOperationName="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3322ade5-41ec-454c-ac53-60267f8b371f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3Request"/></con:call></con:operation><con:operation id="d083cca9-c811-4198-9ae8-fbcf86997d5f" isOneWay="false" action="http://microsoft.com/webservices/obtenerPosiciones_v2" name="obtenerPosiciones_v2" bindingOperationName="obtenerPosiciones_v2" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2738ca5a-546d-4b99-a525-49124b4530b7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerPosiciones_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v2>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerPosiciones_v2Request"/></con:call></con:operation><con:operation id="4d2d6e3f-e7ea-47d5-a99f-5edaf61ae0fa" isOneWay="false" action="http://microsoft.com/webservices/obtenerPosiciones_v3" name="obtenerPosiciones_v3" bindingOperationName="obtenerPosiciones_v3" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="221cc5f0-e020-4b28-b16d-9b98871ebb2f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerPosiciones_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerPosiciones_v3Request"/></con:call></con:operation></con:interface><con:testSuite id="78621193-03fa-47d3-84aa-9c4064f2ea69" name="wsCartaPorteExternoSoap TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="b2cc7194-8509-4cf7-8e03-cc60e1e20066" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="e527e2a5-0757-4242-ad32-2c9df36f9b92" name="obtenerDescargas"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerDescargas</con:operation><con:request name="obtenerDescargas" id="74b2d9e7-6d44-4033-9aed-11642b5ea817"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargas>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerDescargas"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="98b34ed3-c76b-4948-b8e9-d8fa20570360" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas_v2 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="528f0353-d37e-4e1c-8ad7-2fb86119565f" name="obtenerDescargas_v2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerDescargas_v2</con:operation><con:request name="obtenerDescargas_v2" id="1dd3984f-2251-4b45-89f3-b74ffb241da0"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargas_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v2>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerDescargas_v2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="758a47ca-e70a-40a3-aacc-75168fd80195" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="5f25cb2c-2f52-4202-bdc0-4d041e795ca2" name="obtenerDescargas_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerDescargas_v3</con:operation><con:request name="obtenerDescargas_v3" id="c0392cd3-0107-4a8e-8bbe-924e0d9c9d16"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargas_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v3>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerDescargas_v3"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="b90a5961-3296-4e28-aa34-89fd3a17367c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="163a5b9d-1e8e-4213-99c3-fb42842a0f68" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3</con:operation><con:request name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" id="eb973642-35c6-4936-b403-bbd164d0fe5d"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="eb7c2fc8-21d2-4caf-8ef9-c752b1a731f9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerPosiciones_v2 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="b1b932fb-c188-44c1-bb04-b96a7cc2de1c" name="obtenerPosiciones_v2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerPosiciones_v2</con:operation><con:request name="obtenerPosiciones_v2" id="51fa4565-95a2-471d-b29e-d679ce2fdea3"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerPosiciones_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v2>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerPosiciones_v2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="69d76140-2dd8-4152-b0ec-ae9fab275545" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerPosiciones_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="793a12f7-acb2-4c47-94b5-55735ee69d8d" name="obtenerPosiciones_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap</con:interface><con:operation>obtenerPosiciones_v3</con:operation><con:request name="obtenerPosiciones_v3" id="70a6ff55-54f0-4b72-88ce-da9ded8a040f"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://microsoft.com/webservices/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:obtenerPosiciones_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v3>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/obtenerPosiciones_v3"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="4be0e52a-3bad-4950-bde8-85a8c5d2175a" name="wsCartaPorteExternoSoap12 TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="4b49d7e2-88db-42a5-a2d3-3f961066832a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="4678423e-71b1-49b0-8c36-402128e47597" name="obtenerDescargas"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerDescargas</con:operation><con:request name="obtenerDescargas" id="9e2226f6-be20-422a-8242-c5be9a8243bb"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargasRequest"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="c0f5286d-66db-4cf5-8fb7-1d29dc228584" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas_v2 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="36fe3aab-92d3-43b2-99a4-feccd97b58d6" name="obtenerDescargas_v2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerDescargas_v2</con:operation><con:request name="obtenerDescargas_v2" id="e9f90eb9-4f27-42f7-b745-1d042498b47f"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v2>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargas_v2Request"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="f624455e-efc4-4fbb-9e89-4964488727e1" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargas_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="00075cd8-3acc-4bb3-9383-aff92ed55dc2" name="obtenerDescargas_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerDescargas_v3</con:operation><con:request name="obtenerDescargas_v3" id="cfe4fc38-393e-43c5-8c61-7ec2977002f2"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargas_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargas_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargas_v3Request"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e89580fd-bfb7-4b84-8220-4c8ee2436a5f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="1ed2afaf-4e23-41b5-9150-0758f80ef0b8" name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3</con:operation><con:request name="obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3" id="76983e60-387e-4b2b-b441-77332fbec08c"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v3Request"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="f600406f-31ac-43f9-a318-021c8ae51765" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerPosiciones_v2 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="284feeca-6578-4df1-be0b-9560f38d5872" name="obtenerPosiciones_v2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerPosiciones_v2</con:operation><con:request name="obtenerPosiciones_v2" id="84be1088-49f6-4714-9631-ca509c1082a5"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerPosiciones_v2>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v2>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerPosiciones_v2Request"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="49afd41e-dc77-4fde-acee-c6392c2e00a5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="obtenerPosiciones_v3 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="f09710f4-e333-4d55-aa69-a264a56758bf" name="obtenerPosiciones_v3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>wsCartaPorteExternoSoap12</con:interface><con:operation>obtenerPosiciones_v3</con:operation><con:request name="obtenerPosiciones_v3" id="70517433-7f08-41ce-a76a-ef31a91059f9"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://prontoweb.williamsentregas.com.ar/ProntoWeb/wsCartaPorteExterno.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://microsoft.com/webservices/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <web:obtenerPosiciones_v3>\r
+         <!--Optional:-->\r
+         <web:usuario>?</web:usuario>\r
+         <!--Optional:-->\r
+         <web:password>?</web:password>\r
+         <!--Optional:-->\r
+         <web:cuit>?</web:cuit>\r
+         <web:fechadesde>?</web:fechadesde>\r
+         <web:fechahasta>?</web:fechahasta>\r
+      </web:obtenerPosiciones_v3>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://microsoft.com/webservices/wsCartaPorteExternoSoap/obtenerPosiciones_v3Request"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
