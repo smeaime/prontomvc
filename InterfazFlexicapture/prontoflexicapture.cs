@@ -6680,7 +6680,7 @@ Formato localidad-provincia	destination	x
                         select new
                         {
                             a.IdReclamo,
-                            Numero = a.Descripcion.Length > 9 ? ( Int64.TryParse(a.Descripcion.Substring(3, 9), out l) ? l : 0  ) : 0,
+                            Numero = a.Descripcion.Length > 9 ? (Int64.TryParse(a.Descripcion.Substring(3, 9), out l) ? l : 0) : 0,
                             a.Descripcion,
                             Fecha = (a.ReclamoComentarios.LastOrDefault() ?? new ProntoMVC.Data.Models.ReclamoComentario()).Fecha.NullSafeToString(),
                             Comentarios = string.Join("<br/>", a.ReclamoComentarios.Select(x => x.Comentario)),
@@ -6711,7 +6711,7 @@ Formato localidad-provincia	destination	x
 
 
 
-                                 "<a href=\"CartaDePorte.aspx?Id=" +  
+                                 "<a href=\"CartaDePorte.aspx?Id=" +
                                     (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero   ).FirstOrDefault()
                                         ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString()
                                         + "\"  target=\"_blank\" >" +
@@ -7112,15 +7112,39 @@ Formato localidad-provincia	destination	x
 
 
         public virtual void GrabarComentarioYNotificar
-            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternos, string usuarioDestino,
+            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternom, string SCbdlmasterInternos , string usuarioDestino,
             bool esExternoUsuarioOrigen, string UrlDominio, string SmtpUser, string SmtpServer, string SmtpPass, int SmtpPort)
         {
 
 
 
+            /*
+
+            [16:26, 23/1/2018] +54 9 11 2857-9291: el chat a tomas se lo mandaste por testing? en q carta y usuario?
+            [16:28, 23/1/2018] Andy: prontotesting, ya te paso la info
+            [16:29, 23 / 1 / 2018] Andy: cp 566024333
+            [16:29, 23/1/2018] Andy: el chat es con el usuario LOSGROBO
+            [16:29, 23 / 1 / 2018] Andy: hay comentarios mios y de prueba2
+            [16:29, 23 / 1 / 2018] Andy: el usuario LOSGROBO tiene el mail de tomas
+            [16:30, 23 / 1 / 2018] Andy: y prueba2 tambien
+            [16:30, 23 / 1 / 2018] +54 9 11 2857-9291: ese usuario esta en la bdlmaster de clientes?
+            [16:30, 23/1/2018] +54 9 11 2857-9291: losgrobo digo
+            [16:31, 23 / 1 / 2018] Andy: LOSGROBO está en bdlmasterclientes y prueba2 en bdlmaster
+            [16:35, 23 / 1 / 2018] +54 9 11 2857-9291: ah entiendo, vos estas hablandole a losgrobo, pero prueba2 se metió en la conversacion y deberian llegarle los mails y no le llegan.es asi?
+            [16:36, 23/1/2018] Andy: en realidad al revés prueba2 inicio el chat y yo me metí
+            [16:37, 23 / 1 / 2018] +54 9 11 2857-9291: aha y a prueba2 no le llega lo tuyo, y a vos sí lo de prueba2 no?
+            [16:37, 23/1/2018] Andy: si, a mi me llego todo ok
+            [16:37, 23 / 1 / 2018] Andy: y a el no le llego nada
+
+
+            */
+
+
             var s = new ServicioCartaPorte.servi();
 
             string[] usuarios = s.GrabarComentario_DLL(idCartaPorte, sComentario, usuarioOrigen, SCpronto, usuarioDestino);
+
+
 
 
             //tiene que ser el dominio de clientes!!!
@@ -7130,6 +7154,7 @@ Formato localidad-provincia	destination	x
 
 
             BDLMasterEntities dbmasterExternos = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterExternos)));
+            BDLMasterEntities dbmasterInternos = new BDLMasterEntities(Auxiliares.FormatearConexParaEntityFrameworkBDLMASTER_2(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SCbdlmasterInternos)));
 
 
             bool ElDestinatarioEsInterno = false;
@@ -7149,14 +7174,23 @@ Formato localidad-provincia	destination	x
 
 
 
+            //  "usuarios[]" tiene todos los usuarios de la conversación. Pero en usuariosCasillas solo voy a tener los de la dbmasterExterna!
 
 
-            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil. ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
+            // solo estos clientes me interesan...  -cuantos usuarios externos hay en la bdlmaster? creo q mas de mil.
+            // ademas, recordá que los usuarios especiales tipo BLD los tendrías que filtrar de otro modo...
             var usuariosCasillas = (from p in dbmasterExternos.UserDatosExtendidos
                                     join u in dbmasterExternos.aspnet_Users on p.UserId equals u.UserId
                                     join m in dbmasterExternos.aspnet_Membership on p.UserId equals m.UserId
                                     where usuarios.Contains(u.UserName)
                                     select m.Email).ToList();
+
+            usuariosCasillas.AddRange((from p in dbmasterInternos.UserDatosExtendidos
+                                       join u in dbmasterInternos.aspnet_Users on p.UserId equals u.UserId
+                                       join m in dbmasterInternos.aspnet_Membership on p.UserId equals m.UserId
+                                       where usuarios.Contains(u.UserName)
+                                       select m.Email).ToList());
+
             //select new { u.UserName, m.Email }).ToList(); //.ToDictionary(x=>x.UserName,x=>x.Email);  
 
 

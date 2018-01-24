@@ -1064,6 +1064,77 @@ namespace ProntoMVC.Tests
         #region reclamos43063_CHAT
 
 
+        [TestMethod]
+        public void conversacion_43063_entre_internos()
+        {
+
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+
+            // Mariano elige una carta
+            int idcarta = 2633335;
+
+            //Mariano saluda a Rogrigo
+            //s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
+
+
+            ////Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
+            //s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
+
+
+            //var sss = Membership.GetAllUsers();
+            //Dictionary<string, string> membershipCasillas = new Dictionary<string, string>() {
+            //                                  { "Mariano", "mscalella911@gmail.com"},
+            //                                  { "RODRIGORIOS", "gmalggievato@gmail.com"}
+            //};
+
+            //deberia enviar el mail y la notificacion esa funcion
+
+
+
+
+
+
+            /*
+
+            [16:26, 23/1/2018] +54 9 11 2857-9291: el chat a tomas se lo mandaste por testing? en q carta y usuario?
+            [16:28, 23/1/2018] Andy: prontotesting, ya te paso la info
+            [16:29, 23 / 1 / 2018] Andy: cp 566024333
+            [16:29, 23/1/2018] Andy: el chat es con el usuario LOSGROBO
+            [16:29, 23 / 1 / 2018] Andy: hay comentarios mios y de prueba2
+            [16:29, 23 / 1 / 2018] Andy: el usuario LOSGROBO tiene el mail de tomas
+            [16:30, 23 / 1 / 2018] Andy: y prueba2 tambien
+            [16:30, 23 / 1 / 2018] +54 9 11 2857-9291: ese usuario esta en la bdlmaster de clientes?
+            [16:30, 23/1/2018] +54 9 11 2857-9291: losgrobo digo
+            [16:31, 23 / 1 / 2018] Andy: LOSGROBO está en bdlmasterclientes y prueba2 en bdlmaster
+            [16:35, 23 / 1 / 2018] +54 9 11 2857-9291: ah entiendo, vos estas hablandole a losgrobo, pero prueba2 se metió en la conversacion y deberian llegarle los mails y no le llegan.es asi?
+            [16:36, 23/1/2018] Andy: en realidad al revés prueba2 inicio el chat y yo me metí
+            [16:37, 23 / 1 / 2018] +54 9 11 2857-9291: aha y a prueba2 no le llega lo tuyo, y a vos sí lo de prueba2 no?
+            [16:37, 23/1/2018] Andy: si, a mi me llego todo ok
+            [16:37, 23 / 1 / 2018] Andy: y a el no le llego nada
+
+
+            */
+
+
+
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Andres estás?", SC, scbdlmasterappconfig, scbdlmasterappconfig, "Andres", false,
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+            s.GrabarComentarioYNotificar(idcarta, "Andres", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
+
+
+
+
 
         [TestMethod]
         public void conversacion_43063()
