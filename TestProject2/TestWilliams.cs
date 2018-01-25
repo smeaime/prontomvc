@@ -1166,11 +1166,11 @@ namespace ProntoMVC.Tests
             //};
 
             //deberia enviar el mail y la notificacion esa funcion
-            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, scbdlmasterappconfig, "RODRIGORIOS", false,
                                                                 ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
-            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, "", true,
+            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
                                                     ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
