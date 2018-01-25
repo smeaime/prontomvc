@@ -7112,7 +7112,7 @@ Formato localidad-provincia	destination	x
 
 
         public virtual void GrabarComentarioYNotificar
-            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternom, string SCbdlmasterInternos , string usuarioDestino,
+            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternos, string SCbdlmasterInternos , string usuarioDestino,
             bool esExternoUsuarioOrigen, string UrlDominio, string SmtpUser, string SmtpServer, string SmtpPass, int SmtpPort)
         {
 
