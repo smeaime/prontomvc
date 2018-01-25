@@ -874,6 +874,78 @@ namespace ProntoMVC.Tests
 
 
 
+
+
+
+
+        [TestMethod]
+        public void InformeSincroLaBiznaga_Ledesma_47230()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Ledesma", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void _47375()
+        {
+
+            /*
+              
+            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
+            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
+            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
+
+
+            ademas,
+                *está el tema de saber a qué mail le corresponde cada cliente
+                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
+
+
+             Sincronismos
+* Página de clientes
+* Web Service
+* 
+            */
+
+
+
+
+
+            
+
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void regla_robot_47322()
         {
