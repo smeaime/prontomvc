@@ -1,0 +1,20 @@
+
+Log Entry : 
+01/12/2018 09:30:38
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________
+
+Log Entry : 
+01/12/2018 09:33:27
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________
+
+Log Entry : 
+01/12/2018 11:29:18
+Error in: . Error Message:Incorrect syntax near ','.
+__________________________
+
+Log Entry : 
+01/12/2018 11:31:06
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________

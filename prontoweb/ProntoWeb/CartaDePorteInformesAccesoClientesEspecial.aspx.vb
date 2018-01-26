@@ -313,12 +313,12 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
         '        Log(Entry)
         '04/21/2014 12:37:52
-        'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+        'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
         '        __________________________()
 
         '        Log(Entry)
         '04/21/2014 12:37:52
-        'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Hubo un error al generar el informe. System.ApplicationException: WriteAndRaiseError: Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+        'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Hubo un error al generar el informe. System.ApplicationException: WriteAndRaiseError: Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
         '   at ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Backup\BDL\BussinessObject\ErrHandler2.vb:line 143
         '   at CartaDePorteManager.GetDataTableFiltradoYPaginado(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32 AgrupadorDeTandaPeriodos, Int32 Vagon, String Patente, Boolean bInsertarEnTablaTemporal)
         '   at CartaDePorteInformesAccesoClientes.AsignaInformeAlReportViewer(Boolean bDescargaExcel)
@@ -455,7 +455,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         If System.Diagnostics.Debugger.IsAttached() Then
             serv = "http://localhost:48391/ProntoWeb"
         Else
-            serv = "http://prontoclientes.williamsentregas.com.ar/"
+            serv = "https://prontoclientes.williamsentregas.com.ar/"
         End If
 
         'RebindReportViewerLINQ("ProntoWeb\Informes\Cartas con Copia sin asignar.rdl", qq, New ReportParameter() {New ReportParameter("sServidor", serv)})
@@ -548,8 +548,8 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
             Select Case cmbInforme.Text
                 Case "Listado general de cartas de porte"
 
-                    ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2, _
-                                "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl", _
+                    ProntoFuncionesUIWeb.RebindReportViewer(ReportViewer2,
+                                "ProntoWeb\Informes\Listado general de Cartas de Porte (simulando original) con foto .rdl",
                                         dt2, Nothing, , , sTitulo)
 
 
@@ -922,9 +922,9 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
             Dim streamids As String()
             Dim mimeType, encoding, extension As String
 
-            Dim bytes As Byte() = ReportViewer2.LocalReport.Render( _
-                       "Excel", Nothing, mimeType, encoding, _
-                         extension, _
+            Dim bytes As Byte() = ReportViewer2.LocalReport.Render(
+                       "Excel", Nothing, mimeType, encoding,
+                         extension,
                         streamids, warnings)
 
             Dim fs = New FileStream(ArchivoExcelDestino, FileMode.Create)
@@ -1088,12 +1088,12 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
         '        Log(Entry)
         '04/21/2014 12:37:52
-        'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+        'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
         '        __________________________()
 
         '        Log(Entry)
         '04/21/2014 12:37:52
-        'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Hubo un error al generar el informe. System.ApplicationException: WriteAndRaiseError: Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+        'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:Hubo un error al generar el informe. System.ApplicationException: WriteAndRaiseError: Error en GetDataTableFiltradoYPaginado. Probable timeout.         ver si el error es de system memory o de report processing, recomendar reinicio del IIS por las sesiones con basura. Incluir sp_who2. Filtro: Descargas,              (Exporta: Entregas, Punto de venta: Todos, Criterio: ALGUNOS Contiene: FUTUROS Y OPCIONES .COM)Error: Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
         '   at ErrHandler2.WriteAndRaiseError(String errorMessage) in C:\Backup\BDL\BussinessObject\ErrHandler2.vb:line 143
         '   at CartaDePorteManager.GetDataTableFiltradoYPaginado(String SC, String ColumnaParaFiltrar, String TextoParaFiltrar, String sortExpression, Int64 startRowIndex, Int64 maximumRows, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRemComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime fechadesde, DateTime fechahasta, Int32 puntoventa, String& sTituloFiltroUsado, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32 AgrupadorDeTandaPeriodos, Int32 Vagon, String Patente, Boolean bInsertarEnTablaTemporal)
         '   at CartaDePorteInformesAccesoClientes.AsignaInformeAlReportViewer(Boolean bDescargaExcel)
@@ -1215,15 +1215,15 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
 
 
 
-            Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(HFSC.Value, _
-                    "", "", "", 1, 0, _
-                    estadofiltro, rs, idVendedor, idCorredor, _
-                    idDestinatario, idIntermediario, _
-                    idRComercial, idArticulo, idProcedencia, idDestino, _
-                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR), _
-                                    DropDownList2.Text, _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)), _
-                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)), _
+            Dim strsql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL(HFSC.Value,
+                    "", "", "", 1, 0,
+                    estadofiltro, rs, idVendedor, idCorredor,
+                    idDestinatario, idIntermediario,
+                    idRComercial, idArticulo, idProcedencia, idDestino,
+                    IIf(cmbCriterioWHERE.SelectedValue = "todos", FiltroANDOR.FiltroAND, FiltroANDOR.FiltroOR),
+                                    DropDownList2.Text,
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaDesde.Text, #1/1/1753#)),
+                    Convert.ToDateTime(iisValidSqlDate(txtFechaHasta.Text, #1/1/2100#)),
                     cmbPuntoVenta.SelectedValue, sTitulo, optDivisionSyngenta.SelectedValue, , , txtQueContenga.Text,
              idClienteAuxiliar, -1, 0, "", , "Todos")
 
@@ -1269,16 +1269,16 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
             'WHERE rn = 1
 
 
-            Dim agrup = ";WITH cte AS " & _
-            "( " & _
-            "       SELECT *, " & _
-            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " & _
-            "       FROM ( " & _
-                     strsql & _
-            "       ) as cartas " & _
-            ") " & _
-            "SELECT * " & _
-            "FROM cte " & _
+            Dim agrup = ";WITH cte AS " &
+            "( " &
+            "       SELECT *, " &
+            "             ROW_NUMBER() OVER (PARTITION BY NumeroCartaDePorte,SubnumeroVagon ORDER BY IdCartaDePorte DESC) AS rn " &
+            "       FROM ( " &
+                     strsql &
+            "       ) as cartas " &
+            ") " &
+            "SELECT * " &
+            "FROM cte " &
             "WHERE rn = 1 "
 
             'dt = ExecDinamico(HFSC.Value, agrup)
@@ -1300,7 +1300,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         Catch ex As Exception
             '            Log(Entry)
             '04/10/2014 08:57:49
-            'Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
+            'Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message: -  Error 
             '   en ExecDinamico. - System.Data.SqlClient.SqlException: Timeout expired.  The timeout period elapsed prior 
             '   to completion of the operation or the server is not responding.
             '   at Microsoft.VisualBasic.CompilerServices.Symbols.Container.InvokeMethod(Method TargetProcedure, Object[] Arguments, Boolean[] CopyBack, BindingFlags Flags)
@@ -1357,7 +1357,7 @@ Partial Class CartaDePorteInformesAccesoClientesBLDcorredor
         If System.Diagnostics.Debugger.IsAttached() Then
             serv = "http://localhost:48391/ProntoWeb"
         Else
-            serv = "http://prontoclientes.williamsentregas.com.ar/"
+            serv = "https://prontoclientes.williamsentregas.com.ar/"
         End If
 
         'RebindReportViewerLINQ("ProntoWeb\Informes\Cartas con Copia sin asignar.rdl", qq, New ReportParameter() {New ReportParameter("sServidor", serv)})

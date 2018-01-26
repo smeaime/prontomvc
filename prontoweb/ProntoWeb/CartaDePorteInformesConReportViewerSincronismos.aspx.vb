@@ -3226,7 +3226,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                         serv = "http://localhost:59798/"
                     Else
                         'es importante el HTTPS
-                        'serv = "http://prontoclientes.williamsentregas.com.ar"
+                        'serv = "https://prontoclientes.williamsentregas.com.ar"
                         serv = "https://prontoweb.williamsentregas.com.ar"
 
                     End If

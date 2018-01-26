@@ -575,8 +575,6 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
 
 
 
-
-
                                     <%--   /////////////////////////////////////////////////////////////////////        
  /////////////////////////////////////////////////////////////////////    --%>
                                     <%--   /////////////////////////////////////////////////////////////////////        
@@ -622,9 +620,9 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
 
 
 
-<%--
 
-                                    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+                                    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" style="visibility:hidden;display:none">
 
                                         <!-- Header section containing title -->
                                         <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
@@ -664,7 +662,15 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                                             </div>
                                         </div>
 
-                                    </div>--%>
+                                    </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -886,7 +892,12 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                                             showHideDiv(tokenDivId, false);
                                             showHideDiv(permissionDivId, true);
                                         }
+
+
+
                                         resetUI();
+
+                                        requestPermission(); //pedirlo siempre?
                                     </script>
 
 

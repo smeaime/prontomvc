@@ -23,7 +23,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
     public partial class UserAdministrationController : ProntoMVC.Controllers.ProntoBaseController // No le pongo ProntoBaseController para no obligarlo a tener base asignada
     {
-        private const int PageSize = 200;
+        private const int PageSize = 20000;
         private const string ResetPasswordBody = "Your new password is: ";
         private const string ResetPasswordSubject = "Your New Password";
         private readonly IRolesService _rolesService;
@@ -38,7 +38,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             try
             {
-               if  (oStaticMembershipService!=null) ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
+                if (oStaticMembershipService != null) ViewBag.NombreUsuario = oStaticMembershipService.GetUser().UserName;
             }
             catch (Exception e)
             {
@@ -176,15 +176,15 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
             IndexViewModel m = new IndexViewModel
-                            {
-                                Search = search,
-                                Users = users,
-                                UsuariosPronto = null,
-                                Roles = _rolesService.Enabled
+            {
+                Search = search,
+                Users = users,
+                UsuariosPronto = null,
+                Roles = _rolesService.Enabled
                                     ? _rolesService.FindAll()
                                     : Enumerable.Empty<string>(),
-                                IsRolesEnabled = _rolesService.Enabled
-                            };
+                IsRolesEnabled = _rolesService.Enabled
+            };
 
 
             //  foreach  ( MembershipUser i in m.Users)
@@ -211,19 +211,19 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                 {
                     if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)
                              || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
-                      {
+                    {
 
                         if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
                         {
-                           if  (!(
-                                Roles.IsUserInRole(u.UserName, "AdminExterno") ||
-                                Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
-                                Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
-                                Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
-                                Roles.IsUserInRole(u.UserName, "Externo")
-                               )) 
+                            if (!(
+                                 Roles.IsUserInRole(u.UserName, "AdminExterno") ||
+                                 Roles.IsUserInRole(u.UserName, "ExternoOrdenesPagoListas") ||
+                                 Roles.IsUserInRole(u.UserName, "ExternoCuentaCorrienteProveedor") ||
+                                 Roles.IsUserInRole(u.UserName, "ExternoPresupuestos") ||
+                                 Roles.IsUserInRole(u.UserName, "Externo")
+                                ))
 
-                               continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
+                                continue; // para que el adminexterno general (que no tiene cuit/grupo) no vea a usuarios supervisores 
                         }
 
 
@@ -274,6 +274,10 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
             return View(m);
         }
+
+
+
+
 
         public virtual ActionResult IndexAdminExterno(int? page, string search, string mensaje = "")
         {
@@ -360,20 +364,25 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
 
-             string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
+            string[] rolesexternos = new string[] {"ExternoCuentaCorrienteCliente",
                                                     "ExternoCuentaCorrienteProveedor",
                                                     "ExternoOrdenesPagoListas",
                                                     "ExternoPresupuestos", "AdminExterno", "Externo"};
 
+
+
+            bool guiduserEsSuperadmin = Roles.IsUserInRole(oStaticMembershipService.GetUser().UserName, "SuperAdmin");
+
+
             foreach (MembershipUser u in users)
             {
-             
-                if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) 
-                         || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+
+                if (DatosExtendidosDelUsuario_GrupoUsuarios((Guid)u.ProviderUserKey) == DatosExtendidosDelUsuario_GrupoUsuarios(guiduser)
+                         || (DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "" || guiduserEsSuperadmin)
                 {
 
 
-                    if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "")
+                    if ((DatosExtendidosDelUsuario_GrupoUsuarios(guiduser) ?? "") == "" && !guiduserEsSuperadmin)
                     {
                         if (!(
                              Roles.IsUserInRole(u.UserName, "AdminExterno") ||
@@ -461,7 +470,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             if (id == Guid.Empty) id = guiduser;
             MembershipUser u = Membership.GetUser(id);
             var c = new ProntoMVC.Controllers.AccountController();
-            string nombrebase = (Session["BasePronto"].NullSafeToString() == "") ? c.BuscarUltimaBaseAccedida( oStaticMembershipService) : Session["BasePronto"].NullSafeToString();
+            string nombrebase = (Session["BasePronto"].NullSafeToString() == "") ? c.BuscarUltimaBaseAccedida(oStaticMembershipService) : Session["BasePronto"].NullSafeToString();
             ViewBag.EmpresaDefault = new SelectList(baselistado.ToList(), "Value", "Text", nombrebase);
 
             try
@@ -514,15 +523,15 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         public virtual ViewResult Role(string id)
         {
             return View(new RoleViewModel
-                            {
-                                Role = id,
-                                Users = _rolesService.FindUserNamesByRole(id)
+            {
+                Role = id,
+                Users = _rolesService.FindUserNamesByRole(id)
                                                      .ToDictionary(
                                                         k => k,
                                                         v => _userService.Get(v)
                                                      )
-                            });
-        
+            });
+
         }
 
 
@@ -587,17 +596,17 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             }
             catch (Exception x)
             {
-    
+
                 ProntoFuncionesGenerales.MandaEmailSimple(ConfigurationManager.AppSettings["ErrorMail"],
-                                "Error de proveedor", 
-                                x.ToString() ,
+                                "Error de proveedor",
+                                x.ToString(),
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpServer"],
                                 ConfigurationManager.AppSettings["SmtpUser"],
                                 ConfigurationManager.AppSettings["SmtpPass"],
                                 "",
                                Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
-                
+
                 //throw;
             }
             if (grupo != "")
@@ -609,25 +618,25 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
             return View(new DetailsViewModel
-                            {
-                                CanResetPassword = _membershipSettings.Password.ResetOrRetrieval.CanReset,
-                                RequirePasswordQuestionAnswerToResetPassword = _membershipSettings.Password.ResetOrRetrieval.RequiresQuestionAndAnswer,
-                                DisplayName = user.UserName,
-                                Grupo = grupo,
-                                User = user,
-                                Roles = _rolesService.Enabled
+            {
+                CanResetPassword = _membershipSettings.Password.ResetOrRetrieval.CanReset,
+                RequirePasswordQuestionAnswerToResetPassword = _membershipSettings.Password.ResetOrRetrieval.RequiresQuestionAndAnswer,
+                DisplayName = user.UserName,
+                Grupo = grupo,
+                User = user,
+                Roles = _rolesService.Enabled
                                     ? _rolesService.FindAll().ToDictionary(role => role, role => userRoles.Contains(role))
                                     : new Dictionary<string, bool>(0),
-                                Empresas = emp,
-                                IsRolesEnabled = _rolesService.Enabled,
-                                Status = user.IsOnline
+                Empresas = emp,
+                IsRolesEnabled = _rolesService.Enabled,
+                Status = user.IsOnline
                                             ? DetailsViewModel.StatusEnum.Online
                                             : !user.IsApproved
                                                 ? DetailsViewModel.StatusEnum.Unapproved
                                                 : user.IsLockedOut
                                                     ? DetailsViewModel.StatusEnum.LockedOut
                                                     : DetailsViewModel.StatusEnum.Offline
-                            });
+            });
 
 
 
@@ -713,9 +722,9 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         public virtual ViewResult CreateUser()
         {
             var model = new CreateUserViewModel
-                            {
-                                InitialRoles = _rolesService.FindAll().ToDictionary(k => k, v => false)
-                            };
+            {
+                InitialRoles = _rolesService.FindAll().ToDictionary(k => k, v => false)
+            };
 
 
 
@@ -1350,7 +1359,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         {
 
             resetearContrConTexto(id, nuevapass);
-           
+
             return RedirectToAction("Password", new { id });
         }
 
@@ -1395,7 +1404,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
         public void resetearContrConTexto(Guid id, string txtPass)
         {
 
-            if (!CheckPasswordComplexity(txtPass)) {
+            if (!CheckPasswordComplexity(txtPass))
+            {
                 TempData["Alerta"] = "La contraseña debe tener al menos 7 caracteres y debe tener un carácter no alfanumérico";
                 return; //throw new Exception("La contraseña es inválida");
             }
@@ -1574,11 +1584,11 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
             Bases b = (from i in dbMaster.Bases
-                     where (i.Descripcion == nombreBase)
-                     select i).FirstOrDefault();
-     
+                       where (i.Descripcion == nombreBase)
+                       select i).FirstOrDefault();
 
-            if (b==null)
+
+            if (b == null)
             {
                 b = new Bases();
 
@@ -1629,13 +1639,13 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
                                                 {  "Williams" ,true},
                                                 {  "Autotrol",false },
                                             };
-            
+
             string usuario = ViewBag.NombreUsuario;
             Guid guiduser = (Guid)Membership.GetUser(usuario).ProviderUserKey;
 
 
             emp = BasesPorUsuarioColeccion2(id, guiduser);
-            
+
 
 
             var user = _userService.Get(id);
@@ -1976,8 +1986,8 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
             m.ArchivoAyuda = parametros.ArchivoAyuda;
             m.PathPlantillas = parametros.PathPlantillas;
 
-            m.BasePRONTOMantenimiento = parametros.BasePRONTOMantenimiento; 
-           
+            m.BasePRONTOMantenimiento = parametros.BasePRONTOMantenimiento;
+
 
             return View(m);
         }
@@ -2019,7 +2029,7 @@ namespace ProntoMVC.Areas.MvcMembership.Controllers
 
 
             parametros.BasePRONTOMantenimiento = configuracionViewModel.BasePRONTOMantenimiento;
-           
+
 
 
             db.SaveChanges();
