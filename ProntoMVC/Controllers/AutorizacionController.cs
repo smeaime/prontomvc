@@ -1202,7 +1202,8 @@ namespace ProntoMVC.Controllers
 
 
             resetear();
-
+            
+            db.AutorizacionesPorComprobante_CircuitoFirmasCompleto(IdFormulario, IdComprobante);
 
             return RedirectToAction("DocumentosPorAutoriza", new { IdAutoriza = IdAutorizo });
 

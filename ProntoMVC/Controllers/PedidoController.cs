@@ -796,6 +796,24 @@ namespace ProntoMVC.Controllers
                 {
                     Pedido.ConfirmadoPorWeb_1 = "SI";
 
+                    foreach (var d in Pedido.DetallePedidos)
+                    {
+                        int IdDetalleRequerimiento = d.IdDetalleRequerimiento ?? 0;
+                        if (IdDetalleRequerimiento > 0)
+                        {
+                            ProntoMVC.Data.Models.DetalleRequerimiento data = db.DetalleRequerimientos.Where(p => p.IdDetalleRequerimiento == IdDetalleRequerimiento).FirstOrDefault();
+                            if (data != null)
+                            {
+                                int IdTipoCompra = data.Requerimientos.IdTipoCompra ?? 0;
+                                if (IdTipoCompra > 0)
+                                {
+                                    Pedido.IdTipoCompraRM = IdTipoCompra;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     string tipomovimiento = "";
                     if (Pedido.IdPedido > 0)
                     {
@@ -2097,16 +2115,14 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult Pedidos_Pendientes(string sidx, string sord, int page, int rows, bool _search, string filters, int? IdProveedor)
+        public virtual ActionResult Pedidos_Pendientes2_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, int? IdProveedor, string Destino)
         {
             int IdProveedor1 = IdProveedor ?? 0;
-
-            var Entidad = db.Pedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && (p.CircuitoFirmasCompleto ?? "") == "SI" && (IdProveedor1 <= 0 || p.IdProveedor == IdProveedor1) && (db.DetallePedidos.Where(q => q.IdPedido == p.IdPedido && (db.DetalleComprobantesProveedores.Where(r => r.IdDetallePedido == q.IdDetallePedido).Count() > 0)).Count() == 0)).AsQueryable();
 
             int totalRecords = 0;
             int pageSize = rows;
 
-            var data = (from a in Entidad
+            var data = (from a in db.Pedidos
                         from b in db.Empleados.Where(o => o.IdEmpleado == a.IdComprador).DefaultIfEmpty()
                         from c in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
                         from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.IdTipoCompraRM).DefaultIfEmpty()
@@ -2153,8 +2169,8 @@ namespace ProntoMVC.Controllers
                             DescripcionIva = f != null ? f.Descripcion : "",
                             FechaEnvioProveedor = a.FechaEnvioProveedor,
                             Detalle = a.Detalle ?? "",
-                        }).OrderBy(sidx + " " + sord).AsQueryable();
-
+                        }).Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && (p.CircuitoFirmasCompleto ?? "") == "SI" && (IdProveedor1 <= 0 || p.IdProveedor == IdProveedor1) && (Destino != "ComprobanteProveedor" || db.DetallePedidos.Where(q => q.IdPedido == p.IdPedido && (db.DetalleComprobantesProveedores.Where(r => r.IdDetallePedido == q.IdDetallePedido).Count() > 0)).Count() == 0)).OrderBy(sidx + " " + sord).AsQueryable();
+            
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Pedidos2>
                                      (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
@@ -2170,9 +2186,11 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdPedido.ToString(),
                             cell = new string[] { 
+                                //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
+                                "<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
                                 a.IdPedido.ToString(), 
-                                a.IdProveedor.ToString(), 
-                                a.IdCondicionCompra.ToString(), 
+                                a.IdProveedor.NullSafeToString(), 
+                                a.IdCondicionCompra.NullSafeToString(), 
                                 a.NumeroPedido.NullSafeToString(), 
                                 a.SubNumero.NullSafeToString(), 
                                 a.FechaPedido==null ? "" :  a.FechaPedido.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -2333,9 +2351,9 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult PedidosPendientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
+        public virtual ActionResult Pedidos_Pendientes_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters)
         {
-            var DetEntidad = db.DetallePedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && p.Pedido.Aprobo != null).AsQueryable();
+            var DetEntidad = db.DetallePedidos.Where(p => (p.Cumplido ?? "") != "SI" && (p.Cumplido ?? "") != "AN" && (p.Pedido.CircuitoFirmasCompleto ?? "") == "SI" && p.Pedido.Aprobo != null).AsQueryable();
 
             int pageSize = rows;
             int totalRecords = DetEntidad.Count();

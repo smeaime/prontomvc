@@ -233,7 +233,7 @@ $(function () {
         //editurl: ROOT + 'Requerimiento/EditGridData/',
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['Acciones', 'IdDetalleRequerimiento', 'IdRequerimiento', 'IdArticulo', 'IdUnidad', 'IdControlCalidad', 'OrigenDescripcion', 
+        colNames: ['Acciones', 'IdDetalleRequerimiento', 'IdRequerimiento', 'IdArticulo', 'IdUnidad', 'IdControlCalidad', 'OrigenDescripcion', 'TipoDesignacion',
                    'Nro. item', 'Cant.', 'Un.', 'Codigo', 'Articulo', 'Observaciones', 'Tipos de descripcion', 'Fecha entrega', 'Cump.', 'Control de calidad', 
                    'Agregar adjunto', 'Archivo adjunto 1', 'Archivo adjunto 2', 'Archivo adjunto 3', 'Archivo adjunto 4', 'Archivo adjunto 5', 'Archivo adjunto 6', 'Archivo adjunto 7',
                    'Archivo adjunto 8', 'Archivo adjunto 9', 'Archivo adjunto 10'
@@ -246,6 +246,7 @@ $(function () {
                     { name: 'IdUnidad', index: 'IdUnidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdControlCalidad', index: 'IdControlCalidad', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'OrigenDescripcion', index: 'OrigenDescripcion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    { name: 'TipoDesignacion', index: 'TipoDesignacion', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     {
                         name: 'NumeroItem', index: 'NumeroItem', width: 50, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
@@ -752,18 +753,20 @@ $(function () {
         var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
         var prox = ProximoNumeroItem();
         try {
-            tmpdata['IdArticulo'] = getdata['IdArticulo'];
-            tmpdata['Codigo'] = getdata['Codigo'];
-            tmpdata['Descripcion'] = getdata['Descripcion'];
-            tmpdata['OrigenDescripcion'] = 1;
             var now = new Date();
             var currentDate = strpad00(now.getDate()) + "/" + strpad00(now.getMonth() + 1) + "/" + now.getFullYear();
+
+            tmpdata['IdDetalleRequerimiento'] = 0;
+            tmpdata['IdArticulo'] = getdata['IdArticulo'];
+            tmpdata['Codigo'] = getdata['Codigo'];
+            tmpdata['Articulo'] = getdata['Descripcion'];
+            tmpdata['OrigenDescripcion'] = 1;
             tmpdata['FechaEntrega'] = currentDate;
             tmpdata['IdUnidad'] = getdata['IdUnidad'];
             tmpdata['Unidad'] = getdata['Unidad'];
-            tmpdata['IdDetalleRequerimiento'] = 0;
             tmpdata['Cantidad'] = 0;
             tmpdata['NumeroItem'] = prox++;
+
             getdata = tmpdata;
         } catch (e) { }
 
@@ -786,7 +789,7 @@ $(function () {
         ///////////////
         //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
 
-        var pos = TraerPosicionLibre();
+        var pos = TraerPosicionLibreRM();
         if (pos == null) {
             $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
         }
