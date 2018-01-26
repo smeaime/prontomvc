@@ -40,6 +40,8 @@ namespace ProntoMVC.Controllers
             return View();
         }
 
+
+
         public virtual ViewResult Edit(int id)
         {
             ValesSalida o;
@@ -77,6 +79,59 @@ namespace ProntoMVC.Controllers
                 return View(o);
             }
         }
+
+
+
+
+        public virtual ViewResult EditPendientesRm(int id,string ItemsDeRm)
+        {
+            ValesSalida o;
+
+            try
+            {
+                if (!PuedeLeer(enumNodos.ValesSalida))
+                {
+                    o = new ValesSalida();
+                    CargarViewBag(o);
+                    ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
+
+                    return View("Edit", o);
+
+                }
+            }
+            catch (Exception)
+            {
+                o = new ValesSalida();
+                CargarViewBag(o);
+                ViewBag.AlertaEnLayout = "No tiene permisos de lectura";
+                return View("Edit", o);
+            }
+
+            if (id <= 0)
+            {
+                o = new ValesSalida();
+                inic(ref o);
+                CargarViewBag(o);
+                return View("Edit", o);
+            }
+            else
+            {
+                o = db.ValesSalidas.Include(x => x.DetalleValesSalidas).SingleOrDefault(x => x.IdValeSalida == id);
+                CargarViewBag(o);
+                Session.Add("ValeSalida", o);
+                return View("Edit", o);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
         void CargarViewBag(ValesSalida o)
         {
@@ -206,6 +261,31 @@ namespace ProntoMVC.Controllers
                             db.SaveChanges();
                         }
 
+
+
+                        /////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////
+                        /*
+                        var reqs = from x in ValeSalida.DetalleValesSalidas select x.IdDetalleRequerimiento;
+
+                        bool ActivarSolicitudMateriales = (db.Parametros.FirstOrDefault().ActivarSolicitudMateriales == "SI");
+                        foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                        {
+                            if (ActivarSolicitudMateriales)
+                            {
+                                detrm.TipoDesignacion = "STK";
+                                db.SaveChanges();
+                            }
+
+                            EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
+                        }
+
+                        */
+                        /////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////
+
+
+
                         scope.Complete();
                         scope.Dispose();
                     }
@@ -284,53 +364,188 @@ namespace ProntoMVC.Controllers
 
 
 
-
-        public virtual JsonResult DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string idDetalleRequerimientosString)
+        public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida, string idDetalleRequerimientosString)
         {
 
-            List<int> idDetalleRequerimientos = idDetalleRequerimientosString.Split(',').Select(Int32.Parse).ToList();
+
+            int IdValeSalida1 = IdValeSalida ?? 0;
+            var Det = db.DetalleValesSalidas.Where(p => p.IdValeSalida == IdValeSalida1).AsQueryable();
+            int pageSize = rows ?? 20;
+            int totalRecords = Det.Count();
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+            int currentPage = page ?? 1;
 
 
-            if (idDetalleRequerimientos == null) return null;
 
-            var vale = new ValesSalida();
 
-            var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
 
-            foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+            if ((idDetalleRequerimientosString ?? "") != "")
+
             {
-                var detvale = new DetalleValesSalida();
-                detvale.IdArticulo = detrm.IdArticulo;
-                detvale.Articulo = detrm.Articulo;
-                detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
-                detvale.Cantidad = detrm.Cantidad;
-                vale.DetalleValesSalidas.Add(detvale);
+
+
+
+                /*
+                // acá tenemos otro formulario modal, UN ALTA DE VALE!!!
+                var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos, user, pass);
+
+                var c = new ValeSalidaController(); //ese controlador no recibe el membership que estoy usando en este
+                c.db = db;
+                c.oStaticMembershipService = oStaticMembershipService;
+                c.BatchUpdate(vale);
+                c = null;
+
+                string ss = db.Parametros.FirstOrDefault().ActivarSolicitudMateriales;
+                bool ActivarSolicitudMateriales = (ss == "SI");
+
+                foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                {
+                    if (ActivarSolicitudMateriales)
+                    {
+                        detrm.TipoDesignacion = "STK";
+                        db.SaveChanges();
+                    }
+
+                    EntidadManager.Tarea(SCsql(), "Requerimientos_ActualizarEstado", detrm.Requerimientos.IdRequerimiento, detrm.IdDetalleRequerimiento);
+                }
+                */
+
+
+
+
+                List<int> idDetalleRequerimientos = idDetalleRequerimientosString.Split(',').Select(Int32.Parse).ToList();
+
+
+                if (idDetalleRequerimientos == null) return null;
+
+                var vale = new ValesSalida();
+
+                var reqs = db.DetalleRequerimientos.Where(x => idDetalleRequerimientos.Contains(x.IdDetalleRequerimiento));
+
+                foreach (Data.Models.DetalleRequerimiento detrm in reqs)
+                {
+                    var detvale = new DetalleValesSalida();
+                    detvale.IdArticulo = detrm.IdArticulo;
+                    detvale.Articulo = detrm.Articulo;
+                    detvale.IdDetalleRequerimiento = detrm.IdDetalleRequerimiento;
+                    detvale.Cantidad = detrm.Cantidad;
+                    vale.DetalleValesSalidas.Add(detvale);
+                }
+
+
+
+                var data2 = (from a in vale.DetalleValesSalidas
+                                //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
+                                //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+                            select new
+                            {
+                                a.IdDetalleValeSalida,
+                                //a.IdValeSalida,
+                                a.IdArticulo,
+                                a.IdUnidad,
+                                //IdObra = 0,//a.ValesSalida.IdObra,
+                                //a.IdDetalleRequerimiento,
+                                Codigo = a.Articulo.Codigo,
+                                Articulo = a.Articulo.Descripcion,
+                                a.Cantidad,
+                                Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
+                                a.Cumplido,
+                                a.Estado,
+                                //NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                                //ItemRM = a.DetalleRequerimiento.Item,
+                                //TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
+                            }).OrderBy(p => p.IdDetalleValeSalida).ToList();
+
+
+
+                var jsonData2 = new jqGridJson()
+                {
+                    total = totalPages,
+                    page = currentPage,
+                    records = totalRecords,
+                    rows = (from a in data2
+                            select new jqGridRowJson
+                            {
+                                id = a.IdDetalleValeSalida.ToString(),
+                                cell = new string[] {
+                            string.Empty,
+                            a.IdDetalleValeSalida.ToString(),
+                            a.IdArticulo.NullSafeToString(),
+                            a.IdUnidad.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.Articulo.NullSafeToString(),
+                            a.Cantidad.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Cumplido.NullSafeToString(),
+                            a.Estado.NullSafeToString(),
+                            //a.NumeroRequerimiento.NullSafeToString(),
+                            //a.ItemRM.NullSafeToString(),
+                            //a.TipoRequerimiento.NullSafeToString()
+                            }
+                            }).ToArray()
+                };
+
+                return Json(jsonData2, JsonRequestBehavior.AllowGet);
+                
+
+
             }
 
-            var data = (from a in vale.DetalleValesSalidas
-                            //from b in db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                            //from c in db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty()
+
+
+
+
+            
+
+            var data = (from a in Det
+                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleValeSalida,
-                            a.IdValeSalida,
                             a.IdArticulo,
                             a.IdUnidad,
-                            IdObra=0,//a.ValesSalida.IdObra,
-                            a.IdDetalleRequerimiento,
-                            NumeroValeSalida=0,//  a.ValesSalida.NumeroValeSalida,
-                            NumeroRequerimiento= "", //a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            NumeroItem= "", //a.DetalleRequerimiento.NumeroItem,
-                            ArticuloCodigo = a.Articulo.Codigo,
-                            ArticuloDescripcion = a.Articulo.Descripcion,
+                            Codigo = a.Articulo.Codigo,
+                            Articulo = a.Articulo.Descripcion,
                             a.Cantidad,
-                            Unidad = "",// db.Unidades.Where(y => y.IdUnidad == a.IdUnidad).DefaultIfEmpty() != null ? b.Abreviatura : "",
-                            Obra = "", //db.Obras.Where(y => y.IdObra == a.ValesSalida.IdObra).DefaultIfEmpty() != null ? c.NumeroObra : "",
-                            Entregado = "", //db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum().ToString(),
-                            Pendiente = "", //(a.Cantidad ?? 0) - (db.DetalleSalidasMateriales.Where(x => x.IdDetalleValeSalida == a.IdDetalleValeSalida && (x.SalidasMateriale.Anulada ?? "") != "SI").Select(x => x.Cantidad).Sum() ?? 0),
-                            a.Partida
-                        }).OrderBy(p => p.IdDetalleValeSalida).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
+                            Unidad = (b != null ? b.Abreviatura : ""),
+                            a.Cumplido,
+                            a.Estado,
+                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
+                            ItemRM = a.DetalleRequerimiento.Item,
+                            TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
+                        }).OrderBy(x => x.IdDetalleValeSalida)
+                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
+                        .ToList();
+
+
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = currentPage,
+                records = totalRecords,
+                rows = (from a in data
+                        select new jqGridRowJson
+                        {
+                            id = a.IdDetalleValeSalida.ToString(),
+                            cell = new string[] {
+                            string.Empty,
+                            a.IdDetalleValeSalida.ToString(),
+                            a.IdArticulo.NullSafeToString(),
+                            a.IdUnidad.NullSafeToString(),
+                            a.Codigo.NullSafeToString(),
+                            a.Articulo.NullSafeToString(),
+                            a.Cantidad.NullSafeToString(),
+                            a.Unidad.NullSafeToString(),
+                            a.Cumplido.NullSafeToString(),
+                            a.Estado.NullSafeToString(),
+                            a.NumeroRequerimiento.NullSafeToString(),
+                            a.ItemRM.NullSafeToString(),
+                            a.TipoRequerimiento.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -367,63 +582,6 @@ namespace ProntoMVC.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult DetValesSalida(string sidx, string sord, int? page, int? rows, int? IdValeSalida)
-        {
-            int IdValeSalida1 = IdValeSalida ?? 0;
-            var Det = db.DetalleValesSalidas.Where(p => p.IdValeSalida == IdValeSalida1).AsQueryable();
-            int pageSize = rows ?? 20;
-            int totalRecords = Det.Count();
-            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            int currentPage = page ?? 1;
-
-            var data = (from a in Det
-                        from b in db.Unidades.Where(o => o.IdUnidad == a.IdUnidad).DefaultIfEmpty()
-                        select new
-                        {
-                            a.IdDetalleValeSalida,
-                            a.IdArticulo,
-                            a.IdUnidad,
-                            Codigo = a.Articulo.Codigo,
-                            Articulo = a.Articulo.Descripcion,
-                            a.Cantidad,
-                            Unidad = (b != null ? b.Abreviatura : ""),
-                            a.Cumplido,
-                            a.Estado,
-                            NumeroRequerimiento = a.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
-                            ItemRM = a.DetalleRequerimiento.Item,
-                            TipoRequerimiento = a.DetalleRequerimiento.Requerimientos.TipoRequerimiento
-                        }).OrderBy(x => x.IdDetalleValeSalida)
-                        //.Skip((currentPage - 1) * pageSize).Take(pageSize)
-                        .ToList();
-
-            var jsonData = new jqGridJson()
-            {
-                total = totalPages,
-                page = currentPage,
-                records = totalRecords,
-                rows = (from a in data
-                        select new jqGridRowJson
-                        {
-                            id = a.IdDetalleValeSalida.ToString(),
-                            cell = new string[] {
-                            string.Empty,
-                            a.IdDetalleValeSalida.ToString(),
-                            a.IdArticulo.NullSafeToString(),
-                            a.IdUnidad.NullSafeToString(),
-                            a.Codigo.NullSafeToString(),
-                            a.Articulo.NullSafeToString(),
-                            a.Cantidad.NullSafeToString(),
-                            a.Unidad.NullSafeToString(),
-                            a.Cumplido.NullSafeToString(),
-                            a.Estado.NullSafeToString(),
-                            a.NumeroRequerimiento.NullSafeToString(),
-                            a.ItemRM.NullSafeToString(),
-                            a.TipoRequerimiento.NullSafeToString()
-                            }
-                        }).ToArray()
-            };
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }
 
         public virtual ActionResult ValesSalidaPendientesDeSalidaMateriales(string sidx, string sord, int? page, int? rows)
         {

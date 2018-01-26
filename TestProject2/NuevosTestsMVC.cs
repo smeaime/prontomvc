@@ -155,6 +155,90 @@ namespace ProntoMVC.TestsMVC
 
 
 
+
+
+        [TestMethod]
+        public void sssss()
+        {
+            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+            var c = new  ValeSalidaController();
+            GetMockedControllerGenerico(c);
+
+            var cr = new RequerimientoController();
+            GetMockedControllerGenerico(cr);
+
+            /*
+            Requerimiento rm = new Requerimiento();
+            var rmdet = new ProntoMVC.Data.Models.DetalleRequerimiento();
+            rm.Aprobo = 700;
+            rm.IdObra = 1;
+            rmdet.IdArticulo = 5128;
+            rmdet.Cantidad = 12;
+            rmdet.IdUnidad = 33;
+            rmdet.NumeroItem = 1;
+            rmdet.OrigenDescripcion = 1;
+            rmdet.IdControlCalidad = 1;
+            rmdet.FechaEntrega = DateTime.Today;
+            rm.DetalleRequerimientos.Add(rmdet);
+            rm.DetalleRequerimientos.Add(new MVCent.DetalleRequerimiento { IdArticulo = 11, Cantidad = 3255 });
+            JsonResult result = c.BatchUpdate(rm);
+            */
+
+
+            // ¿tiene sentido paginar las grillas de detalle? se hace más facil la edicion de la grilla si se carga completa?
+
+            JsonResult result3 = (JsonResult)cr.RequerimientosPendientesAsignar_DynamicGridData("NumeroRequerimiento", "desc", 0, 50, false, "", "", "", "");
+            jqGridJson listado3 = (jqGridJson)result3.Data;
+
+
+            JsonResult result2 = (JsonResult)c.DetValesSalida ("NumeroRequerimiento", "desc", 0, 50, -1 , "9021,9022");
+            jqGridJson listado2 = (jqGridJson)result2.Data;
+
+            //habria problemas con los TipoDesignacion del detalle no? -si
+
+
+
+
+
+
+            Assert.IsTrue(listado2.records > 0);
+
+        }
+
+
+
+
+
+        [TestMethod]
+        public void probar_context_del_rms_pendientesGenerarValesAlmacen2222()
+        {
+
+            // a veces no desaparecen desde web. desaparecen si lo hago desde el prontovb6?
+
+            var c = new RequerimientoController();
+            GetMockedControllerGenerico(c);
+
+            c.GenerarValesAlmacen((new int[] { 42499 }).ToList(), "administrador", "");
+
+
+            //abrir el vale(de los item de rms pendientes) en otra ventana? cómo le pasaría los parametros? por la url ?
+
+
+            //    cómo hago un test de ui mvc?
+            // edit(int id [el parametro default del ruteador], string rmitems)
+            //http://localhost:40053/ValeSalida/Edit/-1?ItemsDeRms=12,3444,8797,8888
+
+            //llamada al action
+            //    @Url.Action("ValeSalida", new { @id = Model.IdRequerimiento })
+        }
+
+
+
+
+
+
+
         [TestMethod]
         public void probar_rms_pendientes_y_partial_del_vale()
         {

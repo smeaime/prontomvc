@@ -417,11 +417,13 @@ Namespace Pronto.ERP.Bll
                 Case "LA BIZNAGA"
                     '                ENTREGAS: titular, Intermediario, Rte comercial y cliente Obs.
                     'EXPORTACION:    Destinatario()
+
                     txtCorredor.Text = ""
-                    txtTitular.Text = "LA BIZNAGA SA AGROPECUARIA"
-                    txtIntermediario.Text = "LA BIZNAGA SA AGROPECUARIA"
-                    txtRcomercial.Text = "LA BIZNAGA SA AGROPECUARIA"
-                    txtPopClienteAuxiliar.Text = "LA BIZNAGA SA AGROPECUARIA"
+                    Dim cuit = "30-50125030-5"
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
 
 
 
@@ -1240,7 +1242,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                        Case "LA BIZNAGA"
+                        Case "LA BIZNAGA", "LEDESMA"
 
                             Dim sql = CartaDePorteManager.GetDataTableFiltradoYPaginado_CadenaSQL_TambienEjecutaCount(SC,
                                             "", "", "", 1, maximumRows,
@@ -1306,7 +1308,7 @@ Namespace Pronto.ERP.Bll
                             yourParams(27) = New ReportParameter("Titulo", titulo)
 
 
-                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "LaBiznaga" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
+                            Dim ArchivoExcelDestino = IO.Path.GetTempPath & "Ledesma" & Now.ToString("ddMMMyyyy_HHmmss") & ".xls" 'http://
 
                             output = CartaDePorteManager.RebindReportViewer_ServidorExcel(rep,
                                     "Williams - Sincro LaBiznaga2.rdl", yourParams, ArchivoExcelDestino, False)
@@ -21053,6 +21055,9 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+
+
                 'sin identificar
                 Case "GLGUAYCHU"
                     Return "100001"
@@ -21066,6 +21071,11 @@ Namespace Pronto.ERP.Bll
 
 
 
+                    'El cambio a realizar, es en el valor del campo Cuit Vendedor, específicamente para los Nombres de Vendedor = G.Villegas y Pehuajo. 
+                    'Actualmente el código se envía como 100168 para General Villegas 
+                    'y como 100104 para Pehuajo, los cuales están mal. 
+                    'Habría que cambiar General Villegas Vendedor = 100068 y Pehuajo Vendedor = 100067.
+
 
 
                 Case "BRAGADO"
@@ -21075,14 +21085,14 @@ Namespace Pronto.ERP.Bll
                 Case "LEVALLE"
                     Return "100267"
                 Case "PEHUA"
-                    Return "100104"
+                    Return "100067"
                 Case "OLAVARR"
                     Return "100093"
                 Case "NAON"
                     Return "100067"
                 Case "G.VILL"
                     '                    Return "100106"
-                    Return "100168"
+                    Return "100068"
                 Case "IRIARTE"
                     Return "100056"
 

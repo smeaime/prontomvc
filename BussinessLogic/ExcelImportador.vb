@@ -1955,6 +1955,13 @@ Public Class ExcelImportadorManager
 
 
 
+        Dim IdDestinoSantaclaraMRP = 39 'BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC) ' 39 ' BuscarDestinoPorCUIT("30500858628", SC, "", "")
+        Dim IdDestinoSantaclaraVicentin = 329 ' BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( VICENTIN )", SC) '329 'BuscarDestinoPorCUIT("30500959629", SC, "", "")
+
+
+
+
+
         Dim db As DemoProntoEntities = New DemoProntoEntities(Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
 
         db.Configuration.AutoDetectChangesEnabled = True
@@ -2311,6 +2318,17 @@ Public Class ExcelImportadorManager
 
 
                         .PuntoVenta = 2 'por decreto http://consultas.bdlconsultores.com.ar/Admin/verConsultas1.php?recordid=32327
+                        'nueva excepcion http://consultas.bdlconsultores.com.ar/Admin/VerConsultas1.php?recordid=47322
+                        If .Destino = IdDestinoSantaclaraMRP And .Destino > 0 Then
+                            .Destino = IdDestinoSantaclaraVicentin
+                            .PuntoVenta = 3
+                        End If
+
+
+
+
+
+
                         'Try
                         '    If .Destino > 0 Then
                         '        .PuntoVenta = db.WilliamsDestinos.Find(.Destino).PuntoVenta

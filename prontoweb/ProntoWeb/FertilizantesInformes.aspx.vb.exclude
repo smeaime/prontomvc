@@ -651,7 +651,7 @@ Partial Class CartaDePorteInformesFertilizantes
                     If System.Diagnostics.Debugger.IsAttached() Then
                         serv = "http://localhost:48391/ProntoWeb"
                     Else
-                        serv = "http://prontoclientes.williamsentregas.com.ar/"
+                        serv = "https://prontoclientes.williamsentregas.com.ar/"
                     End If
 
                     RebindReportViewerLINQ("ProntoWeb\Informes\Cupos por producto.rdl", q) ', New ReportParameter() {New ReportParameter("sServidor", serv)})
