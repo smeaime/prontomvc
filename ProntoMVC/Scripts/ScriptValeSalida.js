@@ -1,13 +1,13 @@
-    var CalcularItem = function (value, colname) {
-        if (colname === "Cantidad") {
-            var rowid = $('#Lista').getGridParam('selrow');
-            value = Number(value);
-            var Cantidad = value;
-            //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
-        }
-        return [true];
-    };
-    
+var CalcularItem = function (value, colname) {
+    if (colname === "Cantidad") {
+        var rowid = $('#Lista').getGridParam('selrow');
+        value = Number(value);
+        var Cantidad = value;
+        //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
+    }
+    return [true];
+};
+
 function inicializar() {
     $("#loading").hide();
 
@@ -198,9 +198,18 @@ function inicializar() {
     /////////////////////////////////////////////////DEFINICION DE GRILLAS   //////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+    // funciona ese url+postData condicionales? (para que dependiendo de uno u otro, se cargue el detalle) -no me convendría llamar a la misma funcion?
+
     $('#Lista').jqGrid({
         url: ROOT + 'ValeSalida/DetValesSalida/',
-        postData: { 'IdValeSalida': function () { return $("#IdValeSalida").val(); } },
+        postData: {
+                'IdValeSalida':                     function () { return $("#IdValeSalida").val(); } ,
+                'idDetalleRequerimientosString':    qs["ItemsDeRm"] 
+        },
+
         datatype: 'json',
         mtype: 'POST',
         colNames: ['', 'IdDetalleValeSalida', 'IdArticulo', 'IdUnidad', 'Codigo', 'Artículo', 'Cantidad', 'Un.', 'Cump.', 'Est.', 'Nro.RM', 'Item RM', 'Tipo RM'],
@@ -374,9 +383,9 @@ function inicializar() {
         cellEdit: true,
         cellsubmit: 'clientArray'
     })
-        //.then(function () {
-                  //CargarDetalle();
-          //      });
+    //.then(function () {
+    //CargarDetalle();
+    //      });
 
     //$('#Lista').jqGrid("inlineNav", "#ListaPager", { addParams: { position: "last" } });
     jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
@@ -490,7 +499,14 @@ function inicializar() {
                 if (result) {
                     $('#Lista').trigger('reloadGrid');
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "ValeSalida/Edit/" + result.IdValeSalida);
+
+                    if (qs["ItemsDeRms"] != "") {
+                        window.location = ROOT + "Requerimiento/RMsPendientesDeAsignar";
+                    }
+                    else {
+                        window.location = (ROOT + "ValeSalida/Edit/" + result.IdValeSalida);
+                    }
+
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');

@@ -1032,7 +1032,7 @@ Partial Class CartaDePorteInformesGerenciales
             serv = "http://localhost:48391/ProntoWeb"
         Else
             'es importante el HTTPS
-            'serv = "http://prontoclientes.williamsentregas.com.ar"
+            'serv = "https://prontoclientes.williamsentregas.com.ar"
             serv = "https://prontoweb.williamsentregas.com.ar"
 
         End If

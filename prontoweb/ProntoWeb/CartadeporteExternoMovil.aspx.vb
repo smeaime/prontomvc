@@ -799,8 +799,8 @@ Partial Class CartadeporteABMExternoMovil
         'para el externo
 
         TabPanel1.Enabled = False
-        TabPanel2.Enabled = False
-        TabPanel3.Enabled = False
+        TabPanel2.Enabled = True
+        TabPanel3.Enabled = True
         TabPanel4.Enabled = False
         TabContainer2.ActiveTabIndex = 4
         btnOk.Visible = False
@@ -2604,7 +2604,7 @@ Partial Class CartadeporteABMExternoMovil
                     '//////////////////////////////////////////////////
 
                     Dim ms, advertencias As String
-                    If CartaDePorteManager.IsValid(SC, myCartaDePorte, ms, advertencias) Then
+                    If CartaDePorteManager.IsValidCarta(SC, myCartaDePorte, ms, advertencias) Then
 
                         Dim b As Boolean = False
                         Try

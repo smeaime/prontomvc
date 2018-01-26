@@ -877,6 +877,114 @@ namespace ProntoMVC.Tests
 
 
 
+
+        [TestMethod]
+        public void InformeSincroLaBiznaga_Ledesma_47230()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Ledesma", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void _47375()
+        {
+
+            /*
+              
+            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
+            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
+            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
+
+
+            ademas,
+                *está el tema de saber a qué mail le corresponde cada cliente
+                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
+
+
+             Sincronismos
+* Página de clientes
+* Web Service
+* 
+            */
+
+
+
+
+
+            
+
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void regla_robot_47322()
+        {
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+
+
+            //le esta metiendo un "non breaking space" C2 A0
+
+
+            var id = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC); // esto tiene espacios
+            var id2 = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC);//esto tiene nonbreakingspace
+                                                                                       //If.Destino <= 0 Then
+                                                                                       //    'primero busco la equivalencia con excepcion prefijada
+                                                                                       //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
+                                                                                       //        log += "Destino; "
+
+
+
+
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+
+
+        }
+
+
+
+
         [TestMethod]
         public void OCR_validacion_de_A_C_A_47215()
         {
@@ -893,8 +1001,8 @@ namespace ProntoMVC.Tests
 
 
 
-       //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
-       //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+            //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+            //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
 
 
         }
@@ -1028,6 +1136,77 @@ namespace ProntoMVC.Tests
         #region reclamos43063_CHAT
 
 
+        [TestMethod]
+        public void conversacion_43063_entre_internos()
+        {
+
+
+            var s = new ServicioCartaPorte.servi();
+
+
+
+
+
+
+            // Mariano elige una carta
+            int idcarta = 2633335;
+
+            //Mariano saluda a Rogrigo
+            //s.GrabarComentario_DLL(idcarta, "Hola Rodrigo como estás", "Mariano", SC, "RODRIGORIOS");
+
+
+            ////Rodrigo contesta, no tiene necesidad de indicar a quien, puesto que es un usuario externo
+            //s.GrabarComentario_DLL(idcarta, "este es mi comentario", "RODRIGORIOS", SC, "");
+
+
+            //var sss = Membership.GetAllUsers();
+            //Dictionary<string, string> membershipCasillas = new Dictionary<string, string>() {
+            //                                  { "Mariano", "mscalella911@gmail.com"},
+            //                                  { "RODRIGORIOS", "gmalggievato@gmail.com"}
+            //};
+
+            //deberia enviar el mail y la notificacion esa funcion
+
+
+
+
+
+
+            /*
+
+            [16:26, 23/1/2018] +54 9 11 2857-9291: el chat a tomas se lo mandaste por testing? en q carta y usuario?
+            [16:28, 23/1/2018] Andy: prontotesting, ya te paso la info
+            [16:29, 23 / 1 / 2018] Andy: cp 566024333
+            [16:29, 23/1/2018] Andy: el chat es con el usuario LOSGROBO
+            [16:29, 23 / 1 / 2018] Andy: hay comentarios mios y de prueba2
+            [16:29, 23 / 1 / 2018] Andy: el usuario LOSGROBO tiene el mail de tomas
+            [16:30, 23 / 1 / 2018] Andy: y prueba2 tambien
+            [16:30, 23 / 1 / 2018] +54 9 11 2857-9291: ese usuario esta en la bdlmaster de clientes?
+            [16:30, 23/1/2018] +54 9 11 2857-9291: losgrobo digo
+            [16:31, 23 / 1 / 2018] Andy: LOSGROBO está en bdlmasterclientes y prueba2 en bdlmaster
+            [16:35, 23 / 1 / 2018] +54 9 11 2857-9291: ah entiendo, vos estas hablandole a losgrobo, pero prueba2 se metió en la conversacion y deberian llegarle los mails y no le llegan.es asi?
+            [16:36, 23/1/2018] Andy: en realidad al revés prueba2 inicio el chat y yo me metí
+            [16:37, 23 / 1 / 2018] +54 9 11 2857-9291: aha y a prueba2 no le llega lo tuyo, y a vos sí lo de prueba2 no?
+            [16:37, 23/1/2018] Andy: si, a mi me llego todo ok
+            [16:37, 23 / 1 / 2018] Andy: y a el no le llego nada
+
+
+            */
+
+
+
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Andres estás?", SC, scbdlmasterappconfig, scbdlmasterappconfig, "Andres", false,
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+
+            s.GrabarComentarioYNotificar(idcarta, "Andres", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+
+        }
+
+
+
+
 
         [TestMethod]
         public void conversacion_43063()
@@ -1059,11 +1238,11 @@ namespace ProntoMVC.Tests
             //};
 
             //deberia enviar el mail y la notificacion esa funcion
-            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, "RODRIGORIOS", false,
+            s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Rodrigo como estás", SC, scbdlmasterappconfig, scbdlmasterappconfig, "RODRIGORIOS", false,
                                                                 ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
-            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, "", true,
+            s.GrabarComentarioYNotificar(idcarta, "RODRIGORIOS", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
                                                     ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
@@ -2485,7 +2664,7 @@ namespace ProntoMVC.Tests
             {
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(ConfigurationManager.AppSettings["ErrorMail"],
                                "Notificación Williams",
-                               "Tenés actuatalizaciones de camiones informados en http://prontoclientes.williamsentregas.com.ar",
+                               "Tenés actuatalizaciones de camiones informados en https://prontoclientes.williamsentregas.com.ar",
                                ConfigurationManager.AppSettings["SmtpUser"],
                                ConfigurationManager.AppSettings["SmtpServer"],
                                ConfigurationManager.AppSettings["SmtpUser"],
@@ -3359,7 +3538,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -4139,7 +4318,10 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void Se_pisan_las_observaciones_en_el_robot_43069()
         {
-            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+
+
 
             string ms = "";
 
@@ -4603,7 +4785,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @"C:\bdl\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @"C:\Users\Mariano\Documents\pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -4670,9 +4852,9 @@ namespace ProntoMVC.Tests
 
             //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
 
-            //string archivoExcel = @"C:\bdl\pronto\docstest\Posicion-170626-1330.xls";
-            string archivoExcel = @"C:\bdl\pronto\docstest\New folder\Posicion-170809-0850.xls";
-            //string archivoExcel = @"C:\bdl\pronto\docstest\New folder\urenport_09ago2017_085016.xls";
+            //string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\Posicion-170626-1330.xls";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+            //string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\urenport_09ago2017_085016.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -4766,7 +4948,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            string archivoExcel = @"C:\bdl\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
             var s = new ServicioCartaPorte.servi();
 
@@ -4793,7 +4975,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void _zxinf_referencias()
         {
-            var dd = CartaDePorteManager.ReadBarcode1D_ZXing(@"C:\bdl\pronto\docstest\000555094127-cp.jpg", 0);
+            var dd = CartaDePorteManager.ReadBarcode1D_ZXing(@"C:\Users\Mariano\Documents\pronto\docstest\000555094127-cp.jpg", 0);
         }
 
 
@@ -6787,7 +6969,7 @@ namespace ProntoMVC.Tests
 
         Log Entry : 
     05/11/2017 13:34:06
-    Error in: http://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
+    Error in: https://prontoclientes.williamsentregas.com.ar/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx. Error Message:System.OutOfMemoryException
     Out of memory.
     at System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
     at System.Drawing.Image.FromFile(String filename)
@@ -8549,7 +8731,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @"C:\bdl\pronto\docstest\1271214feb2017.tif";
+            zipFile = @"C:\Users\Mariano\Documents\pronto\docstest\1271214feb2017.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13465,7 +13647,7 @@ namespace ProntoMVC.Tests
         void VaciarDirectorioTemp()
         {
 
-            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\bdl\pronto\prontoweb\Temp");
+            System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\Users\Mariano\Documents\pronto\prontoweb\Temp");
 
             foreach (FileInfo file in di.GetFiles())
             {

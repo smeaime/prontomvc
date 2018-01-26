@@ -551,7 +551,13 @@ Public Module SQLdinamico
     Function BuscaIdWilliamsDestinoPreciso(ByVal Destino As String, ByVal SC As String) As Integer
         If Destino = "" Then Return -1
 
-        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE Descripcion='" & Destino & "'")
+        'de donde salió con tabs????? -de la gridview?
+        'le esta metiendo un "non breaking space" C2 A0
+        'Print  Replace('FABRICA SANTA CLARA ( MRP )', char(160), '') --esto tiene espacios normales
+        'Print  REPLACE('FABRICA SANTA CLARA ( MRP )', char(160), ' ') --esto tiene nonbreakspace
+
+        Dim ds = EntidadManager.ExecDinamico(SC, "SELECT TOP 1 IdWilliamsDestino FROM WilliamsDestinos WHERE REPLACE(Descripcion, char(160), ' ') =REPLACE('" & Destino & "', char(160), ' ')  ")
+
 
         If ds.Rows.Count < 1 Then Return -1
 

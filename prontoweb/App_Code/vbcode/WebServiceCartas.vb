@@ -240,7 +240,9 @@ Public Class WebServiceCartas
             End If
 
             Dim s = New ServicioCartaPorte.servi()
-            s.GrabarComentarioYNotificar(idCartaPorte, usuario, sComentario, Encriptar(scs), ConexBDLmasterClientes, usuarioDestino, esExterno,
+            s.GrabarComentarioYNotificar(idCartaPorte, usuario, sComentario, Encriptar(scs),
+                                         ConexBDLmasterClientes, ConexBDLmaster,
+                                         usuarioDestino, esExterno,
                                          ConfigurationManager.AppSettings("UrlDominio"),
                                          ConfigurationManager.AppSettings("SmtpUser"),
                                          ConfigurationManager.AppSettings("SmtpServer"),
