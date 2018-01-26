@@ -284,7 +284,7 @@
     <div style="width: ; margin-top: 3px; height: auto;">
         <table style="padding: 0px; border: none #FFFFFF; width: ; margin-right: 0px; font-size: large;"
             cellpadding="1" cellspacing="1">
-        
+
             <tr>
                 <td class="EncabezadoCell" style="width: 70px; font-weight: bold; font-size: 20px;">C.PORTE
                 </td>
@@ -317,7 +317,7 @@
                                     </style>
                                     <%-- <ajaxToolkit:TextBoxWatermarkExtender ID="TBWE2" runat="server" TargetControlID="txtSubfijo"
                                         WatermarkText="Subf" WatermarkCssClass="watermarked aaa" Enabled="True" />--%>
-                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True"  Visible="false"
+                                    <asp:TextBox ID="txtSubNumeroVagon" runat="server" Width="80px" TabIndex="2" AutoPostBack="True" Visible="false"
                                         ToolTip="Vagón" MaxLength="7" Font-Size="24px" Height="24px" Style="font-weight: bolder;">
                                         
                                         
@@ -418,7 +418,7 @@
                                         CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
                                         Enabled="True" />
                                 </td>
-                                <td class="EncabezadoCell" style="height: 80px;" colspan="2">
+                                <td class="EncabezadoCell" style="height: 80px; visibility: hidden; display: none" colspan="2">
                                     <table>
                                         <tr>
                                             <td style="width 70%">
@@ -440,8 +440,8 @@
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
 
-                                                <asp:HyperLink ID="linkPDF" Target="_blank" runat="server" Text="PDF" Visible="true"></asp:HyperLink>
-                                                <asp:HyperLink ID="linkTIF" Target="_blank" runat="server" Text="TIFF" Visible="true"></asp:HyperLink>
+                                                <asp:HyperLink ID="linkPDF" Target="_blank" runat="server" Text="PDF"></asp:HyperLink>
+                                                <asp:HyperLink ID="linkTIF" Target="_blank" runat="server" Text="TIFF"></asp:HyperLink>
                                             </td>
                                             <td class="" style="height: 80px;" colspan="1">
                                                 <asp:Panel ID="Panel3" runat="server" Width="50px">
@@ -552,31 +552,31 @@
                             <tr>
                                 <td class="EncabezadoCell" style="width: 15%; height: 23px;">Punto venta
                                 </td>
-                                <td class="EncabezadoCell " style="width: 35%; height: 23px;">
+                                <td class="EncabezadoCell " style="width: 35%; height: 23px; visibility: hidden; display: none">
                                     <asp:DropDownList ID="cmbPuntoVenta" runat="server" CssClass="CssCombo" TabIndex="2"
                                         Width="50px" />
                                 </td>
-                                <td class="EncabezadoCell" style="width: 15%; height: 26px;">
+                                <td class="EncabezadoCell" style="width: 15%; height: 26px; visibility: hidden; display: none">
                                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                         <ContentTemplate>
                                             <asp:Label ID="lblFacturarleAesteCliente" runat="server" Text="Facturar a" Visible="False"></asp:Label>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </td>
-                                <td class="EncabezadoCell" onkeydown="return jsVerificarAcopiosFacturarA();">
+                                <td class="EncabezadoCell" onkeydown="return jsVerificarAcopiosFacturarA();" style="visibility: hidden; display: none">
                                     <script type="text/javascript">
 
 
-                                        function jsVerificarAcopiosFacturarA() {
+                                                        function jsVerificarAcopiosFacturarA() {
 
 
-                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtFacturarleAesteCliente");
-                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optAcopiosFacturarA");
+                                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtFacturarleAesteCliente");
+                                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optAcopiosFacturarA");
 
-                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
-                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
+                                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
+                                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
 
-                                        }
+                                                        }
 
 
                                     </script>
@@ -618,9 +618,9 @@
                                 <td class="EncabezadoCell " style="width: 35%; height: 26px;">
                                     <asp:TextBox ID="txtCEE" runat="server" Width="180px" TabIndex="2"></asp:TextBox>
                                 </td>
-                                <td class="EncabezadoCell" style="width: 15%; height: 26px;">Fecha carga
+                                <td class="EncabezadoCell" style="width: 15%; height: 26px; visibility: hidden; display: none">Fecha carga
                                 </td>
-                                <td class="EncabezadoCell">
+                                <td class="EncabezadoCell" style="visibility: hidden; display: none">
                                     <asp:TextBox ID="txtFechaCarga" runat="server" Width="72px" MaxLength="1" TabIndex="3"></asp:TextBox>
                                     <asp:Button ID="btnPopCalendar1" runat="server" Style="margin-left: 0px" />
                                     <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy" TargetControlID="txtFechaCarga"
@@ -665,15 +665,15 @@
 
 
 
-                                        //                                        $("#optDivisionSyngenta").change(function () {
+                                                        //                                        $("#optDivisionSyngenta").change(function () {
 
-                                        //                                            $("#HiddenCasosEspeciales").val($("#optDivisionSyngenta").val());
+                                                        //                                            $("#HiddenCasosEspeciales").val($("#optDivisionSyngenta").val());
 
-                                        //                                        });
+                                                        //                                        });
 
-                                        function addslashes(str) {
-                                            return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-                                        }
+                                                        function addslashes(str) {
+                                                            return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+                                                        }
 
 
 
@@ -683,16 +683,16 @@
 
 
 
-                                        String.prototype.escapeSpecialChars = function () {
-                                            return this.replace(/\\n/g, "\\n")
-                                                       .replace(/\\'/g, "\\'")
-                                                       .replace(/\\"/g, '\\"')
-                                                       .replace(/\\&/g, "\\&")
-                                                       .replace(/\\r/g, "\\r")
-                                                       .replace(/\\t/g, "\\t")
-                                                       .replace(/\\b/g, "\\b")
-                                                       .replace(/\\f/g, "\\f");
-                                        };
+                                                        String.prototype.escapeSpecialChars = function () {
+                                                            return this.replace(/\\n/g, "\\n")
+                                                                .replace(/\\'/g, "\\'")
+                                                                .replace(/\\"/g, '\\"')
+                                                                .replace(/\\&/g, "\\&")
+                                                                .replace(/\\r/g, "\\r")
+                                                                .replace(/\\t/g, "\\t")
+                                                                .replace(/\\b/g, "\\b")
+                                                                .replace(/\\f/g, "\\f");
+                                                        };
 
 
 
@@ -701,191 +701,191 @@
 
 
 
-                                        function jsAcopiosPorCliente(textbox, combo) {
-                                            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+                                                        function jsAcopiosPorCliente(textbox, combo) {
+                                                            //var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
 
-                                            var $txttitular = $("#" + textbox.id + "")
-                                            var $select = $("#" + combo.id + "")
+                                                            var $txttitular = $("#" + textbox.id + "")
+                                                            var $select = $("#" + combo.id + "")
 
 
 
-                                            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
-                                            var myEscapedJSONString = myJSONString.escapeSpecialChars();
+                                                            var myJSONString = JSON.stringify($("#ctl00_ContentPlaceHolder1_HFSC").val());
+                                                            var myEscapedJSONString = myJSONString.escapeSpecialChars();
 
-                                            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
+                                                            var aaa = addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val())
 
 
-                                            $.ajax({
-                                                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
-                                                url: "WebServiceClientes.asmx/AcopiosPorCliente",
-                                                type: 'POST',
-                                                contentType: "application/json; charset=utf-8",
-                                                dataType: "json",
-                                                //dataType: "xml",
-                                                data: "{'NombreCliente':'" +
-                                                       addslashes($txttitular.val()) +
-                                                     "', 'SC':'" + aaa + "' }",
+                                                            $.ajax({
+                                                                // url: "/CartaDePorte.aspx/AcopiosPorCliente",
+                                                                url: "WebServiceClientes.asmx/AcopiosPorCliente",
+                                                                type: 'POST',
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                //dataType: "xml",
+                                                                data: "{'NombreCliente':'" +
+                                                                addslashes($txttitular.val()) +
+                                                                "', 'SC':'" + aaa + "' }",
 
 
-                                                //data: {
-                                                //    NombreCliente: 'asdfasdf',
-                                                //    SC:  'asdfsadfsa' // $("#HFSC").val()
-                                                //},
-                                                success: function (data) {
+                                                                //data: {
+                                                                //    NombreCliente: 'asdfasdf',
+                                                                //    SC:  'asdfsadfsa' // $("#HFSC").val()
+                                                                //},
+                                                                success: function (data) {
 
-                                                    var x = data.d;
+                                                                    var x = data.d;
 
-                                                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
+                                                                    //var $select= $('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta');
 
-                                                    var guardoelactualId = $select.val()
-                                                    $select.find('option').remove();
+                                                                    var guardoelactualId = $select.val()
+                                                                    $select.find('option').remove();
 
 
 
-                                                    $.each(x, function (i, val) {
+                                                                    $.each(x, function (i, val) {
 
 
-                                                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
+                                                                        $select.append('<option value=' + val.idacopio + '>' + val.desc + '</option>');
 
-                                                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
-                                                        //$("<option></option>")
-                                                        //    .val(val.idacopio).text(val.desc));
+                                                                        //$('select#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').append(
+                                                                        //$("<option></option>")
+                                                                        //    .val(val.idacopio).text(val.desc));
 
-                                                    });
+                                                                    });
 
-                                                    $select.val(guardoelactualId)
+                                                                    $select.val(guardoelactualId)
 
-                                                    if (x.length > 1) combo.style.visibility = "visible";
-                                                    else combo.style.visibility = "hidden";
+                                                                    if (x.length > 1) combo.style.visibility = "visible";
+                                                                    else combo.style.visibility = "hidden";
 
-                                                },
-                                                error: function (xhr) {
-                                                    // alert("Something seems Wrong");
-                                                }
-                                            });
+                                                                },
+                                                                error: function (xhr) {
+                                                                    // alert("Something seems Wrong");
+                                                                }
+                                                            });
 
-                                        }
+                                                        }
 
 
-                                        function comboCasosEspeciales(textbox, combo) {
+                                                        function comboCasosEspeciales(textbox, combo) {
 
-                                            return
+                                                            return
 
-                                            if (textbox.value.indexOf("SYNGENTA") != -1) {
-                                                combo.style.visibility = "visible";
-                                                //                                                var temp = $(combo).val();
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
-                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
-                                                //                                                $(combo).val(temp);
+                                                            if (textbox.value.indexOf("SYNGENTA") != -1) {
+                                                                combo.style.visibility = "visible";
+                                                                //                                                var temp = $(combo).val();
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
+                                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
+                                                                //                                                $(combo).val(temp);
 
-                                                //                                                $("#theSelect option[value='Seeds']").attr('disabled', 'disabled')
-                                                //                                                $("#theSelect option[value='Agro']").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value='Seeds']").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value='Agro']").attr('disabled', 'disabled')
 
-                                                // $("#theSelect option[value='Agro']").removeAttr('disabled');
-                                                // $("#theSelect option:selected").attr('disabled', 'disabled')
+                                                                // $("#theSelect option[value='Agro']").removeAttr('disabled');
+                                                                // $("#theSelect option:selected").attr('disabled', 'disabled')
 
-                                                // $(combo).("option[value='401']").remove();
-                                                // document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
-                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
+                                                                // $(combo).("option[value='401']").remove();
+                                                                // document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value="Agro">Agro</option>');
+                                                                //                                                $(combo).append('<option value="Seeds">Seeds</option>');
 
 
-                                                //                                                combo.options[2].remove()
-                                                //                                                combo.options[3].remove()
-                                                //                                                combo.options[4].remove()
-                                                //combo.options[0].attr('disabled', 'disabled')
-                                                //$("#" + combo.id + " option[value='401']").remove();
-                                                $("#" + combo.id + " option").removeAttr('disabled');
-                                                $("#" + combo.id + " option").not("[value='Agro']").not("[value='Seeds']").attr('disabled', 'disabled')
+                                                                //                                                combo.options[2].remove()
+                                                                //                                                combo.options[3].remove()
+                                                                //                                                combo.options[4].remove()
+                                                                //combo.options[0].attr('disabled', 'disabled')
+                                                                //$("#" + combo.id + " option[value='401']").remove();
+                                                                $("#" + combo.id + " option").removeAttr('disabled');
+                                                                $("#" + combo.id + " option").not("[value='Agro']").not("[value='Seeds']").attr('disabled', 'disabled')
 
 
-                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
-                                                {
-                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
-                                                }
+                                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
+                                                                {
+                                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
+                                                                }
 
-                                            }
-                                            else if ((textbox.value.indexOf("A.C.A") != -1 || textbox.value.indexOf("LDC ARGENTINA S.A.") != -1) &&
-                                                // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11341
-                                                    (textbox.id != "ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestinatario")) {
+                                                            }
+                                                            else if ((textbox.value.indexOf("A.C.A") != -1 || textbox.value.indexOf("LDC ARGENTINA S.A.") != -1) &&
+                                                                // http://bdlconsultores.dyndns.org/Consultas/Admin/verConsultas1.php?recordid=11341
+                                                                (textbox.id != "ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestinatario")) {
 
 
 
 
 
-                                                combo.style.visibility = "visible";
+                                                                combo.style.visibility = "visible";
 
-                                                // http://stackoverflow.com/questions/740195/adding-options-to-a-select-using-jquery-javascript
-                                                //                                                var o = new Option("option text", "value");
-                                                //                                                /// jquerify the DOM object 'o' so we can use the html method
-                                                //                                                $(o).html("option text");
-                                                //                                                $("#selectList").append(o);
+                                                                // http://stackoverflow.com/questions/740195/adding-options-to-a-select-using-jquery-javascript
+                                                                //                                                var o = new Option("option text", "value");
+                                                                //                                                /// jquerify the DOM object 'o' so we can use the html method
+                                                                //                                                $(o).html("option text");
+                                                                //                                                $("#selectList").append(o);
 
-                                                //document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
+                                                                //document.getElementById('ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta').options[0].remove()
 
-                                                //$("#" + combo.id + " option[value='401']").remove();
-                                                $("#" + combo.id + " option").removeAttr('disabled');
-                                                $("#" + combo.id + " option[value='Agro']").attr('disabled', 'disabled')
-                                                $("#" + combo.id + " option[value='Seeds']").attr('disabled', 'disabled')
+                                                                //$("#" + combo.id + " option[value='401']").remove();
+                                                                $("#" + combo.id + " option").removeAttr('disabled');
+                                                                $("#" + combo.id + " option[value='Agro']").attr('disabled', 'disabled')
+                                                                $("#" + combo.id + " option[value='Seeds']").attr('disabled', 'disabled')
 
 
-                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
-                                                {
-                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
-                                                }
+                                                                if ($("#" + combo.id + " :selected").attr('disabled')) // quedó elegido uno deshabilitado
+                                                                {
+                                                                    $("#" + combo.id + " option:not([disabled]):first").attr('selected', 'selected')
+                                                                }
 
-                                                //                                                $("#theSelect option[value=401]").attr('disabled', 'disabled')
-                                                //                                                $("#theSelect option[value=402]").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value=401]").attr('disabled', 'disabled')
+                                                                //                                                $("#theSelect option[value=402]").attr('disabled', 'disabled')
 
 
-                                                //                                                var temp=$(combo).val();
-                                                //                                                $(combo).empty();
-                                                //                                                $(combo).append('<option value=401>1Acopio  A.C.A.</option>');
-                                                //                                                $(combo).append('<option value=402>2Acopio  A.C.A.</option>');
-                                                //                                                $(combo).append('<option value=403>3Acopio  A.C.A.</option>');
-                                                //                                                $(combo).val(temp);
-                                            }
-                                            else {
-                                                //alert("a");
-                                                combo.style.visibility = "hidden";
-                                            }
-                                        }
+                                                                //                                                var temp=$(combo).val();
+                                                                //                                                $(combo).empty();
+                                                                //                                                $(combo).append('<option value=401>1Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).append('<option value=402>2Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).append('<option value=403>3Acopio  A.C.A.</option>');
+                                                                //                                                $(combo).val(temp);
+                                                            }
+                                                            else {
+                                                                //alert("a");
+                                                                combo.style.visibility = "hidden";
+                                                            }
+                                                        }
 
 
 
-                                        function jsVerificarSyngenta() {
+                                                        function jsVerificarSyngenta() {
 
-                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-                                            //a=document.getElementById(objID)
-                                            //alert(a.value);
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                                            //a=document.getElementById(objID)
+                                                            //alert(a.value);
 
-                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
-                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta");
+                                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTitular");
+                                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngenta");
 
 
-                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
+                                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
 
-                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
+                                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
 
 
 
-                                            //alert(txttitular);
-                                            //                                            if (txttitular.indexOf("SYNGENTA") != -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
-                                            //                                            else if (txttitular.indexOf("A.C.A") != -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
-                                            //                                            else {
-                                            //                                                //alert("a");
-                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
-                                            //                                            }
+                                                            //alert(txttitular);
+                                                            //                                            if (txttitular.indexOf("SYNGENTA") != -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
+                                                            //                                            else if (txttitular.indexOf("A.C.A") != -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
+                                                            //                                            else {
+                                                            //                                                //alert("a");
+                                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
+                                                            //                                            }
 
-                                            //return false;
-                                        }
+                                                            //return false;
+                                                        }
 
 
 
@@ -921,31 +921,31 @@
                                     <script type="text/javascript">
 
 
-                                        function jsVerificarSyngentaIntermediario() {
+                                                        function jsVerificarSyngentaIntermediario() {
 
-                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-                                            //a=document.getElementById(objID)
-                                            //alert(a.value);
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                                            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                                            //a=document.getElementById(objID)
+                                                            //alert(a.value);
 
-                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtIntermediario");
-                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngentaIntermediario");
+                                                            var txttitular = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtIntermediario");
+                                                            var optDivisionSyngenta = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_optDivisionSyngentaIntermediario");
 
 
-                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
-                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
+                                                            comboCasosEspeciales(txttitular, optDivisionSyngenta);
+                                                            jsAcopiosPorCliente(txttitular, optDivisionSyngenta);
 
-                                            //alert(txttitular);
-                                            //                                            if (txttitular.indexOf("SYNGENTA") == -1) {
-                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
-                                            //                                            }
-                                            //                                            else {
-                                            //                                                //alert("a");
-                                            //                                                optDivisionSyngenta.style.visibility = "visible";
-                                            //                                            }
+                                                            //alert(txttitular);
+                                                            //                                            if (txttitular.indexOf("SYNGENTA") == -1) {
+                                                            //                                                optDivisionSyngenta.style.visibility = "hidden";
+                                                            //                                            }
+                                                            //                                            else {
+                                                            //                                                //alert("a");
+                                                            //                                                optDivisionSyngenta.style.visibility = "visible";
+                                                            //                                            }
 
-                                            //return false;
-                                        }
+                                                            //return false;
+                                                        }
 
 
                                     </script>
@@ -1195,7 +1195,7 @@
                                 </td>
                                 <td style="height: 1px; width: 35%;">
                                     <asp:DropDownList ID="cmbCosecha" runat="server" CssClass="CssCombo" TabIndex="14">
-                                        <asp:ListItem Value="" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Selected="True"></asp:ListItem>
                                         <asp:ListItem Value="2017/18">2017/18</asp:ListItem>
                                         <asp:ListItem Value="2016/17">2016/17</asp:ListItem>
                                         <asp:ListItem>2015/16</asp:ListItem>
@@ -1208,12 +1208,6 @@
                                         <asp:ListItem>2008/09</asp:ListItem>
                                         <asp:ListItem>2007/08</asp:ListItem>
                                     </asp:DropDownList>
-                                    <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator100" runat="server" ControlToValidate="cmbCosecha"
-                                        InitialValue="" ErrorMessage="* Ingrese una cosecha" Font-Size="Small" ForeColor="#FF3300"
-                                        Font-Bold="True" ValidationGroup="Encabezado" Style="display: none" />
-                                    <ajaxToolkit:ValidatorCalloutExtender
-                                        ID="ValidatorCalloutExtender10" runat="server" Enabled="True" TargetControlID="RequiredFieldValidator100"
-                                        CssClass="CustomValidatorCalloutStyle" />--%>
                                 </td>
                                 <td style="width: 15%;" class="EncabezadoCell">Peso Tara
                                 </td>
@@ -1230,8 +1224,9 @@
                                 <td style="height: 9px; width: 35%;">
                                     <asp:CheckBox ID="chkExporta" runat="server" ForeColor="White" ToolTip="Para controlar el stock del cliente"
                                         TabIndex="14" />
-                                    No facturar a subcontratistas
-                                    <asp:CheckBox ID="chkNoFacturarASubcontratistas" runat="server" ForeColor="White"
+
+
+                                    <asp:CheckBox ID="chkNoFacturarASubcontratistas" runat="server" ForeColor="White" Visible="False"
                                         ToolTip="Para controlar el stock del cliente" TabIndex="14" />
                                     <td class="EncabezadoCell" style="width: 15%; height: 11px;">Peso Neto
                                     </td>
@@ -1367,9 +1362,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="EncabezadoCell" style="width: 15%">Movimiento
+                                <td class="EncabezadoCell" style="width: 15%; visibility: hidden; display: none">Movimiento
                                 </td>
-                                <td>
+                                <td style="visibility: hidden; display: none">
+
                                     <asp:DropDownList ID="cmbMovimientoLosGrobo" runat="server" CssClass="CssCombo" TabIndex="26">
                                         <asp:ListItem Value="1">1. Egresos contratos de Venta</asp:ListItem>
                                         <asp:ListItem Value="2">2. Egreso Directo a Destino Productor</asp:ListItem>
@@ -1720,7 +1716,7 @@
                                                 Width="526px" Height="42px" Style="margin-left: 0px" TabIndex="38"></asp:TextBox>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="visibility: hidden; display: none">
                                         <td class="EncabezadoCell" style="width: 15%">Costo administrativo
                                         </td>
                                         <td class="EncabezadoCell" colspan="3">
@@ -1728,7 +1724,8 @@
                                                 TabIndex="14" />
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="visibility: hidden; display: none">
+
                                         <td class="EncabezadoCell" style="width: 15%">Liquida viaje
                                         </td>
                                         <td class="EncabezadoCell" colspan="3">
@@ -1736,7 +1733,8 @@
                                                 TabIndex="14" />
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="visibility: hidden; display: none">
+
                                         <td class="EncabezadoCell" style="width: 15%">Cobra acarreo
                                         </td>
                                         <td class="EncabezadoCell" colspan="3">
@@ -1751,7 +1749,8 @@
                                     /////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     /////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
 
-                                    <tr>
+                                    <tr style="visibility: hidden; display: none">
+
                                         <td class="EncabezadoCell" style="width: 15%">Recibidor Of.
                                         </td>
                                         <td class="EncabezadoCell" colspan="1">
@@ -1771,7 +1770,8 @@
                                         </td>
 
                                     </tr>
-                                    <tr>
+                                    <tr style="visibility: hidden; display: none">
+
                                         <td class="EncabezadoCell" style="width: 15%">Movimiento
                                         </td>
                                         <td class="EncabezadoCell">
@@ -2784,7 +2784,7 @@
             </cc1:TabPanel>
 
 
-            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px"  width="200px" OnClientPopulated="TabListo()">
+            <cc1:TabPanel ID="TabPanel5" runat="server" BackColor="#6600FF" Height="550px" Width="200px" OnClientPopulated="TabListo()">
                 <HeaderTemplate>
                     C<u>h</u>at
                 </HeaderTemplate>
@@ -2840,17 +2840,17 @@
 
                         <asp:TextBox ID="TextBox5" runat="server" CssClass=" span8" Width="250px" Height="50px" TextMode="MultiLine" Enabled="true" Text="" />
 
-                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6"  type="button"   value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
+                        <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6" type="button" value="enviar" class="btn btn-primary" style="height: 55px; width: 50px; vertical-align: top;" />
 
-                        
-                        
+
+
                         <span>
                             <ajaxToolkit:AsyncFileUpload ID="AsyncFileUpload3" runat="server" OnClientUploadComplete="ClientUploadComplete3" Height="40px" Font-Size="16"
                                 UploaderStyle="Traditional" CssClass="AFU AFU3" FailedValidation="False" />
 
 
 
-<%--<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
+                            <%--<input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo"  type="button"   value="abrir" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />
 <input id="ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo"  type="button"   value="cerrar" class="btn btn-primary" style="height: 40px ; width: ; vertical-align: top;" />--%>
 
                        
@@ -2861,224 +2861,222 @@
                         <script>
 
 
-                            function ClientUploadComplete3(sender, args) {
-                                $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));
-                            }
+                                                function ClientUploadComplete3(sender, args) {
+                                                    $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));
+                                                }
 
 
 
-                            $("#__tab_ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5").click(function () {
-                                //alert('holis');
-                                scrollToLastRow($("#Lista"))
-                            })
+                                                $("#__tab_ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5").click(function () {
+                                                    //alert('holis');
+                                                    scrollToLastRow($("#Lista"))
+                                                })
 
 
 
 
-                            $("#Button9").click(function () {
-                              
+                                                $("#Button9").click(function () {
 
-                                var d = {
-                                    idCartaPorte: qs["Id"],
-                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
-                                    usuarioDestino: ''
-                                }
 
+                                                    var d = {
+                                                        idCartaPorte: qs["Id"],
+                                                        sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
+                                                        usuarioDestino: ''
+                                                    }
 
-                                $.ajax({
-                                    type: "POST",
-                                    //method: "POST",
-                                    url: "WebServiceCartas.asmx/GrabarComentario",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
 
-                                    data: JSON.stringify(d),
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        //method: "POST",
+                                                        url: "WebServiceCartas.asmx/GrabarComentario",
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
 
-                                    success: function (data) {
-                                        //alert(data.d);
-                                        //window.open(data.d);
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
-                                        $("#Lista").trigger("reloadGrid");
-                                        scrollToLastRow($("#Lista"))
-                                    }
+                                                        data: JSON.stringify(d),
 
+                                                        success: function (data) {
+                                                            //alert(data.d);
+                                                            //window.open(data.d);
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                                            $("#Lista").trigger("reloadGrid");
+                                                            scrollToLastRow($("#Lista"))
+                                                        }
 
-                                    ,
-                                    beforeSend: function () {
-                                        //$('.loading').html('some predefined loading img html');
-                                        $("#loading").show();
-                                        $('#grabar2').attr("disabled", true).val("Espere...");
 
-                                    },
-                                    complete: function () {
-                                        $("#loading").hide();
-                                    }
+                                                        ,
+                                                        beforeSend: function () {
+                                                            //$('.loading').html('some predefined loading img html');
+                                                            $("#loading").show();
+                                                            $('#grabar2').attr("disabled", true).val("Espere...");
 
+                                                        },
+                                                        complete: function () {
+                                                            $("#loading").hide();
+                                                        }
 
-                                })
 
+                                                    })
 
-                            })
 
+                                                })
 
 
-                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
-                                //alert("hola")
 
-                                //return;
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6").click(function () {
+                                                    //alert("hola")
 
-                                var d = {
-                                    idCartaPorte: qs["Id"],
-                                    sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
-                                    usuarioDestino: ''
-                                }
+                                                    //return;
 
+                                                    var d = {
+                                                        idCartaPorte: qs["Id"],
+                                                        sComentario: $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val(),
+                                                        usuarioDestino: ''
+                                                    }
 
-                                $.ajax({
-                                    type: "POST",
-                                    //method: "POST",
-                                    url: "WebServiceCartas.asmx/GrabarComentario",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
 
-                                    data: JSON.stringify(d),
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        //method: "POST",
+                                                        url: "WebServiceCartas.asmx/GrabarComentario",
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
 
-                                    success: function (data) {
-                                        //alert(data.d);
-                                        //window.open(data.d);
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
-                                        $("#Lista").trigger("reloadGrid");
-                                        scrollToLastRow($("#Lista"))
-                                    }
+                                                        data: JSON.stringify(d),
 
+                                                        success: function (data) {
+                                                            //alert(data.d);
+                                                            //window.open(data.d);
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                                            $("#Lista").trigger("reloadGrid");
+                                                            scrollToLastRow($("#Lista"))
+                                                        }
 
-                                    ,
-                                    beforeSend: function () {
-                                        //$('.loading').html('some predefined loading img html');
-                                        $("#loading").show();
-                                        $('#grabar2').attr("disabled", true).val("Espere...");
 
-                                    },
-                                    complete: function () {
-                                        $("#loading").hide();
-                                    }
+                                                        ,
+                                                        beforeSend: function () {
+                                                            //$('.loading').html('some predefined loading img html');
+                                                            $("#loading").show();
+                                                            $('#grabar2').attr("disabled", true).val("Espere...");
 
+                                                        },
+                                                        complete: function () {
+                                                            $("#loading").hide();
+                                                        }
 
-                                })
 
+                                                    })
 
-                            })
 
+                                                })
 
 
 
 
 
-                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").click(function () {
-                                //alert("hola")
 
-                                var d = {
-                                    idCartaPorte: qs["Id"]
-                                }
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").click(function () {
+                                                    //alert("hola")
 
+                                                    var d = {
+                                                        idCartaPorte: qs["Id"]
+                                                    }
 
-                                $.ajax({
-                                    type: "POST",
-                                    //method: "POST",
-                                    url: "WebServiceCartas.asmx/CerrarReclamo",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
 
-                                    data: JSON.stringify(d),
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        //method: "POST",
+                                                        url: "WebServiceCartas.asmx/CerrarReclamo",
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
 
-                                    success: function (data) {
-                                        //alert(data.d);
-                                        //window.open(data.d);
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
-                                        $("#Lista").trigger("reloadGrid");
-                                        scrollToLastRow($("#Lista"))
-                                    }
+                                                        data: JSON.stringify(d),
 
+                                                        success: function (data) {
+                                                            //alert(data.d);
+                                                            //window.open(data.d);
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                                            $("#Lista").trigger("reloadGrid");
+                                                            scrollToLastRow($("#Lista"))
+                                                        }
 
-                                    ,
-                                    beforeSend: function () {
-                                        //$('.loading').html('some predefined loading img html');
-                                        $("#loading").show();
-                                        $('#grabar2').attr("disabled", true).val("Espere...");
 
-                                    },
-                                    complete: function () {
-                                        $("#loading").hide();
+                                                        ,
+                                                        beforeSend: function () {
+                                                            //$('.loading').html('some predefined loading img html');
+                                                            $("#loading").show();
+                                                            $('#grabar2').attr("disabled", true).val("Espere...");
 
-                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
-                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
-                                        
+                                                        },
+                                                        complete: function () {
+                                                            $("#loading").hide();
 
-                                    }
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").hide();
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").show();
 
 
-                                })
+                                                        }
 
 
-                            })
+                                                    })
 
 
+                                                })
 
 
 
-                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").click(function () {
-                                //alert("hola")
 
-                                var d = {
-                                    idCartaPorte: qs["Id"]
-                                }
 
+                                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").click(function () {
+                                                    //alert("hola")
 
-                                $.ajax({
-                                    type: "POST",
-                                    //method: "POST",
-                                    url: "WebServiceCartas.asmx/AbrirReclamo",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=utf-8",
+                                                    var d = {
+                                                        idCartaPorte: qs["Id"]
+                                                    }
 
-                                    data: JSON.stringify(d),
 
-                                    success: function (data) {
-                                        //alert(data.d);
-                                        //window.open(data.d);
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
-                                        $("#Lista").trigger("reloadGrid");
-                                        scrollToLastRow($("#Lista"))
-                                    }
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        //method: "POST",
+                                                        url: "WebServiceCartas.asmx/AbrirReclamo",
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
 
+                                                        data: JSON.stringify(d),
 
-                                    ,
-                                    beforeSend: function () {
-                                        //$('.loading').html('some predefined loading img html');
-                                        $("#loading").show();
-                                        $('#grabar2').attr("disabled", true).val("Espere...");
+                                                        success: function (data) {
+                                                            //alert(data.d);
+                                                            //window.open(data.d);
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_TextBox5").val("")
+                                                            $("#Lista").trigger("reloadGrid");
+                                                            scrollToLastRow($("#Lista"))
+                                                        }
 
-                                    },
-                                    complete: function () {
-                                        $("#loading").hide();
 
-                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
-                                        //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
-                                        $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
+                                                        ,
+                                                        beforeSend: function () {
+                                                            //$('.loading').html('some predefined loading img html');
+                                                            $("#loading").show();
+                                                            $('#grabar2').attr("disabled", true).val("Espere...");
 
+                                                        },
+                                                        complete: function () {
+                                                            $("#loading").hide();
 
-                                    }
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').attr("disabled", true);
+                                                            //$('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_Button6').val("habilitar consulta");
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnCerrarReclamo").show();
+                                                            $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_btnAbrirReclamo").hide();
 
 
-                                })
+                                                        }
 
 
-                            })
+                                                    })
 
 
+                                                })
 
 
 
@@ -3087,34 +3085,36 @@
 
 
 
-                            function getGridRowHeight(targetGrid) {
-                                var height = null; // Default
 
-                                try {
-                                    height = jQuery(targetGrid).find('tbody').find('tr:first').outerHeight();
-                                }
-                                catch (e) {
-                                    //catch and just suppress error
-                                }
 
-                                return height;
-                            }
+                                                function getGridRowHeight(targetGrid) {
+                                                    var height = null; // Default
 
-                            function scrollToRow(targetGrid, id) {
-                                var rowHeight = getGridRowHeight(targetGrid) || 23; // Default height
-                                var index = jQuery(targetGrid).getInd(id);
-                                jQuery(targetGrid).closest(".ui-jqgrid-bdiv").scrollTop(rowHeight * index);
-                            }
+                                                    try {
+                                                        height = jQuery(targetGrid).find('tbody').find('tr:first').outerHeight();
+                                                    }
+                                                    catch (e) {
+                                                        //catch and just suppress error
+                                                    }
 
+                                                    return height;
+                                                }
 
-                            function scrollToLastRow(targetGrid) {
-                                jQuery("#Lista").closest(".ui-jqgrid-bdiv").scrollTop(10000) //como no anda bien scrollToLastRow, lo hago cabeza -probablemete porq esta incluida en el tabpanel...
-                                return;
-                                var rows = $(targetGrid)[0].rows;
-                                var lastRowDOM = rows[rows.length - 1];
+                                                function scrollToRow(targetGrid, id) {
+                                                    var rowHeight = getGridRowHeight(targetGrid) || 23; // Default height
+                                                    var index = jQuery(targetGrid).getInd(id);
+                                                    jQuery(targetGrid).closest(".ui-jqgrid-bdiv").scrollTop(rowHeight * index);
+                                                }
 
-                                scrollToRow(targetGrid, $(lastRowDOM).attr('id'));
-                            }
+
+                                                function scrollToLastRow(targetGrid) {
+                                                    jQuery("#Lista").closest(".ui-jqgrid-bdiv").scrollTop(10000) //como no anda bien scrollToLastRow, lo hago cabeza -probablemete porq esta incluida en el tabpanel...
+                                                    return;
+                                                    var rows = $(targetGrid)[0].rows;
+                                                    var lastRowDOM = rows[rows.length - 1];
+
+                                                    scrollToRow(targetGrid, $(lastRowDOM).attr('id'));
+                                                }
 
 
 
@@ -3139,30 +3139,30 @@
                 <asp:Panel ID="panelAdjunto" runat="server" Style="display: none">
                     <script type="text/javascript">
 
-                        //    http: //forums.asp.net/t/1048832.aspx
+                                                //    http: //forums.asp.net/t/1048832.aspx
 
-                        function BrowseFile() {
-                            var fileUpload = document.getElementById("<%=FileUpLoad2.ClientID %>");
+                                                function BrowseFile() {
+                                                    var fileUpload = document.getElementById("<%=FileUpLoad2.ClientID %>");
 
-                            var btnUpload = document.getElementById("<%=btnAdjuntoSubir.ClientID %>"); //linea mia
+                                                    var btnUpload = document.getElementById("<%=btnAdjuntoSubir.ClientID %>"); //linea mia
 
-                            fileUpload.click();
+                                                    fileUpload.click();
 
-                            var filePath = fileUpload.value;
+                                                    var filePath = fileUpload.value;
 
-                            btnUpload.click();  //linea mia
+                                                    btnUpload.click();  //linea mia
 
-                            /*
-                            // esto lo usa para grabar una lista de archivos
-        
-                            var filePath = fileUpload.value;
-
-                            var j = listBox.options.length;
-                            listBox.options[j] = new Option();
-                            listBox.options[j].text = filePath.substr(filePath.lastIndexOf("\\") + 1);
-                            listBox.options[j].value = filePath;
-                            */
-                        }
+                                                    /*
+                                                    // esto lo usa para grabar una lista de archivos
+                                
+                                                    var filePath = fileUpload.value;
+                        
+                                                    var j = listBox.options.length;
+                                                    listBox.options[j] = new Option();
+                                                    listBox.options[j].text = filePath.substr(filePath.lastIndexOf("\\") + 1);
+                                                    listBox.options[j].value = filePath;
+                                                    */
+                                                }
                     </script>
                     <img src="../Imagenes/GmailAdjunto2.png" alt="" style="border-style: none; border-color: inherit; border-width: medium; vertical-align: middle; text-decoration: none; margin-left: 5px;" />
                     <asp:LinkButton ID="lnkAdjuntar" runat="server" Font-Bold="False" Font-Size="Small"
@@ -3218,25 +3218,25 @@
                                 Text='Duplicar' Font-Underline="false"> </asp:HyperLink>
                             <br />
                             <script type="text/javascript">
-                                function HandleIT() {
+                                                function HandleIT() {
 
-                                    PageMethods.btnDuplicar_Click();
-                                    function onSucess(result) {
-                                        alert(result);
-                                    }
-                                    function onError(result) {
-                                        alert('Something wrong.');
-                                    }
-                                }
+                                                    PageMethods.btnDuplicar_Click();
+                                                    function onSucess(result) {
+                                                        alert(result);
+                                                    }
+                                                    function onError(result) {
+                                                        alert('Something wrong.');
+                                                    }
+                                                }
 
-                                function aaa() {
-                                    alert('ssss');
-                                    $('HyperLink1').click();
-                                }
+                                                function aaa() {
+                                                    alert('ssss');
+                                                    $('HyperLink1').click();
+                                                }
 
-                                // http://stackoverflow.com/questions/1305954/asp-net-postback-with-javascript
-                                function jj() {
-                                    __doPostBack('<%= btnDuplicarEscondido.UniqueID %>', '')
+                                                // http://stackoverflow.com/questions/1305954/asp-net-postback-with-javascript
+                                                function jj() {
+                                                    __doPostBack('<%= btnDuplicarEscondido.UniqueID %>', '')
 
                                     //                                    $.ajax({
                                     //                                        type: "POST",
@@ -3283,122 +3283,122 @@
         <asp:Label ID="Label12" runat="server" ForeColor="White" Text="Imprimir" Font-Underline="True"></asp:Label>
     </asp:LinkButton>
     <script type="text/javascript">
-        //        var datos=new Array(); 
+                                //        var datos=new Array(); 
 
-        //        function AbreVentanaModal(){ 
-        //        datos[0]="Prueba 1"; 
-        //        datos[1]="Prueba 2"; 
-        //        datos[2]="Prueba 3"; 
-        //        datos=showModalDialog('Firma.aspx', datos,'status:no;resizable:yes;toolbar:no;menubar:no;scrollbars:yes;help:no''); 
-        //        DatoPadre1.value=datos[0]; 
-        //        DatoPadre2.value=datos[1]; 
-        //        DatoPadre3.value=datos[2]; 
-        //        } 
+                                //        function AbreVentanaModal(){ 
+                                //        datos[0]="Prueba 1"; 
+                                //        datos[1]="Prueba 2"; 
+                                //        datos[2]="Prueba 3"; 
+                                //        datos=showModalDialog('Firma.aspx', datos,'status:no;resizable:yes;toolbar:no;menubar:no;scrollbars:yes;help:no''); 
+                                //        DatoPadre1.value=datos[0]; 
+                                //        DatoPadre2.value=datos[1]; 
+                                //        DatoPadre3.value=datos[2]; 
+                                //        } 
 
-        //        function okScript() {
-        //            msg = 'ok';
-        //        }
+                                //        function okScript() {
+                                //            msg = 'ok';
+                                //        }
 
-        //        function cancelScript() {
-        //            msg = 'cancel';
-        //        }
+                                //        function cancelScript() {
+                                //            msg = 'cancel';
+                                //        }
 
-        function fnClickOK(sender, e) {
-            __doPostBack(sender, e)
-        }
-
-    </script>
-    <script type="text/javascript">
-
-
-        function getObj(objID) {
-            return document.getElementById(objID);
-        }
+                                function fnClickOK(sender, e) {
+                                    __doPostBack(sender, e)
+                                }
 
     </script>
     <script type="text/javascript">
-        function isNumber(n) {
-            return !isNaN(parseFloat(n)) && isFinite(n);
-        }
-
-        function toNumber(n) {
-            if (isNumber(n)) return n;
-
-            return 0;
-        }
-
-        function jsRecalcular() {
-
-            //alert("a");
-            //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
-            //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
-            //a=document.getElementById(objID)
-            //alert(a.value);
 
 
-            //if (getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value > 0 && getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value > 0) {
+                                function getObj(objID) {
+                                    return document.getElementById(objID);
+                                }
 
-            brutoposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value
-            taraposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value;
+    </script>
+    <script type="text/javascript">
+                                function isNumber(n) {
+                                    return !isNaN(parseFloat(n)) && isFinite(n);
+                                }
 
-            brutodescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtBrutoDescarga").value;
-            taradescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtTaraDescarga").value;
+                                function toNumber(n) {
+                                    if (isNumber(n)) return n;
 
+                                    return 0;
+                                }
 
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            //PESTAÑA POSICION
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
+                                function jsRecalcular() {
 
-            brutoposicion = +parseFloat(brutoposicion);
-            if (!isNumber(brutoposicion)) brutoposicion = 0;
-
-            taraposicion = +parseFloat(taraposicion);
-            if (!isNumber(taraposicion)) taraposicion = 0;
-
-            if (!(brutoposicion == 0 && taraposicion == 0)) // para que no me modifique el neto si no hay datos en el bruto NI en la tara
-            {
-                getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = brutoposicion - taraposicion;
-                if (taraposicion > brutoposicion) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = 0;
-            }
-
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            //PESTAÑA DESCARGA
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-
-            brutodescarga = +parseFloat(brutodescarga);
-            if (!isNumber(brutodescarga)) brutodescarga = 0;
-
-            taradescarga = +parseFloat(taradescarga);
-            if (!isNumber(taradescarga)) taradescarga = 0;
-
-            getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = brutodescarga - taradescarga;
-            if (taradescarga > brutodescarga) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = 0;
+                                    //alert("a");
+                                    //a = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtCantidad4");
+                                    //a = getObj("ctl00_ContentPlaceHolder1_lblAnulado0");
+                                    //a=document.getElementById(objID)
+                                    //alert(a.value);
 
 
-            ///////////////////////////////////////////////////////////////////////////////
-            //neto final con mermas y sarasas
-            ///////////////////////////////////////////////////////////////////////////////
+                                    //if (getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value > 0 && getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value > 0) {
 
-            netodescarga = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value);
-            humedad = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal").value);
-            fumigada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtFumigada").value);
-            secada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtSecada").value);
-            otrasmermas = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma").value);
+                                    brutoposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtBrutoPosicion").value
+                                    taraposicion = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtTaraPosicion").value;
 
-            txtnetototal = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas");
+                                    brutodescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtBrutoDescarga").value;
+                                    taradescarga = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtTaraDescarga").value;
 
-            if (netodescarga > 0) {
-                txtnetototal.value = Math.round(netodescarga - humedad - fumigada - secada - otrasmermas);
-            }
 
-            ActualizarDiferencia();
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //PESTAÑA POSICION
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
 
-            return false;
-        }
+                                    brutoposicion = +parseFloat(brutoposicion);
+                                    if (!isNumber(brutoposicion)) brutoposicion = 0;
+
+                                    taraposicion = +parseFloat(taraposicion);
+                                    if (!isNumber(taraposicion)) taraposicion = 0;
+
+                                    if (!(brutoposicion == 0 && taraposicion == 0)) // para que no me modifique el neto si no hay datos en el bruto NI en la tara
+                                    {
+                                        getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = brutoposicion - taraposicion;
+                                        if (taraposicion > brutoposicion) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion").value = 0;
+                                    }
+
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //PESTAÑA DESCARGA
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    ///////////////////////////////////////////////////////////////////////////////
+
+                                    brutodescarga = +parseFloat(brutodescarga);
+                                    if (!isNumber(brutodescarga)) brutodescarga = 0;
+
+                                    taradescarga = +parseFloat(taradescarga);
+                                    if (!isNumber(taradescarga)) taradescarga = 0;
+
+                                    getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = brutodescarga - taradescarga;
+                                    if (taradescarga > brutodescarga) getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value = 0;
+
+
+                                    ///////////////////////////////////////////////////////////////////////////////
+                                    //neto final con mermas y sarasas
+                                    ///////////////////////////////////////////////////////////////////////////////
+
+                                    netodescarga = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga").value);
+                                    humedad = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal").value);
+                                    fumigada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtFumigada").value);
+                                    secada = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtSecada").value);
+                                    otrasmermas = toNumber(getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma").value);
+
+                                    txtnetototal = getObj("ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas");
+
+                                    if (netodescarga > 0) {
+                                        txtnetototal.value = Math.round(netodescarga - humedad - fumigada - secada - otrasmermas);
+                                    }
+
+                                    ActualizarDiferencia();
+
+                                    return false;
+                                }
 
     </script>
     <asp:UpdatePanel ID="UpdatePanelPreRedirectMsgbox" runat="server">
@@ -3524,7 +3524,9 @@
                 Height="16px" Width="66px" />
             <%--style="visibility:hidden;"/>--%>
             <asp:Panel ID="Panel1" runat="server" Height="119px" Width="221px" BorderColor="Transparent"
-                CssClass="modalPopup" Style="vertical-align: middle; text-align: center" ForeColor="White">
+                CssClass="modalPopup" Style="er i
+             center"
+                ForeColor="White">
                 <div align="center">
                     Ingrese usuario y password
                     <br />
@@ -3550,13 +3552,12 @@
 
 
     <style>
-        .ui-autocomplete {
-            max-height: 200px;
-            overflow-y: auto;
-            /* prevent horizontal scrollbar */
-            overflow-x: hidden;
-            /* add padding to account for vertical scrollbar */
-            padding-right: 20px;
+        max-height: 200px;
+        /*  preven h r
+                overfl w-x: 
+        d
+        rtical scrollbar */
+        padding-right: 20px;
         }
     </style>
 
@@ -3569,7 +3570,7 @@
             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_lblDiferenciaKilos').text(
                 "DIF de KG " +
                 (parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
-                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val()))
+                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtNetoPosicion').val()))
             );
         }
 
@@ -3606,7 +3607,7 @@
                         data: "{" +
                         "'term':'" + $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_txtDestino").val() + "'," +
                         "'puntoventa':'" +
-                          addslashes($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_cmbPuntoVenta").val()) +
+                        addslashes($("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel2_cmbPuntoVenta").val()) +
                         "', 'SC':'" +
                         "" // addslashes($("#ctl00_ContentPlaceHolder1_HFSC").val()) 
 
@@ -3624,20 +3625,20 @@
 
                             if (!arr) {
                                 var result = [
-                                 {
-                                     label: 'No se encontraron resultados',
-                                     value: response.term
-                                 }
+                                    {
+                                        label: 'No se encontraron resultados',
+                                        value: response.term
+                                    }
                                 ];
                                 response(result);
                             }
 
                             if (!arr.length || arr.length == 0) {
                                 var result = [
-                                 {
-                                     label: 'No se encontraron resultados',
-                                     value: response.term
-                                 }
+                                    {
+                                        label: 'No se encontraron resultados',
+                                        value: response.term
+                                    }
                                 ];
                                 response(result);
                             }
@@ -3705,29 +3706,29 @@
             return;
 
             var tot = parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma').val()) +
-                        parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma').val())
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma').val()) +
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma').val())
 
 
 
@@ -3737,10 +3738,10 @@
             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val(tot);
 
             $('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoFinalTotalMenosMermas').val(
-                    parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
-                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal').val())
-                    - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val())
-                );
+                parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtNetoDescarga').val())
+                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtHumedadTotal').val())
+                - parseFloat($('#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel3_txtMerma').val())
+            );
 
 
 
@@ -3839,22 +3840,22 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26").on('input', function (e) {
 
                 jsRebajaRubro("Materias Extrañas",
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosRebaja"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos")
-                    );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox26"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosExtranosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGranosExtranos")
+                );
             });
 
 
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado").on('input', function (e) {
 
                 jsRebajaRubro("Quebrados partidos",
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosRebaja"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma"),
-                                $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados")
-                    );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuebradosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuebrados")
+                );
 
             });
 
@@ -3862,11 +3863,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29").on('input', function (e) {
 
                 jsRebajaRubro("Dañados",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox29"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGranosDanadosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDaniados")
+                );
 
             });
 
@@ -3876,11 +3877,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado").on('input', function (e) {
 
                 jsRebajaRubro("Semilla de chamico",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaChamico")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadChamicoMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaChamico")
+                );
 
             });
 
@@ -3891,11 +3892,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoResultado").on('input', function (e) {
 
                 jsRebajaRubro("Revolcado en tierra",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaRevolcado")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadRevolcadoMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaRevolcado")
+                );
 
             });
 
@@ -3906,11 +3907,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesResultado").on('input', function (e) {
 
                 jsRebajaRubro("Olores objetables",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaObjetables")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadObjetablesMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaObjetables")
+                );
 
             });
 
@@ -3922,11 +3923,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosResultado").on('input', function (e) {
 
                 jsRebajaRubro("Granos amohosados",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadAmohosadosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaAmohosados")
+                );
 
             });
 
@@ -3936,11 +3937,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtPuntaSombreada").on('input', function (e) {
 
                 jsRebajaRubro("Punta sombreada",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtPuntaSombreada"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPuntaSombreada")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtPuntaSombreada"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPuntaSombreadaMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPuntaSombreada")
+                );
 
             });
 
@@ -3952,11 +3953,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox35").on('input', function (e) {
 
                 jsRebajaRubro("Peso hectolítrico",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox35"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHectolitrico")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox35"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHectolitricoMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHectolitrico")
+                );
 
             });
 
@@ -3964,11 +3965,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox36").on('input', function (e) {
 
                 jsRebajaRubro("Granos con carbón",
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox36"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaCarbon")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox36"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadCarbonMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaCarbon")
+                );
 
             });
 
@@ -3986,11 +3987,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37").on('input', function (e) {
 
                 jsRebajaRubro('Panza blanca',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPanzaBlanca")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox37"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPanzaBlancaMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPanzaBlanca")
+                );
 
             });
 
@@ -4001,11 +4002,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox38").on('input', function (e) {
 
                 jsRebajaRubro('Picados',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox38"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPicados")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox38"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadPicadosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaPicados")
+                );
 
             });
 
@@ -4015,11 +4016,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41").on('input', function (e) {
 
                 jsRebajaRubro('Granos verdes',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVerdes")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox41"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadVerdesMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVerdes")
+                );
 
             });
 
@@ -4034,11 +4035,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox1").on('input', function (e) {
 
                 jsRebajaRubro('Granos Quemados o de Avería',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox1"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuemados")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox1"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadQuemadosMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaQuemados")
+                );
 
             });
 
@@ -4048,11 +4049,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2").on('input', function (e) {
 
                 jsRebajaRubro('Tierra',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox2"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTierraMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTierra")
+                );
 
             });
 
@@ -4063,11 +4064,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox4").on('input', function (e) {
 
                 jsRebajaRubro('Mermas por Zarandeo',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox4"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaZarandeo")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_TextBox4"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadZarandeoMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaZarandeo")
+                );
 
             });
 
@@ -4077,11 +4078,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadResultado").on('input', function (e) {
 
                 jsRebajaRubro("Humedad",
-                                   $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHumedad")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadHumedadMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaHumedad")
+                );
 
             });
 
@@ -4089,11 +4090,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado").on('input', function (e) {
 
                 jsRebajaRubro('Gastos de fumigación',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFumigacion")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionResultado"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastosFumigacionMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFumigacion")
+                );
 
             });
 
@@ -4101,11 +4102,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecada").on('input', function (e) {
 
                 jsRebajaRubro('Gastos de Secada',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecada"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGastoDeSecada")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecada"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadGastoDeSecadaMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaGastoDeSecada")
+                );
 
             });
 
@@ -4118,11 +4119,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil").on('input', function (e) {
 
                 jsRebajaRubro('Merma Volatil',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVolatil")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatil"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaVolatilMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaVolatil")
+                );
 
             });
 
@@ -4132,11 +4133,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNidera").on('input', function (e) {
 
                 jsRebajaRubro('Fondo Nidera',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNidera"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFondoNidera")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNidera"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadFondoNideraMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaFondoNidera")
+                );
 
             });
 
@@ -4145,11 +4146,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida").on('input', function (e) {
 
                 jsRebajaRubro('Merma Convenida',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaConvenida")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenida"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadMermaConvenidaMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaConvenida")
+                );
 
             });
 
@@ -4159,11 +4160,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentin").on('input', function (e) {
 
                 jsRebajaRubro('Tal Cual Vicentin',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentin"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTalCualVicentin")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentin"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadTalCualVicentinMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaTalCualVicentin")
+                );
 
             });
 
@@ -4175,11 +4176,11 @@
             $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinal").on('input', function (e) {
 
                 jsRebajaRubro('Descuento Final',
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinal"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalRebaja"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma"),
-                              $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDescuentoFinal")
-                  );
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinal"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalRebaja"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_txtCalidadDescuentoFinalMerma"),
+                    $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel4_cmbTipoMermaDescuentoFinal")
+                );
 
             });
 
@@ -4871,7 +4872,7 @@
                     'destino': '',//  function () { return $("txtDestino").val(); },
                     'puntovent': 0, //function () { return $("#cmbPuntoVenta").val(); },
                     'idcarta': qs["Id"],
-                    'nombreusuario':  '' //function () { return $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val() }
+                    'nombreusuario': '' //function () { return $("#ctl00_ContentPlaceHolder1_TabContainer2_TabPanel5_usuarioschat").val() }
 
                 },
                 datatype: 'json',
@@ -4884,7 +4885,7 @@
 
 
                 colNames: ['', 'IdReclamoComentario', 'IdReclamo', 'Nombre', 'Comentario', 'Comentario'
-                                , 'Fecha', 'ArchivoAdjunto'
+                    , 'Fecha', 'ArchivoAdjunto'
                     , 'nrocarta'
                 ],
 
@@ -4907,7 +4908,7 @@
 
 
                     { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
-            { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
+                    { name: 'ArchivoAdjunto', index: 'ArchivoAdjunto', align: 'left', width: 100, editable: true, hidden: true, sortable: false },
 
 
 

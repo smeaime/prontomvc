@@ -543,7 +543,7 @@ Public Module ProntoFuncionesUIWeb
                                 If System.Diagnostics.Debugger.IsAttached() Then
                                     serv = "http://localhost:48391/ProntoWeb"
                                 Else
-                                    serv = "http://prontoclientes.williamsentregas.com.ar/"
+                                    serv = "https://prontoclientes.williamsentregas.com.ar/"
                                 End If
                                 Dim p2 = New ReportParameter("sServidor", serv)
 
@@ -783,7 +783,7 @@ Public Module ProntoFuncionesUIWeb
                                 If System.Diagnostics.Debugger.IsAttached() Then
                                     serv = "http://localhost:48391/ProntoWeb"
                                 Else
-                                    serv = "http://prontoclientes.williamsentregas.com.ar/"
+                                    serv = "https://prontoclientes.williamsentregas.com.ar/"
                                 End If
                                 Dim p2 = New ReportParameter("sServidor", serv)
 
@@ -1093,7 +1093,7 @@ Public Module ProntoFuncionesUIWeb
                                 If System.Diagnostics.Debugger.IsAttached() Then
                                     serv = "http://localhost:48391/ProntoWeb"
                                 Else
-                                    serv = "http://prontoclientes.williamsentregas.com.ar/"
+                                    serv = "https://prontoclientes.williamsentregas.com.ar/"
                                 End If
                                 Dim p2 = New ReportParameter("sServidor", serv)
 

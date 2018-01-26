@@ -218,25 +218,25 @@
                         </div>
                         <div class="span4 lightblue cc">
                             <div class="span3 lightblue">
-                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
+                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                 {
                                     @Html.CheckBox("EsAdminExterno" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "AdminExterno"))
                                 }
                             </div>
                             <div class="span3 lightblue">
-                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
+                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                 {
                                     @Html.CheckBox("EsExterno" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "Externo"))
                                 }
                             </div>
                             <div class="span3 lightblue">
-                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
+                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                 {
                                     @Html.CheckBox("EsExternoOrdenesPagoListas" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "ExternoOrdenesPagoListas"))
                                 }
                             </div>
                             <div class="span3 lightblue">
-                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno"))
+                                @if (Roles.IsUserInRole(ViewBag.NombreUsuario, "AdminExterno") || Roles.IsUserInRole(ViewBag.NombreUsuario, "SuperAdmin"))
                                 {
                                     @Html.CheckBox("EsExternoCuentaCorrienteProveedor" + user.ProviderUserKey, Roles.IsUserInRole(user.UserName, "ExternoCuentaCorrienteProveedor"))
                                 }

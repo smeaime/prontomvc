@@ -8,35 +8,35 @@ var ListaReq1 = "";
 
 
 
-   var CalcularItem = function (value, colname) {
-        if (colname === "Cantidad") {
-            var rowid = $('#Lista').getGridParam('selrow');
-            value = Number(value);
-            var Cantidad = value;
-            //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
-        }
-        return [true];
-    };
+var CalcularItem = function (value, colname) {
+    if (colname === "Cantidad") {
+        var rowid = $('#Lista').getGridParam('selrow');
+        value = Number(value);
+        var Cantidad = value;
+        //$('#Lista').jqGrid('setCell', rowid, 'Cantidad', Cantidad[0]);
+    }
+    return [true];
+};
 
+
+function CargarDetalle() {
+
+    /*
+                        $("#Lista").jqGrid().setGridParam({
+                            datatype: 'json',
+                            traditional: true, //problemas al usar arrays en los parametros
+                            ajaxDelOptions: {traditional: true},
+                            mtype: 'POST' 
+                        }).trigger("reloadGrid");
     
-function CargarDetalle (){
+    */
 
-/*
-                    $("#Lista").jqGrid().setGridParam({
-                        datatype: 'json',
-                        traditional: true, //problemas al usar arrays en los parametros
-                        ajaxDelOptions: {traditional: true},
-                        mtype: 'POST' 
-                    }).trigger("reloadGrid");
-
-*/
-
-                  //  $("#Lista").html("");
+    //  $("#Lista").html("");
 
     $('#Lista').jqGrid({
-        
-                        url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
-                        postData: { 'idDetalleRequerimientosString' : ListaReq1 },
+
+        url: ROOT + 'ValeSalida/DetValesSalidaSinFormatoSegunListaDeItemsDeRequerimientos',
+        postData: { 'idDetalleRequerimientosString': ListaReq1 },
 
 
         datatype: 'json',
@@ -212,9 +212,9 @@ function CargarDetalle (){
         cellEdit: true,
         cellsubmit: 'clientArray'
     })
-        //.then(function () {
-                  //CargarDetalle();
-          //      });
+    //.then(function () {
+    //CargarDetalle();
+    //      });
 
     jQuery("#Lista").jqGrid('navGrid', '#ListaPager', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
     jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager',
@@ -234,7 +234,7 @@ function CargarDetalle (){
     jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
 
-        
+
 }
 
 
@@ -245,74 +245,105 @@ $(document).ready(function () {
 
 
 
-       $("#Vale").click(function () {    //$('#Vale').on('click', function () {
-        $("#frmVale").dialog({
-            autoOpen: true,
-            position: { my: "center", at: "100", of: window },
-            height: 750,
-            width: 900,
-            resizable: true,
-            //title: 'Vale',
-            modal: true,
-            open: function () {
-                $("#frmVale").html("");
-
-                var $grid = $("#ListaReq"), i, n;
-                ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
-                if ((ListaReq == null) || (ListaReq.length == 0)) {
-                    ListaReq = [rowIdContextMenu];
-                    if ((ListaReq == null) || (ListaReq.length == 0)) {
-                        alert("No hay rms elegidas " + rowIdContextMenu);
-                        return;
-                    }
-                }
-
-                ListaReq1 = ""
-                for (i = 0, n = ListaReq.length; i < n; i++) {
-                    ListaReq1 = ListaReq1 + ListaReq[i] + ",";
-                }
-                if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
+    $("#Vale").click(function () {    //$('#Vale').on('click', function () {
 
 
 
-
-
-
-                $.get(
-                        ROOT + 'Requerimiento/PartialPage1',
-                         { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
-                    try {
-                        $("#frmVale").html(partialView);
-                    }
-                    catch (err) {
-                    }
-                    //inicializar();
-
-                    RefrescaAnchoJqgrids();
-                    deshabilitarPanelesDerecho();
-
-
-
-
-
-                }).then(function () {
-                    //alert("hola")
-
-                  CargarDetalle();
-                });
-            },
-            buttons: {
-                //"Add User": function () {
-                //    //addUserInfo();
-                //    $(this).dialog("close");
-                //},
-                //"Cancelar": function () {
-                //    $(this).dialog("close");
-                //}
+        var $grid = $("#ListaReq"), i, n;
+        ListaReq = $grid.jqGrid("getGridParam", "selarrrow");
+        if ((ListaReq == null) || (ListaReq.length == 0)) {
+            ListaReq = [rowIdContextMenu];
+            if ((ListaReq == null) || (ListaReq.length == 0)) {
+                alert("No hay rms elegidas " + rowIdContextMenu);
+                return;
             }
-        });
-        return false;
+        }
+
+        ListaReq1 = ""
+        for (i = 0, n = ListaReq.length; i < n; i++) {
+            ListaReq1 = ListaReq1 + ListaReq[i] + ",";
+        }
+        if (ListaReq1.length > 0) { ListaReq1 = ListaReq1.substring(1, ListaReq1.length - 1); }
+
+
+        if (false) {
+
+            //opcion con partial page
+
+
+            $("#frmVale").dialog({
+                autoOpen: true,
+                position: { my: "center", at: "100", of: window },
+                height: 750,
+                width: 900,
+                resizable: true,
+                //title: 'Vale',
+                modal: true,
+                open: function () {
+                    $("#frmVale").html("");
+
+
+
+
+
+                    $.get(
+                        ROOT + 'Requerimiento/PartialPage1', //esto es un vale, no una rm. pasa que el partial está en ese directorio -habría que renombrarlo al archivo... 
+                        { idDetalleRequerimientos: ListaReq1 }, function (partialView) {
+                            try {
+                                $("#frmVale").html(partialView);
+                            }
+                            catch (err) {
+                            }
+                            //inicializar();
+
+                            RefrescaAnchoJqgrids();
+                            deshabilitarPanelesDerecho();
+
+
+
+
+
+                        }).then(function () {
+                            //alert("hola")
+
+                            CargarDetalle();
+                        });
+
+
+
+                },
+                buttons: {
+                    //"Add User": function () {
+                    //    //addUserInfo();
+                    //    $(this).dialog("close");
+                    //},
+                    //"Cancelar": function () {
+                    //    $(this).dialog("close");
+                    //}
+                }
+            });
+            return false;
+
+
+        }
+        else {
+            // opcion redirigiendo al alta de Vale
+
+            window.location.href = ROOT + "ValeSalida/EditPendientesRm/-1?ItemsDeRm=" + ListaReq1
+
+        }
+
+
+
     });
+
+
+
+
+
+
+
+
 
 
 

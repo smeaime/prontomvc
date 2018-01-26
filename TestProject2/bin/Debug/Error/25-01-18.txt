@@ -1,0 +1,194 @@
+
+Log Entry : 
+01/25/2018 12:17:37
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 12:17:45
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 12:23:45
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 12:23:49
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 12:25:06
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 12:25:10
+Error in: . Error Message:System.IO.DirectoryNotFoundException
+No se puede encontrar una parte de la ruta de acceso 'C:\Users\Mariano\Documents\pronto\TestProject2\bin\Debug\imagenes\Unnamed.png'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Net.Mail.AttachmentBase.SetContentFromFile(String fileName, String mediaType)
+   en System.Net.Mail.AttachmentBase..ctor(String fileName)
+   en System.Net.Mail.Attachment..ctor(String fileName)
+   en Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sFileNameAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img, String friendlyname, String replyTo, Boolean isHtml, String inlinePNG, String inlinePNG2) en C:\Users\Mariano\Documents\pronto\BussinessLogic\EntidadManager.vb:línea 231
+mscorlib
+__________________________
+
+Log Entry : 
+01/25/2018 14:26:01
+Error in: . Error Message:Generando sincro para Ledesma
+__________________________
+
+Log Entry : 
+01/25/2018 14:26:27
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5336
+__________________________
+
+Log Entry : 
+01/25/2018 14:26:35
+Error in: . Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5443
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Mariano\Documents\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1313
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/25/2018 14:35:55
+Error in: . Error Message:Generando sincro para Ledesma
+__________________________
+
+Log Entry : 
+01/25/2018 14:36:16
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5336
+__________________________
+
+Log Entry : 
+01/25/2018 14:36:24
+Error in: . Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5443
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Mariano\Documents\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1313
+Microsoft.ReportViewer.WebForms
+__________________________
+
+Log Entry : 
+01/25/2018 14:38:19
+Error in: . Error Message:Generando sincro para Ledesma
+__________________________
+
+Log Entry : 
+01/25/2018 14:40:35
+Error in: . Error Message:Generando sincro para Ledesma
+__________________________
+
+Log Entry : 
+01/25/2018 14:53:18
+Error in: . Error Message:System.Net.WebException: Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.SetParameters(IEnumerable`1 parameters)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5336
+__________________________
+
+Log Entry : 
+01/25/2018 14:53:26
+Error in: . Error Message:System.Net.WebException
+Error de la solicitud con el código de estado HTTP 401: Unauthorized.
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.GetSecureMethods()
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.IsSecureMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.SetConnectionSSLForMethod(String methodname)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.ProxyMethodInvocation.Execute[TReturn](RSExecutionConnection connection, ProxyMethod`1 initialMethod, ProxyMethod`1 retryMethod)
+   en Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution.RSExecutionConnection.LoadReport(String Report, String HistoryID)
+   en Microsoft.Reporting.WebForms.ServerReport.EnsureExecutionSession()
+   en Microsoft.Reporting.WebForms.ServerReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en Microsoft.Reporting.WebForms.Report.Render(String format, String deviceInfo, String& mimeType, String& encoding, String& fileNameExtension, String[]& streams, Warning[]& warnings)
+   en CartaDePorteManager.RebindReportViewer_ServidorExcel(ReportViewer& oReportViewer, String rdlFile, IEnumerable`1 parametros, String& ArchivoExcelDestino, Boolean bDescargaHtml) en C:\Users\Mariano\Documents\pronto\BussinessLogic\ManagerDebug\CartaDePorteManager.vb:línea 5443
+   en Pronto.ERP.Bll.SincronismosWilliamsManager.GenerarSincro(String sSincronismo, String& sErroresRef, String SC, String sUrlDominio, String& sTituloFiltroUsado, enumCDPestado estado, String QueContenga, Int32 idVendedor, Int32 idCorredor, Int32 idDestinatario, Int32 idIntermediario, Int32 idRComercial, Int32 idArticulo, Int32 idProcedencia, Int32 idDestino, FiltroANDOR AplicarANDuORalFiltro, String ModoExportacion, DateTime sDesde, DateTime sHasta, Int32 puntoventa, String optDivisionSyngenta, Boolean bTraerDuplicados, String Contrato, String QueContenga2, Int32 idClienteAuxiliar, Int32& registrosFiltrados, Int64 maximumRows) en C:\Users\Mariano\Documents\pronto\BussinessLogic\SincronismosWilliamsManager.vb:línea 1313
+Microsoft.ReportViewer.WebForms
+__________________________
