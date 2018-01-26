@@ -153,13 +153,16 @@
                             @Html.DropDownList("IdSolicito", null, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.IdSolicito)
                         </div>
-                        <!--/span-->
-                        <div class="span9 lightblue">
+                        <div class="span7 lightblue">
                             @Html.LabelFor(model => model.LugarEntrega, "Lugar de entrega")
                             @Html.TextBoxFor(model => model.LugarEntrega, new { @class = "span12" })
                             @Html.ValidationMessageFor(model => model.LugarEntrega)
                         </div>
-                        <!--/span-->
+                        <div class="span2 lightblue">
+                            @Html.LabelFor(model => model.IdTipoCompra, "Tipo compra")
+                            @Html.DropDownList("IdTipoCompra", null, new { @class = "span12" })
+                            @Html.ValidationMessageFor(model => model.IdTipoCompra)
+                        </div>
                     </div>
                     <!--/row-->
                     <div class="row-fluid">

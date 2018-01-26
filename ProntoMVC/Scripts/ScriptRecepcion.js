@@ -48,8 +48,8 @@
         $grid = "";
         gridCellWasClicked = false;
 
-        if (jQuery("#ListaArticulos").find(target).length) {
-            $grid = $('#ListaArticulos');
+        if (jQuery("#Lista").find(target).length) {
+            $grid = $('#Lista');
             grillaenfoco = true;
         }
         
@@ -89,7 +89,7 @@
     /////////////////////////////////////////////////DEFINICION DE GRILLAS   //////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    $('#ListaArticulos').jqGrid({
+    $('#Lista').jqGrid({
         url: ROOT + 'Recepcion/DetRecepcion/',
         postData: { 'IdRecepcion': function () { return $("#IdRecepcion").val(); } },
         editurl: ROOT + 'Recepcion/EditGridData/',
@@ -128,11 +128,11 @@
                                         }
                                         event.preventDefault();
                                         $(elem).val(ui.item.label);
-                                        var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Articulo', ui.item.title);
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
                                     },
                                     focus: function (event, ui) {
                                         if (ui.item.label === NoResultsLabel) {
@@ -164,11 +164,11 @@
                                         }
                                         event.preventDefault();
                                         $(elem).val(ui.item.label);
-                                        var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
-                                        $('#ListaArticulos').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdArticulo', ui.item.id);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Codigo', ui.item.codigo);
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', ui.item.IdUnidad);
+                                        $('#Lista').jqGrid('setCell', rowid, 'Unidad', ui.item.Unidad);
                                     },
                                     focus: function (event, ui) {
                                         if (ui.item.label === NoResultsLabel) {
@@ -195,7 +195,7 @@
                                 type: 'keypress',
                                 fn: function (e) {
                                     var key = e.charCode || e.keyCode;
-                                    if (key == 13) { setTimeout("jQuery('#ListaArticulos').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
+                                    if (key == 13) { setTimeout("jQuery('#Lista').editCell(" + selIRow + " + 1, " + selICol + ", true);", 100); }
                                     if ((key < 48 || key > 57) && key !== 46 && key !== 44 && key !== 8 && key !== 37 && key !== 39) { return false; }
                                 }
                             }]
@@ -210,8 +210,8 @@
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUnidad', this.value);
+                                    var rowid = $('#Lista').getGridParam('selrow');
+                                    $('#Lista').jqGrid('setCell', rowid, 'IdUnidad', this.value);
                                 }
                             }]
                         },
@@ -225,8 +225,8 @@
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdUbicacion', this.value);
+                                    var rowid = $('#Lista').getGridParam('selrow');
+                                    $('#Lista').jqGrid('setCell', rowid, 'IdUbicacion', this.value);
                                 }
                             }]
                         },
@@ -240,8 +240,8 @@
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
-                                    var rowid = $('#ListaArticulos').getGridParam('selrow');
-                                    $('#ListaArticulos').jqGrid('setCell', rowid, 'IdObra', this.value);
+                                    var rowid = $('#Lista').getGridParam('selrow');
+                                    $('#Lista').jqGrid('setCell', rowid, 'IdObra', this.value);
                                 }
                             }]
                         },
@@ -271,6 +271,10 @@
         gridComplete: function () {
             //calculaTotalImputaciones();
         },
+        loadComplete: function () {
+            //AgregarItemVacio(jQuery("#Lista"));
+            AgregarRenglonesEnBlanco({ "IdDetalleRecepcion": "0", "IdArticulo": "0", "Cantidad": "0", "Articulo": "" });
+        },
         pager: $('#ListaPager1'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
@@ -295,66 +299,89 @@
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
-    jQuery("#ListaArticulos").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
-    jQuery("#ListaArticulos").jqGrid('navButtonAdd', '#ListaPager1',
+    jQuery("#Lista").jqGrid('navGrid', '#ListaPager1', { refresh: false, add: false, edit: false, del: false, search: false }, {}, {}, {}, { sopt: ["cn"], width: 700, closeOnEscape: true, closeAfterSearch: true });
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
                                  {
                                      caption: "", buttonicon: "ui-icon-plus", title: "Agregar item",
                                      onClickButton: function () {
-                                         AgregarItemVacio(jQuery("#ListaArticulos"));
+                                         AgregarItemVacio(jQuery("#Lista"));
                                      },
                                  });
-    jQuery("#ListaArticulos").jqGrid('navButtonAdd', '#ListaPager1',
+    jQuery("#Lista").jqGrid('navButtonAdd', '#ListaPager1',
                                  {
                                      caption: "", buttonicon: "ui-icon-trash", title: "Eliminar",
                                      onClickButton: function () {
-                                         EliminarSeleccionados(jQuery("#ListaArticulos"));
+                                         EliminarSeleccionados(jQuery("#Lista"));
                                      },
                                  });
-    jQuery("#ListaArticulos").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
+    jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
 
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'Pedido/PedidosPendientes_DynamicGridData',
-        //postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteRecepcion': "SI" },
+        url: ROOT + 'Pedido/Pedidos_Pendientes2_DynamicGridData',
+        postData: { 'Destino': "Recepcion" },
         datatype: 'json',
         mtype: 'POST',
-        colNames: ['', 'IdDetallePedido', 'IdPedido', 'IdProveedor', 'IdObra', 'IdArticulo', 'IdUnidad', 'Numero Pedido', 'Sub', 'Item PE', 'Fecha pedido', 'Proveedor', 'Obra', 'Comprador',
-                   'Solicito RM', 'Fecha entrega', 'Codigo', 'Descripcion', 'Observaciones RM', 'Observaciones PE', 'Cantidad', 'Un.', 'Entregado', 'Pendiente', 'Numero RM', 'Item RM', 'Cump',
-                   'Tipo compra', 'Circ. Compl. Firmas', 'Control de calidad'],
+        colNames: ['Acciones', 'IdPedido', 'IdProveedor', 'IdCondicionCompra', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.',
+                   'IVA', 'Otros', 'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra',
+                   'Exterior', 'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio',
+                   'Detalles generales'
+        ],
         colModel: [
-                    { name: 'ver', index: 'ver', hidden: true, width: 50 },
-                    { name: 'IdDetallePedido', index: 'IdDetallePedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdPedido', index: 'IdPedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdProveedor', index: 'IdProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'IdUnidad', index: 'IdUnidad', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                    { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'SubNumero', index: 'SubNumero', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'ItemPE', index: 'ItemPE', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false, hidden: false },
-                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 130, editable: false, hidden: false },
-                    { name: 'SolicitoRM', index: 'SolicitoRM', align: 'left', width: 130, editable: false, hidden: false },
-                    { name: 'FechaEntrega', index: 'FechaEntrega', width: 70, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                    { name: 'ArticuloCodigo', index: 'ArticuloCodigo', align: 'center', width: 100, editable: false, hidden: false },
-                    { name: 'ArticuloDescripcion', index: 'ArticuloDescripcion', align: 'left', width: 300, editable: false, hidden: false },
-                    { name: 'ObservacionesRM', index: 'ObservacionesRM', align: 'left', width: 300, editable: false, hidden: false },
-                    { name: 'ObservacionesPE', index: 'ObservacionesPE', align: 'left', width: 300, editable: false, hidden: false },
-                    { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Unidad', index: 'Unidad', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Entregado', index: 'Entregado', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Pendiente', index: 'Pendiente', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'ItemRM', index: 'ItemRM', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'TipoCompra', index: 'TipoCompra', align: 'left', width: 150, editable: false, hidden: false },
-                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                    { name: 'ControlCalidad', index: 'ControlCalidad', align: 'left', width: 150, editable: false, hidden: false }
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                    { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'IdCondicionCompra', index: 'IdCondicionCompra', align: 'left', width: 100, editable: false, hidden: true },
+                    { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'SubNumero', index: 'SubNumero', align: 'right', width: 30, frozen: true, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    {
+                        name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    {
+                        name: 'FechaSalida', index: 'FechaSalida', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'left', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Requerimientos', index: 'Requerimientos', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Obras', index: 'Obras', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'ProveedoresCodigo', index: 'ProveedoresCodigo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'ProveedoresNombre', index: 'ProveedoresNombre', align: 'left', width: 300, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'TotalGravado', index: 'TotalGravado', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteBonificacion', index: 'ImporteBonificacion', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteIva1', index: 'ImporteIva1', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'OtrosConceptos', index: 'OtrosConceptos', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImpuestosInternos', index: 'ImpuestosInternos', align: 'right', width: 70, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'ImporteTotal', index: 'ImporteTotal', align: 'right', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Moneda', index: 'Moneda', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'LiberadoPor', index: 'LiberadoPor', align: 'left', width: 150, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 50, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'NumeroComparativa', index: 'NumeroComparativa', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'TiposCompra', index: 'TiposCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 400, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CondicionCompra', index: 'CondicionCompra', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'DetalleCondicionCompra', index: 'DetalleCondicionCompra', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'PedidoExterior', index: 'PedidoExterior', align: 'left', width: 50, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'NumeroLicitacion', index: 'NumeroLicitacion', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['eq'] } },
+                    { name: 'Impresa', index: 'Impresa', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'UsuarioAnulo', index: 'UsuarioAnulo', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    {
+                        name: 'FechaAnulacion', index: 'FechaAnulacion', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    { name: 'MotivoAnulacion', index: 'MotivoAnulacion', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'EquipoDestino', index: 'EquipoDestino', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'left', width: 100, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    { name: 'DescripcionIva', index: 'DescripcionIva', align: 'left', width: 100, hidden: true, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
+                    {
+                        name: 'FechaEnvioProveedor', index: 'FechaEnvioProveedor', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy',
+                        search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
+                    },
+                    { name: 'Detalle', index: 'Detalle', align: 'left', width: 200, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
         ],
         ondblClickRow: function (id) {
-            Copiar1(id, "Dbl");
+            CopiarPE(id);
         },
         loadComplete: function () {
             grid = $(this);
@@ -389,107 +416,281 @@
         stringResult: true, searchOnEnter: true,
         defaultSearch: 'cn',
         enableClear: false
-    }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+    }); 
+
+    $("#ListaDrag2").jqGrid({
+        url: ROOT + 'Pedido/Pedidos_Pendientes_DynamicGridData',
+        //postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); }, 'PendienteRecepcion': "SI" },
+        datatype: 'json',
+        mtype: 'POST',
+        colNames: ['', 'IdDetallePedido', 'IdPedido', 'IdProveedor', 'IdObra', 'IdArticulo', 'IdUnidad', 'Numero Pedido', 'Sub', 'Item PE', 'Fecha pedido', 'Proveedor', 'Obra', 'Comprador',
+                   'Solicito RM', 'Fecha entrega', 'Codigo', 'Descripcion', 'Observaciones RM', 'Observaciones PE', 'Cantidad', 'Un.', 'Entregado', 'Pendiente', 'Numero RM', 'Item RM', 'Cump',
+                   'Tipo compra', 'Circ. Compl. Firmas', 'Control de calidad'],
+        colModel: [
+                    { name: 'ver', index: 'ver', hidden: true, width: 50 },
+                    { name: 'IdDetallePedido', index: 'IdDetallePedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdPedido', index: 'IdPedido', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdProveedor', index: 'IdProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdObra', index: 'IdObra', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdArticulo', index: 'IdArticulo', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'IdUnidad', index: 'IdUnidad', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                    { name: 'NumeroPedido', index: 'NumeroPedido', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'SubNumero', index: 'SubNumero', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ItemPE', index: 'ItemPE', align: 'center', width: 30, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'FechaPedido', index: 'FechaPedido', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'Proveedor', index: 'Proveedor', align: 'left', width: 250, editable: false, search: true, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Obra', index: 'Obra', align: 'left', width: 70, editable: false, hidden: false },
+                    { name: 'Comprador', index: 'Comprador', align: 'left', width: 130, editable: false, hidden: false },
+                    { name: 'SolicitoRM', index: 'SolicitoRM', align: 'left', width: 130, editable: false, hidden: false },
+                    { name: 'FechaEntrega', index: 'FechaEntrega', width: 70, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                    { name: 'ArticuloCodigo', index: 'ArticuloCodigo', align: 'center', width: 100, editable: false, hidden: false },
+                    { name: 'ArticuloDescripcion', index: 'ArticuloDescripcion', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'ObservacionesRM', index: 'ObservacionesRM', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'ObservacionesPE', index: 'ObservacionesPE', align: 'left', width: 300, editable: false, hidden: false },
+                    { name: 'Cantidad', index: 'Cantidad', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Unidad', index: 'Unidad', align: 'center', width: 40, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Entregado', index: 'Entregado', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Pendiente', index: 'Pendiente', align: 'right', width: 80, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', align: 'right', width: 70, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ItemRM', index: 'ItemRM', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'Cumplido', index: 'Cumplido', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'TipoCompra', index: 'TipoCompra', align: 'left', width: 150, editable: false, hidden: false },
+                    { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn', 'eq'] } },
+                    { name: 'ControlCalidad', index: 'ControlCalidad', align: 'left', width: 150, editable: false, hidden: false }
+        ],
+        ondblClickRow: function (id) {
+            CopiarPEdetalle(id);
+        },
+        loadComplete: function () {
+            grid = $(this);
+            $("#ListaDrag2 td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
+        },
+        pager: $('#ListaDragPager'),
+        rowNum: 15,
+        rowList: [10, 20, 50],
+        sortname: 'NumeroPedido', // 'FechaRecibo,NumeroRecibo',
+        sortorder: 'desc',
+        viewrecords: true,
+        emptyrecords: 'No hay registros para mostrar',
+        width: 'auto', // 'auto',
+        autowidth: true,
+        shrinkToFit: false,
+        height: $(window).height() - ALTOLISTADO, // '100%'
+        altRows: false,
+        footerrow: false, //true,
+        userDataOnFooter: true,
+        gridview: true,
+        multiboxonly: true,
+        multipleSearch: true
+    })
+    jQuery("#ListaDrag2").jqGrid('navGrid', '#ListaDragPager2', { csv: true, refresh: true, add: false, edit: false, del: false }, {}, {}, {},
+        {
+            //sopt: ["cn"]
+            //sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+            width: 700, closeOnEscape: true, closeAfterSearch: true, multipleSearch: true, overlay: false
+        }
+    );
+    jQuery("#ListaDrag2").filterToolbar({
+        stringResult: true, searchOnEnter: true,
+        defaultSearch: 'cn',
+        enableClear: false
+    });
 
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
-    $('a#a_panel_este_tab1').text('Pedidos pendientes');
-    //$('a#a_panel_este_tab5').remove();  //    
-
-    ConectarGrillas1();
+    $('a#a_panel_este_tab1').text('Ped. Res.');
+    $('a#a_panel_este_tab1').attr('title', 'Pedidos Resumidos');
+    $('a#a_panel_este_tab2').text('Ped. Det.');
+    $('a#a_panel_este_tab2').attr('title', 'Pedidos detallados');
 
     $('#a_panel_este_tab1').click(function () {
         ConectarGrillas1();
     });
 
+    $('#a_panel_este_tab2').click(function () {
+        ConectarGrillas2();
+    });
+
+    ///////////////////////////////////////// CONEXION DE GRILLAS //////////////////////////////////////////////
+
     function ConectarGrillas1() {
         $("#ListaDrag").jqGrid('gridDnD', {
-            connectWith: '#ListaArticulos',
+            connectWith: '#Lista',
             onstart: function (ev, ui) {
                 ui.helper.removeClass("ui-state-highlight myAltRowClass")
                             .addClass("ui-state-error ui-widget")
                             .css({ border: "5px ridge tomato" });
                 $("#gbox_grid2").css("border", "3px solid #aaaaaa");
             },
+            //ondrop: function (ev, ui, getdata) {
+            //    Copiar1($(ui.draggable).attr("id"), "DnD");
+            //}
             ondrop: function (ev, ui, getdata) {
-                Copiar1($(ui.draggable).attr("id"), "DnD");
-                //var getdata = ui.draggable.parent().parent().jqGrid('getRowData', acceptId);
-                //var dropmodel = $("#" + this.id).jqGrid('getGridParam', 'colModel');
+                var acceptId = $(ui.draggable).attr("id");
+                BorraElPrimeroAgregado();
+                CopiarPE(acceptId, ui, "DnD");
             }
         });
     }
 
-    function Copiar1(idsource, Origen) {
-        var acceptId = idsource, IdEntidad = 0, mPrimerItem = true, IdObra = 0;
-        var $gridOrigen = $("#ListaDrag"), $gridDestino = $("#ListaArticulos");
+    function ConectarGrillas2() {
+        $("#ListaDrag2").jqGrid('gridDnD', {
+            connectWith: '#Lista',
+            onstart: function (ev, ui) {
+                //sacarDeEditMode();
+            },
+            ondrop: function (ev, ui, getdata) {
+                var acceptId = $(ui.draggable).attr("id");
+                BorraElPrimeroAgregado();
+                CopiarPEdetalle(acceptId, ui, "DnD"); //, ui);
+                return;
+            }
+        });
+    }
 
-        var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
-        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
-
+    function CopiarPE(acceptId, ui, Origen) {
+        jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+        GrabarGrillaLocal()
+        var getdata = jQuery("#ListaDrag").jqGrid('getRowData', acceptId);
         try {
-            IdEntidad = getdata['IdDetallePedido'];
-            IdObra = getdata['IdObra'];
-
-            $("#IdProveedor").val(getdata['IdProveedor']);
-            $("#Proveedor").val(getdata['Proveedor']);
-            $("#IdObra").val(getdata['IdObra']);
+            //me traigo los datos de detalle
+            var Id = getdata['IdPedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
 
             $.ajax({
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 url: ROOT + 'Pedido/DetPedidosSinFormato/',
-                data: { IdDetallePedido: IdEntidad },
+                data: { IdPedido: Id },
                 dataType: "Json",
                 success: function (data) {
                     var longitud = data.length;
                     for (var i = 0; i < data.length; i++) {
-                        Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
-                        if (data[i].Pendiente > 0) {
-                            tmpdata['IdDetalleRecepcion'] = Id2;
-                            tmpdata['IdArticulo'] = data[i].IdArticulo;
-                            tmpdata['IdUnidad'] = data[i].IdUnidad;
-                            tmpdata['IdColor'] = data[i].IdColor;
-                            tmpdata['IdObra'] = data[i].IdObra;
-                            tmpdata['Obra'] = data[i].Obra;
-                            tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
-                            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
-                            tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
-                            tmpdata['Codigo'] = data[i].ArticuloCodigo;
-                            tmpdata['Articulo'] = data[i].ArticuloDescripcion;
-                            tmpdata['Cantidad'] = data[i].Pendiente;
-                            tmpdata['Unidad'] = data[i].Unidad;
-                            tmpdata['Observaciones'] = data[i].ObservacionesPE;
-                            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
-                            tmpdata['ItemRM'] = data[i].ItemRM;
-                            tmpdata['NumeroPedido'] = data[i].NumeroPedido;
-                            tmpdata['ItemPE'] = data[i].ItemPE;
-                            tmpdata['Recepcionado'] = data[i].Entregado;
-                            tmpdata['ControlCalidad'] = data[i].ControlCalidad;
-                            
-                            getdata = tmpdata;
-
-                            if (Origen == "DnD") {
-                                if (mPrimerItem) {
-                                    dataIds = $gridDestino.jqGrid('getDataIDs');
-                                    Id = dataIds[0];
-                                    $gridDestino.jqGrid('setRowData', Id, getdata);
-                                    mPrimerItem = false;
-                                } else {
-                                    Id = Id2
-                                    $gridDestino.jqGrid('addRowData', Id, getdata, "first");
-                                }
-                            } else {
-                                Id = Id2
-                                $gridDestino.jqGrid('addRowData', Id, getdata, "first");
-                            };
-                        }
+                        CopiarItemPE(data, i, Origen, "ListaDrag");
                     }
+                    AgregarRenglonesEnBlanco({ "IdDetalleRecepcion": "0", "IdArticulo": "0", "Cantidad": "0", "Articulo": "" });
                     ActualizarDatos();
                 }
             });
-        } catch (e) { }
-
+        } catch (e) {
+            alert(e.message);
+        }
         $("#gbox_grid2").css("border", "1px solid #aaaaaa");
+    }
+
+    function CopiarPEdetalle(acceptId, ui, Origen) {
+        jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+        GrabarGrillaLocal()
+        var getdata = jQuery("#ListaDrag2").jqGrid('getRowData', acceptId);
+        var j = 0, dropname, grid;
+        var Id = getdata['IdDetallePedido']; //deber�a usar getdata['IdRequerimiento'];, pero estan desfasadas las columnas
+
+        try {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: ROOT + 'Pedido/DetPedidosSinFormato/',
+                data: { IdDetallePedido: Id },
+                dataType: "Json",
+                success: function (data) {
+                    CopiarItemPE(data, 0, Origen, "ListaDrag2");
+                    AgregarRenglonesEnBlanco({ "IdDetalleRecepcion": "0", "IdArticulo": "0", "Cantidad": "0", "Articulo": "" });
+                    ActualizarDatos();
+                }
+            })
+        } catch (e) {
+            alert(e.message);
+        }
+    }
+
+    function CopiarItemPE(data, i, Origen, source) {
+        jQuery('#Lista').jqGrid('saveCell', lastSelectediRow, lastSelectediCol);
+
+        GrabarGrillaLocal()
+
+        var tmpdata = {};
+        var longitud = data.length;
+        var mPrimerItem = true, $gridOrigen = $("#" + source), $gridDestino = $("#Lista");
+        var dataIds, Id;
+        var Id2 = ($gridDestino.jqGrid('getGridParam', 'records') + 1) * -1;
+
+        if (data[i].Pendiente > 0) {
+            tmpdata['IdDetalleRecepcion'] = Id2;
+            tmpdata['IdArticulo'] = 
+            tmpdata['IdUnidad'] = data[i].IdUnidad;
+            tmpdata['IdColor'] = data[i].IdColor;
+            tmpdata['IdObra'] = data[i].IdObra;
+            tmpdata['Obra'] = data[i].Obra;
+            tmpdata['IdControlCalidad'] = data[i].IdControlCalidad;
+            tmpdata['IdDetalleRequerimiento'] = data[i].IdDetalleRequerimiento;
+            tmpdata['IdDetallePedido'] = data[i].IdDetallePedido;
+            tmpdata['Codigo'] = data[i].ArticuloCodigo;
+            tmpdata['Articulo'] = data[i].ArticuloDescripcion;
+            tmpdata['Cantidad'] = data[i].Pendiente;
+            tmpdata['Unidad'] = data[i].Unidad;
+            tmpdata['Observaciones'] = data[i].ObservacionesPE;
+            tmpdata['NumeroRequerimiento'] = data[i].NumeroRequerimiento;
+            tmpdata['ItemRM'] = data[i].ItemRM;
+            tmpdata['NumeroPedido'] = data[i].NumeroPedido;
+            tmpdata['ItemPE'] = data[i].ItemPE;
+            tmpdata['Recepcionado'] = data[i].Entregado;
+            tmpdata['ControlCalidad'] = data[i].ControlCalidad;
+
+            getdata = tmpdata;
+
+            // estos son datos de cabecera que ya tengo en la grilla auxiliar
+            $("#IdProveedor").val(data[i].IdProveedor);
+            $("#Proveedor").val(data[i].Proveedor);
+            $("#IdObra").val(getdata['IdObra']);
+
+            //if (Origen == "DnD") {
+            //    if (mPrimerItem) {
+            //        dataIds = $gridDestino.jqGrid('getDataIDs');
+            //        Id = dataIds[0];
+            //        $gridDestino.jqGrid('setRowData', Id, getdata);
+            //        mPrimerItem = false;
+            //    } else {
+            //        Id = Id2
+            //        $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+            //    }
+            //} else {
+            //    Id = Id2
+            //    $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+            //};
+        }
+
+        var getdata = tmpdata;
+        var idazar = Math.ceil(Math.random() * 1000000);
+
+        ///////////////
+        // paso 1: borrar el renglon vacío de yapa que agrega el D&D (pero no el dblClick) -pero cómo sabés que estás en modo D&D?
+        ///////////////
+        var segundorenglon = $($("#Lista")[0].rows[1]).attr("id")
+        // var segundorenglon = $($("#Lista")[0].rows[pos+2]).attr("id") // el segundo renglon
+        //alert(segundorenglon);
+        if (segundorenglon.indexOf("dnd") != -1) {
+            // tiró el renglon en modo dragdrop, no hizo dobleclic
+            $("#Lista").jqGrid('delRowData', segundorenglon);
+        }
+        //var dataIds = $('#Lista').jqGrid('getDataIDs'); // me traigo los datos
+        //var data = $('#Lista').jqGrid('getRowData', dataIds[1]);
+
+        ///////////////
+        // paso 2: agregar en el ultimo lugar antes de los renglones vacios
+        ///////////////
+        //acá hay un problemilla... si el tipo está usando el DnD, se crea un renglon libre arriba de todo...
+        var pos = TraerPosicionLibre();
+        if (pos == null) {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "first")
+        }
+        else {
+            $("#Lista").jqGrid('addRowData', idazar, getdata, "after", pos); // como hago para escribir en el primer renglon usando 'after'? paso null?
+        }
+        //$("#Lista").jqGrid('addRowData', idazar, getdata, "last");
+        // http: //stackoverflow.com/questions/8517988/how-to-add-new-row-in-jqgrid-in-middle-of-grid
+        // $("#Lista").jqGrid('addRowData', grid, getdata, 'first');  // usar por ahora 'first'   'after' : 'before'; 'last' : 'first';
+        //    rows = $("#Lista").getGridParam("reccount");
+        //    if (rows > 5) $("#Lista").jqGrid('setGridHeight', rows * 40, true);
+        AgregarRenglonesEnBlanco({ "IdDetalleRecepcion": "0", "IdArticulo": "0", "Cantidad": "0", "Articulo": "" });
     }
 
     ////////////////////////////////////////////////////////// CHANGES //////////////////////////////////////////////////////////
@@ -529,7 +730,7 @@
         cabecera.Obra = "";
 
         cabecera.DetalleRecepciones = [];
-        $grid = $('#ListaArticulos');
+        $grid = $('#Lista');
         nuevo = -1;
         colModel = $grid.jqGrid('getGridParam', 'colModel');
         dataIds = $grid.jqGrid('getDataIDs');
@@ -537,10 +738,11 @@
             try {
                 data = $grid.jqGrid('getRowData', dataIds[i]);
                 iddeta = data['IdDetalleRecepcion'];
-                if (!iddeta) {
-                    iddeta = nuevo;
-                    nuevo--;
-                }
+                if (data['Articulo'].length == 0) continue;
+                //if (!iddeta) {
+                //    iddeta = nuevo;
+                //    nuevo--;
+                //}
 
                 data1 = '{"IdDetalleRecepcion":"' + iddeta + '",';
                 data1 = data1 + '"IdRecepcion":"' + $("#IdRecepcion").val() + '",';
@@ -736,4 +938,41 @@ function TraerNumeroComprobante() {
     } else {
         $("#grabar2").prop("disabled", true);
     }
+}
+
+function GrabarGrillaLocal() {
+    var $this = $('#Lista')
+    var ids = $this.jqGrid('getDataIDs'), i, l = ids.length;
+
+    for (i = 0; i < l; i++) {
+        try {
+            var rowdata = $('#Lista').jqGrid('saveRow', ids[i]);
+        } catch (e) {
+            $('#Lista').jqGrid('restoreRow', ids[i]);
+            continue;
+        }
+    }
+}
+
+function BorraElPrimeroAgregado() {
+    var grid = $("#Lista"),
+        ids = grid.jqGrid("getDataIDs");
+    if (ids && ids.length > 0)
+        grid.jqGrid("delRowData", ids[0]);
+}
+
+function TraerPosicionLibre() {
+    var grid = jQuery("#Lista")
+    var rows = $("#Lista").getGridParam("reccount");
+    var dataIds = $('#Lista').jqGrid('getDataIDs');
+    for (var i = 0; i < dataIds.length; i++) {
+        var data = $('#Lista').jqGrid('getRowData', dataIds[i]);
+        var desc = data['Articulo'];
+        if (desc == "") break;
+    }
+
+    if (i == 0) return null;
+    if (i == dataIds.length) i = dataIds.length - 1;
+
+    return $($("#Lista")[0].rows[i]).attr("id");
 }

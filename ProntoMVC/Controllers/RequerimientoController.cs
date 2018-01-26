@@ -69,6 +69,7 @@ namespace ProntoMVC.Controllers
             Parametros parametros = db.Parametros.Find(1);
 
             o.IdMoneda = 1;
+            o.IdTipoCompra = 1;
 
             //string usuario = ViewBag.NombreUsuario;
             //var IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -142,7 +143,7 @@ namespace ProntoMVC.Controllers
             rows = dt.AsEnumerable();
             var sq2 = (from r in rows orderby r[1] select new { IdArticulo = r[0], Titulo = r[1] }).ToList();
             ViewBag.IdEquipoDestino = new SelectList(sq2, "IdArticulo", "Titulo", o.IdEquipoDestino);
-
+            ViewBag.IdTipoCompra = new SelectList(db.TiposCompras.OrderBy(x => x.Descripcion), "IdTipoCompra", "Descripcion", o.IdTipoCompra);
         }
 
         public void ActivarAnulacionLiberacion(bool Activar)
@@ -215,6 +216,11 @@ namespace ProntoMVC.Controllers
                 // ModelState.AddModelError("Letra", "La letra debe ser A, B, C, E o X");
                 sErrorMsg += "\n" + "Falta la obra";
                 // return false;
+            }
+
+            if ((o.IdTipoCompra ?? 0) <= 0)
+            {
+                sErrorMsg += "\n" + "Falta el tipo de compra";
             }
 
             string OrigenDescripcionDefault = BuscarClaveINI("OrigenDescripcion en 3 cuando hay observaciones");
@@ -445,31 +451,29 @@ namespace ProntoMVC.Controllers
                     if (parametros.ActivarSolicitudMateriales == "SI") dr.TipoDesignacion = "S/D";
                 }
 
-                string TipoDeCompraEnRMHabilitado = BuscarClaveINI("Habilitar tipo de compra en RM");
-                //  SET @TipoDeCompraEnRMHabilitado=Isnull((Select Top 1 ProntoIni.Valor From ProntoIni   
-                //Left Outer Join ProntoIniClaves pic On pic.IdProntoIniClave=ProntoIni.IdProntoIniClave  
-                //Where pic.Clave='Habilitar tipo de compra en RM'),'')  
+                string TipoDeCompraEnRMHabilitado = BuscarClaveINI("Habilitar tipo de compra en RM",-1);
 
                 if (TipoDeCompraEnRMHabilitado == "SI")
                 {
                     string Modalidad = db.TiposCompras.Find(requerimiento.IdTipoCompra).Modalidad ?? "CC";
 
-                    int IdDetallePedido = (from dp in dr.DetallePedidos
+                    string TipoDesignacionActual = "-1";
+                    int IdDetallePedido = 0;
+                    if (dr.IdDetalleRequerimiento > 0)
+                    {
+                        TipoDesignacionActual = db.DetalleRequerimientos.Find(dr.IdDetalleRequerimiento).TipoDesignacion ?? null;
+                        IdDetallePedido = (from dp in dr.DetallePedidos
                                            join p in db.Pedidos on dp.IdPedido equals p.IdPedido
-                                           where (dp.Cumplido ?? "NO") != "AN" && (p.Cumplido ?? "NO") != "AN"
+                                           where (dp.IdDetalleRequerimiento ?? 0) == dr.IdDetalleRequerimiento && (dp.Cumplido ?? "NO") != "AN" && (p.Cumplido ?? "NO") != "AN"
                                            select dp.IdDetallePedido
-                           ).FirstOrDefault();
-                    //int IdDetallePedido=IsNull((Select Top 1 dp.IdDetallePedido From DetallePedidos dp   
-                    //         Left Outer Join Pedidos On Pedidos.IdPedido = dp.IdPedido  
-                    //         Where dp.IdDetalleRequerimiento=@IdDetalleRequerimiento and 
-                    //             IsNull(dp.Cumplido,"NO")<>"AN" and IsNull(Pedidos.Cumplido,"NO")<>"AN"),0)  
+                               ).FirstOrDefault();
+                    }
 
-
-                    if (Modalidad == "CR" && IdDetallePedido == 0 && dr.TipoDesignacion == null)
+                    if (Modalidad == "CR" && IdDetallePedido == 0 && (TipoDesignacionActual == "-1" || TipoDesignacionActual == null))
                         dr.TipoDesignacion = "S/D";
-                    else if (Modalidad == "CO" && IdDetallePedido == 0 && dr.TipoDesignacion == "S/D")
+                    else if (Modalidad == "CO" && IdDetallePedido == 0 && (TipoDesignacionActual == "-1" || TipoDesignacionActual == "S/D"))
                         dr.TipoDesignacion = null;
-                    else if (Modalidad == "CN" && IdDetallePedido == 0 && dr.TipoDesignacion == "S/D")
+                    else if (Modalidad == "CN" && IdDetallePedido == 0 && (TipoDesignacionActual == "-1" || TipoDesignacionActual == "S/D"))
                         dr.TipoDesignacion = null;
                 }
 
@@ -666,6 +670,7 @@ namespace ProntoMVC.Controllers
         public class Requerimientos2
         {
             public int IdRequerimiento { get; set; }
+            public int? IdObra { get; set; }
             public int? NumeroRequerimiento { get; set; }
             public DateTime? FechaRequerimiento { get; set; }
             public string NumeradorEliminacionesFirmas { get; set; }
@@ -696,6 +701,9 @@ namespace ProntoMVC.Controllers
             public string Observaciones { get; set; }
             public string CircuitoFirmasCompleto { get; set; }
             public string Firmas { get; set; }
+            public string Confirmado { get; set; }
+            public string Modalidad { get; set; }
+            public int? CantidadItemsNoComprables { get; set; }
         }
 
         public class DetalleRequerimientos2
@@ -731,6 +739,8 @@ namespace ProntoMVC.Controllers
             public string ArchivoAdjunto10 { get; set; }
             public int? Aprobo { get; set; }
             public string CircuitoFirmasCompleto { get; set; }
+            public string Modalidad { get; set; }
+            public string TipoDesignacion { get; set; }
         }
 
         public virtual ActionResult Requerimientos_DynamicGridData
@@ -767,6 +777,7 @@ namespace ProntoMVC.Controllers
                         select new Requerimientos2
                         {
                             IdRequerimiento = a.IdRequerimiento,
+                            IdObra = a.IdObra,
                             NumeroRequerimiento = a.NumeroRequerimiento,
                             FechaRequerimiento = a.FechaRequerimiento,
                             NumeradorEliminacionesFirmas = a.NumeradorEliminacionesFirmas.ToString(),
@@ -776,11 +787,11 @@ namespace ProntoMVC.Controllers
                             Impresa = a.Impresa,
                             Detalle = a.Detalle,
                             Obra = a.Obra.NumeroObra+" "+a.Obra.Descripcion,
-                            Presupuestos = "", //ModelDefinedFunctions.Pedidos_Requerimientos(a.IdPedido).ToString(),
+                            Presupuestos = ModelDefinedFunctions.Requerimientos_Presupuestos(a.IdRequerimiento).ToString(),
                             Comparativas = "",
-                            Pedidos = "",
-                            Recepciones = "",
-                            Salidas = "",
+                            Pedidos = ModelDefinedFunctions.Requerimientos_Pedidos(a.IdRequerimiento).ToString(),
+                            Recepciones = ModelDefinedFunctions.Requerimientos_Recepciones(a.IdRequerimiento).ToString(),
+                            Salidas = ModelDefinedFunctions.Requerimientos_SalidasMateriales(a.IdRequerimiento).ToString(),
                             CantidadItems = a.DetalleRequerimientos.Count(),
                             LiberadoPor = b != null ? b.Nombre : "",
                             FechaAprobacion = a.FechaAprobacion,
@@ -797,7 +808,10 @@ namespace ProntoMVC.Controllers
                             Observaciones = a.Observaciones,
                             CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
                             Firmas = "",
-                        }).Where(a => a.FechaRequerimiento >= FechaDesde && a.FechaRequerimiento <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+                            Confirmado = a.Confirmado,
+                            Modalidad = d != null ? d.Modalidad : "",
+                            CantidadItemsNoComprables = a.DetalleRequerimientos.Where(x => (x.TipoDesignacion ?? "") == "S/D").Count()
+                        }).Where(a => a.FechaRequerimiento >= FechaDesde && a.FechaRequerimiento <= FechaHasta && (IdObra == "" || a.IdObra.ToString() == IdObra) && (!bALiberar || a.LiberadoPor == "") && (!bAConfirmar || (a.Confirmado ?? "") != "SI")).OrderBy(sidx + " " + sord).AsQueryable();
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2>
                                      (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
@@ -1202,6 +1216,7 @@ namespace ProntoMVC.Controllers
                         select new Requerimientos2
                         {
                             IdRequerimiento = a.IdRequerimiento,
+                            IdObra = a.IdObra,
                             NumeroRequerimiento = a.NumeroRequerimiento,
                             FechaRequerimiento = a.FechaRequerimiento,
                             NumeradorEliminacionesFirmas = a.NumeradorEliminacionesFirmas.ToString(),
@@ -1232,7 +1247,10 @@ namespace ProntoMVC.Controllers
                             Observaciones = a.Observaciones,
                             CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
                             Firmas = "",
-                        }).Where(a => (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && a.LiberadoPor.Length > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI").OrderBy(sidx + " " + sord).AsQueryable();
+                            Confirmado = a.Confirmado,
+                            Modalidad = d != null ? d.Modalidad : "",
+                            CantidadItemsNoComprables = a.DetalleRequerimientos.Where(x => (x.TipoDesignacion ?? "") == "S/D").Count()
+                        }).Where(a => (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && a.LiberadoPor.Length > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Modalidad ?? "") != "CO" && a.CantidadItems>a.CantidadItemsNoComprables).OrderBy(sidx + " " + sord).AsQueryable();
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2> (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
@@ -1500,6 +1518,7 @@ namespace ProntoMVC.Controllers
                             a.IdUnidad,
                             a.IdControlCalidad,
                             a.OrigenDescripcion,
+                            a.TipoDesignacion,
                             a.NumeroItem,
                             a.Cantidad,
                             Unidad = a.Unidad.Abreviatura,
@@ -1541,15 +1560,16 @@ namespace ProntoMVC.Controllers
                                 a.IdUnidad.ToString(),
                                 a.IdControlCalidad.NullSafeToString(),
                                 a.OrigenDescripcion.ToString(),
+                                a.TipoDesignacion.NullSafeToString(),
                                 a.NumeroItem.ToString(),
                                 a.Cantidad.ToString(),
                                 a.Unidad,
                                 a.Codigo,
                                 a.Articulo,
-                                a.Observaciones,
+                                a.Observaciones.NullSafeToString(),
                                 a.TiposDeDescripcion,
                                 a.FechaEntrega.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.Cumplido,
+                                a.Cumplido.NullSafeToString(),
                                 a.DescripcionControlCalidad.NullSafeToString(),
                                 "", //"<input id='fileupload' type='file' name='files[]' multiple />",  //"<input style='height:22px;width:20px;' id='fileupload'+  type='file' name='files[]' multiple value='A' onclick=\"Adjunto;\"  />",
                                 (a.ArchivoAdjunto1==null || a.ArchivoAdjunto1.Length == 0) ?  "" :  "<a href="+ Url.Action("ArchivosAdjuntos",new {filename = a.ArchivoAdjunto1} ) + ">" + a.ArchivoAdjunto1 + "</>",
@@ -1576,6 +1596,7 @@ namespace ProntoMVC.Controllers
             int pageSize = rows;
 
             var data = (from a in db.DetalleRequerimientos
+                        from d in db.TiposCompras.Where(o => o.IdTipoCompra == a.Requerimientos.IdTipoCompra).DefaultIfEmpty()
                         select new DetalleRequerimientos2
                         {
                             IdDetalleRequerimiento = a.IdDetalleRequerimiento,
@@ -1608,9 +1629,11 @@ namespace ProntoMVC.Controllers
                             ArchivoAdjunto9 = a.ArchivoAdjunto9,
                             ArchivoAdjunto10 = a.ArchivoAdjunto10,
                             Aprobo = a.Requerimientos.Aprobo,
-                            CircuitoFirmasCompleto = a.Requerimientos.CircuitoFirmasCompleto
-                        }).Where(a => (IdRequerimiento1 <= 0 || a.IdRequerimiento == IdRequerimiento1) && (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && (a.Aprobo ?? 0) > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)) > 0).OrderBy(sidx + " " + sord).AsQueryable();
-
+                            CircuitoFirmasCompleto = a.Requerimientos.CircuitoFirmasCompleto,
+                            Modalidad = d != null ? d.Modalidad : "",
+                            TipoDesignacion = a.TipoDesignacion
+                        }).Where(a => (IdRequerimiento1 <= 0 || a.IdRequerimiento == IdRequerimiento1) && (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && (a.Aprobo ?? 0) > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)) > 0 && (a.Modalidad ?? "") != "CO" && (a.TipoDesignacion ?? "") != "S/D").OrderBy(sidx + " " + sord).AsQueryable();
+            
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<DetalleRequerimientos2>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
