@@ -167,6 +167,30 @@ public static class ModelDefinedFunctions
         throw new NotSupportedException("Direct calls are not supported.");
     }
 
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Requerimientos_Pedidos")]
+    public static string Requerimientos_Pedidos(int IdRequerimiento)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Requerimientos_Presupuestos")]
+    public static string Requerimientos_Presupuestos(int IdRequerimiento)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Requerimientos_Recepciones")]
+    public static string Requerimientos_Recepciones(int IdRequerimiento)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
+    [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "Requerimientos_SalidasMateriales")]
+    public static string Requerimientos_SalidasMateriales(int IdRequerimiento)
+    {
+        throw new NotSupportedException("Direct calls are not supported.");
+    }
+
     [System.Data.Entity.Core.Objects.DataClasses.EdmFunction("DemoProntoModel.Store", "SalidasMateriales_EquiposDestino")]
     public static string SalidasMateriales_EquiposDestino(int IdSalidaMateriales)
     {

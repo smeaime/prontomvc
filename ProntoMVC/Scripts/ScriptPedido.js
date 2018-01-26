@@ -1709,9 +1709,7 @@ function ConectarGrillas1() {
         },
         ondrop: function (ev, ui, getdata) {
             var acceptId = $(ui.draggable).attr("id");
-
             BorraElPrimeroAgregado();
-
             CopiarRM(acceptId, ui);
         }
     });

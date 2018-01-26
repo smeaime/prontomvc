@@ -138,7 +138,7 @@ namespace ProntoMVC.Controllers
             if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; }
             if (mIdProveedor <= 0 && o.TipoRecepcion == 1) { sErrorMsg += "\n" + "Falta definir el proveedor"; }
 
-            if (mIdProveedor > 0)
+            if (mIdProveedor > 0 && mAnulada != "SI")
             {
                 if ((db.Proveedores.Where(x => x.IdProveedor == mIdProveedor).Select(x => x.Estados_Proveedores.Activo).FirstOrDefault() ?? "") == "NO") { sErrorMsg += "\n" + "Proveedor inhabilitado"; }
 
