@@ -878,6 +878,7 @@ namespace ProntoMVC.Tests
 
 
 
+
         [TestMethod]
         public void InformeSincroLaBiznaga_Ledesma_47230()
         {
@@ -934,7 +935,7 @@ namespace ProntoMVC.Tests
 
 
 
-            
+
 
         }
 
@@ -958,10 +959,10 @@ namespace ProntoMVC.Tests
 
             var id = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC); // esto tiene espacios
             var id2 = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC);//esto tiene nonbreakingspace
-                                                                                       //If.Destino <= 0 Then
-                                                                                       //    'primero busco la equivalencia con excepcion prefijada
-                                                                                       //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
-                                                                                       //        log += "Destino; "
+                                                                                                   //If.Destino <= 0 Then
+                                                                                                   //    'primero busco la equivalencia con excepcion prefijada
+                                                                                                   //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
+                                                                                                   //        log += "Destino; "
 
 
 
