@@ -34,7 +34,7 @@ using ProntoFlexicapture;
 
 using System.IO;
 
-
+using System.Diagnostics;
 
 
 //test de java lopez
@@ -157,10 +157,56 @@ namespace ProntoMVC.TestsMVC
 
 
 
+
+
         [TestMethod]
-        public void sssss()
+        public void Llamada_al_plantilla_EXE_por_linea_de_comandos()
         {
-            // como puedo crear una RM para que aparezca en el "RMs Pendientes de Asignar"?
+
+
+
+            //'How to Wait for a Shelled Process to Finish
+            //'Get the name of the system folder.
+            var sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            //'Create a new ProcessStartInfo structure.
+            var pInfo = new ProcessStartInfo();
+            //'Set the file name member of pinfo to Eula.txt in the system folder.
+            pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
+
+            pInfo.Arguments= @"-Plantilla=C:\Pronto\Plantillas\Requerimiento_Servipet.dot -SC=" + scSQL +  @" -Id=20 -FileOut=C:\Requerimiento.doc";
+
+            //'Start the process.
+            Process p = Process.Start(pInfo);
+            //'Wait for the process window to complete loading.
+            p.WaitForInputIdle();
+            //'Wait for the process to exit.
+            p.WaitForExit();
+            //'Continue with the code.
+            //MessageBox.Show("Code continuing...");
+
+
+            
+
+
+
+
+            var cr = new RequerimientoController();
+            GetMockedControllerGenerico(cr);
+
+            //cr.Imprimir(22);
+            cr.ImprimirConPlantillaEXE(22);
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void DetValesSalida_con_parametros_de_items_pendiendes_de_rm()
+        {
 
             var c = new  ValeSalidaController();
             GetMockedControllerGenerico(c);

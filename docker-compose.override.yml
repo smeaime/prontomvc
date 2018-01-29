@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  prontomvc:
+    ports:
+      - "80"
+networks:
+  default:
+    external:
+      name: nat
