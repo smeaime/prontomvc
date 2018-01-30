@@ -1931,7 +1931,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual FileResult ImprimirConPlantillaEXE(int id,string DirApp) //(int id)
+        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp) //(int id)
         {
             string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
 
@@ -1964,10 +1964,28 @@ namespace ProntoMVC.Controllers
             pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
 
 
+            /*
+            [14:13, 30/1/2018] +54 9 11 2857-9291: edu parece q anda nomas
+[14:13, 30 / 1 / 2018] +54 9 11 2857-9291: tuve problemas usando mi formato de cadena de conexion
+[14:14, 30 / 1 / 2018] Edu: ok, modificaste el codigo?
+[14:15, 30 / 1 / 2018] +54 9 11 2857-9291: si, pero ahora esta la cadena de conexion harcodeada apuntando a la base q me pasaste vos de ejemplo
+[14:15, 30 / 1 / 2018] +54 9 11 2857-9291: solo me queria asegurar de q la llamada al exe descargase bien el archivo
+[14:17, 30 / 1 / 2018] Edu: ok, igual hay que ampliarlo para las plantillas que usen mas argumentos, pero si ya anda es un tema de ir adaptandolo y bajarlo junto con el sitio
+[14:18, 30 / 1 / 2018] +54 9 11 2857-9291: quizas el problema haya sido siempre lo del formato de la cadena de conexion
+
+            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
+            // en lugar de este formato, yo mandaba:
+            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
+    */
+
             SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
+            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
+            // en lugar de este formato, yo mandaba:
+            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
+
             pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
 
-            
+
 
             ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
 
