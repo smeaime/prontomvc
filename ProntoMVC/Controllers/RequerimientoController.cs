@@ -1931,13 +1931,13 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual FileResult ImprimirConPlantillaEXE(int id) //(int id)
+        public virtual FileResult ImprimirConPlantillaEXE(int id,string DirApp) //(int id)
         {
-            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+            string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
 
-            string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            string output = DirApp + "\\Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
-            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
@@ -1961,9 +1961,15 @@ namespace ProntoMVC.Controllers
             //'Create a new ProcessStartInfo structure.
             var pInfo = new ProcessStartInfo();
             //'Set the file name member of pinfo to Eula.txt in the system folder.
-            pInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"\bin\Plantillas.exe";
+            pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
 
-            pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SC + @" -Id=" + id + " -FileOut=" + output;
+
+            SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
+            pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
+
+            
+
+            ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
 
             //'Start the process.
             Process p = Process.Start(pInfo);
@@ -1991,14 +1997,19 @@ namespace ProntoMVC.Controllers
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
+
+
+            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory);
+
+
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
             //plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_Autotrol_PUNTONET.docx";
-            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
             //edu está usando .dotm para poder usar la exportacion pdf. Lo voy a volver a .dot para probar si el problema en el server viene por ahi
-            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dot";
+            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dot";
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
