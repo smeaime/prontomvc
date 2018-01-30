@@ -6588,11 +6588,14 @@ Formato localidad-provincia	destination	x
 
             //IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
             IQueryable<Reclamo> q = db.Reclamos;
-            if (nombreusuario != "") q = q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
+            if (nombreusuario != "") q = q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario) || x.Descripcion.Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
+            //                                   agregué el OR porque hubo casos (no sé por qué) en que al crearse el reclamo, no se generó el "comentario fantasma" del destinatario
+            
 
-            var cartareclamo = db.CartasDePortes.Find(idcarta);
-            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
-            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+
+            //var cartareclamo = db.CartasDePortes.Find(idcarta);
+            //int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
+            //if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
             //q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
 

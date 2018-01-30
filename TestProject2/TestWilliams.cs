@@ -923,6 +923,8 @@ namespace ProntoMVC.Tests
             ademas,
                 *está el tema de saber a qué mail le corresponde cada cliente
                 *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
+                * en la facturacion hay otro criterio
+                * en la vista por celulares, otro (basta conque el usuario figure entre los clientes de la carta, en cualquier lado)
 
 
              Sincronismos
