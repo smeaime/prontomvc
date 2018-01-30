@@ -6743,7 +6743,55 @@ Formato localidad-provincia	destination	x
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),
 
-							}
+
+
+
+
+                                asdfasdfasdf
+                                asdfasdf
+
+
+
+
+                                                                "<span> " +
+                                "<b>Situacion</b> " + (a.Situacion ?? 0).NullSafeToString() +
+                                "<br/><b>Obs</b> " + a.ObservacionesSituacion +
+                                "<br/>" + a.Producto.ToString() +
+                                "<br/>" + a.TitularDesc +
+                                "<br/>" + a.IntermediarioDesc +
+                                "<br/>" + a.RComercialDesc +
+                                "<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" > Imagenes </>" +
+                                "<span/>",
+
+
+
+
+
+
+                        var html = "<span style='font-size: 14px'> " +
+                            "<br/><b>Situación</b>      " + situacionDesc +
+                            "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                            "<br/><b>Producto</b>       " + a.Producto +
+                            "<br/><b>Titular</b>            " + a.TitularDesc +
+                            "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                            "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                            "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                            "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                            "<br/><b>Destino</b>  " + a.DestinoDesc +
+                            "<br/><b>Patente</b>  " + a.Patente +
+                            "<br/><b>Neto</b>  " + a.NetoPto +
+                            "<br/><b>Arribo</b>  " + a.FechaArribo +
+                            "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                            //"<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                            "<span/>";
+
+
+
+
+
+
+
+        }
                         }).ToArray()
             };
 
@@ -7200,7 +7248,7 @@ Formato localidad-provincia	destination	x
 
 
 
-
+            notificar segun sucursal
 
 
 
@@ -7298,9 +7346,17 @@ Formato localidad-provincia	destination	x
 
 
 
+
+
+
+
+
             try
             {
-                //async....  https://stackoverflow.com/questions/3408397/asynchronously-sending-emails-in-c
+    
+        asfasdfasdf
+
+        //async....  https://stackoverflow.com/questions/3408397/asynchronously-sending-emails-in-c
                 Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
                     SmtpUser, SmtpServer,
                     SmtpUser, SmtpPass, "",
@@ -7310,6 +7366,11 @@ Formato localidad-provincia	destination	x
             {
                 ErrHandler2.WriteError(ex);
             }
+
+
+
+
+
 
         }
 

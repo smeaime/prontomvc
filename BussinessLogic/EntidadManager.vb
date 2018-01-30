@@ -2290,7 +2290,7 @@ Salida:
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
                                           "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
-                                          "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
+                                          "Verificar el directorio de plantillas. Tiene permisos para usar el directorio? Verificar el formato de la cadena de conexion!!!! <--esto no es porque todavia no llame a Emision")
                     Throw
                 End Try
 
@@ -2560,7 +2560,7 @@ Salida:
                 Catch ex As Exception
                     ErrHandler2.WriteError(ex.Message & "Explota en el oW.Documents.Add(plant).  Plantilla: " & plant & " No se puede abrir el " &
                                           "almacenamiento de macros? Verficar las referencias de la plantilla a dlls (especialmente COMPRONTO). " &
-                                          "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?")
+                                          "Verificar el directorio de plantillas. Tiene permisos para usar el directorio?  Verificar el formato de la cadena de conexion!!!! <--esto no es porque todavia no llame a Emision")
                     Throw
                 End Try
 
