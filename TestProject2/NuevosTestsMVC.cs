@@ -165,7 +165,7 @@ namespace ProntoMVC.TestsMVC
             GetMockedControllerGenerico(cr);
 
             //cr.Imprimir(22);
-            cr.ImprimirConPlantillaEXE(22);
+            cr.ImprimirConPlantillaEXE(22,DirApp);
 
 
         }
