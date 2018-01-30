@@ -1441,8 +1441,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         'FechaFinal': function () { return $("#ctl00_ContentPlaceHolder1_txtFechaHasta").val(); },
                         'puntovent': function () { return $("#ctl00_ContentPlaceHolder1_cmbPuntoVenta").val(); },
                         'destino': function () { return $("#ctl00_ContentPlaceHolder1_txtDestino").val(); },
-                        'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); },
-                        'nombreusuario': 'adasddas'
+                        'estado': function () { return $("#ctl00_ContentPlaceHolder1_cmbEstado").val(); }
+                        
                     },
                     datatype: 'json',
                     mtype: 'POST',
@@ -1506,6 +1506,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+
+
+
+
+
+
+
+
                         var html = "<span style='font-size: 14px'> " +
                             "<br/><b>Reclamo</b>            " + a.IdReclamo +
                             "<br/><b>Titulo</b>       " + a.Titulo +
@@ -1517,7 +1525,85 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         $("#" + subgrid_id).append(html);
 
 
+
+
+
+
+
+
+
+
+
+                        var situacionDesc = "";
+                        switch (parseInt(a.Situacion)) {
+                            case 0:
+                                situacionDesc = "Autorizado";
+                                break;
+                            case 1:
+                                situacionDesc = "Demorado";
+                                break;
+                            case 2:
+                                situacionDesc = "Posición";
+                                break;
+                            case 3:
+                                situacionDesc = "Descargado";
+                                break;
+                            case 4:
+                                situacionDesc = "A Descargar";
+                                break;
+                            case 5:
+                                situacionDesc = "Rechazado";
+                                break;
+                            case 6:
+                                situacionDesc = "Desviado";
+                                break;
+                            case 7:
+                                situacionDesc = "CP p/cambiar";
+                                break;
+                            case 8:
+                                situacionDesc = "Sin Cupo";
+                                break;
+                            case 9:
+                                situacionDesc = "Calado";
+                                break;
+                            default:
+                                situacionDesc = "";
+
+                        }
+
+
+
+
+                        var html = "<span style='font-size: 14px'> " +
+                            "<br/><b>Situación</b>      " + situacionDesc +
+                            "<br/><b>Observaciones</b>            " + a.ObservacionesSituacion +
+                            "<br/><b>Producto</b>       " + a.Producto +
+                            "<br/><b>Titular</b>            " + a.TitularDesc +
+                            "<br/><b>Intermediario</b>            " + a.IntermediarioDesc +
+                            "<br/><b>R.Comercial</b>            " + a.RComercialDesc +
+                            "<br/><b>Corredor</b>            " + a.CorredorDesc +
+                            "<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
+                            "<br/><b>Destino</b>  " + a.DestinoDesc +
+                            "<br/><b>Patente</b>  " + a.Patente +
+                            "<br/><b>Neto</b>  " + a.NetoPto +
+                            "<br/><b>Arribo</b>  " + a.FechaArribo +
+                            "<br/><b>Descarga</b>  " + a.FechaDescarga +
+                            //"<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                            "<span/>";
+
+                        $("#" + subgrid_id).append(html);
+
+
+
+
+
                     },
+
+
+
+
+
+
 
                     onSelectRow: function (rowId) {
                         // $("#Lista").jqGrid('toggleSubGridRow', rowId);
