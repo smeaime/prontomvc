@@ -1,0 +1,1 @@
+Plantillas.exe -Plantilla=C:\Pronto\Plantillas\Requerimiento_Servipet.dot -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45 -Id=20 -FileOut=C:\Requerimiento.doc
