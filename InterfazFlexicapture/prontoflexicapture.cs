@@ -6677,6 +6677,8 @@ Formato localidad-provincia	destination	x
             Entidad.ToList();
 
 
+            
+
             long l;
 
             var data = (from a in Entidad
@@ -6746,24 +6748,23 @@ Formato localidad-provincia	destination	x
 
                                 
 
-
-
+                                
 
                                 "<span style='font-size: 14px'> " +
-                                "<b>Situacion</b> " + ( (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Situacion ?? 0).NullSafeToString() +
+                                "<b>Situacion</b> " + ExcelImportadorManager.Situaciones [ ( (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Situacion ?? 0) ]+
                                 "<br/><b>Obs</b> " +  (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).ObservacionesSituacion +
-                                //"<br/>" + a.Producto.ToString() +
-                                //"<br/>" + a.TitularDesc +
-                                //"<br/>" + a.IntermediarioDesc +
-                                //"<br/>" + a.RComercialDesc +
-                                //"<br/><b>Corredor</b>            " + a.CorredorDesc +
-                                //"<br/><b>Destinatario</b>            " + a.DestinatarioDesc +
-                                //"<br/><b>Destino</b>  " + a.DestinoDesc +
-                                //"<br/><b>Patente</b>  " + a.Patente +
-                                //"<br/><b>Neto</b>  " + a.NetoPto +
-                                //"<br/><b>Arribo</b>  " + a.FechaArribo +
-                                //"<br/><b>Descarga</b>  " + a.FechaDescarga +
-                                //"<a href=\"CartaDePorte.aspx?Id=" +  a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                                "<br/><b>Producto</b> "  + EntidadManager.NombreArticulo( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdArticulo)+
+                                "<br/><b>Titular</b> "  + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Vendedor) +
+                                "<br/><b>Intermediario</b>  " + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).CuentaOrden1 )+
+                                "<br/><b>Remitente</b> "  + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).CuentaOrden2) +
+                                "<br/><b>Corredor</b>            " + EntidadManager.NombreVendedor( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Corredor) +
+                                "<br/><b>Destinatario</b>            " + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Entregador) +
+                                "<br/><b>Destino</b>  " + EntidadManager.NombreDestino( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Destino) +
+                                "<br/><b>Patente</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Patente +
+                                "<br/><b>Neto</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).NetoFinal +
+                                "<br/><b>Arribo</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).FechaArribo +
+                                "<br/><b>Descarga</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).FechaDescarga +
+                                //"<br/><a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
                                 "<span/>",
 
 
