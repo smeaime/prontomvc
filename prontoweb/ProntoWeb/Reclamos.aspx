@@ -1452,7 +1452,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
                     // CP	TURNO	SITUACION	MERC	TITULAR_CP	INTERMEDIARIO	RTE CIAL	CORREDOR	DESTINATARIO	DESTINO	ENTREGADOR	PROC	KILOS	OBSERVACION
 
-                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte', 'estado'
+                    colNames: ['[Grabar]', 'Nro Reclamo', 'cp', 'Titulo', 'fecha', 'comentarios', 'usuarios', 'idcartadeporte', 'estado','adj','html'
 
 
 
@@ -1490,6 +1490,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         { name: 'usuarios', index: 'usuarios', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
                         { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
                         { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+                        { name: 'adjunto', index: 'adjunto', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
+                        { name: 'textohtml', index: 'textohtml', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
 
 
                     ],
@@ -1589,7 +1591,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                             "<br/><b>Arribo</b>  " + a.FechaArribo +
                             "<br/><b>Descarga</b>  " + a.FechaDescarga +
                             //"<br/><br/><a href=\"CartaDePorte.aspx?Id=" + a.IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
-                            "<span/>";
+
+                            "<span/>"
+                            + a.textohtml;
 
                         $("#" + subgrid_id).append(html);
 
