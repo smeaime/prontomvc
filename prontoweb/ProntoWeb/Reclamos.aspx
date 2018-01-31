@@ -1756,8 +1756,31 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+       <p id="token2" style="word-break: break-all;"></p>
 
 
+
+    <script>
+
+        $( function() {
+            //$('#token2').text($('#token').text())
+            $('#tokenContenedor').show()
+
+            $("#tokenContenedor").css("visibility", "visible") 
+            $('#BorraToken').hide()
+            
+            })
+
+
+    </script>
+    
+
+
+
+
+
+    
+    
 
 
 
@@ -1809,9 +1832,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     <link rel="manifest" href="./manifest.json">
 
 
-
-
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
         <!-- Header section containing title -->
         <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
@@ -1852,6 +1873,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         </div>
 
     </div>
+
+
 
     <script>
 
