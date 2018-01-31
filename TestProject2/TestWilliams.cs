@@ -942,11 +942,13 @@ namespace ProntoMVC.Tests
 
 
             s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Andres estás?", SC, scbdlmasterappconfig, scbdlmasterappconfig, "Andres", false,
-                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], 
+                                                                ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]) );
 
 
             s.GrabarComentarioYNotificar(idcarta, "Andres", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
-                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"],
+                                                    ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
 
