@@ -622,7 +622,7 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
 
 
 
-                                    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" style="visibility:hidden;display:none">
+                                    <div id="tokenContenedor" class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header" style="visibility:hidden;display:none">
 
                                         <!-- Header section containing title -->
                                         <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
@@ -643,7 +643,7 @@ ERA ESO EL PROBLEMA DEL PANELCITO VACIO?????????????????!!!!!!!!!!!!!!!1
                                                     <p id="token" style="word-break: break-all;"></p>
 
 
-                                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                                                    <button id="BorraToken" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                                                         onclick="deleteToken()">
                                                         Borrar Ticket</button>
                                                 </div>
