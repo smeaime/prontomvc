@@ -689,7 +689,7 @@ Public Class WebServiceCartas
     <WebMethod(Description:="", EnableSession:=False)>
     <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Sub ReclamosMaestro(sidx As String, sord As String, page As Integer, rows As Integer, _search As Boolean,
-                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer, nombreusuario As String) ' As String
+                                    filters As String, FechaInicial As String, FechaFinal As String, puntovent As Integer, idcarta As Integer) ' As String
 
 
         Try

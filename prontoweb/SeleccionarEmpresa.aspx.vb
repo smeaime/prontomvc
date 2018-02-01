@@ -184,7 +184,7 @@ Partial Class SeleccionarEmpresa
 
             DDLEmpresas.Focus()
 
-            Dim bMeterseDirectoEnLaPrimeraEmpresa As Boolean = False
+            Dim bMeterseDirectoEnLaPrimeraEmpresa As Boolean = True 'False
             'If Debugger.IsAttached Then bMeterseDirectoEnLaPrimeraEmpresa = True
 
             Dim UsuarioExiste As Boolean
@@ -289,7 +289,7 @@ Partial Class SeleccionarEmpresa
                 End If
 
 
-            ElseIf bMeterseDirectoEnLaPrimeraEmpresa And Session(SESSIONPRONTO_NombreEmpresa) = "" Then
+            ElseIf bMeterseDirectoEnLaPrimeraEmpresa And If(Session(SESSIONPRONTO_NombreEmpresa), "") = "" And Session("SaltarSeleccionarEmpresa") <> "NO" Then
                 'si tiene mas de una empresa o se loguea por segunda vez, que vaya directo
 
                 Session(SESSIONPRONTO_NombreEmpresa) = BDLMasterEmpresasManagerMigrar.GetUltimaBaseQueAccedioUsuario(Session(SESSIONPRONTO_UserId))
@@ -308,7 +308,7 @@ Partial Class SeleccionarEmpresa
                     If Not f Then Session(SESSIONPRONTO_NombreEmpresa) = lista(0).Descripcion
                 End If
 
-
+                Session("SaltarSeleccionarEmpresa") = ""
 
                 Try
                     'UsuarioExiste = BDLMasterEmpresasManagerMigrar.AddEmpresaToSession(lista.Item(0).Id, Session, SC, Me)

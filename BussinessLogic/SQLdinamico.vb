@@ -313,18 +313,19 @@ Public Module SQLdinamico
 
 
 
-            Return EntidadManager.ExecDinamico(SC, "SELECT TOP 1  " & _
-                                             " isnull(Descripcion,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " & _
-                                             " + isnull(Clientes.RazonSocial,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " & _
-                                             " + Convert(varchar(200),isnull(AuxiliarString1,'')  COLLATE SQL_Latin1_General_CP1_CI_AS)+ ' ' " & _
-                                             " + Convert(varchar(200),isnull(AuxiliarString2,'')  COLLATE SQL_Latin1_General_CP1_CI_AS) " & _
-                                             " FROM CDPEstablecimientos left JOIN CLIENTES on  CLIENTES.idcliente=CDPEstablecimientos.idtitular " & _
+            Return EntidadManager.ExecDinamico(SC, "SELECT TOP 1  " &
+                                             " isnull(Descripcion,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " &
+                                             " + isnull(Clientes.RazonSocial,'')  COLLATE SQL_Latin1_General_CP1_CI_AS  + ' ' " &
+                                             " + Convert(varchar(200),isnull(AuxiliarString1,'')  COLLATE SQL_Latin1_General_CP1_CI_AS)+ ' ' " &
+                                             " + Convert(varchar(200),isnull(AuxiliarString2,'')  COLLATE SQL_Latin1_General_CP1_CI_AS) " &
+                                             " FROM CDPEstablecimientos left JOIN CLIENTES on  CLIENTES.idcliente=CDPEstablecimientos.idtitular " &
                                              "  WHERE IdEstablecimiento=" & IdEstablecimiento & "").Rows(0).Item(0).ToString
 
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
+
 
     Public Function BuscaIdEstablecimientoWilliams(ByVal Nombre As String, ByVal SC As String) As Integer
         If Nombre = "" Then Return -1

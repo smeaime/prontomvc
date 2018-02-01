@@ -562,7 +562,7 @@
         for (i = 0, n = selIds.length; i < n; i++) {
             var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
 
-            var url = '@Html.Raw(@Url.Action("Imprimir", "Requerimiento", new { id = "__param__" }))';
+            var url = '@Html.Raw(@Url.Action("ImprimirConPlantillaEXE", "Requerimiento", new { id = "__param__" }))';
             url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
             //window.location.href = url.replace('__param__', encodeURIComponent(IdRequerimiento));
             //window.open(url, '_blank');
@@ -591,7 +591,7 @@
         var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, cellValues = [];
         for (i = 0, n = selIds.length; i < n; i++) {
             var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
-            var url = '@Html.Raw(@Url.Action("ImprimirPDF", "Requerimiento", new { id = "__param__" }))';
+            var url = '@Html.Raw(@Url.Action("ImprimirConPlantillaEXE", "Requerimiento", new { id = "__param__", Tipo = "PDF" }))';
             url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
             window.open(url); 
         }

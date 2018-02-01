@@ -6588,11 +6588,14 @@ Formato localidad-provincia	destination	x
 
             //IQueryable<ReclamoComentario> q = db.ReclamoComentarios;
             IQueryable<Reclamo> q = db.Reclamos;
-            if (nombreusuario != "") q = q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
+            if (nombreusuario != "") q = q.Where(x => x.ReclamoComentarios.Select(c => c.NombreUsuario).Contains(nombreusuario) || x.Descripcion.Contains(nombreusuario)); //filtro los reclamos donde participa el usuario...
+                                                                                                                                                                           //                                   agregué el OR porque hubo casos (no sé por qué) en que al crearse el reclamo, no se generó el "comentario fantasma" del destinatario
 
-            var cartareclamo = db.CartasDePortes.Find(idcarta);
-            int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
-            if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
+
+
+            //var cartareclamo = db.CartasDePortes.Find(idcarta);
+            //int? idreclamo = cartareclamo == null ? null : cartareclamo.IdReclamo;
+            //if (idreclamo != null) q = q.Where(x => x.IdReclamo == idreclamo);
             //q = q.Where(x => x.IdReclamo == (idreclamo ?? -1));
 
 
@@ -6674,6 +6677,8 @@ Formato localidad-provincia	destination	x
             Entidad.ToList();
 
 
+            
+
             long l;
 
             var data = (from a in Entidad
@@ -6740,7 +6745,39 @@ Formato localidad-provincia	destination	x
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),
 
-							}
+
+                                
+
+                                
+
+                                "<span style='font-size: 14px'> " +
+                                "<b>Situacion</b> " + ExcelImportadorManager.Situaciones [ ( (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Situacion ?? 0) ]+
+                                "<br/><b>Obs</b> " +  (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).ObservacionesSituacion +
+                                "<br/><b>Producto</b> "  + EntidadManager.NombreArticulo( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdArticulo)+
+                                "<br/><b>Titular</b> "  + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Vendedor) +
+                                "<br/><b>Intermediario</b>  " + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).CuentaOrden1 )+
+                                "<br/><b>Remitente</b> "  + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).CuentaOrden2) +
+                                "<br/><b>Corredor</b>            " + EntidadManager.NombreVendedor( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Corredor) +
+                                "<br/><b>Destinatario</b>            " + EntidadManager.NombreCliente( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Entregador) +
+                                "<br/><b>Destino</b>  " + EntidadManager.NombreDestino( SC, (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Destino) +
+                                "<br/><b>Patente</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).Patente +
+                                "<br/><b>Neto</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).NetoFinal +
+                                "<br/><b>Arribo</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).FechaArribo +
+                                "<br/><b>Descarga</b>  " + (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).FechaDescarga +
+                                //"<br/><a href=\"CartaDePorte.aspx?Id=" +  (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte + "\"  target=\"_blank\" > ver carta </>" +
+                                "<span/>",
+
+
+
+
+
+
+
+
+
+
+
+        }
                         }).ToArray()
             };
 
@@ -7112,7 +7149,7 @@ Formato localidad-provincia	destination	x
 
 
         public virtual void GrabarComentarioYNotificar
-            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternos, string SCbdlmasterInternos , string usuarioDestino,
+            (int idCartaPorte, string usuarioOrigen, string sComentario, string SCpronto, string SCbdlmasterExternos, string SCbdlmasterInternos, string usuarioDestino,
             bool esExternoUsuarioOrigen, string UrlDominio, string SmtpUser, string SmtpServer, string SmtpPass, int SmtpPort)
         {
 
@@ -7198,9 +7235,6 @@ Formato localidad-provincia	destination	x
 
 
 
-
-
-
             string casillas = "";
             foreach (string u in usuariosCasillas)
             {
@@ -7229,47 +7263,96 @@ Formato localidad-provincia	destination	x
             }
 
 
+
+
+            // TODO: falta agregar a la funcion que reciba los parametros de SmtpUserPuntoVenta1
+            string mailsuc = "", nombresuc = "";
+            switch (carta.PuntoVenta)
+            {
+                case 1:
+                    nombresuc = "Buenos Aires";
+                    mailsuc = "buenosaires@williamsentregas.com.ar";
+                    break;
+                case 2:
+                    nombresuc = "San Lorenzo";
+                    mailsuc = "sanlorenzo@williamsentregas.com.ar";
+                    break;
+                case 3:
+                    nombresuc = "Arroyo Seco";
+                    mailsuc = "arroyoseco@williamsentregas.com.ar";
+                    break;
+                case 4:
+                    nombresuc = "Bahía Blanca";
+                    mailsuc = "bahiablanca@williamsentregas.com.ar";
+                    break;
+                default:
+                    nombresuc = "Buenos Aires";
+                    mailsuc = "buenosaires@williamsentregas.com.ar";
+                    break;
+            }
+            if (Debugger.IsAttached) mailsuc = "ProntoWebMail@gmail.com";
+
+
+
+
+
+
             if (esExternoUsuarioOrigen)
             {
                 // como es un usuario externo el q hace el comentario, incluyo en las casillas a la oficina
-                string Para;
-                switch (carta.PuntoVenta)
-                {
-                    case 1:
-                        Para = "buenosaires@williamsentregas.com.ar";
-                        break;
-                    case 2:
-                        Para = "sanlorenzo@williamsentregas.com.ar";
-                        break;
-                    case 3:
-                        Para = "arroyoseco@williamsentregas.com.ar";
-                        break;
-                    case 4:
-                        Para = "bahiablanca@williamsentregas.com.ar";
-                        break;
-                    default:
-                        Para = "buenosaires@williamsentregas.com.ar";
-                        break;
-                }
-                casillas = (casillas + Para);
+
+                casillas = (casillas + mailsuc);
                 // ConfigurationManager.AppSettings("ErrorMail")
-
-
 
                 // como es un externo, como hago con la notificacion al usuario interno?
                 usuarioDestino = usuarios.Where(x => x != usuarioOrigen).FirstOrDefault();
 
             }
 
-            string coment = "Comentario de "
-                        + usuarioOrigen + " en CP " + carta.NumeroCartaDePorte.ToString() + ": <br/>"
-                        + sComentario + "<br/><br/> " +
-                        "<a href=\'" + linkAlReclamo + "\'>Link al comentario</a>";
 
 
-            string coment2 = "Comentario de "
-                        + usuarioOrigen + " en CP " + carta.NumeroCartaDePorte.ToString() + ": "
-                        + sComentario;
+
+
+
+            string asunto = " Of: " + nombresuc +
+                            " - CP " + carta.NumeroCartaDePorte.ToString() + "" +
+                            " - Informe de Camión - " + EntidadManager.NombreCliente(SCpronto, carta.Vendedor) + "" +
+                            " - Destino: " + EntidadManager.NombreDestino(SCpronto, carta.Destino)
+                            ;
+
+
+            string coment = " Of: " + nombresuc +
+                            " - CP " + carta.NumeroCartaDePorte.ToString() + "" +
+                            " - Informe de Camión - " + EntidadManager.NombreCliente(SCpronto, carta.Vendedor) + "" +
+                            " - Destino: " + EntidadManager.NombreDestino(SCpronto, carta.Destino)
+                            + "<br/><br/> " + "Comentario de " + usuarioOrigen + ": " + sComentario 
+                            + "<br/><br/> " + "<a href=\'" + linkAlReclamo + "\'>Link al comentario</a>";
+
+
+            //"Of: { Nombre Oficina}     -CP: { Numero CP}    -Informe de Camion - { Titular de CP}    -Destino: { Nombre del Destino}    Comentario de { Usuario}: { Comentario}    { Link al chat}"
+
+
+
+
+            string comentChrome = " Of: " + nombresuc +
+                            " - CP " + carta.NumeroCartaDePorte.ToString() + "" +
+                            " - Informe de Camión - " + EntidadManager.NombreCliente(SCpronto, carta.Vendedor) + "" +
+                            " - Destino: " + EntidadManager.NombreDestino(SCpronto, carta.Destino)
+                            + "\nComentario de " + usuarioOrigen + ": " + sComentario;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7284,7 +7367,7 @@ Formato localidad-provincia	destination	x
                     }
 
                     //convertir comentario de html a text
-                    s.EnviarNotificacionALosDispositivosDelUsuario(n, coment2, "Williams Entregas", SCpronto, linkAlReclamo, "https://prontoweb.williamsentregas.com.ar/Imagenes/logotw.png"); //  "http://www.williamsentregas.com.ar/img/logotw.png");
+                    s.EnviarNotificacionALosDispositivosDelUsuario(n, comentChrome, "Williams Entregas", SCpronto, linkAlReclamo, "https://prontoweb.williamsentregas.com.ar/Imagenes/logotw.png"); //  "http://www.williamsentregas.com.ar/img/logotw.png");
 
                 }
             }
@@ -7295,12 +7378,26 @@ Formato localidad-provincia	destination	x
 
 
 
+
+
+
+
+
             try
             {
+
+
+
+
                 //async....  https://stackoverflow.com/questions/3408397/asynchronously-sending-emails-in-c
-                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(casillas, "Consulta por carta porte", coment,
-                    SmtpUser, SmtpServer,
-                    SmtpUser, SmtpPass, "",
+                Pronto.ERP.Bll.EntidadManager.MandaEmail_Nuevo(
+
+                    casillas, asunto, coment,
+
+                    mailsuc,
+
+                    SmtpServer,
+                    mailsuc, SmtpPass, "",
                     SmtpPort, 1, "", "", "Williams Entregas");
             }
             catch (Exception ex)
@@ -7308,7 +7405,21 @@ Formato localidad-provincia	destination	x
                 ErrHandler2.WriteError(ex);
             }
 
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7628,78 +7739,78 @@ Formato localidad-provincia	destination	x
 
 
             /*
-			select
-	*
-	from
-	(
-	select
-	FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
-	from 
-	dbo.fSQL_GetDataTableFiltradoYPaginado  
-				(  
+            select
+        *
+        from
+        (
+        select
+        FLOOR( sum(netoproc) /1000) as kilos, LOCORI.Nombre as localidad, isnull(PROVORI.Nombre,'BUENOS AIRES' ) as provincia
+        from 
+        dbo.fSQL_GetDataTableFiltradoYPaginado  
+                (  
 
-	NULL, 
-					10, 
-					0,
-					NULL, 
-					-1,
+        NULL, 
+                    10, 
+                    0,
+                    NULL, 
+                    -1,
 
-	-1,-1,
-	-1,
-	-1,
-	-1,
+        -1,-1,
+        -1,
+        -1,
+        -1,
 
-					-1, 
-					NULL, 
-					0,
-					@Modo,
-					@FechaDesde,
+                    -1, 
+                    NULL, 
+                    0,
+                    @Modo,
+                    @FechaDesde,
 
-					@FechaHasta,
-					NULL, 
-					NULL,
-					 'FALSE',
-					NULL, 
-					NULL, 
+                    @FechaHasta,
+                    NULL, 
+                    NULL,
+                     'FALSE',
+                    NULL, 
+                    NULL, 
 
-					NULL, 
-					NULL, 
-					NULL,
-					NULL, 
-					NULL
+                    NULL, 
+                    NULL, 
+                    NULL,
+                    NULL, 
+                    NULL
 
-					)
+                    )
 
-	as CDP
-
-
+        as CDP
 
 
-	RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
-	LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
-	where   1=1
-	--procedencia is not null
-	--and netoproc > 0
-
-	--and (producto like @producto or isnull(@producto,'')=''  )
-	--and (titulardesc like @cliente or
-	--    rcomercialdesc like @cliente  or
-	--    intermediariodesc like @cliente  or
-	--    destinatariodesc like @cliente 
-	--	or  isnull(@cliente,'')='' )
-	--and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
 
-	group by LOCORI.Nombre,PROVORI.Nombre
+        RIGHT OUTER JOIN Localidades LOCORI ON CDP.Procedencia = LOCORI.IdLocalidad          
+        LEFT OUTER JOIN Provincias PROVORI ON LOCORI.IdProvincia = PROVORI.IdProvincia           
+        where   1=1
+        --procedencia is not null
+        --and netoproc > 0
 
-	) as C
-	--where kilos >= isnull(@TonsDesde,0)
-	--and kilos <= isnull(@TonsHasta,999999999)
+        --and (producto like @producto or isnull(@producto,'')=''  )
+        --and (titulardesc like @cliente or
+        --    rcomercialdesc like @cliente  or
+        --    intermediariodesc like @cliente  or
+        --    destinatariodesc like @cliente 
+        --	or  isnull(@cliente,'')='' )
+        --and (destinodesc like @puerto or  isnull(@puerto,'')='')
 
-	order by kilos desc
+
+        group by LOCORI.Nombre,PROVORI.Nombre
+
+        ) as C
+        --where kilos >= isnull(@TonsDesde,0)
+        --and kilos <= isnull(@TonsHasta,999999999)
+
+        order by kilos desc
 
 
-			*/
+            */
 
 
             //var coordinates = new List<GeographicPosition>
@@ -7920,109 +8031,109 @@ Formato localidad-provincia	destination	x
 
             /*
 
-						#!/usr/bin/python
-			# -*- coding: utf-8 -*-
-			import os
-			from time import sleep
-			from selenium import webdriver
-			from pyvirtualdisplay import Display
-			from selenium.webdriver.support.ui import WebDriverWait
-			from selenium.webdriver.support import expected_conditions as EC
-			from selenium.webdriver.common.by import By
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
 
 
-			def download_excel(silent=True):
-				if silent:
-					display = Display(visible=0, size=(1366, 768))
-					display.start()
-				 #Instalar Firefox
-				# instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
-				binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
-				os.environ["PATH"] += os.pathsep + binpath
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
 
-				filename = 'Urenport.xls'
+                filename = 'Urenport.xls'
 
-				profile = webdriver.FirefoxProfile()
-				profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
-				profile.set_preference('browser.download.manager.showWhenStarting', False)
-				profile.set_preference('browser.download.dir', os.getcwd())
-				profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
-				profile.set_preference('browser.helperApps.alwaysAsk.force', False)
-				browser = webdriver.Firefox(firefox_profile=profile)
-				try:
-					browser.get('http://entregadores.cerealnet.com/')
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
 
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "txtUsuario")))
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
 
-					user_name = browser.find_element_by_id('txtUsuario')
-					user_name.send_keys('williams')
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
 
-					password = browser.find_element_by_id('txtPass')
-					password.send_keys('santiago1177')
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
 
-					button = browser.find_element_by_id('btnInicio')
-					button.click()
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
 
-					if os.path.isfile(filename):
-						os.remove(filename)
+                    if os.path.isfile(filename):
+                        os.remove(filename)
 
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-
-
-					button = browser.find_element_by_id('CPHPrincipal_btnExcel')
-					button.click()
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
 
 
-					sleep(30)
-
-					browser.get('http://extranet.urenport.com/login.aspx')
-
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "Logins_UserName")))
-
-					user_name = browser.find_element_by_id('Logins_UserName')
-					user_name.send_keys('williams')
-
-					password = browser.find_element_by_id('Logins_Password')
-					password.send_keys('santiago1177')
-
-					button = browser.find_element_by_id('Logins_LoginButton')
-					button.click()
-
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
-
-					button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
-					button.click()
-
-					sleep(15)
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
 
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    sleep(30)
 
-					sleep(2)
+                    browser.get('http://extranet.urenport.com/login.aspx')
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
-					os.system(bashCommand)
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
 
-				finally:
-					#browser.quit()
-					bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
-					os.system(bashCommand)
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
 
-					sleep(2)
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
-					os.system(bashCommand)
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
 
-			download_excel(silent=False)
-						*/
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
         }
 
 
@@ -8097,109 +8208,109 @@ Formato localidad-provincia	destination	x
 
             /*
 
-						#!/usr/bin/python
-			# -*- coding: utf-8 -*-
-			import os
-			from time import sleep
-			from selenium import webdriver
-			from pyvirtualdisplay import Display
-			from selenium.webdriver.support.ui import WebDriverWait
-			from selenium.webdriver.support import expected_conditions as EC
-			from selenium.webdriver.common.by import By
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
 
 
-			def download_excel(silent=True):
-				if silent:
-					display = Display(visible=0, size=(1366, 768))
-					display.start()
-				 #Instalar Firefox
-				# instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
-				binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
-				os.environ["PATH"] += os.pathsep + binpath
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
 
-				filename = 'Urenport.xls'
+                filename = 'Urenport.xls'
 
-				profile = webdriver.FirefoxProfile()
-				profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
-				profile.set_preference('browser.download.manager.showWhenStarting', False)
-				profile.set_preference('browser.download.dir', os.getcwd())
-				profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
-				profile.set_preference('browser.helperApps.alwaysAsk.force', False)
-				browser = webdriver.Firefox(firefox_profile=profile)
-				try:
-					browser.get('http://entregadores.cerealnet.com/')
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
 
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "txtUsuario")))
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
 
-					user_name = browser.find_element_by_id('txtUsuario')
-					user_name.send_keys('williams')
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
 
-					password = browser.find_element_by_id('txtPass')
-					password.send_keys('santiago1177')
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
 
-					button = browser.find_element_by_id('btnInicio')
-					button.click()
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
 
-					if os.path.isfile(filename):
-						os.remove(filename)
+                    if os.path.isfile(filename):
+                        os.remove(filename)
 
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-
-
-					button = browser.find_element_by_id('CPHPrincipal_btnExcel')
-					button.click()
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
 
 
-					sleep(30)
-
-					browser.get('http://extranet.urenport.com/login.aspx')
-
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "Logins_UserName")))
-
-					user_name = browser.find_element_by_id('Logins_UserName')
-					user_name.send_keys('williams')
-
-					password = browser.find_element_by_id('Logins_Password')
-					password.send_keys('santiago1177')
-
-					button = browser.find_element_by_id('Logins_LoginButton')
-					button.click()
-
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
-
-					button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
-					button.click()
-
-					sleep(15)
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
 
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    sleep(30)
 
-					sleep(2)
+                    browser.get('http://extranet.urenport.com/login.aspx')
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
-					os.system(bashCommand)
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
 
-				finally:
-					#browser.quit()
-					bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
-					os.system(bashCommand)
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
 
-					sleep(2)
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
-					os.system(bashCommand)
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
 
-			download_excel(silent=False)
-						*/
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
         }
 
 
@@ -8221,16 +8332,16 @@ Formato localidad-provincia	destination	x
 
 
             /*
-			FirefoxProfile profile = new FirefoxProfile();
+            FirefoxProfile profile = new FirefoxProfile();
 
-			profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
-			//profile.SetPreference("browser.download.manager.showWhenStarting", false);
-			profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
-			profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
-			profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
+            profile.SetPreference("browser.download.folderList", 2);  // # 2 = custom location
+            //profile.SetPreference("browser.download.manager.showWhenStarting", false);
+            profile.SetPreference("browser.download.dir", @"C:\Users\Administrador\Downloads" );  //os.getcwd()
+            profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel");
+            profile.SetPreference("browser.helperApps.alwaysAsk.force", false);
 
-			IWebDriver browser = new FirefoxDriver(profile);
-			*/
+            IWebDriver browser = new FirefoxDriver(profile);
+            */
 
 
             IWebDriver browser = new PhantomJSDriver();
@@ -8278,109 +8389,109 @@ Formato localidad-provincia	destination	x
 
             /*
 
-						#!/usr/bin/python
-			# -*- coding: utf-8 -*-
-			import os
-			from time import sleep
-			from selenium import webdriver
-			from pyvirtualdisplay import Display
-			from selenium.webdriver.support.ui import WebDriverWait
-			from selenium.webdriver.support import expected_conditions as EC
-			from selenium.webdriver.common.by import By
+                        #!/usr/bin/python
+            # -*- coding: utf-8 -*-
+            import os
+            from time import sleep
+            from selenium import webdriver
+            from pyvirtualdisplay import Display
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            from selenium.webdriver.common.by import By
 
 
-			def download_excel(silent=True):
-				if silent:
-					display = Display(visible=0, size=(1366, 768))
-					display.start()
-				 #Instalar Firefox
-				# instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
-				binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
-				os.environ["PATH"] += os.pathsep + binpath
+            def download_excel(silent=True):
+                if silent:
+                    display = Display(visible=0, size=(1366, 768))
+                    display.start()
+                 #Instalar Firefox
+                # instalar el ejecutable geckodriver de https://github.com/mozilla/geckodriver/releases
+                binpath = 'E:/SistemaPronto/Robot' # Directorio donde está geckodriver
+                os.environ["PATH"] += os.pathsep + binpath
 
-				filename = 'Urenport.xls'
+                filename = 'Urenport.xls'
 
-				profile = webdriver.FirefoxProfile()
-				profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
-				profile.set_preference('browser.download.manager.showWhenStarting', False)
-				profile.set_preference('browser.download.dir', os.getcwd())
-				profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
-				profile.set_preference('browser.helperApps.alwaysAsk.force', False)
-				browser = webdriver.Firefox(firefox_profile=profile)
-				try:
-					browser.get('http://entregadores.cerealnet.com/')
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference('browser.download.folderList', 2)    # 2 = custom location
+                profile.set_preference('browser.download.manager.showWhenStarting', False)
+                profile.set_preference('browser.download.dir', os.getcwd())
+                profile.set_preference('browser.helperApps.neverAsk.saveToDisk', "application/ms-excel;application/xls;text/csv;application/vnd.ms-excel")
+                profile.set_preference('browser.helperApps.alwaysAsk.force', False)
+                browser = webdriver.Firefox(firefox_profile=profile)
+                try:
+                    browser.get('http://entregadores.cerealnet.com/')
 
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "txtUsuario")))
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "txtUsuario")))
 
-					user_name = browser.find_element_by_id('txtUsuario')
-					user_name.send_keys('williams')
+                    user_name = browser.find_element_by_id('txtUsuario')
+                    user_name.send_keys('williams')
 
-					password = browser.find_element_by_id('txtPass')
-					password.send_keys('santiago1177')
+                    password = browser.find_element_by_id('txtPass')
+                    password.send_keys('santiago1177')
 
-					button = browser.find_element_by_id('btnInicio')
-					button.click()
+                    button = browser.find_element_by_id('btnInicio')
+                    button.click()
 
-					if os.path.isfile(filename):
-						os.remove(filename)
+                    if os.path.isfile(filename):
+                        os.remove(filename)
 
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
-
-
-					button = browser.find_element_by_id('CPHPrincipal_btnExcel')
-					button.click()
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "CPHPrincipal_btnExcel")))
 
 
-					sleep(30)
-
-					browser.get('http://extranet.urenport.com/login.aspx')
-
-					WebDriverWait(browser, 10).until(
-						EC.presence_of_element_located((By.ID, "Logins_UserName")))
-
-					user_name = browser.find_element_by_id('Logins_UserName')
-					user_name.send_keys('williams')
-
-					password = browser.find_element_by_id('Logins_Password')
-					password.send_keys('santiago1177')
-
-					button = browser.find_element_by_id('Logins_LoginButton')
-					button.click()
-
-					WebDriverWait(browser, 20).until(
-						EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
-
-					button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
-					button.click()
-
-					sleep(15)
+                    button = browser.find_element_by_id('CPHPrincipal_btnExcel')
+                    button.click()
 
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    sleep(30)
 
-					sleep(2)
+                    browser.get('http://extranet.urenport.com/login.aspx')
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
-					os.system(bashCommand)
+                    WebDriverWait(browser, 10).until(
+                        EC.presence_of_element_located((By.ID, "Logins_UserName")))
 
-				finally:
-					#browser.quit()
-					bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
-					os.system(bashCommand)
+                    user_name = browser.find_element_by_id('Logins_UserName')
+                    user_name.send_keys('williams')
 
-					bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
-					os.system(bashCommand)
+                    password = browser.find_element_by_id('Logins_Password')
+                    password.send_keys('santiago1177')
 
-					sleep(2)
+                    button = browser.find_element_by_id('Logins_LoginButton')
+                    button.click()
 
-					bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
-					os.system(bashCommand)
+                    WebDriverWait(browser, 20).until(
+                        EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_GridView2")))
 
-			download_excel(silent=False)
-						*/
+                    button = browser.find_element_by_id('ContentPlaceHolder1_ASPxMenu2_DXI0_T')
+                    button.click()
+
+                    sleep(15)
+
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt "
+                    os.system(bashCommand)
+
+                finally:
+                    #browser.quit()
+                    bashCommand = "Taskkill /IM Firefox.exe /F >nul 2>&1"
+                    os.system(bashCommand)
+
+                    bashCommand = "ren Urenport.xls \"Urenport_%time:~0,2%%time:~3,2%-%DATE:/=%.xls\" "
+                    os.system(bashCommand)
+
+                    sleep(2)
+
+                    bashCommand = "robocopy E:\SistemaPronto\Robot\  E:\Sites\ProntoTesting\Temp\Pegatinas *.xls /MOV /LOG+:LogRobot.txt"
+                    os.system(bashCommand)
+
+            download_excel(silent=False)
+                        */
         }
 
 
@@ -8509,38 +8620,36 @@ Formato localidad-provincia	destination	x
 
 
                 /*
-	__________________________
+        __________________________
 
-	Log Entry:
-	07 / 27 / 2017 18:05:29
-	Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
-	at System.Net.HttpWebRequest.GetResponse()
-	at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-	-- - End of inner exception stack trace-- -
-	at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-	at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-	at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-	at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-	at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-	at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-	at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-	__________________________
+        Log Entry:
+        07 / 27 / 2017 18:05:29
+        Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds. ---> System.Net.WebException: The operation has timed out
+        at System.Net.HttpWebRequest.GetResponse()
+        at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+        -- - End of inner exception stack trace-- -
+        at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+        at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+        at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+        at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+        at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+        at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+        __________________________
 
-	Log Entry:
-	07 / 27 / 2017 18:05:29
-	Error in: . Error Message:OpenQA.Selenium.WebDriverException
-	The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
-	at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
-	at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
-	at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-	at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-	at OpenQA.Selenium.Remote.RemoteWebElement.Click()
-	at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
-	at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
-	WebDriver
-	__________________________
-
-
+        Log Entry:
+        07 / 27 / 2017 18:05:29
+        Error in: . Error Message:OpenQA.Selenium.WebDriverException
+        The HTTP request to the remote WebDriver server for URL http://localhost:63353/session/bce41a1121d80cf54cc11199098451be/element/0.38402688537807506-1/click timed out after 60 seconds.
+        at OpenQA.Selenium.Remote.HttpCommandExecutor.CreateResponse(WebRequest request)
+        at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+        at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+        at OpenQA.Selenium.Remote.RemoteWebElement.Click()
+        at ServicioCartaPorte.servi.CerealnetSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver) in C:\bdl\pronto\InterfazFlexicapture\prontoflexicapture.cs:line 6441
+        at ProntoWindowsService.Service1.DoWorkSoloPegatinas() in C:\bdl\pronto\ProntoWindowsService\Service1.cs:line 819
+        WebDriver
+        __________________________
 
 
 
@@ -8549,7 +8658,6 @@ Formato localidad-provincia	destination	x
 
 
 
-			
 
 
 
@@ -8557,51 +8665,54 @@ Formato localidad-provincia	destination	x
 
 
 
-		Log Entry : 
-11/16/2017 02:32:34
-Error in: . Error Message:hilo #8: System.InvalidOperationException: unknown error: unrecognized Chrome version: HeadlessChrome/62.0.3202.94
-  (Driver info: chromedriver= 2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 6.1.7601 SP1 x86_64)
-   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
-   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
-   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
-   at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
-   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
-   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
-__________________________
-
-		__________________________
-
-Log Entry : 
-11/16/2017 10:59:12
-Error in: . Error Message:System.Net.Mail.SmtpException
-Mailbox unavailable.The server response was: 5.4.5 Daily user sending quota exceeded.f189sm844058qkj.12 - gsmtp
- at System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
- at System.Net.Mail.DataCommand.Send(SmtpConnection conn)
- at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
-   at System.Net.Mail.SmtpClient.Send(MailMessage message)
-   at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
-   at CartaDePorteManager.MandarMailDeError(Exception e)
-System
-__________________________
-
-Log Entry : 
-11/16/2017 10:59:12
-Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: Cannot start the driver service on http://localhost:62137/
-   at OpenQA.Selenium.DriverService.Start()
-   at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
-   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
-   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
-   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
-   at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
-   at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
-   at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
-__________________________
 
 
 
+        Log Entry : 
+        11/16/2017 02:32:34
+        Error in: . Error Message:hilo #8: System.InvalidOperationException: unknown error: unrecognized Chrome version: HeadlessChrome/62.0.3202.94
+        (Driver info: chromedriver= 2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 6.1.7601 SP1 x86_64)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+        at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+        at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+        at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
+        at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+        __________________________
 
-	*/
+        __________________________
+
+        Log Entry : 
+        11/16/2017 10:59:12
+        Error in: . Error Message:System.Net.Mail.SmtpException
+        Mailbox unavailable.The server response was: 5.4.5 Daily user sending quota exceeded.f189sm844058qkj.12 - gsmtp
+        at System.Net.Mail.DataCommand.CheckResponse(SmtpStatusCode statusCode, String serverResponse)
+        at System.Net.Mail.DataCommand.Send(SmtpConnection conn)
+        at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+        at System.Net.Mail.SmtpClient.Send(MailMessage message)
+        at ProntoFuncionesGenerales.MandaEmailSimple(String Para, String Asunto, String Cuerpo, String De, String SmtpServer, String SmtpUser, String SmtpPass, String sStringGenerarAdjunto, Int64 SmtpPort, Int32 EnableSSL, String CCO, String img)
+        at CartaDePorteManager.MandarMailDeError(Exception e)
+        System
+        __________________________
+
+        Log Entry : 
+        11/16/2017 10:59:12
+        Error in: . Error Message:hilo #8: OpenQA.Selenium.WebDriverException: Cannot start the driver service on http://localhost:62137/
+        at OpenQA.Selenium.DriverService.Start()
+        at OpenQA.Selenium.Remote.DriverServiceCommandExecutor.Execute(Command commandToExecute)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+        at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+        at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+        at OpenQA.Selenium.Chrome.ChromeDriver..ctor(ChromeDriverService service, ChromeOptions options)
+        at ServicioCartaPorte.servi.UrenportSelenium_ConChromeHeadless(String directorioDescarga, String dirDriver)
+        at ProntoWindowsService.Service1.DoWorkSoloPegatinas()
+        __________________________
+
+
+
+
+        */
 
             }
 
@@ -8620,70 +8731,70 @@ __________________________
 
 
             /*
-			 * 
-			 * https://stackoverflow.com/questions/26461507/running-selenium-server-chromedriver-as-a-windows-service
-			 * 
-			 * 
-		Right now you can't help it - it used to work fine in session 0 but for the past few days after chrome update only works for interactive sessions.
+             * 
+             * https://stackoverflow.com/questions/26461507/running-selenium-server-chromedriver-as-a-windows-service
+             * 
+             * 
+        Right now you can't help it - it used to work fine in session 0 but for the past few days after chrome update only works for interactive sessions.
 
-		Related bugs:
+        Related bugs:
 
-		https://code.google.com/p/selenium/issues/detail?id=8029 https://code.google.com/p/chromium/issues/detail?id=422218
+        https://code.google.com/p/selenium/issues/detail?id=8029 https://code.google.com/p/chromium/issues/detail?id=422218
 
-		shareedit
-		answered Oct 20 '14 at 13:15
+        shareedit
+        answered Oct 20 '14 at 13:15
 
-		swiniak
-		691
+        swiniak
+        691
 
-		Is there a particular version of Chrome you know works within Session 0? If I can simply downgrade, then this would be an option. – jwa Oct 20 '14 at 13:54
-		1	 	
-		With versions of Chrome before 38 all works as windows-service fine. Since version 38 - my windows service with selenium does not work. Downgrading Chrome solved problem for me – razon Oct 30 '14 at 9:50
-		1	 	
-		I can confirm what @razon is saying. Chrome 37 is last known version working when run under service. – Stas Berkov Jul 8 '15 at 11:26
-		1	 	
-		It's been a while since the last comment on this. Do later versions of chrome still not work? – Paul Perrick Jan 24 '16 at 0:19
+        Is there a particular version of Chrome you know works within Session 0? If I can simply downgrade, then this would be an option. – jwa Oct 20 '14 at 13:54
+        1	 	
+        With versions of Chrome before 38 all works as windows-service fine. Since version 38 - my windows service with selenium does not work. Downgrading Chrome solved problem for me – razon Oct 30 '14 at 9:50
+        1	 	
+        I can confirm what @razon is saying. Chrome 37 is last known version working when run under service. – Stas Berkov Jul 8 '15 at 11:26
+        1	 	
+        It's been a while since the last comment on this. Do later versions of chrome still not work? – Paul Perrick Jan 24 '16 at 0:19
 
 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 * 
-			 Comment 39 by samu...@chromium.org, Nov 5 2014
-	⚐
-	Cc: samu...@chromium.org
-	I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             Comment 39 by samu...@chromium.org, Nov 5 2014
+        ⚐
+        Cc: samu...@chromium.org
+        I'm able to reproduce this issue in M38, and I've also confirmed that M37 is not affected by this. The issue only comes up when launching Chrome from a scheduled task in Windows, and the task must be running as SYSTEM.
 
-	OS: Windows 7 Enterprise Service Pack 1
-	Last Known Good Chrome Version: 37.0.2062.124
-	First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
+        OS: Windows 7 Enterprise Service Pack 1
+        Last Known Good Chrome Version: 37.0.2062.124
+        First Known Bad Chrome Version: 38.0.2125.111 (current stable channel)
 
-	The steps to reproduce are below. This should be enough to bisect on.
+        The steps to reproduce are below. This should be enough to bisect on.
 
-	1. Start "Task Scheduler" and click "Create Task..."
-	2. Give it a name, and set the user account to SYSTEM
-	3. Click the Actions tab, click "New..."
-	4. For Program/script, give it the path to chrome.exe
-	5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
-	6. Click the Triggers tab, click "New..." and set the time to something soon
-	7. Click OK and OK, and wait for the task to run
-	8. Open up c:\sams_user_data_dir\chrome_debug.log
+        1. Start "Task Scheduler" and click "Create Task..."
+        2. Give it a name, and set the user account to SYSTEM
+        3. Click the Actions tab, click "New..."
+        4. For Program/script, give it the path to chrome.exe
+        5. For "Add arguments" type "--enable-logging --log-level=0 --user-data-dir=c:\sams_user_data_dir"
+        6. Click the Triggers tab, click "New..." and set the time to something soon
+        7. Click OK and OK, and wait for the task to run
+        8. Open up c:\sams_user_data_dir\chrome_debug.log
 
-	In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
+        In M38, but not in M37, the debug log contains the error message below. Full logs from my system for M37 and M38 are attached.
 
-	[4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
+        [4620:5648:1105/142727:ERROR:child_process_launcher.cc(344)] Failed to launch child process
 
-	m37_chrome_debug.log 
-	2.7 KB View Download
-	m38_chrome_debug.log 
-	2.8 KB View Download  
-			 * 
-			 */
+        m37_chrome_debug.log 
+        2.7 KB View Download
+        m38_chrome_debug.log 
+        2.8 KB View Download  
+             * 
+             */
 
 
 
