@@ -1,0 +1,15 @@
+
+Log Entry : 
+01/30/2018 12:51:13
+Error in: . Error Message:Invalid object name 'PlantillasXML'.
+__________________________
+
+Log Entry : 
+01/30/2018 12:52:03
+Error in: . Error Message:Invalid object name 'PlantillasXML'.
+__________________________
+
+Log Entry : 
+01/30/2018 13:11:39
+Error in: . Error Message:C:\bdl\pronto\prontoweb\bin\Plantillas.exe -Plantilla=C:\bdl\pronto\prontoweb\Documentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500 -Id=22 -FileOut=C:\bdl\pronto\prontoweb\Documentos\archivo.doc
+__________________________
