@@ -1295,13 +1295,9 @@ $(function () {
         sortorder: "asc",
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
