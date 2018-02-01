@@ -878,262 +878,8 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
-        public void InformeSincroLaBiznaga_Ledesma_47230()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            int registrosf = 0;
-
-
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Ledesma", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
-                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
-                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
-
-
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void _47375()
-        {
-
-            /*
-              
-            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
-            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
-            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
-
-
-            ademas,
-                *está el tema de saber a qué mail le corresponde cada cliente
-                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
-
-
-             Sincronismos
-* Página de clientes
-* Web Service
-* 
-            */
-
-
-
-
-
-            
-
-        }
-
-
-
-
-
-
-
-
-
-        [TestMethod]
-        public void regla_robot_47322()
-        {
-            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
-
-
-
-            //le esta metiendo un "non breaking space" C2 A0
-
-
-            var id = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC); // esto tiene espacios
-            var id2 = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC);//esto tiene nonbreakingspace
-                                                                                       //If.Destino <= 0 Then
-                                                                                       //    'primero busco la equivalencia con excepcion prefijada
-                                                                                       //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
-                                                                                       //        log += "Destino; "
-
-
-
-
-
-            string ms = "";
-
-            int m_IdMaestro = 0;
-            Pronto.ERP.BO.CartaDePorte carta;
-
-
-            string log = "";
-            //hay que pasar el formato como parametro 
-            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
-                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
-
-
-
-        }
-
-
-
-
-        [TestMethod]
-        public void OCR_validacion_de_A_C_A_47215()
-        {
-
-            /*
-                                             * en los casos de a.c.a me tira:
-            Error in: . Error Message:Falta elegir a qué acopio corresponde el remitente comercial
-                habría q eludir esa validacion
-
-            */
-
-
-
-
-
-
-            //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
-            //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
-
-
-        }
-
-
-
-
-
-
-
-        [TestMethod]
-        public void SincroDiazRiganti_47179()
-        {
-
-            string sErrores = "", sTitulo = "";
-            // LinqCartasPorteDataContext db = null;
-
-
-
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                    "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
-        }
-
-
-
-
-
-
-        [TestMethod]
-        public void ServicioWebServiceDescargas_BLD_47213()
-        {
-
-            //¿habrá alguna diferencia entre el ListadoSegunCliente y el listado normal? andy sospecha del robot
-
-            //La carta Id = 3222062 no aparece, al usar obtenerDescargas_v3 con estos paramtros:
-            //Andres
-            //Andre5!
-            //1
-            //2017 / 12 / 23
-            //2017 / 12 / 23
-            //
-            // -creo que es porque el netofinal está en 0 (aún cuando está cargado el netosinmerma y la fecha de descarga)
-            // -pero entonces debería aparecer como de posicion, no?
-            // http://iismvc/Williams/ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v3?usuario=Andres&password=Andre5!&cuit=1&fechadesde=2017-12-23T00:00:00&fechahasta=2017-12-23T00:00:00
-            // al regrabarla, le calcula bien el netofinal
-            // -y entonces cómo solucionarlo? agregando una validacion que si la fechaDescarga está puesta, tambien el NetoFinal? Y por qué solo usa la fecha
-            // para mostrar la pestaña de descarga, cuando la funcion sql usa el peso en lugar de la fecha?
-            // Al margen de esto... cómo es que se dieron cuenta, si despues de todo, el informe muestra lo mismo que el servicio? -deben haber usado de referencia el sincronismo, no?
-
-
-
-
-
-
-
-
-            //var s = new ServicioCartaPorte.servi();
-            //string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
-            //string dirMiRepo = @"C:\Users\Mariano\Documents\";
-            //s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
-
-            //le tendria que pasar el directorio del chrome viejo
-            //ProntoWindowsService.Service1.Initialize();
-            //ProntoWindowsService.Service1.DoWorkSoloPegatinas();
-
-
-
-
-            string usuario = "Andres"; //"fyo";
-            string clave = "Andre5!"; // "76075";
-            string cuit = "1";
-
-            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
-            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
-                                            new DateTime(2017, 12, 23),
-                                            new DateTime(2017, 12, 23), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                                            SC, DirApp, scbdlmasterappconfig);
-
-
-            foreach (var desc in respEntrega.descargas)
-            {
-                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
-
-                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
-                {
-                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
-                    {
-                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
-                    }
-                }
-            }
-            //Console.ReadKey();
-        }
-
-
-
-
-
-        [TestMethod]
-        public void MandarmeLosSincrosAutomaticos_tema_de_la_firma_47212()
-        {
-
-            var s = CDPMailFiltrosManager2.AgregarFirmaHtml(1);
-
-            string sErr = "";
-            SincronismosWilliamsManager.EnviarSincro("TOMASHNOS", "nano@gggg", ref sErr, true);
-
-
-        }
-
-
-
-
-
-
-
         #region reclamos43063_CHAT
+
 
 
         [TestMethod]
@@ -1196,11 +942,13 @@ namespace ProntoMVC.Tests
 
 
             s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Andres estás?", SC, scbdlmasterappconfig, scbdlmasterappconfig, "Andres", false,
-                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], 
+                                                                ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]) );
 
 
             s.GrabarComentarioYNotificar(idcarta, "Andres", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
-                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
+                                                    ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"],
+                                                    ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
         }
 
@@ -1591,6 +1339,268 @@ namespace ProntoMVC.Tests
 
 
         #endregion
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void InformeSincroLaBiznaga_Ledesma_47230()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            int registrosf = 0;
+
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Ledesma", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 1, 30),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 40);
+
+
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void _47375()
+        {
+
+            /*
+              
+            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
+            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
+            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
+
+
+            ademas,
+                *está el tema de saber a qué mail le corresponde cada cliente
+                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
+                * en la facturacion hay otro criterio
+                * en la vista por celulares, otro (basta conque el usuario figure entre los clientes de la carta, en cualquier lado)
+
+
+             Sincronismos
+* Página de clientes
+* Web Service
+* 
+            */
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void regla_robot_47322()
+        {
+            string archivoExcel = @"C:\Users\Mariano\Documents\pronto\docstest\New folder\Posicion-170809-0850.xls";
+
+
+
+            //le esta metiendo un "non breaking space" C2 A0
+
+
+            var id = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC); // esto tiene espacios
+            var id2 = SQLdinamico.BuscaIdWilliamsDestinoPreciso("FABRICA SANTA CLARA ( MRP )", SC);//esto tiene nonbreakingspace
+                                                                                                   //If.Destino <= 0 Then
+                                                                                                   //    'primero busco la equivalencia con excepcion prefijada
+                                                                                                   //    If actua(.Destino, BuscaIdWilliamsDestinoPreciso(DiccionarioEquivalenciasManager.BuscarEquivalencia(SC, "DESTINO|" + Val(r(17)).ToString), SC)) Then
+                                                                                                   //        log += "Destino; "
+
+
+
+
+
+            string ms = "";
+
+            int m_IdMaestro = 0;
+            Pronto.ERP.BO.CartaDePorte carta;
+
+
+            string log = "";
+            //hay que pasar el formato como parametro 
+            ExcelImportadorManager.FormatearExcelImportadoEnDLL(ref m_IdMaestro, archivoExcel,
+                                    LogicaImportador.FormatosDeExcel.Urenport, SC, 0, ref log, "", 0, "");
+
+
+
+        }
+
+
+
+
+        [TestMethod]
+        public void OCR_validacion_de_A_C_A_47215()
+        {
+
+            /*
+                                             * en los casos de a.c.a me tira:
+            Error in: . Error Message:Falta elegir a qué acopio corresponde el remitente comercial
+                habría q eludir esa validacion
+
+            */
+
+
+
+
+
+
+            //         [13:49, 10 / 1 / 2018] + 54 9 11 2857 - 9291: andy no se muy bien como resolver el tema del acopio del A.C.A en el robot. les cargo un acopio default?
+            //[14:00, 10 / 1 / 2018] Andy: si, si te parece podemos crear uno que sea "Acopio a Definir" o algo asi
+
+
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void SincroDiazRiganti_47179()
+        {
+
+            string sErrores = "", sTitulo = "";
+            // LinqCartasPorteDataContext db = null;
+
+
+
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Diaz Riganti", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                    "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 2), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        public void ServicioWebServiceDescargas_BLD_47213()
+        {
+
+            //¿habrá alguna diferencia entre el ListadoSegunCliente y el listado normal? andy sospecha del robot
+
+            //La carta Id = 3222062 no aparece, al usar obtenerDescargas_v3 con estos paramtros:
+            //Andres
+            //Andre5!
+            //1
+            //2017 / 12 / 23
+            //2017 / 12 / 23
+            //
+            // -creo que es porque el netofinal está en 0 (aún cuando está cargado el netosinmerma y la fecha de descarga)
+            // -pero entonces debería aparecer como de posicion, no?
+            // http://iismvc/Williams/ProntoWeb/wsCartaPorteExterno.asmx/obtenerPosiciones_v3?usuario=Andres&password=Andre5!&cuit=1&fechadesde=2017-12-23T00:00:00&fechahasta=2017-12-23T00:00:00
+            // al regrabarla, le calcula bien el netofinal
+            // -y entonces cómo solucionarlo? agregando una validacion que si la fechaDescarga está puesta, tambien el NetoFinal? Y por qué solo usa la fecha
+            // para mostrar la pestaña de descarga, cuando la funcion sql usa el peso en lugar de la fecha?
+            // Al margen de esto... cómo es que se dieron cuenta, si despues de todo, el informe muestra lo mismo que el servicio? -deben haber usado de referencia el sincronismo, no?
+
+
+
+
+
+
+
+
+            //var s = new ServicioCartaPorte.servi();
+            //string dir = DirApp + @"\Temp\Pegatinas"; // es fundamental para el selenium que no tenga la ultima barrita? SII!!!!!
+            //string dirMiRepo = @"C:\Users\Mariano\Documents\";
+            //s.CerealnetSelenium_ConChromeHeadless(dir, dirMiRepo + @"pronto\InterfazFlexicapture\bin\Debug\", true);
+
+            //le tendria que pasar el directorio del chrome viejo
+            //ProntoWindowsService.Service1.Initialize();
+            //ProntoWindowsService.Service1.DoWorkSoloPegatinas();
+
+
+
+
+            string usuario = "Andres"; //"fyo";
+            string clave = "Andre5!"; // "76075";
+            string cuit = "1";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario, clave, cuit,
+                                            new DateTime(2017, 12, 23),
+                                            new DateTime(2017, 12, 23), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            foreach (var desc in respEntrega.descargas)
+            {
+                Console.WriteLine(string.Format("CP {0}", desc.cartaporte));
+
+                if (desc.listaAnalisis != null && desc.listaAnalisis.Length > 0)
+                {
+                    foreach (CerealNet.WSCartasDePorte.analisis anal in desc.listaAnalisis)
+                    {
+                        Console.WriteLine(string.Format("\tRubro: {0} - %Analisis: {1} - %Merma: {2} - KgsMerma: {3}", anal.rubro.Trim(), anal.porcentajeAnalisis, anal.porcentajeMerma, anal.kilosMermas));
+                    }
+                }
+            }
+            //Console.ReadKey();
+        }
+
+
+
+
+
+        [TestMethod]
+        public void MandarmeLosSincrosAutomaticos_tema_de_la_firma_47212()
+        {
+
+            var s = CDPMailFiltrosManager2.AgregarFirmaHtml(1);
+
+            string sErr = "";
+            SincronismosWilliamsManager.EnviarSincro("TOMASHNOS", "nano@gggg", ref sErr, true);
+
+
+        }
+
+
+
 
 
 
