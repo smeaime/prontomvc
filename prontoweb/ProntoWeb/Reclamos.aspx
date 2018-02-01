@@ -69,8 +69,6 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
-    <br />
-
     <style>
         /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
@@ -106,7 +104,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </div>
 
 
-    <div style="margin-left: 20px">
+    <div style="margin-left: 0px">
         <%--   <table id="list9">
         </table>
         <div id="pager9">
@@ -1586,6 +1584,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     },
 
 
+                    loadComplete: function () {
+                        refrescaancho()
+
+                    },
 
 
                     pager: $('#ListaPager'),
@@ -1683,20 +1685,54 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
 
+            refrescaancho();
+
         
             $(window).on("resize", function () {
+                refrescaancho()
+            });
 
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 40);
+
+
+
+            function refrescaancho() { // hay que llamarla en el window.resize y en el jqgrid.onloadcomplete
+
+
+
+                $('#Lista').jqGrid('setGridWidth', $(window).width() - 0);
                 //RefrescaAnchoJqgrids();
 
 
 
-                //var $grid = $("#Lista"),
-                //    newWidth = $grid.closest(".ui-jqgrid").parent().width();
-                //$grid.jqGrid("setGridWidth", newWidth, true);
-            });
+                //var $grid = $("#Lista");
+                ////    newWidth = $grid.closest(".ui-jqgrid").parent().width();
+                ////$grid.jqGrid("setGridWidth", newWidth, true);
 
 
+                //var grid = $("#Lista");
+                //if (grid = $('.ui-jqgrid-btable')) { // le quit� el visible para que tambien trabaje sobre el tab que todav�a no salt� a la pantalla
+                //    grid.each(function (index) {
+                //        var gridId = $(this).attr('id');
+                //        var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                //        $('#' + gridId).setGridWidth(gridParentWidth);
+
+                //        //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
+
+                //        //                    var height = $('#gbox_' + gridId).parent().height();
+                //        //                    $('#' + gridId).setGridHeight(height);
+
+                //        //                    jQuery("table.ui-jqgrid-htable", jQuery("#gview_list")).css("height", 30);
+
+
+                //        //                    var grid = $("#lista");
+                //        //                    var ids = grid.getDataIDs();
+                //        //                    for (var i = 0; i < ids.length; i++) {
+                //        //                        grid.setRowData(ids[i], false, { height: 20 + i * 2 });
+                //        //                    }
+                //    });
+                //}
+
+            }
 
 
 
