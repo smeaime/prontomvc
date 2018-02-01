@@ -20,7 +20,7 @@ using System.Data.Entity.Core.Objects;
 using System.Reflection;
 using Pronto.ERP.Bll;
 using System.Configuration;
-
+using System.Diagnostics;
 
 namespace ProntoMVC.Controllers
 {
@@ -336,7 +336,7 @@ namespace ProntoMVC.Controllers
                             requerimiento.CircuitoFirmasCompleto = "SI";
                         }
                     }
-                    
+
                     if (requerimiento.IdRequerimiento > 0)
                     {
                         var originalrequerimiento = db.Requerimientos.Where(p => p.IdRequerimiento == requerimiento.IdRequerimiento).Include(p => p.DetalleRequerimientos).SingleOrDefault();
@@ -451,7 +451,7 @@ namespace ProntoMVC.Controllers
                     if (parametros.ActivarSolicitudMateriales == "SI") dr.TipoDesignacion = "S/D";
                 }
 
-                string TipoDeCompraEnRMHabilitado = BuscarClaveINI("Habilitar tipo de compra en RM",-1);
+                string TipoDeCompraEnRMHabilitado = BuscarClaveINI("Habilitar tipo de compra en RM", -1);
 
                 if (TipoDeCompraEnRMHabilitado == "SI")
                 {
@@ -786,7 +786,7 @@ namespace ProntoMVC.Controllers
                             Entregado = a.Entregado,
                             Impresa = a.Impresa,
                             Detalle = a.Detalle,
-                            Obra = a.Obra.NumeroObra+" "+a.Obra.Descripcion,
+                            Obra = a.Obra.NumeroObra + " " + a.Obra.Descripcion,
                             Presupuestos = ModelDefinedFunctions.Requerimientos_Presupuestos(a.IdRequerimiento).ToString(),
                             Comparativas = "",
                             Pedidos = ModelDefinedFunctions.Requerimientos_Pedidos(a.IdRequerimiento).ToString(),
@@ -827,39 +827,39 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdRequerimiento.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.NullSafeToString(), 
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.NullSafeToString(),
                                 a.FechaRequerimiento==null ? "" :  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.NumeradorEliminacionesFirmas.NullSafeToString(), 
-                                a.Cumplido.NullSafeToString(), 
-                                a.Recepcionado.NullSafeToString(), 
-                                a.Entregado.NullSafeToString(), 
-                                a.Impresa.NullSafeToString(), 
-                                a.Detalle.NullSafeToString(), 
-                                a.Obra.NullSafeToString(), 
-                                a.Presupuestos.NullSafeToString(), 
-                                a.Comparativas.NullSafeToString(), 
-                                a.Pedidos.NullSafeToString(), 
-                                a.Recepciones.NullSafeToString(), 
-                                a.Salidas.NullSafeToString(), 
-                                a.CantidadItems.NullSafeToString(), 
-                                a.LiberadoPor.NullSafeToString(), 
-                                a.FechaAprobacion.NullSafeToString(), 
-                                a.SolicitadaPor.NullSafeToString(), 
-                                a.Sector.NullSafeToString(), 
-                                a.EquipoDestino.NullSafeToString(), 
-                                a.UsuarioAnulacion.NullSafeToString(), 
-                                a.FechaAnulacion.NullSafeToString(), 
-                                a.MotivoAnulacion.NullSafeToString(), 
-                                a.TipoCompra.NullSafeToString(), 
-                                a.Comprador.NullSafeToString(), 
-                                a.FechasLiberacionCompra.NullSafeToString(), 
-                                a.DetalleImputacion.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(), 
-                                a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                a.NumeradorEliminacionesFirmas.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.Recepcionado.NullSafeToString(),
+                                a.Entregado.NullSafeToString(),
+                                a.Impresa.NullSafeToString(),
+                                a.Detalle.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Presupuestos.NullSafeToString(),
+                                a.Comparativas.NullSafeToString(),
+                                a.Pedidos.NullSafeToString(),
+                                a.Recepciones.NullSafeToString(),
+                                a.Salidas.NullSafeToString(),
+                                a.CantidadItems.NullSafeToString(),
+                                a.LiberadoPor.NullSafeToString(),
+                                a.FechaAprobacion.NullSafeToString(),
+                                a.SolicitadaPor.NullSafeToString(),
+                                a.Sector.NullSafeToString(),
+                                a.EquipoDestino.NullSafeToString(),
+                                a.UsuarioAnulacion.NullSafeToString(),
+                                a.FechaAnulacion.NullSafeToString(),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.TipoCompra.NullSafeToString(),
+                                a.Comprador.NullSafeToString(),
+                                a.FechasLiberacionCompra.NullSafeToString(),
+                                a.DetalleImputacion.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.CircuitoFirmasCompleto.NullSafeToString(),
                                 a.Firmas.NullSafeToString()
                             }
                         }).ToArray()
@@ -873,13 +873,13 @@ namespace ProntoMVC.Controllers
             //if (idDetalleRequerimientos == "") return PartialView();
 
             var idDetalleRequerimientos2 = idDetalleRequerimientos.Split(',').Select(Int32.Parse).ToList();
-            
+
             var vale = CrearValeSegunItemDeRM(idDetalleRequerimientos2, "", "");
 
             //return PartialView("_PartialPage1", new ValesSalida());
             return PartialView("_PartialPage1", vale);
         }
-        
+
 
         public virtual ActionResult RequerimientosPendientesAsignar_DynamicGridData
               (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, string IdObra, bool bAConfirmar = false, bool bALiberar = false)
@@ -967,36 +967,36 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-                                a.IdDetalleRequerimiento.ToString(), 
-                                a.IdRequerimiento.ToString(), 
-                                a.IdObra.ToString(), 
-                                a.TipoDesignacion.ToString(), 
-                                a.NumeroRequerimiento.ToString(), 
-                                a.Item.ToString(), 
-                                a.Cantidad.ToString(), 
-                                a.Unidad.ToString(), 
-                                a.CantidadVales.ToString(), 
-                                a.CantidadPedida.ToString(), 
-                                a.CantidadRecibida.ToString(), 
-                                a.NumeroRecepcion.ToString(), 
-                                a.UltimoNumeroRecepcion.ToString(), 
-                                a.EnStock.ToString(), 
-                                a.StockMinimo.ToString(), 
-                                a.Articulo.ToString(), 
-                                a.FechaEntrega.ToString(), 
-                                a.Solicito.ToString(), 
-                                a.TipoRequerimiento.ToString(), 
-                                a.Obra.ToString(), 
-                                a.Cumplido.ToString(), 
-                                a.Recepcionado.ToString(), 
-                                a.Observacionesitem.ToString(), 
-                                a.Deposito.ToString(), 
-                                a.ObservacionesFirmante.ToString(), 
-                                a.FirmanteObservo.ToString(), 
-                                a.FechaUltimaObservacion.ToString(), 
-                                a.CodigoEquipoDestino.ToString(), 
+                                a.IdDetalleRequerimiento.ToString(),
+                                a.IdRequerimiento.ToString(),
+                                a.IdObra.ToString(),
+                                a.TipoDesignacion.ToString(),
+                                a.NumeroRequerimiento.ToString(),
+                                a.Item.ToString(),
+                                a.Cantidad.ToString(),
+                                a.Unidad.ToString(),
+                                a.CantidadVales.ToString(),
+                                a.CantidadPedida.ToString(),
+                                a.CantidadRecibida.ToString(),
+                                a.NumeroRecepcion.ToString(),
+                                a.UltimoNumeroRecepcion.ToString(),
+                                a.EnStock.ToString(),
+                                a.StockMinimo.ToString(),
+                                a.Articulo.ToString(),
+                                a.FechaEntrega.ToString(),
+                                a.Solicito.ToString(),
+                                a.TipoRequerimiento.ToString(),
+                                a.Obra.ToString(),
+                                a.Cumplido.ToString(),
+                                a.Recepcionado.ToString(),
+                                a.Observacionesitem.ToString(),
+                                a.Deposito.ToString(),
+                                a.ObservacionesFirmante.ToString(),
+                                a.FirmanteObservo.ToString(),
+                                a.FechaUltimaObservacion.ToString(),
+                                a.CodigoEquipoDestino.ToString(),
                                 a.EquipoDestino.ToString()
                             }
                         }).ToArray()
@@ -1128,7 +1128,7 @@ namespace ProntoMVC.Controllers
             var data = from a in Req.Where(campo).OrderBy(sidx + " " + sord)
                         .Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList()
-                        select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
+                       select a; //supongo que tengo que hacer la paginacion antes de hacer un select, para que me llene las colecciones anidadas
 
             var jsonData = new jqGridJson()
             {
@@ -1250,9 +1250,9 @@ namespace ProntoMVC.Controllers
                             Confirmado = a.Confirmado,
                             Modalidad = d != null ? d.Modalidad : "",
                             CantidadItemsNoComprables = a.DetalleRequerimientos.Where(x => (x.TipoDesignacion ?? "") == "S/D").Count()
-                        }).Where(a => (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && a.LiberadoPor.Length > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Modalidad ?? "") != "CO" && a.CantidadItems>a.CantidadItemsNoComprables).OrderBy(sidx + " " + sord).AsQueryable();
+                        }).Where(a => (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && a.LiberadoPor.Length > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Modalidad ?? "") != "CO" && a.CantidadItems > a.CantidadItemsNoComprables).OrderBy(sidx + " " + sord).AsQueryable();
 
-            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2> (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<Requerimientos2>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
 
@@ -1265,39 +1265,39 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdRequerimiento.ToString(),
-                            cell = new string[] { 
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
-                                a.IdRequerimiento.ToString(), 
-                                a.NumeroRequerimiento.NullSafeToString(), 
+                                a.IdRequerimiento.ToString(),
+                                a.NumeroRequerimiento.NullSafeToString(),
                                 a.FechaRequerimiento==null ? "" :  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                                a.NumeradorEliminacionesFirmas.NullSafeToString(), 
-                                a.Cumplido.NullSafeToString(), 
-                                a.Recepcionado.NullSafeToString(), 
-                                a.Entregado.NullSafeToString(), 
-                                a.Impresa.NullSafeToString(), 
-                                a.Detalle.NullSafeToString(), 
-                                a.Obra.NullSafeToString(), 
-                                a.Presupuestos.NullSafeToString(), 
-                                a.Comparativas.NullSafeToString(), 
-                                a.Pedidos.NullSafeToString(), 
-                                a.Recepciones.NullSafeToString(), 
-                                a.Salidas.NullSafeToString(), 
-                                a.CantidadItems.NullSafeToString(), 
-                                a.LiberadoPor.NullSafeToString(), 
-                                a.FechaAprobacion.NullSafeToString(), 
-                                a.SolicitadaPor.NullSafeToString(), 
-                                a.Sector.NullSafeToString(), 
-                                a.EquipoDestino.NullSafeToString(), 
-                                a.UsuarioAnulacion.NullSafeToString(), 
-                                a.FechaAnulacion.NullSafeToString(), 
-                                a.MotivoAnulacion.NullSafeToString(), 
-                                a.TipoCompra.NullSafeToString(), 
-                                a.Comprador.NullSafeToString(), 
-                                a.FechasLiberacionCompra.NullSafeToString(), 
-                                a.DetalleImputacion.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(), 
-                                a.CircuitoFirmasCompleto.NullSafeToString(), 
+                                a.NumeradorEliminacionesFirmas.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.Recepcionado.NullSafeToString(),
+                                a.Entregado.NullSafeToString(),
+                                a.Impresa.NullSafeToString(),
+                                a.Detalle.NullSafeToString(),
+                                a.Obra.NullSafeToString(),
+                                a.Presupuestos.NullSafeToString(),
+                                a.Comparativas.NullSafeToString(),
+                                a.Pedidos.NullSafeToString(),
+                                a.Recepciones.NullSafeToString(),
+                                a.Salidas.NullSafeToString(),
+                                a.CantidadItems.NullSafeToString(),
+                                a.LiberadoPor.NullSafeToString(),
+                                a.FechaAprobacion.NullSafeToString(),
+                                a.SolicitadaPor.NullSafeToString(),
+                                a.Sector.NullSafeToString(),
+                                a.EquipoDestino.NullSafeToString(),
+                                a.UsuarioAnulacion.NullSafeToString(),
+                                a.FechaAnulacion.NullSafeToString(),
+                                a.MotivoAnulacion.NullSafeToString(),
+                                a.TipoCompra.NullSafeToString(),
+                                a.Comprador.NullSafeToString(),
+                                a.FechasLiberacionCompra.NullSafeToString(),
+                                a.DetalleImputacion.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.CircuitoFirmasCompleto.NullSafeToString(),
                                 a.Firmas.NullSafeToString()
                             }
                         }).ToArray()
@@ -1633,7 +1633,7 @@ namespace ProntoMVC.Controllers
                             Modalidad = d != null ? d.Modalidad : "",
                             TipoDesignacion = a.TipoDesignacion
                         }).Where(a => (IdRequerimiento1 <= 0 || a.IdRequerimiento == IdRequerimiento1) && (a.Cumplido == null || (a.Cumplido != "AN" && a.Cumplido != "SI")) && (a.Aprobo ?? 0) > 0 && (a.CircuitoFirmasCompleto ?? "NO") == "SI" && (a.Cantidad - (db.DetallePedidos.Where(x => x.IdDetalleRequerimiento == a.IdDetalleRequerimiento && ((x.Cumplido ?? "NO") != "AN")).Sum(z => z.Cantidad) ?? 0)) > 0 && (a.Modalidad ?? "") != "CO" && (a.TipoDesignacion ?? "") != "S/D").OrderBy(sidx + " " + sord).AsQueryable();
-            
+
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<DetalleRequerimientos2>(sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
 
             int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
@@ -1647,37 +1647,37 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdDetalleRequerimiento.ToString(),
-                            cell = new string[] { 
-                                a.IdDetalleRequerimiento.ToString(), 
-                                a.IdRequerimiento.NullSafeToString(), 
-                                a.IdArticulo.NullSafeToString(), 
-                                a.IdUnidad.NullSafeToString(), 
-                                a.IdControlCalidad.NullSafeToString(), 
-                                a.OrigenDescripcion.NullSafeToString(), 
-                                a.NumeroRequerimiento.NullSafeToString(), 
-                                a.FechaRequerimiento.NullSafeToString(), 
-                                a.NumeroItem.NullSafeToString(), 
-                                a.Cantidad.NullSafeToString(), 
+                            cell = new string[] {
+                                a.IdDetalleRequerimiento.ToString(),
+                                a.IdRequerimiento.NullSafeToString(),
+                                a.IdArticulo.NullSafeToString(),
+                                a.IdUnidad.NullSafeToString(),
+                                a.IdControlCalidad.NullSafeToString(),
+                                a.OrigenDescripcion.NullSafeToString(),
+                                a.NumeroRequerimiento.NullSafeToString(),
+                                a.FechaRequerimiento.NullSafeToString(),
+                                a.NumeroItem.NullSafeToString(),
+                                a.Cantidad.NullSafeToString(),
                                 a.CantidadPendiente.NullSafeToString(),
-                                a.Unidad.NullSafeToString(), 
-                                a.Codigo.NullSafeToString(), 
-                                a.Articulo.NullSafeToString(), 
-                                a.Observaciones.NullSafeToString(), 
-                                a.TiposDeDescripcion.NullSafeToString(), 
-                                a.FechaEntrega.NullSafeToString(), 
-                                a.Cumplido.NullSafeToString(), 
-                                a.DescripcionControlCalidad.NullSafeToString(), 
-                                a.ArchivoAdjunto1.NullSafeToString(), 
-                                a.ArchivoAdjunto2.NullSafeToString(), 
-                                a.ArchivoAdjunto3.NullSafeToString(), 
-                                a.ArchivoAdjunto4.NullSafeToString(), 
-                                a.ArchivoAdjunto5.NullSafeToString(), 
-                                a.ArchivoAdjunto6.NullSafeToString(), 
-                                a.ArchivoAdjunto7.NullSafeToString(), 
-                                a.ArchivoAdjunto8.NullSafeToString(), 
-                                a.ArchivoAdjunto9.NullSafeToString(), 
-                                a.ArchivoAdjunto10.NullSafeToString(), 
-                                a.Aprobo.NullSafeToString(), 
+                                a.Unidad.NullSafeToString(),
+                                a.Codigo.NullSafeToString(),
+                                a.Articulo.NullSafeToString(),
+                                a.Observaciones.NullSafeToString(),
+                                a.TiposDeDescripcion.NullSafeToString(),
+                                a.FechaEntrega.NullSafeToString(),
+                                a.Cumplido.NullSafeToString(),
+                                a.DescripcionControlCalidad.NullSafeToString(),
+                                a.ArchivoAdjunto1.NullSafeToString(),
+                                a.ArchivoAdjunto2.NullSafeToString(),
+                                a.ArchivoAdjunto3.NullSafeToString(),
+                                a.ArchivoAdjunto4.NullSafeToString(),
+                                a.ArchivoAdjunto5.NullSafeToString(),
+                                a.ArchivoAdjunto6.NullSafeToString(),
+                                a.ArchivoAdjunto7.NullSafeToString(),
+                                a.ArchivoAdjunto8.NullSafeToString(),
+                                a.ArchivoAdjunto9.NullSafeToString(),
+                                a.ArchivoAdjunto10.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
                                 a.CircuitoFirmasCompleto.NullSafeToString()
                             }
                         }).ToArray()
@@ -1903,6 +1903,11 @@ namespace ProntoMVC.Controllers
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
+
+
+
+
+
         public virtual JsonResult Autorizaciones(int IdRequerimiento)
         {
             var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, IdRequerimiento);
@@ -1915,16 +1920,90 @@ namespace ProntoMVC.Controllers
             base.Dispose(disposing);
         }
 
+        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp = "", string Tipo = "") //(int id)
+        {
+            if (DirApp.Length == 0) { 
+                DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            }
+            else
+            {
+                DirApp = DirApp + "\\";
+            }
+            
+            string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
+
+            string output = DirApp + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+
+            string nombrearchivo = "requerimiento.doc";
+            if (Tipo == "PDF") { 
+                output = DirApp + "Documentos\\" + "archivo.pdf";
+                nombrearchivo = "requerimiento.pdf";
+            }
+
+            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
+
+            //if (!MyFile2.Exists)
+            //{
+            //    plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+            //}
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            //'How to Wait for a Shelled Process to Finish
+            //'Get the name of the system folder.
+            var sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            //'Create a new ProcessStartInfo structure.
+            var pInfo = new ProcessStartInfo();
+            //'Set the file name member of pinfo to Eula.txt in the system folder.
+            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
+
+            /*
+            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
+            // en lugar de este formato, yo mandaba:
+            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
+             */
+            //SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
+                        
+            if (!SCsinEncriptar.ToLower().Contains("provider="))
+            {
+                SCsinEncriptar +=";Provider=SQLOLEDB.1";
+            }
+
+            pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
+
+            ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
+
+            //'Start the process.
+            pInfo.UseShellExecute = false;
+            Process p = Process.Start(pInfo);
+            //'Wait for the process window to complete loading.
+            p.WaitForInputIdle();
+            //'Wait for the process to exit.
+            p.WaitForExit();
+            //'Continue with the code.
+            //MessageBox.Show("Code continuing...");
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
         public virtual FileResult Imprimir(int id) //(int id)
         {
+            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory);
+
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
             //plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento1_Autotrol_PUNTONET.docx";
-            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
             //edu está usando .dotm para poder usar la exportacion pdf. Lo voy a volver a .dot para probar si el problema en el server viene por ahi
-            string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dot";
+            //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dot";
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
@@ -1948,15 +2027,20 @@ namespace ProntoMVC.Controllers
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.doc");
         }
 
+
+
+
         public virtual FileResult ImprimirPDF(int id, String output2 = "") //(int id)
         {
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
             string output = "";
-            if (output2.Length > 0) { 
-                output = output2; 
+            if (output2.Length > 0)
+            {
+                output = output2;
             }
-            else{
+            else
+            {
                 output = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "archivo.pdf"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
             }
 
@@ -2065,7 +2149,7 @@ namespace ProntoMVC.Controllers
                     }
                 }
             }
-            
+
             return resul;
         }
 
@@ -2288,7 +2372,7 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 1, IdRequerimiento = IdRequerimiento, ex = "" });
         }
 
-        public virtual FileResult ArchivosAdjuntos(String filename = "") 
+        public virtual FileResult ArchivosAdjuntos(String filename = "")
         {
             //string plantilla = AppDomain.CurrentDomain.BaseDirectory + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
             string plantilla = Path.Combine(Server.MapPath("~/Adjuntos"), filename);
@@ -2319,7 +2403,7 @@ namespace ProntoMVC.Controllers
             }
             return Json(Errores, JsonRequestBehavior.AllowGet);
         }
-    
-    
+
+
     }
 }

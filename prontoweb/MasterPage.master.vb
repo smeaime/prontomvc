@@ -1128,6 +1128,7 @@ Partial Class MasterPage
 
     Protected Sub lnkEmpresa_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkEmpresa.Click
         Session(SESSIONPRONTO_NombreEmpresa) = ""
+        Session("SaltarSeleccionarEmpresa") = "NO"
         Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
         'ssss()
         'jjjjj()
