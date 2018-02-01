@@ -1976,12 +1976,25 @@ namespace ProntoMVC.Controllers
             // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
             // en lugar de este formato, yo mandaba:
             // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
-    */
+    
+             
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
 
-            SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
-            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
-            // en lugar de este formato, yo mandaba:
-            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
+
+             */
+
+            //SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
+                        
+
+            if (!SCsinEncriptar.ToLower().Contains("provider="))
+            {
+                SCsinEncriptar +=";Provider=SQLOLEDB.1";
+            }
+
+
 
             pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
 
