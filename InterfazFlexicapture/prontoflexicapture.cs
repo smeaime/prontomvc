@@ -8987,9 +8987,11 @@ namespace ServicioMVC
 
 
 
-        public string ImprimirConPlantillaEXE(int id, string SC, string DirApp, string plantilla, string sArchivoSalida, out string mensajeError, string Tipo = "")
-
+        public string ImprimirConPlantillaEXE(int id, string SC, string DirApp, string plantilla, string sArchivoSalida, out string mensajeError) //, string Tipo = "")
         {
+            //devuelve pdf si se le pasa un sArchivoSalida con extension pdf
+
+
             string SCsinEncriptar = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
@@ -9009,7 +9011,7 @@ namespace ServicioMVC
             //'Create a new ProcessStartInfo structure.
             var pInfo = new ProcessStartInfo();
             //'Set the file name member of pinfo to Eula.txt in the system folder.
-            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
+            pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
 
             /*
             // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
@@ -9026,18 +9028,23 @@ namespace ServicioMVC
 
 
 
-            if (Tipo == "PDF")
-            {
-                output = DirApp + "Documentos\\" + "archivo.pdf";
-                nombrearchivo = "requerimiento.pdf";
-            }
+
+            
+            //if (Tipo == "PDF")
+            //{
+            //    output = DirApp + "Documentos\\" + "archivo.pdf";
+            //    nombrearchivo = "requerimiento.pdf";
+            //}
 
 
 
 
             pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + sArchivoSalida;
 
+            
             ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
+            
+
 
             //'Start the process.
             pInfo.UseShellExecute = false;
@@ -9063,19 +9070,24 @@ namespace ServicioMVC
                 // If mArchivo = "" Then CodigoSalida = -106
                 //If CodigoSalida<> 0 Then GoTo Salida
 
+                case 0:
+                    mensajeError = "";
+                    break;
+
                 case -103:
                     mensajeError = "Falta la plantilla";
                     break;
 
                 case -104:
-                    mensajeError = "Falta la plantilla";
+                    mensajeError = "Falta la cadena de conexión";
                     break;
+
                 case -105:
-                    mensajeError = "Falta la plantilla";
+                    mensajeError = "Falta el Id del comprobante";
                     break;
 
                 case -106:
-                    mensajeError = "Falta la plantilla";
+                    mensajeError = "Falta el nombre del archivo de salida";
                     break;
 
                 default:

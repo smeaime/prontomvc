@@ -1,0 +1,41 @@
+
+Log Entry : 
+02/02/2018 11:24:54
+Error in: . Error Message:xusv*8hautv4x"8|'5=/"}83}@kT%ynbEvj`tusvjwqOnuApouhS
+dvu(%jPcLT*pvctegusO}:mtcvzv?uhhsh#03gyivJc*"niMhasPy;!bin\Plantillas.exe -Plantilla=C:\bdl\pronto\prontowebDocumentos\Requerimiento_VialAgro.dotm -SC=3R[urA-zuhhsh0Pfgycgowt;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\bdl\pronto\prontowebDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:25:54
+Error in: . Error Message:C:\bdl\pronto\prontowebbin\Plantillas.exe -Plantilla=C:\bdl\pronto\prontowebDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\bdl\pronto\prontowebDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:27:05
+Error in: . Error Message:C:\bdl\pronto\prontoweb\bin\Plantillas.exe -Plantilla=C:\bdl\pronto\prontowebDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\bdl\pronto\prontowebDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:29:32
+Error in: . Error Message:C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:32:27
+Error in: . Error Message:C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:33:14
+Error in: . Error Message:C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:49:09
+Error in: . Error Message:C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVC\Documentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVC\Documentos\archivo65464.doc
+__________________________
+
+Log Entry : 
+02/02/2018 11:49:45
+Error in: . Error Message:C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVC\Documentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=1 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVC\Documentos\archivo6524.doc
+__________________________
