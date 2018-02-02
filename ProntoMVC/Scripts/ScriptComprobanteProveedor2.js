@@ -530,18 +530,20 @@ $(function () {
     jQuery("#Lista").jqGrid('gridResize', { minWidth: 350, maxWidth: 910, minHeight: 100, maxHeight: 500 });
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     $("#ListaDrag").jqGrid({
-        url: ROOT + 'Pedido/Pedidos_Pendientes',
-        postData: { 'IdProveedor': function () { return $("#IdProveedor").val(); } },
+        url: ROOT + 'Pedido/Pedidos_Pendientes2_DynamicGridData',
+        postData: { 'IdProveedor': function () { return $("#IdProveedor").val(); }, 'Destino': "ComprobanteProveedor" },
         datatype: 'json',
         mtype: 'POST',
         cellEdit: false,
-        colNames: ['IdPedido', 'IdProveedor', 'IdCondicionCompra', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.', 'IVA', 'Otros',
-                   'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra', 'Exterior',
-                   'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio', 'Detalles generales'
+        colNames: ['Acciones', 'IdPedido', 'IdProveedor', 'IdCondicionCompra', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.',
+                   'IVA', 'Otros', 'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra',
+                   'Exterior', 'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio',
+                   'Detalles generales'
         ],
         colModel: [
+                    { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                     { name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
                     { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 100, editable: false, hidden: true },
                     { name: 'IdCondicionCompra', index: 'IdCondicionCompra', align: 'left', width: 100, editable: false, hidden: true },
@@ -600,7 +602,6 @@ $(function () {
             grid = $(this);
             $("#ListaDrag td", grid[0]).css({ background: 'rgb(234, 234, 234)' });
         },
-
         pager: $('#ListaDragPager'),
         rowNum: 15,
         rowList: [10, 20, 50],
@@ -874,7 +875,7 @@ $(function () {
     }
 
     function Copiar1(idsource, Origen) {
-        var acceptId = idsource, IdPedido = 0, IdProveedor = 0;
+        var acceptId = idsource, IdPedido = 0, IdProveedor = 0, AuxD1 = 0;
         var mPrimerItem = true, $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
@@ -910,8 +911,9 @@ $(function () {
                             tmpdata['Articulo'] = data[i].ArticuloDescripcion;
                             tmpdata['Cantidad'] = data[i].Cantidad;
                             tmpdata['Importe'] = data[i].Importe;
-                            tmpdata['PorcentajeIva'] = data[i].AlicuotaIVA;
-                            
+                            AuxD1 = data[i].AlicuotaIVA;
+                            tmpdata['PorcentajeIva'] = AuxD1.toFixed(2);
+
                             $("#IdObra").val(data[i].IdObra);
 
                             getdata = tmpdata;
