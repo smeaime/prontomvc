@@ -718,17 +718,8 @@
     <Content Include="Documentos\CertificadoRetencionSUSS.dot" />
     <Content Include="Documentos\Comparativa.xlsx" />
     <Content Include="Documentos\Comparativa.xlt" />
-    <Content Include="Documentos\Pedido_Autotrol_PUNTONET.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentos\Pronto.app" />
-    <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET.docx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
-    <Content Include="Documentos\Requerimiento1_AUTOTROL_PUNTONET - Copia.docx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Documentos\Factura_A_BaseNueva.dot">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

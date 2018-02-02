@@ -1489,7 +1489,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
                         { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
                         { name: 'adjunto', index: 'adjunto', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
-                        { name: 'textohtml', index: 'textohtml', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
+                        { name: 'textohtml', index: 'textohtml', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
 
 
                     ],
@@ -1696,7 +1696,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             function refrescaancho() { // hay que llamarla en el window.resize y en el jqgrid.onloadcomplete
-
+                return;
 
 
                 $('#Lista').jqGrid('setGridWidth', $(window).width() - 0);
@@ -1709,28 +1709,28 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 ////$grid.jqGrid("setGridWidth", newWidth, true);
 
 
-                //var grid = $("#Lista");
-                //if (grid = $('.ui-jqgrid-btable')) { // le quit� el visible para que tambien trabaje sobre el tab que todav�a no salt� a la pantalla
-                //    grid.each(function (index) {
-                //        var gridId = $(this).attr('id');
-                //        var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                //        $('#' + gridId).setGridWidth(gridParentWidth);
+                var grid = $("#Lista");
+                if (grid = $('.ui-jqgrid-btable')) { // le quit� el visible para que tambien trabaje sobre el tab que todav�a no salt� a la pantalla
+                    grid.each(function (index) {
+                        var gridId = $(this).attr('id');
+                        var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                        $('#' + gridId).setGridWidth(gridParentWidth);
 
-                //        //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
+                        //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
 
-                //        //                    var height = $('#gbox_' + gridId).parent().height();
-                //        //                    $('#' + gridId).setGridHeight(height);
+                        //                    var height = $('#gbox_' + gridId).parent().height();
+                        //                    $('#' + gridId).setGridHeight(height);
 
-                //        //                    jQuery("table.ui-jqgrid-htable", jQuery("#gview_list")).css("height", 30);
+                        //                    jQuery("table.ui-jqgrid-htable", jQuery("#gview_list")).css("height", 30);
 
 
-                //        //                    var grid = $("#lista");
-                //        //                    var ids = grid.getDataIDs();
-                //        //                    for (var i = 0; i < ids.length; i++) {
-                //        //                        grid.setRowData(ids[i], false, { height: 20 + i * 2 });
-                //        //                    }
-                //    });
-                //}
+                        //                    var grid = $("#lista");
+                        //                    var ids = grid.getDataIDs();
+                        //                    for (var i = 0; i < ids.length; i++) {
+                        //                        grid.setRowData(ids[i], false, { height: 20 + i * 2 });
+                        //                    }
+                    });
+                }
 
             }
 
@@ -1788,9 +1788,9 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             $(function () {
                 //$('#token2').text($('#token').text())
-                $('#tokenContenedor').show()
+                
 
-                $("#tokenContenedor").css("visibility", "visible")
+                //$("#tokenContenedor").css("visibility", "visible")
                 $('#BorraToken').hide()
 
 
