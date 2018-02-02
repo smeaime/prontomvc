@@ -1928,8 +1928,10 @@ namespace ProntoMVC.Controllers
         public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
         {
             string DirApp = AppDomain.CurrentDomain.BaseDirectory;
-            string output = DirApp + "\\Documentos\\" + "archivo.pdf";
-            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
 
@@ -1951,9 +1953,10 @@ namespace ProntoMVC.Controllers
         public virtual FileResult ImprimirConPlantillaEXE(int id)
         {
             string DirApp = AppDomain.CurrentDomain.BaseDirectory;
-            string output = DirApp + "\\Documentos\\" + "archivo.doc"; 
-            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string output = DirApp + "Documentos\\" + "archivo.doc"; 
+            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
 
             var s = new ServicioMVC.servi();

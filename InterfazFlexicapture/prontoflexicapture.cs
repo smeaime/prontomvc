@@ -9011,7 +9011,7 @@ namespace ServicioMVC
             //'Create a new ProcessStartInfo structure.
             var pInfo = new ProcessStartInfo();
             //'Set the file name member of pinfo to Eula.txt in the system folder.
-            pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
+            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
 
             /*
             // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
