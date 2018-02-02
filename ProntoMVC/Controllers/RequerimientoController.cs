@@ -1920,81 +1920,70 @@ namespace ProntoMVC.Controllers
             base.Dispose(disposing);
         }
 
-        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp = "", string Tipo = "") //(int id)
+
+
+
+
+
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
         {
-            if (DirApp.Length == 0) { 
-                DirApp = AppDomain.CurrentDomain.BaseDirectory;
-            }
-            else
-            {
-                DirApp = DirApp + "\\";
-            }
-            
-            string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "\\Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
-            string output = DirApp + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
-            string nombrearchivo = "requerimiento.doc";
-            if (Tipo == "PDF") { 
-                output = DirApp + "Documentos\\" + "archivo.pdf";
-                nombrearchivo = "requerimiento.pdf";
-            }
 
-            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
 
-            System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
-            //if (!MyFile2.Exists)
-            //{
-            //    plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
-            //}
-
-            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
-            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
-            if (MyFile1.Exists) MyFile1.Delete();
-
-            //'How to Wait for a Shelled Process to Finish
-            //'Get the name of the system folder.
-            var sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
-            //'Create a new ProcessStartInfo structure.
-            var pInfo = new ProcessStartInfo();
-            //'Set the file name member of pinfo to Eula.txt in the system folder.
-            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
-
-            /*
-            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
-            // en lugar de este formato, yo mandaba:
-            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
-                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
-             */
-            //SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
-                        
-            if (!SCsinEncriptar.ToLower().Contains("provider="))
-            {
-                SCsinEncriptar +=";Provider=SQLOLEDB.1";
-            }
-
-            pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
-
-            ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
-
-            //'Start the process.
-            pInfo.UseShellExecute = false;
-            Process p = Process.Start(pInfo);
-            //'Wait for the process window to complete loading.
-            p.WaitForInputIdle();
-            //'Wait for the process to exit.
-            p.WaitForExit();
-            //'Continue with the code.
-            //MessageBox.Show("Code continuing...");
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "requerimiento.pdf";
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
         }
 
+
+
+
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "\\Documentos\\" + "archivo.doc"; 
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+
+
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "requerimiento.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+
+            //como mostrar mensaje de error?
+
+        }
+
+
+
+
+
+
+
+
         public virtual FileResult Imprimir(int id) //(int id)
         {
-            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory);
+
+            int CodigoSalida;
+            return ImprimirConPlantillaEXE(id);
+
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 

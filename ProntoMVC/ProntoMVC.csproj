@@ -711,8 +711,32 @@
     <Content Include="Areas\MvcMembership\Views\UserAdministration\IndexAdminExterno.cshtml" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\CreateUserExterno.cshtml" />
     <Content Include="Areas\MvcMembership\Views\Web.config" />
+<<<<<<< HEAD
     <Content Include="Documentos\Pronto.app" />
     <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
+=======
+    <Content Include="Documentos\CertificadoRetencionGanancias.dot" />
+    <Content Include="Documentos\CertificadoRetencionIIBB.dot" />
+    <Content Include="Documentos\CertificadoRetencionIIBB_StaFe.dot" />
+    <Content Include="Documentos\CertificadoRetencionIVA.dot" />
+    <Content Include="Documentos\CertificadoRetencionSUSS.dot" />
+    <Content Include="Documentos\Comparativa.xlsx" />
+    <Content Include="Documentos\Comparativa.xlt" />
+    <Content Include="Documentos\Pronto.app" />
+    <Content Include="Areas\MvcMembership\Views\UserAdministration\DetailsExterno.cshtml" />
+    <Content Include="Documentos\Factura_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\Factura_A_BaseNueva_FA.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\NotaCredito_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Documentos\NotaDebito_A_BaseNueva.dot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+>>>>>>> 63a940eaaaf76ac524bed80c94af2c0c40ab358e
     <Content Include="Areas\WebForms\_MVC_MasterPage.master" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
