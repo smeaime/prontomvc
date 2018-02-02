@@ -161,23 +161,18 @@ namespace ProntoMVC.TestsMVC
         {
 
 
+            // @"C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc"
 
-            string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
-
-            string output = DirApp + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-
-            string nombrearchivo = "requerimiento.doc";
-
-            string plantilla = DirApp + "Documentos\\" + "Requerimiento_VialAgro.dotm";
-
-
+           string output = DirApp + "\\Documentos\\" + "archivo6524.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+           string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_VialAgro.dotm";
 
 
             string mensajeError;
 
             var s = new ServicioMVC.servi();
-            s.ImprimirConPlantillaEXE(22, DirApp, SC, nombrearchivo, mensajeError, "PDF");
+            s.ImprimirConPlantillaEXE(1, scSQL, DirApp, plantilla, output, out mensajeError);
 
+            System.Diagnostics.Process.Start(output);
 
         }
 
@@ -193,7 +188,7 @@ namespace ProntoMVC.TestsMVC
             GetMockedControllerGenerico(cr);
 
             //cr.Imprimir(22);
-            cr.ImprimirConPlantillaEXE(22);
+            //cr.ImprimirConPlantillaEXE_PDF(22);
         }
 
 

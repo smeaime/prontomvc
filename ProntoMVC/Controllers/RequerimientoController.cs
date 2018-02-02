@@ -1925,20 +1925,40 @@ namespace ProntoMVC.Controllers
 
 
 
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "\\Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "requerimiento.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
 
 
 
 
         public virtual FileResult ImprimirConPlantillaEXE(int id)
         {
-            DirApp = AppDomain.CurrentDomain.BaseDirectory;
-            string output = DirApp + "Documentos\\" + "archivo.doc"; 
-            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "\\Documentos\\" + "archivo.doc"; 
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
 
 
             var s = new ServicioMVC.servi();
-            s.ImprimirConPlantillaEXE(id,SC, DirApp, plantilla, outpu);
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
 
 
 
@@ -1946,6 +1966,9 @@ namespace ProntoMVC.Controllers
             byte[] contents = System.IO.File.ReadAllBytes(output);
             string nombrearchivo = "requerimiento.doc";
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+
+            //como mostrar mensaje de error?
+
         }
 
 
