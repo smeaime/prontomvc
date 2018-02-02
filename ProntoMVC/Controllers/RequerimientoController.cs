@@ -1931,7 +1931,7 @@ namespace ProntoMVC.Controllers
 
 
 
-        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp) //(int id)
+        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp, out int CodigoSalida ) //(int id)
         {
             string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
 
@@ -2013,6 +2013,19 @@ namespace ProntoMVC.Controllers
 
 
 
+            CodigoSalida = p.ExitCode;
+
+
+   
+     // If mPlantilla = "" Then CodigoSalida = -103
+     // If mStringConexion = "" Then CodigoSalida = -104
+     // If mvarId = 0 Then CodigoSalida = -105
+     // If mArchivo = "" Then CodigoSalida = -106
+     //If CodigoSalida<> 0 Then GoTo Salida
+
+
+
+
 
 
 
@@ -2029,8 +2042,8 @@ namespace ProntoMVC.Controllers
         public virtual FileResult Imprimir(int id) //(int id)
         {
 
-
-            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory);
+            int CodigoSalida;
+            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory, out CodigoSalida);
 
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
