@@ -1914,16 +1914,13 @@ namespace ProntoMVC.Controllers
             return Json(Autorizaciones, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
         protected override void Dispose(bool disposing)
         {
             if (db != null) db.Dispose();
             base.Dispose(disposing);
         }
 
+<<<<<<< HEAD
 
 
 
@@ -1932,12 +1929,29 @@ namespace ProntoMVC.Controllers
 
 
         public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp, out int CodigoSalida ) //(int id)
+=======
+        public virtual FileResult ImprimirConPlantillaEXE(int id, string DirApp = "", string Tipo = "") //(int id)
+>>>>>>> 54461c2d33f13e2df81b399813a91106d97983b1
         {
+            if (DirApp.Length == 0) { 
+                DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            }
+            else
+            {
+                DirApp = DirApp + "\\";
+            }
+            
             string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
 
-            string output = DirApp + "\\Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            string output = DirApp + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
-            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+            string nombrearchivo = "requerimiento.doc";
+            if (Tipo == "PDF") { 
+                output = DirApp + "Documentos\\" + "archivo.pdf";
+                nombrearchivo = "requerimiento.pdf";
+            }
+
+            string plantilla = DirApp + "Documentos\\" + "Requerimiento_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
 
             System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
 
@@ -1950,59 +1964,33 @@ namespace ProntoMVC.Controllers
             System.IO.FileInfo MyFile1 = new System.IO.FileInfo(output);//busca si ya existe el archivo a generar y en ese caso lo borra
             if (MyFile1.Exists) MyFile1.Delete();
 
-
-
-
-
-
             //'How to Wait for a Shelled Process to Finish
             //'Get the name of the system folder.
             var sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
             //'Create a new ProcessStartInfo structure.
             var pInfo = new ProcessStartInfo();
             //'Set the file name member of pinfo to Eula.txt in the system folder.
-            pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
-
+            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
 
             /*
-            [14:13, 30/1/2018] +54 9 11 2857-9291: edu parece q anda nomas
-[14:13, 30 / 1 / 2018] +54 9 11 2857-9291: tuve problemas usando mi formato de cadena de conexion
-[14:14, 30 / 1 / 2018] Edu: ok, modificaste el codigo?
-[14:15, 30 / 1 / 2018] +54 9 11 2857-9291: si, pero ahora esta la cadena de conexion harcodeada apuntando a la base q me pasaste vos de ejemplo
-[14:15, 30 / 1 / 2018] +54 9 11 2857-9291: solo me queria asegurar de q la llamada al exe descargase bien el archivo
-[14:17, 30 / 1 / 2018] Edu: ok, igual hay que ampliarlo para las plantillas que usen mas argumentos, pero si ya anda es un tema de ir adaptandolo y bajarlo junto con el sitio
-[14:18, 30 / 1 / 2018] +54 9 11 2857-9291: quizas el problema haya sido siempre lo del formato de la cadena de conexion
-
             // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
             // en lugar de este formato, yo mandaba:
             // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
-    
-             
                 LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
-                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
-                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
-                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
-
-
              */
-
             //SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
                         
-
             if (!SCsinEncriptar.ToLower().Contains("provider="))
             {
                 SCsinEncriptar +=";Provider=SQLOLEDB.1";
             }
 
-
-
             pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + output;
-
-
 
             ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
 
             //'Start the process.
+            pInfo.UseShellExecute = false;
             Process p = Process.Start(pInfo);
             //'Wait for the process window to complete loading.
             p.WaitForInputIdle();
@@ -2011,6 +1999,7 @@ namespace ProntoMVC.Controllers
             //'Continue with the code.
             //MessageBox.Show("Code continuing...");
 
+<<<<<<< HEAD
 
 
             CodigoSalida = p.ExitCode;
@@ -2031,20 +2020,21 @@ namespace ProntoMVC.Controllers
 
 
 
+=======
+>>>>>>> 54461c2d33f13e2df81b399813a91106d97983b1
             byte[] contents = System.IO.File.ReadAllBytes(output);
-            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.doc");
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
         }
-
-
-
-
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
+<<<<<<< HEAD
 
             int CodigoSalida;
             return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory, out CodigoSalida);
-
+=======
+            return ImprimirConPlantillaEXE(id, AppDomain.CurrentDomain.BaseDirectory);
+>>>>>>> 54461c2d33f13e2df81b399813a91106d97983b1
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 

@@ -341,11 +341,11 @@ $(function () {
                     { name: 'IdCaja', index: 'IdCaja', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
                     { name: 'IdTarjetaCredito', index: 'IdTarjetaCredito', formoptions: { rowpos: 1, colpos: 1 }, editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: false }, label: 'TB' },
                     {
-                        name: 'Tipo', index: 'Tipo', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 50, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        name: 'Tipo', index: 'Tipo', formoptions: { rowpos: 3, colpos: 1 }, align: 'left', width: 30, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             dataUrl: ROOT + 'Valor/GetTiposValores',
                             dataInit: function(elem) {
-                                $(elem).width(40);
+                                $(elem).width(25);
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
@@ -368,7 +368,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'NumeroInterno', index: 'NumeroInterno', formoptions: { rowpos: 2, colpos: 1 }, width: 70, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'NumeroInterno', index: 'NumeroInterno', formoptions: { rowpos: 2, colpos: 1 }, width: 40, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0',
                             dataEvents: [
@@ -383,7 +383,7 @@ $(function () {
                         }
                     },
                     {
-                        name: 'NumeroValor', index: 'NumeroValor', formoptions: { rowpos: 2, colpos: 2 }, width: 100, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'NumeroValor', index: 'NumeroValor', formoptions: { rowpos: 2, colpos: 2 }, width: 60, align: 'center', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0',
                             dataEvents: [
@@ -417,11 +417,11 @@ $(function () {
                     },
 
                     {
-                        name: 'Entidad', index: 'Entidad', formoptions: { rowpos: 4, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        name: 'Entidad', index: 'Entidad', formoptions: { rowpos: 4, colpos: 1 }, align: 'left', width: 250, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             dataUrl: ROOT + 'Banco/GetBancosPropios',
                             dataInit: function (elem) {
-                                $(elem).width(290);
+                                $(elem).width(240);
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
@@ -480,7 +480,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'Importe', index: 'Importe', formoptions: { rowpos: 4, colpos: 2 }, width: 90, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Importe', index: 'Importe', formoptions: { rowpos: 4, colpos: 2 }, width: 60, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
@@ -495,11 +495,11 @@ $(function () {
                         }
                     },
                     {
-                        name: 'Chequera', index: 'Chequera', formoptions: { rowpos: 5, colpos: 1 }, align: 'left', width: 300, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
+                        name: 'Chequera', index: 'Chequera', formoptions: { rowpos: 5, colpos: 1 }, align: 'left', width: 100, editable: true, hidden: false, edittype: 'select', editrules: { required: false },
                         editoptions: {
                             dataUrl: ROOT + 'Banco/GetChequerasPorIdCuentaBancaria2?IdCuentaBancaria=0',
                             dataInit: function (elem) {
-                                $(elem).width(290);
+                                $(elem).width(90);
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
@@ -524,9 +524,9 @@ $(function () {
                             }]
                         },
                     },
-                    { name: 'Anulado', index: 'Anulado', width: 50, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
+                    { name: 'Anulado', index: 'Anulado', width: 40, align: 'center', editable: false, hidden: false, editoptions: { disabled: 'disabled' }, editrules: { edithidden: false }, label: 'TB' },
                     { name: 'ChequesALaOrdenDe', index: 'ChequesALaOrdenDe', formoptions: { rowpos: 6, colpos: 1 }, width: 200, align: 'left', editable: true, editrules: { required: false }, edittype: 'text', label: 'TB' },
-                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 6, colpos: 2 }, width: 90, align: 'left', editable: true, editrules: { required: false }, edittype: "checkbox", editoptions: { value: "SI:NO" }, formatter: "checkbox", formatoptions: { disabled: false }, label: 'TB' }
+                    { name: 'NoALaOrden', index: 'NoALaOrden', formoptions: { rowpos: 6, colpos: 2 }, width: 50, align: 'left', editable: true, editrules: { required: false }, edittype: "checkbox", editoptions: { value: "SI:NO" }, formatter: "checkbox", formatoptions: { disabled: false }, label: 'TB' }
         ],
         gridComplete: function () {
             calculaTotalValores();
@@ -1095,11 +1095,11 @@ $(function () {
                     { name: 'IdDetalleOrdenPagoRubrosContables', index: 'IdDetalleOrdenPagoRubrosContables', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
                     { name: 'IdRubroContable', index: 'IdRubroContable', editable: true, hidden: true, editoptions: { disabled: 'disabled' }, editrules: { edithidden: true }, label: 'TB' },
                     {
-                        name: 'RubroContable', index: 'RubroContable', align: 'left', width: 180, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        name: 'RubroContable', index: 'RubroContable', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
                         editoptions: {
                             dataUrl: ROOT + 'RubroContable/GetRubrosContables',
                             dataInit: function (elem) {
-                                $(elem).width(170);
+                                $(elem).width(140);
                             },
                             dataEvents: [{
                                 type: 'change', fn: function (e) {
@@ -1110,7 +1110,7 @@ $(function () {
                         },
                     },
                     {
-                        name: 'Importe', index: 'Importe', width: 80, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
+                        name: 'Importe', index: 'Importe', width: 60, align: 'right', editable: true, editrules: { required: false, number: true }, edittype: 'text', label: 'TB',
                         editoptions: {
                             maxlength: 20, defaultValue: '0.00',
                             dataEvents: [
@@ -1158,7 +1158,7 @@ $(function () {
         pgtext: "",
         pginput: false,
         rowList: "",
-        caption: 'RUB. CONTABLES',
+        caption: 'RUBROS CONTABLES',
         cellEdit: true,
         cellsubmit: 'clientArray'
     });
@@ -1295,13 +1295,9 @@ $(function () {
         sortorder: "asc",
         viewrecords: true,
         emptyrecords: 'No hay registros para mostrar', //,
-
-        ///////////////////////////////
         width: 'auto', // 'auto',
         autowidth: true,
         shrinkToFit: false,
-        //////////////////////////////
-
         height: $(window).height() - ALTOLISTADO, // '100%'
         altRows: false,
         footerrow: false, //true,
