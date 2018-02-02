@@ -154,6 +154,33 @@ namespace ProntoMVC.TestsMVC
 
 
 
+
+
+
+        [TestMethod]
+        public void Llamada_al_plantilla_EXE_por_linea_de_comandos__2()
+        {
+
+
+
+
+            var cr = new RequerimientoController();
+            GetMockedControllerGenerico(cr);
+
+            //cr.Imprimir(22);
+            cr.ImprimirConPlantillaEXE(22, DirApp);
+
+
+        }
+
+
+
+
+
+
+
+
+
         [TestMethod]
         public void Llamada_al_plantilla_EXE_por_linea_de_comandos__2()
         {
@@ -169,6 +196,10 @@ namespace ProntoMVC.TestsMVC
 
 
         }
+
+
+
+
 
 
 
