@@ -544,7 +544,7 @@
                             }
                             @if (Model.IdRequerimiento > 0)
                             {
-                                <a id="lImprimir" class="btn  btn-large" style="color: Black" href="@Url.Action("Imprimir", new { @id = Model.IdRequerimiento })"><i class="icon-print"></i>&nbsp;Imprimir</a>
+                                <a id="lImprimir" class="btn  btn-large" style="color: Black" href="@Url.Action("ImprimirConPlantillaEXE", new { @id = Model.IdRequerimiento })"><i class="icon-print"></i>&nbsp;Imprimir</a>
                             }
                             @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link pull-right" })
                         </div>
