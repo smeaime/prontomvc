@@ -156,19 +156,27 @@ namespace ProntoMVC.TestsMVC
 
 
 
-
         [TestMethod]
-        public void Llamada_al_plantilla_EXE_por_linea_de_comandos__2()
+        public void Llamada_al_plantilla_EXE_por_linea_de_comandos__4()
         {
 
 
 
+            string SCsinEncriptar = Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService);
 
-            var cr = new RequerimientoController();
-            GetMockedControllerGenerico(cr);
+            string output = DirApp + "Documentos\\" + "archivo.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
 
-            //cr.Imprimir(22);
-            cr.ImprimirConPlantillaEXE(22, DirApp);
+            string nombrearchivo = "requerimiento.doc";
+
+            string plantilla = DirApp + "Documentos\\" + "Requerimiento_VialAgro.dotm";
+
+
+
+
+            string mensajeError;
+
+            var s = new ServicioMVC.servi();
+            s.ImprimirConPlantillaEXE(22, DirApp, SC, nombrearchivo, mensajeError, "PDF");
 
 
         }
@@ -177,6 +185,17 @@ namespace ProntoMVC.TestsMVC
 
 
 
+        [TestMethod]
+        public void Llamada_al_plantilla_EXE_por_linea_de_comandos__3()
+        {
+
+            var cr = new PedidoController();
+            GetMockedControllerGenerico(cr);
+
+            //cr.Imprimir(22);
+            cr.ImprimirConPlantillaEXE(22);
+        }
+
 
 
 
@@ -185,17 +204,13 @@ namespace ProntoMVC.TestsMVC
         public void Llamada_al_plantilla_EXE_por_linea_de_comandos__2()
         {
 
-
-
-
             var cr = new RequerimientoController();
             GetMockedControllerGenerico(cr);
 
             //cr.Imprimir(22);
-            cr.ImprimirConPlantillaEXE(22,DirApp);
-
-
+            cr.ImprimirConPlantillaEXE(22);
         }
+
 
 
 
@@ -222,7 +237,7 @@ namespace ProntoMVC.TestsMVC
             //'Set the file name member of pinfo to Eula.txt in the system folder.
             pInfo.FileName = DirApp + @"\bin\Plantillas.exe";
 
-            pInfo.Arguments= @"-Plantilla=C:\Pronto\Plantillas\Requerimiento_Servipet.dot -SC=" + scSQL +  @" -Id=20 -FileOut=C:\Requerimiento.doc";
+            pInfo.Arguments = @"-Plantilla=C:\Pronto\Plantillas\Requerimiento_Servipet.dot -SC=" + scSQL + @" -Id=20 -FileOut=C:\Requerimiento.doc";
 
             //'Start the process.
             Process p = Process.Start(pInfo);
@@ -234,7 +249,7 @@ namespace ProntoMVC.TestsMVC
             //MessageBox.Show("Code continuing...");
 
 
-            
+
 
 
 
@@ -252,7 +267,7 @@ namespace ProntoMVC.TestsMVC
         public void DetValesSalida_con_parametros_de_items_pendiendes_de_rm()
         {
 
-            var c = new  ValeSalidaController();
+            var c = new ValeSalidaController();
             GetMockedControllerGenerico(c);
 
             var cr = new RequerimientoController();
@@ -282,7 +297,7 @@ namespace ProntoMVC.TestsMVC
             jqGridJson listado3 = (jqGridJson)result3.Data;
 
 
-            JsonResult result2 = (JsonResult)c.DetValesSalida ("NumeroRequerimiento", "desc", 0, 50, -1 , "9021,9022");
+            JsonResult result2 = (JsonResult)c.DetValesSalida("NumeroRequerimiento", "desc", 0, 50, -1, "9021,9022");
             jqGridJson listado2 = (jqGridJson)result2.Data;
 
             //habria problemas con los TipoDesignacion del detalle no? -si
@@ -333,11 +348,11 @@ namespace ProntoMVC.TestsMVC
         public void probar_rms_pendientes_y_partial_del_vale()
         {
 
-/*
-            var c = new RequerimientoController();
-            GetMockedControllerGenerico(c);
-            var res = c.Index() as ViewResult;
-            */
+            /*
+                        var c = new RequerimientoController();
+                        GetMockedControllerGenerico(c);
+                        var res = c.Index() as ViewResult;
+                        */
 
 
             var c = new ValeSalidaController();
@@ -363,7 +378,7 @@ namespace ProntoMVC.TestsMVC
             GetMockedControllerGenerico(c);
 
 
-           // c.EnviarEmail(10, 10, "SI");
+            // c.EnviarEmail(10, 10, "SI");
 
         }
 
@@ -378,8 +393,8 @@ namespace ProntoMVC.TestsMVC
             var c = new ClienteAPIController();
             //GetMockedControllerGenerico(c);
 
-            
-            var sss= c.TraerClientePorCuit("30711633053");
+
+            var sss = c.TraerClientePorCuit("30711633053");
 
             //cuantos datos pasamos? 
             //c.AgregarCliente("30711633053");
