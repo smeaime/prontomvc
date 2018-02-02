@@ -4,9 +4,14 @@ $(function () {
     'use strict';
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
-    var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo, mTotalGastosFF;
+    var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo, mTotalGastosFF, idaux;
 
-    TraerCotizacion()
+    idaux = $("#IdComprobanteProveedor").val();
+    if (idaux <= 0) {
+        TraerCotizacion()
+    } else {
+        pageLayout.close('east');
+    }
 
     var getColumnIndexByName = function (grid, columnName) {
         var cm = grid.jqGrid('getGridParam', 'colModel'), i, l = cm.length;
@@ -1445,7 +1450,7 @@ $(function () {
         var $gridOrigen = $("#ListaDrag"), $gridDestino = $("#Lista");
 
         var getdata = $gridOrigen.jqGrid('getRowData', acceptId);
-        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate;
+        var tmpdata = {}, dataIds, data2, Id, Id2, i, date, displayDate, mPrimerItem = true;
         //var dropmodel = $("#ListaDrag").jqGrid('getGridParam', 'colModel');
 
         dataIds = $gridDestino.jqGrid('getDataIDs');
@@ -1467,27 +1472,59 @@ $(function () {
                 dataType: "Json",
                 success: function (data) {
                     for (i = 0; i < data.length; i++) {
-                        data2 = data[i]
-                        data2.IdDetalleOrdenPago = Id2;
+                        tmpdata['IdDetalleOrdenPago'] = Id2;
+                        tmpdata['IdImputacion'] = data[i].IdImputacion;
+                        tmpdata['IdTipoRetencionGanancia'] = data[i].IdTipoRetencionGanancia;
+                        tmpdata['IdIBCondicion'] = data[i].IdIBCondicion;
+                        tmpdata['BaseCalculoIIBB'] = data[i].BaseCalculoIIBB;
+                        tmpdata['CotizacionMoneda'] = data[i].CotizacionMoneda;
+                        tmpdata['IdTipoComp'] = data[i].IdTipoComp;
+                        tmpdata['IdComprobante'] = data[i].IdComprobante;
+                        tmpdata['Tipo'] = data[i].Tipo;
+                        tmpdata['Numero'] = data[i].Numero;
+                        tmpdata['ImporteOriginal'] = data[i].ImporteOriginal;
+                        tmpdata['Saldo'] = data[i].Saldo;
+                        tmpdata['Importe'] = data[i].Importe;
+                        tmpdata['ImportePagadoSinImpuestos'] = data[i].ImportePagadoSinImpuestos;
+                        tmpdata['IvaTotal'] = data[i].IvaTotal;
+                        tmpdata['TotalComprobante'] = data[i].TotalComprobante;
+                        tmpdata['BienesYServicios'] = data[i].BienesYServicios;
+                        tmpdata['GravadoIVA'] = data[i].GravadoIVA;
+                        tmpdata['PorcentajeIVAParaMonotributistas'] = data[i].PorcentajeIVAParaMonotributistas;
+                        tmpdata['CertificadoPoliza'] = data[i].CertificadoPoliza;
+                        tmpdata['NumeroEndosoPoliza'] = data[i].NumeroEndosoPoliza;
 
                         date = new Date(parseInt(data[i].Fecha.substr(6)));
                         displayDate = $.datepicker.formatDate("dd/mm/yy", date);
-                        data2.Fecha = displayDate;
+                        tmpdata['Fecha'] = displayDate;
                         date = new Date(parseInt(data[i].FechaVencimiento.substr(6)));
                         displayDate = $.datepicker.formatDate("dd/mm/yy", date);
-                        data2.FechaVencimiento = displayDate;
-                        date = new Date(parseInt(data[i].FechaComprobante.substr(6)));
-                        displayDate = $.datepicker.formatDate("dd/mm/yy", date);
-                        data2.FechaComprobante = displayDate;
+                        tmpdata['FechaVencimiento'] = displayDate;
+                        if (data[i].FechaComprobante != null) {
+                            date = new Date(parseInt(data[i].FechaComprobante.substr(6)));
+                            displayDate = $.datepicker.formatDate("dd/mm/yy", date);
+                            tmpdata['FechaComprobante'] = displayDate;
+                        }
+
+                        getdata = tmpdata;
 
                         if (Origen == "DnD") {
-                            Id = dataIds[0];
-                            $gridDestino.jqGrid('setRowData', Id, data2);
+                            if (mPrimerItem) {
+                                dataIds = $gridDestino.jqGrid('getDataIDs');
+                                Id = dataIds[0];
+                                $gridDestino.jqGrid('setRowData', Id, getdata);
+                                mPrimerItem = false;
+                            } else {
+                                Id = Id2
+                                $gridDestino.jqGrid('addRowData', Id, getdata, "first");
+                            }
                         } else {
                             Id = Id2
-                            $gridDestino.jqGrid('addRowData', Id, data2, "first");
+                            $gridDestino.jqGrid('addRowData', Id, getdata, "first");
                         };
+
                         calculaTotalImputaciones();
+
                         //ar new_id = 39; //for example
                         //aftersavefunc: function( old_id ) {
 
