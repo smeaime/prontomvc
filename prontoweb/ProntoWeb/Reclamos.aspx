@@ -1720,12 +1720,14 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
             function refrescaancho() { // hay que llamarla en el window.resize y en el jqgrid.onloadcomplete
                 //return;
 
+                // hay que incluir esta funcion en las llamadas a $('#MenuPrincipal').toggle()/ hide/show
+
                 var grid = $("#Lista");
                 //var gridParentWidth = grid.closest(".ui-jqgrid").parent().width();
                 //var gridParentWidth = $("divcontentplaceholder2").width() - 0;
                 //var gridParentWidth = $("#divsupercontenedor").width() - 0;
-                var gridParentWidth = $(window).width() - $("#MenuPrincipal").width();
-                if (!$('#MenuPrincipal').is(":visible")) gridParentWidth = $(window).width();
+                var gridParentWidth = $(window).width() - $("#MenuPrincipal").width()-6;
+                if (!$('#MenuPrincipal').is(":visible")) gridParentWidth = $(window).width() - 6;
 
 
 
