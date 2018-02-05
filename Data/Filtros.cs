@@ -535,10 +535,11 @@ namespace Filtrador
                     try
                     {
                         filteredQuery = q.Where(s, parm);  // este where es de dynamic, no de EF
-
+                        //es necesario respetar las mayusculas!!!!
                     }
                     catch (Exception)
                     {
+                        //es necesario respetar las mayusculas!!!!
                         s = s.Replace(".ToString()", ".Value.ToString()");       //   http://stackoverflow.com/questions/9273991/dynamic-linq-to-entities-where-with-nullable-datetime-column
                         filteredQuery = q.Where(s, parm);
 

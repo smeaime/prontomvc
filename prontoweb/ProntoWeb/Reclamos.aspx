@@ -1487,7 +1487,29 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         { name: 'comentarios', index: 'comentarios', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
                         { name: 'usuarios', index: 'usuarios', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
                         { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
-                        { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+
+
+                        {
+                            name: 'Estado', index: 'Estado', align: 'left', width: 100, editable: false, hidden: false, sortable: true,
+                        
+
+
+                            edittype: 'select', sortable: false,
+                            editoptions: {
+                                value: "1:Abierto; 2:Cerrado"
+                            },
+                            formatter: 'select', stype: 'select',
+                            searchoptions: {
+                                sopt: ['eq'],
+                                value: ":Todos; 1:Abierto; 2:Cerrado"
+                            }
+
+
+                        },
+
+
+
+
                         { name: 'adjunto', index: 'adjunto', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
                         { name: 'textohtml', index: 'textohtml', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
 
