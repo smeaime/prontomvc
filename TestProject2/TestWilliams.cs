@@ -874,6 +874,72 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void SincroGESAGRO_47416()
+        {
+
+
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            int idcli = CartaDePorteManager.BuscarClientePorCUIT("30-50930520-6", SC, "");
+
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Gesagro", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", idcli, -1,
+                -1, idcli,
+                 idcli, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Entregas",
+                new DateTime(2016, 1, 1), new DateTime(2016, 3, 31),
+                -1, "Ambas", false, "", "", -1, ref registrosf, 4000);
+
+
+
+
+          System.Diagnostics.Process.Start(output);
+        }
+
+
+
+
+            
+
+
+        [TestMethod]
+        public void SincroBunge_47497()
+        {
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1,
+                -1, -1,
+                -1, -1, -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+        }
+
+
+
 
 
 
@@ -14338,33 +14404,6 @@ namespace ProntoMVC.Tests
 
             System.Diagnostics.Process.Start(output);
 
-        }
-
-
-        [TestMethod]
-        public void SincroBunge()
-        {
-
-            string sErrores = "", sTitulo = "";
-            LinqCartasPorteDataContext db = null;
-
-            // el _CONST_MAXROWS sale del app.config
-
-            int registrosf = 0;
-
-            var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
-                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
-                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
-                0, "Ambas", false, "", "", -1, ref registrosf);
-
-
-
-            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
-            System.Diagnostics.Process.Start(output);
         }
 
 

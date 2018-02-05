@@ -16205,7 +16205,7 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.CorredorDesc.ToString, 30).PadRight(30) 'NomCorrVend	STRING(30)	Nombre Corredor Vendedor)    453)    482
 
 
-                    sb &= Left(cadenavacia.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
+                    sb &= Left(.DestinoCUIT.ToString.Replace("-", ""), 14).PadRight(14) 'CUITPlantaOrigen	STRING(14)	CUIT Planta Origen)    483)    496
                     sb &= Left(.DestinoDesc.ToString, 30).PadRight(30) 'NomPlantaOrigen	STRING(30)	Nombre Planta Origen)    497)    526
 
 
@@ -29481,6 +29481,17 @@ Namespace Pronto.ERP.Bll
 
                     sb &= JustificadoDerecha("000000", 6) '   85	CANTIDAD DE BULTOS O CAJAS - NUMERICO	 6 *
                     sb &= JustificadoDerecha(Val(.Contrato), 8, "0") ' 86	CONTRATO DE VENTA DE BUNGE - NUMERICO	 8 **
+
+
+
+
+                    sb &= JustificadoIzquierda(.CTG.ToString, 14) '87  Nro.de CTG  (Codigo Trazabilidad Granos)	NUMERICO	 14 	SOLO RECEPCION GRANOS EN CAMIONES	 699 
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) ' '88  Cosecha del producto (granos)	NUMERICO	 4 	SOLO RECEPCION GRANOS EN CAMIONES	 703 
+
+                    sb &= "   " '89  codigo planta origen (para transferencias)	numérico	 3 	Solo recepción por transferencias	 706 
+                    sb &= "     " '90  codigo postal (5 digitos)	numérico	 5 	Código postal de Bunge	 711 
+                    sb &= " " '91  Marca para generar movimiento de compra	alfanumércio	 1 	Solo para despachos código 220: s = Si proviene por compra — Espacio en blanco=No	 712 
+
 
 
 
