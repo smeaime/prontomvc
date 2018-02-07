@@ -28920,7 +28920,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function Sincronismo_Bunge(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "", Optional ByRef sErrores As String = "") As String
+        Public Shared Function Sincronismo_Bunge(ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
 
             'Dado que el sincronismo solicitado para el cliente BLD preveía enviar datos que ya no existen en las Cartas de Porte se solicitó el desarrollo de nuevo del mismo.
@@ -29015,8 +29015,6 @@ Namespace Pronto.ERP.Bll
             For Each cdp As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoRow In pDataTable.Select(sWHERE)
                 With cdp
 
-                    i = 0 : sb = ""
-
                     Dim cero = 0
 
 
@@ -29024,6 +29022,86 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+                    Dim cc = CartaDePorteManager.GetItem(SC, cdp.IdCartaDePorte)
+
+
+
+
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    'primero armo la cadena de rubros
+
+                    Dim cadenaRubros As String
+                    Dim contadorRubro As Integer, contadorMerma As Integer
+
+
+                    '45 a 48 enviar SIEMPRE humedad, aunque no tenga merma (completar 01 y porcentaje)
+                    cadenaRubros &= RubroBunge(1, .HumedadDesnormalizada, .Humedad, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(24, cc.NobleExtranos, cc.CalidadGranosExtranosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(26, cc.NobleQuebrados, cc.CalidadQuebradosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(28, cc.NobleDaniados, cc.CalidadDanadosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(27, cc.NobleChamico, cc.CalidadChamicoMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(32, cc.NobleRevolcado, cc.CalidadRevolcadosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(31, cc.NobleObjetables, cc.CalidadObjetablesMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(66, cc.NobleAmohosados, cc.CalidadAmohosadosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(74, cc.CalidadPuntaSombreada, cc.CalidadPuntaSombreadaMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(54, cc.NobleHectolitrico, cc.CalidadHectolitricoMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(59, cc.NobleCarbon, cc.CalidadCarbonMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(60, cc.NoblePanzaBlanca, cc.CalidadPanzaBlancaMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(55, cc.NoblePicados, cc.CalidadPicadosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(94, cc.NobleVerdes, cc.CalidadVerdesMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(29, cc.CalidadGranosQuemados, cc.CalidadQuemadosMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(25, cc.CalidadTierra, cc.CalidadTierraMerma, cc, contadorRubro, contadorMerma)
+                    cadenaRubros &= RubroBunge(52, cc.CalidadMermaZarandeo, cc.CalidadZarandeoMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadDescuentoFinal, cc.CalidadDescuentoFinalMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadHumedadResultado, cc.CalidadHumedadMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastosFumigacionResultado, cc.CalidadGastosFumigacionMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadFondoNidera, cc.CalidadFondoNideraMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaMerma, cc, contadorRubro, contadorMerma)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinMerma, cc, contadorRubro, contadorMerma)
+
+
+
+
+
+                    For i = contadorRubro To 10
+                        '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
+                        '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
+                        '47	Item-Si el rubro referido fue a Cámara (1)	ALFANUMERICO	 1 	C= Cuando el rubro fue a cámara   - 
+                        '48	Item-Resultado del analisis hecho en la planta (1)	NUMERICO	 4 	Porcentaje del analisis del rubro  ( 2 enteros y 2 decimales)
+                        cadenaRubros &= JustificadoIzquierda(IIf(i = 1, "01", "00"), 2)
+                        cadenaRubros &= JustificadoIzquierda("", 6).Replace(" ", "0")
+                        cadenaRubros &= " " 'C= Cuando el rubro fue a cámara   - 
+                        cadenaRubros &= JustificadoIzquierda("", 4).Replace(" ", "0")
+                    Next
+
+
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+                    i = 0 : sb = ""
 
 
 
@@ -29081,11 +29159,20 @@ Namespace Pronto.ERP.Bll
                     End If
 
 
-                    '* Cuando Bunge está como Remitente Comercial, el campo Operación (código) debe ir con código 120, en cualquier otro caso 110.
-                    Dim operacionMovimiento As String = "110"
-                    If .RComercialDesc.ToUpper.Contains("BUNGE") Or .IntermediarioDesc.ToUpper.Contains("BUNGE") Then
-                        operacionMovimiento = "220"
 
+
+
+                    '6 - Código de Movimiento según Bunge. 
+                    '   Si entiendo el Cod 110 es cuando la cp viene BUNGE EN DESTINATARIO // 
+                    '   cod120 cuando es Rem Ccial -que podria llegar a venir las ccpp, no en este contrato, pero si en futuros- //	2018-02-06 14:38:13		
+
+                    Dim operacionMovimiento As String = "110"
+                    If .DestinatarioDesc.ToUpper.Contains("BUNGE") Then
+                        operacionMovimiento = "110"
+                    ElseIf .RComercialDesc.ToUpper.Contains("BUNGE") Or .IntermediarioDesc.ToUpper.Contains("BUNGE") Then
+                        operacionMovimiento = "120"
+                    Else
+                        operacionMovimiento = "110"
                     End If
                     sb &= JustificadoIzquierda(operacionMovimiento, 3)  'Código de Movimiento según Bunge	NUMERICO	 3 	codigo 110 = recepcion por compra   sino VER TABLA2 
 
@@ -29303,7 +29390,10 @@ Namespace Pronto.ERP.Bll
 
 
                     sb &= JustificadoIzquierda(.SubnumeroVagon, 10)  ' '26	Numero de Vagon o de Barcaza	NUMERICO	 10 	Completar solo si el medio de transporte es Vagon o Barcaza -  Si es camion poner en 0
-                    sb &= JustificadoIzquierda("", 10).Replace(" ", "0")  '27	Nombre Operativo o Nombre del Convoy	ALFANUMERICO	 10 	Completar solo si el medio de transporte es Vagon o Barcaza - Si es camion poner en 0
+
+
+                    '27 - Nombre Operativo o Nombre del ConvoyNúmero de vagon
+                    sb &= JustificadoIzquierda(.SubnumeroVagon, 10)   '27	Nombre Operativo o Nombre del Convoy	ALFANUMERICO	 10 	Completar solo si el medio de transporte es Vagon o Barcaza - Si es camion poner en 0
 
 
                     sb &= Int(.BrutoPto).ToString.PadLeft(8, "0") 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
@@ -29316,15 +29406,36 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(.TaraFinal).ToString.PadLeft(8, "0") 'PesoEgre	STRING(10)	Peso de egreso (Peso del camión vacío (TARA)) Sin Decimales)    626)    635
                     sb &= Int(.NetoFinal).ToString.PadLeft(8, "0") 'PesoNeto	STRING(10)	Total bruto(PesoBrut-PesoEgre) (sin decimales))    636)    645
 
-                    sb &= Int(.NetoFinal - .NetoProc).ToString.PadLeft(8, "0") 'TotMerm	STRING(10)	Total mermas (Total mermas sin decimales))    646)    655
 
 
-                    'sb &= Int(.Merma).ToString.PadLeft(8, "0") 'TotMerm	STRING(10)	Total mermas (Total mermas sin decimales))    646)    655
-                    'sb &= String.Format("{0:F1}", .Humedad).PadLeft(10) 'PorHume	STRING(10)	Porcentaje humedad (un (1) decimal))    666)    675
-                    sb &= JustificadoIzquierda("", 8).Replace(" ", "0")
-                    sb &= JustificadoIzquierda("", 8).Replace(" ", "0")
 
-                    sb &= " "
+
+
+
+
+
+
+
+
+                    '////////////////////////////////////////////////
+                    '34 acá enviar unicamente las mermas por secada y zaranda
+                    '35 acá enviar solamente las mermas de volatil
+                    '36 acá enviar únicamente las mermas que no se pueden clasificar según la tabla 3
+
+
+                    sb &= Int(Val(cc.CalidadZarandeoMerma)).ToString.PadLeft(8, "0") '34. esta es la merma. y el porcentaje esta en CalidadMermaZarandeo
+                    sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(8, "0") '35. esta es la merma. y el porcentaje esta en CalidadMermaVolatil
+
+                    sb &= Int((.NetoFinal - .NetoProc) - contadorMerma).ToString.PadLeft(8, "0") '36
+
+
+
+
+
+
+
+
+                    sb &= " "   '37 fumiga
 
 
                     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29364,24 +29475,57 @@ Namespace Pronto.ERP.Bll
                     End If
 
 
-                    sb &= JustificadoIzquierda(cal, 1)   '38	Conformidad	ALFANUMERICO	 1 	S=Mercadería conforme  N=Mercadería condicional   C=Cámara
+
+
+
+
+
+                    '38 - Conformidad: 
+                    'Si no tiene descuentos (humedad o cualquier otra merma) – C=Cámara
+                    'Si tiene descuentos – N=Mercadería condicional / 
+
+                    sb &= IIf(.NetoFinal = .NetoProc, "C", "N")    '38	Conformidad	ALFANUMERICO	 1 	S=Mercadería conforme  N=Mercadería condicional   C=Cámara
 
 
                     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    '///////////////////////////////////////////// ///////////////////////////////////////////////////////////////////////////////////////////////////
                     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    '39	Codigo de la Cámara	ALFANUMERICO	 1 	campo 38=C(camara)Completar: P=Paraná S=StaFe R=Rosario N=Bs As  T=Calidad Total B=B.BlancaX=Córdoba
+
+
+
+
+                    '39 - Código de la Cámara:
+                    'Si es Bahia Blanca = B
+                    'Si es Buenos Aires= N 
+                    'Si es Arroyo/Sa Lorenoz = R
+                    Dim pv As Char
+                    Select Case .PuntoVenta
+                        Case 1
+                            pv = "N"
+                        Case 2, 3
+                            pv = "R"
+                        Case 4
+                            pv = "B"
+                        Case Else
+                            pv = "N"
+                    End Select
+
+                    sb &= pv '39	Codigo de la Cámara	ALFANUMERICO	 1 	campo 38=C(camara)Completar: P=Paraná S=StaFe R=Rosario N=Bs As  T=Calidad Total B=B.BlancaX=Córdoba
+
+
+
+
+
+
                     '40	Número de CEE	NUMERICO	 14 	 
                     '41	Fecha vencimiento CEE	NUMERICO	 8 	Fecha vencimiento (aaaammdd)
                     '42	Código Postal del Cliente	NUMERICO	 4 	Código Postal del domicilio del cliente 
                     '43	Grado	NUMERICO	 1 	 
                     '44	Observaciones	ALFANUMERICO	 80 	 
 
-
-                    sb &= JustificadoIzquierda(" ", 1) '39	Codigo de la Cámara	ALFANUMERICO	 1 	campo 38=C(camara)Completar: P=Paraná S=StaFe R=Rosario N=Bs As  T=Calidad Total B=B.BlancaX=Córdoba
                     sb &= JustificadoIzquierda(.CEE, 14)  '40	Número de CEE	NUMERICO	 14 	 
 
                     If .IsFechaVencimientoNull Then .FechaVencimiento = Nothing
@@ -29460,19 +29604,41 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= RubroBunge(eRubroBunge.Humedad, .HumedadDesnormalizada, .Humedad)
 
 
-                    For i = 2 To 10
-                        '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
-                        '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
-                        '47	Item-Si el rubro referido fue a Cámara (1)	ALFANUMERICO	 1 	C= Cuando el rubro fue a cámara   - 
-                        '48	Item-Resultado del analisis hecho en la planta (1)	NUMERICO	 4 	Porcentaje del analisis del rubro  ( 2 enteros y 2 decimales)
-                        sb &= JustificadoIzquierda(IIf(i = 1, "01", "00"), 2)
-                        sb &= JustificadoIzquierda("", 6).Replace(" ", "0")
-                        sb &= " " 'C= Cuando el rubro fue a cámara   - 
-                        sb &= JustificadoIzquierda("", 4).Replace(" ", "0")
-                    Next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    'RUBROS. 10 grupos de 4 columnas cada uno, a partir de la columna 45 hasta la 84 incluida
+                    '/////////////////////////////////////////////////////////////////////////////////
+
+
+                    sb &= cadenaRubros
+
+
+                    '/////////////////////////////////////////////////////////////////////////////////
+                    '/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
                     ' sb &= JustificadoIzquierda(.EspecieONCAA, 6)  '
@@ -29524,23 +29690,97 @@ Namespace Pronto.ERP.Bll
             'Return TextToExcel(vFileName, titulo)
         End Function
 
+
+
+
+
+
+
+
         Public Enum eRubroBunge
             Humedad = 1
+            '            asdasd
+            '            asdasd
+
+
+
+            '            Humedad	1
+            'Materia Grasa S.S.S.	2
+            'Acidez s/Materia Grasa	6
+            'Sedimento	15
+            'Cuerpos Extraños	24
+            'Tierra	25
+            'Quebrados y/o Partidos	26
+            'Chamico %	27
+            'Chamico semillas c/ 100 Gr.	27
+            'Dañados	28
+            'Quemados o de Averia	29
+            'Arbitraje Olores Comercialmente Objetables	31
+            'Olor	31
+            'Arbitraje Revolcado en Tierra	32
+            'Color	38
+            'Granos Otro Color	38
+            'Gluten	39
+            'Aflatoxinas 	44
+            'Granos Sueltos	49
+            'Granos Helados	51
+            'Rendimiento sobre zaranda 7.5 mm	52
+            'Rendimiento sobre zaranda 6.25 mm	53
+            'Peso Hectolitrico	54
+            'Granos Picados	55
+            'Materias Extrañas	56
+            'Ardidos y Dañados por Calor	57
+            'Total Dañados	58
+            'Granos con Carbon	59
+            'Panza Blanca	60
+            'Quebrados y/o Chuzos	61
+            'Trebol de Olor	62
+            'Insectos y arácnidos vivos	63
+            'Contenido Proteico	64
+            'Granos Negros	65
+            'Arbitraje Amohosado	66
+            'Arbitraje Otras Causas Calidad Inferior	67
+            'Arbitraje Punta Negra por Carbón	68
+            'Granos Quebrados	70
+            'Otro Tipo	71
+            'Descascarado y Roto	73
+            'Arbitraje Punta Sombreda por Tierra             	74
+            'Falling Number	75
+            'Verde Intenso	77
+            'Excremento de Roedores	78
+            'Cornezuelo	79
+            'Esclerotos	82
+            'Semillas de Bejuco y/o Porotillo	86
+            'Coloreados y/o con Estrias Roja	87
+            'Manchados y/o Coloreados	88
+            'Enyesados o Muertos	89
+            'Rendimiento de Granos Enteros	90
+            'Rendimiento de Granos Quebrados	91
+            'Brotados	92
+            'Granos Verdes	94
+
         End Enum
 
-        Public Shared Function RubroBunge(e As eRubroBunge, merma As Integer, porcentaje As Double) As String
+
+
+        Public Shared Function RubroBunge(e As eRubroBunge, merma As Integer, porcentaje As Double, cp As CartaDePorte, ByRef contadorRubro As Integer, ByRef contadorMerma As Integer) As String
             Dim sb As String
             '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
             '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
             '47	Item-Si el rubro referido fue a Cámara (1)	ALFANUMERICO	 1 	C= Cuando el rubro fue a cámara   - 
             '48	Item-Resultado del analisis hecho en la planta (1)	NUMERICO	 4 	Porcentaje del analisis del rubro  ( 2 enteros y 2 decimales)
 
+
+
+
             sb &= JustificadoDerecha(Val(e).ToString, 2).Replace(" ", "0")
             sb &= JustificadoDerecha(merma.ToString, 6).Replace(" ", "0")
-            sb &= " " 'C= Cuando el rubro fue a cámara   - 
+            sb &= IIf(cp.CalidadDesc.Contains("COND.") Or cp.CalidadDesc.Contains("CONDICIONAL"), "C", "")
             sb &= LeftMasPadLeft(porcentaje.ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5).Replace(".", "")
             Return sb
         End Function
+
+
 
 
         Public Shared Function Sincronismo_BungeCalidades(ByVal SC As String, ByVal pDataTable As WillyInformesDataSet.wCartasDePorte_TX_InformesCorregidoDataTable, Optional ByVal titulo As String = "", Optional ByVal sWHERE As String = "") As String
