@@ -156,6 +156,19 @@ Partial Class CartadeporteABM
 
 
 
+        'la estas cargando dos veces para hacer esta comprobacion. arreglar
+        If IdCartaDePorte > 0 Then
+            Dim temp = CartaDePorteManager.GetItem(SC, IdCartaDePorte, True)
+            'CartaDePorteManager.DuplicarCartaporteConOtroSubnumeroDeFacturacion(SC, myCartaDePorte)
+
+            If temp Is Nothing Then
+                MsgBoxAjaxAndRedirect(Me, "La carta buscada (ID=" & IdCartaDePorte & ") no existe. Verificar si estás en la base que corresponde", String.Format("CartasDePortes.aspx"))
+                Return
+            End If
+        End If
+
+
+
 
 
         If Not Page.IsPostBack Then
@@ -3805,6 +3818,10 @@ Partial Class CartadeporteABM
 
     Protected Sub AsyncFileUpload3_UploadedComplete(ByVal sender As Object, ByVal e As AjaxControlToolkit.AsyncFileUploadEventArgs) Handles AsyncFileUpload3.UploadedComplete
 
+        If usuarioschat.SelectedItem Is Nothing Then
+            MsgBoxAjax(Me, "Falta elegir un usuario destino")
+            Return
+        End If
 
         Dim DIRFTP = DirApp() & "\DataBackupear\"
         Dim nombre = NameOnlyFromFullPath(AsyncFileUpload3.PostedFile.FileName)
@@ -3847,7 +3864,8 @@ Partial Class CartadeporteABM
 
 
         Dim s = New ServicioCartaPorte.servi()
-        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC, "")
+
+        s.GrabarComentario_DLL(IdCartaDePorte, "\DataBackupear\" + nombrenuevo, Membership.GetUser.UserName, SC, usuarioschat.SelectedItem.Text)
 
         AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "dfsdf", " $('#Lista').trigger('reloadGrid'); scrollToLastRow($('#Lista'));", True)
 

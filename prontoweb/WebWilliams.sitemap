@@ -146,9 +146,9 @@
 
       <siteMapNode url="ProntoWeb/MapaComercialGoogleMaps.aspx" title="Mapa Google Maps"  description="Informes" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
 
-
-
     </siteMapNode>
+    
+    
 
     <siteMapNode url="" title="ADMINISTRADOR" description="" roles="Administrador,WilliamsAdmin,AdministradorLimitado">
       <siteMapNode url="Admin/AgregarUsuarios.aspx" title="Nuevo usuario"  description="Nuevo usuario" roles="Administrador,WilliamsAdmin,AdministradorLimitado" />
@@ -203,7 +203,7 @@
 
 
 
-      <siteMapNode url="ProntoWeb/Reclamos.aspx?Id=-1" title="Reclamos"  description="Reclamos" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />
+      <siteMapNode url="ProntoWeb/Reclamos.aspx?Id=-1" title="Reclamos"  description="Reclamos" roles="Usuario,Administrador,Comercial,Demo,WilliamsAdmin,WilliamsComercial,WilliamsFacturacion" />
 
 
       <siteMapNode url="ProntoWeb/CDPFacturacion.aspx?tipo=Confirmados" title="Facturación"  description="Humedad" roles="Administrador,Comercial,WilliamsAdmin,WilliamsFacturacion,WilliamsComercial" />

@@ -4451,6 +4451,138 @@ Public Class ExcelImportadorManager
 
 
 
+    Public Shared Function DesprotegerExcel(fileName As String)
+
+
+
+        Dim oXL As Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+        Dim oRng As Excel.Range
+        Dim oWBs As Excel.Workbooks
+
+        Try
+
+            '  creat a Application object
+            'http://stackoverflow.com/questions/2483659/interop-type-cannot-be-embedded  'no está el nodo References en VB (sí en C#), así que uso la segunda opcion
+            oXL = New Excel.Application()
+            'oXL = New Excel.ApplicationClass()
+
+
+            '   get   WorkBook  object
+            oWBs = oXL.Workbooks
+
+
+            Try
+                'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
+                'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
+                'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
+                'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
+                'si salta un msgbox de seguridad en el servidor, la sesion del usuario se colgará
+                oWB = oWBs.Open(fileName, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+    Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+    Missing.Value, Excel.XlCorruptLoad.xlExtractData)
+
+                'http://stackoverflow.com/questions/9062823/exception-when-opening-excel-file-in-c-sharp-using-interop?noredirect=1&lq=1
+
+
+            Catch ex As Exception
+
+                'problemas al abrir T6
+
+                ' http://www.made4dotnet.com/Default.aspx?tabid=141&aid=15
+                'http://stackoverflow.com/questions/493178/excel-programming-exception-from-hresult-0x800a03ec-at-microsoft-office-inter
+
+
+                '  Otro  problema mas con T6!!!!!!!
+                'importacion de excel de Terminal6 hace tildar el sitio. Office automation, macros.....  
+                '-Había un vinculo a "Camiones demorados.xls". Era eso? -es que eso lo revisa por la seguridad...  -Podes reemplazar el GetExcel????
+
+
+
+
+                'If Exception=HRESULT: 0x800A03EC 
+
+                '        Try
+                '            SetNewCurrentCulture()
+                '            oWB = oWBs.Open(fileName, Missing.Value, Missing.Value, _
+                'Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
+                'Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, _
+                'Missing.Value, Missing.Value)
+
+                '        Catch ex2 As Exception
+                '            Throw
+                '        Finally
+                '            ResetCurrentCulture()
+                '        End Try
+
+                ErrHandler2.WriteError(fileName + "  No pudo extraer el excel. INCREIBLE: en 2008, en el directorio  C:\Windows\SysWOW64\config\systemprofile\ hay que crear una carpeta Desktop!!!!!!!!!!!!!!!!!!!!!  " + ex.ToString)
+
+
+            End Try
+
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+            '///////////////////////////////////////////////////////////////////////////////////
+
+
+            Dim pw_str = "" ' "asdfasdfasdf" ' //password
+
+            oWB.Unprotect(pw_str)
+            oWB.UnprotectSharing(pw_str)
+            oXL.DisplayAlerts = False
+            oWB.SaveAs("sadfasdf.xls")
+            oXL.Quit()
+
+
+
+
+
+        Catch ex As Exception
+            ErrHandler2.WriteError("No pudo extraer el excel. " + ex.ToString)
+            Return Nothing
+
+
+            '            1. In DCOMCNFG, right click on the My Computer and select properties.
+            '2. Choose the COM Securities tab
+            '3. In Access Permissions, click "Edit Defaults" and add Network Service to it and give it "Allow local access" permission. Do the same for <Machine_name>
+            '  \Users.
+            '  4. In launch and Activation Permissions, click "Edit Defaults" and add Network Service to it and give it "Local launch" and "Local Activation" permission. Do the same for <Machine_name>
+            '    \Users
+            '   Press OK and thats it. i can run my application now
+        Finally
+            Try
+                'The service (excel.exe) will continue to run
+                If Not oWB Is Nothing Then oWB.Close(False)
+                NAR(oWB)
+                oWBs.Close()
+                NAR(oWBs)
+                'quit and dispose app
+                oXL.Quit()
+                NAR(oXL)
+                'VERY IMPORTANT
+                GC.Collect()
+
+                'Dispose()  'este me arruinaba todo, me hacia aparecer el cartelote del Prerender
+            Catch ex As Exception
+                ErrHandler2.WriteError("No pudo cerrar el servicio excel. " + ex.ToString)
+            End Try
+        End Try
+
+
+
+
+    End Function
+
+
+
+
+
+
+
     Public Shared Function GetExcel2_ODBC(ByVal fileName As String, Optional ByVal workSheetName As String = "") As DataTable
 
 
@@ -4726,6 +4858,7 @@ Public Class ExcelImportadorManager
             '    oSheet = CType(oWB.Worksheets(SheetNumero), Microsoft.Office.Interop.Excel.Worksheet)
             'End Try
 
+            oXL.DisplayAlerts = False
 
             Dim dt As New Data.DataTable("dtExcel")
 
