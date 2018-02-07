@@ -29038,36 +29038,36 @@ Namespace Pronto.ERP.Bll
                     '/////////////////////////////////////////////////////////////////////////////////
                     'primero armo la cadena de rubros
 
-                    Dim cadenaRubros As String
-                    Dim contadorRubro As Integer, contadorMerma As Integer
+                    Dim cadenaRubros As String = ""
+                    Dim contadorRubro As Integer = 0, contadorMerma As Integer = 0
 
 
-                    '45 a 48 enviar SIEMPRE humedad, aunque no tenga merma (completar 01 y porcentaje)
-                    cadenaRubros &= RubroBunge(1, .HumedadDesnormalizada, .Humedad, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(24, cc.NobleExtranos, cc.CalidadGranosExtranosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(26, cc.NobleQuebrados, cc.CalidadQuebradosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(28, cc.NobleDaniados, cc.CalidadDanadosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(27, cc.NobleChamico, cc.CalidadChamicoMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(32, cc.NobleRevolcado, cc.CalidadRevolcadosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(31, cc.NobleObjetables, cc.CalidadObjetablesMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(66, cc.NobleAmohosados, cc.CalidadAmohosadosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(74, cc.CalidadPuntaSombreada, cc.CalidadPuntaSombreadaMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(54, cc.NobleHectolitrico, cc.CalidadHectolitricoMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(59, cc.NobleCarbon, cc.CalidadCarbonMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(60, cc.NoblePanzaBlanca, cc.CalidadPanzaBlancaMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(55, cc.NoblePicados, cc.CalidadPicadosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(94, cc.NobleVerdes, cc.CalidadVerdesMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(29, cc.CalidadGranosQuemados, cc.CalidadQuemadosMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(25, cc.CalidadTierra, cc.CalidadTierraMerma, cc, contadorRubro, contadorMerma)
-                    cadenaRubros &= RubroBunge(52, cc.CalidadMermaZarandeo, cc.CalidadZarandeoMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadDescuentoFinal, cc.CalidadDescuentoFinalMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadHumedadResultado, cc.CalidadHumedadMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastosFumigacionResultado, cc.CalidadGastosFumigacionMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadFondoNidera, cc.CalidadFondoNideraMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaMerma, cc, contadorRubro, contadorMerma)
-                    'cadenaRubros &= RubroBunge(xx, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinMerma, cc, contadorRubro, contadorMerma)
+                    'campos 45 a 48 (caracter 542 a 670 ) enviar SIEMPRE humedad, aunque no tenga merma (completar 01 y porcentaje)
+                    cadenaRubros &= RubroBunge(1, .HumedadDesnormalizada, .Humedad, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(24, cc.NobleExtranos, cc.CalidadGranosExtranosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(26, cc.NobleQuebrados, cc.CalidadQuebradosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(28, cc.NobleDaniados, cc.CalidadDanadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(27, cc.NobleChamico, cc.CalidadChamicoMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(32, cc.NobleRevolcado, cc.CalidadRevolcadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(31, cc.NobleObjetables, cc.CalidadObjetablesMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(66, cc.NobleAmohosados, cc.CalidadAmohosadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(74, cc.CalidadPuntaSombreada, cc.CalidadPuntaSombreadaMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(54, cc.NobleHectolitrico, cc.CalidadHectolitricoMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(59, cc.NobleCarbon, cc.CalidadCarbonMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(60, cc.NoblePanzaBlanca, cc.CalidadPanzaBlancaMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(55, cc.NoblePicados, cc.CalidadPicadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(94, cc.NobleVerdes, cc.CalidadVerdesMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(29, cc.CalidadGranosQuemados, cc.CalidadQuemadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(25, cc.CalidadTierra, cc.CalidadTierraMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(52, cc.CalidadMermaZarandeo, cc.CalidadZarandeoMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadDescuentoFinal, cc.CalidadDescuentoFinalMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadHumedadResultado, cc.CalidadHumedadMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastosFumigacionResultado, cc.CalidadGastosFumigacionMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadGastoDeSecada, cc.CalidadGastoDeSecadaMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaVolatil, cc.CalidadMermaVolatilMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadFondoNidera, cc.CalidadFondoNideraMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadMermaConvenida, cc.CalidadMermaConvenidaMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(xx, cc.CalidadTalCualVicentin, cc.CalidadTalCualVicentinMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
 
 
 
@@ -29426,7 +29426,10 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(cc.CalidadZarandeoMerma)).ToString.PadLeft(8, "0") '34. esta es la merma. y el porcentaje esta en CalidadMermaZarandeo
                     sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(8, "0") '35. esta es la merma. y el porcentaje esta en CalidadMermaVolatil
 
-                    sb &= Int((.NetoFinal - .NetoProc) - contadorMerma - cc.CalidadZarandeoMerma - cc.CalidadMermaVolatilMerma).ToString.PadLeft(8, "0") '36
+
+                    Dim otrasMermas As Integer = Int((.NetoFinal - .NetoProc) - contadorMerma - cc.CalidadZarandeoMerma - cc.CalidadMermaVolatilMerma)
+                    If otrasMermas < 0 Then otrasMermas = 0
+                    sb &= otrasMermas.ToString.PadLeft(8, "0") '36
 
 
 
@@ -29763,8 +29766,8 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function RubroBunge(e As Integer, merma As Integer, porcentaje As Double, cp As CartaDePorte, ByRef contadorRubro As Integer, ByRef contadorMerma As Integer) As String
-            Dim sb As String
+        Public Shared Function RubroBunge(e As Integer, porcentaje As Double, merma As Integer, cp As CartaDePorte, ByRef contadorRubro As Integer, ByRef contadorMerma As Integer, calidaddesc As String) As String
+            Dim sb As String = ""
             '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
             '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
             '47	Item-Si el rubro referido fue a Cámara (1)	ALFANUMERICO	 1 	C= Cuando el rubro fue a cámara   - 
@@ -29772,10 +29775,12 @@ Namespace Pronto.ERP.Bll
 
 
 
-            If e = 1 Or merma > 0 Then 'solo si es humedad o si hay merma
-                sb &= JustificadoDerecha(Val(e).ToString, 2).Replace(" ", "0")
+            If (e = 1 Or merma > 0 Or porcentaje > 0) And contadorRubro < 10 Then 'solo si es humedad o si hay merma
+                sb &= JustificadoDerecha(e.ToString, 2).Replace(" ", "0")
                 sb &= JustificadoDerecha(merma.ToString, 6).Replace(" ", "0")
-                sb &= IIf(If(cp.CalidadDesc, "").Contains("COND.") Or If(cp.CalidadDesc, "").Contains("CONDICIONAL"), "C", "")
+
+
+                sb &= IIf(calidaddesc.Contains("COND.") Or calidaddesc.Contains("CONDICIONAL"), "C", " ")
                 sb &= LeftMasPadLeft(porcentaje.ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5).Replace(".", "")
 
                 contadorRubro += 1
