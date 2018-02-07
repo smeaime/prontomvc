@@ -1502,7 +1502,7 @@ Namespace Pronto.ERP.Bll
                         Case "BUNGE"
                             Dim sErr As String
 
-                            output = Sincronismo_Bunge(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErr) 'AbrirSegunTipoComprobante (SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                            output = Sincronismo_Bunge(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErr, SC) 'AbrirSegunTipoComprobante (SC, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
                             sErroresRef = sErr
 
                             registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
@@ -29073,7 +29073,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    For i = contadorRubro To 10
+                    For i = contadorRubro + 1 To 10
                         '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
                         '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
                         '47	Item-Si el rubro referido fue a Cámara (1)	ALFANUMERICO	 1 	C= Cuando el rubro fue a cámara   - 
@@ -29426,7 +29426,7 @@ Namespace Pronto.ERP.Bll
                     sb &= Int(Val(cc.CalidadZarandeoMerma)).ToString.PadLeft(8, "0") '34. esta es la merma. y el porcentaje esta en CalidadMermaZarandeo
                     sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(8, "0") '35. esta es la merma. y el porcentaje esta en CalidadMermaVolatil
 
-                    sb &= Int((.NetoFinal - .NetoProc) - contadorMerma).ToString.PadLeft(8, "0") '36
+                    sb &= Int((.NetoFinal - .NetoProc) - contadorMerma - cc.CalidadZarandeoMerma - cc.CalidadMermaVolatilMerma).ToString.PadLeft(8, "0") '36
 
 
 
@@ -29763,7 +29763,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Function RubroBunge(e As eRubroBunge, merma As Integer, porcentaje As Double, cp As CartaDePorte, ByRef contadorRubro As Integer, ByRef contadorMerma As Integer) As String
+        Public Shared Function RubroBunge(e As Integer, merma As Integer, porcentaje As Double, cp As CartaDePorte, ByRef contadorRubro As Integer, ByRef contadorMerma As Integer) As String
             Dim sb As String
             '45	Item-Código del Rubro (1)	NUMERICO	 2 	VER TABLA3
             '46	Item-Kilos de merma según el rubro referido (1)	NUMERICO	 6 	Kilos de merma para el rubro 
@@ -29772,11 +29772,15 @@ Namespace Pronto.ERP.Bll
 
 
 
+            If e = 1 Or merma > 0 Then 'solo si es humedad o si hay merma
+                sb &= JustificadoDerecha(Val(e).ToString, 2).Replace(" ", "0")
+                sb &= JustificadoDerecha(merma.ToString, 6).Replace(" ", "0")
+                sb &= IIf(If(cp.CalidadDesc, "").Contains("COND.") Or If(cp.CalidadDesc, "").Contains("CONDICIONAL"), "C", "")
+                sb &= LeftMasPadLeft(porcentaje.ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5).Replace(".", "")
 
-            sb &= JustificadoDerecha(Val(e).ToString, 2).Replace(" ", "0")
-            sb &= JustificadoDerecha(merma.ToString, 6).Replace(" ", "0")
-            sb &= IIf(cp.CalidadDesc.Contains("COND.") Or cp.CalidadDesc.Contains("CONDICIONAL"), "C", "")
-            sb &= LeftMasPadLeft(porcentaje.ToString("00.00", System.Globalization.CultureInfo.InvariantCulture), 5).Replace(".", "")
+                contadorRubro += 1
+                contadorMerma += merma
+            End If
             Return sb
         End Function
 
