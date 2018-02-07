@@ -889,11 +889,11 @@ namespace ProntoMVC.Tests
 
             var output = SincronismosWilliamsManager.GenerarSincro("Bunge", ref sErrores, SC, "dominio", ref sTitulo
                                 , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
-                     "", -1, -1,
-                -1, -1,
-                -1, -1, -1, -1,
+                     "", -1, -1, -1, -1,
+                 -1, -1,
+                 -1, -1, 
                  CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
-                new DateTime(2014, 1, 1), new DateTime(2014, 1, 2),
+                new DateTime(2014, 1, 10), new DateTime(2014, 1, 10),
                 0, "Ambas", false, "", "", -1, ref registrosf);
 
 
@@ -941,13 +941,13 @@ namespace ProntoMVC.Tests
 
 
 
-          System.Diagnostics.Process.Start(output);
+            System.Diagnostics.Process.Start(output);
         }
 
 
 
 
-            
+
 
 
 
@@ -1016,8 +1016,8 @@ namespace ProntoMVC.Tests
 
 
             s.GrabarComentarioYNotificar(idcarta, "Mariano", "Hola Andres estás?", SC, scbdlmasterappconfig, scbdlmasterappconfig, "Andres", false,
-                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"], 
-                                                                ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]) );
+                                                                ConfigurationManager.AppSettings["UrlDominio"], ConfigurationManager.AppSettings["SmtpUser"], ConfigurationManager.AppSettings["SmtpServer"],
+                                                                ConfigurationManager.AppSettings["SmtpPass"], Convert.ToInt16(ConfigurationManager.AppSettings["SmtpPort"]));
 
 
             s.GrabarComentarioYNotificar(idcarta, "Andres", "Mariano cuando va a estar listo este tema???", SC, scbdlmasterappconfig, scbdlmasterappconfig, "", true,
