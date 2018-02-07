@@ -36,6 +36,8 @@ using System.IO;
 
 using System.Diagnostics;
 
+using System.Data;
+
 
 //test de java lopez
 // https://github.com/ajlopez/TddAppAspNetMvc/blob/master/Src/MyLibrary.Web.Tests/Controllers/HomeControllerTests.cs
@@ -164,8 +166,14 @@ namespace ProntoMVC.TestsMVC
             var s = new ServicioMVC.servi();
             // s.ImportarFondoFijo(excel, scSQL, out mensajeError);
 
-            
-            var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName).DataSet;
+
+
+            var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2);
+
+            //ExcelImportadorManager.DesprotegerExcel(pFileName);
+            //var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName).DataSet;
+
+            //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
 
             ExcelImportadorManager.ImportacionComprobantesFondoFijo2();
 
@@ -173,7 +181,7 @@ namespace ProntoMVC.TestsMVC
 
             //desproteger el excel si tira "oledbexception could not decrypt file"
 
-            foreach (Data.DataRow dr in ds.Tables[0].Rows)
+            foreach (DataRow dr in ds2.Tables[0].Rows)
             {
 
 
