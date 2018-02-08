@@ -175,7 +175,7 @@ namespace ProntoMVC.TestsMVC
 
             //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
 
-            ExcelImportadorManager.ImportacionComprobantesFondoFijo2();
+            ExcelImportadorManager.ImportacionComprobantesFondoFijo2(ds2.Tables[0]);
 
 
 
