@@ -29043,7 +29043,7 @@ Namespace Pronto.ERP.Bll
 
 
                     'campos 45 a 48 (caracter 542 a 670 ) enviar SIEMPRE humedad, aunque no tenga merma (completar 01 y porcentaje)
-                    cadenaRubros &= RubroBunge(1, .HumedadDesnormalizada, .Humedad, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    cadenaRubros &= RubroBunge(1, .Humedad, .HumedadDesnormalizada, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     cadenaRubros &= RubroBunge(24, cc.NobleExtranos, cc.CalidadGranosExtranosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     cadenaRubros &= RubroBunge(26, cc.NobleQuebrados, cc.CalidadQuebradosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     cadenaRubros &= RubroBunge(28, cc.NobleDaniados, cc.CalidadDanadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
@@ -29059,7 +29059,7 @@ Namespace Pronto.ERP.Bll
                     cadenaRubros &= RubroBunge(94, cc.NobleVerdes, cc.CalidadVerdesMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     cadenaRubros &= RubroBunge(29, cc.CalidadGranosQuemados, cc.CalidadQuemadosMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     cadenaRubros &= RubroBunge(25, cc.CalidadTierra, cc.CalidadTierraMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
-                    cadenaRubros &= RubroBunge(52, cc.CalidadMermaZarandeo, cc.CalidadZarandeoMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
+                    'cadenaRubros &= RubroBunge(52, cc.CalidadMermaZarandeo, cc.CalidadZarandeoMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     'cadenaRubros &= RubroBunge(xx, cc.CalidadDescuentoFinal, cc.CalidadDescuentoFinalMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     'cadenaRubros &= RubroBunge(xx, cc.CalidadHumedadResultado, cc.CalidadHumedadMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
                     'cadenaRubros &= RubroBunge(xx, cc.CalidadGastosFumigacionResultado, cc.CalidadGastosFumigacionMerma, cc, contadorRubro, contadorMerma, .CalidadDesc)
@@ -29423,11 +29423,11 @@ Namespace Pronto.ERP.Bll
                     '36 acá enviar únicamente las mermas que no se pueden clasificar según la tabla 3
 
 
-                    sb &= Int(Val(cc.CalidadZarandeoMerma)).ToString.PadLeft(8, "0") '34. esta es la merma. y el porcentaje esta en CalidadMermaZarandeo
+                    sb &= Int(cc.CalidadZarandeoMerma + cc.CalidadGastoDeSecadaMerma).ToString.PadLeft(8, "0") '34. esta es la merma. y el porcentaje esta en CalidadMermaZarandeo
                     sb &= Int(Val(cc.CalidadMermaVolatilMerma)).ToString.PadLeft(8, "0") '35. esta es la merma. y el porcentaje esta en CalidadMermaVolatil
 
 
-                    Dim otrasMermas As Integer = Int((.NetoFinal - .NetoProc) - contadorMerma - cc.CalidadZarandeoMerma - cc.CalidadMermaVolatilMerma)
+                    Dim otrasMermas As Integer = Int((.NetoFinal - .NetoProc) - contadorMerma - cc.CalidadZarandeoMerma - cc.CalidadGastoDeSecadaMerma - cc.CalidadMermaVolatilMerma)
                     If otrasMermas < 0 Then otrasMermas = 0
                     sb &= otrasMermas.ToString.PadLeft(8, "0") '36
 
