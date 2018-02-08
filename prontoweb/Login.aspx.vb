@@ -32,9 +32,12 @@ Partial Class Login
         'End If
 
 
+        If Membership.GetUser IsNot Nothing Then
+            Response.Redirect("~/SeleccionarEmpresa.aspx" + Request.Url.Query)
+        End If
+
 
         If Request.Browser("IsMobileDevice") = "true" Then
-
             Response.Redirect("LoginMobile.aspx" + Request.Url.Query) 'hay que pasarle el returnurl
         End If
 
@@ -132,6 +135,7 @@ Partial Class Login
         '//////////////////////////////////////////////////////////////////////////
         'If txtUserName.Text = "Test" Then
         'If _DEBUG Then
+
 
 
 
