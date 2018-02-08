@@ -6465,7 +6465,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function ImportacionComprobantesFondoFijo2()
+    Public Shared Function ImportacionComprobantesFondoFijo2(dt As DataTable)
 
         '        'parametros de entrada
         '        'mArchivo = .FileBrowser1(0).text
@@ -6481,7 +6481,7 @@ Public Class ExcelImportadorManager
         '        Dim oOP 'As ComPronto.OrdenPago
         '        Dim oRsAux1 'As ADOR.Recordset
         '        Dim oRsAux2 'As ADOR.Recordset
-        '        Dim oF 'As Form
+        '        Dim oForm 'As Form
         '        Dim oEx As Excel.Application
 
         '        Dim mOk As Boolean, mConProblemas As Boolean, mTomarCuentaDePresupuesto As Boolean
@@ -6507,7 +6507,7 @@ Public Class ExcelImportadorManager
 
         '        mPuntosVentaAsociados = ""
         '        If glbPuntoVentaEnNumeroInternoCP Then
-        '      Set oRsAux1 = Aplicacion.Empleados.TraerFiltrado("_PorId", glbIdUsuario)
+        '      oRsAux1 = Aplicacion.Empleados.TraerFiltrado("_PorId", glbIdUsuario)
         '      If oRsAux1.RecordCount > 0 Then mPuntosVentaAsociados = IIf(IsNull(oRsAux1.Fields("PuntosVentaAsociados").Value), "", oRsAux1.Fields("PuntosVentaAsociados").Value)
         '            oRsAux1.Close
         '            If Len(mPuntosVentaAsociados) = 0 Then
@@ -6517,8 +6517,8 @@ Public Class ExcelImportadorManager
         '        End If
 
 
-        '   Set oF = New frmPathPresto
-        '   With oF
+        '   oForm = New frmPathPresto
+        '   With oForm
         '      .Id = 14
         '            .Show vbModal
         '      mOk = .Ok
@@ -6529,8 +6529,8 @@ Public Class ExcelImportadorManager
         '                If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
         '            End If
         '        End With
-        '        Unload oF
-        '   Set oF = Nothing
+        '        Unload oForm
+        '   oForm = Nothing
 
 
 
@@ -6542,14 +6542,14 @@ Public Class ExcelImportadorManager
         '      Exit Sub
         '        End If
 
-        '   Set oAp = Aplicacion
+        '   oAp = Aplicacion
 
         '   mIncrementarReferencia = BuscarClaveINI("IncrementarReferenciaEnImportacionDeComprobantes", -1)
         '        mCondicionCompra = BuscarClaveINI("Condicion de compra default para fondos fijos")
         '        mFecha1 = BuscarClaveINI("Fecha recepcion igual fecha comprobante en fondo fijo")
         '        mCuitDefault = BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos")
 
-        '   Set oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
+        '   oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
         '   mIdMonedaPesos = oRsAux1.Fields("IdMoneda").Value
         '        mIdTipoComprobanteFacturaCompra = oRsAux1.Fields("IdTipoComprobanteFacturaCompra").Value
         '        mIdUnidadPorUnidad = IIf(IsNull(oRsAux1.Fields("IdUnidadPorUnidad").Value), 0, oRsAux1.Fields("IdUnidadPorUnidad").Value)
@@ -6569,516 +6569,510 @@ Public Class ExcelImportadorManager
         '        mAux = TraerValorParametro2("TomarCuentaDePresupuestoEnComprobantesProveedores")
         '        If Not IsNull(mAux) And mAux = "SI" Then mTomarCuentaDePresupuesto = True
 
-        '   Set oF = New frmAviso
-        '   With oF
+
+
+
+
+
+        '   oForm = New frmAviso
+        '   With oForm
         '      .Label1 = "Iniciando EXCEL ..."
         '            .Show
         '            .Refresh
         '            DoEvents
         '        End With
 
-        '   oF.Label1 = oF.Label1 & vbCrLf & "Procesando fondo fijo ..."
-        '   oF.Label2 = ""
-        '   oF.Label3 = ""
+        '   oForm.Label1 = oForm.Label1 & vbCrLf & "Procesando fondo fijo ..."
+        '   oForm.Label2 = ""
+        '   oForm.Label3 = ""
         '   DoEvents
 
-        '        mMensaje = oF.Label1
+        '        mMensaje = oForm.Label1
 
         '   fl = 7
         '        mContador = 0
         '        mNumeroRendicion = 0
         '        mIdCuentaFF = 0
 
-        '   Set oEx = CreateObject("Excel.Application")
-        '   With oEx
-        '            .Visible = True
-        '            .WindowState = xlMinimized
-        '            Me.Refresh
 
-        '            With .Workbooks.Open(mArchivo)
-        '                .Sheets("FF").Select
-        '                With .ActiveSheet
-        '                    Do While True
-        '                        If Len(Trim(.Cells(fl, 2))) > 0 Or Len(Trim(.Cells(fl, 3))) > 0 Or Len(Trim(.Cells(fl, 4))) > 0 Or
-        '                     Len(Trim(.Cells(fl, 5))) > 0 Or Len(Trim(.Cells(fl, 9))) > 0 Or Len(Trim(.Cells(fl, 10))) > 0 Then
-        '                            mConProblemas = False
 
-        '                            If mNumeroRendicion = 0 And IsNumeric(.Cells(2, 16)) Then mNumeroRendicion = .Cells(2, 16)
-        '                            mContador = mContador + 1
-        '                  oF.Label2 = "Comprobante : " & .Cells(fl, 8)
-        '                  oF.Label3 = "" & mContador
-        '                  DoEvents
 
-        '                            mTipo = .Cells(fl, 4)
-        '                            If Len(.Cells(fl, 5)) > 0 Then
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mIdTipoComprobante " & .Cells(fl, 5)
-        '                     mIdTipoComprobante = .Cells(fl, 5)
-        '                            Else
-        '                                mIdTipoComprobante = mIdTipoComprobanteFacturaCompra
-        '                            End If
-        '                            mLetra = Trim(.Cells(fl, 6))
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroComprobante1 " & .Cells(fl, 7)
-        '                  mNumeroComprobante1 = .Cells(fl, 7)
-        '                            If mNumeroComprobante1 > 9999 Then
-        '                                mError = mError & vbCrLf & "Fila " & fl & "  - El punto de venta no puede tener mas de 4 digitos."
-        '                                fl = fl + 1
-        '                                GoTo FinLoop
-        '                            End If
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroComprobante2 " & .Cells(fl, 8)
-        '                  mNumeroComprobante2 = .Cells(fl, 8)
-        '                            If mNumeroComprobante2 > 99999999 Then
-        '                                mError = mError & vbCrLf & "Fila " & fl & "  - El numero de comprobante no puede tener mas de 8 digitos."
-        '                                fl = fl + 1
-        '                                GoTo FinLoop
-        '                            End If
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mRazonSocial " & .Cells(fl, 9)
-        '                  mRazonSocial = Mid(.Cells(fl, 9), 1, 50)
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mCuit " & .Cells(fl, 10)
-        '                  mCuitPlanilla = .Cells(fl, 10)
-        '                            mCuit = mCuitPlanilla
-        '                            If Len(mCuit) <> 13 Then
-        '                                If Len(mCuit) = 11 Then
-        '                                    mCuit = VBA.mId(mCuit, 1, 2) & "-" & VBA.mId(mCuit, 3, 8) & "-" & VBA.mId(mCuit, 11, 1)
-        '                                Else
-        '                                    mCuit = ""
-        '                                End If
-        '                            End If
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaFactura " & .Cells(fl, 3)
-        '                  mFechaFactura = CDate(.Cells(fl, 3))
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAI " & .Cells(fl, 18)
-        '                  mNumeroCAI = .Cells(fl, 18)
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaVencimientoCAI " & .Cells(fl, 19)
-        '                  If IsDate(.Cells(fl, 19)) Then
-        '                                mFechaVencimientoCAI = CDate(.Cells(fl, 19))
-        '                            Else
-        '                                mFechaVencimientoCAI = 0
-        '                            End If
-        '                            If mFecha1 = "SI" Then mFechaRecepcion = mFechaFactura
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mCodObra " & .Cells(fl, 2)
-        '                  mCodObra = Trim(.Cells(fl, 2))
 
-        '                            mActividad = Trim(.Cells(fl, 23))
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAE " & .Cells(fl, 24)
-        '                  mNumeroCAE = .Cells(fl, 24)
 
-        '                            If mIdCuentaFF = 0 Then
-        '                                If Len(.Cells(2, 10)) = 0 Then
-        '                                    MsgBox "Debe definir la cuenta del fondo fijo", vbExclamation
-        '                        Exit Do
-        '                                End If
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mCodigoCuentaFF " & .Cells(2, 10)
-        '                     mCodigoCuentaFF = Val(.Cells(2, 10))
-        '                     Set oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorCodigo", mCodigoCuentaFF)
-        '                     If oRsAux1.RecordCount > 0 Then
-        '                                    mIdCuentaFF = oRsAux1.Fields(0).Value
-        '                                Else
-        '                                    mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                              "-" & Format(mNumeroComprobante2, "00000000") & ", cuenta de fondo fijo inexistente"
-        '                                    fl = fl + 1
-        '                                    GoTo FinLoop
-        '                                End If
-        '                                oRsAux1.Close
-        '                            End If
 
-        '                            mIdObra = 0
-        '                  Set oRsAux1 = oAp.Obras.TraerFiltrado("_PorNumero", mCodObra)
-        '                  If oRsAux1.RecordCount > 0 Then
-        '                                mIdObra = oRsAux1.Fields("IdObra").Value
-        '                            Else
-        '                                mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Obra " & mCodObra & " inexistente"
-        '                                fl = fl + 1
-        '                                GoTo FinLoop
-        '                            End If
-        '                            oRsAux1.Close
 
-        '                            If mFechaRecepcion > gblFechaUltimoCierre Then
-        '                                If Len(mCuit) = 0 Then mCuit = mCuitDefault
-        '                                If Len(mCuit) = 0 Then
-        '                                    '                        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") & _
-        '                                    '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuit inexistente"
-        '                                    '                        fl = fl + 1
-        '                                    '                        GoTo FinLoop
-        '                                Else
-        '                                    If Not VerificarCuit(mCuit) Then
-        '                                        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuit invalido : " & mCuit
-        '                                        fl = fl + 1
-        '                                        GoTo FinLoop
-        '                                    End If
-        '                                End If
 
-        '                                mIdActividad = 0
-        '                                If Len(mActividad) > 0 Then
-        '                        Set oRsAux1 = oAp.ActividadesProveedores.TraerFiltrado("_PorDescripcion", mActividad)
-        '                        If oRsAux1.RecordCount > 0 Then mIdActividad = oRsAux1.Fields(0).Value
-        '                                    oRsAux1.Close
-        '                                End If
+        Dim oForm
+        Dim fl
 
-        '                                mIdProveedor = 0
-        '                                If Len(mCuit) > 0 Then
-        '                        Set oRsAux1 = oAp.Proveedores.TraerFiltrado("_PorCuit", mCuit)
-        '                     Else
-        '                        Set oRsAux1 = oAp.Proveedores.TraerFiltrado("_PorNombre", mRazonSocial)
-        '                     End If
-        '                                If oRsAux1.RecordCount > 0 Then
-        '                                    mIdProveedor = oRsAux1.Fields(0).Value
-        '                                    mvarProvincia = IIf(IsNull(oRsAux1.Fields("IdProvincia").Value), 0, oRsAux1.Fields("IdProvincia").Value)
-        '                                    mvarIBCondicion = IIf(IsNull(oRsAux1.Fields("IBCondicion").Value), 0, oRsAux1.Fields("IBCondicion").Value)
-        '                                    mvarIdIBCondicion = IIf(IsNull(oRsAux1.Fields("IdIBCondicionPorDefecto").Value), 0, oRsAux1.Fields("IdIBCondicionPorDefecto").Value)
-        '                                    mvarIGCondicion = IIf(IsNull(oRsAux1.Fields("IGCondicion").Value), 0, oRsAux1.Fields("IGCondicion").Value)
-        '                                    mvarIdTipoRetencionGanancia = IIf(IsNull(oRsAux1.Fields("IdTipoRetencionGanancia").Value), 0, oRsAux1.Fields("IdTipoRetencionGanancia").Value)
-        '                                    mBienesOServicios = IIf(IsNull(oRsAux1.Fields("BienesOServicios").Value), "B", oRsAux1.Fields("BienesOServicios").Value)
-        '                                    mIdCodigoIva = IIf(IsNull(oRsAux1.Fields("IdCodigoIva").Value), 0, oRsAux1.Fields("IdCodigoIva").Value)
-        '                                    If mIdActividad > 0 And mIdActividad <> IIf(IsNull(oRsAux1.Fields("IdActividad").Value), 0, oRsAux1.Fields("IdActividad").Value) Then
-        '                           Set oPr = oAp.Proveedores.Item(-1)
-        '                           With oPr.Registro
-        '                                            .Fields("IdActividad").Value = mIdActividad
-        '                                        End With
-        '                                        oPr.Guardar
-        '                           Set oPr = Nothing
-        '                        End If
-        '                                Else
-        '                                    If Len(mCuit) > 0 Then
-        '                                        If mLetra = "C" Then
-        '                                            mIdCodigoIva = 6
-        '                                        Else
-        '                                            mIdCodigoIva = 1
-        '                                        End If
-        '                                    Else
-        '                                        mIdCodigoIva = 5
-        '                                    End If
-        '                        Set oPr = oAp.Proveedores.Item(-1)
-        '                        With oPr.Registro
-        '                                        .Fields("Confirmado").Value = "NO"
-        '                                        .Fields("RazonSocial").Value = Mid(mRazonSocial, 1, 50)
-        '                                        .Fields("CUIT").Value = mCuit
-        '                                        .Fields("EnviarEmail").Value = 1
-        '                                        If mIdCodigoIva <> 0 Then .Fields("IdCodigoIva").Value = mIdCodigoIva
-        '                                        If IsNumeric(mCondicionCompra) Then .Fields("IdCondicionCompra").Value = CInt(mCondicionCompra)
-        '                                        If mIdActividad <> 0 Then .Fields("IdActividad").Value = mIdActividad
-        '                                    End With
-        '                                    oPr.Guardar
-        '                                    mIdProveedor = oPr.Registro.Fields(0).Value
-        '                        Set oPr = Nothing
-        '                        mvarProvincia = 0
-        '                                    mvarIBCondicion = 0
-        '                                    mvarIdIBCondicion = 0
-        '                                    mvarIGCondicion = 0
-        '                                    mvarIdTipoRetencionGanancia = 0
-        '                                    mBienesOServicios = "B"
-        '                                End If
-        '                                oRsAux1.Close
 
-        '                     Set oRsAux1 = oAp.ComprobantesProveedores.TraerFiltrado("_PorNumeroComprobante", Array(mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante))
-        '                     If oRsAux1.RecordCount = 0 Then
-        '                                    mvarCotizacionDolar = Cotizacion(mFechaFactura, glbIdMonedaDolar)
-        '                                    If mvarCotizacionDolar = 0 Then mConProblemas = True
-        '                        Set oCP = oAp.ComprobantesProveedores.Item(-1)
-        '                        With oCP
-        '                                        With .Registro
-        '                                            .Fields("IdTipoComprobante").Value = mIdTipoComprobante
-        '                                            .Fields("IdObra").Value = mIdObra
-        '                                            .Fields("FechaComprobante").Value = mFechaFactura
-        '                                            If mFechaFactura > mFechaRecepcion Then
-        '                                                .Fields("FechaRecepcion").Value = mFechaFactura
-        '                                            Else
-        '                                                .Fields("FechaRecepcion").Value = mFechaRecepcion
-        '                                            End If
-        '                                            .Fields("FechaVencimiento").Value = mFechaFactura
-        '                                            .Fields("FechaAsignacionPresupuesto").Value = mFechaFactura
-        '                                            .Fields("IdMoneda").Value = mIdMonedaPesos
-        '                                            .Fields("CotizacionMoneda").Value = 1
-        '                                            .Fields("CotizacionDolar").Value = mvarCotizacionDolar
-        '                                            .Fields("IdProveedorEventual").Value = mIdProveedor
-        '                                            .Fields("IdProveedor").Value = Null
-        '                                            .Fields("IdCuenta").Value = mIdCuentaFF
-        '                                            .Fields("IdOrdenPago").Value = Null
-        '                                            .Fields("Letra").Value = mLetra
-        '                                            .Fields("NumeroComprobante1").Value = mNumeroComprobante1
-        '                                            .Fields("NumeroComprobante2").Value = mNumeroComprobante2
-        '                                            .Fields("NumeroRendicionFF").Value = mNumeroRendicion
-        '                                            If (mvarIBCondicion = 2 Or mvarIBCondicion = 3) And mvarIdIBCondicion <> 0 Then
-        '                                                .Fields("IdIBCondicion").Value = mvarIdIBCondicion
-        '                                            Else
-        '                                                .Fields("IdIBCondicion").Value = Null
-        '                                            End If
-        '                                            If (mvarIGCondicion = 2 Or mvarIGCondicion = 3) And mvarIdTipoRetencionGanancia <> 0 Then
-        '                                                .Fields("IdTipoRetencionGanancia").Value = mvarIdTipoRetencionGanancia
-        '                                            Else
-        '                                                .Fields("IdTipoRetencionGanancia").Value = Null
-        '                                            End If
-        '                                            .Fields("IdProvinciaDestino").Value = mvarProvincia
-        '                                            .Fields("BienesOServicios").Value = Null
-        '                                            .Fields("NumeroCAI").Value = mNumeroCAI
-        '                                            If mFechaVencimientoCAI <> 0 Then
-        '                                                .Fields("FechaVencimientoCAI").Value = mFechaVencimientoCAI
-        '                                            Else
-        '                                                .Fields("FechaVencimientoCAI").Value = Null
-        '                                            End If
-        '                                            .Fields("DestinoPago").Value = "O"
-        '                                            .Fields("InformacionAuxiliar").Value = mInformacionAuxiliar
-        '                                            If mIdCodigoIva <> 0 Then .Fields("IdCodigoIva").Value = mIdCodigoIva
-        '                                            .Fields("CircuitoFirmasCompleto").Value = "SI"
-        '                                            If mIdPuntoVenta <> 0 Then .Fields("IdPuntoVenta").Value = mIdPuntoVenta
-        '                                            If Len(mNumeroCAE) > 0 Then .Fields("NumeroCAE").Value = mNumeroCAE
-        '                                        End With
-        '                                    End With
+        Do While True
 
-        '                                    mTotalBruto = 0
-        '                                    mTotalIva1 = 0
-        '                                    mTotalPercepcion = 0
-        '                                    mTotalComprobante = 0
-        '                                    mTotalAjusteIVA = 0
-        '                                    mAjusteIVA = 0
 
-        '                                    Do While Len(Trim(.Cells(fl, 2))) > 0 And mLetra = Trim(.Cells(fl, 6)) And mNumeroComprobante1 = .Cells(fl, 7) And mNumeroComprobante2 = .Cells(fl, 8) And
-        '                              (mCuit = .Cells(fl, 10) Or mCuitPlanilla = .Cells(fl, 10) Or mCuit = mCuitDefault)
-        '                                        mCodigoCuentaGasto = .Cells(fl, 22)
-        '                                        mItemPresupuestoObrasNodo = Trim(.Cells(fl, 24))
-        '                                        mCantidad = Val(.Cells(fl, 25))
 
-        '                                        mIdCuentaGasto = 0
-        '                                        mIdCuenta = 0
-        '                                        mCodigoCuenta = 0
-        '                                        mIdRubroContable = 0
-        '                                        If Len(mCodigoCuentaGasto) > 0 Then
-        '                              Set oRsAux1 = oAp.CuentasGastos.TraerFiltrado("_PorCodigo2", mCodigoCuentaGasto)
-        '                              If oRsAux1.RecordCount > 0 Then
-        '                                                mIdCuentaGasto = oRsAux1.Fields("IdCuentaGasto").Value
-        '                                                oRsAux1.Close
-        '                                 Set oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorObraCuentaGasto", Array(mIdObra, mIdCuentaGasto))
-        '                                 If oRsAux1.RecordCount > 0 Then
-        '                                                    mIdCuenta = oRsAux1.Fields("IdCuenta").Value
-        '                                                    mCodigoCuenta = oRsAux1.Fields("Codigo").Value
-        '                                                    mIdRubroContable = IIf(IsNull(oRsAux1.Fields("IdRubroFinanciero").Value), 0, oRsAux1.Fields("IdRubroFinanciero").Value)
-        '                                                    If mIdRubroContable = 0 And Not IsNull(oRsAux1.Fields("CodigoRubroContable").Value) Then
-        '                                       Set oRsAux2 = Aplicacion.RubrosContables.TraerFiltrado("_PorCodigo", Array(oRsAux1.Fields("CodigoRubroContable").Value, mIdObra, "SI"))
-        '                                       If oRsAux2.RecordCount > 0 Then mIdRubroContable = oRsAux2.Fields(0).Value
-        '                                                        oRsAux2.Close
-        '                                                    End If
-        '                                                Else
-        '                                                    If Not mTomarCuentaDePresupuesto Then
-        '                                                        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                                          "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta de gasto codigo :" & mCodigoCuentaGasto & " inexistente"
-        '                                                        fl = fl + 1
-        '                                                        GoTo FinLoop
-        '                                                    End If
-        '                                                End If
-        '                                            Else
-        '                                                oRsAux1.Close
-        '                                 Set oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorCodigo", mCodigoCuentaGasto)
-        '                                 If oRsAux1.RecordCount > 0 Then
-        '                                                    mIdCuenta = oRsAux1.Fields("IdCuenta").Value
-        '                                                    mCodigoCuenta = oRsAux1.Fields("Codigo").Value
-        '                                                    mIdRubroContable = IIf(IsNull(oRsAux1.Fields("IdRubroFinanciero").Value), 0, oRsAux1.Fields("IdRubroFinanciero").Value)
-        '                                                    If mIdRubroContable = 0 And Not IsNull(oRsAux1.Fields("CodigoRubroContable").Value) Then
-        '                                       Set oRsAux2 = Aplicacion.RubrosContables.TraerFiltrado("_PorCodigo", Array(oRsAux1.Fields("CodigoRubroContable").Value, mIdObra, "SI"))
-        '                                       If oRsAux2.RecordCount > 0 Then mIdRubroContable = oRsAux2.Fields(0).Value
-        '                                                        oRsAux2.Close
-        '                                                    End If
-        '                                                Else
-        '                                                    If Not mTomarCuentaDePresupuesto Then
-        '                                                        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                                          "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta contable inexistente"
-        '                                                        fl = fl + 1
-        '                                                        GoTo FinLoop
-        '                                                    End If
-        '                                                End If
-        '                                            End If
-        '                                            oRsAux1.Close
-        '                                        End If
+            'If Len(Trim(dt.Rows(fl).Item(2))) > 0 Or Len(Trim(dt.Rows(fl).Item(3))) > 0 Or Len(Trim(dt.Rows(fl).Item(4))) > 0 Or
+            '         Len(Trim(dt.Rows(fl).Item(5))) > 0 Or Len(Trim(dt.Rows(fl).Item(9))) > 0 Or Len(Trim(dt.Rows(fl).Item(10))) > 0 Then
+            '    mConProblemas = False
 
-        '                                        mIdPresupuestoObrasNodo = 0
-        '                                        If Len(mItemPresupuestoObrasNodo) > 0 Then
-        '                              Set oRsAux1 = Aplicacion.PresupuestoObrasNodos.TraerFiltrado("_PorItem", Array(mItemPresupuestoObrasNodo, mIdObra))
-        '                              If oRsAux1.RecordCount = 1 Then
-        '                                                mIdPresupuestoObrasNodo = oRsAux1.Fields("IdPresupuestoObrasNodo").Value
-        '                                                If IIf(IsNull(oRsAux1.Fields("IdCuenta").Value), 0, oRsAux1.Fields("IdCuenta").Value) > 0 Then
-        '                                                    mIdCuenta = IIf(IsNull(oRsAux1.Fields("IdCuenta").Value), 0, oRsAux1.Fields("IdCuenta").Value)
-        '                                                End If
-        '                                            End If
-        '                                            oRsAux1.Close
-        '                                        End If
+            '    If mNumeroRendicion = 0 And IsNumeric(dt.Rows(ff).Item(cc)(2, 16)) Then mNumeroRendicion = dt.Rows(2).Item(16)
+            '    mContador = mContador + 1
+            '    oForm.Label2 = "Comprobante : " & dt.Rows(fl).Item(8)
+            '    oForm.Label3 = "" & mContador
+            '    DoEvents
 
-        '                           Set oRsAux1 = Aplicacion.Cuentas.TraerFiltrado("_PorId", mIdCuenta)
-        '                           If oRsAux1.RecordCount > 0 Then
-        '                                            If IIf(IsNull(oRsAux1.Fields("ImputarAPresupuestoDeObra").Value), "NO", oRsAux1.Fields("ImputarAPresupuestoDeObra").Value) = "NO" And Not mTomarCuentaDePresupuesto Then
-        '                                                mIdPresupuestoObrasNodo = 0
-        '                                            End If
-        '                                            mCodigoCuenta = oRsAux1.Fields("Codigo").Value
-        '                                            If IIf(IsNull(oRsAux1.Fields("IdRubroFinanciero").Value), 0, oRsAux1.Fields("IdRubroFinanciero").Value) > 0 Then
-        '                                                mIdRubroContable = oRsAux1.Fields("IdRubroFinanciero").Value
-        '                                            End If
-        '                                        Else
-        '                                            mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                                 "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta contable inexistente"
-        '                                            fl = fl + 1
-        '                                            GoTo FinLoop
-        '                                        End If
-        '                                        oRsAux1.Close
+            '    mTipo = dt.Rows(fl).Item(4)
+            '    If Len(dt.Rows(fl).Item(5)) > 0 Then
+            '        oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mIdTipoComprobante " & dt.Rows(fl).Item(5)
+            '        mIdTipoComprobante = dt.Rows(fl).Item(5)
+            '    Else
+            '        mIdTipoComprobante = mIdTipoComprobanteFacturaCompra
+            '    End If
+            '    mLetra = Trim(dt.Rows(fl).Item(6))
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroComprobante1 " & dt.Rows(fl).Item(7)
+            '    mNumeroComprobante1 = dt.Rows(fl).Item(7)
+            '    If mNumeroComprobante1 > 9999 Then
+            '        mError = mError & vbCrLf & "Fila " & fl & "  - El punto de venta no puede tener mas de 4 digitos."
+            '        fl = fl + 1
+            '        GoTo FinLoop
+            '    End If
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroComprobante2 " & dt.Rows(fl).Item(8)
+            '    mNumeroComprobante2 = dt.Rows(fl).Item(8)
+            '    If mNumeroComprobante2 > 99999999 Then
+            '        mError = mError & vbCrLf & "Fila " & fl & "  - El numero de comprobante no puede tener mas de 8 digitos."
+            '        fl = fl + 1
+            '        GoTo FinLoop
+            '    End If
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mRazonSocial " & dt.Rows(fl).Item(9)
+            '    mRazonSocial = Mid(dt.Rows(fl).Item(9), 1, 50)
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mCuit " & dt.Rows(fl).Item(10)
+            '    mCuitPlanilla = dt.Rows(fl).Item(10)
+            '    mCuit = mCuitPlanilla
+            '    If Len(mCuit) <> 13 Then
+            '        If Len(mCuit) = 11 Then
+            '            mCuit = VBA.mId(mCuit, 1, 2) & "-" & VBA.mId(mCuit, 3, 8) & "-" & VBA.mId(mCuit, 11, 1)
+            '        Else
+            '            mCuit = ""
+            '        End If
+            '    End If
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaFactura " & dt.Rows(fl).Item(3)
+            '    mFechaFactura = CDate(dt.Rows(fl).Item(3))
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAI " & dt.Rows(fl).Item(18)
+            '    mNumeroCAI = dt.Rows(fl).Item(18)
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaVencimientoCAI " & dt.Rows(fl).Item(19)
+            '    If IsDate(dt.Rows(fl).Item(19)) Then
+            '        mFechaVencimientoCAI = CDate(dt.Rows(fl).Item(19))
+            '    Else
+            '        mFechaVencimientoCAI = 0
+            '    End If
+            '    If mFecha1 = "SI" Then mFechaRecepcion = mFechaFactura
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mCodObra " & dt.Rows(fl).Item(2)
+            '    mCodObra = Trim(dt.Rows(fl).Item(2))
 
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mBruto " & .Cells(fl, 13)
-        '                           mBruto = Abs(CDbl(.Cells(fl, 13)))
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mIva1 " & .Cells(fl, 14)
-        '                           mIVA1 = Round(Abs(CDbl(.Cells(fl, 14))), 4)
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mPercepcion " & .Cells(fl, 15)
-        '                           mPercepcion = Abs(CDbl(.Cells(fl, 15)))
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mTotalItem " & .Cells(fl, 16)
-        '                           mTotalItem = Round(Abs(CDbl(.Cells(fl, 16))), 2)
-        '                                        mObservaciones = "Rendicion : " & mNumeroRendicion & vbCrLf & .Cells(fl, 20) & vbCrLf
+            '    mActividad = Trim(dt.Rows(fl).Item(23))
+            '    oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAE " & dt.Rows(fl).Item(24)
+            '    mNumeroCAE = dt.Rows(fl).Item(24)
 
-        '                                        mTotalBruto = mTotalBruto + mBruto
-        '                                        mTotalIva1 = mTotalIva1 + mIVA1
-        '                                        mTotalPercepcion = mTotalPercepcion + mPercepcion
-        '                                        mTotalComprobante = mTotalComprobante + mTotalItem
-        '                                        mTotalAjusteIVA = mTotalAjusteIVA + mAjusteIVA
-        '                                        mPorcentajeIVA = 0
-        '               oF.Label1 = mMensaje & vbCrLf & vbCrLf & "mPorcentajeIVA " & .Cells(fl, 11)
-        '                           If mIVA1 <> 0 And mBruto <> 0 Then mPorcentajeIVA = .Cells(fl, 11)
+            '    If mIdCuentaFF = 0 Then
+            '        If Len(dt.Rows(ff).Item(cc)(2, 10)) = 0 Then
+            '            MsgBox "Debe definir la cuenta del fondo fijo", vbExclamation
+            '                    Exit Do
+            '        End If
+            '        oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mCodigoCuentaFF " & dt.Rows(ff).Item(cc)(2, 10)
+            '        mCodigoCuentaFF = Val(dt.Rows(ff).Item(cc)(2, 10))
+            '        oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorCodigo", mCodigoCuentaFF)
+            '        If oRsAux1.RecordCount > 0 Then
+            '            mIdCuentaFF = oRsAux1.Fields(0).Value
+            '        Else
+            '            mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                  "-" & Format(mNumeroComprobante2, "00000000") & ", cuenta de fondo fijo inexistente"
+            '            fl = fl + 1
+            '            GoTo FinLoop
+            '        End If
+            '        oRsAux1.Close
+            '    End If
 
-        '                                        mIdCuentaIvaCompras1 = 0
-        '                                        mvarPosicionCuentaIva = 1
-        '                                        If mPorcentajeIVA <> 0 Then
-        '                                            For i = 1 To 10
-        '                                                If mIVAComprasPorcentaje(i) = mPorcentajeIVA Then
-        '                                                    mIdCuentaIvaCompras1 = mIdCuentaIvaCompras(i)
-        '                                                    mvarPosicionCuentaIva = i
-        '                                                    Exit For
-        '                                                End If
-        '                                            Next
-        '                                        End If
-        '                                        If mIVA1 <> 0 And mIdCuentaIvaCompras1 = 0 Then
-        '                                            mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - No se encontro el porcentaje de iva " & mPorcentajeIVA
-        '                                            fl = fl + 1
-        '                                            GoTo FinLoop
-        '                                        End If
+            '    mIdObra = 0
+            '    oRsAux1 = oAp.Obras.TraerFiltrado("_PorNumero", mCodObra)
+            '    If oRsAux1.RecordCount > 0 Then
+            '        mIdObra = oRsAux1.Fields("IdObra").Value
+            '    Else
+            '        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                  "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Obra " & mCodObra & " inexistente"
+            '        fl = fl + 1
+            '        GoTo FinLoop
+            '    End If
+            '    oRsAux1.Close
 
-        '                                        With oCP.DetComprobantesProveedores.Item(-1)
-        '                                            With .Registro
-        '                                                .Fields("IdObra").Value = mIdObra
-        '                                                .Fields("IdCuentaGasto").Value = mIdCuentaGasto
-        '                                                .Fields("IdCuenta").Value = mIdCuenta
-        '                                                .Fields("CodigoCuenta").Value = mCodigoCuenta
-        '                                                .Fields("Importe").Value = mBruto
-        '                                                .Fields("IdCuentaIvaCompras1").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje1").Value = 0
-        '                                                .Fields("ImporteIVA1").Value = 0
-        '                                                .Fields("AplicarIVA1").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras2").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje2").Value = 0
-        '                                                .Fields("ImporteIVA2").Value = 0
-        '                                                .Fields("AplicarIVA2").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras3").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje3").Value = 0
-        '                                                .Fields("ImporteIVA3").Value = 0
-        '                                                .Fields("AplicarIVA3").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras4").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje4").Value = 0
-        '                                                .Fields("ImporteIVA4").Value = 0
-        '                                                .Fields("AplicarIVA4").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras5").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje5").Value = 0
-        '                                                .Fields("ImporteIVA5").Value = 0
-        '                                                .Fields("AplicarIVA5").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras6").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje6").Value = 0
-        '                                                .Fields("ImporteIVA6").Value = 0
-        '                                                .Fields("AplicarIVA6").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras7").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje7").Value = 0
-        '                                                .Fields("ImporteIVA7").Value = 0
-        '                                                .Fields("AplicarIVA7").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras8").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje8").Value = 0
-        '                                                .Fields("ImporteIVA8").Value = 0
-        '                                                .Fields("AplicarIVA8").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras9").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje9").Value = 0
-        '                                                .Fields("ImporteIVA9").Value = 0
-        '                                                .Fields("AplicarIVA9").Value = "NO"
-        '                                                .Fields("IdCuentaIvaCompras10").Value = Null
-        '                                                .Fields("IVAComprasPorcentaje10").Value = 0
-        '                                                If mIdCuentaIvaCompras1 <> 0 Then
-        '                                                    .Fields("IdCuentaIvaCompras" & mvarPosicionCuentaIva).Value = mIdCuentaIvaCompras1
-        '                                                    .Fields("IVAComprasPorcentaje" & mvarPosicionCuentaIva).Value = mPorcentajeIVA
-        '                                                    .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mIVA1, 2)
-        '                                                    .Fields("AplicarIVA" & mvarPosicionCuentaIva).Value = "SI"
-        '                                                End If
-        '                                                .Fields("ImporteIVA10").Value = 0
-        '                                                .Fields("AplicarIVA10").Value = "NO"
-        '                                                If mIdPresupuestoObrasNodo <> 0 Then .Fields("IdPresupuestoObrasNodo").Value = mIdPresupuestoObrasNodo
-        '                                                If mIdRubroContable > 0 Then .Fields("IdRubroContable").Value = mIdRubroContable
-        '                                                .Fields("Cantidad").Value = mCantidad
-        '                                            End With
-        '                                            .Modificado = True
-        '                                        End With
+            '    If mFechaRecepcion > gblFechaUltimoCierre Then
+            '        If Len(mCuit) = 0 Then mCuit = mCuitDefault
+            '        If Len(mCuit) = 0 Then
+            '            '                       comentado
+            '        Else
+            '            If Not VerificarCuit(mCuit) Then
+            '                mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                  "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuit invalido : " & mCuit
+            '                fl = fl + 1
+            '                GoTo FinLoop
+            '            End If
+            '        End If
 
-        '                                        fl = fl + 1
-        '                                    Loop
+            '        mIdActividad = 0
+            '        If Len(mActividad) > 0 Then
+            '            oRsAux1 = oAp.ActividadesProveedores.TraerFiltrado("_PorDescripcion", mActividad)
+            '            If oRsAux1.RecordCount > 0 Then mIdActividad = oRsAux1.Fields(0).Value
+            '            oRsAux1.Close
+            '        End If
 
-        '                                    With oCP
-        '                                        With .Registro
-        '                                            .Fields("NumeroReferencia").Value = mNumeroReferencia
-        '                                            .Fields("Confirmado").Value = "NO"
-        '                                            .Fields("TotalBruto").Value = mTotalBruto
-        '                                            .Fields("TotalIva1").Value = mTotalIva1
-        '                                            .Fields("TotalIva2").Value = 0
-        '                                            .Fields("TotalBonificacion").Value = 0
-        '                                            .Fields("TotalComprobante").Value = mTotalComprobante
-        '                                            .Fields("PorcentajeBonificacion").Value = 0
-        '                                            .Fields("TotalIVANoDiscriminado").Value = 0
-        '                                            .Fields("AjusteIVA").Value = mTotalAjusteIVA
-        '                                            .Fields("Observaciones").Value = mObservaciones
-        '                                            If mIncrementarReferencia <> "SI" Then .Fields("AutoincrementarNumeroReferencia").Value = "NO"
-        '                                        End With
-        '                                        .Guardar
-        '                                    End With
-        '                        Set oCP = Nothing
+            '        mIdProveedor = 0
+            '        If Len(mCuit) > 0 Then
+            '            oRsAux1 = oAp.Proveedores.TraerFiltrado("_PorCuit", mCuit)
+            '        Else
+            '            oRsAux1 = oAp.Proveedores.TraerFiltrado("_PorNombre", mRazonSocial)
+            '        End If
+            '        If oRsAux1.RecordCount > 0 Then
+            '            mIdProveedor = oRsAux1.Fields(0).Value
+            '            mvarProvincia = IIf(IsNull(oRsAux1.Fields("IdProvincia").Value), 0, oRsAux1.Fields("IdProvincia").Value)
+            '            mvarIBCondicion = IIf(IsNull(oRsAux1.Fields("IBCondicion").Value), 0, oRsAux1.Fields("IBCondicion").Value)
+            '            mvarIdIBCondicion = IIf(IsNull(oRsAux1.Fields("IdIBCondicionPorDefecto").Value), 0, oRsAux1.Fields("IdIBCondicionPorDefecto").Value)
+            '            mvarIGCondicion = IIf(IsNull(oRsAux1.Fields("IGCondicion").Value), 0, oRsAux1.Fields("IGCondicion").Value)
+            '            mvarIdTipoRetencionGanancia = IIf(IsNull(oRsAux1.Fields("IdTipoRetencionGanancia").Value), 0, oRsAux1.Fields("IdTipoRetencionGanancia").Value)
+            '            mBienesOServicios = IIf(IsNull(oRsAux1.Fields("BienesOServicios").Value), "B", oRsAux1.Fields("BienesOServicios").Value)
+            '            mIdCodigoIva = IIf(IsNull(oRsAux1.Fields("IdCodigoIva").Value), 0, oRsAux1.Fields("IdCodigoIva").Value)
+            '            If mIdActividad > 0 And mIdActividad <> IIf(IsNull(oRsAux1.Fields("IdActividad").Value), 0, oRsAux1.Fields("IdActividad").Value) Then
+            '                oPr = oAp.Proveedores.Item(-1)
+            '                With oPr.Registro
+            '                    .Fields("IdActividad").Value = mIdActividad
+            '                End With
+            '                oPr.Guardar
+            '                oPr = Nothing
+            '            End If
+            '        Else
+            '            If Len(mCuit) > 0 Then
+            '                If mLetra = "C" Then
+            '                    mIdCodigoIva = 6
+            '                Else
+            '                    mIdCodigoIva = 1
+            '                End If
+            '            Else
+            '                mIdCodigoIva = 5
+            '            End If
+            '            oPr = oAp.Proveedores.Item(-1)
+            '            With oPr.Registro
+            '                .Fields("Confirmado").Value = "NO"
+            '                .Fields("RazonSocial").Value = Mid(mRazonSocial, 1, 50)
+            '                .Fields("CUIT").Value = mCuit
+            '                .Fields("EnviarEmail").Value = 1
+            '                If mIdCodigoIva <> 0 Then .Fields("IdCodigoIva").Value = mIdCodigoIva
+            '                If IsNumeric(mCondicionCompra) Then .Fields("IdCondicionCompra").Value = CInt(mCondicionCompra)
+            '                If mIdActividad <> 0 Then .Fields("IdActividad").Value = mIdActividad
+            '            End With
+            '            oPr.Guardar
+            '            mIdProveedor = oPr.Registro.Fields(0).Value
+            '            oPr = Nothing
+            '            mvarProvincia = 0
+            '            mvarIBCondicion = 0
+            '            mvarIdIBCondicion = 0
+            '            mvarIGCondicion = 0
+            '            mvarIdTipoRetencionGanancia = 0
+            '            mBienesOServicios = "B"
+            '        End If
+            '        oRsAux1.Close
 
-        '                        mNumeroReferencia = mNumeroReferencia + 1
-        '                                Else
-        '                                    fl = fl + 1
-        '                                End If
-        '                            Else
-        '                                mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
-        '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Fecha es anterior al ultimo cierre contable : " & mComprobante
-        '                                fl = fl + 1
-        '                            End If
-        '                        Else
-        '                            Exit Do
-        '                        End If
-        'FinLoop:
-        '                    Loop
-        '                End With
-        '                .Close False
-        '      End With
-        '            .Quit()
-        '        End With
+            '        oRsAux1 = oAp.ComprobantesProveedores.TraerFiltrado("_PorNumeroComprobante", Array(mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante))
+            '        If oRsAux1.RecordCount = 0 Then
+            '            mvarCotizacionDolar = Cotizacion(mFechaFactura, glbIdMonedaDolar)
+            '            If mvarCotizacionDolar = 0 Then mConProblemas = True
+            '            oCP = oAp.ComprobantesProveedores.Item(-1)
+            '            With oCP
+            '                With .Registro
+            '                    .Fields("IdTipoComprobante").Value = mIdTipoComprobante
+            '                    .Fields("IdObra").Value = mIdObra
+            '                    .Fields("FechaComprobante").Value = mFechaFactura
+            '                    If mFechaFactura > mFechaRecepcion Then
+            '                        .Fields("FechaRecepcion").Value = mFechaFactura
+            '                    Else
+            '                        .Fields("FechaRecepcion").Value = mFechaRecepcion
+            '                    End If
+            '                    .Fields("FechaVencimiento").Value = mFechaFactura
+            '                    .Fields("FechaAsignacionPresupuesto").Value = mFechaFactura
+            '                    .Fields("IdMoneda").Value = mIdMonedaPesos
+            '                    .Fields("CotizacionMoneda").Value = 1
+            '                    .Fields("CotizacionDolar").Value = mvarCotizacionDolar
+            '                    .Fields("IdProveedorEventual").Value = mIdProveedor
+            '                    .Fields("IdProveedor").Value = Null
+            '                    .Fields("IdCuenta").Value = mIdCuentaFF
+            '                    .Fields("IdOrdenPago").Value = Null
+            '                    .Fields("Letra").Value = mLetra
+            '                    .Fields("NumeroComprobante1").Value = mNumeroComprobante1
+            '                    .Fields("NumeroComprobante2").Value = mNumeroComprobante2
+            '                    .Fields("NumeroRendicionFF").Value = mNumeroRendicion
+            '                    If (mvarIBCondicion = 2 Or mvarIBCondicion = 3) And mvarIdIBCondicion <> 0 Then
+            '                        .Fields("IdIBCondicion").Value = mvarIdIBCondicion
+            '                    Else
+            '                        .Fields("IdIBCondicion").Value = Null
+            '                    End If
+            '                    If (mvarIGCondicion = 2 Or mvarIGCondicion = 3) And mvarIdTipoRetencionGanancia <> 0 Then
+            '                        .Fields("IdTipoRetencionGanancia").Value = mvarIdTipoRetencionGanancia
+            '                    Else
+            '                        .Fields("IdTipoRetencionGanancia").Value = Null
+            '                    End If
+            '                    .Fields("IdProvinciaDestino").Value = mvarProvincia
+            '                    .Fields("BienesOServicios").Value = Null
+            '                    .Fields("NumeroCAI").Value = mNumeroCAI
+            '                    If mFechaVencimientoCAI <> 0 Then
+            '                        .Fields("FechaVencimientoCAI").Value = mFechaVencimientoCAI
+            '                    Else
+            '                        .Fields("FechaVencimientoCAI").Value = Null
+            '                    End If
+            '                    .Fields("DestinoPago").Value = "O"
+            '                    .Fields("InformacionAuxiliar").Value = mInformacionAuxiliar
+            '                    If mIdCodigoIva <> 0 Then .Fields("IdCodigoIva").Value = mIdCodigoIva
+            '                    .Fields("CircuitoFormirmasCompleto").Value = "SI"
+            '                    If mIdPuntoVenta <> 0 Then .Fields("IdPuntoVenta").Value = mIdPuntoVenta
+            '                    If Len(mNumeroCAE) > 0 Then .Fields("NumeroCAE").Value = mNumeroCAE
+            '                End With
+            '            End With
 
-        '        If Len(mError) > 0 Then
-        '            MsgBox "Los siguientes comprobantes no se importaron :" & vbCrLf & mError, vbExclamation
-        '   End If
+            '            mTotalBruto = 0
+            '            mTotalIva1 = 0
+            '            mTotalPercepcion = 0
+            '            mTotalComprobante = 0
+            '            mTotalAjusteIVA = 0
+            '            mAjusteIVA = 0
 
-        'Salida:
+            '            Do While Len(Trim(dt.Rows(fl).Item(2))) > 0 And mLetra = Trim(dt.Rows(fl).Item(6)) And mNumeroComprobante1 = dt.Rows(fl).Item(7) And mNumeroComprobante2 = dt.Rows(fl).Item(8) And
+            '                  (mCuit = dt.Rows(fl).Item(10) Or mCuitPlanilla = dt.Rows(fl).Item(10) Or mCuit = mCuitDefault)
+            '                mCodigoCuentaGasto = dt.Rows(fl).Item(22)
+            '                mItemPresupuestoObrasNodo = Trim(dt.Rows(fl).Item(24))
+            '                mCantidad = Val(dt.Rows(fl).Item(25))
 
-        '        Unload oF
-        '   Set oF = Nothing
+            '                mIdCuentaGasto = 0
+            '                mIdCuenta = 0
+            '                mCodigoCuenta = 0
+            '                mIdRubroContable = 0
+            '                If Len(mCodigoCuentaGasto) > 0 Then
+            '                    oRsAux1 = oAp.CuentasGastos.TraerFiltrado("_PorCodigo2", mCodigoCuentaGasto)
+            '                    If oRsAux1.RecordCount > 0 Then
+            '                        mIdCuentaGasto = oRsAux1.Fields("IdCuentaGasto").Value
+            '                        oRsAux1.Close
+            '                        oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorObraCuentaGasto", Array(mIdObra, mIdCuentaGasto))
+            '                        If oRsAux1.RecordCount > 0 Then
+            '                            mIdCuenta = oRsAux1.Fields("IdCuenta").Value
+            '                            mCodigoCuenta = oRsAux1.Fields("Codigo").Value
+            '                            mIdRubroContable = IIf(IsNull(oRsAux1.Fields("IdRubroForminanciero").Value), 0, oRsAux1.Fields("IdRubroForminanciero").Value)
+            '                            If mIdRubroContable = 0 And Not IsNull(oRsAux1.Fields("CodigoRubroContable").Value) Then
+            '                                oRsAux2 = Aplicacion.RubrosContables.TraerFiltrado("_PorCodigo", Array(oRsAux1.Fields("CodigoRubroContable").Value, mIdObra, "SI"))
+            '                                If oRsAux2.RecordCount > 0 Then mIdRubroContable = oRsAux2.Fields(0).Value
+            '                                oRsAux2.Close
+            '                            End If
+            '                        Else
+            '                            If Not mTomarCuentaDePresupuesto Then
+            '                                mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta de gasto codigo :" & mCodigoCuentaGasto & " inexistente"
+            '                                fl = fl + 1
+            '                                GoTo FinLoop
+            '                            End If
+            '                        End If
+            '                    Else
+            '                        oRsAux1.Close
+            '                        oRsAux1 = oAp.Cuentas.TraerFiltrado("_PorCodigo", mCodigoCuentaGasto)
+            '                        If oRsAux1.RecordCount > 0 Then
+            '                            mIdCuenta = oRsAux1.Fields("IdCuenta").Value
+            '                            mCodigoCuenta = oRsAux1.Fields("Codigo").Value
+            '                            mIdRubroContable = IIf(IsNull(oRsAux1.Fields("IdRubroForminanciero").Value), 0, oRsAux1.Fields("IdRubroForminanciero").Value)
+            '                            If mIdRubroContable = 0 And Not IsNull(oRsAux1.Fields("CodigoRubroContable").Value) Then
+            '                                oRsAux2 = Aplicacion.RubrosContables.TraerFiltrado("_PorCodigo", Array(oRsAux1.Fields("CodigoRubroContable").Value, mIdObra, "SI"))
+            '                                If oRsAux2.RecordCount > 0 Then mIdRubroContable = oRsAux2.Fields(0).Value
+            '                                oRsAux2.Close
+            '                            End If
+            '                        Else
+            '                            If Not mTomarCuentaDePresupuesto Then
+            '                                mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                              "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta contable inexistente"
+            '                                fl = fl + 1
+            '                                GoTo FinLoop
+            '                            End If
+            '                        End If
+            '                    End If
+            '                    oRsAux1.Close
+            '                End If
 
-        '   Set oRsAux1 = Nothing
-        '   Set oRsAux2 = Nothing
-        '   Set oAp = Nothing
-        '   Set oEx = Nothing
-        '   Set oCP = Nothing
-        '   Set oOP = Nothing
+            '                mIdPresupuestoObrasNodo = 0
+            '                If Len(mItemPresupuestoObrasNodo) > 0 Then
+            '                    oRsAux1 = Aplicacion.PresupuestoObrasNodos.TraerFiltrado("_PorItem", Array(mItemPresupuestoObrasNodo, mIdObra))
+            '                    If oRsAux1.RecordCount = 1 Then
+            '                        mIdPresupuestoObrasNodo = oRsAux1.Fields("IdPresupuestoObrasNodo").Value
+            '                        If IIf(IsNull(oRsAux1.Fields("IdCuenta").Value), 0, oRsAux1.Fields("IdCuenta").Value) > 0 Then
+            '                            mIdCuenta = IIf(IsNull(oRsAux1.Fields("IdCuenta").Value), 0, oRsAux1.Fields("IdCuenta").Value)
+            '                        End If
+            '                    End If
+            '                    oRsAux1.Close
+            '                End If
 
-        '   Exit Sub
+            '                oRsAux1 = Aplicacion.Cuentas.TraerFiltrado("_PorId", mIdCuenta)
+            '                If oRsAux1.RecordCount > 0 Then
+            '                    If IIf(IsNull(oRsAux1.Fields("ImputarAPresupuestoDeObra").Value), "NO", oRsAux1.Fields("ImputarAPresupuestoDeObra").Value) = "NO" And Not mTomarCuentaDePresupuesto Then
+            '                        mIdPresupuestoObrasNodo = 0
+            '                    End If
+            '                    mCodigoCuenta = oRsAux1.Fields("Codigo").Value
+            '                    If IIf(IsNull(oRsAux1.Fields("IdRubroForminanciero").Value), 0, oRsAux1.Fields("IdRubroForminanciero").Value) > 0 Then
+            '                        mIdRubroContable = oRsAux1.Fields("IdRubroForminanciero").Value
+            '                    End If
+            '                Else
+            '                    mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                     "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Cuenta contable inexistente"
+            '                    fl = fl + 1
+            '                    GoTo FinLoop
+            '                End If
+            '                oRsAux1.Close
 
-        'Mal:
+            '                oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mBruto " & dt.Rows(fl).Item(13)
+            '                mBruto = Abs(CDbl(dt.Rows(fl).Item(13)))
+            '                oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mIva1 " & dt.Rows(fl).Item(14)
+            '                mIVA1 = Round(Abs(CDbl(dt.Rows(fl).Item(14))), 4)
+            '                oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mPercepcion " & dt.Rows(fl).Item(15)
+            '                mPercepcion = Abs(CDbl(dt.Rows(fl).Item(15)))
+            '                oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mTotalItem " & dt.Rows(fl).Item(16)
+            '                mTotalItem = Round(Abs(CDbl(dt.Rows(fl).Item(16))), 2)
+            '                mObservaciones = "Rendicion : " & mNumeroRendicion & vbCrLf & dt.Rows(fl).Item(20) & vbCrLf
 
-        '        MsgBox "Se ha producido un error al registrar los datos" & vbCrLf & Err.Number & " -> " & Err.Description, vbCritical
-        '   Resume Salida
+            '                mTotalBruto = mTotalBruto + mBruto
+            '                mTotalIva1 = mTotalIva1 + mIVA1
+            '                mTotalPercepcion = mTotalPercepcion + mPercepcion
+            '                mTotalComprobante = mTotalComprobante + mTotalItem
+            '                mTotalAjusteIVA = mTotalAjusteIVA + mAjusteIVA
+            '                mPorcentajeIVA = 0
+            '                oForm.Label1 = mMensaje & vbCrLf & vbCrLf & "mPorcentajeIVA " & dt.Rows(fl).Item(11)
+            '                If mIVA1 <> 0 And mBruto <> 0 Then mPorcentajeIVA = dt.Rows(fl).Item(11)
+
+            '                mIdCuentaIvaCompras1 = 0
+            '                mvarPosicionCuentaIva = 1
+            '                If mPorcentajeIVA <> 0 Then
+            '                    For i = 1 To 10
+            '                        If mIVAComprasPorcentaje(i) = mPorcentajeIVA Then
+            '                            mIdCuentaIvaCompras1 = mIdCuentaIvaCompras(i)
+            '                            mvarPosicionCuentaIva = i
+            '                            Exit For
+            '                        End If
+            '                    Next
+            '                End If
+            '                If mIVA1 <> 0 And mIdCuentaIvaCompras1 = 0 Then
+            '                    mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                  "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - No se encontro el porcentaje de iva " & mPorcentajeIVA
+            '                    fl = fl + 1
+            '                    GoTo FinLoop
+            '                End If
+
+            '                With oCP.DetComprobantesProveedores.Item(-1)
+            '                    With .Registro
+            '                        .Fields("IdObra").Value = mIdObra
+            '                        .Fields("IdCuentaGasto").Value = mIdCuentaGasto
+            '                        .Fields("IdCuenta").Value = mIdCuenta
+            '                        .Fields("CodigoCuenta").Value = mCodigoCuenta
+            '                        .Fields("Importe").Value = mBruto
+            '                        .Fields("IdCuentaIvaCompras1").Value = Null
+            '                        .Fields("IVAComprasPorcentaje1").Value = 0
+            '                        .Fields("ImporteIVA1").Value = 0
+            '                        .Fields("AplicarIVA1").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras2").Value = Null
+            '                        .Fields("IVAComprasPorcentaje2").Value = 0
+            '                        .Fields("ImporteIVA2").Value = 0
+            '                        .Fields("AplicarIVA2").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras3").Value = Null
+            '                        .Fields("IVAComprasPorcentaje3").Value = 0
+            '                        .Fields("ImporteIVA3").Value = 0
+            '                        .Fields("AplicarIVA3").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras4").Value = Null
+            '                        .Fields("IVAComprasPorcentaje4").Value = 0
+            '                        .Fields("ImporteIVA4").Value = 0
+            '                        .Fields("AplicarIVA4").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras5").Value = Null
+            '                        .Fields("IVAComprasPorcentaje5").Value = 0
+            '                        .Fields("ImporteIVA5").Value = 0
+            '                        .Fields("AplicarIVA5").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras6").Value = Null
+            '                        .Fields("IVAComprasPorcentaje6").Value = 0
+            '                        .Fields("ImporteIVA6").Value = 0
+            '                        .Fields("AplicarIVA6").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras7").Value = Null
+            '                        .Fields("IVAComprasPorcentaje7").Value = 0
+            '                        .Fields("ImporteIVA7").Value = 0
+            '                        .Fields("AplicarIVA7").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras8").Value = Null
+            '                        .Fields("IVAComprasPorcentaje8").Value = 0
+            '                        .Fields("ImporteIVA8").Value = 0
+            '                        .Fields("AplicarIVA8").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras9").Value = Null
+            '                        .Fields("IVAComprasPorcentaje9").Value = 0
+            '                        .Fields("ImporteIVA9").Value = 0
+            '                        .Fields("AplicarIVA9").Value = "NO"
+            '                        .Fields("IdCuentaIvaCompras10").Value = Null
+            '                        .Fields("IVAComprasPorcentaje10").Value = 0
+            '                        If mIdCuentaIvaCompras1 <> 0 Then
+            '                            .Fields("IdCuentaIvaCompras" & mvarPosicionCuentaIva).Value = mIdCuentaIvaCompras1
+            '                            .Fields("IVAComprasPorcentaje" & mvarPosicionCuentaIva).Value = mPorcentajeIVA
+            '                            .Fields("ImporteIVA" & mvarPosicionCuentaIva).Value = Round(mIVA1, 2)
+            '                            .Fields("AplicarIVA" & mvarPosicionCuentaIva).Value = "SI"
+            '                        End If
+            '                        .Fields("ImporteIVA10").Value = 0
+            '                        .Fields("AplicarIVA10").Value = "NO"
+            '                        If mIdPresupuestoObrasNodo <> 0 Then .Fields("IdPresupuestoObrasNodo").Value = mIdPresupuestoObrasNodo
+            '                        If mIdRubroContable > 0 Then .Fields("IdRubroContable").Value = mIdRubroContable
+            '                        .Fields("Cantidad").Value = mCantidad
+            '                    End With
+            '                    .Modificado = True
+            '                End With
+
+            '                fl = fl + 1
+            '            Loop
+
+
+
+
+
+
+            '            With oCP
+            '                With .Registro
+            '                    .Fields("NumeroReferencia").Value = mNumeroReferencia
+            '                    .Fields("Confirmado").Value = "NO"
+            '                    .Fields("TotalBruto").Value = mTotalBruto
+            '                    .Fields("TotalIva1").Value = mTotalIva1
+            '                    .Fields("TotalIva2").Value = 0
+            '                    .Fields("TotalBonificacion").Value = 0
+            '                    .Fields("TotalComprobante").Value = mTotalComprobante
+            '                    .Fields("PorcentajeBonificacion").Value = 0
+            '                    .Fields("TotalIVANoDiscriminado").Value = 0
+            '                    .Fields("AjusteIVA").Value = mTotalAjusteIVA
+            '                    .Fields("Observaciones").Value = mObservaciones
+            '                    If mIncrementarReferencia <> "SI" Then .Fields("AutoincrementarNumeroReferencia").Value = "NO"
+            '                End With
+            '                .Guardar
+            '            End With
+            '            oCP = Nothing
+
+
+
+
+            '            mNumeroReferencia = mNumeroReferencia + 1
+            '        Else
+            '            fl = fl + 1
+            '        End If
+            '    Else
+            '        mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & Format(mNumeroComprobante1, "0000") &
+            '                  "-" & Format(mNumeroComprobante2, "00000000") & ", fila " & fl & "  - Fecha es anterior al ultimo cierre contable : " & mComprobante
+            '        fl = fl + 1
+            '    End If
+            'Else
+            '    Exit Do
+            'End If
+            'FinLoop:
+        Loop
+
+
+
+
+
+
 
     End Function
 
