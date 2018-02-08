@@ -1996,7 +1996,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
                     Case "BUNGE"
                         Dim sErr As String
 
-                        output = Sincronismo_Bunge(ds.wCartasDePorte_TX_InformesCorregido, , sWHERE, sErr) 'AbrirSegunTipoComprobante (HFSC.Value, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
+                        output = Sincronismo_Bunge(ds.wCartasDePorte_TX_InformesCorregido, "", sWHERE, sErr, HFSC.Value) 'AbrirSegunTipoComprobante (HFSC.Value, ds.wCartasDePorte_TX_InformesCorregido, , sWHERE)
                         lblErrores.Text = sErr
                         UpdatePanel2.Update()
                         registrosFiltrados = ds.wCartasDePorte_TX_InformesCorregido.Count
