@@ -143,6 +143,7 @@
                                         <script>
                                             $('#btnMostrarMenu').click(function () {
                                                 $('#MenuPrincipal').toggle();
+                                                refrescaancho();
                                             })
                                         </script>
 
