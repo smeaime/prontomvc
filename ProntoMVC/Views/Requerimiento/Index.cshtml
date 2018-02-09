@@ -295,13 +295,13 @@
             },
             datatype: 'local', //'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdRequerimiento', 
+            colNames: ['', '', 'IdRequerimiento',
                        'Numero', 'Fecha', 'Vs', 'Cump.', 'Recep.', 'Entreg.', 'Impresa', 'Detalle', 'Obra', 'Presupuestos', 'Comparativas', 'Pedidos', 'Recepciones',
                        'Salidas', 'Items', 'Liberado por', 'Fecha aprobacion', 'Solicito', 'Sector', 'Equipos destino', 'Usuario anulo', 'Fecha anulacion', 'Motivo anulacion', 'Tipo compra',
                        'Comprador', 'Fechas liberacion para compra', 'Detalle imputacion', 'Observaciones', 'Circ. firmas completo', 'Firmas'],
             colModel: [
-                        { name: 'act', index: 'act', width: 80, align: 'center', sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
-                        { name: 'act', index: 'act', width: 80, align: 'center', sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', width: 0, align: 'left', editable: false, hidden: true, frozen: true },
                         { name: 'NumeroRequerimiento', index: 'NumeroRequerimiento', width: 80, align: 'right', editable: false, frozen: true, search: true, searchoptions: { sopt: ['eq'] } },
                         {
@@ -566,8 +566,8 @@
             url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
             //window.location.href = url.replace('__param__', encodeURIComponent(IdRequerimiento));
             //window.open(url, '_blank');
-            window.open(url); 
-           
+            window.open(url);
+
             //$.post(url, function (result) {
             //    $('#previewCredencial').html(
             //        $('<iframe/>', {
@@ -591,9 +591,9 @@
         var $grid = $("#Lista"), selIds = $grid.jqGrid("getGridParam", "selarrrow"), i, n, cellValues = [];
         for (i = 0, n = selIds.length; i < n; i++) {
             var IdRequerimiento = $grid.jqGrid("getCell", selIds[i], "IdRequerimiento");
-            var url = '@Html.Raw(@Url.Action("ImprimirConPlantillaEXE", "Requerimiento", new { id = "__param__", Tipo = "PDF" }))';
+            var url = '@Html.Raw(@Url.Action("ImprimirConPlantillaEXE_PDF", "Requerimiento", new { id = "__param__"}))';
             url=url.replace('__param__', encodeURIComponent(IdRequerimiento));
-            window.open(url); 
+            window.open(url);
         }
     };
 
