@@ -115,7 +115,6 @@ namespace ProntoMVC.Controllers
             ViewBag.ProntoIni_PermitirImputarTodosLosEquipoDestino = BuscarClaveINI("Permitir imputar todos los equipos en salida de materiales") ?? "";
             ViewBag.ProntoIni_OTsDesdeMantenimiento = BuscarClaveINI("OTs desde Mantenimiento") ?? "";
 
-
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
             mIdMonedaPesos = parametros.IdMoneda ?? 1;
             mIdMonedaDolar = parametros.IdMonedaDolar ?? 0;
@@ -453,6 +452,7 @@ namespace ProntoMVC.Controllers
                                 }
                             }
                             db.SaveChanges();
+                            db.Tree_TX_Actualizar("SalidaMaterialesAgrupadas", SalidaMateriales.IdSalidaMateriales, "SalidaMateriales");
                         }
                         scope.Complete();
                         scope.Dispose();
@@ -491,6 +491,40 @@ namespace ProntoMVC.Controllers
                 errors.Add(ex.Message);
                 return Json(errors);
             }
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "SalidaMateriales_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "SalidaMateriales.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.doc";
+            string plantilla = DirApp + "Documentos\\" + "SalidaMateriales_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "SalidaMateriales.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
         }
 
         public virtual FileResult ImprimirConInteropPDF(int id)
@@ -847,7 +881,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdSalidaMateriales.ToString(),
                             cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdSalidaMateriales} ) + ">Editar</>",
-                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdSalidaMateriales} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE_PDF",new {id = a.IdSalidaMateriales} ) + ">Emitir</a> ",
                                 a.IdSalidaMateriales.ToString(),
                                 a.TipoSalida.NullSafeToString(),
                                 a.NumeroSalidaMateriales1.NullSafeToString(),
@@ -942,7 +976,6 @@ namespace ProntoMVC.Controllers
                             a.IdMoneda,
                             a.IdEquipoDestino,
                             a.IdPresupuestoObrasNodo,
-
                             a.DetalleRecepcione.Recepcione.NumeroRecepcionAlmacen,
                             a.DetalleValesSalida.ValesSalida.NumeroValeSalida,
                             a.DetalleValesSalida.DetalleRequerimiento.Requerimientos.NumeroRequerimiento,
@@ -966,22 +999,17 @@ namespace ProntoMVC.Controllers
                         //.Skip((currentPage - 1) * pageSize).Take(pageSize)
                         .ToList();
 
-            var data2 = (from a in data
-
-                         from b in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
-                         from c in dbmant.Articulos.Where(o => o.IdArticulo == a.IdEquipoDestino).DefaultIfEmpty()
-                         select new 
-                         { 
-                                IdOrdenTrabajo = (a==null) ? 0 :  (a.IdOrdenTrabajo ?? 0),
-                                NumeroOrdenTrabajo =  (b==null) ? 0 :  (b.NumeroOrdenTrabajo ??  0),
-                                IdEquipoDestino = (a == null) ? 0 : (a.IdEquipoDestino ?? 0),
-                                EquipoDestino = (c == null) ? "" : (c.Descripcion != null ? c.Descripcion : "")
-                         }).Distinct().ToList();
-
-            //from k in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
-              //           select new { a.IdOrdenTrabajo, NumeroOrdenTrabajo = (k==null) ? "" : k.NumeroOrdenTrabajo.NullSafeToString() }).ToList();
-
-
+            //var data2 = (from a in data
+                         
+            //             from b in dbmant.OrdenesTrabajo.Where(o => o.IdOrdenTrabajo == a.IdOrdenTrabajo).DefaultIfEmpty()
+            //             from c in dbmant.Articulos.Where(o => o.IdArticulo == a.IdEquipoDestino).DefaultIfEmpty()
+            //             select new 
+            //             { 
+            //                    IdOrdenTrabajo = (a==null) ? 0 :  (a.IdOrdenTrabajo ?? 0),
+            //                    NumeroOrdenTrabajo =  (b==null) ? 0 :  (b.NumeroOrdenTrabajo ??  0),
+            //                    IdEquipoDestino = (a == null) ? 0 : (a.IdEquipoDestino ?? 0),
+            //                    EquipoDestino = (c == null) ? "" : (c.Descripcion != null ? c.Descripcion : "")
+            //             }).Distinct().ToList();
 
             var jsonData = new jqGridJson()
             {
@@ -1023,8 +1051,8 @@ namespace ProntoMVC.Controllers
                             a.CostoUnitario.NullSafeToString(),
                             a.Moneda.NullSafeToString(),
                             a.FechaImputacion == null ? "" : a.FechaImputacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
-                            data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
-                            data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ).FirstOrDefault().NullSafeToString(),
+                            a.EquipoDestino.NullSafeToString(), //data2.Where(x=>x.IdEquipoDestino==a.IdEquipoDestino).Select(x=>x.EquipoDestino ?? "").FirstOrDefault().NullSafeToString(),
+                            a.OrdenTrabajo.NullSafeToString(), //data2.Where(x=>x.IdOrdenTrabajo==a.IdOrdenTrabajo).Select(x=>x.NumeroOrdenTrabajo ).FirstOrDefault().NullSafeToString(),
                             a.PresupuestoObrasEtapa.NullSafeToString(),
                             a.Observaciones.NullSafeToString()
                             }

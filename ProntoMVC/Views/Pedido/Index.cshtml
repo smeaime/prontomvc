@@ -171,13 +171,14 @@ If you want additionally remove vertical border between the cells in the grid yo
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Acciones', 'IdPedido', 'IdProveedor', 'IdCondicionCompra', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.',
+            colNames: ['', '', 'IdPedido', 'IdProveedor', 'IdCondicionCompra', 'Numero', 'Sub', 'Fecha', 'Salida', 'Cumplido', 'RMs', 'Obras', 'Cod. prov.', 'Proveedor', 'Subtotal', 'Bonif.',
                        'IVA', 'Otros', 'Imp. Int.', 'Total pedido', 'Mon.', 'Comprador', 'Aprobo', 'Items', 'Comparativa', 'Tipo compra', 'Observaciones', 'Cond. compra', 'Detalle cond. compra',
                        'Exterior', 'Nro. licitacion', 'Impresa', 'Anuló', 'Fecha anulacion', 'Motivo anulacion', 'Equipos destino', 'Circ. firma completo', 'Condicion iva', 'Fecha envio',
                        'Detalles generales'
             ],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 80, sortable: false, frozen: true, editable: false, search: false }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
                         {name: 'IdPedido', index: 'IdPedido', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdProveedor', index: 'IdProveedor', align: 'left', width: 100, editable: false, hidden: true },
                         { name: 'IdCondicionCompra', index: 'IdCondicionCompra', align: 'left', width: 100, editable: false, hidden: true },
@@ -243,12 +244,12 @@ If you want additionally remove vertical border between the cells in the grid yo
 
                 //edicion inline
                 // http://stackoverflow.com/questions/8163106/form-editing-with-inline-editing-to-same-jqgrid
-                //                if(id && id!==lastSel){ 
-                //                    jQuery('#Lista').restoreRow(lastSel); 
-                //                    lastSel=id; 
+                //                if(id && id!==lastSel){
+                //                    jQuery('#Lista').restoreRow(lastSel);
+                //                    lastSel=id;
                 //                }
-                //                jQuery('#Lista').editRow(id, true); 
-                //   
+                //                jQuery('#Lista').editRow(id, true);
+                //
 
             },
             loadComplete: function () {
@@ -363,7 +364,7 @@ If you want additionally remove vertical border between the cells in the grid yo
         for (i = 0, n = selIds.length; i < n; i++) {
             var IdPedido = $grid.jqGrid("getCell", selIds[i], "IdPedido");
 
-            var url = '@Html.Raw(@Url.Action("ImprimirPDF", "Pedido", new { id = "__param__" }))';
+            var url = '@Html.Raw(@Url.Action("ImprimirConPlantillaEXE_PDF", "Pedido", new { id = "__param__" }))';
             url = url.replace('__param__', encodeURIComponent(IdPedido));
             window.open(url);
         }

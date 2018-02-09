@@ -8981,16 +8981,12 @@ Formato localidad-provincia	destination	x
 namespace ServicioMVC
 {
 
-
     public class servi
     {
-
-
 
         public string ImprimirConPlantillaEXE(int id, string SC, string DirApp, string plantilla, string sArchivoSalida, out string mensajeError) //, string Tipo = "")
         {
             //devuelve pdf si se le pasa un sArchivoSalida con extension pdf
-
 
             string SCsinEncriptar = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
 
@@ -9026,25 +9022,15 @@ namespace ServicioMVC
                 SCsinEncriptar += ";Provider=SQLOLEDB.1";
             }
 
-
-
-
-            
             //if (Tipo == "PDF")
             //{
             //    output = DirApp + "Documentos\\" + "archivo.pdf";
             //    nombrearchivo = "requerimiento.pdf";
             //}
 
-
-
-
             pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + sArchivoSalida;
 
-            
             ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
-            
-
 
             //'Start the process.
             pInfo.UseShellExecute = false;
@@ -9054,22 +9040,13 @@ namespace ServicioMVC
             //'Wait for the process to exit.
             p.WaitForExit();
 
-
             //'Continue with the code.
             //MessageBox.Show("Code continuing...");
 
             int CodigoSalida = p.ExitCode;
 
-
             switch (CodigoSalida)
             {
-
-                // If mPlantilla = "" Then CodigoSalida = -103
-                // If mStringConexion = "" Then CodigoSalida = -104
-                // If mvarId = 0 Then CodigoSalida = -105
-                // If mArchivo = "" Then CodigoSalida = -106
-                //If CodigoSalida<> 0 Then GoTo Salida
-
                 case 0:
                     mensajeError = "";
                     break;
@@ -9093,18 +9070,11 @@ namespace ServicioMVC
                 default:
                     mensajeError = "Error inesperado";
                     break;
-
             }
-
-
-
-
 
             return sArchivoSalida;
         }
 
-
     }
-
 
 }
