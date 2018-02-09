@@ -1,0 +1,20 @@
+
+Log Entry : 
+02/05/2018 11:31:24
+Error in: . Error Message:Generando sincro para Bunge
+__________________________
+
+Log Entry : 
+02/05/2018 11:32:46
+Error in: . Error Message:Generando sincro para Gesagro
+__________________________
+
+Log Entry : 
+02/05/2018 12:33:07
+Error in: . Error Message:Falló con Microsoft.ACE.OLEDB. Pruebo con Microsoft.Jet.OLEDB
+__________________________
+
+Log Entry : 
+02/05/2018 12:36:06
+Error in: . Error Message:Leyo bien con Microsoft.ACE.OLEDB
+__________________________

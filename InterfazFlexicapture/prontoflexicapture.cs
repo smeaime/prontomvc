@@ -6741,7 +6741,8 @@ Formato localidad-provincia	destination	x
                                 a.Usuarios,
 
                                  (db.CartasDePortes.Where(x=> x.NumeroCartaDePorte ==  a.Numero).FirstOrDefault() ?? new CartasDePorte()).IdCartaDePorte.NullSafeToString() , // a.Comentario.Contains("DataBackupear") ? "<a href='" +  a.Comentario + "'    style='text-decoration: underline; color: blue !important;'  > Bajar archivo </ a > " : a.Comentario,
-								a.Estado.NullSafeToString() , // a.Fecha==null ? "" :  a.Fecha.GetValueOrDefault().ToShortDateString(),
+
+                                a.Estado.NullSafeToString(), //(a.Estado ?? 0) == 1 ? "Abierto" : "Cerrado", 
 
 								"", // a.ArchivoAdjunto.NullSafeToString(),
 

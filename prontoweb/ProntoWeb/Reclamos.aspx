@@ -1487,7 +1487,29 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         { name: 'comentarios', index: 'comentarios', align: 'left', width: 300, editable: false, hidden: false, sortable: true },
                         { name: 'usuarios', index: 'usuarios', align: 'left', width: 200, editable: false, hidden: false, sortable: true },
                         { name: 'IdCartaDePorte', index: 'IdCartaDePorte', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
-                        { name: 'estado', index: 'estado', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
+
+
+                        {
+                            name: 'Estado', index: 'Estado', align: 'left', width: 100, editable: false, hidden: false, sortable: true,
+                        
+
+
+                            edittype: 'select', sortable: false,
+                            editoptions: {
+                                value: "1:Abierto; 2:Cerrado"
+                            },
+                            formatter: 'select', stype: 'select',
+                            searchoptions: {
+                                sopt: ['eq'],
+                                value: ":Todos; 1:Abierto; 2:Cerrado"
+                            }
+
+
+                        },
+
+
+
+
                         { name: 'adjunto', index: 'adjunto', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
                         { name: 'textohtml', index: 'textohtml', align: 'left', width: 200, editable: false, hidden: true, sortable: true },
 
@@ -1696,13 +1718,24 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
 
             function refrescaancho() { // hay que llamarla en el window.resize y en el jqgrid.onloadcomplete
-                return;
+                //return;
+
+                // hay que incluir esta funcion en las llamadas a $('#MenuPrincipal').toggle()/ hide/show
+
+                var grid = $("#Lista");
+                //var gridParentWidth = grid.closest(".ui-jqgrid").parent().width();
+                //var gridParentWidth = $("divcontentplaceholder2").width() - 0;
+                //var gridParentWidth = $("#divsupercontenedor").width() - 0;
+                var gridParentWidth = $(window).width() - $("#MenuPrincipal").width()-6;
+                if (!$('#MenuPrincipal').is(":visible")) gridParentWidth = $(window).width() - 6;
 
 
-                $('#Lista').jqGrid('setGridWidth', $(window).width() - 0);
+
+
+                grid.jqGrid('setGridWidth', gridParentWidth);
                 //RefrescaAnchoJqgrids();
 
-
+                return;
 
                 //var $grid = $("#Lista");
                 ////    newWidth = $grid.closest(".ui-jqgrid").parent().width();
@@ -1713,7 +1746,10 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 if (grid = $('.ui-jqgrid-btable')) { // le quit� el visible para que tambien trabaje sobre el tab que todav�a no salt� a la pantalla
                     grid.each(function (index) {
                         var gridId = $(this).attr('id');
+
                         var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                        //var gridParentWidth = grid.closest(".ui-jqgrid").parent().width();
+
                         $('#' + gridId).setGridWidth(gridParentWidth);
 
                         //en cuanto a la altura: http://stackoverflow.com/questions/3203402/jqgrid-set-row-height/3204842#3204842
