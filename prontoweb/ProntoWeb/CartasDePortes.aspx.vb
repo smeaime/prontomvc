@@ -149,8 +149,9 @@ Partial Class CartasDePortes
         Try
             Dim rol = Roles.GetRolesForUser(Session(SESSIONPRONTO_UserName))
             If rol(0) = "Cliente" Or rol(0) = "WilliamsClientes" Then
-                Response.Redirect(String.Format("CartaDePorteInformesAccesoClientes.aspx"))
-            End If
+
+                Response.Redirect(String.Format("CartaDePorteInformesAccesoClientes.aspx"))  a este le falta el prefijo \prontoweb\?  Response.Redirect(String.Format("~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"))
+            End If-
 
         Catch ex As Exception
             ErrHandler2.WriteError(ex)
