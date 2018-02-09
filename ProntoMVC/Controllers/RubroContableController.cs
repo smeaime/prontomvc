@@ -193,6 +193,15 @@ namespace ProntoMVC.Controllers
             return PartialView("Select", tabla);
         }
 
+        public virtual ActionResult GetRubrosFinancierosEgresos()
+        {
+            Dictionary<int, string> tabla = new Dictionary<int, string>();
+            foreach (ProntoMVC.Data.Models.RubrosContable u in db.RubrosContables.Where(x => (x.Financiero ?? "") == "SI" && (x.IngresoEgreso ?? "") == "E").OrderBy(x => x.Descripcion).ToList())
+                tabla.Add(u.IdRubroContable, u.Descripcion);
+
+            return PartialView("Select", tabla);
+        }
+
         public virtual ActionResult GetTiposRubrosFinancierosGrupos()
         {
             Dictionary<int, string> tabla = new Dictionary<int, string>();

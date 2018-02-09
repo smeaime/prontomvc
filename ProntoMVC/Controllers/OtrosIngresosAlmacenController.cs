@@ -129,7 +129,6 @@ namespace ProntoMVC.Controllers
                 if ((x.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin obra"; }
                 if ((x.IdUbicacion ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin ubicacion"; }
                 if ((x.CostoUnitario ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin costo"; }
-                if ((x.IdMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin moneda"; }
                 if ((x.Cantidad ?? 0) <= 0) { sErrorMsg += "\n" + "Hay items sin cantidad positiva"; }
             }
 
@@ -301,6 +300,7 @@ namespace ProntoMVC.Controllers
                                 }
                             }
                             db.SaveChanges();
+                            db.Tree_TX_Actualizar("OtrosIngresosAlmacenAgrupados", OtroIngresoAlmacen.IdOtroIngresoAlmacen, "OtroIngresoAlmacen");
                         }
 
                         scope.Complete();
@@ -340,6 +340,40 @@ namespace ProntoMVC.Controllers
                 errors.Add(ex.Message);
                 return Json(errors);
             }
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "OtrosIngresosAlmacen_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "OtrosIngresosAlmacen.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.doc";
+            string plantilla = DirApp + "Documentos\\" + "OtrosIngresosAlmacen_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "OtrosIngresosAlmacen.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
         }
 
         public virtual FileResult ImprimirConInteropPDF(int id)
@@ -417,7 +451,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdOtroIngresoAlmacen.ToString(),
                             cell = new string[] { 
                                 "<a href="+ Url.Action("Edit",new {id = a.IdOtroIngresoAlmacen} ) + ">Editar</>",
-                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdOtroIngresoAlmacen} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE_PDF",new {id = a.IdOtroIngresoAlmacen} ) + ">Emitir</a> ",
                                 a.IdOtroIngresoAlmacen.ToString(),
                                 a.Emitio.NullSafeToString(),
                                 a.Aprobo.NullSafeToString(),
@@ -434,6 +468,111 @@ namespace ProntoMVC.Controllers
                             }
                         }).ToArray()
             };
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        public class OtrosIngresosAlmacens2
+        {
+            public int IdOtroIngresoAlmacen { get; set; }
+            public int? Emitio { get; set; }
+            public int? Aprobo { get; set; }
+            public int? TipoIngreso { get; set; }
+            public int? NumeroOtroIngresoAlmacen { get; set; }
+            public DateTime? FechaOtroIngresoAlmacen { get; set; }
+            public string TipoOtroIngresoAlmacen { get; set; }
+            public string EmitioNombre { get; set; }
+            public string AproboNombre { get; set; }
+            public string Anulado { get; set; }
+            public string Anulo { get; set; }
+            public DateTime? FechaAnulacion { get; set; }
+            public string Observaciones { get; set; }
+            public int? CantidadItems { get; set; }
+        }
+
+        public virtual ActionResult OtrosIngresosAlmacen_DynamicGridData
+                (string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        {
+            DateTime FechaDesde, FechaHasta;
+            try
+            {
+                if (FechaInicial == "") FechaDesde = DateTime.MinValue;
+                else FechaDesde = DateTime.ParseExact(FechaInicial, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaDesde = DateTime.MinValue;
+            }
+
+            try
+            {
+                if (FechaFinal == "") FechaHasta = DateTime.MaxValue;
+                else FechaHasta = DateTime.ParseExact(FechaFinal, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                FechaHasta = DateTime.MaxValue;
+            }
+
+            int totalRecords = 0;
+            int pageSize = rows;
+
+            var data = (from a in db.OtrosIngresosAlmacens
+                        from b in db.Empleados.Where(o => o.IdEmpleado == a.Emitio).DefaultIfEmpty()
+                        from c in db.Empleados.Where(o => o.IdEmpleado == a.Aprobo).DefaultIfEmpty()
+                        from d in db.Empleados.Where(o => o.IdEmpleado == a.IdAutorizaAnulacion).DefaultIfEmpty()
+                        select new OtrosIngresosAlmacens2
+                        {
+                            IdOtroIngresoAlmacen = a.IdOtroIngresoAlmacen,
+                            Emitio = a.Emitio,
+                            Aprobo = a.Aprobo,
+                            TipoIngreso = a.TipoIngreso,
+                            NumeroOtroIngresoAlmacen = a.NumeroOtroIngresoAlmacen,
+                            FechaOtroIngresoAlmacen = a.FechaOtroIngresoAlmacen,
+                            TipoOtroIngresoAlmacen = ((a.TipoIngreso ?? 0) == 0 ? "Devolucion de fabrica" : ((a.TipoIngreso ?? 0) == 1 ? "Devolucion prestamo" : ((a.TipoIngreso ?? 0) == 2 ? "Devolucion muestra" : ((a.TipoIngreso ?? 0) == 3 ? "Devolucion de obra" : ((a.TipoIngreso ?? 0) == 4 ? "Otros ingresos" : ""))))),
+                            EmitioNombre = b != null ? b.Nombre : "",
+                            AproboNombre = c != null ? c.Nombre : "",
+                            Anulado = a.Anulado,
+                            Anulo = d != null ? d.Nombre : "",
+                            FechaAnulacion = a.FechaAnulacion,
+                            Observaciones = a.Observaciones,
+                            CantidadItems = a.DetalleOtrosIngresosAlmacens.Where(x => x.IdOtroIngresoAlmacen == a.IdOtroIngresoAlmacen).Count()
+                        }).Where(a => a.FechaOtroIngresoAlmacen >= FechaDesde && a.FechaOtroIngresoAlmacen <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+
+            var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<OtrosIngresosAlmacens2>
+                                     (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
+
+            int totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
+
+            var jsonData = new jqGridJson()
+            {
+                total = totalPages,
+                page = page,
+                records = totalRecords,
+                rows = (from a in pagedQuery
+                        select new jqGridRowJson
+                        {
+                            id = a.IdOtroIngresoAlmacen.ToString(),
+                            cell = new string[] {
+                                "<a href="+ Url.Action("Edit",new {id = a.IdOtroIngresoAlmacen} ) + "  >Editar</>" ,
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE",new {id = a.IdOtroIngresoAlmacen} )  +">Emitir</>" ,
+                                a.IdOtroIngresoAlmacen.ToString(),
+                                a.Emitio.NullSafeToString(),
+                                a.Aprobo.NullSafeToString(),
+                                a.TipoIngreso.NullSafeToString(),
+                                a.NumeroOtroIngresoAlmacen.NullSafeToString(),
+                                a.FechaOtroIngresoAlmacen==null ? "" :  a.FechaOtroIngresoAlmacen.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.TipoOtroIngresoAlmacen.NullSafeToString(),
+                                a.EmitioNombre.NullSafeToString(),
+                                a.AproboNombre.NullSafeToString(),
+                                a.Anulado.NullSafeToString(),
+                                a.Anulo.NullSafeToString(),
+                                a.FechaAnulacion==null ? "" :  a.FechaAnulacion.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                                a.Observaciones.NullSafeToString(),
+                                a.CantidadItems.NullSafeToString()
+                            }
+                        }).ToArray()
+            };
+
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 

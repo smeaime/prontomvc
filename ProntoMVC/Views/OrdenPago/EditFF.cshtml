@@ -99,14 +99,14 @@
                                         });
                                     </script>
                                     @if (Model.IdCuenta > 0)
-                                    {
-                                        <script>
+            {
+                        <script>
                             $(function () {
                                 var IdCuenta = @Html.Raw(Json.Encode(Model.IdCuenta));
                                 DatosCuenta(IdCuenta, "p", 0, "Codigo");
                             })
-                                        </script>
-                                    }
+                        </script>
+}
                                 </div>
                                 <div class="span2 lightblue">
                                     @Html.LabelFor(model => model.IdObra, "Obra")
@@ -147,7 +147,23 @@
                                     <div id="ListaPager2" class="scroll" style="text-align: center; height: 30px"></div>
                                 </div>
                             </div>
+
+                            <style>
+                                #gbox_ListaValores table.ui-jqgrid-htable { font-size: 9px; }
+                                #ListaValores { font-size: 9px; }
+
+                                #gbox_ListaRubrosContables table.ui-jqgrid-htable { font-size: 9px; }
+                                #ListaRubrosContables { font-size: 9px; }
+
+                                #gbox_ListaImpuestos table.ui-jqgrid-htable { font-size: 9px; }
+                                #ListaImpuestos { font-size: 9px; }
+
+                                #gbox_ListaGastos table.ui-jqgrid-htable { font-size: 9px; }
+                                #ListaGastos { font-size: 9px; }
+                            </style>
+
                             <br />
+
                             <div class="row-fluid">
                                 <div class="span7 lightblue">
                                     <table id="ListaValores" class="scroll" cellpadding="0" cellspacing="0"></table>
@@ -244,14 +260,12 @@
                                             <td width="100"></td>
                                         </tr>
                                     </table>
-
                                     <br />
-
                                 </div>
-
-
                             </div>
+
                             <br />
+
                             <div class="row-fluid">
                                 <div class="span3 lightblue">
                                     <table id="ListaRubrosContables" class="scroll" cellpadding="0" cellspacing="0"></table>
@@ -264,18 +278,11 @@
                                 </div>
                             </div>
                             <br />
-
                             <br />
-
                         </div>
                         <div id="pie" style="position: absolute; bottom: -26px; background: rgb(236, 236, 236); width: 100%; height: 68px; padding-left: 0; margin-right: 15px;">
                             <hr style="margin: 0; border-top-color: #D8D4D4; border-bottom: 0px solid #ffffff;  " />
-
                             @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-link  pull-right" })
-
-
-
-
                             <input type="button" id="grabar2" value="Aceptar" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                             <input type="button" id="ActualizarDatos" value="Calcular" class="btn  btn-large btn-primary " usesubmitbehavior="false" />
                             @if (Model.IdOrdenPago > 0)
@@ -319,10 +326,6 @@
                                             }
                                         })
                             </script>
-
-
-
-
                             @if (Model.FechaAnulacion == null)
                             {
                             }
@@ -342,26 +345,15 @@
                             {
                                 <script>$(function () { ActivarAsientoManual(false); })</script> }
                         </div>
-
-
-
-
                     </div>
-
                 </form>
-
-
             </div>
 
             <script type="text/javascript">
-
-
                 $(window).resize(function () {
                     RefrescaAnchoGrillaDetalle();
                     $("#conscroll").height($(window).height() - 120);
                 });
-
-
 
                 $(function () {
                     //pageLayout.hide('east');
@@ -381,4 +373,4 @@
                     }
                 })
             </script>
-            }
+        }

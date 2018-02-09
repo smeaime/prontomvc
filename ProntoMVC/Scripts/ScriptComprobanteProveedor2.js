@@ -20,10 +20,18 @@ $(function () {
         pageLayout.close('east');
     }
 
-    idaux = $("#IdProveedor").val();
-    if (idaux.length > 0) {
-        MostrarDatosProveedor(idaux);
+    if ($("#TipoDeComprobante").val() == "FF") {
+        idaux = $("#IdProveedorEventual").val();
+        if (idaux.length > 0) {
+            MostrarDatosProveedor(idaux);
+        }
+    } else {
+        idaux = $("#IdProveedor").val();
+        if (idaux.length > 0) {
+            MostrarDatosProveedor(idaux);
+        }
     }
+
     TraerCotizacion()
     TraerNumeroComprobante()
     ActualizarPuntosDeVenta()
@@ -247,7 +255,7 @@ $(function () {
         mtype: 'POST',
         colNames: ['Acciones', 'IdDetalleComprobanteProveedor', 'IdCuenta', 'IdDetallePedido', 'IdDetalleRecepcion', 'IdObra', 'IdCuentaGasto', 'IdCuentaBancaria', 'IdRubroContable',
                    'IdEquipoDestino', 'IdArticulo', 'CodigoCuenta', 'CuentaContable', 'CodigoArticulo', 'Articulo', 'Cantidad', 'Importe', 'PorcentajeIva', 'ImporteIva',
-                   'TomarEnCalculoDeImpuestos', 'IdProvinciaDestino1', 'PorcentajeProvinciaDestino1', 'IdProvinciaDestino2', 'PorcentajeProvinciaDestino2'],
+                   'TomarEnCalculoDeImpuestos', 'IdProvinciaDestino1', 'PorcentajeProvinciaDestino1', 'IdProvinciaDestino2', 'PorcentajeProvinciaDestino2', 'RubroContable'],
         colModel: [
                     { name: 'act', index: 'act', align: 'left', width: 60, hidden: true, sortable: false, editable: false },
                     { name: 'IdDetalleComprobanteProveedor', index: 'IdDetalleComprobanteProveedor', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true } },
@@ -457,6 +465,21 @@ $(function () {
                     { name: 'PorcentajeProvinciaDestino1', index: 'PorcentajeProvinciaDestino1', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'IdProvinciaDestino2', index: 'IdProvinciaDestino2', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
                     { name: 'PorcentajeProvinciaDestino2', index: 'PorcentajeProvinciaDestino2', editable: true, hidden: true, editoptions: { disabled: 'disabled', defaultValue: 0 }, editrules: { edithidden: true, required: true }, label: 'TB' },
+                    {
+                        name: 'RubroContable', index: 'RubroContable', align: 'left', width: 150, editable: true, hidden: false, edittype: 'select', editrules: { required: false }, label: 'TB',
+                        editoptions: {
+                            dataUrl: ROOT + 'RubroContable/GetRubrosFinancierosEgresos',
+                            dataInit: function (elem) { $(elem).width(145); },
+                            dataEvents: [
+                                { type: 'focusout', fn: function (e) { $('#Lista').jqGrid("saveCell", lastSelectediRow, lastSelectediCol); } },
+                                {
+                                    type: 'change', fn: function (e) {
+                                        var rowid = $('#Lista').getGridParam('selrow');
+                                        $('#Lista').jqGrid('setCell', rowid, 'IdRubroContable', this.value);
+                                    }
+                                }]
+                        },
+                    },
         ],
         onCellSelect: function (rowid, iCol, cellcontent, e) {
             var $this = $(this);
@@ -811,23 +834,27 @@ $(function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //DEFINICION DE PANEL ESTE PARA LISTAS DRAG DROP
-    $('a#a_panel_este_tab1').text('Pedidos');
-    $('a#a_panel_este_tab2').text('Recepciones');
-    $('a#a_panel_este_tab3').text('Cuenta corriente');
+    if ($("#TipoDeComprobante").val() == "FF") {
+        deshabilitarPanelesDerecho()
+    } else {
+        $('a#a_panel_este_tab1').text('Pedidos');
+        $('a#a_panel_este_tab2').text('Recepciones');
+        $('a#a_panel_este_tab3').text('Cuenta corriente');
 
-    ConectarGrillas1();
-    ConectarGrillas2();
-    ConectarGrillas3();
-
-    $('#a_panel_este_tab1').click(function () {
         ConectarGrillas1();
-    });
-    $('#a_panel_este_tab2').click(function () {
         ConectarGrillas2();
-    });
-    $('#a_panel_este_tab3').click(function () {
         ConectarGrillas3();
-    });
+
+        $('#a_panel_este_tab1').click(function () {
+            ConectarGrillas1();
+        });
+        $('#a_panel_este_tab2').click(function () {
+            ConectarGrillas2();
+        });
+        $('#a_panel_este_tab3').click(function () {
+            ConectarGrillas3();
+        });
+    }
 
     function ConectarGrillas1() {
         $("#ListaDrag").jqGrid('gridDnD', {
@@ -1069,6 +1096,9 @@ $(function () {
         TipoComprobante()
     })
 
+    $("#IdCuenta").change(function () {
+        CuentaFF()
+    })
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 
@@ -1081,7 +1111,20 @@ $(function () {
 
         var cabecera = $("#formid").serializeObject();
 
-        BienesOServicios = $("input[name='BienesOServicios']:checked").val();
+        if ($("#TipoDeComprobante").val() == "FF") {
+            cabecera.IdProveedorEventual = $("#IdProveedorEventual").val();
+            cabecera.IdCondicionCompra = null;
+            BienesOServicios = "";
+        } else {
+            cabecera.IdProveedor = $("#IdProveedor").val();
+            cabecera.IdCondicionCompra = $("#IdCondicionCompra").val();
+            BienesOServicios = $("input[name='BienesOServicios']:checked").val();
+            if (BienesOServicios == "B") {
+            } else {
+                cabecera.FechaPrestacionServicio = $("#FechaPrestacionServicio").val();
+                //cabecera.FechaFinServicio = $("#FechaFinServicio").val();
+            }
+        }
 
         cabecera.NumeroReferencia = $("#NumeroReferencia").val();
         cabecera.FechaComprobante = $("#FechaComprobante").val();
@@ -1091,10 +1134,8 @@ $(function () {
         cabecera.NumeroComprobante1 = $("#NumeroComprobante1").val();
         cabecera.NumeroComprobante2 = $("#NumeroComprobante2").val();
         cabecera.IdTipoComprobante = $("#IdTipoComprobante").val();
-        cabecera.IdProveedor = $("#IdProveedor").val();
         cabecera.IdPuntoVenta = $("#IdPuntoVenta").val();
         cabecera.PuntoVenta = $("#IdPuntoVenta").find('option:selected').text();
-        cabecera.IdCondicionCompra = $("#IdCondicionCompra").val();
         cabecera.CotizacionMoneda = $("#CotizacionMoneda").val();
         cabecera.CotizacionDolar = $("#CotizacionDolar").val();
         cabecera.CotizacionEuro = $("#CotizacionEuro").val();
@@ -1103,14 +1144,9 @@ $(function () {
         cabecera.NumeroCAI = $("#NumeroCAI").val();
         cabecera.NumeroCAE = $("#NumeroCAE").val();
         cabecera.FechaVencimientoCAI = $("#FechaVencimientoCAI").val();
+        cabecera.IdCuenta = $("#IdCuenta").val();
         cabecera.Dolarizada = "NO";
         cabecera.Proveedor = "";
-
-        if (BienesOServicios == "B") {
-        } else {
-            cabecera.FechaPrestacionServicio = $("#FechaPrestacionServicio").val();
-            //cabecera.FechaFinServicio = $("#FechaFinServicio").val();
-        }
 
         cabecera.DetalleComprobantesProveedores = [];
         $grid = $('#Lista');
@@ -1167,7 +1203,11 @@ $(function () {
             success: function (result) {
                 if (result) {
                     $('html, body').css('cursor', 'auto');
-                    window.location = (ROOT + "ComprobanteProveedor/Edit/" + result.IdComprobanteProveedor);
+                    if ($("#TipoDeComprobante").val() == "FF") {
+                        window.location = (ROOT + "ComprobanteProveedor/EditFF/" + result.IdComprobanteProveedor);
+                    } else {
+                        window.location = (ROOT + "ComprobanteProveedor/Edit/" + result.IdComprobanteProveedor);
+                    }
                 } else {
                     alert('No se pudo grabar el registro.');
                     $('.loading').html('');
@@ -1189,10 +1229,10 @@ $(function () {
                     for (var key in errorData) { errorMessages.push(errorData[key]); }
                     $('html, body').css('cursor', 'auto');
                     $('#grabar2').attr("disabled", false).val("Aceptar");
-                    $("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
-                    $("#mensajeAlerta").show();
-                    pageLayout.show('east', true);
-                    pageLayout.open('east');
+                    //$("#textoMensajeAlerta").html(errorData.Errors.join("<br />"));
+                    //$("#mensajeAlerta").show();
+                    //pageLayout.show('east', true);
+                    //pageLayout.open('east');
 
                     alert(errorData.Errors.join("\n").replace(/<br\/>/g, '\n'));
 
@@ -1218,9 +1258,16 @@ $(function () {
 function ActualizarDatos() {
     var IdCodigoIva = 0, Letra = "B", id = 0, IdComprobanteProveedor = 0;
 
-    id = $("#IdProveedor").val();
-    if (id.length > 0) {
-        MostrarDatosProveedor(id);
+    if ($("#TipoDeComprobante").val() == "FF") {
+        id = $("#IdProveedorEventual").val();
+        if (id.length > 0) {
+            MostrarDatosProveedor(id);
+        }
+    } else {
+        id = $("#IdProveedor").val();
+        if (id.length > 0) {
+            MostrarDatosProveedor(id);
+        }
     }
 
     IdComprobanteProveedor = $("#IdComprobanteProveedor").val() || 0;
@@ -1395,6 +1442,27 @@ function TipoComprobante() {
     });
 };
 
+function CuentaFF() {
+    var datos1, IdCuenta = 0, NumeroAuxiliar = 0;
+    IdCuenta = $("#IdCuenta").val();
+    $.ajax({
+        type: "Post",
+        async: false,
+        url: ROOT + 'Cuenta/TraerUna/',
+        data: { IdCuenta: IdCuenta },
+        success: function (result) {
+            if (result.length > 0) {
+                NumeroAuxiliar = result[0].NumeroAuxiliar;
+                $("#NumeroRendicionFF").val(NumeroAuxiliar);
+            }
+        },
+        error: function (xhr, textStatus, exceptionThrown) {
+            alert('No se encontro el registro');
+            $('#CoeficienteComprobante').val("");
+        }
+    });
+};
+
 function pickdates(id) {
     jQuery("#" + id + "_sdate", "#Lista").datepicker({ dateFormat: "yy-mm-dd" });
 }
@@ -1406,7 +1474,6 @@ function unformatNumber(cellvalue, options, rowObject) {
 function formatNumber(cellvalue, options, rowObject) {
     return cellvalue.replace(".", ",");
 }
-
 
 // Para usar en la edicion de una fila afterSubmit:processAddEdit,
 function processAddEdit(response, postdata) {
@@ -1600,7 +1667,6 @@ function ActivarControles(Activar) {
             jQuery(this).prop("disabled", true);
         })
     }
-
 }
 
 $.extend($.fn.fmatter, {
@@ -1703,7 +1769,11 @@ function TraerDatosProveedorPorCodigo() {
             dataType: "json",
             success: function (result) {
                 if (result.length > 0) {
-                    $("#IdProveedor").val(result[0]["id"]);
+                    if ($("#TipoDeComprobante").val() == "FF") {
+                        $("#IdProveedorEventual").val(result[0]["id"]);
+                    } else {
+                        $("#IdProveedor").val(result[0]["id"]);
+                    }
                     $("#Proveedor").val(result[0]["value"]);
                     $("#IdCodigoIva").val(result[0]["IdCodigoIva"]);
                     $("#IdCondicionCompra").val(result[0]["IdCondicionCompra"]);
@@ -1744,3 +1814,74 @@ function MostrarComprobanteImputado() {
     }
 }
 
+function CrearProveedor() {
+    $("#dlgProveedor").dialog({
+        show: "blind",
+        hide: "blind",
+        width: 500,
+        height: 320,
+        modal: true,
+        buttons: {
+            "Registrar": function () {
+                var Cuit_Eventual, RazonSocial_Eventual, IdCodigoIva;
+
+                Cuit_Eventual = $("#Cuit_Eventual").val();
+                if (Cuit_Eventual.length != 13) {
+                    alert("El cuit debe tener 13 digitos");
+                    return
+                }
+
+                RazonSocial_Eventual = $("#RazonSocial_Eventual").val();
+                if (RazonSocial_Eventual.length == 0) {
+                    alert("Debe ingresar la razon social");
+                    return
+                }
+
+                IdCodigoIva = $("#IdCodigoIva_Eventual").val();
+
+                $.ajax({
+                    type: "GET",
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    url: ROOT + 'Proveedor/GetProveedorPorCuit/',
+                    data: { Cuit: Cuit_Eventual },
+                    dataType: "Json",
+                    success: function (data) {
+                        if (typeof data.length === 'undefined' || data.length === null) {
+                            var cabecera = $("#formid").serializeObject();
+                            cabecera.RazonSocial = RazonSocial_Eventual;
+                            cabecera.Cuit = Cuit_Eventual;
+                            cabecera.IdCodigoIva = IdCodigoIva;
+
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json; charset=utf-8',
+                                url: ROOT + 'Proveedor/RegistrarProveedorEventual',
+                                dataType: 'json',
+                                data: JSON.stringify({ ProveedorEventual: cabecera }),
+                                success: function (result) {
+                                    if (result) {
+                                        MostrarDatosProveedor(result.IdProveedor);
+                                        $("#IdCodigoIva").val(IdCodigoIva);
+                                        $("#IdProveedorEventual").val(result.IdProveedor);
+                                    } else {
+                                        alert('No se pudo grabar el registro.');
+                                    }
+                                },
+                            });
+                        } else {
+                            data2 = data[0]
+                            alert("Ya existe un proveedor con ese cuit : " + data2.value);
+                            return
+                        }
+                    }
+                });
+
+                $(this).dialog("close");
+            },
+            "Cancelar": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
