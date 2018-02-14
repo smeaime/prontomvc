@@ -1,9 +1,9 @@
+var NS = {};
+
 $(function () {
     $("#loading").hide();
 
-    
     'use strict';
-
 
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic;
     var headerRow, rowHight, resizeSpanHeight;
@@ -1067,6 +1067,27 @@ $(function () {
             }
         });
     });
+
+    NS.anularfirma = function () {
+        var id = $("#IdRequerimiento").val();
+        var IdAnulo = $("#IdUsuarioEliminoFirmas").val();
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: ROOT + 'Requerimiento/AnularFirmas',
+            dataType: 'json',
+            data: JSON.stringify({ IdRequerimiento: id, IdAnulo: IdAnulo }),
+            success: function (result) {
+                if (result) {
+                    alert("Firmas anuladas");
+                    window.location.replace(window.location.pathname);
+                } else { alert('No se pudo completar la operacion.'); }
+            },
+            error: function (result) {
+                alert("No se pudo anular");
+            }
+        });
+    }
 
     //idaux = $("#IdRequerimiento").val();
     //if (idaux <= 0) {
