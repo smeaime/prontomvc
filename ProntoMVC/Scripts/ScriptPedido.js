@@ -1822,7 +1822,9 @@ function CopiarRM(acceptId, ui) {
                 // venido el objeto devuelto (jsoneado) ?
                 var longitud = data.length;
                 for (var i = 0; i < data.length; i++) {
-                    CopiarItemRM(data, i);
+                    if (data[i].TipoDesignacion == "CMP") {
+                        CopiarItemRM(data, i);
+                    }
                 }
                 AgregarRenglonesEnBlanco({ "IdDetallePedido": "0", "IdArticulo": "0", "Cantidad": "0", "Articulo": "" });
                 Validar();
@@ -1877,10 +1879,22 @@ function CopiarItemRM(data, i) {
 
     GrabarGrillaLocal()
 
-    var tmpdata = {};
+    var $gridDestino = $("#Lista");
+    var tmpdata = {}, dataIds, data2, i2, IdDetalleRequerimiento;
     var longitud = data.length;
 
     if (data[i].Cumplido == 'AN' || data[i].CantidadPendiente == 0) return;
+
+    IdDetalleRequerimiento = data[i].IdDetalleRequerimiento;
+    dataIds = $gridDestino.jqGrid('getDataIDs');
+    for (i2 = 0; i2 < dataIds.length; i2++) {
+        data2 = $gridDestino.jqGrid('getRowData', dataIds[i2]);
+        if (data2.IdDetalleRequerimiento == IdDetalleRequerimiento) {
+            //if (Origen == "DnD") $gridDestino.jqGrid('delRowData', dataIds[0]);
+            alert("Ya existe el registro que apunta al detalle de RM");
+            return;
+        }
+    };
 
     tmpdata['IdArticulo'] = data[i].IdArticulo;
     tmpdata['Codigo'] = data[i].Codigo;
