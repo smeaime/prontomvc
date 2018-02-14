@@ -453,6 +453,8 @@ namespace ServicioMVC
                     }
                 }
 
+
+
                 if (mIdProveedor > 0)
                 {
                     var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
@@ -461,6 +463,12 @@ namespace ServicioMVC
                         if ((Proveedores.RegistrarMovimientosEnCuentaCorriente ?? "SI") == "NO") { mGrabarRegistrosEnCuentaCorriente = false; }
                     }
                 }
+                else
+                {
+                    mGrabarRegistrosEnCuentaCorriente = false;
+                }
+
+                
 
                 if (mIdComprobanteProveedor > 0)
                 {
