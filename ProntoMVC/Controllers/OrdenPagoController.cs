@@ -303,6 +303,40 @@ namespace ProntoMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "OrdenPago_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "OrdenPago.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.doc";
+            string plantilla = DirApp + "Documentos\\" + "OrdenPago_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "OrdenPago.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             object nulo = null;
@@ -453,7 +487,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdOrdenPago.ToString(),
                             cell = new string[] {
                                 a.Tipo=="CC" ? "<a href="+ Url.Action("EditCC",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : (a.Tipo=="FF" ? "<a href="+ Url.Action("EditFF",new {id = a.IdOrdenPago} ) + " target='' >Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdOrdenPago} ) + " target='' >Editar</>"),
-                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE_PDF",new {id = a.IdOrdenPago} ) + ">Emitir</a> ",
                                 "<a href="+ Url.Action("ImprimirRetenciones",new {id = a.IdOrdenPago} ) + ">Emitir retenciones</a> ",
                                 a.IdOrdenPago.NullSafeToString(),
                                 a.IdOPComplementariaFF.NullSafeToString(),
@@ -2370,6 +2404,7 @@ namespace ProntoMVC.Controllers
                 {
                     if (mObservaciones.Length == 0) { sErrorMsg += "\n" + "El campo observaciones no puede estar vacio"; }
                     if ((o.IdEmpleadoFF ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el destinatario del fondo"; }
+                    if ((o.DiferenciaBalanceo ?? 0) != 0) { sErrorMsg += "\n" + "La orden de pago no balancea"; }
                 }
                 else
                 {

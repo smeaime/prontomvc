@@ -277,7 +277,8 @@ namespace ProntoMVC.Controllers
                          EsCajaBanco = b != null ? b.EsCajaBanco : "",
                          IdObra = a.IdObra ?? 0,
                          IdCuentaGasto = a.IdCuentaGasto ?? 0,
-                         IdTipoCuentaGrupo = a.IdTipoCuentaGrupo ?? 0
+                         IdTipoCuentaGrupo = a.IdTipoCuentaGrupo ?? 0,
+                         NumeroAuxiliar = a.NumeroAuxiliar ?? 0
                      }).ToList();
 
             return Json(q, JsonRequestBehavior.AllowGet);

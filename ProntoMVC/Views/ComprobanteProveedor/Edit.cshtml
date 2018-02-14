@@ -54,14 +54,14 @@
                                 <div>@Html.Hidden("IdComprobanteProveedor", Model.IdComprobanteProveedor)</div>
                                 <div>@Html.Hidden("IdProveedor", Model.IdProveedor)</div>
                                 <div>@Html.Hidden("IdProveedorEventual", Model.IdProveedorEventual)</div>
-                                @*<div>@Html.Hidden("IdTipoComprobante", Model.IdTipoComprobante)</div>*@
                                 <div>@Html.Hidden("IdCodigoIva", Model.IdCodigoIva)</div>
                                 <div>@Html.Hidden("IdComprobanteImputado", Model.IdComprobanteImputado)</div>
+                                <div>@Html.Hidden("TipoDeComprobante", "CC")</div>
                                 <div><input id="CoeficienteComprobante" name="CoeficienteComprobante" type="hidden"></div>
                                 <div><input id="TotalIVANoDiscriminado" name="TotalIVANoDiscriminado" type="hidden"></div>
                                 <div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
                                 <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
-                        </div>
+</div>
                     </div>
 
                     <div class="row-fluid">
