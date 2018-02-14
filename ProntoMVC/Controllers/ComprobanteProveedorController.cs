@@ -910,14 +910,12 @@ namespace ProntoMVC.Controllers
         {
             if (!PuedeEditar(enumNodos.ComprobantesPrv)) throw new Exception("No tenés permisos");
 
-
             if (!System.Diagnostics.Debugger.IsAttached && (!oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "SuperAdmin") &&
                 !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Administrador") &&
                 !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "FondosFijos") &&
                 !oStaticMembershipService.UsuarioTieneElRol(oStaticMembershipService.GetUser().UserName, "Compras")
                 ))
             {
-
                 int idproveedor = fondoFijoService.buscaridproveedorporcuit(DatosExtendidosDelUsuario_GrupoUsuarios((Guid)oStaticMembershipService.GetUser().ProviderUserKey));
 
                 if (ComprobanteProveedor.IdProveedor != idproveedor) throw new Exception("Sólo podes acceder a ComprobantesProveedores tuyos");
@@ -967,8 +965,7 @@ namespace ProntoMVC.Controllers
             ComprobanteProveedor o = new ComprobanteProveedor();
             AutoMapper.Mapper.Map(ComprobanteProveedor, o);
 
-            if ((o.IdProveedor ?? 0) <= 0 && (o.IdProveedorEventual ?? 0) <= 0
-                && (o.Proveedor ?? new Proveedor()).RazonSocial.NullSafeToString() != "")
+            if ((o.IdProveedor ?? 0) <= 0 && (o.IdProveedorEventual ?? 0) <= 0 && (o.Proveedor ?? new Proveedor()).RazonSocial.NullSafeToString() != "")
             {
                 crearProveedor(o);
             }
@@ -1124,6 +1121,21 @@ namespace ProntoMVC.Controllers
 
 
 
+<<<<<<< HEAD
+=======
+                        if (mIdProveedor > 0)
+                        {
+                            var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
+                            if (Proveedores != null)
+                            {
+                                if ((Proveedores.RegistrarMovimientosEnCuentaCorriente ?? "SI") == "NO") { mGrabarRegistrosEnCuentaCorriente = false; }
+                            }
+                        }
+                        else
+                        {
+                            mGrabarRegistrosEnCuentaCorriente = false;
+                        }
+>>>>>>> 430369bd929d48ac673357beb822ebda01ac5575
 
                     //using (var s = new ServicioMVC.servi())
                     //{
@@ -1599,6 +1611,8 @@ namespace ProntoMVC.Controllers
 
         void CargarViewBag(ComprobanteProveedor o)
         {
+            Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
+
             ViewBag.PorcentajesIVA = ListaPorcentajesIVA();
             //ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes, "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
             ViewBag.IdTipoComprobante = new SelectList(db.TiposComprobantes.Where(x => (x.Agrupacion1 ?? "") == "PROVEEDORES"), "IdTipoComprobante", "Descripcion", o.IdTipoComprobante);
@@ -1611,9 +1625,11 @@ namespace ProntoMVC.Controllers
             //ViewBag.IdComprador = new SelectList(fondoFijoService.Empleados.OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.IdComprador);
             //ViewBag.Aprobo = new SelectList(fondoFijoService.Empleados.OrderBy(x => x.Nombre), "IdEmpleado", "Nombre", o.Aprobo);
             ViewBag.Proveedor = (db.Proveedores.Find(o.IdProveedor) ?? new Proveedor()).RazonSocial;
-            ViewBag.IdCodigoIVA = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
+            ViewBag.IdCodigoIva = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion", (o.Proveedor ?? new Proveedor()).IdCodigoIva);
+            ViewBag.IdCodigoIva_Eventual = new SelectList(db.DescripcionIvas, "IdCodigoIVA", "Descripcion");
             ViewBag.CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.ComprobantesProveedores, 0, -1).Count();
             ViewBag.Letras = new SelectList(new List<string> { "A", "B", "C", "M" }, o.Letra);
+            ViewBag.IdCuenta = new SelectList(db.Cuentas.Where(x => (x.Activa ?? "SI") == "SI" && (x.IdTipoCuentaGrupo ?? 0) == (parametros.IdTipoCuentaGrupoFF ?? -1) && x.Descripcion.Length > 0 && (x.IdTipoCuenta == 2 || x.IdTipoCuenta == 4)).OrderBy(x => x.Descripcion), "IdCuenta", "Descripcion", o.IdCuenta);
         }
 
         void CargarViewBagViejo(ViewModelComprobanteProveedor o)
@@ -1678,13 +1694,18 @@ namespace ProntoMVC.Controllers
             decimal mTotalBruto = 0;
             decimal mTotalComprobante = 0;
 
+            Int32 mvarId = 0;
             Int32 mIdObra = 0;
+            Int32 mNumeroItem = 0;
 
             string mTipoComprobante = "";
             string mvarControlFechaNecesidad = "";
             string mAuxS5 = "";
             string usuarionombre;
             string nombre = "";
+            string mvarControlarRubrosContablesEnCP = "";
+
+            mvarId = o.IdComprobanteProveedor;
 
             List<int> duplicates = o.DetalleComprobantesProveedores.Where(s => (s.IdDetalleComprobanteProveedor) > 0).GroupBy(s => s.IdDetalleComprobanteProveedor)
                          .Where(g => g.Count() > 1)
@@ -1713,9 +1734,24 @@ namespace ProntoMVC.Controllers
             if (o.IdProveedorEventual != null) { mTipoComprobante = "FF"; }
             if (o.IdCuentaOtros != null) { mTipoComprobante = "OT"; }
 
+            if (mTipoComprobante == "CC")
+            {
+                o.IdProveedorEventual = null;
+                o.IdOrdenPago = null;
+                o.Cuit = null;
+            }
+            if (mTipoComprobante == "FF")
+            {
+                o.BienesOServicios = null;
+                o.CircuitoFirmasCompleto = "SI";
+                o.IdProveedor = null;
+                o.Cuit = null;
+            }
+
             if ((o.IdTipoComprobante ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el tipo de comprobante"; }
             if (mTipoComprobante == "CC" && (o.IdProveedor ?? 0) == 0) { sErrorMsg += "\n" + "Falta el proveedor"; }
             if (mTipoComprobante == "FF" && (o.IdProveedorEventual ?? 0) == 0) { sErrorMsg += "\n" + "Falta el proveedor"; }
+            if (mTipoComprobante == "FF" && (o.IdCuenta ?? 0) == 0) { sErrorMsg += "\n" + "Falta la cuenta de fondo fijo"; }
             if (mTipoComprobante == "OT" && (o.IdCuentaOtros ?? 0) == 0) { sErrorMsg += "\n" + "Falta la cuenta de otros"; }
             if (o.FechaComprobante == null) sErrorMsg += "\n" + "Fecha del comprobante";
             if (o.FechaVencimiento == null) sErrorMsg += "\n" + "Fecha de cencimiento";
@@ -1723,15 +1759,15 @@ namespace ProntoMVC.Controllers
             if ((o.Letra ?? "") == "") { sErrorMsg += "\n" + "Falta la Letra"; }
             if ((o.NumeroComprobante1 ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de punto de venta"; }
             if ((o.NumeroComprobante2 ?? 0) <= 0) { sErrorMsg += "\n" + "Falta el número de comprobante"; }
-            if ((o.IdCondicionCompra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la condición de compra"; }
+            if ((o.IdCondicionCompra ?? 0) <= 0 && mTipoComprobante == "CC") { sErrorMsg += "\n" + "Falta la condición de compra"; }
             if ((o.NumeroCAI ?? "") == "" && (o.NumeroCAE ?? "") == "") { sErrorMsg += "\n" + "Falta el número de CAI o CAE"; }
             if (o.FechaRecepcion == null) { sErrorMsg += "\n" + "Falta la fecha de recepción"; }
-            if (o.FechaVencimientoCAI < DateTime.Today) { sErrorMsg += "\n" + "La fecha de CAI está vencida"; }
+            if (mvarId <= 0 && o.FechaVencimientoCAI < DateTime.Today) { sErrorMsg += "\n" + "La fecha de CAI está vencida"; }
             if ((o.IdObra ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la obra"; }
             if ((o.CotizacionDolar ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cotización"; }
             if ((o.IdMoneda ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la moneda"; }
             if (o.TotalComprobante <= 0) { sErrorMsg += "\n" + "El importe total debe ser mayor a 0"; }
-            if ((o.BienesOServicios ?? "") == "") { sErrorMsg += "\n" + "Falta indicar si es un bien o un servicio"; }
+            if ((o.BienesOServicios ?? "") == "" && mTipoComprobante == "CC") { sErrorMsg += "\n" + "Falta indicar si es un bien o un servicio"; }
 
             usuarionombre = oStaticMembershipService.GetUser().UserName;
             var mvarMontoMinimo = fondoFijoService.BuscarClaveINI("Monto minimo para registrar ComprobanteProveedor", usuarionombre);
@@ -1748,11 +1784,15 @@ namespace ProntoMVC.Controllers
 
             Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
 
+            var Parametros2 = db.Parametros2.Where(p => p.Campo == "ControlarRubrosContablesEnCP").FirstOrDefault();
+            if (Parametros2 != null) { if ((Parametros2.Valor ?? "") == "SI") { mvarControlarRubrosContablesEnCP = "SI"; } }
+
             foreach (ProntoMVC.Data.Models.DetalleComprobantesProveedore x in o.DetalleComprobantesProveedores)
             {
+                mNumeroItem = mNumeroItem + 1;
                 mIdObra = x.IdObra ?? 0;
                 if ((x.IdCuenta ?? 0) <= 0) { sErrorMsg += "\n" + "Falta la cuenta contable del item"; }
-                //if (x.CodigoCuenta == null) sErrorMsg += "\n " + nombre + " no CodigoCuenta";
+                if ((x.IdRubroContable ?? 0) <= 0 && mvarControlarRubrosContablesEnCP == "SI") sErrorMsg += "\n El item " + mNumeroItem + " no tiene rubro contable";
                 //if (x.IdCuentaGasto == null) sErrorMsg += "\n " + nombre + " no tiene cuenta de gasto asociada";
                 //if (x.AplicarIVA1 == null) sErrorMsg += "\n " + nombre + " no AplicarIVA1";
                 //if (x.TomarEnCalculoDeImpuestos == null) sErrorMsg += "\n " + nombre + " no TomarEnCalculoDeImpuestos";
@@ -2337,6 +2377,9 @@ namespace ProntoMVC.Controllers
         public class ComprobantesProveedores2
         {
             public int IdComprobanteProveedor { get; set; }
+            public int? IdProveedor { get; set; }
+            public int? IdProveedorEventual { get; set; }
+            public int? IdCuenta { get; set; }
             public string TipoComprobante { get; set; }
             public string Letra { get; set; }
             public string NumeroComprobante1 { get; set; }
@@ -2369,6 +2412,7 @@ namespace ProntoMVC.Controllers
             public string Modifico { get; set; }
             public DateTime? FechaModifico { get; set; }
             public int? NumeroRendicionFF { get; set; }
+            public int? NumeroOrdenPagoFF { get; set; }
             public string Etapa { get; set; }
             public string Rubro { get; set; }
             public string CircuitoFirmasCompleto { get; set; }
@@ -2416,9 +2460,15 @@ namespace ProntoMVC.Controllers
                         from d in db.Provincias.Where(o => o.IdProvincia == a.IdProvinciaDestino).DefaultIfEmpty()
                         from e in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioIngreso).DefaultIfEmpty()
                         from f in db.Empleados.Where(o => o.IdEmpleado == a.IdUsuarioModifico).DefaultIfEmpty()
+                        from g in db.Proveedores.Where(o => o.IdProveedor == a.IdProveedorEventual).DefaultIfEmpty()
+                        from h in db.Cuentas.Where(o => o.IdCuenta == a.IdCuenta).DefaultIfEmpty()
+                        from i in db.OrdenesPago.Where(o => o.IdOrdenPago == a.IdOrdenPago).DefaultIfEmpty()
                         select new ComprobantesProveedores2
                         {
                             IdComprobanteProveedor = a.IdComprobanteProveedor,
+                            IdProveedor = a.IdProveedor,
+                            IdProveedorEventual = a.IdProveedorEventual,
+                            IdCuenta = a.IdCuenta,
                             TipoComprobante = b != null ? b.Descripcion : "",
                             Letra = a.Letra,
                             NumeroComprobante1 = SqlFunctions.Replicate("0", 4 - a.NumeroComprobante1.ToString().Length) + a.NumeroComprobante1.ToString(),
@@ -2429,9 +2479,9 @@ namespace ProntoMVC.Controllers
                             FechaComprobante = a.FechaComprobante,
                             FechaRecepcion = a.FechaRecepcion,
                             FechaVencimiento = a.FechaVencimiento,
-                            ProveedorCodigo = a.Proveedor != null ? a.Proveedor.CodigoEmpresa : "",
-                            Proveedor = a.Proveedor != null ? a.Proveedor.RazonSocial : "",
-                            Cuenta = a.Cuenta.Descripcion,
+                            ProveedorCodigo = a.Proveedor != null ? a.Proveedor.CodigoEmpresa : (g != null ? g.CodigoEmpresa : ""),
+                            Proveedor = a.Proveedor != null ? a.Proveedor.RazonSocial : (g != null ? g.RazonSocial : ""),
+                            Cuenta = a.Cuenta != null ? a.Cuenta.Descripcion : (h != null ? h.Descripcion : ""),
                             NumeroOrdenPago_Vale = c != null ? c.NumeroOrdenPago : 0,
                             CondicionIva = a.DescripcionIva.Descripcion,
                             Obra = a.Obra != null ? a.Obra.NumeroObra : "",
@@ -2451,6 +2501,7 @@ namespace ProntoMVC.Controllers
                             Modifico = f != null ? f.Nombre : "",
                             FechaModifico = a.FechaModifico,
                             NumeroRendicionFF = a.NumeroRendicionFF,
+                            NumeroOrdenPagoFF = i != null ? i.NumeroOrdenPago : null,
                             Etapa = "",
                             Rubro = "",
                             CircuitoFirmasCompleto = a.CircuitoFirmasCompleto,
@@ -2481,7 +2532,8 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdComprobanteProveedor.ToString(),
                             cell = new string[] {
-                                "<a href="+ Url.Action("Edit",new {id = a.IdComprobanteProveedor} ) + ">Editar</>",
+
+                                ((a.IdProveedor ?? 0) > 0 ? "<a href="+ Url.Action("Edit",new {id = a.IdComprobanteProveedor}) + ">Editar</>" : ((a.IdCuenta ?? 0) > 0 ? "<a href="+ Url.Action("EditFF",new {id = a.IdComprobanteProveedor}) + ">Editar</>" : "<a href="+ Url.Action("EditOT",new {id = a.IdComprobanteProveedor}) + ">Editar</>")),
                                 a.IdComprobanteProveedor.ToString(),
                                 a.TipoComprobante.NullSafeToString(),
                                 a.Letra.NullSafeToString(),
@@ -2515,6 +2567,7 @@ namespace ProntoMVC.Controllers
                                 a.Modifico.NullSafeToString(),
                                 a.FechaModifico == null ? "" : a.FechaModifico.GetValueOrDefault().ToString("dd/MM/yyyy"),
                                 a.NumeroRendicionFF.NullSafeToString(),
+                                a.NumeroOrdenPagoFF.NullSafeToString(),
                                 a.Etapa.NullSafeToString(),
                                 a.Rubro.NullSafeToString(),
                                 a.CircuitoFirmasCompleto.NullSafeToString(),
@@ -3337,6 +3390,7 @@ namespace ProntoMVC.Controllers
 
             var data = (from a in Det
                         from b in db.Articulos.Where(o => o.IdArticulo == a.IdArticulo).DefaultIfEmpty()
+                        from c in db.RubrosContables.Where(o => o.IdRubroContable == a.IdRubroContable).DefaultIfEmpty()
                         select new
                         {
                             a.IdDetalleComprobanteProveedor,
@@ -3361,7 +3415,8 @@ namespace ProntoMVC.Controllers
                             a.IdProvinciaDestino1,
                             a.PorcentajeProvinciaDestino1,
                             a.IdProvinciaDestino2,
-                            a.PorcentajeProvinciaDestino2
+                            a.PorcentajeProvinciaDestino2,
+                            RubroContable = (c != null ? " " + c.Descripcion : "")
                         }).OrderBy(x => x.IdDetalleComprobanteProveedor)
                         .ToList();
 
@@ -3399,6 +3454,7 @@ namespace ProntoMVC.Controllers
                             a.PorcentajeProvinciaDestino1.NullSafeToString(),
                             a.IdProvinciaDestino2.NullSafeToString(),
                             a.PorcentajeProvinciaDestino2.NullSafeToString(),
+                            a.RubroContable.NullSafeToString()
                             }
                         }).ToArray()
             };
