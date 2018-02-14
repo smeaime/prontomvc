@@ -1581,6 +1581,9 @@ Partial Class CartadeporteABM
 
             .Observaciones = txtObservaciones.Text
 
+            .Cupo = txtCupo.Text
+            .Turno = txtTurno.Text
+
             .Factor = StringToDecimal(txtFactor.Text)
 
 
@@ -2021,6 +2024,10 @@ Partial Class CartadeporteABM
                 chkCobraAcarreo.Checked = .CobraAcarreo
 
                 txtObservaciones.Text = .Observaciones
+
+                txtCupo.Text = .Cupo
+                txtTurno.Text = .Turno
+
 
                 Try
                     .IdUsuarioIngreso = Session(SESSIONPRONTO_glbIdUsuario)

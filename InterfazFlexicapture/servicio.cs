@@ -357,7 +357,7 @@ namespace ServicioMVC
 
 
 
-        public string Grabar_ComprobanteProveedor(ComprobanteProveedor ComprobanteProveedor)
+        public string Grabar_ComprobanteProveedor(ComprobanteProveedor ComprobanteProveedor, int IdUsuario)
         {
 
 
