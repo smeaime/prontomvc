@@ -858,6 +858,40 @@ namespace ProntoMVC.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "Recepcion_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "Recepcion.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.doc";
+            string plantilla = DirApp + "Documentos\\" + "Recepcion_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "Recepcion.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
         public virtual FileResult ImprimirConInteropPDF(int id)
         {
             object nulo = null;
@@ -1019,7 +1053,7 @@ namespace ProntoMVC.Controllers
                             id = a.IdRecepcion.ToString(),
                             cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRecepcion} ) + ">Editar</>",
-                                "<a href="+ Url.Action("ImprimirConInteropPDF",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE_PDF",new {id = a.IdRecepcion} ) + ">Emitir</a> ",
                                 a.IdRecepcion.ToString(),
                                 a.IdProveedor.ToString(), 
                                 a.IdCondicionCompra.ToString(), 

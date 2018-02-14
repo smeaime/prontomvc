@@ -344,6 +344,62 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
+        [HttpPost]
+        public virtual JsonResult RegistrarProveedorEventual([Bind(Exclude = "IdDetalleProveedor")] Proveedor ProveedorEventual)
+        {
+            if (!PuedeEditar(enumNodos.Proveedores)) throw new Exception("No tenés permisos");
+
+            try
+            {
+                Proveedor Proveedor = new Proveedor();
+
+                var s = ProveedorEventual.Cuit.Replace("-", "");
+                Proveedor.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                Proveedor.RazonSocial = ProveedorEventual.RazonSocial;
+                Proveedor.IdCodigoIva = ProveedorEventual.IdCodigoIva;
+                Proveedor.Eventual = "SI";
+
+                if (ModelState.IsValid || true)
+                {
+                    string usuario = ViewBag.NombreUsuario;
+                    int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
+
+                    Proveedor.IdUsuarioIngreso = IdUsuario;
+                    Proveedor.FechaIngreso = DateTime.Now;
+
+                    db.Proveedores.Add(Proveedor);
+                    db.SaveChanges();
+
+                    return Json(new { Success = 1, IdProveedor = Proveedor.IdProveedor, ex = "" });
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new System.Data.Entity.Validation.DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                );
+            }
+
+            catch (Exception ex)
+            {
+                return Json(new { Success = 0, ex = ex.Message.ToString() });
+            }
+            return Json(new { Success = 0, ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
+        }
+
         public class Proveedores2
         {
             public int IdProveedor { get; set; }
@@ -1070,6 +1126,34 @@ namespace ProntoMVC.Controllers
         {
             var filtereditems = (from a in db.Proveedores
                                  where (a.IdProveedor == Id)
+                                 select new
+                                 {
+                                     id = a.IdProveedor,
+                                     value = a.RazonSocial.Trim(),
+                                     a.CodigoEmpresa,
+                                     a.Direccion,
+                                     Localidad = a.Localidad.Nombre,
+                                     a.CodigoPostal,
+                                     Provincia = a.Provincia.Nombre,
+                                     Pais = a.Pais.Descripcion,
+                                     Telefono = a.Telefono1,
+                                     a.Fax,
+                                     a.Email,
+                                     a.Cuit,
+                                     DescripcionIva = a.DescripcionIva.Descripcion,
+                                     IdCodigoIva = a.IdCodigoIva,
+                                     IdIBCondicionPorDefecto = a.IdIBCondicionPorDefecto
+                                 }).ToList();
+
+            if (filtereditems.Count == 0) return Json(new { value = "No se encontraron resultados" }, JsonRequestBehavior.AllowGet);
+
+            return Json(filtereditems, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult GetProveedorPorCuit(string Cuit)
+        {
+            var filtereditems = (from a in db.Proveedores
+                                 where (a.Cuit == Cuit)
                                  select new
                                  {
                                      id = a.IdProveedor,

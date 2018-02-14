@@ -29,27 +29,29 @@
         $('.ui-jqgrid .ui-jqgrid-htable th div').css('white-space', 'normal');
 
         $('#Lista').jqGrid({
-            url: '@Url.Action("TT", "OtroIngresoAlmacen")',
+            url: '@Url.Action("OtrosIngresosAlmacen_DynamicGridData", "OtroIngresoAlmacen")',
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', '', 'IdOtroIngresoAlmacen', 'Emitio', 'Aprobo', 'TipoIngreso', 'Numero', 'Fecha', 'Tipo de Ingreso', 'Emitio', 'Aprobo', 'Anulo', 'Fecha de anulacion', 'Items', 'Observaciones'],
+            colNames: ['', '', 'IdOtroIngresoAlmacen', 'Emitio', 'Aprobo', 'TipoIngreso', 'Numero', 'Fecha', 'Tipo de Ingreso', 'Emitio', 'Aprobo', 'Anulado', 'Anulo',
+                'Fecha de anulacion', 'Observaciones', 'Items'],
             colModel: [
-                        { name: 'ver', index: 'ver', hidden: false, width: 50 },
-                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50 },
+                        { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
+                        { name: 'Emitir', index: 'Emitir', hidden: false, width: 50, search: false },
                         { name: 'IdOtroIngresoAlmacen', index: 'IdOtroIngresoAlmacen', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'Emitio', index: 'Emitio', width: 80, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'Aprobo', index: 'Aprobo', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'TipoIngreso', index: 'TipoIngreso', width: 80, sortable: false, editable: false, search: false, hidden: true },
+                        { name: 'TipoIngreso', index: 'TipoIngreso', width: 120, sortable: false, editable: false, search: false, hidden: true },
                         { name: 'NumeroOtroIngresoAlmacen', index: 'NumeroOtroIngresoAlmacen', align: 'right', width: 80, editable: false, hidden: false },
-                        { name: 'FechaOtroIngresoAlmacen', index: 'FechaOtroIngresoAlmacen', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'TipoOtroIngresoAlmacen', index: 'TipoOtroIngresoAlmacen', align: 'center', width: 150, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'EmitioNombre', index: 'EmitioNombre', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
-                        { name: 'AproboNombre', index: 'AproboNombre', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'FechaOtroIngresoAlmacen', index: 'FechaOtroIngresoAlmacen', width: 100, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
+                        { name: 'TipoOtroIngresoAlmacen', index: 'TipoOtroIngresoAlmacen', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn','eq']  } },
+                        { name: 'EmitioNombre', index: 'EmitioNombre', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn']  } },
+                        { name: 'AproboNombre', index: 'AproboNombre', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn']  } },
+                        { name: 'Anulado', index: 'Anulado', align: 'left', width: 60, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
                         { name: 'Anulo', index: 'Anulo', align: 'left', width: 170, editable: false, search: true, searchoptions: { sopt: ['cn','eq']  } },
                         { name: 'FechaAnulacion', index: 'FechaAnulacion', width: 80, align: 'center', sorttype: 'date', hidden: false, editable: false, formatoptions: { newformat: 'dd/mm/yy' }, datefmt: 'dd/mm/yy', search: false },
-                        { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } },
-                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false }
+                        { name: 'Observaciones', index: 'Observaciones', align: 'left', width: 500, editable: false, hidden: false },
+                        { name: 'CantidadItems', index: 'CantidadItems', align: 'right', width: 40, editable: false, search: true, searchoptions: { sopt: ['cn'] } }
             ],
             onSelectRow: function (id) {
                 if (id && id !== lastSelectedId) {

@@ -570,7 +570,8 @@ $(function () {
                 $('#ListaValores').jqGrid('setCell', rowid, 'Chequera', " ");
                 $("#ListaValores").setColProp('Chequera', { editoptions: { dataUrl: ROOT + 'Banco/GetChequerasPorIdCuentaBancaria2?IdCuentaBancaria=' + IdCuentaBancaria } });
             }
-        },        pager: $('#ListaPager3'),
+        },
+        pager: $('#ListaPager3'),
         rowNum: 100,
         rowList: [10, 20, 50, 100],
         sortname: 'IdDetalleOrdenPagoValores',
