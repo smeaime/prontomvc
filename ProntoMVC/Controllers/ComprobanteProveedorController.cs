@@ -33,6 +33,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Transactions;
 
+
+
+
 namespace ProntoMVC.Controllers
 {
 
@@ -897,6 +900,11 @@ namespace ProntoMVC.Controllers
         }
 
 
+
+
+
+
+
         [HttpPost]
         public virtual JsonResult BatchUpdate_CuentaCorriente(ViewModelComprobanteProveedor ComprobanteProveedor)
         {
@@ -1064,59 +1072,26 @@ namespace ProntoMVC.Controllers
             return Json(new { Success = 0, Errors = "", ex = new Exception("Error al registrar").Message.ToString(), ModelState = ModelState });
         }
 
+
+
+
+
+
+
         [HttpPost]
         public virtual JsonResult BatchUpdate(ProntoMVC.Data.Models.ComprobanteProveedor ComprobanteProveedor)
         {
+
+            string errs = "";
+            string warnings = "";
+
+
+
             if (!PuedeEditar(enumNodos.Facturas)) throw new Exception("No tenés permisos");
 
             try
             {
-                decimal mCotizacionMoneda = 0;
-                decimal mCotizacionDolar = 0;
-                decimal mCotizacionEuro = 0;
-                decimal mCotizacionMonedaAnterior = 0;
-                decimal mTotalComprobante = 0;
-                decimal mTotalIvaNoDiscriminado = 0;
-                decimal mIvaNoDiscriminadoItem = 0;
-                decimal mTotalAnterior = 0;
-                decimal mTotalAnteriorDolar = 0;
-                decimal mTotalAnteriorEuro = 0;
-                decimal mTotal = 0;
-                decimal mTotalDolar = 0;
-                decimal mTotalEuro = 0;
-                decimal mCoef = 1;
-                decimal mImporte = 0;
-                decimal mImporteIva = 0;
-                decimal mAjusteIVA = 0;
-
-                Int32 mIdComprobanteProveedor = 0;
-                Int32 mIdTipoComprobante = 0;
-                Int32 mIdTipoComprobanteAnterior = 0;
-                Int32 mIdProveedor = 0;
-                Int32 mNumero = 0;
-                Int32 mIdCtaCte = 0;
-                Int32 mIdCuentaProveedor = 0;
-                Int32 mIdCuentaComprasTitulo = 0;
-                Int32 mIdMonedaPesos = 0;
-                Int32 mIdCuentaBonificaciones = 0;
-                Int32 mIdCuenta = 0;
-                Int32 mIdCuentaReintegros = 0;
-                Int32 mIdImputacion = 0;
                 
-                string errs = "";
-                string warnings = "";
-                string mWebService = "";
-                string mSubdiarios_ResumirRegistros = "";
-
-                bool mGrabarRegistrosEnCuentaCorriente = true;
-
-                Parametros parametros = db.Parametros.Where(p => p.IdParametro == 1).FirstOrDefault();
-                mIdCuentaProveedor = parametros.IdCuentaAcreedoresVarios ?? 0;
-                mIdCuentaComprasTitulo = parametros.IdCuentaComprasTitulo ?? 0;
-                mIdMonedaPesos = parametros.IdMoneda ?? 0;
-                mIdCuentaBonificaciones = parametros.IdCuentaBonificaciones ?? 0;
-                mSubdiarios_ResumirRegistros = parametros.Subdiarios_ResumirRegistros ?? "";
-                mIdCuentaReintegros = parametros.IdCuentaReintegros ?? 0;
 
                 string usuario = ViewBag.NombreUsuario;
                 int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
@@ -1143,47 +1118,11 @@ namespace ProntoMVC.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        mIdComprobanteProveedor = ComprobanteProveedor.IdComprobanteProveedor;
-                        mIdTipoComprobante = ComprobanteProveedor.IdTipoComprobante ?? 0;
-                        mIdTipoComprobanteAnterior = mIdTipoComprobante;
-                        mIdProveedor = ComprobanteProveedor.IdProveedor ?? 0;
-                        mCotizacionMoneda = ComprobanteProveedor.CotizacionMoneda ?? 1;
-                        mCotizacionDolar = ComprobanteProveedor.CotizacionDolar ?? 0;
-                        mCotizacionEuro = ComprobanteProveedor.CotizacionEuro ?? 0;
-                        mTotalComprobante = (ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda;
-                        mTotalIvaNoDiscriminado = (ComprobanteProveedor.TotalIvaNoDiscriminado ?? 0) * mCotizacionMoneda;
-                        mAjusteIVA = (ComprobanteProveedor.AjusteIVA ?? 0) * mCotizacionMoneda;
 
-                        mTotal = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda, 2);
-                        if (mCotizacionDolar != 0) { mTotalDolar = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionDolar, 2); }
-                        if (mCotizacionEuro != 0) { mTotalEuro = decimal.Round((ComprobanteProveedor.TotalComprobante ?? 0) * mCotizacionMoneda / mCotizacionEuro, 2); }
 
-                        var TiposComprobantes = db.TiposComprobantes.Where(c => c.IdTipoComprobante == mIdTipoComprobante).SingleOrDefault();
-                        if (TiposComprobantes != null)
-                        {
-                            mCoef = TiposComprobantes.Coeficiente ?? mCoef;
-                        }
 
-                        if (mIdComprobanteProveedor <= 0)
-                        {
-                            ComprobanteProveedor.IdUsuarioIngreso = IdUsuario;
-                            ComprobanteProveedor.FechaIngreso = DateTime.Now;
-                            ComprobanteProveedor.TotalIva1 = ComprobanteProveedor.TotalIva1 ?? 0;
-                        }
-                        else
-                        {
-                            ComprobanteProveedor.IdUsuarioIngreso = IdUsuario;
-                            ComprobanteProveedor.FechaIngreso = DateTime.Now;
-
-                            ComprobanteProveedor ComprobanteProveedorAnterior = db.ComprobantesProveedor.Where(c => c.IdComprobanteProveedor == mIdComprobanteProveedor).SingleOrDefault();
-                            if (ComprobanteProveedorAnterior != null)
-                            {
-                                mIdTipoComprobanteAnterior = ComprobanteProveedorAnterior.IdTipoComprobante ?? mIdTipoComprobante;
-                            }
-                        }
-
+<<<<<<< HEAD
+=======
                         if (mIdProveedor > 0)
                         {
                             var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
@@ -1196,335 +1135,20 @@ namespace ProntoMVC.Controllers
                         {
                             mGrabarRegistrosEnCuentaCorriente = false;
                         }
+>>>>>>> 430369bd929d48ac673357beb822ebda01ac5575
 
-                        if (mIdComprobanteProveedor > 0)
-                        {
-                            var EntidadOriginal = db.ComprobantesProveedor.Where(p => p.IdComprobanteProveedor == mIdComprobanteProveedor).SingleOrDefault();
+                    //using (var s = new ServicioMVC.servi())
+                    //{
+                    //    //s.Grabar_ComprobanteProveedor();
 
-                            var EntidadoEntry = db.Entry(EntidadOriginal);
-                            EntidadoEntry.CurrentValues.SetValues(ComprobanteProveedor);
-
-                            //////////////////////////////////////////////// ITEMS ////////////////////////////////////////////////
-                            foreach (var d in ComprobanteProveedor.DetalleComprobantesProveedores)
-                            {
-                                var DetalleEntidadOriginal = EntidadOriginal.DetalleComprobantesProveedores.Where(c => c.IdDetalleComprobanteProveedor == d.IdDetalleComprobanteProveedor && d.IdDetalleComprobanteProveedor > 0).SingleOrDefault();
-                                if (DetalleEntidadOriginal != null)
-                                {
-                                    var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                    DetalleEntidadEntry.CurrentValues.SetValues(d);
-                                }
-                                else
-                                {
-                                    EntidadOriginal.DetalleComprobantesProveedores.Add(d);
-                                }
-                            }
-                            foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleComprobantesProveedores.Where(c => c.IdDetalleComprobanteProveedor != 0).ToList())
-                            {
-                                if (!ComprobanteProveedor.DetalleComprobantesProveedores.Any(c => c.IdDetalleComprobanteProveedor == DetalleEntidadOriginal.IdDetalleComprobanteProveedor))
-                                {
-                                    EntidadOriginal.DetalleComprobantesProveedores.Remove(DetalleEntidadOriginal);
-                                    db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                                }
-                            }
-
-                            ////////////////////////////////////////////// FIN MODIFICACION //////////////////////////////////////////////
-                            db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            ProntoMVC.Data.Models.PuntosVenta PuntoVenta = db.PuntosVentas.Where(c => c.IdPuntoVenta == ComprobanteProveedor.IdPuntoVenta).SingleOrDefault();
-                            if (PuntoVenta != null)
-                            {
-                                mNumero = PuntoVenta.ProximoNumero ?? 1;
-                                ComprobanteProveedor.NumeroReferencia = mNumero;
-
-                                PuntoVenta.ProximoNumero = mNumero + 1;
-                                db.Entry(PuntoVenta).State = System.Data.Entity.EntityState.Modified;
-                            }
-
-                            db.ComprobantesProveedor.Add(ComprobanteProveedor);
-                            db.SaveChanges();
-                        }
-
-                        ////////////////////////////////////////////// IMPUTACION //////////////////////////////////////////////
-                        // si es modificacion y tenia imputado algo
-                        //If mvarIdentificador > 0 Then
-                        //   Set DatosAnt = oDet.LeerUno("ComprobantesProveedores", mvarIdentificador)
-                        //   If DatosAnt.RecordCount > 0 Then
-                        //      mvarCotizacionAnt = IIf(IsNull(DatosAnt.Fields("CotizacionMoneda").Value), 1, DatosAnt.Fields("CotizacionMoneda").Value)
-                        //      mTotalAnterior = DatosAnt.Fields("TotalComprobante").Value * mvarCotizacionAnt
-                        //      If Not IsNull(DatosAnt.Fields("IdProveedor").Value) Then
-                        //         mvarIdProveedorAnterior = DatosAnt.Fields("IdProveedor").Value
-                        //      End If
-                        //      If Not IsNull(DatosAnt.Fields("IdTipoComprobante").Value) Then
-                        //         mvarIdTipoComprobanteAnterior = DatosAnt.Fields("IdTipoComprobante").Value
-                        //      End If
-                        //      Set Datos = oDet.LeerUno("TiposComprobante", DatosAnt.Fields("IdTipoComprobante").Value)
-                        //      If Datos.RecordCount > 0 Then
-                        //         mvarCoeficienteAnt = Datos.Fields("Coeficiente").Value
-                        //      End If
-                        //      mvarIdOrdenPagoAnterior = IIf(IsNull(DatosAnt.Fields("IdOrdenPago").Value), 0, DatosAnt.Fields("IdOrdenPago").Value)
-                        //      Datos.Close
-                        //      Set Datos = Nothing
-
-                        //      If Not IsNull(DatosAnt.Fields("IdComprobanteImputado").Value) Then
-                        //         mvarAuxL1 = 11
-                        //         Set oRsAux = oDet.LeerUno("ComprobantesProveedores", DatosAnt.Fields("IdComprobanteImputado").Value)
-                        //         If oRsAux.RecordCount > 0 Then
-                        //            mvarAuxL1 = oRsAux.Fields("IdTipoComprobante").Value
-                        //         End If
-                        //         oRsAux.Close
-
-                        //         Set DatosCtaCteNv = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(mvarIdentificador, DatosAnt.Fields("IdTipoComprobante").Value))
-                        //         If DatosCtaCteNv.RecordCount > 0 Then
-                        //            Tot = DatosCtaCteNv.Fields("ImporteTotal").Value - DatosCtaCteNv.Fields("Saldo").Value
-                        //            TotDol = DatosCtaCteNv.Fields("ImporteTotalDolar").Value - DatosCtaCteNv.Fields("SaldoDolar").Value
-                        //            TotEu = IIf(IsNull(DatosCtaCteNv.Fields("ImporteTotalEuro").Value), 0, DatosCtaCteNv.Fields("ImporteTotalEuro").Value) - _
-                        //                     IIf(IsNull(DatosCtaCteNv.Fields("SaldoEuro").Value), 0, DatosCtaCteNv.Fields("SaldoEuro").Value)
-
-                        //            Set DatosCtaCte = oDet.TraerFiltrado("CtasCtesA", "_BuscarComprobante", Array(DatosAnt.Fields("IdComprobanteImputado").Value, mvarAuxL1))
-                        //            If DatosCtaCte.RecordCount > 0 Then
-                        //                  DatosCtaCte.Fields("Saldo").Value = DatosCtaCte.Fields("Saldo").Value + Tot
-                        //                  DatosCtaCte.Fields("SaldoDolar").Value = DatosCtaCte.Fields("SaldoDolar").Value + TotDol
-                        //                  DatosCtaCte.Fields("SaldoEuro").Value = IIf(IsNull(DatosCtaCte.Fields("SaldoEuro").Value), 0, DatosCtaCte.Fields("SaldoEuro").Value) + TotEu
-                        //                  Resp = oDet.Guardar("CtasCtesA", DatosCtaCte)
-                        //            End If
-                        //            DatosCtaCte.Close
-                        //            Set DatosCtaCte = Nothing
-
-                        //            oDet.Eliminar "CtasCtesA", DatosCtaCteNv.Fields(0).Value
-                        //         End If
-                        //         DatosCtaCteNv.Close
-                        //         Set DatosCtaCteNv = Nothing
-                        //      End If
-                        //   End If
-                        //   DatosAnt.Close
-                        //   Set DatosAnt = Nothing
-                        //End If
+                    //}
+                        
 
 
-                        if (mIdProveedor > 0 && mGrabarRegistrosEnCuentaCorriente)
-                        {
-                            if (mIdComprobanteProveedor > 0)
-                            {
-                                CuentasCorrientesAcreedor CtaCteAnterior = db.CuentasCorrientesAcreedores.Where(c => c.IdComprobante == mIdComprobanteProveedor && c.IdTipoComp == mIdTipoComprobanteAnterior).FirstOrDefault();
-                                if (CtaCteAnterior != null)
-                                {
-                                    mTotalAnterior = (CtaCteAnterior.ImporteTotal ?? 0) - (CtaCteAnterior.Saldo ?? 0);
-                                    mTotalAnteriorDolar = (CtaCteAnterior.ImporteTotalDolar ?? 0) - (CtaCteAnterior.SaldoDolar ?? 0);
-                                    mTotalAnteriorEuro = (CtaCteAnterior.ImporteTotalEuro ?? 0) - (CtaCteAnterior.SaldoEuro ?? 0);
-                                }
-                            }
 
-                            CuentasCorrientesAcreedor CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdComprobante == mIdComprobanteProveedor && c.IdTipoComp == mIdTipoComprobante).FirstOrDefault();
-                            if (CtaCte == null)
-                            {
-                                CtaCte = new CuentasCorrientesAcreedor();
-                                mIdCtaCte = 0;
-                                mIdImputacion = 0;
-                            }
-                            else
-                            {
-                                mIdCtaCte = CtaCte.IdCtaCte;
-                                mIdImputacion = CtaCte.IdImputacion ?? 0;
-                            }
 
-                            CtaCte.IdTipoComp = mIdTipoComprobante;
-                            CtaCte.IdComprobante = mIdComprobanteProveedor;
-                            CtaCte.IdProveedor = ComprobanteProveedor.IdProveedor;
-                            CtaCte.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                            CtaCte.Fecha = ComprobanteProveedor.FechaRecepcion;
-                            CtaCte.FechaVencimiento = ComprobanteProveedor.FechaVencimiento;
-                            CtaCte.CotizacionDolar = ComprobanteProveedor.CotizacionDolar;
-                            CtaCte.CotizacionEuro = ComprobanteProveedor.CotizacionEuro;
-                            CtaCte.CotizacionMoneda = ComprobanteProveedor.CotizacionMoneda;
-                            //CtaCte.IdComprobante = ComprobanteProveedor.IdOrdenPago;
-                            CtaCte.ImporteTotal = mTotal;
-                            CtaCte.Saldo = mTotal - mTotalAnterior;
-                            CtaCte.ImporteTotalDolar = mTotalDolar;
-                            CtaCte.SaldoDolar = mTotalDolar - mTotalAnteriorDolar;
-                            CtaCte.ImporteTotalEuro = mTotalEuro;
-                            CtaCte.SaldoEuro = mTotalEuro - mTotalAnteriorEuro;
-                            CtaCte.IdMoneda = ComprobanteProveedor.IdMoneda;
 
-                            if (mIdCtaCte <= 0) { db.CuentasCorrientesAcreedores.Add(CtaCte); }
-                            else { db.Entry(CtaCte).State = System.Data.Entity.EntityState.Modified; }
-
-                            db.SaveChanges();
-                            mIdCtaCte = CtaCte.IdCtaCte;
-
-                            if (mIdImputacion == 0)
-                            {
-                                CtaCte = db.CuentasCorrientesAcreedores.Where(c => c.IdCtaCte == mIdCtaCte).SingleOrDefault();
-                                if (CtaCte != null)
-                                {
-                                    CtaCte.IdImputacion = mIdCtaCte;
-                                    db.Entry(CtaCte).State = System.Data.Entity.EntityState.Modified;
-                                    db.SaveChanges();
-                                }
-                            }
-                        }
-
-                        ////////////////////////////////////////////// ASIENTO //////////////////////////////////////////////
-                        if (mIdComprobanteProveedor > 0)
-                        {
-                            var Subdiarios = db.Subdiarios.Where(c => c.IdTipoComprobante == mIdTipoComprobante && c.IdComprobante == mIdComprobanteProveedor).ToList();
-                            if (Subdiarios != null) { foreach (Subdiario s1 in Subdiarios) { db.Entry(s1).State = System.Data.Entity.EntityState.Deleted; } }
-                            db.SaveChanges();
-                        }
-
-                        Subdiario s;
-
-                        Proveedor Proveedor = db.Proveedores.Where(c => c.IdProveedor == mIdProveedor).SingleOrDefault();
-                        if (Proveedor != null) { mIdCuentaProveedor = Proveedor.IdCuenta ?? mIdCuentaProveedor; }
-                        else { mIdCuentaProveedor = ComprobanteProveedor.IdCuenta ?? (ComprobanteProveedor.IdCuentaOtros ?? 0); }
-
-                        if (mIdCuentaProveedor > 0)
-                        {
-                            s = new Subdiario();
-                            s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                            s.IdCuenta = mIdCuentaProveedor;
-                            s.IdTipoComprobante = mIdTipoComprobante;
-                            s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                            s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                            s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                            if (mCoef == 1) { s.Haber = mTotalComprobante; }
-                            else { s.Debe = mTotalComprobante; }
-                            s.IdMoneda = mIdMonedaPesos;
-                            s.CotizacionMoneda = 1;
-
-                            db.Subdiarios.Add(s);
-                        }
-
-                        mImporte = (ComprobanteProveedor.TotalBonificacion ?? 0) * mCotizacionMoneda;
-                        if (mImporte != 0 && mIdCuentaBonificaciones > 0)
-                        {
-                            s = new Subdiario();
-                            s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                            s.IdCuenta = mIdCuentaBonificaciones;
-                            s.IdTipoComprobante = mIdTipoComprobante;
-                            s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                            s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                            s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                            if (mCoef == 1) { s.Haber = mImporte; }
-                            else { s.Debe = mImporte; }
-                            s.IdMoneda = mIdMonedaPesos;
-                            s.CotizacionMoneda = 1;
-
-                            db.Subdiarios.Add(s);
-                        }
-
-                        foreach (var d in ComprobanteProveedor.DetalleComprobantesProveedores)
-                        {
-                            mImporte = (d.Importe ?? 0) * mCotizacionMoneda;
-                            mImporteIva = (d.ImporteIVA1 ?? 0) * mCotizacionMoneda;
-
-                            if ((ComprobanteProveedor.Letra ?? "") == "A" || (ComprobanteProveedor.Letra ?? "") == "M") { }
-                            else { mIvaNoDiscriminadoItem = mIvaNoDiscriminadoItem + mImporteIva; }
-
-                            if (mAjusteIVA != 0)
-                            {
-                                mImporteIva = mImporteIva + mAjusteIVA;
-                                mAjusteIVA = 0;
-                            }
-
-                            mIdCuenta = d.IdCuentaIvaCompras1 ?? 0;
-                            if (mIdCuenta > 0 && mImporteIva != 0)
-                            {
-                                s = new Subdiario();
-                                s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                                s.IdCuenta = mIdCuenta;
-                                s.IdTipoComprobante = mIdTipoComprobante;
-                                s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                                s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                                s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                                if (mCoef == 1)
-                                {
-                                    if (mImporteIva >= 0) { s.Debe = mImporteIva; } else { s.Haber = mImporteIva * -1; };
-                                }
-                                else
-                                {
-                                    if (mImporteIva >= 0) { s.Haber = mImporteIva; } else { s.Debe = mImporteIva * -1; };
-                                }
-                                s.IdMoneda = mIdMonedaPesos;
-                                s.CotizacionMoneda = 1;
-                                if (mSubdiarios_ResumirRegistros != "SI") { s.IdDetalleComprobante = d.IdDetalleComprobanteProveedor; }
-
-                                db.Subdiarios.Add(s);
-                            }
-
-                            mIdCuenta = d.IdCuenta ?? 0;
-                            mImporte = mImporte - mIvaNoDiscriminadoItem;
-                            if (mIdCuenta > 0 && mImporte != 0)
-                            {
-                                s = new Subdiario();
-                                s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                                s.IdCuenta = mIdCuenta;
-                                s.IdTipoComprobante = mIdTipoComprobante;
-                                s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                                s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                                s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                                if (mCoef == 1)
-                                {
-                                    if (mImporte >= 0) { s.Debe = mImporte; } else { s.Haber = mImporte * -1; };
-                                }
-                                else
-                                {
-                                    if (mImporte >= 0) { s.Haber = mImporte; } else { s.Debe = mImporte * -1; };
-                                }
-                                s.IdMoneda = mIdMonedaPesos;
-                                s.CotizacionMoneda = 1;
-                                if (mSubdiarios_ResumirRegistros != "SI") { s.IdDetalleComprobante = d.IdDetalleComprobanteProveedor; }
-
-                                db.Subdiarios.Add(s);
-                            }
-                        }
-
-                        mIdCuenta = ComprobanteProveedor.ReintegroIdCuenta ?? 0;
-                        mImporte = (ComprobanteProveedor.ReintegroImporte ?? 0) * mCotizacionMoneda;
-                        if (mIdCuentaReintegros > 0 && mIdCuenta > 0 && mImporte != 0)
-                        {
-                            s = new Subdiario();
-                            s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                            s.IdCuenta = mIdCuentaReintegros;
-                            s.IdTipoComprobante = mIdTipoComprobante;
-                            s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                            s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                            s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                            if (mCoef == 1) { s.Haber = mImporte; }
-                            else { s.Debe = mImporte; }
-                            s.IdMoneda = mIdMonedaPesos;
-                            s.CotizacionMoneda = 1;
-
-                            db.Subdiarios.Add(s);
-
-                            s = new Subdiario();
-                            s.IdCuentaSubdiario = mIdCuentaComprasTitulo;
-                            s.IdCuenta = mIdCuenta;
-                            s.IdTipoComprobante = mIdTipoComprobante;
-                            s.NumeroComprobante = ComprobanteProveedor.NumeroReferencia;
-                            s.FechaComprobante = ComprobanteProveedor.FechaRecepcion;
-                            s.IdComprobante = ComprobanteProveedor.IdComprobanteProveedor;
-                            if (mCoef == 1) { s.Debe = mImporte; }
-                            else { s.Haber = mImporte; }
-                            s.IdMoneda = mIdMonedaPesos;
-                            s.CotizacionMoneda = 1;
-
-                            db.Subdiarios.Add(s);
-                        }
-
-                        db.SaveChanges();
-
-                        //////////////////////////////////////////////////////////
-                        db.Tree_TX_Actualizar("ComprobantesPrvPorMes", ComprobanteProveedor.IdComprobanteProveedor, "ComprobanteProveedor");
-
-                        //////////////////////////////////////////////////////////
-                        scope.Complete();
-                        scope.Dispose();
-                        //////////////////////////////////////////////////////////
-                    }
-
+                  
                     TempData["Alerta"] = "Grabado " + DateTime.Now.ToShortTimeString();
 
                     return Json(new { Success = 1, IdComprobanteProveedor = ComprobanteProveedor.IdComprobanteProveedor, ex = "" });
@@ -1594,6 +1218,14 @@ namespace ProntoMVC.Controllers
                 return Json(errors);
             }
         }
+        
+
+
+
+
+
+
+
 
         public virtual ActionResult Edit(int id)
         {
