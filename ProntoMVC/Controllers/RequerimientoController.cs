@@ -828,8 +828,8 @@ namespace ProntoMVC.Controllers
                         {
                             id = a.IdRequerimiento.ToString(),
                             cell = new string[] {
-                                "<a href="+ Url.Action("Imprimir",new {id = a.IdRequerimiento} )  +">Imprimir</>" ,
                                 "<a href="+ Url.Action("Edit",new {id = a.IdRequerimiento} ) + "  >Editar</>" ,
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE",new {id = a.IdRequerimiento} )  +">Emitir</>" ,
                                 a.IdRequerimiento.ToString(),
                                 a.NumeroRequerimiento.NullSafeToString(),
                                 a.FechaRequerimiento==null ? "" :  a.FechaRequerimiento.GetValueOrDefault().ToString("dd/MM/yyyy"),
@@ -1903,11 +1903,6 @@ namespace ProntoMVC.Controllers
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
         public virtual JsonResult Autorizaciones(int IdRequerimiento)
         {
             var Autorizaciones = db.AutorizacionesPorComprobante_TX_AutorizacionesPorComprobante((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, IdRequerimiento);
@@ -1920,11 +1915,6 @@ namespace ProntoMVC.Controllers
             base.Dispose(disposing);
         }
 
-
-
-
-
-
         public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
         {
             string DirApp = AppDomain.CurrentDomain.BaseDirectory;
@@ -1933,22 +1923,20 @@ namespace ProntoMVC.Controllers
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
+<<<<<<< HEAD
 
 
             var s = new ServicioMVC.servi(SC);
+=======
+            var s = new ServicioMVC.servi();
+>>>>>>> 430369bd929d48ac673357beb822ebda01ac5575
             string mensajeError;
             s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
-
-
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             string nombrearchivo = "requerimiento.pdf";
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
         }
-
-
-
-
 
         public virtual FileResult ImprimirConPlantillaEXE(int id)
         {
@@ -1958,35 +1946,24 @@ namespace ProntoMVC.Controllers
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
+<<<<<<< HEAD
 
             var s = new ServicioMVC.servi(SC);
+=======
+            var s = new ServicioMVC.servi();
+>>>>>>> 430369bd929d48ac673357beb822ebda01ac5575
             string mensajeError;
             s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
-
-
-
 
             byte[] contents = System.IO.File.ReadAllBytes(output);
             string nombrearchivo = "requerimiento.doc";
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
-
-            //como mostrar mensaje de error?
-
         }
-
-
-
-
-
-
-
 
         public virtual FileResult Imprimir(int id) //(int id)
         {
-
             int CodigoSalida;
             return ImprimirConPlantillaEXE(id);
-
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
@@ -2018,9 +1995,6 @@ namespace ProntoMVC.Controllers
             byte[] contents = System.IO.File.ReadAllBytes(output);
             return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, "requerimiento.doc");
         }
-
-
-
 
         public virtual FileResult ImprimirPDF(int id, String output2 = "") //(int id)
         {

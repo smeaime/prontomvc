@@ -8977,3 +8977,108 @@ Formato localidad-provincia	destination	x
 
 
 
+<<<<<<< HEAD
+=======
+
+
+namespace ServicioMVC
+{
+
+    public class servi
+    {
+
+        public string ImprimirConPlantillaEXE(int id, string SC, string DirApp, string plantilla, string sArchivoSalida, out string mensajeError) //, string Tipo = "")
+        {
+            //devuelve pdf si se le pasa un sArchivoSalida con extension pdf
+
+            string SCsinEncriptar = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC);
+
+            System.IO.FileInfo MyFile2 = new System.IO.FileInfo(plantilla);//busca si ya existe el archivo a generar y en ese caso lo borra
+
+            //if (!MyFile2.Exists)
+            //{
+            //    plantilla = Pronto.ERP.Bll.OpenXML_Pronto.CargarPlantillaDeSQL(OpenXML_Pronto.enumPlantilla.FacturaA, SC);
+            //}
+
+            //tengo que copiar la plantilla en el destino, porque openxml usa el archivo que le vaya a pasar
+            System.IO.FileInfo MyFile1 = new System.IO.FileInfo(sArchivoSalida);//busca si ya existe el archivo a generar y en ese caso lo borra
+            if (MyFile1.Exists) MyFile1.Delete();
+
+            //'How to Wait for a Shelled Process to Finish
+            //'Get the name of the system folder.
+            var sysFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
+            //'Create a new ProcessStartInfo structure.
+            var pInfo = new ProcessStartInfo();
+            //'Set the file name member of pinfo to Eula.txt in the system folder.
+            pInfo.FileName = DirApp + @"bin\Plantillas.exe";
+
+            /*
+            // -SC=Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45
+            // en lugar de este formato, yo mandaba:
+            // -SC=Data Source=sqlmvc;Initial catalog=Pronto_Vialagro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500
+                LO QUE NO LE GUSTA ES QUE LE FALTE EL "PROVIDER="
+             */
+            //SCsinEncriptar = @"Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa; Password=.SistemaPronto.;Initial catalog=Pronto;Data Source=serversql3\TESTING;Connect Timeout=45";
+
+            if (!SCsinEncriptar.ToLower().Contains("provider="))
+            {
+                SCsinEncriptar += ";Provider=SQLOLEDB.1";
+            }
+
+            //if (Tipo == "PDF")
+            //{
+            //    output = DirApp + "Documentos\\" + "archivo.pdf";
+            //    nombrearchivo = "requerimiento.pdf";
+            //}
+
+            pInfo.Arguments = @"-Plantilla=" + plantilla + " -SC=" + SCsinEncriptar + @" -Id=" + id + " -FileOut=" + sArchivoSalida;
+
+            ErrHandler2.WriteError(pInfo.FileName + " " + pInfo.Arguments);
+
+            //'Start the process.
+            pInfo.UseShellExecute = false;
+            Process p = Process.Start(pInfo);
+            //'Wait for the process window to complete loading.
+            p.WaitForInputIdle();
+            //'Wait for the process to exit.
+            p.WaitForExit();
+
+            //'Continue with the code.
+            //MessageBox.Show("Code continuing...");
+
+            int CodigoSalida = p.ExitCode;
+
+            switch (CodigoSalida)
+            {
+                case 0:
+                    mensajeError = "";
+                    break;
+
+                case -103:
+                    mensajeError = "Falta la plantilla";
+                    break;
+
+                case -104:
+                    mensajeError = "Falta la cadena de conexión";
+                    break;
+
+                case -105:
+                    mensajeError = "Falta el Id del comprobante";
+                    break;
+
+                case -106:
+                    mensajeError = "Falta el nombre del archivo de salida";
+                    break;
+
+                default:
+                    mensajeError = "Error inesperado";
+                    break;
+            }
+
+            return sArchivoSalida;
+        }
+
+    }
+
+}
+>>>>>>> 430369bd929d48ac673357beb822ebda01ac5575

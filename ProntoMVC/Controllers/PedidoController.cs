@@ -80,6 +80,40 @@ namespace ProntoMVC.Controllers
             return View(Pedido);
         }
 
+        public virtual FileResult ImprimirConPlantillaEXE_PDF(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.pdf";
+            string plantilla = DirApp + "Documentos\\" + "Pedido_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "pedido.pdf";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
+        public virtual FileResult ImprimirConPlantillaEXE(int id)
+        {
+            string DirApp = AppDomain.CurrentDomain.BaseDirectory;
+            string output = DirApp + "Documentos\\" + "archivo.doc";
+            string plantilla = DirApp + "Documentos\\" + "Pedido_" + this.HttpContext.Session["BasePronto"].ToString() + ".dotm";
+
+            string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
+
+            var s = new ServicioMVC.servi();
+            string mensajeError;
+            s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
+
+            byte[] contents = System.IO.File.ReadAllBytes(output);
+            string nombrearchivo = "pedido.doc";
+            return File(contents, System.Net.Mime.MediaTypeNames.Application.Octet, nombrearchivo);
+        }
+
         public virtual FileResult Imprimir(int id, bool bAgruparItems = false) //(int id)
         {
             // string sBasePronto = (string)rc.HttpContext.Session["BasePronto"];
@@ -1792,9 +1826,9 @@ namespace ProntoMVC.Controllers
                         select new jqGridRowJson
                         {
                             id = a.IdPedido.ToString(),
-                            cell = new string[] { 
-                                //"<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + " target='' >Editar</>" ,
+                            cell = new string[] {
                                 "<a href="+ Url.Action("Edit",new {id = a.IdPedido} ) + "  >Editar</>" ,
+                                "<a href="+ Url.Action("ImprimirConPlantillaEXE",new {id = a.IdPedido} )  +">Emitir</>" ,
                                 a.IdPedido.ToString(), 
                                 a.IdProveedor.NullSafeToString(), 
                                 a.IdCondicionCompra.NullSafeToString(), 

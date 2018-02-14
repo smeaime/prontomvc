@@ -25,10 +25,10 @@
             </button>
             @*<button onclick="window.location.href='@Url.Action("EditOtros", new { id = -1 })'" class="btn btn-default span2 ">
                 Nuevo de Otros
-            </button>
-            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-default span2 ">
-                Nuevo Fondo fijo
             </button>*@
+            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-primary span2 ">
+                Nuevo Fondo fijo
+            </button>
 
             @*<div class="span4">
         <div class="input-prepend input-append">
@@ -125,15 +125,15 @@
             postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['', 'IdComprobanteProveedor', 'Tipo Comp.', 'Letra', 'Nro. Pto. Vta.', 'Nro. Comprobante', 'Punto venta', 'Nro. Referencia', 'Tipo', 'Fecha comprobante', 'Fecha recepcion',
-                       'Fecha vencimiento', 'Codigo proveedor', 'Proveedor', 'Cuenta p/otros', 'Nro. OP (Vale)', 'Condicion iva', 'Obra', 'Cuenta contable (1er. detalle)', 'Subtotal',
-                       'Neto gravado', 'Total iva', 'Ajuste iva', 'Total bonificacion', 'Total comprobante', 'Mon.', 'Cotizacion dolar', 'Provincia destino', 'Observaciones', 'Ingreso',
-                       'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Nro. rendicion FF', 'Etapa', 'Rubro', 'Circ. Firmas Compl.', 'Pedidos', 'Recepciones', 'Subcontratos', 'Numero CAI',
-                       'Numero CAE', 'Control AFIP (Resultado)', 'Control AFIP (Mensaje)', 'Control AFIP (Fecha)', 'Conf.', 'Items'],
+            colNames: ['', 'IdComprobanteProveedor', 'Tipo Comprobante', 'Letra', 'Nro. Pto. Vta.', 'Nro. Comprobante', 'Pto. Vta. Int.', 'Nro. Referencia', 'Tipo', 'Fecha comprobante', 'Fecha recepcion',
+                        'Fecha vencimiento', 'Codigo proveedor', 'Proveedor', 'Cuenta contable', 'Nro. OP (Vale)', 'Condicion iva', 'Obra', 'Cuenta contable (1er. detalle)', 'Subtotal',
+                        'Neto gravado', 'Total iva', 'Ajuste iva', 'Total bonificacion', 'Total comprobante', 'Mon.', 'Cotizacion dolar', 'Provincia destino', 'Observaciones', 'Ingreso',
+                        'Fecha ingreso', 'Modifico', 'Fecha modificacion', 'Nro. rendicion FF', 'Nro. orden pago FF', 'Etapa', 'Rubro', 'Circ. Firmas Compl.', 'Pedidos', 'Recepciones',
+                        'Subcontratos', 'Numero CAI', 'Numero CAE', 'Control AFIP (Resultado)', 'Control AFIP (Mensaje)', 'Control AFIP (Fecha)', 'Conf.', 'Items'],
             colModel: [
                         { name: 'ver', index: 'ver', hidden: false, width: 50, search: false },
                         { name: 'IdComprobanteProveedor', index: 'IdComprobanteProveedor', width: 80, sortable: false, editable: false, search: false, hidden: true },
-                        { name: 'TipoComprobante', index: 'TipoComprobante', align: 'left', width: 250, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], enableClear: true } },
+                        { name: 'TipoComprobante', index: 'TipoComprobante', align: 'left', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], enableClear: true } },
                         { name: 'Letra', index: 'Letra', align: 'center', width: 50, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'NumeroComprobante1', index: 'NumeroComprobante1', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
                         { name: 'NumeroComprobante2', index: 'NumeroComprobante2', align: 'center', width: 120, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'], clearSearch: false } },
@@ -180,6 +180,7 @@
                             search: true, searchrules: { date: true }, searchoptions: { sopt: ['ge', 'le', 'eq'] }
                         },
                         { name: 'NumeroRendicionFF', index: 'NumeroRendicionFF', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'], clearSearch: false } },
+                        { name: 'NumeroOrdenPagoFF', index: 'NumeroOrdenPagoFF', align: 'center', width: 100, editable: false, search: true, hidden: false, searchoptions: { sopt: ['eq'], clearSearch: false } },
                         { name: 'Etapa', index: 'Etapa', align: 'center', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'Rubro', index: 'Rubro', align: 'center', width: 200, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },
                         { name: 'CircuitoFirmasCompleto', index: 'CircuitoFirmasCompleto', align: 'center', width: 60, editable: false, search: true, hidden: false, searchoptions: { sopt: ['cn'] } },

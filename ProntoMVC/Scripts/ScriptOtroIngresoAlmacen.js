@@ -355,29 +355,29 @@
     //    $("#Telefono").val("");
     //})
 
-    $("#Emitio").change(function () {
-        var IdEmitio = $("#Emitio > option:selected").attr("value");
-        var Emitio = $("#Emitio > option:selected").html();
-        $("#Aux1").val(IdEmitio);
-        $("#Aux2").val(Emitio);
-        $("#Aux3").val("");
-        $("#Aux10").val("");
-        $('#dialog-password').data('Combo', 'Emitio');
-        $('#dialog-password').dialog('open');
-        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
-    });
+    //$("#Emitio").change(function () {
+    //    var IdEmitio = $("#Emitio > option:selected").attr("value");
+    //    var Emitio = $("#Emitio > option:selected").html();
+    //    $("#Aux1").val(IdEmitio);
+    //    $("#Aux2").val(Emitio);
+    //    $("#Aux3").val("");
+    //    $("#Aux10").val("");
+    //    $('#dialog-password').data('Combo', 'Emitio');
+    //    $('#dialog-password').dialog('open');
+    //    $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+    //});
 
-    $("#Aprobo").change(function () {
-        var IdAprobo = $("#Aprobo > option:selected").attr("value");
-        var Aprobo = $("#Aprobo > option:selected").html();
-        $("#Aux1").val(IdAprobo);
-        $("#Aux2").val(Aprobo);
-        $("#Aux3").val("");
-        $("#Aux10").val("");
-        $('#dialog-password').data('Combo', 'Aprobo');
-        $('#dialog-password').dialog('open');
-        $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
-    });
+    //$("#Aprobo").change(function () {
+    //    var IdAprobo = $("#Aprobo > option:selected").attr("value");
+    //    var Aprobo = $("#Aprobo > option:selected").html();
+    //    $("#Aux1").val(IdAprobo);
+    //    $("#Aux2").val(Aprobo);
+    //    $("#Aux3").val("");
+    //    $("#Aux10").val("");
+    //    $('#dialog-password').data('Combo', 'Aprobo');
+    //    $('#dialog-password').dialog('open');
+    //    $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+    //});
 
     ////////////////////////////////////////////////////////// SERIALIZACION //////////////////////////////////////////////////////////
 

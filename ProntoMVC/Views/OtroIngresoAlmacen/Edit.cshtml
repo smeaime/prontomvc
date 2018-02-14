@@ -135,6 +135,83 @@
                                         });
                                     }
                                 })
+
+                                $("#Aprobo").change(function (event) {
+                                    aprobar();
+                                });
+
+                                function aprobar() {
+                                    var IdAprobo = $("#Aprobo > option:selected").attr("value");
+                                    var Aprobo = $("#Aprobo > option:selected").html();
+                                    $("#Aux1").val(IdAprobo);
+                                    $("#Aux2").val(Aprobo);
+                                    $("#Aux3").val("");
+                                    $("#Aux10").val("");
+
+                                    $("#dialog-password").dialog({
+                                        buttons: {
+                                            'Aceptar': function () {
+                                                //alert('hola');
+                                                //  $(this).dialog('close');
+                                                // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
+                                                validatePwd2(
+                                                    function () {
+                                                        var combo = $("#Aux0").val();
+                                                        var idusuario = $("#Aux1").val();
+                                                        var post = $("#Aux10").val();
+                                                        $('#' + combo).val(idusuario);
+                                                        $("#Aux3").val(idusuario);
+                                                    },
+                                                    function () {
+                                                        alert('Password incorrecta');
+                                                        var combo = $("#Aux0").val();
+                                                        $('#' + combo).val("");
+                                                        $("#Aux3").val("");
+                                                    }
+                                                );
+                                            },
+                                            'Cancelar': function () {
+                                                $(this).dialog('close');
+                                            }
+                                        },
+
+                                        open: function () {
+                                            //alert("hay que volver a llenar el mySelect"); //porque el anular lo rellena con otra lista
+                                            // pasar la eleccion del combo DESPUES de que hizo la llamada a CargarEmpleadosParaAprobar, como callback
+
+                                            var callbackfunction = function () {
+                                                var combo = $("#dialog-password").data('Combo')
+                                                var idusuario = $("#Aux1").val();
+                                                var usuario = $("#Aux2").val();
+                                                $("#Aux0").val(combo);
+                                                $("#usuario").val(usuario);
+                                                $('#password').focus();
+                                                if (idusuario == "") {
+                                                    $("#mySelect").val([]);
+                                                }
+                                                else {
+                                                    $('#mySelect').val(idusuario);
+                                                }
+                                            }
+
+                                            //CargarEmpleadosParaAprobar(callbackfunction);
+                                            CargarEmpleadosParaAprobar_Compras(callbackfunction);
+                                        },
+                                        close: function () {
+                                            // si usás una funcion de callback, pasale los parametros. Quiero decir: que el dialog no tenga que saber cómo implementarla!
+                                            // http://stackoverflow.com/questions/939032/jquery-pass-more-parameters-into-callback
+
+                                            $('#password').val("");
+                                            var combo = $("#Aux0").val();
+                                            $('#' + combo).val("");  // acá reseteo el combo que se pasó como parámetro en la llamada   $('#dialog-password').data('Combo', 'Aprobo');
+                                            $("#Aux3").val("");
+                                        }
+                                    });
+
+                                    $('#dialog-password').data('Combo', 'Aprobo');
+                                    $('#dialog-password').dialog('open');
+                                    $('#mySelect').focus(); // esto es clave, para que no me cierre el cuadro de dialogo al recibir un posible enter apretado en el change
+                                }
                             </script>
                         </div>
                     </div>
