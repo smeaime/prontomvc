@@ -350,7 +350,7 @@ namespace ProntoMVC.Controllers
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
-            var s = new ServicioMVC.servi();
+            var s = new ServicioMVC.servi(SC);
             string mensajeError;
             s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
 
@@ -367,7 +367,7 @@ namespace ProntoMVC.Controllers
 
             string SC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
 
-            var s = new ServicioMVC.servi();
+            var s = new ServicioMVC.servi(SC);
             string mensajeError;
             s.ImprimirConPlantillaEXE(id, SC, DirApp, plantilla, output, out mensajeError);
 
