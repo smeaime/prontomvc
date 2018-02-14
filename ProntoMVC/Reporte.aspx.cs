@@ -20,7 +20,7 @@ namespace ProntoMVC.Reportes
             {
                 try
                 {
-                    Informe();
+                    //Informe();
                 }
 
                 catch (System.Net.WebException ex2)

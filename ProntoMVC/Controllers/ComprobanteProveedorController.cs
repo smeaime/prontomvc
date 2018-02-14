@@ -1120,22 +1120,7 @@ namespace ProntoMVC.Controllers
                 {
 
 
-
-<<<<<<< HEAD
-=======
-                        if (mIdProveedor > 0)
-                        {
-                            var Proveedores = db.Proveedores.Where(p => p.IdProveedor == mIdProveedor).FirstOrDefault();
-                            if (Proveedores != null)
-                            {
-                                if ((Proveedores.RegistrarMovimientosEnCuentaCorriente ?? "SI") == "NO") { mGrabarRegistrosEnCuentaCorriente = false; }
-                            }
-                        }
-                        else
-                        {
-                            mGrabarRegistrosEnCuentaCorriente = false;
-                        }
->>>>>>> 430369bd929d48ac673357beb822ebda01ac5575
+                    
 
                     //using (var s = new ServicioMVC.servi())
                     //{
