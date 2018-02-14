@@ -12,7 +12,9 @@
 
 
 <script>
-    var ROOT = <%=Page.ResolveUrl("~/")  %>;  
+    var ROOT ="<% =Page.ResolveUrl("~/")  %>" ;  
+    <%--var ROOT = <% =Url.Content("~") %>;    ;--%>
+
 </script>
 
 <script runat="server">
@@ -367,6 +369,10 @@ If you want additionally remove vertical border between the cells in the grid yo
         </div>
         <br />
         <br />
+
+
+
+
         <%--   
        <table id="addtree">
                 </table>
@@ -740,11 +746,15 @@ If you want additionally remove vertical border between the cells in the grid yo
     //repito estas llamadas porque no me las llama más abajo
     armarMenu();
 
+    //armarArbol(); //por qué tuve que agregar armarArbol?  -sacalo, es el viejo formato, sin jqgrid, a mano completamente
+
     estiloArbol();
+
+    
 
 
 </script>
-<script src="<%=Page.ResolveUrl("~/")%>Scripts/jsLayout.js?1611" type="text/javascript"></script>
+<%--<script src="<%=Page.ResolveUrl("~/")%>Scripts/jsLayout.js?1611" type="text/javascript"></script>--%>
 <script type="text/javascript">
 
     $(function () {
