@@ -117,6 +117,14 @@ Public Class wsCartaPorteExterno
     '////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    'version 1
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
     <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)> _
     Public Function obtenerDescargas(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega
@@ -142,6 +150,15 @@ Public Class wsCartaPorteExterno
 
     End Function
 
+
+
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    'version 2
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -196,6 +213,17 @@ Public Class wsCartaPorteExterno
 
 
     End Function
+
+
+
+
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    'version 3
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -290,5 +318,105 @@ Public Class wsCartaPorteExterno
 
     End Function
 
+
+
+
+
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    'version 4
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+    '/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)>
+    Public Function obtenerDescargas_v4(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v4
+
+
+
+        'avisar q error hubo (de contraseña)
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v4(usuario, password, cuit, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+    <WebMethod(Description:="Devuelve un listado de posiciones", EnableSession:=False)>
+    Public Function obtenerPosiciones_v4(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v4
+
+
+        'avisar q error hubo (de contraseña)
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v4(usuario, password, cuit, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.Posicion, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
+
+
+
+
+
+    <WebMethod(Description:="Devuelve un listado de descargas", EnableSession:=False)>
+    Public Function obtenerDescargasDeHoyMasPosicionesEnRangoFecha_v4(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime) As CerealNet.WSCartasDePorte.respuestaEntrega_v4
+
+        'avisar q error hubo (de contraseña)
+
+
+        Try
+
+            Dim scs As String
+
+            If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+                scs = scLocal
+            Else
+                scs = scWilliamsRelease
+            End If
+
+            Return CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v4(usuario, password, cuit, fechadesde, fechahasta, CartaDePorteManager.enumCDPestado.DescargasMasFacturadas, Encriptar(scs), AplicacionConImagenes, Encriptar(scConexBDLmaster))
+        Catch ex As Exception
+
+            ErrHandler2.WriteError(ex)
+            Throw
+        End Try
+
+
+
+    End Function
 
 End Class

@@ -139,7 +139,8 @@ Partial Class CartasDePortesMovil
         Try
             Dim rol = Roles.GetRolesForUser(Session(SESSIONPRONTO_UserName))
             If rol(0) = "Cliente" Or rol(0) = "WilliamsClientes" Then
-                Response.Redirect(String.Format("CartaDePorteInformesAccesoClientes.aspx")) sdfasf  Response.Redirect(String.Format("~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"))
+                'Response.Redirect(String.Format("CartaDePorteInformesAccesoClientes.aspx"))
+                Response.Redirect(String.Format("~/ProntoWeb/CartaDePorteInformesAccesoClientes.aspx"))
             End If
 
         Catch ex As Exception

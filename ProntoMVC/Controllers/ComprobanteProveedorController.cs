@@ -1125,11 +1125,11 @@ namespace ProntoMVC.Controllers
 
 
 
-                    using (var s = new ServicioMVC.servi())
-                    {
-                        s.Grabar_ComprobanteProveedor()
+                    //using (var s = new ServicioMVC.servi())
+                    //{
+                    //    //s.Grabar_ComprobanteProveedor();
 
-                    }
+                    //}
                         
 
 

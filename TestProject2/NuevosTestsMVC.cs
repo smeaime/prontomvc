@@ -163,7 +163,7 @@ namespace ProntoMVC.TestsMVC
 
 
 
-            var s = new ServicioMVC.servi();
+            var s = new ServicioMVC.servi(scEF);
             // s.ImportarFondoFijo(excel, scSQL, out mensajeError);
 
 
@@ -209,7 +209,7 @@ namespace ProntoMVC.TestsMVC
 
             string mensajeError;
 
-            var s = new ServicioMVC.servi();
+            var s = new ServicioMVC.servi(scEF);
             s.ImprimirConPlantillaEXE(1, scSQL, DirApp, plantilla, output, out mensajeError);
 
             System.Diagnostics.Process.Start(output);
