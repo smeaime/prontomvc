@@ -315,6 +315,10 @@ Namespace Pronto.ERP.BO
         Public SituacionLog As String
 
 
+        Public Turno As String
+        Public Cupo As String
+
+
 
 
 
@@ -518,14 +522,8 @@ Namespace Pronto.ERP.BO
             End Set
         End Property
 
-        Public Property Cupo() As String
-            Get
-                Return _Cupo
-            End Get
-            Set(ByVal value As String)
-                _Cupo = value
-            End Set
-        End Property
+
+
 
         Public Property NetoFinalDespuesDeRestadasMermas() As Double
             Get
