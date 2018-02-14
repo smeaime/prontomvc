@@ -44,10 +44,7 @@
     </div>
 
     <div class="contextMenu" id="myMenu1" style="display:none">
-
-
         <style>
-
             .price-features li span {
                 padding: 0 0 0 0 !important;
                 border: 0;
@@ -55,10 +52,7 @@
                 margin: 0 0 0 0;
                 height: 30px;
             }
-
         </style>
-
-
         <ul style="width: 400px"  class="price-features">
             <li id="add">
                 @*<span class="ui-icon ui-icon-plus" style="float:left"></span>*@
@@ -75,11 +69,7 @@
         </ul>
     </div>
 
-
     <style>
-
-
-
         .ui-dialog-titlebar {
             /*display: none;*/
         }
@@ -95,11 +85,7 @@
 
     $(document).ready(function () {
 
-
-
-
         //mover todo esto al ScriptRMsPendientes...js, cambiando los helpers de Razor (arrobaUrl) 
-
 
         $("#Vale2").click(function () {
             var $grid = $("#ListaReq");
@@ -308,7 +294,7 @@
                        'Recepcion', 'Ult. Recepcion', 'En Stock', 'Stock Min.', 'Articulo', 'Fecha Entrega', 'Solicito', 'Tipo Requerimiento', 'Obra', 'Cump.', 'Recep.',
                        'Observaciones Item', 'Deposito', 'Observaciones Firmante', 'Firmante Observo', 'Fecha Ult. Observacion', 'Cod. Equ. Destino', 'Equipo Destino'],
             colModel: [
-                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
+                        { name: 'act', index: 'act', align: 'center', width: 50, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdDetalleRequerimiento', index: 'IdDetalleRequerimiento', align: 'center', width: 80, sortable: false, editable: false, search: false, frozen: true, hidden: true }, //, formatter: 'showlink', formatoptions: { baseLinkUrl: '@Url.Action("Edit")'} },
                         { name: 'IdRequerimiento', index: 'IdRequerimiento', align: 'left', width: 0, editable: false, hidden: true, frozen: true },
                         { name: 'IdObra', index: 'IdObra', align: 'left', width: 0, editable: false, hidden: true, frozen: true },

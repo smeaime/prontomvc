@@ -639,20 +639,36 @@ namespace ProntoMVC.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult AnularFirmas(Requerimiento Pedido)
+        public virtual JsonResult AnularFirmas(int IdRequerimiento, int IdAnulo = 0)
         {
-            int glbIdUsuario = Pedido.Aprobo ?? -1;
-            if (glbIdUsuario <= 0) glbIdUsuario = -1;
+            Requerimiento requerimiento = db.Requerimientos.Find(IdRequerimiento);
+
+            int CantidadAutorizaciones = db.Autorizaciones_TX_CantidadAutorizaciones((int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, 0, -1).Count();
+
+            if (IdAnulo <= 0) IdAnulo = -1;
             string nSC = ProntoFuncionesGeneralesCOMPRONTO.Encriptar(Generales.sCadenaConexSQL(this.HttpContext.Session["BasePronto"].ToString(), oStaticMembershipService));
             Pronto.ERP.Bll.EntidadManager.Tarea(nSC, "AutorizacionesPorComprobante_EliminarFirmas",
-                                                    (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales,
-                                                    Pedido.IdRequerimiento, -1, glbIdUsuario);  // idformulario,idcomprobante, orden autorizacion, idusuarioelimino
+                                                    (int)Pronto.ERP.Bll.EntidadManager.EnumFormularios.RequerimientoMateriales, IdRequerimiento, -1, IdAnulo);
 
-            Pedido.Aprobo = null;
-            Pedido.CircuitoFirmasCompleto = null;
-            // Pedido.SubNumero += 1;
+            requerimiento.Aprobo = null;
+            requerimiento.CircuitoFirmasCompleto = null;
+            if (CantidadAutorizaciones > 0)
+            {
+                if (IdAnulo > 0) { requerimiento.IdUsuarioEliminoFirmas = IdAnulo; }
+                requerimiento.FechaEliminacionFirmas = DateTime.Now;
+                requerimiento.NumeradorEliminacionesFirmas = (requerimiento.NumeradorEliminacionesFirmas ?? 0) + 1;
+            }
+            requerimiento.Cumplido = null;
+            db.SaveChanges();
 
-            return BatchUpdate(Pedido);
+            var data = (from a in db.Requerimientos
+                        where (a.IdRequerimiento == IdRequerimiento)
+                        select new
+                        {
+                            IdRequerimiento = a.IdRequerimiento
+                        }).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -1865,6 +1881,7 @@ namespace ProntoMVC.Controllers
                             NumeroRequerimiento = a.Requerimientos.NumeroRequerimiento,
                             NumeroObra = a.Requerimientos.Obra.NumeroObra,
                             PorcentajeIva = a.Articulo.AlicuotaIVA,
+                            TipoDesignacion = a.TipoDesignacion ?? "CMP"
                         }).OrderBy(p => p.NumeroItem).ToList();
 
             return Json(data, JsonRequestBehavior.AllowGet);

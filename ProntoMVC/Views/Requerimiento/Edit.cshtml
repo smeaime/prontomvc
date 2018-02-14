@@ -114,6 +114,15 @@
                     <div>@Html.Hidden("FechaAnulacion", Model.FechaAnulacion)</div>
                     <div>@Html.Hidden("UsuarioAnulacion", Model.UsuarioAnulacion)</div>
                     <div>@Html.Hidden("MotivoAnulacion", Model.MotivoAnulacion)</div>
+                    <div>@Html.Hidden("IdUsuarioEliminoFirmas", Model.IdUsuarioEliminoFirmas)</div>
+
+                    <div>@Html.Hidden("CantidadAutorizaciones", "")</div>
+                    <script>
+                        var mCampoVB = "";
+                        mCampoVB = '@(ViewBag.CantidadAutorizaciones)';
+                        $("#CantidadAutorizaciones").val(mCampoVB);
+                    </script>
+
                     <div class="row-fluid">
                         <div class="span2 lightblue">
                             @Html.LabelFor(model => model.FechaRequerimiento, "Fecha")
@@ -176,12 +185,11 @@
                             @Html.Label("Autorizaciones")
                             <form>
                                 @{
-
-                                <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
-                                    int ca = ViewBag.CantidadAutorizaciones;
-                                    int j = 1;
-                                    for (var i = 1; i <= ca; i++)
-                                    { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
+                                    <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
+                    int ca = ViewBag.CantidadAutorizaciones;
+                    int j = 1;
+                    for (var i = 1; i <= ca; i++)
+                    { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
                                 }
                             </form>
                         </div>
@@ -189,7 +197,7 @@
                             @Html.LabelFor(model => model.Aprobo, ". ")
                             @if (Model.Aprobo != null && ViewBag.MostrarAnularLiberacion)
                             {
-                            <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
+                                <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
                             }
                             <script>
                                 $(function () {
@@ -200,6 +208,7 @@
                                         $("#Aux2").val(Aprobo);
                                         $("#Aux3").val("");
                                         $("#Aux10").val("");
+                                        $("#IdUsuarioEliminoFirmas").val(IdAprobo);
 
                                         $("#dialog-password").dialog({
                                             buttons: {
@@ -207,7 +216,7 @@
                                                     //alert('hola');
                                                     // $(this).dialog('close');
                                                     // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
-                                                    validatePwd2(anularfirma, function () { });
+                                                    validatePwd2(NS.anularfirma, function () { });
                                                     $(this).dialog('close');
                                                 },
                                                 'Cancelar': function () {
@@ -236,24 +245,6 @@
                                         }
                                     })
 
-                                    function anularfirma() {
-                                        $.ajax({
-                                            type: 'POST',
-                                            contentType: 'application/json; charset=utf-8',
-                                            url: ROOT + 'Requerimiento/AnularFirmas',
-                                            dataType: 'json',
-                                            data: JSON.stringify(SerializaForm()),
-                                            success: function (result) {
-                                                alert("Firmas anuladas");
-                                                window.location.replace(window.location.pathname);
-                                                //window.location = (ROOT + "Pedido/Edit/" + result.IdPedido);
-                                            },
-                                            error: function (result) {
-                                                alert("No se pudo anular");
-                                            }
-                                        })
-                                    }
-
                                     $("#Aprobo").change(function (event) {
                                         //            alert("change");
                                         //        event.preventDefault();
@@ -276,19 +267,19 @@
                                                     //  $(this).dialog('close');
                                                     // http://stackoverflow.com/questions/1031674/how-do-i-write-a-jquery-function-that-accepts-a-callback-as-a-parameter
                                                     validatePwd2(
-                                                    function () {
-                                                        var combo = $("#Aux0").val();
-                                                        var idusuario = $("#Aux1").val();
-                                                        var post = $("#Aux10").val();
-                                                        $('#' + combo).val(idusuario);
-                                                        $("#Aux3").val(idusuario);
-                                                    },
-                                                     function () {
-                                                         alert('Password incorrecta');
-                                                         var combo = $("#Aux0").val();
-                                                         $('#' + combo).val("");
-                                                         $("#Aux3").val("");
-                                                     }
+                                                        function () {
+                                                            var combo = $("#Aux0").val();
+                                                            var idusuario = $("#Aux1").val();
+                                                            var post = $("#Aux10").val();
+                                                            $('#' + combo).val(idusuario);
+                                                            $("#Aux3").val(idusuario);
+                                                        },
+                                                        function () {
+                                                            alert('Password incorrecta');
+                                                            var combo = $("#Aux0").val();
+                                                            $('#' + combo).val("");
+                                                            $("#Aux3").val("");
+                                                        }
                                                     );
                                                 },
                                                 'Cancelar': function () {
@@ -429,8 +420,7 @@
                                 }
                             </style>
 
-                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0">
-                            </table>
+                            <table id="Lista" class="scroll separacion AltoRenglones" cellpadding="0" cellspacing="0"></table>
                             <div id="ListaPager1" class="scroll">
                             </div>
                             <div style="margin-top: 4px">
@@ -440,13 +430,8 @@
                                     <input id="fileupload" type="file" name="files[]" multiple>
                                 </span>
 
-                                @*<input type="button" class="btn btn-small" id="addData" value="+ Agregar" />
-                                <input type="button" class="btn btn-small" id="edtData" value="Modificar" />
-                                <input type="button" class="btn btn-small" id="delData" value="Borrar" />
-                                <input type="button" class="btn btn-small pull-right" id="" value="Buscar" onclick="conmutarPanelesDerecho();  pageLayout.hide('south'); pageLayout.hide('north'); RefrescaAnchoGrillaDetalle();" />&nbsp;*@
                                 <input type="button" class="btn btn-small  pull-right" id="asignarNecesidad" value="Asignar fecha" />&nbsp;
                             </div>
-                            @*<input type="button" class="btn btn-small  pull-right" id="duplicar" value="Duplicar" />*@
                         </div>
                         <div id="dialog" title="">
                             Fecha de entrega
@@ -462,10 +447,6 @@
                                                 var f = $("#InputFechaEntrega").val();
                                                 var $grid = $("#Lista");
                                                 var righe = $grid.jqGrid("getGridParam", "selarrrow");
-                                                //                                            selRowIds.each(function (id1, id2) {
-                                                //                                                return rows.namedItem(id1).rowIndex - rows.namedItem(id2).rowIndex;
-                                                //                                                var data = $(nomeGrigliaFiglia).jqGrid('getRowData', Id);
-                                                //                                            })
 
                                                 if ((righe == null) || (righe.length == 0)) {
                                                     return false;
@@ -494,8 +475,6 @@
 
                                         if ((righe == null) || (righe.length == 0)) {
                                             righe = $grid.jqGrid('getDataIDs');
-                                            //                                    alert("No elegiste items");
-                                            //                                    return false;
                                         }
 
                                         // $("#InputFechaEntrega").val();
@@ -521,10 +500,10 @@
 
                         <div class="span6 lightblue" style="visibility: hidden">
                             @using (Html.BeginForm("SubirPlantilla", "Requerimiento", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                <input type="file" name="file" />
-                                <input type="submit" class="btn" value="Subir" />
-                            }
+            {
+                <input type="file" name="file" />
+                <input type="submit" class="btn" value="Subir" />
+}
                         </div>
                     </div>
                     <br />
