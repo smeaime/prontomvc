@@ -26,392 +26,421 @@ function RefrescarArbol() {
 
 $(function () {
 
-    RefrescarArbol();  //creo que cuando es "local", hay que forzar la carga, no hay autoload http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3aretrieving_data#array_data
-})
 
 
-
-var eslaprimeravez = true;
-
-
-var $grid = $('#addtree')
+    var eslaprimeravez = true;
 
 
-// creo que la posta está por acá
-// http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
-
-var idsOfExpandedRows = []
-
-if (bEstadoNodos) {
-
-    var
-        saveObjectInLocalStorage = function (storageItemName, object) {
-            if (typeof window.localStorage !== 'undefined') {
-                window.localStorage.setItem(storageItemName, JSON.stringify(object));
-            }
-        },
-        removeObjectFromLocalStorage = function (storageItemName) {
-            if (typeof window.localStorage !== 'undefined') {
-                window.localStorage.removeItem(storageItemName);
-            }
-        },
-        getObjectFromLocalStorage = function (storageItemName) {
-            if (typeof window.localStorage !== 'undefined') {
-                return JSON.parse(window.localStorage.getItem(storageItemName));
-            }
-        },
-        myColumnStateName = function (g) {
-            if (g[0] == undefined) return undefined;
-            // return window.location.pathname + '#' + g[0].id; // para devolver uno por pagina
-            return '#' + g[0].id;
-
-        },
-        updateIdsOfExpandedRows = function (id, isExpanded) {
-            var index = $.inArray(id, idsOfExpandedRows);
-            if (!isExpanded && index >= 0) {
-                idsOfExpandedRows.splice(index, 1); // remove id from the list
-            } else if (index < 0) {
-                idsOfExpandedRows.push(id);
-            }
-            saveObjectInLocalStorage(myColumnStateName($grid), idsOfExpandedRows);
-        },
-        orgExpandRow = $.fn.jqGrid.expandRow,
-        orgCollapseRow = $.fn.jqGrid.collapseRow;
-
-    if ($grid[0] != undefined) {
-        idsOfExpandedRows = getObjectFromLocalStorage(myColumnStateName($grid)) || [];
-    }
-
-}
+    var $grid = $('#addtree')
 
 
+    // creo que la posta está por acá
+    // http: //stackoverflow.com/questions/9242601/how-to-remove-flashing-on-persisting-remotely-populated-jqgrid-tree-node/9244023#9244023
 
+    var idsOfExpandedRows = []
 
+    if (bEstadoNodos) {
 
-/////////////////////////////////////////////
-
-
-if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
-{
-
-    if (bCargaParcial) {
-
-        // arbol normal, q carga los nodos a medida q se los usa
-
-        jQuery("#addtree").jqGrid({
-
-            //columns names
-            colNames: ['', '', ''],
-            //columns model
-            colModel: [
-                                            { name: 'Name', index: 'Name', align: 'left', width: 400 },
-                                            { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
-                                            { name: 'Role', index: 'Role', width: 1, hidden: true },
-            ],
-
-            // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
-            //    treeReader: {
-            //        level_field: "level",
-            //        parent_id_field: "parent", // then why does your table use "parent_id"?
-            //        leaf_field: "isLeaf",
-            //        expanded_field: "expanded",
-            //        loaded: "loaded",
-            //        icon_field: "icon"
-            //    },
-
-
-            postData: {
-                idsOfExpandedRows: function () {
-                    // the code can by dynamic, read contain of some elements 
-                    // on the page use "if"s and so on and return the value which 
-                    // should be posted to the server
-                    return idsOfExpandedRows;
+        var
+            saveObjectInLocalStorage = function (storageItemName, object) {
+                if (typeof window.localStorage !== 'undefined') {
+                    window.localStorage.setItem(storageItemName, JSON.stringify(object));
                 }
             },
-
-            ExpandColumn: 'Name',
-            //                                            colNames: ["Account", "Acc Num", "Debit", "Credit", "Balance", "Enabled"],
-            //                                            colModel: [
-            //                                        { name: "name", index: "name", width: 180 },
-            //                                        { name: "num", index: "acc_num", width: 80, formatter: "integer", sorttype: "int", align: "center" },
-            //                                        { name: "debit", index: "debit", width: 80, formatter: "number", sorttype: "number", align: "right" },
-            //                                        { name: "credit", index: "credit", width: 80, formatter: "number", sorttype: "number", align: "right" },
-            //                                        { name: "balance", index: "balance", width: 80, formatter: "number", sorttype: "number", align: "right" },
-            //                                        { name: "enbl", index: "enbl", width: 60, align: "center", formatter: "checkbox", editoptions: { value: "1:0"} }
-            //                                    ],
-
-
-            onSelectRow: function (id, status, e) {
-                guardarTopPositionDelArbol();
-            },
-
-            beforeProcessing: function (data) {
-                //guardarTopPositionDelArbol();
-                if (bEstadoNodos) {
-                    var rows = data.rows, i, l = rows.length, row, index;
-                    for (i = 0; i < l; i++) {
-                        row = rows[i].cell;
-                        // cambié los indices en los tres renglones!
-                        index = $.inArray(row[1], idsOfExpandedRows);
-                        row[6] = index >= 0; // set expanded column
-                        row[7] = index >= 0;  //true;       // set loaded column
-                    }
-
+            removeObjectFromLocalStorage = function (storageItemName) {
+                if (typeof window.localStorage !== 'undefined') {
+                    window.localStorage.removeItem(storageItemName);
                 }
-
             },
-
-
-
-            loadComplete: function (data) {
-                refrescarFondo_addtree();
-
-                if (eslaprimeravez) {
-                    cargarTopPositionDelArbol();
-                    eslaprimeravez = false;
+            getObjectFromLocalStorage = function (storageItemName) {
+                if (typeof window.localStorage !== 'undefined') {
+                    return JSON.parse(window.localStorage.getItem(storageItemName));
                 }
-
-                var gridId = $("#addtree").attr('id');
-                //var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                //$('#' + gridId).setGridWidth(gridParentWidth);
+            },
+            myColumnStateName = function (g) {
+                if (g[0] == undefined) return undefined;
+                // return window.location.pathname + '#' + g[0].id; // para devolver uno por pagina
+                return '#' + g[0].id;
 
             },
-
-
-            //    onSelectRow: function (id) {
-            //        var data = $("#addtree").jqGrid('getRowData', id);
-            //        if (data['Role'] != "") {
-            //            window.location = $($.parseHTML(data['Role'])).attr('href');
-            //        }
-            //    },
-
-            url: ROOT + "Home/TreeGrid",
-
-            treedatatype: 'json',
-            datatype: 'json',
-            // ajaxGridOptions: { contentType: "application/json" },
-            mtype: "POST",
-
-            viewrecords: true,
-            treeGridModel: 'adjacency',
-
-            treeIcons: {
-                leaf: 'ui-icon-blank'  // http://stackoverflow.com/questions/22248944/jqgrid-treegrid-remove-icon-from-leaf-nodes
-                //leaf: 'ui-icon-document-b' 
+            updateIdsOfExpandedRows = function (id, isExpanded) {
+                var index = $.inArray(id, idsOfExpandedRows);
+                if (!isExpanded && index >= 0) {
+                    idsOfExpandedRows.splice(index, 1); // remove id from the list
+                } else if (index < 0) {
+                    idsOfExpandedRows.push(id);
+                }
+                saveObjectInLocalStorage(myColumnStateName($grid), idsOfExpandedRows);
             },
+            orgExpandRow = $.fn.jqGrid.expandRow,
+            orgCollapseRow = $.fn.jqGrid.collapseRow;
 
-
-            ///////////////////////////////
-            width: 'auto', // 'auto',
-            autowidth: false,
-            shrinkToFit: true,
-            //////////////////////////////
-
-
-            ExpandColClick: true,
-
-            sortname: 'Name',
-            sortorder: 'asc',
-
-            col: false,
-            gridview: true,
-            height: 'auto',
-            pager: "", //, "paddtree", //"paddtree", // "#paddtree",
-            treeGrid: true,
-            rowNum: 10000,
-
-            caption: ""
-        });
-
-        //jQuery("#addtree").jqGrid('navGrid', "#paddtree");
-        // $grid.jqGrid('navGrid', '#addtree', { edit: false, add: false, del: false, search: false });
-        jQuery("#addtree").jqGrid('bindKeys');
-        // jQuery("#addtree").setCell(row, col, val, { background: '#ff0000' });
-        jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
-
-
-
-
+        if ($grid[0] != undefined) {
+            idsOfExpandedRows = getObjectFromLocalStorage(myColumnStateName($grid)) || [];
+        }
 
     }
 
-    else {
-        // pruebas para árbol usando cookie
-        // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
-
-        //if ($.cookie("arbol") == null) {
-        //    RecargarCookieArbol();
-        //}
-
-        if (localStorage.arbol == null) {
-            RecargarCookieArbol();
-        }
-
-        function RecargarCookieArbol() {
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
-                dataType: "json",
-                success: function (data) {
-                    var lala = JSON.stringify(data);
-                    // $.cookie("arbol", lala, { path: '/' });
-                    localStorage.arbol = lala;
-                    RefrescarArbol();
-
-                }
-            });
-        }
 
 
-        if (localStorage.arbol != null) {
-            $("#addtree2").jqGrid({
-                //data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
-                datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
-                datastr: JSON.parse(localStorage.arbol).rows,
 
+
+    /////////////////////////////////////////////
+
+
+    if (bCARGAR_ARBOL) // no cargar ningun arbol. -si, porque lo que pone lento todo es la carga de la jqgrid con semejante localstorage
+    {
+
+        if (bCargaParcial) {
+
+            // arbol normal, q carga los nodos a medida q se los usa
+
+            jQuery("#addtree").jqGrid({
+
+                //columns names
+                colNames: ['', '', ''],
+                //columns model
                 colModel: [
-                    //{ name: "id", width: 1 },
-                    { name: "descr", width: 180 , searchoptions: { sopt: ['cn', 'eq'] }  },
-                    //{ name: "Name2", width: 1, hidden: true },
-                    //{ name: "Name3", width: 1, hidden: true },
-                    //{ name: "Name4", width: 1, hidden: true },
-                    //{ name: "Name5", width: 1, hidden: true },
+                    { name: 'Name', index: 'Name', align: 'left', width: 400 },
+                    { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
+                    { name: 'Role', index: 'Role', width: 1, hidden: true },
                 ],
 
-                //ignoreCase: true,
-
-                //loadComplete: function (data) {
-                //    refrescarFondo_addtree();
-
-                //    if (eslaprimeravez) {
-                //        cargarTopPositionDelArbol();
-                //        eslaprimeravez = false;
-                //    }
-
-                //    var gridId = $("#addtree2").attr('id');
-                //    var gridParentWidth = $('#gbox_' + gridId).parent().width();
-                //    $('#' + gridId).setGridWidth(gridParentWidth);
-
-                //},
-
-                //// pager: "#addtree2Pager",
-                //rowNum: 500,
-                ////rowList: [1, 2, 10],
-                //viewrecords: true,
-
-                ////autoencode: true,
-                ////gridview: true,
-                ignoreCase: true,
-
-                ////treeGrid: true,
-
-                height: "auto",
+                // el treeReader define las columnas que vienen despues del colmodel para manejo del arbol. por default se agregan 4 columnas
+                //    treeReader: {
+                //        level_field: "level",
+                //        parent_id_field: "parent", // then why does your table use "parent_id"?
+                //        leaf_field: "isLeaf",
+                //        expanded_field: "expanded",
+                //        loaded: "loaded",
+                //        icon_field: "icon"
+                //    },
 
 
-                gridview: true,
-                rowNum: 10000,
-                ////sortname: 'id',
+                postData: {
+                    idsOfExpandedRows: function () {
+                        // the code can by dynamic, read contain of some elements 
+                        // on the page use "if"s and so on and return the value which 
+                        // should be posted to the server
+                        return idsOfExpandedRows;
+                    }
+                },
 
-                treeGrid: true,
+                ExpandColumn: 'Name',
+                //                                            colNames: ["Account", "Acc Num", "Debit", "Credit", "Balance", "Enabled"],
+                //                                            colModel: [
+                //                                        { name: "name", index: "name", width: 180 },
+                //                                        { name: "num", index: "acc_num", width: 80, formatter: "integer", sorttype: "int", align: "center" },
+                //                                        { name: "debit", index: "debit", width: 80, formatter: "number", sorttype: "number", align: "right" },
+                //                                        { name: "credit", index: "credit", width: 80, formatter: "number", sorttype: "number", align: "right" },
+                //                                        { name: "balance", index: "balance", width: 80, formatter: "number", sorttype: "number", align: "right" },
+                //                                        { name: "enbl", index: "enbl", width: 60, align: "center", formatter: "checkbox", editoptions: { value: "1:0"} }
+                //                                    ],
+
+
+                onSelectRow: function (id, status, e) {
+                    guardarTopPositionDelArbol();
+                },
+
+                beforeProcessing: function (data) {
+                    //guardarTopPositionDelArbol();
+                    if (bEstadoNodos) {
+                        var rows = data.rows, i, l = rows.length, row, index;
+                        for (i = 0; i < l; i++) {
+                            row = rows[i].cell;
+                            // cambié los indices en los tres renglones!
+                            index = $.inArray(row[1], idsOfExpandedRows);
+                            row[6] = index >= 0; // set expanded column
+                            row[7] = index >= 0;  //true;       // set loaded column
+                        }
+
+                    }
+
+                },
+
+
+
+                loadComplete: function (data) {
+                    refrescarFondo_addtree();
+
+                    if (eslaprimeravez) {
+                        cargarTopPositionDelArbol();
+                        eslaprimeravez = false;
+                    }
+
+                    var gridId = $("#addtree").attr('id');
+                    //var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                    //$('#' + gridId).setGridWidth(gridParentWidth);
+
+                },
+
+
+                //    onSelectRow: function (id) {
+                //        var data = $("#addtree").jqGrid('getRowData', id);
+                //        if (data['Role'] != "") {
+                //            window.location = $($.parseHTML(data['Role'])).attr('href');
+                //        }
+                //    },
+
+                url: ROOT + "Home/TreeGrid",
+
+                treedatatype: 'json',
+                datatype: 'json',
+                // ajaxGridOptions: { contentType: "application/json" },
+                mtype: "POST",
+
+                viewrecords: true,
                 treeGridModel: 'adjacency',
-                treedatatype: "local",
-                ExpandColumn: 'descr',
+
+                treeIcons: {
+                    leaf: 'ui-icon-blank'  // http://stackoverflow.com/questions/22248944/jqgrid-treegrid-remove-icon-from-leaf-nodes
+                    //leaf: 'ui-icon-document-b' 
+                },
 
 
-                loadui: 'disable', // es la unica manera q encontré de sacar el cartelote "loading" q no se iba
-                jsonReader: {
-                    repeatitems: false,
-                    root: function (obj) { return obj; },
-                    page: function () { return 1; },
-                    total: function () { return 1; },
-                    records: function (obj) { return obj.length; }
-                }
+                ///////////////////////////////
+                width: 'auto', // 'auto',
+                autowidth: false,
+                shrinkToFit: true,
+                //////////////////////////////
 
 
+                ExpandColClick: true,
 
+                sortname: 'Name',
+                sortorder: 'asc',
 
+                col: false,
+                gridview: true,
+                height: 'auto',
+                pager: "", //, "paddtree", //"paddtree", // "#paddtree",
+                treeGrid: true,
+                rowNum: 10000,
+
+                caption: ""
             });
 
-            jQuery("#addtree2").filterToolbar({
-                stringResult: true, searchOnEnter: true,
-                defaultSearch: 'cn',
-                enableClear: false
-            });
+            //jQuery("#addtree").jqGrid('navGrid', "#paddtree");
+            // $grid.jqGrid('navGrid', '#addtree', { edit: false, add: false, del: false, search: false });
+            jQuery("#addtree").jqGrid('bindKeys');
+            // jQuery("#addtree").setCell(row, col, val, { background: '#ff0000' });
+            jQuery("#addtree").filterToolbar({ stringResult: true, searchOnEnter: true, defaultSearch: 'cn', enableClear: false }); // si queres sacar el enableClear, definilo en las searchoptions de la columna específica http://www.trirand.com/blog/?page_id=393/help/clearing-the-clear-icon-in-a-filtertoolbar/
+
+
+
+
 
         }
+
+        else {
+            // pruebas para árbol usando cookie
+            // con cookies no va. probar usando localstorage http://www.w3schools.com/html/html5_webstorage.asp
+
+            //if ($.cookie("arbol") == null) {
+            //    RecargarCookieArbol();
+            //}
+
+            if (localStorage.arbol == null) {
+                RecargarCookieArbol();
+            }
+
+            function RecargarCookieArbol() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: ROOT + "Home/TreeGrid_ParaGrillaNoTreeviewEnLocalStorage",
+                    dataType: "json",
+                    success: function (data) {
+                        var lala = JSON.stringify(data);
+                        // $.cookie("arbol", lala, { path: '/' });
+                        localStorage.arbol = lala;
+                        RefrescarArbol();
+
+                    }
+                });
+            }
+
+
+            if (localStorage.arbol != null) {
+                $("#addtree2").jqGrid({
+                    //data: JSON.parse(localStorage.arbol).rows,//$.cookie("arbol"),
+                    datatype: "jsonstring", // "local",  //http://stackoverflow.com/questions/6831306/load-local-json-data-in-jqgrid-without-addjsonrows
+                    datastr: JSON.parse(localStorage.arbol).rows,
+
+                    colModel: [
+                        //{ name: "id", width: 1 },
+                        { name: "descr", width: 180, searchoptions: { sopt: ['cn', 'eq'] } },
+                        //{ name: "Name2", width: 1, hidden: true },
+                        //{ name: "Name3", width: 1, hidden: true },
+                        //{ name: "Name4", width: 1, hidden: true },
+                        //{ name: "Name5", width: 1, hidden: true },
+                    ],
+
+                    //ignoreCase: true,
+
+                    //loadComplete: function (data) {
+                    //    refrescarFondo_addtree();
+
+                    //    if (eslaprimeravez) {
+                    //        cargarTopPositionDelArbol();
+                    //        eslaprimeravez = false;
+                    //    }
+
+                    //    var gridId = $("#addtree2").attr('id');
+                    //    var gridParentWidth = $('#gbox_' + gridId).parent().width();
+                    //    $('#' + gridId).setGridWidth(gridParentWidth);
+
+                    //},
+
+                    //// pager: "#addtree2Pager",
+                    //rowNum: 500,
+                    ////rowList: [1, 2, 10],
+                    //viewrecords: true,
+
+                    ////autoencode: true,
+                    ////gridview: true,
+                    ignoreCase: true,
+
+                    ////treeGrid: true,
+
+                    height: "auto",
+
+
+                    gridview: true,
+                    rowNum: 10000,
+                    ////sortname: 'id',
+
+                    treeGrid: true,
+                    treeGridModel: 'adjacency',
+                    treedatatype: "local",
+                    ExpandColumn: 'descr',
+
+
+                    loadui: 'disable', // es la unica manera q encontré de sacar el cartelote "loading" q no se iba
+                    jsonReader: {
+                        repeatitems: false,
+                        root: function (obj) { return obj; },
+                        page: function () { return 1; },
+                        total: function () { return 1; },
+                        records: function (obj) { return obj.length; }
+                    }
+
+
+
+
+                });
+
+                jQuery("#addtree2").filterToolbar({
+                    stringResult: true, searchOnEnter: true,
+                    defaultSearch: 'cn',
+                    enableClear: false
+                });
+
+            }
+        }
+
+
     }
 
 
-}
-///////////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////
-// scroll 
-$(".ui-jqgrid").css("overflow-x", "hidden");
-$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
-/////////////////////////////////////
-/////////////////////////////////////
-/////////////////////////////////////
-// transparente
-//$("#addtree > .ui-jqgrid tr.jqgrow").css(" background-color", "yellow !important;");
-$("#addtree > .ui-widget-content").css("background", "transparent");
-$("#gbox_addtree").css("background", "transparent");
-$("#gbox_addtree").css("border", "0");
-/////////////////////////////////////
-/////////////////////////////////////
-// http://stackoverflow.com/questions/1195374/jqgrid-change-theme
-//     $('#myGrid .ui-widget').addClass('jqgrid-widget');
-$('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
 
 
 
-function refrescarFondo_addtree() {
 
+
+
+    if (bEstadoNodos) {
+
+
+
+
+        $grid.jqGrid('navButtonAdd', '#paddtree', {
+            caption: "",
+            buttonicon: "ui-icon-closethick",
+            title: "Clear saved grid's settings",
+            onClickButton: function () {
+                removeObjectFromLocalStorage(myColumnStateName($(this)));
+                window.location.reload();
+            }
+        });
+        $.jgrid.extend({
+            expandRow: function (rc) {
+                //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                updateIdsOfExpandedRows(rc._id_, true);
+                return orgExpandRow.call(this, rc);
+            },
+            collapseRow: function (rc) {
+                //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
+                updateIdsOfExpandedRows(rc._id_, false);
+                return orgCollapseRow.call(this, rc);
+            }
+        });
+    }
+
+
+
+
+
+
+
+    ///////////////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // scroll 
+    $(".ui-jqgrid").css("overflow-x", "hidden");
+    $(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+    /////////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // transparente
+    //$("#addtree > .ui-jqgrid tr.jqgrow").css(" background-color", "yellow !important;");
+    $("#addtree > .ui-widget-content").css("background", "transparent");
+    $("#gbox_addtree").css("background", "transparent");
+    $("#gbox_addtree").css("border", "0");
+    /////////////////////////////////////
+    /////////////////////////////////////
+    // http://stackoverflow.com/questions/1195374/jqgrid-change-theme
+    //     $('#myGrid .ui-widget').addClass('jqgrid-widget');
     $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
-    $('#addtree2 .ui-widget-content').addClass('jqgrid-widget-content');
-
-}
 
 
 
-///////////////////
-// para borrar el encabezado
-var gview = $("#addtree").parents("div.ui-jqgrid-view");
-gview.children("div.ui-jqgrid-hdiv").hide();
+    function refrescarFondo_addtree() {
+
+        $('#addtree .ui-widget-content').addClass('jqgrid-widget-content');
+        $('#addtree2 .ui-widget-content').addClass('jqgrid-widget-content');
+
+    }
+
+
+
+    ///////////////////
+    // para borrar el encabezado
+    var gview = $("#addtree").parents("div.ui-jqgrid-view");
+    gview.children("div.ui-jqgrid-hdiv").hide();
 
 
 
 ////////////////
 
 
-if (bEstadoNodos) {
 
 
 
 
-    $grid.jqGrid('navButtonAdd', '#paddtree', {
-        caption: "",
-        buttonicon: "ui-icon-closethick",
-        title: "Clear saved grid's settings",
-        onClickButton: function () {
-            removeObjectFromLocalStorage(myColumnStateName($(this)));
-            window.location.reload();
-        }
-    });
-    $.jgrid.extend({
-        expandRow: function (rc) {
-            //alert('before expandNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-            updateIdsOfExpandedRows(rc._id_, true);
-            return orgExpandRow.call(this, rc);
-        },
-        collapseRow: function (rc) {
-            //alert('before collapseNode: rowid="' + rc._id_ + '", name="' + rc.name + '"');
-            updateIdsOfExpandedRows(rc._id_, false);
-            return orgCollapseRow.call(this, rc);
-        }
-    });
-}
+
+
+
+
+
+    RefrescarArbol();  //creo que cuando es "local", hay que forzar la carga, no hay autoload http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3aretrieving_data#array_data
+})
+
+
+
+
+
+
 
 
 
