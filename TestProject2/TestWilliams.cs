@@ -876,6 +876,64 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void LogDelWebservice_47448()
+        {
+
+            //        47448 Registro de Consulta de Web Service
+            //Se solicita dejar un registro de las consultas al Web Service para luego poder consultar quiénes lo usan, cuándo y qué consultan.
+
+
+        }
+
+
+
+
+
+
+
+
+        [TestMethod]
+        public void LogDeLogin_47576()
+        {
+
+
+            //             47576 Registro de Login - IP
+            //Registrar los ingresos correctos e incorrectos al sistema con su IP de origen en un log que grabe
+            //- Usuario
+            //- IP
+            //- Fecha y Hora
+        }
+
+
+
+
+
+
+
+        [TestMethod]
+        public void sincro_marelli_47449()
+        {
+
+            //    47449 SINCRONISMO PARA MARELLI JUAN CRUZ Y MIGUEL ENRIQ
+
+            //Andres buenas
+            //Tenemos que crearle un sincronismo a este cliente.Opera con dos firmas: MARELLI JUAN CRUZ Y MIGUEL ENRIQUE y con LA ESTANZUELA AGRICULTURA S.A.
+
+            //el formato tiene que ser el mismo de LELFUN S.A.
+
+            //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
+
+        }
+
+
+
+
+
+
+
+
+
 
 
         [TestMethod]

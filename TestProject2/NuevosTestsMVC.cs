@@ -153,6 +153,12 @@ namespace ProntoMVC.TestsMVC
         #endregion
 
 
+
+
+
+
+
+
         [TestMethod]
         public void importacion_excel_de_fondosfijos()
         {
@@ -175,7 +181,7 @@ namespace ProntoMVC.TestsMVC
 
             //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
 
-            ExcelImportadorManager.ImportacionComprobantesFondoFijo2(ds2.Tables[0]);
+            ExcelImportadorManager.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scEF);
 
 
 
