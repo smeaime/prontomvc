@@ -20,7 +20,7 @@ namespace ProntoMVC.Reportes
             {
                 try
                 {
-                    //Informe();
+                    Informe();
                 }
 
                 catch (System.Net.WebException ex2)
@@ -29,7 +29,7 @@ namespace ProntoMVC.Reportes
                     //Activar reporting services
                     info.Text = "Verificar que Reporting Services esté en marcha. Si es Unauthorized, no se puede usar el alias bdlconsultores.sytes.net \n\n" + ex2.ToString();
                     Elmah.ErrorSignal.FromCurrentContext().Raise(ex2);
-                    //throw;
+                    throw;
                 }
                 catch (Exception ex)
                 {
@@ -94,9 +94,10 @@ namespace ProntoMVC.Reportes
 
                 ProntoMVC.Controllers.CuentaController c = new ProntoMVC.Controllers.CuentaController();
 
-                if (this.Session["BasePronto"].ToString() == "")
+                if (nombreBase == "")
                 {
                     // this.Session["BasePronto"] = Generales.BaseDefault((Guid)oStaticMembershipService.GetUser().ProviderUserKey); // NO! esto ya tiene que venir marcado! no puedo usar la default si el tipo eligió otra!
+                    throw new Exception("No está elegida la base");
                 }
 
                 c.db = new ProntoMVC.Data.Models.DemoProntoEntities(scEF);
