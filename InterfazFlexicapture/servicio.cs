@@ -77,7 +77,7 @@ namespace ServicioMVC
 
 
 
-    public class servi
+    public class servi : IDisposable
     {
 
 
@@ -90,6 +90,41 @@ namespace ServicioMVC
         {
                         db = new DemoProntoEntities(cadenaconexionDirectaFormatoEF);
         }
+
+
+
+
+
+
+
+        private bool _disposed;
+
+        
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                    dbmant.Dispose();
+                    // Dispose other managed resources.
+                }
+                //release unmanaged resources.
+            }
+            _disposed = true;
+        }
+
+
+
+
+
 
 
 
