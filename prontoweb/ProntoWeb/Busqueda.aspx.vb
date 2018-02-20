@@ -302,7 +302,20 @@ Partial Class Buscador
 
 
 
-        
+
+URL:	/ProntoWeb/Busqueda.aspx?q=tecsi
+User:   twilliams2
+        Exception Type: System.Data.SqlClient.SqlException
+Message: Conversion failed when converting date And/Or time from character string.
+Stack Trace: at Buscador.Rebind()
+at Buscador.Page_Load(Object sender, EventArgs e)
+at System.Web.UI.Control.OnLoad(EventArgs e)
+at System.Web.UI.Control.LoadRecursive()
+at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+Server Error in '/' Application.
+Conversion failed when converting date And/Or time from character string.
+
+
 
         '        at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 228
         'at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Backup\BDL\BussinessLogic\EntidadManager.vb:line 303

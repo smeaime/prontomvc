@@ -147,6 +147,10 @@ Partial Class SincronismosAutomaticos
             txtMailBTGPactual.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBTGPactual" & pv).ToString
 
 
+            txtMailMarelli.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv).ToString
+            txtMailEstanzuela.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv).ToString
+
+
         End If
 
 
@@ -412,6 +416,8 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBTGPactual" & pv, txtMailBTGPactual.Text)
 
 
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv, txtMailMarelli.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv, txtMailEstanzuela.Text)
 
     End Sub
 
@@ -495,6 +501,8 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
         If (CheckBoxZENI.Checked) Then sTodosErr += Enviar("Zeni", txtMailZENI.Text, sErr, bVistaPrevia)
 
+        If (CheckBoxMarelli.Checked) Then sTodosErr += Enviar("Marelli", txtMailMarelli.Text, sErr, bVistaPrevia)
+        If (CheckBoxEstanzuela.Checked) Then sTodosErr += Enviar("Estanzuela", txtMailEstanzuela.Text, sErr, bVistaPrevia)
 
 
 

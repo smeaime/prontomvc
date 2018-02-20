@@ -1,4 +1,9 @@
-﻿
+﻿select * from log order by fecharegistro desc
+
+
+/*
+
+
 select dbo.RemoveNonASCII(descripcion), * from williamsdestinos 
 where descripcion like 'FABRICA SANTA%'
 
@@ -76,3 +81,6 @@ returns table with schemabinding as return (
      as clean_string
 );
 go
+
+
+*/
