@@ -243,9 +243,9 @@ Partial Class Login
 
 
 
-  
-    <WebMethod()> _
-    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)> _
+
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod(ResponseFormat:=System.Web.Script.Services.ResponseFormat.Json)>
     Public Shared Function LoginCookie(user As String, pass As String) As String
         'http://stackoverflow.com/questions/4939533/cookie-confusion-with-formsauthentication-setauthcookie-method
         'http://stackoverflow.com/questions/12840410/how-to-get-a-cookie-from-an-ajax-response
@@ -369,15 +369,15 @@ Partial Class Login
             End If
 
             '// http://stackoverflow.com/questions/13276368/asp-net-mvc-4-custom-authorization-ticket-redirect-issue
-            Dim authTicket As FormsAuthenticationTicket = New  _
-                     FormsAuthenticationTicket(1, _
-                     user, _
-                     DateTime.Now, _
-                     expira, _
-                     True, _
+            Dim authTicket As FormsAuthenticationTicket = New _
+                     FormsAuthenticationTicket(1,
+                     user,
+                     DateTime.Now,
+                     expira,
+                     True,
                        "")
 
-            Dim ck As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, _
+            Dim ck As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName,
                             FormsAuthentication.Encrypt(authTicket))
             ck.Path = FormsAuthentication.FormsCookiePath
 
@@ -449,7 +449,64 @@ Partial Class Login
 
     End Sub
 
+
+
+
+    Function AddUserToSession() As String
+        Dim mu As MembershipUser
+        mu = Membership.GetUser(Login1.UserName)
+        Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
+        Session(SESSIONPRONTO_UserName) = mu.UserName
+
+        Dim lista As Pronto.ERP.BO.EmpresaList
+
+        'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
+        'las encripto para que la capa inferior la use desencriptada cuando
+        'cree que la encripta por primera vez
+        Dim sConex As String
+        sConex = ConexBDLmaster()
+        lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
+        If lista Is Nothing Then
+            'forzar error del login
+            If False Then
+                Return "El usuario " & Session(SESSIONPRONTO_UserName) & " no tiene asignada ninguna empresa. Contacte al Administrador del sistema"
+            End If
+        Else
+            Dim arrayEmpresas(lista.Count - 1) As Integer
+            For i As Integer = 0 To lista.Count - 1
+                arrayEmpresas(i) = lista(i).Id
+            Next
+            Session("Empresas") = arrayEmpresas
+        End If
+
+
+
+        Return ""
+    End Function
+
+
+
+
+
+
+
+
     Protected Sub Login1_LoggedIn(ByVal sender As Object, ByVal e As System.EventArgs) Handles Login1.LoggedIn
+
+
+
+        'claro, no sabes a qué base se va a conectar... habria q loguearlo en la bdlmaster? -nah. usá una base default (tal como en el webservice)
+        Dim scs As String
+        If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+            scs = scLocal
+        Else
+            scs = scWilliamsRelease
+        End If
+        EntidadManager.LogPronto(Encriptar(scs), 0, "LOGIN_OK", Login1.UserName, Login1.Password, GetIPAddress())
+        'EntidadManager.LogPronto(scs, 0, "LOGIN_ERR", Login1.UserName, Login1.Password)
+
+
+
 
         '////////////////////////////////////////////////////////////////////////////////////////
         '////////////////////////////////////////////////////////////////////////////////////////
@@ -595,19 +652,19 @@ Partial Class Login
 
 
         '// http://stackoverflow.com/questions/13276368/asp-net-mvc-4-custom-authorization-ticket-redirect-issue
-        Dim authTicket As FormsAuthenticationTicket = New  _
-                 FormsAuthenticationTicket(1, _
-                 Session(SESSIONPRONTO_UserName), _
-                 DateTime.Now, _
-                 expira, _
-                 True, _
+        Dim authTicket As FormsAuthenticationTicket = New _
+                 FormsAuthenticationTicket(1,
+                 Session(SESSIONPRONTO_UserName),
+                 DateTime.Now,
+                 expira,
+                 True,
                    "")
 
 
 
 
 
-        Dim ck As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, _
+        Dim ck As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName,
                         FormsAuthentication.Encrypt(authTicket))
         ck.Path = FormsAuthentication.FormsCookiePath
         Response.Cookies.Add(ck) 'quizas se está perdiendo al hacer redirects o al cambiar la destinationpage del login o algo... 
@@ -811,36 +868,16 @@ Partial Class Login
 
 
 
-    Function AddUserToSession() As String
-        Dim mu As MembershipUser
-        mu = Membership.GetUser(Login1.UserName)
-        Session(SESSIONPRONTO_UserId) = mu.ProviderUserKey.ToString
-        Session(SESSIONPRONTO_UserName) = mu.UserName
 
-        Dim lista As Pronto.ERP.BO.EmpresaList
-
-        'Como las conexiones del web.config que apuntan a la BDLmaster no estan encriptadas,
-        'las encripto para que la capa inferior la use desencriptada cuando
-        'cree que la encripta por primera vez
-        Dim sConex As String
-        sConex = ConexBDLmaster()
-        lista = EmpresaManager.GetEmpresasPorUsuario(sConex, mu.ProviderUserKey.ToString)
-        If lista Is Nothing Then
-            'forzar error del login
-            If False Then
-                Return "El usuario " & Session(SESSIONPRONTO_UserName) & " no tiene asignada ninguna empresa. Contacte al Administrador del sistema"
-            End If
+    Public Shared Function GetIPAddress() As String
+        Dim context As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sIPAddress As String = context.Request.ServerVariables("HTTP_X_FORWARDED_FOR")
+        If String.IsNullOrEmpty(sIPAddress) Then
+            Return context.Request.ServerVariables("REMOTE_ADDR")
         Else
-            Dim arrayEmpresas(lista.Count - 1) As Integer
-            For i As Integer = 0 To lista.Count - 1
-                arrayEmpresas(i) = lista(i).Id
-            Next
-            Session("Empresas") = arrayEmpresas
+            Dim ipArray As String() = sIPAddress.Split(New [Char]() {","c})
+            Return ipArray(0)
         End If
-
-
-
-        Return ""
     End Function
 
 
@@ -867,6 +904,23 @@ Partial Class Login
         '//There was a problem logging in the user
 
         '//See if this user exists in the database
+
+
+
+        'claro, no sabes a qué base se va a conectar... habria q loguearlo en la bdlmaster? -nah. usá una base default (tal como en el webservice)
+        Dim scs As String
+        If System.Diagnostics.Debugger.IsAttached() Or ConfigurationManager.AppSettings("UrlDominio").Contains("localhost") Then
+            scs = scLocal
+        Else
+            scs = scWilliamsRelease
+        End If
+        'LogPronto(scs, 0, "LOGIN_OK", Login1.UserName, Login1.Password, GetIPAddress())
+        EntidadManager.LogPronto(Encriptar(scs), 0, "LOGIN_ERR", Login1.UserName, Login1.Password, GetIPAddress())
+
+
+
+
+
 
         Try
 
@@ -971,4 +1025,7 @@ Partial Class Login
 
         '// InvalidCredentialsLogDataSource.Insert();
     End Sub
+
+
+
 End Class

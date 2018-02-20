@@ -882,13 +882,38 @@ namespace ProntoMVC.Tests
 
 
 
-        [TestMethod]
+
+        //All projects referencing InterfazFlexicapture.csproj must install nuget package Microsoft.Bcl.Build.
+        //    For more information, see http://go.microsoft.com/fwlink/?LinkID=317569.
+
+
+
+
+
+
+                [TestMethod]
         public void LogDelWebservice_47448()
         {
 
             //        47448 Registro de Consulta de Web Service
             //Se solicita dejar un registro de las consultas al Web Service para luego poder consultar quiénes lo usan, cuándo y qué consultan.
 
+
+
+
+
+            string usuario = "Andres"; //"fyo";
+            string clave = "Andre5!"; // "76075";
+            string cuit = "1";
+
+            // var respEntrega = cerealnet.obtenerDescargas(usuario, clave, cuit, "2016-10-01", "2016-10-25");
+            var respEntrega = CartaDePorteManager.BajarListadoDeCartaPorte_CerealNet_DLL_v4(usuario, clave, cuit,
+                                            new DateTime(2017, 12, 23),
+                                            new DateTime(2017, 12, 23), CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                                            SC, DirApp, scbdlmasterappconfig);
+
+
+            //LogPronto(SC, CartaDePorteId, "COTOBUG", NombreUsuario, , , , )
 
         }
 
@@ -909,6 +934,10 @@ namespace ProntoMVC.Tests
             //- Usuario
             //- IP
             //- Fecha y Hora
+
+            //'claro, no sabes a qué base se va a conectar... habria q loguearlo en la bdlmaster? -nah. usá una base default (tal como en el webservice)
+            //Login1_LoginError
+            //Login1_LoggedIn
         }
 
 
@@ -929,6 +958,48 @@ namespace ProntoMVC.Tests
             //el formato tiene que ser el mismo de LELFUN S.A.
 
             //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("Marelli", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1, -1, -1,
+                 -1, -1,
+                 -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 10), new DateTime(2014, 1, 10),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+
+
+
+
+            var output2 = SincronismosWilliamsManager.GenerarSincro("Estanzuela", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1, -1, -1,
+                 -1, -1,
+                 -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 10), new DateTime(2014, 1, 10),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output2);
+
+
+
 
         }
 
@@ -968,7 +1039,7 @@ namespace ProntoMVC.Tests
 
             Assert.IsTrue(cp2.Turno == "xvcxcsbnh");
             Assert.IsTrue(cp2.Cupo == "sdfasdf");
-            
+
 
 
 
@@ -1580,8 +1651,10 @@ namespace ProntoMVC.Tests
 
 
 
+
+
         [TestMethod]
-        public void _47375()
+        public void filtrosEnGeneral_estoesuntema_47375()
         {
 
             /*
@@ -1596,7 +1669,7 @@ namespace ProntoMVC.Tests
                 *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
                 * en la facturacion hay otro criterio
                 * en la vista por celulares, otro (basta conque el usuario figure entre los clientes de la carta, en cualquier lado)
-
+                *en la pagina de clientes, esta el filtro de "cuits relacionados"
 
              Sincronismos
 * Página de clientes
@@ -5292,7 +5365,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -6001,7 +6074,7 @@ namespace ProntoMVC.Tests
             yourParams2[0] = new ReportParameter("TopClientes", topclie.ToString());
             yourParams2[1] = new ReportParameter("MinimoNeto", MinimoNeto.ToString());
 
-            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
 
             System.Diagnostics.Process.Start(output2);
 
@@ -6150,7 +6223,7 @@ namespace ProntoMVC.Tests
 
             //insertarequivalencia("DESTINO|LDC ARGENTINA S A", "LDC ARG (PTA TIMBUES)");
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-170626-1330.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Posicion-170626-1330.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -6638,7 +6711,7 @@ namespace ProntoMVC.Tests
             yourParams[0] = new ReportParameter("Titulo", "jhjh");
             yourParams[1] = p2;
 
-            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
 
             System.Diagnostics.Process.Start(output);
 
@@ -6756,7 +6829,7 @@ namespace ProntoMVC.Tests
             //Password: 4R04475j
 
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Syngenta_10feb2017_115941.xlsx";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Syngenta_10feb2017_115941.xlsx";
 
             var s = new ServicioCartaPorte.servi();
 
@@ -6872,9 +6945,9 @@ namespace ProntoMVC.Tests
 
             string ms = "";
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\PORTE050041ramallo175.txt";  // tabs
-                                                                                                                      // string archivoExcel = @dirMiRepo+@"pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
-                                                                                                                      //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\PORTE050041ramallo175.txt";  // tabs
+                                                                                              // string archivoExcel = @dirMiRepo+@"pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+                                                                                              //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
 
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -7091,7 +7164,7 @@ namespace ProntoMVC.Tests
             yourParams[0] = new ReportParameter("Titulo", "jhjh");
             yourParams[1] = p2;
 
-            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Estadísticas de Toneladas descargadas Sucursal-Modo.rdl", q, ref output, yourParams);
 
             System.Diagnostics.Process.Start(output);
 
@@ -7119,7 +7192,7 @@ namespace ProntoMVC.Tests
             yourParams2[0] = new ReportParameter("TopClientes", topclie.ToString());
             yourParams2[1] = new ReportParameter("MinimoNeto", MinimoNeto.ToString());
 
-            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
+            CartaDePorteManager.RebindReportViewerLINQ_Excel(ref ReporteLocal2, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Ranking de Clientes.rdl", q2, ref output2, yourParams2);
 
             System.Diagnostics.Process.Start(output2);
 
@@ -7145,7 +7218,7 @@ namespace ProntoMVC.Tests
         {
 
 
-            string archivo = @dirMiRepo+@"pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
+            string archivo = @dirMiRepo + @"pronto\docstest\2501323ago2016_100401_555332208-CP.jpg";
             string output = archivo + ".salida.jpg";
             string output2 = archivo + ".salida.tif";
 
@@ -7199,7 +7272,7 @@ namespace ProntoMVC.Tests
                                               @dirMiRepo+@"New folder\550558123-cp.jpg"};
 
                 ClassFlexicapture.SaveAsMultiPageTiff(
-                                                     @dirMiRepo+@"New folder\assadfasdf.tiff",
+                                                     @dirMiRepo + @"New folder\assadfasdf.tiff",
                                                      sss
                                                      );
             }
@@ -7230,7 +7303,7 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void OCR_Postprocesamiento_ManotearExcel()
         {
-            var excel = @dirMiRepo+@"pronto\docstest\ExportToXLS.xls";
+            var excel = @dirMiRepo + @"pronto\docstest\ExportToXLS.xls";
 
             ClassFlexicapture.ManotearExcel(excel, "asdfasdf", "232324423");
 
@@ -7250,7 +7323,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
             //zipFile = @dirMiRepo+@"pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
-            zipFile = @dirMiRepo+@"pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
+            zipFile = @dirMiRepo + @"pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -7287,7 +7360,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
             //zipFile = @dirMiRepo+@"pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
-            zipFile = @dirMiRepo+@"pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
+            zipFile = @dirMiRepo + @"pronto\docstest\Xerox WorkCentre 3550_20170511174612.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -7531,7 +7604,7 @@ namespace ProntoMVC.Tests
             */
 
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 951-28042017.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Urenport_ 951-28042017.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -7820,7 +7893,7 @@ namespace ProntoMVC.Tests
             */
 
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\prueba.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\prueba.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -8770,7 +8843,7 @@ namespace ProntoMVC.Tests
             */
 
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 930-28032017.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Urenport_ 930-28032017.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -8811,7 +8884,7 @@ namespace ProntoMVC.Tests
             */
 
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_1130-21032017.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Urenport_1130-21032017.xls";
 
             //FuncionesGenericasCSharp.GetExcel5_HTML_AgilityPack(archivoExcel);
             //FuncionesGenericasCSharp.GetExcel4_ExcelDataReader(archivoExcel);
@@ -8839,7 +8912,7 @@ namespace ProntoMVC.Tests
         public void Urenport_32235_conotroarchivo()
         {
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Posicion-161229-0945.xls";
 
 
             //explota
@@ -8873,8 +8946,8 @@ namespace ProntoMVC.Tests
 
 
             var ds3 = ExcelImportadorManager.GetExcel2_ODBC(ArchivoExcelDestino);
-            var ds4 = ExcelImportadorManager.GetExcel2_ODBC(@dirMiRepo+@"pronto\docstest\Urenport_ 953-29122016.xlsx");
-            var ds5 = ExcelImportadorManager.GetExcel2_ODBC(@dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls");
+            var ds4 = ExcelImportadorManager.GetExcel2_ODBC(@dirMiRepo + @"pronto\docstest\Urenport_ 953-29122016.xlsx");
+            var ds5 = ExcelImportadorManager.GetExcel2_ODBC(@dirMiRepo + @"pronto\docstest\Posicion-161229-0945.xls");
 
             var dt1 = FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS(ArchivoExcelDestino);
 
@@ -9100,7 +9173,7 @@ namespace ProntoMVC.Tests
         {
 
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 953-29122016.xlsx";
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_1450-23022017.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Urenport_1450-23022017.xls";
 
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls"
 
@@ -9142,7 +9215,7 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 953-29122016.xlsx";
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls"
             //string archivoExcel = @dirMiRepo+@"New folder\Urenport_ 951-24012017.xls";
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Ejemplo punto 3.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Ejemplo punto 3.xls";
 
 
 
@@ -9259,7 +9332,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"New folder\Lote 20ene165904 nveron PV2\0.tif";
+            zipFile = @dirMiRepo + @"New folder\Lote 20ene165904 nveron PV2\0.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -9288,8 +9361,8 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"pronto\docstest\imagenes\3333.tif";
-            zipFile = @dirMiRepo+@"pronto\docstest\imagenes\CPTKCPTK.tif";
+            zipFile = @dirMiRepo + @"pronto\docstest\imagenes\3333.tif";
+            zipFile = @dirMiRepo + @"pronto\docstest\imagenes\CPTKCPTK.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -9383,7 +9456,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -9426,7 +9499,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -9468,7 +9541,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -9522,7 +9595,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -9576,7 +9649,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -9596,7 +9669,7 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\171116\Posicion-161117-1722.xls";
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 953-29122016.xlsx";
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls"
-            string archivoExcel = @dirMiRepo+@"New folder\Urenport_ 951-24012017.xls";
+            string archivoExcel = @dirMiRepo + @"New folder\Urenport_ 951-24012017.xls";
             //explota
 
             string ms = "";
@@ -9651,7 +9724,7 @@ namespace ProntoMVC.Tests
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\171116\urenport.xls";
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\171116\Posicion-161117-1722.xls";
             //string archivoExcel = @dirMiRepo+@"pronto\docstest\Urenport_ 953-29122016.xlsx";
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\Posicion-161229-0945.xls";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\Posicion-161229-0945.xls";
             //string archivoExcel = @dirMiRepo+@"New folder\Urenport_ 951-24012017.xls";
             //explota
 
@@ -10361,7 +10434,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"pronto\docstest\140029nov2016_095446_ExportToXLS_388413.tif.jpg";
+            zipFile = @dirMiRepo + @"pronto\docstest\140029nov2016_095446_ExportToXLS_388413.tif.jpg";
 
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10404,7 +10477,7 @@ namespace ProntoMVC.Tests
 
             var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
 
-            System.Diagnostics.Process.Start(@dirMiRepo+@"pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
+            System.Diagnostics.Process.Start(@dirMiRepo + @"pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
 
 
 
@@ -10556,7 +10629,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
+            zipFile = @dirMiRepo + @"pronto\docstest\Lote 09nov190213 cgoycochea PV4\Xerox WorkCentre 3550_20161109190032.tif";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11327,8 +11400,8 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"pronto\docstest\tickets y cartas.zip";
-            zipFile = @dirMiRepo+@"pronto\docstest\141016\TIFFF.zip";
+            zipFile = @dirMiRepo + @"pronto\docstest\tickets y cartas.zip";
+            zipFile = @dirMiRepo + @"pronto\docstest\141016\TIFFF.zip";
 
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11371,7 +11444,7 @@ namespace ProntoMVC.Tests
 
             var excels = ClassFlexicapture.BuscarExcelsGenerados(DirApp);
 
-            System.Diagnostics.Process.Start(@dirMiRepo+@"pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
+            System.Diagnostics.Process.Start(@dirMiRepo + @"pronto\prontoweb\Temp\" + excels[0] + @"\ExportToXLS.xls");
 
 
 
@@ -11394,7 +11467,7 @@ namespace ProntoMVC.Tests
 
             string ms = "";
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\230916\descar19.txt";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\230916\descar19.txt";
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
 
@@ -11571,7 +11644,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -11598,7 +11671,7 @@ namespace ProntoMVC.Tests
 
             string ms = "";
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\150916\Anali19.txt";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\150916\Anali19.txt";
 
 
             int m_IdMaestro = 0;
@@ -11661,7 +11734,7 @@ namespace ProntoMVC.Tests
 
             string ms = "";
 
-            string archivoExcel = @dirMiRepo+@"pronto\docstest\080916\Anali19.txt";
+            string archivoExcel = @dirMiRepo + @"pronto\docstest\080916\Anali19.txt";
 
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
@@ -11729,7 +11802,7 @@ namespace ProntoMVC.Tests
             string ms = "";
 
             //string archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.txt";  // tabs
-            string archivoExcel = @dirMiRepo+@"pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
+            string archivoExcel = @dirMiRepo + @"pronto\prontoweb\Documentos\pegatinas\bungeramallo.txt";
             //archivoExcel = @"C:\Users\Administrador\Desktop\Anali19.d";   // punto y coma
 
             int m_IdMaestro = 0;
@@ -11886,7 +11959,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"pronto\docstest\TIFFFF1.zip";
+            zipFile = @dirMiRepo + @"pronto\docstest\TIFFFF1.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11938,9 +12011,9 @@ namespace ProntoMVC.Tests
         [TestMethod]
         public void DESCARGA_IMAGENES_22373_3()
         {
-            using (Bitmap bmp = new Bitmap(@dirMiRepo+@"pronto\docstest\2501323ago2016_100401_555332208-CP.jpg"))
+            using (Bitmap bmp = new Bitmap(@dirMiRepo + @"pronto\docstest\2501323ago2016_100401_555332208-CP.jpg"))
             {
-                using (Tiff tif = Tiff.Open(@dirMiRepo+@"pronto\docstest\BitmapTo24BitColorTiff.tif", "w"))
+                using (Tiff tif = Tiff.Open(@dirMiRepo + @"pronto\docstest\BitmapTo24BitColorTiff.tif", "w"))
                 {
                     byte[] raster = getImageRasterBytes(bmp, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
                     tif.SetField(TiffTag.IMAGEWIDTH, bmp.Width);
@@ -11968,7 +12041,7 @@ namespace ProntoMVC.Tests
                     }
                 }
 
-                System.Diagnostics.Process.Start(@dirMiRepo+@"pronto\docstest\BitmapTo24BitColorTiff.tif");
+                System.Diagnostics.Process.Start(@dirMiRepo + @"pronto\docstest\BitmapTo24BitColorTiff.tif");
             }
         }
 
@@ -12046,7 +12119,7 @@ namespace ProntoMVC.Tests
                                               @dirMiRepo+@"New folder\550558123-cp.jpg"};
 
                 ClassFlexicapture.SaveAsMultiPageTiff(
-                                                     @dirMiRepo+@"New folder\assadfasdf.tiff",
+                                                     @dirMiRepo + @"New folder\assadfasdf.tiff",
                                                      sss
                                                      );
             }
@@ -12186,7 +12259,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"imagenescp\tickets.zip";
+            zipFile = @dirMiRepo + @"imagenescp\tickets.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -12533,7 +12606,7 @@ namespace ProntoMVC.Tests
             string output = "";
 
             CartaDePorteManager.RebindReportViewerLINQ_Excel
-                                (ref ReporteLocal, @dirMiRepo+@"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
+                                (ref ReporteLocal, @dirMiRepo + @"pronto\prontoweb\ProntoWeb\Informes\Liquidación de SubContratistas 2.rdl", q, ref output, p);
 
             System.Diagnostics.Process.Start(output);
 
@@ -12801,7 +12874,7 @@ namespace ProntoMVC.Tests
                                               @dirMiRepo+@"New folder\550558123-cp.jpg"};
 
                 ClassFlexicapture.SaveAsMultiPageTiff(
-                                                     @dirMiRepo+@"New folder\assadfasdf.tiff",
+                                                     @dirMiRepo + @"New folder\assadfasdf.tiff",
                                                      sss
                                                      );
             }
@@ -13381,8 +13454,8 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
-            zipFile = @dirMiRepo+@"New folder\prueba.zip";
+            zipFile = @dirMiRepo + @"New folder\Lote 21mar101631 prueba1 PV1\prueba sistema.zip";
+            zipFile = @dirMiRepo + @"New folder\prueba.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13725,8 +13798,8 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile;
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\CPTKCPTK.tif";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\3333.tif";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\CPTKCPTK.tif";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\3333.tif";
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13778,19 +13851,19 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string zipFile = @"C:\Users\Administrador\Desktop\tiff multipagina.zip";
-            zipFile = @dirMiRepo+@"New folder\Lote.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\LoteDe10.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\Nueva carpeta.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\doc02102016173229.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\tandabuena.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\doc02152016123436.zip";
+            zipFile = @dirMiRepo + @"New folder\Lote.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\LoteDe10.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\Nueva carpeta.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\doc02102016173229.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\tandabuena.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\doc02152016123436.zip";
             zipFile = @"C:\Users\Administrador\Desktop\bien giradas\bien giradas.zip";
-            zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\patasarriba.zip";
-            zipFile = @dirMiRepo+@"New folder\doc02172016135519.tif";
-            zipFile = @dirMiRepo+@"New folder\doc02172016094547.tif";
-            zipFile = @dirMiRepo+@"New folder\doc02182016085814.tif";
-            zipFile = @dirMiRepo+@"New folder\Lote 23feb094434 prueba1\doc02232016091830.tif";
-            zipFile = @dirMiRepo+@"New folder\pv4 buenas\pv4 buenas.zip";
+            zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\patasarriba.zip";
+            zipFile = @dirMiRepo + @"New folder\doc02172016135519.tif";
+            zipFile = @dirMiRepo + @"New folder\doc02172016094547.tif";
+            zipFile = @dirMiRepo + @"New folder\doc02182016085814.tif";
+            zipFile = @dirMiRepo + @"New folder\Lote 23feb094434 prueba1\doc02232016091830.tif";
+            zipFile = @dirMiRepo + @"New folder\pv4 buenas\pv4 buenas.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13879,8 +13952,8 @@ namespace ProntoMVC.Tests
         {
             string SamplesFolder;
             SamplesFolder = @"C:\Users\Administrador\Desktop\codigo barras\17-3-2015\entrega\14Williams\loteindividual";
-            SamplesFolder = @dirMiRepo+@"prontoweb\Documentos\imagenes\buenlote";
-            SamplesFolder = @dirMiRepo+@"New folder\repetido";
+            SamplesFolder = @dirMiRepo + @"prontoweb\Documentos\imagenes\buenlote";
+            SamplesFolder = @dirMiRepo + @"New folder\repetido";
 
             string sError = "";
 
@@ -14018,7 +14091,7 @@ namespace ProntoMVC.Tests
 
             string ms = "";
 
-            string archivoExcel = @dirMiRepo+@"prontoweb\Documentos\pegatinas\30488_Posi19.txt";
+            string archivoExcel = @dirMiRepo + @"prontoweb\Documentos\pegatinas\30488_Posi19.txt";
             int m_IdMaestro = 0;
             Pronto.ERP.BO.CartaDePorte carta;
 
@@ -14356,7 +14429,7 @@ namespace ProntoMVC.Tests
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            string zipFile = @dirMiRepo+@"prontoweb\Documentos\imagenes\destino rebuscado.zip";
+            string zipFile = @dirMiRepo + @"prontoweb\Documentos\imagenes\destino rebuscado.zip";
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

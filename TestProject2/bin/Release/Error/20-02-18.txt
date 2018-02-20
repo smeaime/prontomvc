@@ -1,0 +1,5 @@
+
+Log Entry : 
+02/20/2018 08:43:37
+Error in: . Error Message:WebService: Lote de 0 cartas. IdCliente=13648 00:00 00:00
+__________________________
