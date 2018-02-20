@@ -239,33 +239,38 @@ Partial Class CartadeporteABMExternoMovil
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             'permisos del usuario externo para esta carta
-            Dim rs As String
-            Try
-                rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
-            Catch ex As Exception
-                ErrHandler2.WriteError(ex)
-                rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
-            End Try
 
-            Dim idcli As Integer
-            If rs <> "" Then
-                idcli = BuscaIdClientePreciso(rs, HFSC.Value)
-                If idcli = -1 Then
+            If Not (Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsComercial") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsAdmin") Or Roles.IsUserInRole(Membership.GetUser().UserName, "WilliamsFacturacion")) Then
 
-                    MsgBoxAjax(Me, "No existe el cliente: " & rs)
+
+                Dim rs As String
+                Try
+                    rs = UserDatosExtendidosManager.TraerRazonSocialDelUsuario(Session(SESSIONPRONTO_UserId), ConexBDLmaster, HFSC.Value)
+                Catch ex As Exception
+                    ErrHandler2.WriteError(ex)
+                    rs = Session(SESSIONPRONTO_UserName) 'como no encuentro el usuario en la tabla de datos adicionales de la bdlmaster, uso el nombre del usuario como razon social que esperaba encontrar en esa dichosa tabla
+                End Try
+
+                Dim idcli As Integer
+                If rs <> "" Then
+                    idcli = BuscaIdClientePreciso(rs, HFSC.Value)
+                    If idcli = -1 Then
+
+                        MsgBoxAjax(Me, "No existe el cliente: " & rs)
+                        Exit Sub
+                    End If
+                End If
+
+                If myCartaDePorte.Titular <> idcli And
+                    myCartaDePorte.Entregador <> idcli And
+                    myCartaDePorte.CuentaOrden1 <> idcli And
+                    myCartaDePorte.CuentaOrden2 <> idcli And
+                    IdClienteEquivalenteDelIdVendedor(myCartaDePorte.Corredor, SC) <> idcli Then
+
+                    ErrHandler2.WriteError("No tenés permisos para esta carta")
+                    MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta carta", "CartaDePorteInformesAccesoClientes.aspx")
                     Exit Sub
                 End If
-            End If
-
-            If myCartaDePorte.Titular <> idcli And
-                myCartaDePorte.Entregador <> idcli And
-                myCartaDePorte.CuentaOrden1 <> idcli And
-                myCartaDePorte.CuentaOrden2 <> idcli And
-                IdClienteEquivalenteDelIdVendedor(myCartaDePorte.Corredor, SC) <> idcli Then
-
-                ErrHandler2.WriteError("No tenés permisos para esta carta")
-                MsgBoxAjaxAndRedirect(Me, "No tenés permisos para esta carta", "CartaDePorteInformesAccesoClientes.aspx")
-                Exit Sub
             End If
 
             '//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -306,12 +311,14 @@ Partial Class CartadeporteABMExternoMovil
             BloqueosDeEdicion(myCartaDePorte)
 
 
+
             If myCartaDePorte.NetoFinalAntesDeRestarMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
                 TabContainer2.ActiveTabIndex = 1
             Else
                 TabContainer2.ActiveTabIndex = 0
             End If
 
+            TabContainer2.ActiveTabIndex = 4
 
             '////////////////////////////
             RangeValidatorFechaArribo.MinimumValue = Today.AddDays(-3).ToShortDateString
