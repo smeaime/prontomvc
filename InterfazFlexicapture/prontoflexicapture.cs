@@ -7187,7 +7187,7 @@ Formato localidad-provincia	destination	x
 
             //tiene que ser el dominio de clientes!!!
             //string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
-            string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
+            string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
 
 
 
@@ -7199,7 +7199,7 @@ Formato localidad-provincia	destination	x
             //hagamos la simple: si tiene usuario en la externa, es "externo"
             ElDestinatarioEsInterno = !dbmasterExternos.aspnet_Users.Any(u => u.LoweredUserName == usuarioDestino.ToLower());
 
-            if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
+            if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
 
 
 
