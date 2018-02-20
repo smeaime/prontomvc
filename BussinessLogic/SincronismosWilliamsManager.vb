@@ -366,6 +366,34 @@ Namespace Pronto.ERP.Bll
                     txtRcomercial.Text = "LELFUN S.A."
                     txtPopClienteAuxiliar.Text = "LELFUN S.A."
 
+
+
+                Case "MARELLI"
+                    txtCorredor.Text = ""
+                    Dim cuit = "30-70909735-7"
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+
+
+
+
+                Case "ESTANZUELA"
+                    txtCorredor.Text = ""
+                    Dim cuit = "30-71542522-6"
+                    txtTitular.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtIntermediario.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+                    txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
+
+
+
+
+
+
+
+
                 Case "ARECO"
                     txtCorredor.Text = ""
                     txtTitular.Text = "ARECO SEMILLAS SA"
