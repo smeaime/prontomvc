@@ -386,9 +386,13 @@ $(function () {
     ///////////////////////////////////////////
     /////////////////////////////////////
     /////////////////////////////////////
-    // scroll 
-    $(".ui-jqgrid").css("overflow-x", "hidden");
-    $(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+    // scroll  // al sacarselo a la grilla del arbol, estoy jodiendo al del resto de las grillas
+    //$(".ui-jqgrid").css("overflow-x", "hidden");
+    //$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+
+
+
+
     /////////////////////////////////////
     /////////////////////////////////////
     /////////////////////////////////////
