@@ -181,9 +181,6 @@ namespace ProntoMVC.TestsMVC
 
             //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
 
-            ExcelImportadorManager.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scEF);
-            //jjj
-
 
             //desproteger el excel si tira "oledbexception could not decrypt file"
 
@@ -193,6 +190,17 @@ namespace ProntoMVC.TestsMVC
 
 
             }
+
+
+            DataColumn Col = ds2.Tables[0].Columns.Add("Column Name", System.Type.GetType("System.Boolean")); // le meto una columna al principio 
+            Col.SetOrdinal(0);// to put the column in position 0;
+
+            //var m = new MigracionVB.Class1();
+
+            MigracionVB.Class1.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scSQL , "", DateTime.Now, 0, 0);
+            //jjj
+
+
 
 
         }
@@ -209,8 +217,8 @@ namespace ProntoMVC.TestsMVC
 
             // @"C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc"
 
-           string output = DirApp + "\\Documentos\\" + "archivo6524.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-           string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_VialAgro.dotm";
+            string output = DirApp + "\\Documentos\\" + "archivo6524.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_VialAgro.dotm";
 
 
             string mensajeError;

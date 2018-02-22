@@ -216,96 +216,12 @@ namespace ProntoMVC.Controllers
                     string usuario = ViewBag.NombreUsuario;
                     int IdUsuario = db.Empleados.Where(x => x.Nombre == usuario || x.UsuarioNT == usuario).Select(x => x.IdEmpleado).FirstOrDefault();
 
-                    if (Proveedor.IdProveedor > 0)
+                    using (var ss = new ServicioMVC.servi(SC))
                     {
-                        Proveedor.IdUsuarioModifico = IdUsuario;
-                        Proveedor.FechaModifico = DateTime.Now;
-                    }
-                    else
-                    {
-                        Proveedor.IdUsuarioIngreso = IdUsuario;
-                        Proveedor.FechaIngreso = DateTime.Now;
+                        ss.Grabar_Proveedor(Proveedor, IdUsuario);
                     }
 
-                    if (Proveedor.IdProveedor > 0)
-                    {
-                        var EntidadOriginal = db.Proveedores.Where(p => p.IdProveedor == Proveedor.IdProveedor).Include(p => p.DetalleProveedoresContactos).Include(p => p.DetalleProveedoresRubros).SingleOrDefault();
-                        var EntidadEntry = db.Entry(EntidadOriginal);
-                        EntidadEntry.CurrentValues.SetValues(Proveedor);
 
-                        foreach (var d in Proveedor.DetalleProveedoresContactos)
-                        {
-                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedoresContactos.Where(c => c.IdDetalleProveedor == d.IdDetalleProveedor && d.IdDetalleProveedor > 0).SingleOrDefault();
-                            if (DetalleEntidadOriginal != null)
-                            {
-                                var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                DetalleEntidadEntry.CurrentValues.SetValues(d);
-                            }
-                            else
-                            {
-                                EntidadOriginal.DetalleProveedoresContactos.Add(d);
-                            }
-                        }
-                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedoresContactos.Where(c => c.IdDetalleProveedor != 0).ToList())
-                        {
-                            if (!Proveedor.DetalleProveedoresContactos.Any(c => c.IdDetalleProveedor == DetalleEntidadOriginal.IdDetalleProveedor))
-                            {
-                                EntidadOriginal.DetalleProveedoresContactos.Remove(DetalleEntidadOriginal);
-                                db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                            }
-                        }
-
-                        foreach (var d in Proveedor.DetalleProveedoresRubros)
-                        {
-                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedoresRubros.Where(c => c.IdDetalleProveedorRubros == d.IdDetalleProveedorRubros && d.IdDetalleProveedorRubros > 0).SingleOrDefault();
-                            if (DetalleEntidadOriginal != null)
-                            {
-                                var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                DetalleEntidadEntry.CurrentValues.SetValues(d);
-                            }
-                            else
-                            {
-                                EntidadOriginal.DetalleProveedoresRubros.Add(d);
-                            }
-                        }
-                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedoresRubros.Where(c => c.IdDetalleProveedorRubros != 0).ToList())
-                        {
-                            if (!Proveedor.DetalleProveedoresRubros.Any(c => c.IdDetalleProveedorRubros == DetalleEntidadOriginal.IdDetalleProveedorRubros))
-                            {
-                                EntidadOriginal.DetalleProveedoresRubros.Remove(DetalleEntidadOriginal);
-                                db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                            }
-                        }
-
-                        foreach (var d in Proveedor.DetalleProveedoresIBs)
-                        {
-                            var DetalleEntidadOriginal = EntidadOriginal.DetalleProveedoresIBs.Where(c => c.IdDetalleProveedorIB == d.IdDetalleProveedorIB && d.IdDetalleProveedorIB > 0).SingleOrDefault();
-                            if (DetalleEntidadOriginal != null)
-                            {
-                                var DetalleEntidadEntry = db.Entry(DetalleEntidadOriginal);
-                                DetalleEntidadEntry.CurrentValues.SetValues(d);
-                            }
-                            else
-                            {
-                                EntidadOriginal.DetalleProveedoresIBs.Add(d);
-                            }
-                        }
-                        foreach (var DetalleEntidadOriginal in EntidadOriginal.DetalleProveedoresIBs.Where(c => c.IdDetalleProveedorIB != 0).ToList())
-                        {
-                            if (!Proveedor.DetalleProveedoresIBs.Any(c => c.IdDetalleProveedorIB == DetalleEntidadOriginal.IdDetalleProveedorIB))
-                            {
-                                EntidadOriginal.DetalleProveedoresIBs.Remove(DetalleEntidadOriginal);
-                                db.Entry(DetalleEntidadOriginal).State = System.Data.Entity.EntityState.Deleted;
-                            }
-                        }
-
-                        db.Entry(EntidadOriginal).State = System.Data.Entity.EntityState.Modified;
-                    }
-                    else
-                    {
-                        db.Proveedores.Add(Proveedor);
-                    }
-                    db.SaveChanges();
 
                     return Json(new { Success = 1, IdProveedor = Proveedor.IdProveedor, ex = "" });
                 }
