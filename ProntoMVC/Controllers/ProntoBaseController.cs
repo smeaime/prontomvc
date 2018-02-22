@@ -539,6 +539,8 @@ namespace ProntoMVC.Controllers
             return idclava;
         }
 
+
+
         bool VerificarPassBase(ActionExecutingContext filterContext)
         {
             string sBasePronto = (string)filterContext.HttpContext.Session["BasePronto"];

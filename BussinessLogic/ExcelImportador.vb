@@ -6465,13 +6465,26 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function ImportacionComprobantesFondoFijo2(dt As DataTable, SC As String)
+    Public Shared Function ImportacionComprobantesFondoFijo2(dt As DataTable, SC As String, mArchivo As String, mFechaRecepcion As Date, mNumeroReferencia As Integer, mIdPuntoVenta As Integer)
 
+
+        '/////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////
         '        'parametros de entrada
         '        'mArchivo = .FileBrowser1(0).text
         '        'mFechaRecepcion = .DTFields(0).Value
         '        'mNumeroReferencia = Val(.Text1.text)
         '        'If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
+
+
+        'globales que tomaba esta funcion. mover a globales del servicio
+        Dim gblFechaUltimoCierre As Date
+        Dim glbIdMonedaDolar As Integer
+        Dim glbIdUsuario As Integer
+        Dim glbPuntoVentaEnNumeroInternoCP As Boolean
+        '/////////////////////////////////////////////////////////////////
+        '/////////////////////////////////////////////////////////////////
+
 
 
         Dim oAp ' As ComPronto.Aplicacion
@@ -6505,25 +6518,19 @@ Public Class ExcelImportadorManager
 
 
 
-        'globales que tomaba esta funcion
-        Dim gblFechaUltimoCierre As Date
-        Dim glbIdMonedaDolar As Integer
-        Dim glbIdUsuario As Integer
-
-
 
 
         'On Error GoTo Mal
 
-        'mPuntosVentaAsociados = ""
-        'If glbPuntoVentaEnNumeroInternoCP Then
-        '    oRsAux1 = Aplicacion.Empleados.TraerFiltrado("_PorId", glbIdUsuario)
-        '    If oRsAux1.RecordCount > 0 Then mPuntosVentaAsociados = IIf(IsNull(oRsAux1.PuntosVentaAsociados), "", oRsAux1.PuntosVentaAsociados)
-        '    oRsAux1.Close
-        '    If Len(mPuntosVentaAsociados) = 0 Then
-        '        Throw New Exception("No tiene asignados puntos de venta para incorporar a los comprobantes importados")
-        '    End If
-        'End If
+        mPuntosVentaAsociados = ""
+        If glbPuntoVentaEnNumeroInternoCP Then
+            oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Empleados_TX_PorId, glbIdUsuario)
+            If oRsAux1.RecordCount > 0 Then mPuntosVentaAsociados = IIf(IsNull(oRsAux1.PuntosVentaAsociados), "", oRsAux1.PuntosVentaAsociados)
+            oRsAux1.Close
+            If Len(mPuntosVentaAsociados) = 0 Then
+                Throw New Exception("No tiene asignados puntos de venta para incorporar a los comprobantes importados")
+            End If
+        End If
 
 
 
@@ -6554,13 +6561,14 @@ Public Class ExcelImportadorManager
 
         'oAp = Aplicacion
 
-        'mIncrementarReferencia = BuscarClaveINI("IncrementarReferenciaEnImportacionDeComprobantes", -1)
-        'mCondicionCompra = BuscarClaveINI("Condicion de compra default para fondos fijos")
-        'mFecha1 = BuscarClaveINI("Fecha recepcion igual fecha comprobante en fondo fijo")
-        'mCuitDefault = BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos")
+        mIncrementarReferencia = EntidadManager.BuscarClaveINI("IncrementarReferenciaEnImportacionDeComprobantes", -1)
+        mCondicionCompra = EntidadManager.BuscarClaveINI("Condicion de compra default para fondos fijos")
+        mFecha1 = EntidadManager.BuscarClaveINI("Fecha recepcion igual fecha comprobante en fondo fijo")
+        mCuitDefault = EntidadManager.BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos")
 
-        oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
-        mIdMonedaPesos = oRsAux1.IdMoneda
+        Dim p As ParametrosOriginalesRenglon
+        'oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
+        mIdMonedaPesos = p.p(ParametroManager.ePmOrg.IdMoneda)
         mIdTipoComprobanteFacturaCompra = oRsAux1.IdTipoComprobanteFacturaCompra
         mIdUnidadPorUnidad = IIf(IsNull(oRsAux1.IdUnidadPorUnidad), 0, oRsAux1.IdUnidadPorUnidad)
         gblFechaUltimoCierre = IIf(IsNull(oRsAux1.FechaUltimoCierre), DateSerial(1980, 1, 1), oRsAux1.FechaUltimoCierre)
