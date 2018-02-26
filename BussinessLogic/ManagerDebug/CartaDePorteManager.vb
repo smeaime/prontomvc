@@ -14529,9 +14529,10 @@ usuario As String, ConexBDLmaster As String,
                 'End If
 
 
+
                 If oFac.RetencionIBrutos1 <> 0 Then
                     If mvarIdProvinciaIIBB = 3 Then
-                        mAuxS1 = "Percepción CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
+                        mAuxS1 = "Percepción IIBB CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
                     Else
                         mAuxS1 = "Percepción IIBB " & mvarNombreProvinciaIIBB & " " & FF2(mvarPorcentajeIBrutos) & " %"
                     End If

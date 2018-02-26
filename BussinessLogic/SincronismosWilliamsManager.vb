@@ -16657,10 +16657,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
         Public Shared Function Sincronismo_MBC(q As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3),
             ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
@@ -16730,7 +16726,7 @@ Namespace Pronto.ERP.Bll
 
             Dim sErroresProcedencia, sErroresDestinos As String
 
-            Dim SEP = ";"
+            Dim SEP = ","
 
             'Dim vFileName As String = Path.GetTempFileName() & ".txt"
             Dim vFileName As String = Path.GetTempPath & "MBC-" & Now.ToString("ddMMMyyyy_HHmmss") & ".csv" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
@@ -16751,11 +16747,13 @@ Namespace Pronto.ERP.Bll
 
             'Dim a = pDataTable(1)
 
+            If False Then
 
-            Dim bbb = """A""" & SEP & "1" & SEP & "64979853" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979853" & SEP & "" & SEP & "25320" & SEP & "11.8" & SEP & "1.65" & SEP & "418" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "24902" & SEP & "24902" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """VKC391""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """30-71176315-1""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """29036703""" & SEP & "14440"
-            Dim aaa = """A""" & SEP & "1" & SEP & "64979856" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979856" & SEP & "" & SEP & "27920" & SEP & "9.9" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "27920" & SEP & "27920" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """EJL819""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """20-24150448-5""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """89670902""" & SEP & "14200"
-            PrintLine(nF, bbb) 'encabezado
-            PrintLine(nF, aaa) 'encabezado
+                Dim bbb = """A""" & SEP & "1" & SEP & "64979853" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979853" & SEP & "" & SEP & "25320" & SEP & "11.8" & SEP & "1.65" & SEP & "418" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "24902" & SEP & "24902" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """VKC391""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """30-71176315-1""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """29036703""" & SEP & "14440"
+                Dim aaa = """A""" & SEP & "1" & SEP & "64979856" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979856" & SEP & "" & SEP & "27920" & SEP & "9.9" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "27920" & SEP & "27920" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """EJL819""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """20-24150448-5""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """89670902""" & SEP & "14200"
+                PrintLine(nF, bbb) 'encabezado
+                PrintLine(nF, aaa) 'encabezado
+            End If
 
 
 
@@ -16798,15 +16796,9 @@ Namespace Pronto.ERP.Bll
                     sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= .NRecibo & SEP
-<<<<<<< HEAD
                     sb &= .BrutoFinal & SEP
                     sb &= .Humedad & SEP
                     sb &= String.Format("{0:F2}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
-=======
-                    sb &= .BrutoPto & SEP
-                    sb &= .Humedad & SEP
-                    sb &= .Humedad & SEP
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
                     sb &= .HumedadDesnormalizada & SEP
 
 
@@ -16829,16 +16821,9 @@ Namespace Pronto.ERP.Bll
                     'KNetos  Peso descontadas las mermas	Numérico	10
                     'KAplicados      Numérico	10
 
-<<<<<<< HEAD
                     sb &= .Merma & SEP ' Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
                     sb &= .NetoFinal & SEP
                     sb &= .NetoFinal & SEP
-=======
-                    sb &= Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
-                    sb &= .NetoFinal & SEP
-                    sb &= "0" & SEP
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
-
 
 
 
@@ -16853,7 +16838,6 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
 
-<<<<<<< HEAD
 
 
 
@@ -16864,24 +16848,12 @@ Namespace Pronto.ERP.Bll
                     'Cuit Entregador		Alfanumérico	16
                     Dim wilycuit = "30-70738607-6"
                     sb &= Left(wilycuit.ToString, 14).PadRight(14) & SEP
-=======
-                    'Cuit vendedor		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
-                    'Cuit Comprador		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
-                    'Cuit Entregador		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
 
                     'Vehículo    1) camion 2) vagon	Numérico	1
-<<<<<<< HEAD
                     sb &= IIf(.SubnumeroVagon > 0, "2", "1") & SEP
-=======
-                    sb &= "" & SEP
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
                     'Patente Camion		Alfanumérico	10
                     sb &= .Patente & SEP
@@ -16921,30 +16893,16 @@ Namespace Pronto.ERP.Bll
                     'Fecha Vto CEE		Fecha	8
                     sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     'Cuit Intermediario		Alfanumérico	16
-<<<<<<< HEAD
                     sb &= Left(.IntermediarioCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
                     sb &= Left(.RComercialCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
-=======
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
-                    'Cuit REM. Comercial		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
-
 
 
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
-<<<<<<< HEAD
                     sb &= .ProcedenciaCodigoONCAA & SEP
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
                     sb &= .DestinoCodigoONCAA & SEP
-=======
-                    sb &= "CP " & SEP
-
-                    'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
-                    sb &= "CP " & SEP
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
@@ -17020,10 +16978,6 @@ Namespace Pronto.ERP.Bll
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
         Public Shared Function BorrarCartasRepetidas(ByRef aa As DataRow())
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
