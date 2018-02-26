@@ -887,7 +887,19 @@ namespace ProntoMVC.Tests
         public void sincro_MBC_47026()
         {
 
+<<<<<<< HEAD
           
+=======
+            //    47449 SINCRONISMO PARA MARELLI JUAN CRUZ Y MIGUEL ENRIQ
+
+            //Andres buenas
+            //Tenemos que crearle un sincronismo a este cliente.Opera con dos firmas: MARELLI JUAN CRUZ Y MIGUEL ENRIQUE y con LA ESTANZUELA AGRICULTURA S.A.
+
+            //el formato tiene que ser el mismo de LELFUN S.A.
+
+            //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
+
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;

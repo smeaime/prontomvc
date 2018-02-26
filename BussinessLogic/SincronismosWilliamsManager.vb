@@ -1679,6 +1679,23 @@ Namespace Pronto.ERP.Bll
 
 
 
+
+                        Case "MBC"
+                            Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
+                                                                     Nothing, idVendedor,
+                                 idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                 idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                  sDesde, sHasta, 0,
+                                 Nothing, False, Nothing, Nothing, Nothing,
+                                  Nothing, Nothing, Nothing, Nothing)
+                                            Select c).Take(3000).ToList
+
+                            output = Sincronismo_MBC(dbcartas, "", "", sErroresRef, SC)
+                            registrosFiltrados = dbcartas.Count
+
+
                         Case "TOMAS HNOS"
                             Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
@@ -16640,6 +16657,10 @@ Namespace Pronto.ERP.Bll
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
         Public Shared Function Sincronismo_MBC(q As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3),
             ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
 
@@ -16777,9 +16798,15 @@ Namespace Pronto.ERP.Bll
                     sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= .NRecibo & SEP
+<<<<<<< HEAD
                     sb &= .BrutoFinal & SEP
                     sb &= .Humedad & SEP
                     sb &= String.Format("{0:F2}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
+=======
+                    sb &= .BrutoPto & SEP
+                    sb &= .Humedad & SEP
+                    sb &= .Humedad & SEP
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
                     sb &= .HumedadDesnormalizada & SEP
 
 
@@ -16802,9 +16829,15 @@ Namespace Pronto.ERP.Bll
                     'KNetos  Peso descontadas las mermas	Numérico	10
                     'KAplicados      Numérico	10
 
+<<<<<<< HEAD
                     sb &= .Merma & SEP ' Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
                     sb &= .NetoFinal & SEP
                     sb &= .NetoFinal & SEP
+=======
+                    sb &= Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
+                    sb &= .NetoFinal & SEP
+                    sb &= "0" & SEP
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
@@ -16820,6 +16853,7 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
 
+<<<<<<< HEAD
 
 
 
@@ -16830,12 +16864,24 @@ Namespace Pronto.ERP.Bll
                     'Cuit Entregador		Alfanumérico	16
                     Dim wilycuit = "30-70738607-6"
                     sb &= Left(wilycuit.ToString, 14).PadRight(14) & SEP
+=======
+                    'Cuit vendedor		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    'Cuit Comprador		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    'Cuit Entregador		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
 
                     'Vehículo    1) camion 2) vagon	Numérico	1
+<<<<<<< HEAD
                     sb &= IIf(.SubnumeroVagon > 0, "2", "1") & SEP
+=======
+                    sb &= "" & SEP
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
                     'Patente Camion		Alfanumérico	10
                     sb &= .Patente & SEP
@@ -16875,17 +16921,30 @@ Namespace Pronto.ERP.Bll
                     'Fecha Vto CEE		Fecha	8
                     sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     'Cuit Intermediario		Alfanumérico	16
+<<<<<<< HEAD
                     sb &= Left(.IntermediarioCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
                     sb &= Left(.RComercialCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+=======
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    'Cuit REM. Comercial		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
+<<<<<<< HEAD
                     sb &= .ProcedenciaCodigoONCAA & SEP
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
                     sb &= .DestinoCodigoONCAA & SEP
+=======
+                    sb &= "CP " & SEP
+
+                    'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
+                    sb &= "CP " & SEP
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
@@ -16961,7 +17020,10 @@ Namespace Pronto.ERP.Bll
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
         Public Shared Function BorrarCartasRepetidas(ByRef aa As DataRow())
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373
