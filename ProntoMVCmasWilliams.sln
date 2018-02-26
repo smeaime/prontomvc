@@ -469,10 +469,6 @@ Global
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Windows-x86.ActiveCfg = Debug|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|Windows-x86.Build.0 = Debug|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|x86.ActiveCfg = Debug|x86
-<<<<<<< HEAD
-=======
-		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.Debug|x86.Build.0 = Debug|x86
->>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Android.ActiveCfg = DebugServer3|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Android.Build.0 = DebugServer3|Any CPU
 		{7D5126A2-B2CA-441C-8D73-2AD8F3EF7FDB}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
