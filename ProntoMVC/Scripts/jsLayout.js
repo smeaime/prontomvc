@@ -387,8 +387,8 @@ $(function () {
     /////////////////////////////////////
     /////////////////////////////////////
     // scroll 
-    $(".ui-jqgrid").css("overflow-x", "hidden");
-    $(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+    //$(".ui-jqgrid").css("overflow-x", "hidden");
+    //$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
     /////////////////////////////////////
     /////////////////////////////////////
     /////////////////////////////////////

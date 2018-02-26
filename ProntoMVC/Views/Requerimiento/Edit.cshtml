@@ -186,19 +186,25 @@
                             <form>
                                 @{
                                     <input type="checkbox" id="chk0" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" />
-                    int ca = ViewBag.CantidadAutorizaciones;
-                    int j = 1;
-                    for (var i = 1; i <= ca; i++)
-                    { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
+                int ca = ViewBag.CantidadAutorizaciones;
+                int j = 1;
+                for (var i = 1; i <= ca; i++)
+                { <input type="checkbox" id="chk@(i)" readonly="readonly" disabled="disabled" class="GridCheckBox" title="" /> }
                                 }
                             </form>
                         </div>
                         <div class="span2 lightblue">
-                            @Html.LabelFor(model => model.Aprobo, ". ")
                             @if (Model.Aprobo != null && ViewBag.MostrarAnularLiberacion)
                             {
-                                <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
+                                <input type="button" id="AnularFirmas" onclick="AnularFirmas();" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )" class="btn  btn-xs btn-info" usesubmitbehavior="false" />
                             }
+                        @*</div>
+                            <div class="span2 lightblue">
+                                @Html.LabelFor(model => model.Aprobo, ". ")
+                                @if (Model.Aprobo != null && ViewBag.MostrarAnularLiberacion)
+            {
+                        <input type="button" id="AnularFirmas" value="@(ViewBag.CantidadAutorizaciones > 1 ? "Anular firmas" : "Anular liberación" )  " class="btn btn-link" />
+    }*@
                             <script>
                                 $(function () {
                                     $('#AnularFirmas').click(function () {
