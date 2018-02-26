@@ -887,15 +887,7 @@ namespace ProntoMVC.Tests
         public void sincro_MBC_47026()
         {
 
-            //    47449 SINCRONISMO PARA MARELLI JUAN CRUZ Y MIGUEL ENRIQ
-
-            //Andres buenas
-            //Tenemos que crearle un sincronismo a este cliente.Opera con dos firmas: MARELLI JUAN CRUZ Y MIGUEL ENRIQUE y con LA ESTANZUELA AGRICULTURA S.A.
-
-            //el formato tiene que ser el mismo de LELFUN S.A.
-
-            //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
-
+          
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
@@ -10652,10 +10644,10 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-        public void ElegirCombosSegunParametro_29385()
+        public void ElegirCombosSegunParametroSincronismoFiltro_29385()
         {
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]", new System.Web.UI.WebControls.TextBox()
+            SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro("BTG PACTUAL [BIT]", new System.Web.UI.WebControls.TextBox()
                 , new System.Web.UI.WebControls.TextBox(),
                 new System.Web.UI.WebControls.TextBox(),
                 new System.Web.UI.WebControls.TextBox(), new System.Web.UI.WebControls.TextBox(),

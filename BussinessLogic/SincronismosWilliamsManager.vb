@@ -55,7 +55,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
+        Public Shared Sub ElegirCombosSegunParametroSincronismoFiltro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
 
             'ReportViewer2.Visible = False
             cmbEstado.Text = "Descargas"
@@ -387,6 +387,21 @@ Namespace Pronto.ERP.Bll
                     txtRcomercial.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
                     txtPopClienteAuxiliar.Text = NombreCliente(SC, BuscarClientePorCUIT(cuit, SC, ""))
 
+
+
+
+
+
+
+                Case "MBC"
+
+                    Dim cuit = "30-70878043-6"
+
+                    txtCorredor.Text = NombreVendedor(SC, BuscarVendedorPorCUIT(cuit, SC, ""))
+                    txtTitular.Text = ""
+                    txtIntermediario.Text = ""
+                    txtRcomercial.Text = ""
+                    txtPopClienteAuxiliar.Text = ""
 
 
 
@@ -2115,7 +2130,7 @@ Namespace Pronto.ERP.Bll
 
 
 
-            '                SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+            '                SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
@@ -16769,7 +16784,7 @@ Namespace Pronto.ERP.Bll
                     sb &= .NRecibo & SEP
                     sb &= .BrutoFinal & SEP
                     sb &= .Humedad & SEP
-                    sb &= String.Format("{0:F3}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
+                    sb &= String.Format("{0:F2}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
                     sb &= .HumedadDesnormalizada & SEP
 
 
@@ -16810,12 +16825,16 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
 
+
+
+
                     'Cuit vendedor		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    sb &= Left(.TitularCUIT.ToString, 14).PadRight(14) & SEP
                     'Cuit Comprador		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    sb &= Left(.DestinatarioCUIT.ToString, 14).PadRight(14) & SEP
                     'Cuit Entregador		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    Dim wilycuit = "30-70738607-6"
+                    sb &= Left(wilycuit.ToString, 14).PadRight(14) & SEP
 
 
 
@@ -16861,9 +16880,9 @@ Namespace Pronto.ERP.Bll
                     'Fecha Vto CEE		Fecha	8
                     sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     'Cuit Intermediario		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    sb &= Left(.IntermediarioCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    sb &= Left(.RComercialCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
 
 
 

@@ -150,6 +150,7 @@ Partial Class SincronismosAutomaticos
             txtMailMarelli.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv).ToString
             txtMailEstanzuela.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv).ToString
 
+            txtMailMBC.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv).ToString
 
         End If
 
@@ -419,6 +420,8 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv, txtMailMarelli.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv, txtMailEstanzuela.Text)
 
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv, txtMailMBC.Text)
+
     End Sub
 
 
@@ -504,11 +507,13 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxMarelli.Checked) Then sTodosErr += Enviar("Marelli", txtMailMarelli.Text, sErr, bVistaPrevia)
         If (CheckBoxEstanzuela.Checked) Then sTodosErr += Enviar("Estanzuela", txtMailEstanzuela.Text, sErr, bVistaPrevia)
 
+        If (CheckBoxMBC.Checked) Then sTodosErr += Enviar("MBC", txtMailMBC.Text, sErr, bVistaPrevia)
 
 
 
 
-        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+
+        SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
@@ -563,7 +568,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+            SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
