@@ -884,22 +884,71 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
+        public void filtrosEnGeneral_estoesuntema_47375()
+        {
+
+            /*
+              
+            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
+            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
+            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
+
+
+            ademas,
+                *está el tema de saber a qué mail le corresponde cada cliente
+                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
+                * en la facturacion hay otro criterio
+                * en la vista por celulares, otro (basta conque el usuario figure entre los clientes de la carta, en cualquier lado)
+                *en la pagina de clientes, esta el filtro de "cuits relacionados"
+
+             Sincronismos
+* Página de clientes
+* Web Service
+* 
+
+
+            podriamos zafar por un tiempo agregando un control q impida enviar el informe, pero que no deforme el filtro
+            -en donde se agregaría el control?
+            -en el envio de filtros por mail, y en el de sincros automaticos
+            -ok... y si igual quisiesen agregar filtros de excepcion?
+            -habria que agregar un "filtro excepcionador" en la UI de Filtros, y tambien en 
+                el de sincros automaticos (modificando tambien el "ElegirCombosSegun..." para blanquear o no ese "excepcionador")
+                -se podra agregar el filtrador magico de la jqgrid?
+                -suponiendo que lo agregas, que cadena generaria y como lo persistirias?
+                https://stackoverflow.com/questions/3015203/remember-persist-the-filter-sort-order-and-current-page-of-jqgrid
+                -esto en el caso de GROBOCOPATEL, qué generaría? o me convendría grabar el WHERE generado en tsql?
+
+            -pero suponiendo que agregas el "filtro excepcionador", tendrían que agregarlo para todos los casos que no fuesen de grobocopatel.
+
+            advertirles que va a ser caro. decenas de horas. y que si lo vuelven a pedir, se lo vamos a tener que cobrar otra vez
+
+            qué diferencia habría en abrirles una ventana ya de codigo TSQL para que programen ellos?
+            
+            qué pasaría si ademas de grobocopatel, hay diez clientes más que piden el mismo rebusque?
+            -en ese caso, la solucion sería que el filtro magico (supuestamente hecho con la jqgrid) cargue por default TODAS las excepciones filtradoras, y que el usuario elimine
+            la especifica.
+            -ok... y si en lugar de diez, ahora lo piden cien clientes?
+            -habria que buscar un patron. y si no hay patron, entonces se lo tienen que fumar, no? tendrían que indicar a qué cliente
+ * 
+ * */
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+        [TestMethod]
         public void sincro_MBC_47026()
         {
 
-<<<<<<< HEAD
-          
-=======
-            //    47449 SINCRONISMO PARA MARELLI JUAN CRUZ Y MIGUEL ENRIQ
-
-            //Andres buenas
-            //Tenemos que crearle un sincronismo a este cliente.Opera con dos firmas: MARELLI JUAN CRUZ Y MIGUEL ENRIQUE y con LA ESTANZUELA AGRICULTURA S.A.
-
-            //el formato tiene que ser el mismo de LELFUN S.A.
-
-            //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
-
->>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
             string sErrores = "", sTitulo = "";
             LinqCartasPorteDataContext db = null;
@@ -1699,43 +1748,6 @@ namespace ProntoMVC.Tests
 
 
 
-
-
-
-
-
-
-        [TestMethod]
-        public void filtrosEnGeneral_estoesuntema_47375()
-        {
-
-            /*
-              
-            esto es un rollo... atras de esto, está la normalizacion de todos los datasource del sistema
-            De todas maneras, como es q surgio? por un filtro de mail que le llego a otro cliente que no era grobo. 
-            -habria que poner un filtro sofisticado en el frontend (como la jqgrid) del tipo  AND NOT ()
-
-
-            ademas,
-                *está el tema de saber a qué mail le corresponde cada cliente
-                *no se sabría por qué se está filtrando una cosa u otra, porque no queda patente en el frontend
-                * en la facturacion hay otro criterio
-                * en la vista por celulares, otro (basta conque el usuario figure entre los clientes de la carta, en cualquier lado)
-                *en la pagina de clientes, esta el filtro de "cuits relacionados"
-
-             Sincronismos
-* Página de clientes
-* Web Service
-* 
-            */
-
-
-
-
-
-
-
-        }
 
 
 
