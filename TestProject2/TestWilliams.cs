@@ -883,6 +883,54 @@ namespace ProntoMVC.Tests
 
 
 
+        [TestMethod]
+        public void sincro_MBC_47026()
+        {
+
+            //    47449 SINCRONISMO PARA MARELLI JUAN CRUZ Y MIGUEL ENRIQ
+
+            //Andres buenas
+            //Tenemos que crearle un sincronismo a este cliente.Opera con dos firmas: MARELLI JUAN CRUZ Y MIGUEL ENRIQUE y con LA ESTANZUELA AGRICULTURA S.A.
+
+            //el formato tiene que ser el mismo de LELFUN S.A.
+
+            //Puede figurar en Titular, Intermediario, remitenet comer. o cliente de observaciones.
+
+
+            string sErrores = "", sTitulo = "";
+            LinqCartasPorteDataContext db = null;
+
+            // el _CONST_MAXROWS sale del app.config
+
+            int registrosf = 0;
+
+            var output = SincronismosWilliamsManager.GenerarSincro("MBC", ref sErrores, SC, "dominio", ref sTitulo
+                                , CartaDePorteManager.enumCDPestado.DescargasMasFacturadas,
+                     "", -1, -1, -1, -1,
+                 -1, -1,
+                 -1, -1,
+                 CartaDePorteManager.FiltroANDOR.FiltroOR, "Ambos",
+                new DateTime(2014, 1, 10), new DateTime(2014, 1, 10),
+                0, "Ambas", false, "", "", -1, ref registrosf);
+
+
+
+            //File.Copy(output, @"C:\Users\Administrador\Desktop\" + Path.GetFileName(output), true);
+            System.Diagnostics.Process.Start(output);
+            
+
+
+
+        }
+
+
+
+
+
+
+
+
+
         //All projects referencing InterfazFlexicapture.csproj must install nuget package Microsoft.Bcl.Build.
         //    For more information, see http://go.microsoft.com/fwlink/?LinkID=317569.
 
@@ -891,7 +939,7 @@ namespace ProntoMVC.Tests
 
 
 
-                [TestMethod]
+        [TestMethod]
         public void LogDelWebservice_47448()
         {
 
