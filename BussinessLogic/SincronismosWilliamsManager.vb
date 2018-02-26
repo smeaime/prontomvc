@@ -16775,20 +16775,26 @@ Namespace Pronto.ERP.Bll
 
 
 
+                    Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
                     'PorcZar     Numérico	4, 3
                     'Kg Zarandeo		Numérico	8
                     'PorcVolatil     Numérico	4, 3
                     'Kg Volátil		Numérico	8
-                    'OtrasMermas     Numérico	8
-                    'KNetos  Peso descontadas las mermas	Numérico	10
-                    'KAplicados      Numérico	10
 
-                    Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
+
                     sb &= cp2.CalidadMermaZarandeo.ToString.PadLeft(5) & SEP
                     sb &= cp2.CalidadZarandeoMerma.ToString.PadLeft(10) & SEP
                     sb &= cp2.CalidadMermaVolatil.ToString.PadLeft(5) & SEP
                     sb &= cp2.CalidadMermaVolatilMerma.ToString.PadLeft(10) & SEP
+
+
+                    'OtrasMermas     Numérico	8
+                    'KNetos  Peso descontadas las mermas	Numérico	10
+                    'KAplicados      Numérico	10
+
                     sb &= Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
+                    sb &= .NetoFinal & SEP
+                    sb &= "0" & SEP
 
 
 
@@ -16810,50 +16816,86 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
 
 
+
+
                     'Vehículo    1) camion 2) vagon	Numérico	1
+                    sb &= "" & SEP
+
                     'Patente Camion		Alfanumérico	10
+                    sb &= .Patente & SEP
                     'Patente Acoplado		Alfanumérico	10
+                    sb &= .Acoplado & SEP
                     'Fumigada    SI = 1, NO = 0	Numérico	1
+                    sb &= "" & SEP
+
                     'Kg Zar.Gasto		Numérico	8
+                    sb &= "" & SEP
+
 
 
 
 
 
                     'Kg Sec.Gasto		Numérico	8
+                    sb &= "" & SEP
+
                     'Kg Aire Frio		Numérico	8
+                    sb &= "" & SEP
+
                     'Kg Fum.Gasto		Numérico	8
+                    sb &= "" & SEP
+
                     'Cuit Chofer		Alfanumérico	16
+                    sb &= .ChoferCUIT & SEP
+
                     'Cuit Emp.Transp		Alfanumérico	16
+                    sb &= "" & SEP
+
 
 
 
                     'CEE     Alfanumérico	14
                     sb &= .CEE & SEP
                     'Fecha Vto CEE		Fecha	8
-                    sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("YYYYMMDD")
+                    sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     'Cuit Intermediario		Alfanumérico	16
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
+                    sb &= "" & SEP
+
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
+                    sb &= "" & SEP
+
                     'Kilos Salidos		Numérico	10
+                    sb &= "" & SEP
+
 
 
 
 
                     'Código Vendedor		Numérico	10
+                    sb &= "" & SEP
+
                     'Código Comprador		Numérico	10
+                    sb &= "" & SEP
+
                     'Código Cosecha		Numérico	4
-                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4) & SEP
                     'Tipo Movimiento	En blanco	Numérico	6
+                    sb &= "" & SEP
+
                     'Procedencia En blanco	Numérico	6
+                    sb &= "" & SEP
+
                     'Destino En blanco	Numérico	6
+                    sb &= "" & SEP
+
                     'CTG     Alfanumérico	15
                     sb &= .CTG & SEP
                     'Tara        Numérico	10
-                    sb &= .TaraFinal & SEP
+                    sb &= .TaraFinal
 
 
 
