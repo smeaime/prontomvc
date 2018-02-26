@@ -1651,6 +1651,23 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dbcartas.Count
 
 
+
+                        Case "MBC"
+                            Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
+
+                            Dim dbcartas = (From c In db.fSQL_GetDataTableFiltradoYPaginado(Nothing, 3000, enumCDPestado.DescargasMasFacturadas,
+                                                                     Nothing, idVendedor,
+                                 idCorredor, idDestinatario, idIntermediario, idRComercial,
+                                 idArticulo, idProcedencia, idDestino, FiltroANDOR.FiltroOR, "Ambos",
+                                  sDesde, sHasta, 0,
+                                 Nothing, False, Nothing, Nothing, Nothing,
+                                  Nothing, Nothing, Nothing, Nothing)
+                                            Select c).Take(3000).ToList
+
+                            output = Sincronismo_MBC(dbcartas, "", "", sErroresRef, SC)
+                            registrosFiltrados = dbcartas.Count
+
+
                         Case "TOMAS HNOS"
                             Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
@@ -16607,6 +16624,281 @@ Namespace Pronto.ERP.Bll
 
 
         End Function
+
+
+
+
+
+
+        Public Shared Function Sincronismo_MBC(q As List(Of ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3),
+            ByVal titulo As String, ByVal sWHERE As String, ByRef sErrores As String, SC As String) As String
+
+
+
+
+
+
+
+            ' """A"",1,64979853,0,"""",""2"",20171013,64979853,,25320,11.8,1.65,418,,,,,,24902,24902,""C/CAMARA"",,,,""33-66679220-9"",""30-50679216-5"",""30-66635125-4"",1,""VKC391"","""",,,,,,""00000000000"",""30-71176315-1"","""",20171013,"""",""30-60741325-4"",""CP "",""CP 7631"",,,,1617,,,,""29036703"",14440"
+
+            'NroSuc_E    Sucursal Interna	Numérico	4
+            'NroOrden_E  Nro Interno de Entrega	Numérico	9
+            'Cód_Tipo        Numérico	4
+            'Contrato        Alfanumérico	20
+            'Cod_Merca   Mercaderia	Alfanumérico	20
+            'Fecha       Fecha   
+            'CartaDePorte        Numérico	12
+            'Recibo      Numérico	12
+            'Peso Sin Tara	Peso descontada la tara	Numérico	10
+            'PorcHumedad     Numérico	4, 3
+            'PorcMHum        Numérico	4, 3
+            'KHumedad        Numérico	8
+            'PorcZar     Numérico	4, 3
+            'Kg Zarandeo		Numérico	8
+            'PorcVolatil     Numérico	4, 3
+            'Kg Volátil		Numérico	8
+            'OtrasMermas     Numérico	8
+            'KNetos  Peso descontadas las mermas	Numérico	10
+            'KAplicados      Numérico	10
+            'Observaciones       Alfanumérico	30
+            'NroSucAna   Nro Interno Suc. Analisis	Numérico	4
+            'NroIntAna   Nro Interno Analisis	Numérico	9
+            'Puerto      Numérico	2
+            'Cuit vendedor		Alfanumérico	16
+            'Cuit Comprador		Alfanumérico	16
+            'Cuit Entregador		Alfanumérico	16
+            'Vehículo    1) camion 2) vagon	Numérico	1
+            'Patente Camion		Alfanumérico	10
+            'Patente Acoplado		Alfanumérico	10
+            'Fumigada    SI = 1, NO = 0	Numérico	1
+            'Kg Zar.Gasto		Numérico	8
+            'Kg Sec.Gasto		Numérico	8
+            'Kg Aire Frio		Numérico	8
+            'Kg Fum.Gasto		Numérico	8
+            'Cuit Chofer		Alfanumérico	16
+            'Cuit Emp.Transp		Alfanumérico	16
+            'CEE     Alfanumérico	14
+            'Fecha Vto CEE		Fecha	8
+            'Cuit Intermediario		Alfanumérico	16
+            'Cuit REM. Comercial		Alfanumérico	16
+            'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
+            'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
+            'Kilos Salidos		Numérico	10
+            'Código Vendedor		Numérico	10
+            'Código Comprador		Numérico	10
+            'Código Cosecha		Numérico	4
+            'Tipo Movimiento	En blanco	Numérico	6
+            'Procedencia En blanco	Numérico	6
+            'Destino En blanco	Numérico	6
+            'CTG     Alfanumérico	15
+            'Tara        Numérico	10
+
+
+
+
+
+            Dim sErroresProcedencia, sErroresDestinos As String
+
+            Dim SEP = ";"
+
+            'Dim vFileName As String = Path.GetTempFileName() & ".txt"
+            Dim vFileName As String = Path.GetTempPath & "MBC-" & Now.ToString("ddMMMyyyy_HHmmss") & ".csv" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+            'Dim vFileName As String = Path.GetTempPath & "SincroLosGrobo.txt" 'http://stackoverflow.com/questions/581570/how-can-i-create-a-temp-file-with-a-specific-extension-with-net
+
+            'Dim vFileName As String = "c:\archivo.txt"
+            Dim nF = FreeFile()
+            FileOpen(nF, vFileName, OpenMode.Output)
+            Dim sb As String = ""
+            Dim dc As DataColumn
+            'For Each dc In pDataTable.Columns
+            '    sb &= dc.Caption & Microsoft.VisualBasic.ControlChars.Tab
+            'Next
+            'PrintLine(nF, sb) 'encabezado
+            Dim i As Integer = 0
+            Dim dr As DataRow
+
+
+            'Dim a = pDataTable(1)
+
+
+            Dim bbb = """A""" & SEP & "1" & SEP & "64979853" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979853" & SEP & "" & SEP & "25320" & SEP & "11.8" & SEP & "1.65" & SEP & "418" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "24902" & SEP & "24902" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """VKC391""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """30-71176315-1""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """29036703""" & SEP & "14440"
+            Dim aaa = """A""" & SEP & "1" & SEP & "64979856" & SEP & "0" & SEP & """""" & SEP & """2""" & SEP & "20171013" & SEP & "64979856" & SEP & "" & SEP & "27920" & SEP & "9.9" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "27920" & SEP & "27920" & SEP & """C/CAMARA""" & SEP & "" & SEP & "" & SEP & "" & SEP & """33-66679220-9""" & SEP & """30-50679216-5""" & SEP & """30-66635125-4""" & SEP & "1" & SEP & """EJL819""" & SEP & """""" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & "" & SEP & """00000000000""" & SEP & """20-24150448-5""" & SEP & """""" & SEP & "20171013" & SEP & """""" & SEP & """30-60741325-4""" & SEP & """CP """ & SEP & """CP 7631""" & SEP & "" & SEP & "" & SEP & "" & SEP & "1617" & SEP & "" & SEP & "" & SEP & "" & SEP & """89670902""" & SEP & "14200"
+            PrintLine(nF, bbb) 'encabezado
+            PrintLine(nF, aaa) 'encabezado
+
+
+
+            'http://msdn.microsoft.com/en-us/magazine/cc163877.aspx
+            For Each cdp As ProntoMVC.Data.Models.fSQL_GetDataTableFiltradoYPaginado_Result3 In q
+                With cdp
+
+                    i = 0 : sb = ""
+
+                    Dim cero = 0
+
+
+
+
+                    'Para los Entregadores son todas Altas, mandar siempre “A”
+                    'NroSuc_E    Sucursal Interna	Numérico	4
+                    'NroOrden_E  Nro Interno de Entrega	Numérico	9
+                    'Cód_Tipo        Numérico	4
+                    'Contrato        Alfanumérico	20
+
+
+
+                    sb &= "A" & SEP 'Para los Entregadores son todas Altas, mandar siempre “A”
+                    sb &= .PuntoVenta & SEP
+                    sb &= .NumeroCartaDePorte & SEP
+                    sb &= "0" & SEP
+                    sb &= "" & SEP
+
+
+                    'Cod_Merca   Mercaderia	Alfanumérico	20
+                    'Fecha       Fecha   
+                    'CartaDePorte        Numérico	12
+                    'Recibo      Numérico	12
+                    'Peso Sin Tara	Peso descontada la tara	Numérico	10
+                    'PorcHumedad     Numérico	4, 3
+                    'PorcMHum        Numérico	4, 3
+                    'KHumedad        Numérico	8
+
+                    sb &= .CodigoSAJPYA.PadRight(3) & SEP '
+                    sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
+                    sb &= .NumeroCartaDePorte & SEP
+                    sb &= .NRecibo & SEP
+                    sb &= .BrutoPto & SEP
+                    sb &= .Humedad & SEP
+                    sb &= .Humedad & SEP
+                    sb &= .HumedadDesnormalizada & SEP
+
+
+
+
+                    'PorcZar     Numérico	4, 3
+                    'Kg Zarandeo		Numérico	8
+                    'PorcVolatil     Numérico	4, 3
+                    'Kg Volátil		Numérico	8
+                    'OtrasMermas     Numérico	8
+                    'KNetos  Peso descontadas las mermas	Numérico	10
+                    'KAplicados      Numérico	10
+
+                    Dim cp2 = CartaDePorteManager.GetItem(SC, .IdCartaDePorte)
+                    sb &= cp2.CalidadMermaZarandeo.ToString.PadLeft(5) & SEP
+                    sb &= cp2.CalidadZarandeoMerma.ToString.PadLeft(10) & SEP
+                    sb &= cp2.CalidadMermaVolatil.ToString.PadLeft(5) & SEP
+                    sb &= cp2.CalidadMermaVolatilMerma.ToString.PadLeft(10) & SEP
+                    sb &= Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
+
+
+
+
+                    'Observaciones       Alfanumérico	30
+                    sb &= .Observaciones & SEP
+                    'NroSucAna   Nro Interno Suc. Analisis	Numérico	4
+                    sb &= "" & SEP
+                    'NroIntAna   Nro Interno Analisis	Numérico	9
+                    sb &= "" & SEP
+
+                    'Puerto      Numérico	2
+
+                    'Cuit vendedor		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    'Cuit Comprador		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+                    'Cuit Entregador		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
+
+
+                    'Vehículo    1) camion 2) vagon	Numérico	1
+                    'Patente Camion		Alfanumérico	10
+                    'Patente Acoplado		Alfanumérico	10
+                    'Fumigada    SI = 1, NO = 0	Numérico	1
+                    'Kg Zar.Gasto		Numérico	8
+
+
+
+
+
+                    'Kg Sec.Gasto		Numérico	8
+                    'Kg Aire Frio		Numérico	8
+                    'Kg Fum.Gasto		Numérico	8
+                    'Cuit Chofer		Alfanumérico	16
+                    'Cuit Emp.Transp		Alfanumérico	16
+
+
+
+                    'CEE     Alfanumérico	14
+                    sb &= .CEE & SEP
+                    'Fecha Vto CEE		Fecha	8
+                    sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("YYYYMMDD")
+                    'Cuit Intermediario		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    'Cuit REM. Comercial		Alfanumérico	16
+                    sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
+                    'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
+                    'Kilos Salidos		Numérico	10
+
+
+
+
+                    'Código Vendedor		Numérico	10
+                    'Código Comprador		Numérico	10
+                    'Código Cosecha		Numérico	4
+                    sb &= Right(.Cosecha, 5).Replace("/", "").PadLeft(4)
+                    'Tipo Movimiento	En blanco	Numérico	6
+                    'Procedencia En blanco	Numérico	6
+                    'Destino En blanco	Numérico	6
+                    'CTG     Alfanumérico	15
+                    sb &= .CTG & SEP
+                    'Tara        Numérico	10
+                    sb &= .TaraFinal & SEP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    PrintLine(nF, sb)
+                End With
+            Next
+
+
+
+
+            FileClose(nF)
+
+
+
+
+            sErrores = "Procedencias sin código postal:<br/> " & sErroresProcedencia & "<br/><br/>Destinos sin código ONCAA: <br/>" & sErroresDestinos
+
+            If True Then
+                If sErroresProcedencia <> "" Or sErroresDestinos <> "" Then vFileName = vFileName + "" Else sErrores = "" 'si hay errores, no devuelvo el archivo así no hay problema del updatepanel con el response.write
+            End If
+
+            Return vFileName
+
+
+        End Function
+
+
+
+
+
 
         Public Shared Function BorrarCartasRepetidas(ByRef aa As DataRow())
 
