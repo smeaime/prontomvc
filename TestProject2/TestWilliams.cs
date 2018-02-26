@@ -883,7 +883,6 @@ namespace ProntoMVC.Tests
 
 
 
-<<<<<<< HEAD
         [TestMethod]
         public void sincro_MBC_47026()
         {
@@ -924,8 +923,6 @@ namespace ProntoMVC.Tests
 
 
 
-=======
->>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
         //All projects referencing InterfazFlexicapture.csproj must install nuget package Microsoft.Bcl.Build.
         //    For more information, see http://go.microsoft.com/fwlink/?LinkID=317569.
 
@@ -934,11 +931,7 @@ namespace ProntoMVC.Tests
 
 
 
-<<<<<<< HEAD
         [TestMethod]
-=======
-                [TestMethod]
->>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
         public void LogDelWebservice_47448()
         {
 
@@ -10651,17 +10644,10 @@ namespace ProntoMVC.Tests
 
 
         [TestMethod]
-<<<<<<< HEAD
         public void ElegirCombosSegunParametroSincronismoFiltro_29385()
         {
 
             SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro("BTG PACTUAL [BIT]", new System.Web.UI.WebControls.TextBox()
-=======
-        public void ElegirCombosSegunParametro_29385()
-        {
-
-            SincronismosWilliamsManager.ElegirCombosSegunParametro("BTG PACTUAL [BIT]", new System.Web.UI.WebControls.TextBox()
->>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
                 , new System.Web.UI.WebControls.TextBox(),
                 new System.Web.UI.WebControls.TextBox(),
                 new System.Web.UI.WebControls.TextBox(), new System.Web.UI.WebControls.TextBox(),
