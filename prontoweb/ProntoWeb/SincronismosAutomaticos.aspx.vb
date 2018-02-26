@@ -150,7 +150,10 @@ Partial Class SincronismosAutomaticos
             txtMailMarelli.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv).ToString
             txtMailEstanzuela.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv).ToString
 
+<<<<<<< HEAD
             txtMailMBC.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv).ToString
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
         End If
 
@@ -420,8 +423,11 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv, txtMailMarelli.Text)
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv, txtMailEstanzuela.Text)
 
+<<<<<<< HEAD
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv, txtMailMBC.Text)
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
     End Sub
 
 
@@ -507,13 +513,20 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxMarelli.Checked) Then sTodosErr += Enviar("Marelli", txtMailMarelli.Text, sErr, bVistaPrevia)
         If (CheckBoxEstanzuela.Checked) Then sTodosErr += Enviar("Estanzuela", txtMailEstanzuela.Text, sErr, bVistaPrevia)
 
+<<<<<<< HEAD
         If (CheckBoxMBC.Checked) Then sTodosErr += Enviar("MBC", txtMailMBC.Text, sErr, bVistaPrevia)
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
 
 
+<<<<<<< HEAD
         SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+=======
+        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
 
@@ -568,7 +581,11 @@ Partial Class SincronismosAutomaticos
 
 
 
+<<<<<<< HEAD
             SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+=======
+            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
 

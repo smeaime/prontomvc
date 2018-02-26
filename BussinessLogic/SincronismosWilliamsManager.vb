@@ -55,7 +55,11 @@ Namespace Pronto.ERP.Bll
 
 
 
+<<<<<<< HEAD
         Public Shared Sub ElegirCombosSegunParametroSincronismoFiltro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
+=======
+        Public Shared Sub ElegirCombosSegunParametro(sSincronismo As String, txtTitular As TextBox, txtCorredor As TextBox, txtIntermediario As TextBox, txtDestinatario As TextBox, txtRcomercial As TextBox, txtPopClienteAuxiliar As TextBox, cmbEstado As DropDownList, cmbCriterioWHERE As DropDownList, DropDownList2 As DropDownList, SC As String)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
             'ReportViewer2.Visible = False
             cmbEstado.Text = "Descargas"
@@ -393,6 +397,7 @@ Namespace Pronto.ERP.Bll
 
 
 
+<<<<<<< HEAD
                 Case "MBC"
 
                     Dim cuit = "30-70878043-6"
@@ -408,6 +413,8 @@ Namespace Pronto.ERP.Bll
 
 
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
                 Case "ARECO"
                     txtCorredor.Text = ""
@@ -1666,6 +1673,7 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dbcartas.Count
 
 
+<<<<<<< HEAD
 
                         Case "MBC"
                             Dim db As ProntoMVC.Data.Models.DemoProntoEntities = New ProntoMVC.Data.Models.DemoProntoEntities(ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC)))
@@ -1683,6 +1691,8 @@ Namespace Pronto.ERP.Bll
                             registrosFiltrados = dbcartas.Count
 
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
                         Case "TOMAS HNOS"
                             Dim s = "(ISNULL(FechaDescarga, '1/1/1753') BETWEEN '" & FechaANSI(sDesde) &
                                            "'     AND   '" & FechaANSI(sHasta) & "' )"
@@ -2130,7 +2140,11 @@ Namespace Pronto.ERP.Bll
 
 
 
+<<<<<<< HEAD
             '                SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+=======
+            '                SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
 
@@ -16640,6 +16654,7 @@ Namespace Pronto.ERP.Bll
 
         End Function
 
+<<<<<<< HEAD
 
 
 
@@ -16966,6 +16981,8 @@ Namespace Pronto.ERP.Bll
 
 
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
         Public Shared Function BorrarCartasRepetidas(ByRef aa As DataRow())
 
             'http://bdlconsultores.ddns.net/Consultas/Admin/VerConsultas1.php?recordid=14373

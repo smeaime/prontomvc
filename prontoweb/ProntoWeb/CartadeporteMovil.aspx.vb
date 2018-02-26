@@ -228,20 +228,26 @@ Partial Class CartadeporteABMMovil
             BloqueosDeEdicion(myCartaDePorte)
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
             If myCartaDePorte.NetoFinalAntesDeRestarMermas > 0 Then 'dependiendo del estado, abre una u otra solapa
                 TabContainer2.ActiveTabIndex = 1
             Else
                 TabContainer2.ActiveTabIndex = 0
             End If
+<<<<<<< HEAD
             'hago q directamente aparezca en la pestaña del chat
             TabContainer2.ActiveTabIndex = 4
 
 
 
 
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
             '////////////////////////////

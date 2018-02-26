@@ -811,6 +811,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     AutoPostBack="false" autocomplete="off"> </asp:TextBox>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="row">
             <div class="col-md-2">
                 <asp:CheckBox ID="CheckBoxMBC" runat="server" Checked="true" />
@@ -821,6 +822,8 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                     AutoPostBack="false" autocomplete="off"> </asp:TextBox>
             </div>
         </div>
+=======
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
         <div class="row">
             <div class="col-md-2">
