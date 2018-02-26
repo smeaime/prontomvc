@@ -1,7 +1,10 @@
 ﻿
-Option Explicit On
+'Option Explicit On
+'Option Infer On
 
-Option Infer On
+
+
+
 
 Imports System.Data.OleDb
 
@@ -168,10 +171,10 @@ Public Class Class1
 
         'If Not mOk Then Exit Sub
 
-        'If glbPuntoVentaEnNumeroInternoCP And mIdPuntoVenta = 0 Then
-        '    MsgBox "Debe elegir un punto de venta", vbExclamation
-        '    Return
-        'End If
+        If glbPuntoVentaEnNumeroInternoCP And mIdPuntoVenta = 0 Then
+            Throw New Exception("Debe elegir un punto de venta")
+            Return ""
+        End If
 
         'oAp = Aplicacion
 
@@ -181,22 +184,29 @@ Public Class Class1
         mCuitDefault = EntidadManager.BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos", SC, -1)
 
         Dim p = ParametroManager.TraerRenglonUnicoDeTablaParametroOriginalClase(SC)
-        'oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
         mIdMonedaPesos = p.p(ParametroManager.ePmOrg.IdMoneda)
         mIdTipoComprobanteFacturaCompra = p.p(ParametroManager.ePmOrg.IdTipoComprobanteFacturaCompra)
         mIdUnidadPorUnidad = IIf(IsNull(p.p(ParametroManager.ePmOrg.IdUnidadPorUnidad)), 0, p.p(ParametroManager.ePmOrg.IdUnidadPorUnidad))
         gblFechaUltimoCierre = IIf(IsNull(p.p(ParametroManager.ePmOrg.FechaUltimoCierre)), DateSerial(1980, 1, 1), p.p(ParametroManager.ePmOrg.FechaUltimoCierre))
 
-        'For i = 1 To 10
-        '    If Not IsNull(oRsAux1.IdCuentaIvaCompras" & i).Value) Then
-        '        mIdCuentaIvaCompras(i) = oRsAux1.IdCuentaIvaCompras" & i).Value Then '
-        '        mIVAComprasPorcentaje(i) = oRsAux1.IVAComprasPorcentaje" & i).Value
-        '    Else
-        '        mIdCuentaIvaCompras(i) = 0
-        '        mIVAComprasPorcentaje(i) = 0
-        '    End If
-        'Next
-        'oRsAux1=nothing
+
+        Dim ppp = ParametroManager.TraerRenglonUnicoDeTablaParametroOriginal(SC)
+
+
+        For i = 1 To 10
+
+
+
+            If Not IsNull(ppp.Item("IdCuentaIvaCompras" & i)) Then
+
+                mIdCuentaIvaCompras(i) = ppp.Item("IdCuentaIvaCompras")
+                mIVAComprasPorcentaje(i) = ppp.Item("IVAComprasPorcentaje")
+            Else
+                mIdCuentaIvaCompras(i) = 0
+                mIVAComprasPorcentaje(i) = 0
+            End If
+        Next
+        oRsAux1 =nothing
 
         mTomarCuentaDePresupuesto = False
         mAux = ParametroManager.TraerValorParametro2(SC, "TomarCuentaDePresupuestoEnComprobantesProveedores")
@@ -263,7 +273,7 @@ Public Class Class1
                     mCuit = mCuitPlanilla
                     If Len(mCuit) <> 13 Then
                         If Len(mCuit) = 11 Then
-                            ' mCuit = VBA.mId(mCuit, 1, 2) & "-" & VBA.mId(mCuit, 3, 8) & "-" & VBA.mId(mCuit, 11, 1)
+                            mCuit = mCuit.Substring(0, 2) & "-" & mCuit.Substring(2, 8) & "-" & mCuit.Substring(10, 1)
                         Else
                             mCuit = ""
                         End If
