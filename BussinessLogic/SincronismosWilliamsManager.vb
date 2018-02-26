@@ -16767,9 +16767,9 @@ Namespace Pronto.ERP.Bll
                     sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= .NRecibo & SEP
-                    sb &= .BrutoPto & SEP
+                    sb &= .BrutoFinal & SEP
                     sb &= .Humedad & SEP
-                    sb &= .Humedad & SEP
+                    sb &= String.Format("{0:F3}", .HumedadDesnormalizada / .NetoFinal * 100) & SEP
                     sb &= .HumedadDesnormalizada & SEP
 
 
@@ -16792,9 +16792,9 @@ Namespace Pronto.ERP.Bll
                     'KNetos  Peso descontadas las mermas	Numérico	10
                     'KAplicados      Numérico	10
 
-                    sb &= Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
+                    sb &= .Merma & SEP ' Int(Int(iisNull(.Merma, 0)) - cp2.CalidadMermaVolatilMerma - cp2.CalidadZarandeoMerma).ToString.PadLeft(10) & SEP
                     sb &= .NetoFinal & SEP
-                    sb &= "0" & SEP
+                    sb &= .NetoFinal & SEP
 
 
 
@@ -16821,7 +16821,7 @@ Namespace Pronto.ERP.Bll
 
 
                     'Vehículo    1) camion 2) vagon	Numérico	1
-                    sb &= "" & SEP
+                    sb &= IIf(.SubnumeroVagon > 0, "2", "1") & SEP
 
                     'Patente Camion		Alfanumérico	10
                     sb &= .Patente & SEP
@@ -16868,10 +16868,10 @@ Namespace Pronto.ERP.Bll
 
 
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
-                    sb &= "CP " & SEP
+                    sb &= .ProcedenciaCodigoONCAA & SEP
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
-                    sb &= "CP " & SEP
+                    sb &= .DestinoCodigoONCAA & SEP
 
 
 
