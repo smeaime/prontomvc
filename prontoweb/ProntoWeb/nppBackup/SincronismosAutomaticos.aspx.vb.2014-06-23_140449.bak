@@ -158,7 +158,11 @@ Partial Class SincronismosAutomaticos
 
 
 
+<<<<<<< HEAD
     Protected Sub ElegirCombosSegunParametroSincronismoFiltro(sSincronismo As String)
+=======
+    Protected Sub ElegirCombosSegunParametro(sSincronismo As String)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
         'ReportViewer2.Visible = False
         cmbEstado.Text = "Descargas"
@@ -673,7 +677,11 @@ Partial Class SincronismosAutomaticos
 
 
 
+<<<<<<< HEAD
         ElegirCombosSegunParametroSincronismoFiltro("LIMPIAR")
+=======
+        ElegirCombosSegunParametro("LIMPIAR")
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
 
         lblErrores.Text = sTodosErr
@@ -762,7 +770,11 @@ Partial Class SincronismosAutomaticos
     Function GenerarSincro(sSincronismo As String, ByRef err As String, sDesde As Date, sHasta As Date) As String
         Dim output As String = ""
 
+<<<<<<< HEAD
         ElegirCombosSegunParametroSincronismoFiltro(sSincronismo)
+=======
+        ElegirCombosSegunParametro(sSincronismo)
+>>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
 
         'Dim dt = EntidadManager.ExecDinamicoConStrongTypedDataset(HFSC.Value, strSQLsincronismo)
 
