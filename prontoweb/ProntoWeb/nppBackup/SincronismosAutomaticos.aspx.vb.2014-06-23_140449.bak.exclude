@@ -158,7 +158,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-    Protected Sub ElegirCombosSegunParametro(sSincronismo As String)
+    Protected Sub ElegirCombosSegunParametroSincronismoFiltro(sSincronismo As String)
 
         'ReportViewer2.Visible = False
         cmbEstado.Text = "Descargas"
@@ -673,7 +673,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-        ElegirCombosSegunParametro("LIMPIAR")
+        ElegirCombosSegunParametroSincronismoFiltro("LIMPIAR")
 
 
         lblErrores.Text = sTodosErr
@@ -762,7 +762,7 @@ Partial Class SincronismosAutomaticos
     Function GenerarSincro(sSincronismo As String, ByRef err As String, sDesde As Date, sHasta As Date) As String
         Dim output As String = ""
 
-        ElegirCombosSegunParametro(sSincronismo)
+        ElegirCombosSegunParametroSincronismoFiltro(sSincronismo)
 
         'Dim dt = EntidadManager.ExecDinamicoConStrongTypedDataset(HFSC.Value, strSQLsincronismo)
 
