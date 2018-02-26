@@ -7188,10 +7188,14 @@ Formato localidad-provincia	destination	x
             //tiene que ser el dominio de clientes!!!
             //string linkAlReclamo = UrlDominio + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 <<<<<<< HEAD
+<<<<<<< HEAD
             string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
 =======
             string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 >>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
+=======
+            string linkAlReclamo = "https://prontoclientes.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
@@ -7204,10 +7208,14 @@ Formato localidad-provincia	destination	x
             ElDestinatarioEsInterno = !dbmasterExternos.aspnet_Users.Any(u => u.LoweredUserName == usuarioDestino.ToLower());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
 =======
             if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString();
 >>>>>>> c2a016a20f2b2db61dc723bbf6302372477e5fb9
+=======
+            if (ElDestinatarioEsInterno) linkAlReclamo = "https://prontoweb.williamsentregas.com.ar" + @"/ProntoWeb/CartaDePorteMovil.aspx?Id=" + idCartaPorte.ToString() + "&Chat=" + (usuarioDestino == "" ? usuarioOrigen : usuarioDestino);
+>>>>>>> 5853ea35af5ce3252fe7664ba6ac265432471a0d
 
 
 
