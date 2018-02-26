@@ -16807,6 +16807,8 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
                     'Puerto      Numérico	2
+                    sb &= "" & SEP
+
 
                     'Cuit vendedor		Alfanumérico	16
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP
@@ -16862,16 +16864,19 @@ Namespace Pronto.ERP.Bll
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
                     sb &= Left(.TitularCUIT.ToString.Replace("-", ""), 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+
+
+
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
-                    sb &= "" & SEP
+                    sb &= "CP " & SEP
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
-                    sb &= "" & SEP
+                    sb &= "CP " & SEP
+
+
 
                     'Kilos Salidos		Numérico	10
                     sb &= "" & SEP
-
-
 
 
 
