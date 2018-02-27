@@ -4451,7 +4451,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function DesprotegerExcel(fileName As String, pw_str As String, archivoDestino As String)
+    Public Shared Function DesprotegerExcel(fileName As String, archivoDestino As String, passwordLibro As String, passwordHojas As String)
 
 
 
@@ -4531,8 +4531,8 @@ Public Class ExcelImportadorManager
 
             'Dim pw_str = ".SistemaPronto." ' "asdfasdfasdf" ' //password
 
-            oWB.Unprotect(pw_str)
-            oWB.UnprotectSharing(pw_str)
+            oWB.Unprotect(passwordLibro)
+            oWB.UnprotectSharing(passwordLibro)
             oXL.DisplayAlerts = False
             oWB.SaveAs(archivoDestino)
             oXL.Quit()

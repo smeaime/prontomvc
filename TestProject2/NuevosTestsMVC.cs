@@ -175,7 +175,7 @@ namespace ProntoMVC.TestsMVC
 
 
 
-            ExcelImportadorManager.DesprotegerExcel(pFileName,".SistemaPronto", pFileName2);
+            ExcelImportadorManager.DesprotegerExcel(pFileName,".SistemaPronto.", pFileName2);
 
 
             var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName2, "FF").DataSet;
