@@ -14,7 +14,7 @@
         margin-top: 10px;" Text=""  AutoPostBack="True"></asp:TextBox>
                         <asp:DropDownList ID="cmbBuscarEsteCampo" runat="server" 
                 Style="text-align: right; margin-left: 0px;"  Width="119px" Height="22px" >
-                <asp:ListItem Text="Nombre" Value="Nombre" Selected="True" />
+                <asp:ListItem Text="Chofer" Value="Chofer" Selected="True" />
                 <asp:ListItem Text="CUIL" Value="CUIL" />
 
                 </asp:DropDownList>
@@ -74,13 +74,13 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Nombre">
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
+                            <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Chofer") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <FooterTemplate>
                             <asp:TextBox ID="txtNewNombre" runat="server"></asp:TextBox>
                         </FooterTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
+                            <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Chofer") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     
