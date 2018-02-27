@@ -14529,9 +14529,10 @@ usuario As String, ConexBDLmaster As String,
                 'End If
 
 
+
                 If oFac.RetencionIBrutos1 <> 0 Then
                     If mvarIdProvinciaIIBB = 3 Then
-                        mAuxS1 = "Percepción CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
+                        mAuxS1 = "Percepción IIBB CABA: " & FF2(mvarPorcentajeIBrutos) & " %"
                     Else
                         mAuxS1 = "Percepción IIBB " & mvarNombreProvinciaIIBB & " " & FF2(mvarPorcentajeIBrutos) & " %"
                     End If
@@ -16086,6 +16087,8 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
         Dim idcliente As Integer = 0
 
         Try
@@ -16095,6 +16098,8 @@ usuario As String, ConexBDLmaster As String,
             If Not Debugger.IsAttached Then
                 If Not Membership.ValidateUser(usuario, password) Then
                     ErrHandler2.WriteError("No logra autenticarse " & usuario)
+
+                    LogPronto(SC, 0, "WEBSERVICE_ERR", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
 
                     Throw New Exception("No logra autenticarse") '        avisar q error hubo (de contraseña)
 
@@ -16127,6 +16132,8 @@ usuario As String, ConexBDLmaster As String,
                 idcliente = BuscaIdClientePreciso(rs, SC)
                 If idcliente <= 0 Then
                     ErrHandler2.WriteError("No se encontró usuario equivalente")
+
+                    LogPronto(SC, 0, "WEBSERVICE_ERR", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
                     Return Nothing
                 End If
 
@@ -16139,6 +16146,7 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+            LogPronto(SC, 0, "WEBSERVICE_OK", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
 
 
 
@@ -16554,7 +16562,9 @@ usuario As String, ConexBDLmaster As String,
 
 
 
-    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario As String, password As String, cuit As String, fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado, SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
+    Public Shared Function BajarListadoDeCartaPorte_CerealNet_DLL_v3(usuario As String, password As String, cuit As String,
+                                                                     fechadesde As DateTime, fechahasta As DateTime, estado As enumCDPestado,
+                                                                     SC As String, DirApp As String, ConexBDLmaster As String) As CerealNet.WSCartasDePorte.respuestaEntrega_v3
 
         'var scEF = ProntoMVC.Data.Models.Auxiliares.FormatearConexParaEntityFramework(ProntoFuncionesGeneralesCOMPRONTO.Encriptar(SC));
         '      DemoProntoEntities db = new DemoProntoEntities(scEF);
@@ -16567,6 +16577,10 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
+
+
         Dim idcliente As Integer = 0
 
         Try
@@ -16575,6 +16589,7 @@ usuario As String, ConexBDLmaster As String,
 
             If Not Debugger.IsAttached Then
                 If Not Membership.ValidateUser(usuario, password) Then
+
                     ErrHandler2.WriteError("No logra autenticarse " & usuario)
 
                     Throw New Exception("No logra autenticarse") '        avisar q error hubo (de contraseña)
@@ -16621,6 +16636,9 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
+            LogPronto(SC, 0, "WEBSERVICE_OK", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
 
 
 
@@ -17092,6 +17110,9 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+            LogPronto(SC, 0, "WEBSERVICE_OK", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
+
+
 
 
 
@@ -17533,6 +17554,9 @@ usuario As String, ConexBDLmaster As String,
 
 
 
+
+
+            LogPronto(SC, 0, "WEBSERVICE_OK", usuario, password, cuit, fechadesde.ToShortTimeString() + " " + fechahasta.ToShortTimeString)
 
 
 
