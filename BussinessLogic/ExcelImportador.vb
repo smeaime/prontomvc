@@ -4451,7 +4451,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function DesprotegerExcel(fileName As String)
+    Public Shared Function DesprotegerExcel(fileName As String, pw_str As String, archivoDestino As String)
 
 
 
@@ -4529,12 +4529,12 @@ Public Class ExcelImportadorManager
             '///////////////////////////////////////////////////////////////////////////////////
 
 
-            Dim pw_str = "" ' "asdfasdfasdf" ' //password
+            'Dim pw_str = ".SistemaPronto." ' "asdfasdfasdf" ' //password
 
             oWB.Unprotect(pw_str)
             oWB.UnprotectSharing(pw_str)
             oXL.DisplayAlerts = False
-            oWB.SaveAs("sadfasdf.xls")
+            oWB.SaveAs(archivoDestino)
             oXL.Quit()
 
 
@@ -4905,7 +4905,7 @@ Public Class ExcelImportadorManager
                     'Range.Value2 << actual datatype. slightly different than "Value" property.
 
                     If IsNumeric(oRng.Value) Then 'me fijo si es numerica, por el asuntillo de la coma
-                        dr("column" & j) = oRng.Value
+                        dr("column" & j) = oRng.Value ' si es fecha lo podes convertir con DateTime.FromOADate(double.Parse(oRng.Value)). pero cómo sabes si es fecha?
                     Else
 
                         Dim strValue As String = oRng.Text.ToString() 'acá como la convertís a string, estás trayendo la coma...

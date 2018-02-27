@@ -165,6 +165,7 @@ namespace ProntoMVC.TestsMVC
 
             string DirRepo = @"C:\Users\Mariano\Documents\pronto";
             string pFileName = DirRepo + @"\docstest\fondofijo\" + @"Copia de FF - LABORATORIO 1 (2).xls";
+            string pFileName2 = DirRepo + @"\docstest\fondofijo\" + @"desprotegido.xls";
             string mensajeError;
 
 
@@ -174,12 +175,22 @@ namespace ProntoMVC.TestsMVC
 
 
 
+            ExcelImportadorManager.DesprotegerExcel(pFileName,".SistemaPronto", pFileName2);
+
+
+            var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName2, "FF").DataSet;
+            var xxx = ds.Tables[0].Rows[0].ItemArray;
+            var xxx2 = ds.Tables[0].Rows[1].ItemArray;
+            var xxx3 = ds.Tables[0].Rows[2].ItemArray;
+            //var iiii = xxx[10]; 
+
+
+
             var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2);
 
-            //ExcelImportadorManager.DesprotegerExcel(pFileName);
-            //var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName).DataSet;
 
-            //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
+
+            var ds3 = ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS(pFileName);
 
 
             //desproteger el excel si tira "oledbexception could not decrypt file"
@@ -192,9 +203,7 @@ namespace ProntoMVC.TestsMVC
             }
 
 
-            DataColumn Col = ds2.Tables[0].Columns.Add("Column Name", System.Type.GetType("System.Boolean")); // le meto una columna al principio 
-            Col.SetOrdinal(0);// to put the column in position 0;
-
+            
             //var m = new MigracionVB.Class1();
 
             MigracionVB.Class1.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scSQL , "", DateTime.Now, 0, 0);

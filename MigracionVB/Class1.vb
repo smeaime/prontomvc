@@ -76,6 +76,8 @@ Imports CDPMailFiltrosManager2
 Imports LogicaImportador.FormatosDeExcel
 
 
+Imports ServicioMVC
+
 
 
 
@@ -83,6 +85,17 @@ Public Class Class1
 
 
     Public Shared Function ImportacionComprobantesFondoFijo2(dt As DataTable, SC As String, mArchivo As String, mFechaRecepcion As Date, mNumeroReferencia As Integer, mIdPuntoVenta As Integer) As String
+
+
+
+
+
+        ' le meto una columna y fila al principio 
+        Dim Col As DataColumn = dt.Columns.Add("Column Name", System.Type.GetType("System.Boolean"))
+        Col.SetOrdinal(0)
+        dt.Rows.InsertAt(dt.NewRow(), 0)
+
+
 
 
         '/////////////////////////////////////////////////////////////////
@@ -129,8 +142,8 @@ Public Class Class1
         Dim mvarCotizacionDolar As Single, mPorcentajeIVA As Single
         Dim mTotalItem As Double, mIVA1 As Double, mGravado As Double, mNoGravado As Double, mTotalBruto As Double, mTotalIva1 As Double, mTotalComprobante As Double, mTotalPercepcion As Double
         Dim mTotalAjusteIVA As Double, mAjusteIVA As Double, mBruto As Double, mPercepcion As Double, mCantidad As Double
-        Dim mIdCuentaIvaCompras(10) As Long
-        Dim mIVAComprasPorcentaje(10) As Single
+        Dim mIdCuentaIvaCompras(11) As Long
+        Dim mIVAComprasPorcentaje(11) As Single
         Dim mAux
 
 
@@ -199,14 +212,14 @@ Public Class Class1
 
             If Not IsNull(ppp.Item("IdCuentaIvaCompras" & i)) Then
 
-                mIdCuentaIvaCompras(i) = ppp.Item("IdCuentaIvaCompras")
-                mIVAComprasPorcentaje(i) = ppp.Item("IVAComprasPorcentaje")
+                mIdCuentaIvaCompras(i) = ppp.Item("IdCuentaIvaCompras" & i)
+                mIVAComprasPorcentaje(i) = ppp.Item("IVAComprasPorcentaje" & i)
             Else
                 mIdCuentaIvaCompras(i) = 0
                 mIVAComprasPorcentaje(i) = 0
             End If
         Next
-        oRsAux1 =nothing
+        oRsAux1 = Nothing
 
         mTomarCuentaDePresupuesto = False
         mAux = ParametroManager.TraerValorParametro2(SC, "TomarCuentaDePresupuestoEnComprobantesProveedores")
@@ -217,7 +230,7 @@ Public Class Class1
 
 
 
-        fl = 7
+        fl = 8 '7
         mContador = 0
         mNumeroRendicion = 0
         mIdCuentaFF = 0
@@ -228,7 +241,7 @@ Public Class Class1
 
 
 
-        Using s As New ServicioMVC.servi(SC)
+        Using s As New servi(SC)
 
             Do While True
 
@@ -279,7 +292,7 @@ Public Class Class1
                         End If
                     End If
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaFactura " & dt.Rows(fl).Item(3)
-                    mFechaFactura = CDate(dt.Rows(fl).Item(3))
+                    mFechaFactura = DateTime.FromOADate(Double.Parse(dt.Rows(fl).Item(3)))
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAI " & dt.Rows(fl).Item(18)
                     mNumeroCAI = dt.Rows(fl).Item(18)
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaVencimientoCAI " & dt.Rows(fl).Item(19)
@@ -295,7 +308,7 @@ Public Class Class1
                     mActividad = Trim(dt.Rows(fl).Item(23))
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAE " & dt.Rows(fl).Item(24)
                     mNumeroCAE = dt.Rows(fl).Item(24)
-
+                    '
                     If mIdCuentaFF = 0 Then
                         If Len(dt.Rows(2).Item(10)) = 0 Then
                             Throw New Exception("Debe definir la cuenta del fondo fijo")
@@ -304,8 +317,8 @@ Public Class Class1
                         mCodigoCuentaFF = Val(dt.Rows(2).Item(10))
                         oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Cuentas_TX_PorCodigo, mCodigoCuentaFF)
                         If oRsAux1.Rows.Count > 0 Then
-                                mIdCuentaFF = oRsAux1.Rows(0).Item(0).Value
-                            Else
+                            mIdCuentaFF = oRsAux1.Rows(0).Item(0).Value
+                        Else
                             mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & mNumeroComprobante1.ToString.PadLeft(4, "0") & "-" & mNumeroComprobante2.ToString.PadLeft(8, "0") & ", cuenta de fondo fijo inexistente"
                             fl = fl + 1
                             Continue Do ' GoTo FinLoop
@@ -316,8 +329,8 @@ Public Class Class1
                     mIdObra = 0
                     oRsAux1 = EntidadManager.TraerFiltrado(SC, "Obras_TX_PorNumero", mCodObra)
                     If oRsAux1.Rows.Count > 0 Then
-                            mIdObra = oRsAux1.Rows(0).Item("IdObra")
-                        Else
+                        mIdObra = oRsAux1.Rows(0).Item("IdObra")
+                    Else
                         mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & mNumeroComprobante1.ToString.PadLeft(4, "0") & "-" & mNumeroComprobante2.ToString.PadLeft(8, "0") & ", fila " & fl & "  - Obra " & mCodObra & " inexistente"
                         fl = fl + 1
                         Continue Do ' GoTo FinLoop
