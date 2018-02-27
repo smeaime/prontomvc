@@ -131,7 +131,6 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
 
 
-    'Protected Sub ElegirCombosSegunParametro(sSincronismo As String)
 
     '    ReportViewer2.Visible = False
     '    cmbEstado.Text = "Descargas"
@@ -396,7 +395,7 @@ Partial Class CartaDePorteInformesConReportViewerSincronismos
 
         Try
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(cmbSincronismo.Text.ToUpper, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+            SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(cmbSincronismo.Text.ToUpper, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
         Catch ex As Exception
 
             MandarMailDeError(ex)

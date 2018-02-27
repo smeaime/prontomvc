@@ -249,7 +249,7 @@ Partial Class Buscador
                 Dim IdComprobante As Integer = Convert.ToInt32(GridView1.DataKeys(rowIndex).Item("IdComprobante"))
                 Dim IdTipoComprobante As Integer = Convert.ToInt32(GridView1.DataKeys(rowIndex).Item("IdTipoComp"))
 
-                Dim sUrl = AbrirSegunTipoComprobante(IdTipoComprobante, IdComprobante)
+                Dim sUrl = ProntoFuncionesUIWeb.AbrirSegunTipoComprobante(IdTipoComprobante, IdComprobante)
 
                 If False Then
                     'metodo 1: abro usando la misma ventana
@@ -302,7 +302,23 @@ Partial Class Buscador
 
 
 
-        
+
+        'URL:	/ProntoWeb/Busqueda.aspx?q=tecsi
+        'User:   twilliams2
+        '        Exception Type: System.Data.SqlClient.SqlException
+        'Message: Conversion failed when converting date And/Or time from character string.
+        'Stack Trace: at Buscador.Rebind()
+        'at Buscador.Page_Load(Object sender, EventArgs e)
+        'at System.Web.UI.Control.OnLoad(EventArgs e)
+        'at System.Web.UI.Control.LoadRecursive()
+        'at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+        'Server Error in '/' Application.
+        'Conversion failed when converting date And/Or time from character string.
+
+
+
+
+
 
         '        at Pronto.ERP.Dal.GeneralDB.TraerDatos(String SC, String Nombre, Object[] ParametrosQueLeQuieroMandarAsql) in C:\Backup\BDL\DataAccess\GeneralDB.vb:line 228
         'at Pronto.ERP.Bll.EntidadManager.GetStoreProcedure(String SC, String sStoreProcedure, Object[] Parametros) in C:\Backup\BDL\BussinessLogic\EntidadManager.vb:line 303
@@ -328,16 +344,22 @@ Partial Class Buscador
         End Try
 
 
+        Try
 
-        If InStr(iisNull(q, Session("Busqueda")).ToString.ToUpper, "NO SE ENCONTRARON RESULTADOS") > 0 Then
-            ErrHandler2.WriteError("salida 1")
-            'Exit Sub
-        End If
-        If iisNull(q, Session("Busqueda")).ToString.ToUpper = "" Then
-            ErrHandler2.WriteError("salida 2 ")
-            'Exit Sub
-        End If
 
+            If InStr(iisNull(q, Session("Busqueda")).ToString.ToUpper, "NO SE ENCONTRARON RESULTADOS") > 0 Then
+                ErrHandler2.WriteError("salida 1")
+                'Exit Sub
+            End If
+            If iisNull(q, Session("Busqueda")).ToString.ToUpper = "" Then
+                ErrHandler2.WriteError("salida 2 ")
+                'Exit Sub
+            End If
+
+        Catch ex As Exception
+            ErrHandler2.WriteError(ex)
+            Return
+        End Try
 
 
 

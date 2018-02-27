@@ -187,7 +187,7 @@ Namespace Pronto.ERP.Dal
                     myCommand.Parameters.AddWithValue("@IdUnidad", IdNull(myCartaDePorte.IdUnidad))
                     myCommand.Parameters.AddWithValue("@IdUbicacion", IdNull(myCartaDePorte.IdUbicacion))
                     myCommand.Parameters.AddWithValue("@Cantidad", myCartaDePorte.Cantidad)
-                    myCommand.Parameters.AddWithValue("@Cupo", myCartaDePorte.Cupo)
+                    myCommand.Parameters.AddWithValue("@Cupo", If(myCartaDePorte.Cupo, ""))
                     myCommand.Parameters.AddWithValue("@NetoProc", myCartaDePorte.NetoFinalDespuesDeRestadasMermas)
                     myCommand.Parameters.AddWithValue("@Calidad", "") 'OBSOLETO myCartaDePorte.Calidad)
                     myCommand.Parameters.AddWithValue("@BrutoPto", myCartaDePorte.BrutoPto)

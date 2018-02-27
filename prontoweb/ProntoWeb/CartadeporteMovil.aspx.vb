@@ -233,6 +233,9 @@ Partial Class CartadeporteABMMovil
             Else
                 TabContainer2.ActiveTabIndex = 0
             End If
+            'hago q directamente aparezca en la pestaña del chat
+            TabContainer2.ActiveTabIndex = 4
+
 
 
             '////////////////////////////

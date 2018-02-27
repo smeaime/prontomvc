@@ -15,7 +15,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
     <asp:UpdatePanel ID="UpdatePanelResumen" runat="server">
         <ContentTemplate>
-            <table width="100%">
+            <table width="100%"  style="max-width: 800px">
                 <tr>
                     <td style="width: 101px; height: 40px;" class="EncabezadoCell" colspan="2">
                         <asp:Label ID="lblRazonSocial" runat="server" Font-Size="Large" Font-Bold="true" />
@@ -200,7 +200,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                         Style="margin-right: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 5px;"
                         BorderWidth="5px" Width="127px"></asp:LinkButton>
                     <asp:Panel ID="Panel4" runat="server">
-                        <table width="100%">
+                        <table width="100%" style="max-width: 800px">
                             <tr>
                                 <td class="EncabezadoCell" style="width: 15%; height: 18px;">Origen
                                 </td>
@@ -429,7 +429,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 
             <iframe id="iframeAAAA" runat="server" src="" visible="false" width="800px" height="600px"></iframe>
 
-            <div style="background-color: #FFFFFF; width: 800px">
+            <div style="background-color: #FFFFFF; width: ">
                 <rsweb:ReportViewer ID="ReportViewer2" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
                     <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">
@@ -448,7 +448,7 @@ Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     </asp:UpdatePanel>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <div style="background-color: #FFFFFF; width: 800px">
+            <div style="background-color: #FFFFFF; width: ">
                 <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
                     Width="100%" Visible="true" ZoomMode="PageWidth" Height="1200px" SizeToReportContent="True">
                     <%--        <LocalReport ReportPath="ProntoWeb\Informes\prueba2.rdl">

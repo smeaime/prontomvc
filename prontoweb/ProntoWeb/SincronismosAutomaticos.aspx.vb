@@ -147,6 +147,11 @@ Partial Class SincronismosAutomaticos
             txtMailBTGPactual.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteBTGPactual" & pv).ToString
 
 
+            txtMailMarelli.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv).ToString
+            txtMailEstanzuela.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv).ToString
+
+            txtMailMBC.Text = ParametroManager.TraerValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv).ToString
+
         End If
 
 
@@ -196,7 +201,7 @@ Partial Class SincronismosAutomaticos
         cmbPuntoVenta.Items.Insert(0, New ListItem("Todos los puntos de venta", -1))
         cmbPuntoVenta.SelectedIndex = 0
 
-        If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()) .PuntoVentaAsociado > 0 Then
+        If If(EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)), New Pronto.ERP.BO.Empleado()).PuntoVentaAsociado > 0 Then
             Dim pventa = EmpleadoManager.GetItem(HFSC.Value, Session(SESSIONPRONTO_glbIdUsuario)).PuntoVentaAsociado 'sector del confeccionó
             BuscaTextoEnCombo(cmbPuntoVenta, pventa)
             If iisNull(pventa, 0) <> 0 Then cmbPuntoVenta.Enabled = False 'si tiene un punto de venta, que no lo pueda elegir
@@ -412,7 +417,10 @@ Partial Class SincronismosAutomaticos
         ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteBTGPactual" & pv, txtMailBTGPactual.Text)
 
 
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMarelli" & pv, txtMailMarelli.Text)
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteEstanzuela" & pv, txtMailEstanzuela.Text)
 
+        ParametroManager.GuardarValorParametro2(HFSC.Value, "CasillaCartasPorteMBC" & pv, txtMailMBC.Text)
     End Sub
 
 
@@ -495,13 +503,16 @@ Partial Class SincronismosAutomaticos
         If (CheckBoxTecnocampo.Checked) Then sTodosErr += Enviar("Tecnocampo", txtMailTecnocampo.Text, sErr, bVistaPrevia)
         If (CheckBoxZENI.Checked) Then sTodosErr += Enviar("Zeni", txtMailZENI.Text, sErr, bVistaPrevia)
 
+        If (CheckBoxMarelli.Checked) Then sTodosErr += Enviar("Marelli", txtMailMarelli.Text, sErr, bVistaPrevia)
+        If (CheckBoxEstanzuela.Checked) Then sTodosErr += Enviar("Estanzuela", txtMailEstanzuela.Text, sErr, bVistaPrevia)
+
+        If (CheckBoxMBC.Checked) Then sTodosErr += Enviar("MBC", txtMailMBC.Text, sErr, bVistaPrevia)
 
 
 
 
 
-        SincronismosWilliamsManager.ElegirCombosSegunParametro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
-
+        SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro("LIMPIAR", txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
@@ -555,7 +566,7 @@ Partial Class SincronismosAutomaticos
 
 
 
-            SincronismosWilliamsManager.ElegirCombosSegunParametro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
+            SincronismosWilliamsManager.ElegirCombosSegunParametroSincronismoFiltro(sincro, txtTitular, txtCorredor, txtIntermediario, txtDestinatario, txtRcomercial, txtPopClienteAuxiliar, cmbEstado, cmbCriterioWHERE, DropDownList2, HFSC.Value)
 
 
 
