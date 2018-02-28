@@ -6,11 +6,13 @@ $(function () {
     var $grid = "", lastSelectedId, lastSelectediCol, lastSelectediRow, lastSelectediCol2, lastSelectediRow2, inEdit, selICol, selIRow, gridCellWasClicked = false, grillaenfoco = false, dobleclic
     var headerRow, rowHight, resizeSpanHeight, mTotalImputaciones, mTotalValores, mRetencionIva, mRetencionGanancias, mRetencionIIBB, mRetencionSUSS, mTotalDiferenciaBalanceo, mTotalGastosFF, idaux;
 
-    idaux = $("#IdComprobanteProveedor").val();
+    idaux = $("#IdOrdenPago").val();
     if (idaux <= 0) {
         TraerCotizacion()
     } else {
         pageLayout.close('east');
+        $("#CodigoProveedor").prop("disabled", true);
+        $("#DescripcionProveedor").prop("disabled", true);
     }
 
     var getColumnIndexByName = function (grid, columnName) {

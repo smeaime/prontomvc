@@ -398,9 +398,10 @@ namespace ProntoMVC.Controllers
             public string Observaciones { get; set; }
             public decimal? CotizacionDolar { get; set; }
             public decimal? CotizacionEuro { get; set; }
+            public string Confirmado { get; set; }
         }
 
-        public virtual JsonResult OrdenesPago_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal)
+        public virtual JsonResult OrdenesPago_DynamicGridData(string sidx, string sord, int page, int rows, bool _search, string filters, string FechaInicial, string FechaFinal, bool bAConfirmar = false)
         {
             DateTime FechaDesde, FechaHasta;
             try
@@ -469,7 +470,8 @@ namespace ProntoMVC.Controllers
                             Observaciones = a.Observaciones,
                             CotizacionDolar = a.CotizacionDolar,
                             CotizacionEuro = a.CotizacionEuro,
-                        }).Where(a => a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta).OrderBy(sidx + " " + sord).AsQueryable();
+                            Confirmado = a.Confirmado
+                        }).Where(a => a.FechaOrdenPago >= FechaDesde && a.FechaOrdenPago <= FechaHasta && (!bAConfirmar || (a.Confirmado ?? "") != "SI")).OrderBy(sidx + " " + sord).AsQueryable();
 
             var pagedQuery = Filters.FiltroGenerico_UsandoIQueryable<OrdenesPago2>
                                      (sidx, sord, page, rows, _search, filters, db, ref totalRecords, data);
@@ -2582,6 +2584,8 @@ namespace ProntoMVC.Controllers
                 mNumeroOP2 = parametros.ProximaOrdenPagoOtros ?? 1;
                 mNumeroOP3 = parametros.ProximaOrdenPagoFF ?? 1;
                 mNumeroOP4 = parametros.ProximaOrdenPagoExterior ?? 1;
+
+                OrdenPago.Confirmado = "SI";
 
                 if (!Validar(OrdenPago, ref errs, ref warnings))
                 {
