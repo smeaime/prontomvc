@@ -4428,9 +4428,32 @@ namespace ExtensionMethods
         }
 
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // la conversion de null a string
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // http://stackoverflow.com/questions/550374/checking-for-null-before-tostring?lq=1
+        // http://stackoverflow.com/questions/5700015/test-for-null-return-a-string-if-needed-what-are-the-pros-cons?lq=1
+        // http://stackoverflow.com/questions/3987618/how-to-do-tostring-for-a-possibly-null-object?lq=1
+
         public static string NullSafeToString(this object obj)
         {
             return obj != null ? obj.ToString() : String.Empty;
+        }
+
+
+
+
+
+
+        /// <summary>
+        /// Put a string between double quotes.
+        /// </summary>
+        /// <param name="value">Value to be put between double quotes ex: foo</param>
+        /// <returns>double quoted string ex: "foo"</returns>
+        public static string AddDoubleQuotes(this string value)
+        {
+            return "\"" + value + "\"";
         }
 
 

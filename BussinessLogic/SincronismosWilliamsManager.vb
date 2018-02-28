@@ -16776,11 +16776,11 @@ Namespace Pronto.ERP.Bll
 
 
 
-                    sb &= "A" & SEP 'Para los Entregadores son todas Altas, mandar siempre “A”
+                    sb &= """" & "A" & """" & SEP 'Para los Entregadores son todas Altas, mandar siempre “A”
                     sb &= .PuntoVenta & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= "0" & SEP
-                    sb &= "" & SEP
+                    sb &= """" & "" & """" & SEP
 
 
                     'Cod_Merca   Mercaderia	Alfanumérico	20
@@ -16792,7 +16792,7 @@ Namespace Pronto.ERP.Bll
                     'PorcMHum        Numérico	4, 3
                     'KHumedad        Numérico	8
 
-                    sb &= .CodigoSAJPYA.PadRight(3) & SEP '
+                    sb &= """" & .CodigoSAJPYA & """" & SEP '
                     sb &= CDate(If(.FechaArribo, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= .NRecibo & SEP
@@ -16811,10 +16811,10 @@ Namespace Pronto.ERP.Bll
                     'Kg Volátil		Numérico	8
 
 
-                    sb &= cp2.CalidadMermaZarandeo.ToString.PadLeft(5) & SEP
-                    sb &= cp2.CalidadZarandeoMerma.ToString.PadLeft(10) & SEP
-                    sb &= cp2.CalidadMermaVolatil.ToString.PadLeft(5) & SEP
-                    sb &= cp2.CalidadMermaVolatilMerma.ToString.PadLeft(10) & SEP
+                    sb &= cp2.CalidadMermaZarandeo.ToString & SEP
+                    sb &= cp2.CalidadZarandeoMerma.ToString & SEP
+                    sb &= cp2.CalidadMermaVolatil.ToString & SEP
+                    sb &= cp2.CalidadMermaVolatilMerma.ToString & SEP
 
 
                     'OtrasMermas     Numérico	8
@@ -16828,7 +16828,7 @@ Namespace Pronto.ERP.Bll
 
 
                     'Observaciones       Alfanumérico	30
-                    sb &= .Observaciones & SEP
+                    sb &= """" & .Observaciones & """" & SEP
                     'NroSucAna   Nro Interno Suc. Analisis	Numérico	4
                     sb &= "" & SEP
                     'NroIntAna   Nro Interno Analisis	Numérico	9
@@ -16842,12 +16842,12 @@ Namespace Pronto.ERP.Bll
 
 
                     'Cuit vendedor		Alfanumérico	16
-                    sb &= Left(.TitularCUIT.ToString, 14).PadRight(14) & SEP
+                    sb &= """" & Left(.TitularCUIT.ToString.Trim(), 13) & """" & SEP
                     'Cuit Comprador		Alfanumérico	16
-                    sb &= Left(.DestinatarioCUIT.ToString, 14).PadRight(14) & SEP
+                    sb &= """""" & Left(.DestinatarioCUIT.ToString.Trim(), 13) & """" & SEP
                     'Cuit Entregador		Alfanumérico	16
                     Dim wilycuit = "30-70738607-6"
-                    sb &= Left(wilycuit.ToString, 14).PadRight(14) & SEP
+                    sb &= """" & Left(wilycuit.ToString, 13) & """" & SEP
 
 
 
@@ -16856,9 +16856,9 @@ Namespace Pronto.ERP.Bll
                     sb &= IIf(.SubnumeroVagon > 0, "2", "1") & SEP
 
                     'Patente Camion		Alfanumérico	10
-                    sb &= .Patente & SEP
+                    sb &= """" & .Patente & """" & SEP
                     'Patente Acoplado		Alfanumérico	10
-                    sb &= .Acoplado & SEP
+                    sb &= """" & .Acoplado & """" & SEP
                     'Fumigada    SI = 1, NO = 0	Numérico	1
                     sb &= "" & SEP
 
@@ -16880,29 +16880,29 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
                     'Cuit Chofer		Alfanumérico	16
-                    sb &= .ChoferCUIT & SEP
+                    sb &= """" & If(.ChoferCUIT, "").Trim() & """" & SEP
 
                     'Cuit Emp.Transp		Alfanumérico	16
-                    sb &= "" & SEP
+                    sb &= """" & "" & """" & SEP
 
 
 
 
                     'CEE     Alfanumérico	14
-                    sb &= .CEE & SEP
+                    sb &= """" & .CEE & """" & SEP
                     'Fecha Vto CEE		Fecha	8
                     sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
                     'Cuit Intermediario		Alfanumérico	16
-                    sb &= Left(.IntermediarioCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    sb &= """" & Left(.IntermediarioCUIT.ToString.Trim(), 13) & """" & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
                     'Cuit REM. Comercial		Alfanumérico	16
-                    sb &= Left(.RComercialCUIT.ToString, 14).PadRight(14) & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
+                    sb &= """" & Left(.RComercialCUIT.ToString.Trim(), 13) & """" & SEP 'CUITVendedor	STRING(14)	CUIT Vendedor)    307)    320
 
 
                     'Ciudad Origen o CP	Codigo de Ciudad según tabla Oncca o 'CP’ + el código postal o EST + cód. de establecimiento	Alfanumérico	10
-                    sb &= .ProcedenciaCodigoONCAA & SEP
+                    sb &= """" & .ProcedenciaCodigoONCAA & """" & SEP
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
-                    sb &= .DestinoCodigoONCAA & SEP
+                    sb &= """" & .DestinoCodigoONCAA & """" & SEP
 
 
 
@@ -16929,7 +16929,7 @@ Namespace Pronto.ERP.Bll
                     sb &= "" & SEP
 
                     'CTG     Alfanumérico	15
-                    sb &= .CTG & SEP
+                    sb &= """" & .CTG & """" & SEP
                     'Tara        Numérico	10
                     sb &= .TaraFinal
 
