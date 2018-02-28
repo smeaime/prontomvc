@@ -4428,6 +4428,7 @@ namespace ExtensionMethods
         }
 
 
+<<<<<<< HEAD
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // la conversion de null a string
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4436,6 +4437,8 @@ namespace ExtensionMethods
         // http://stackoverflow.com/questions/5700015/test-for-null-return-a-string-if-needed-what-are-the-pros-cons?lq=1
         // http://stackoverflow.com/questions/3987618/how-to-do-tostring-for-a-possibly-null-object?lq=1
 
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
         public static string NullSafeToString(this object obj)
         {
             return obj != null ? obj.ToString() : String.Empty;
@@ -4444,6 +4447,7 @@ namespace ExtensionMethods
 
 
 
+<<<<<<< HEAD
 
 
         /// <summary>
@@ -4459,5 +4463,7 @@ namespace ExtensionMethods
 
 
 
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
     }
 }
