@@ -1350,6 +1350,10 @@
       <Project>{cca1e32e-7c60-4312-b521-11a6e4ccfca2}</Project>
       <Name>InterfazFlexicapture</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MigracionVB\MigracionVB.vbproj">
+      <Project>{3706e865-88d2-44b8-8f3e-ce9c6674b128}</Project>
+      <Name>MigracionVB</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

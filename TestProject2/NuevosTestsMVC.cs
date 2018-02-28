@@ -165,6 +165,7 @@ namespace ProntoMVC.TestsMVC
 
             string DirRepo = @"C:\Users\Mariano\Documents\pronto";
             string pFileName = DirRepo + @"\docstest\fondofijo\" + @"Copia de FF - LABORATORIO 1 (2).xls";
+            string pFileName2 = DirRepo + @"\docstest\fondofijo\" + @"desprotegido.xls";
             string mensajeError;
 
 
@@ -173,16 +174,35 @@ namespace ProntoMVC.TestsMVC
             // s.ImportarFondoFijo(excel, scSQL, out mensajeError);
 
 
+            var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2, Microsoft.Office.Interop.Excel.XlCorruptLoad.xlNormalLoad);
+            var yxxx1 = ds2.Tables[0].Rows[0].ItemArray;
+            var yxxx2 = ds2.Tables[0].Rows[1].ItemArray;
+            var yxxx3 = ds2.Tables[0].Rows[2].ItemArray;
 
-            var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2);
 
-            //ExcelImportadorManager.DesprotegerExcel(pFileName);
-            //var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName).DataSet;
+            MigracionVB.Class1.ImportacionComprobantesFondoFijo2(ds2.Tables[0], scSQL, "", DateTime.Now, 0, 0);
 
-            //var ds3 =  ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS
 
-            ExcelImportadorManager.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scEF);
-            //jjj
+            return;
+
+
+
+
+            ExcelImportadorManager.DesprotegerExcel(pFileName, pFileName2, "WE",".SistemaPronto.");
+
+
+            var ds = ExcelImportadorManager.GetExcel2_ODBC(pFileName2, "FF").DataSet;
+            var xxx = ds.Tables[0].Rows[0].ItemArray;
+            var xxx2 = ds.Tables[0].Rows[1].ItemArray;
+            var xxx3 = ds.Tables[0].Rows[2].ItemArray;
+            //var iiii = xxx[10]; 
+
+
+
+
+
+
+            var ds3 = ProntoMVC.Data.FuncionesGenericasCSharp.GetExcel3_XLSX_EEPLUS(pFileName);
 
 
             //desproteger el excel si tira "oledbexception could not decrypt file"
@@ -193,6 +213,14 @@ namespace ProntoMVC.TestsMVC
 
 
             }
+
+
+            
+            //var m = new MigracionVB.Class1();
+
+            //jjj
+
+
 
 
         }
@@ -209,8 +237,8 @@ namespace ProntoMVC.TestsMVC
 
             // @"C:\Users\Mariano\Documents\pronto\ProntoMVC\bin\Plantillas.exe -Plantilla=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\Requerimiento_VialAgro.dotm -SC=Data Source=DESKTOP-TVDQV7C;Initial catalog=VialAgro;User ID=sa; Password=.SistemaPronto.;Connect Timeout=500;Provider=SQLOLEDB.1 -Id=22 -FileOut=C:\Users\Mariano\Documents\pronto\ProntoMVCDocumentos\archivo.doc"
 
-           string output = DirApp + "\\Documentos\\" + "archivo6524.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
-           string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_VialAgro.dotm";
+            string output = DirApp + "\\Documentos\\" + "archivo6524.doc"; //System.IO.Path.GetDirectoryName(); // + '\Documentos\' + 'archivo.docx';
+            string plantilla = DirApp + "\\Documentos\\" + "Requerimiento_VialAgro.dotm";
 
 
             string mensajeError;

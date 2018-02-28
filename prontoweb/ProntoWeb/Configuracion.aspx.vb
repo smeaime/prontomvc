@@ -3,10 +3,14 @@ Imports System.Linq
 Imports Pronto.ERP.Bll
 Imports Pronto.ERP.Bll.ParametroManager
 Imports System.Data
-Imports Microsoft.SqlServer.Management.Smo
-Imports Microsoft.SqlServer.Management.Sdk.Sfc
 Imports System.Diagnostics
 Imports System.Collections.Generic
+
+
+'Imports Microsoft.SqlServer.Management.Smo
+'Imports Microsoft.SqlServer.Management.Sdk.Sfc
+
+
 
 Imports CartaDePorteManager
 
@@ -879,289 +883,289 @@ Partial Class Configuracion
     End Sub
 
 
-    Function ExportarScriptConSMO()
-        'http://msdn.microsoft.com/en-us/library/ms162160(v=sql.90).aspx
-        'http://stackoverflow.com/questions/3488666/how-to-automate-script-generation-using-smo-in-sql-server
+    'Function ExportarScriptConSMO()
+    '    'http://msdn.microsoft.com/en-us/library/ms162160(v=sql.90).aspx
+    '    'http://stackoverflow.com/questions/3488666/how-to-automate-script-generation-using-smo-in-sql-server
 
-        Dim filescript As String = DirApp() & "\Novedades\Nuevos_SP WEB.sql"
+    '    Dim filescript As String = DirApp() & "\Novedades\Nuevos_SP WEB.sql"
 
-        Dim filescriptdrops As String = DirApp() & "\Novedades\dev\Nuevos_SP WEB drops.sql"
+    '    Dim filescriptdrops As String = DirApp() & "\Novedades\dev\Nuevos_SP WEB drops.sql"
 
-        Try
+    '    Try
 
 
-            'SQL Server 2008 - Backup and Restore Databases using SMO
+    '        'SQL Server 2008 - Backup and Restore Databases using SMO
 
-            Dim parser = New System.Data.SqlClient.SqlConnectionStringBuilder(Encriptar(HFSC.Value))
-            Dim servidor As String = parser.DataSource
-            Dim user As String = parser.UserID
-            Dim pass = parser.Password
+    '        Dim parser = New System.Data.SqlClient.SqlConnectionStringBuilder(Encriptar(HFSC.Value))
+    '        Dim servidor As String = parser.DataSource
+    '        Dim user As String = parser.UserID
+    '        Dim pass = parser.Password
 
-            Dim base As String = parser.InitialCatalog
+    '        Dim base As String = parser.InitialCatalog
 
 
-            'Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(Encriptar(HFSC.Value))
-            Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(servidor, user, pass)
+    '        'Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(Encriptar(HFSC.Value))
+    '        Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(servidor, user, pass)
 
-            Dim srv = New Server(connection)
+    '        Dim srv = New Server(connection)
 
 
-            '//Reference the AdventureWorks2008R2 database.  
-            Dim db = srv.Databases(base)
+    '        '//Reference the AdventureWorks2008R2 database.  
+    '        Dim db = srv.Databases(base)
 
-            ' http://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.scriptingoptions.aspx
-            '//Define a Scripter object and set the required scripting options. 
-            Dim scrp As Scripter
+    '        ' http://msdn.microsoft.com/en-us/library/microsoft.sqlserver.management.smo.scriptingoptions.aspx
+    '        '//Define a Scripter object and set the required scripting options. 
+    '        Dim scrp As Scripter
 
 
 
-            scrp = New Scripter(srv)
+    '        scrp = New Scripter(srv)
 
 
 
-            If False Then
+    '        If False Then
 
-                Using outfile As StreamWriter = New StreamWriter(filescript, True)
+    '            Using outfile As StreamWriter = New StreamWriter(filescript, True)
 
 
 
-                    'Iterate through the tables in database and script each one. Display the script.
-                    'Note that the StringCollection type needs the System.Collections.Specialized namespace to be included.
-                    Dim tb As Table
-                    Dim sp As StoredProcedure
-                    Dim smoObjects(1) As Urn
-                    Dim i, total As Long
+    '                'Iterate through the tables in database and script each one. Display the script.
+    '                'Note that the StringCollection type needs the System.Collections.Specialized namespace to be included.
+    '                Dim tb As Table
+    '                Dim sp As StoredProcedure
+    '                Dim smoObjects(1) As Urn
+    '                Dim i, total As Long
 
 
 
-                    For Each sp In db.StoredProcedures
-                        If Left(sp.Name, 1) = "w" Then
-                            total += 1
-                        End If
-                    Next
-                    Debug.Print(total)
+    '                For Each sp In db.StoredProcedures
+    '                    If Left(sp.Name, 1) = "w" Then
+    '                        total += 1
+    '                    End If
+    '                Next
+    '                Debug.Print(total)
 
 
-                    Dim drop = New ScriptingOptions()
-                    drop.ScriptDrops = True
-                    drop.IncludeIfNotExists = True
+    '                Dim drop = New ScriptingOptions()
+    '                drop.ScriptDrops = True
+    '                drop.IncludeIfNotExists = True
 
-                    If False Then
-                        For Each sp In db.StoredProcedures
-                            If Left(sp.Name, 1) = "w" Then
-                                If sp.IsSystemObject = False Then
-                                    smoObjects = New Urn(0) {}
-                                    smoObjects(0) = sp.Urn
+    '                If False Then
+    '                    For Each sp In db.StoredProcedures
+    '                        If Left(sp.Name, 1) = "w" Then
+    '                            If sp.IsSystemObject = False Then
+    '                                smoObjects = New Urn(0) {}
+    '                                smoObjects(0) = sp.Urn
 
-                                    Dim sc As StringCollection
-                                    sc = scrp.Script(smoObjects)
+    '                                Dim sc As StringCollection
+    '                                sc = scrp.Script(smoObjects)
 
-                                    'outfile.WriteLine(sc.ToString())
+    '                                'outfile.WriteLine(sc.ToString())
 
-                                    'Dim st As String
-                                    'For Each st In sc
-                                    '    Console.WriteLine(st)
-                                    '    outfile.WriteLine(st)
-                                    'Next
+    '                                'Dim st As String
+    '                                'For Each st In sc
+    '                                '    Console.WriteLine(st)
+    '                                '    outfile.WriteLine(st)
+    '                                'Next
 
-                                End If
-                                i += 1
-                                Debug.Print(i)
-                            End If
-                        Next
+    '                            End If
+    '                            i += 1
+    '                            Debug.Print(i)
+    '                        End If
+    '                    Next
 
-                    End If
+    '                End If
 
 
-                    outfile.Close()
-                End Using
+    '                outfile.Close()
+    '            End Using
 
-            End If
+    '        End If
 
 
-            'http://stackoverflow.com/questions/274408/using-smo-to-get-create-script-for-table-defaults
-
-            Dim list = New Generic.List(Of Urn)()
-            Dim dataTable = db.EnumObjects(DatabaseObjectTypes.StoredProcedure) '.Table)
-            For Each row In dataTable.Rows
-                If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
-                    list.Add(New Urn(row("Urn")))
-                End If
-            Next
+    '        'http://stackoverflow.com/questions/274408/using-smo-to-get-create-script-for-table-defaults
+
+    '        Dim list = New Generic.List(Of Urn)()
+    '        Dim dataTable = db.EnumObjects(DatabaseObjectTypes.StoredProcedure) '.Table)
+    '        For Each row In dataTable.Rows
+    '            If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
+    '                list.Add(New Urn(row("Urn")))
+    '            End If
+    '        Next
 
-            dataTable = db.EnumObjects(DatabaseObjectTypes.View) '.Table)
-            For Each row In dataTable.Rows
-                If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
-                    list.Add(New Urn(row("Urn")))
-                End If
-            Next
+    '        dataTable = db.EnumObjects(DatabaseObjectTypes.View) '.Table)
+    '        For Each row In dataTable.Rows
+    '            If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
+    '                list.Add(New Urn(row("Urn")))
+    '            End If
+    '        Next
 
-            dataTable = db.EnumObjects(DatabaseObjectTypes.UserDefinedFunction) '.Table)
-            For Each row In dataTable.Rows
-                If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
-                    list.Add(New Urn(row("Urn")))
-                End If
-            Next
+    '        dataTable = db.EnumObjects(DatabaseObjectTypes.UserDefinedFunction) '.Table)
+    '        For Each row In dataTable.Rows
+    '            If Left(row("Name"), 1) = "w" Then 'And row("IsSystemObject") = False Then
+    '                list.Add(New Urn(row("Urn")))
+    '            End If
+    '        Next
 
 
-            With scrp
-                ' scrp.Options.ScriptDrops = True
-                '    scrp.Options.WithDependencies = False
-                scrp.Options.ScriptSchema = True
-                .Options.ScriptData = False
-                '    scrp.Options.IncludeIfNotExists = False
-                scrp.Options.IncludeHeaders = True
-                'scrp.Options.SchemaQualify = True
+    '        With scrp
+    '            ' scrp.Options.ScriptDrops = True
+    '            '    scrp.Options.WithDependencies = False
+    '            scrp.Options.ScriptSchema = True
+    '            .Options.ScriptData = False
+    '            '    scrp.Options.IncludeIfNotExists = False
+    '            scrp.Options.IncludeHeaders = True
+    '            'scrp.Options.SchemaQualify = True
 
-                '    '.Options.SchemaQualifyForeignKeysReferences = True
-                '    '.Options.NoCollation = True
-                '    .Options.DriAllConstraints = True
-                '    scrp.Options.DriAll = True
-                '    .Options.DriAllKeys = True
-                '    .Options.DriIndexes = True
-                '.Options.ClusteredIndexes = True
-                '.Options.NonClusteredIndexes = True
+    '            '    '.Options.SchemaQualifyForeignKeysReferences = True
+    '            '    '.Options.NoCollation = True
+    '            '    .Options.DriAllConstraints = True
+    '            '    scrp.Options.DriAll = True
+    '            '    .Options.DriAllKeys = True
+    '            '    .Options.DriIndexes = True
+    '            '.Options.ClusteredIndexes = True
+    '            '.Options.NonClusteredIndexes = True
 
 
 
-                .Options.ToFileOnly = True
-                .Options.FileName = filescript
+    '            .Options.ToFileOnly = True
+    '            .Options.FileName = filescript
 
-                .Script(list.ToArray())
+    '            .Script(list.ToArray())
 
 
-                .Options.FileName = filescriptdrops
-                scrp.Options.ScriptDrops = True
-                .Script(list.ToArray())
-            End With
+    '            .Options.FileName = filescriptdrops
+    '            scrp.Options.ScriptDrops = True
+    '            .Script(list.ToArray())
+    '        End With
 
-        Catch ex As Exception
-            ErrHandler2.WriteAndRaiseError(ex)
-        End Try
+    '    Catch ex As Exception
+    '        ErrHandler2.WriteAndRaiseError(ex)
+    '    End Try
 
-        Dim str As String
-        str &= File.ReadAllText(filescriptdrops)
-        str &= File.ReadAllText(filescript)
+    '    Dim str As String
+    '    str &= File.ReadAllText(filescriptdrops)
+    '    str &= File.ReadAllText(filescript)
 
-        Dim objStreamWriter As StreamWriter
-        objStreamWriter = File.CreateText(filescript)
-        objStreamWriter.Write(str)
-        objStreamWriter.Close()
+    '    Dim objStreamWriter As StreamWriter
+    '    objStreamWriter = File.CreateText(filescript)
+    '    objStreamWriter.Write(str)
+    '    objStreamWriter.Close()
 
 
 
-        Dim MyFile1 = New FileInfo(filescript)
-        Try
-            Dim nombrearchivo = MyFile1.Name
-            If Not IsNothing(filescript) Then
-                Response.ContentType = "application/octet-stream"
-                Response.AddHeader("Content-Disposition", "attachment; filename=" & nombrearchivo)
-                'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
-                'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
-                'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnNotaCreditoXML)
+    '    Dim MyFile1 = New FileInfo(filescript)
+    '    Try
+    '        Dim nombrearchivo = MyFile1.Name
+    '        If Not IsNothing(filescript) Then
+    '            Response.ContentType = "application/octet-stream"
+    '            Response.AddHeader("Content-Disposition", "attachment; filename=" & nombrearchivo)
+    '            'problema: UpdatePanel and Response.Write / Response.TransmitFile http://forums.asp.net/t/1090634.aspx
+    '            'TENES QUE AGREGAR EN EL Page_Load (AUN CUADO ES POSTBACK)!!!!!
+    '            'AjaxControlToolkit.ToolkitScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnNotaCreditoXML)
 
-                Response.TransmitFile(filescript)
-                'Response.BinaryWrite()
-                'Response.OutputStream
+    '            Response.TransmitFile(filescript)
+    '            'Response.BinaryWrite()
+    '            'Response.OutputStream
 
 
-                Response.End()
-            Else
-                MsgBoxAjax(Me, "No se pudo generar el informe. Consulte al administrador")
-            End If
-        Catch ex As Exception
-            'MsgBoxAjax(Me, ex.ToString)
-            ErrHandler2.WriteError(ex)
-        End Try
-    End Function
+    '            Response.End()
+    '        Else
+    '            MsgBoxAjax(Me, "No se pudo generar el informe. Consulte al administrador")
+    '        End If
+    '    Catch ex As Exception
+    '        'MsgBoxAjax(Me, ex.ToString)
+    '        ErrHandler2.WriteError(ex)
+    '    End Try
+    'End Function
 
 
 
-    Protected Sub btnGenerarScript_Click(sender As Object, e As System.EventArgs) Handles btnGenerarScript.Click
-        ExportarScriptConSMO()
-        'MsgBoxAjax(Me, "Script generado")
+    'Protected Sub btnGenerarScript_Click(sender As Object, e As System.EventArgs) Handles btnGenerarScript.Click
+    '    ExportarScriptConSMO()
+    '    'MsgBoxAjax(Me, "Script generado")
 
-    End Sub
+    'End Sub
 
-    Protected Sub Button7_Click(sender As Object, e As System.EventArgs) Handles Button7.Click
-        BackupMasActualizacionConSMO()
-    End Sub
+    'Protected Sub Button7_Click(sender As Object, e As System.EventArgs) Handles Button7.Click
+    '    BackupMasActualizacionConSMO()
+    'End Sub
 
 
 
-    Function BackupMasActualizacionConSMO()
-        'http://msdn.microsoft.com/en-us/library/ms162160(v=sql.90).aspx
-        'http://stackoverflow.com/questions/3488666/how-to-automate-script-generation-using-smo-in-sql-server
+    'Function BackupMasActualizacionConSMO()
+    '    'http://msdn.microsoft.com/en-us/library/ms162160(v=sql.90).aspx
+    '    'http://stackoverflow.com/questions/3488666/how-to-automate-script-generation-using-smo-in-sql-server
 
 
-        'SQL Server 2008 - Backup and Restore Databases using SMO
+    '    'SQL Server 2008 - Backup and Restore Databases using SMO
 
-        Dim parser = New System.Data.SqlClient.SqlConnectionStringBuilder(Encriptar(HFSC.Value))
-        Dim servidor As String = parser.DataSource
-        Dim user As String = parser.UserID
-        Dim pass = parser.Password
+    '    Dim parser = New System.Data.SqlClient.SqlConnectionStringBuilder(Encriptar(HFSC.Value))
+    '    Dim servidor As String = parser.DataSource
+    '    Dim user As String = parser.UserID
+    '    Dim pass = parser.Password
 
-        Dim base As String = parser.InitialCatalog
+    '    Dim base As String = parser.InitialCatalog
 
 
-        'Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(Encriptar(HFSC.Value))
-        Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(servidor, user, pass)
+    '    'Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(Encriptar(HFSC.Value))
+    '    Dim connection = New Microsoft.SqlServer.Management.Common.ServerConnection(servidor, user, pass)
 
-        Dim srv = New Server(connection)
+    '    Dim srv = New Server(connection)
 
 
 
-        '//Reference the AdventureWorks2008R2 database.  
-        Dim db = srv.Databases(base)
+    '    '//Reference the AdventureWorks2008R2 database.  
+    '    Dim db = srv.Databases(base)
 
-        Dim tableText As String
+    '    Dim tableText As String
 
-        Try
+    '    Try
 
-            Dim nuevtablefile As String = DirApp() & "\Novedades\dev\Nuevas_Tablas Web.sql"
-            Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(nuevtablefile)
-                tableText = FileReader.ReadToEnd
-            End Using
+    '        Dim nuevtablefile As String = DirApp() & "\Novedades\dev\Nuevas_Tablas Web.sql"
+    '        Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(nuevtablefile)
+    '            tableText = FileReader.ReadToEnd
+    '        End Using
 
-            Dim altertablefile As String = DirApp() & "\Novedades\dev\ALTERTABLE 2011 Modulo WEB.sql"
-            Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(altertablefile)
-                tableText = FileReader.ReadToEnd
-            End Using
+    '        Dim altertablefile As String = DirApp() & "\Novedades\dev\ALTERTABLE 2011 Modulo WEB.sql"
+    '        Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(altertablefile)
+    '            tableText = FileReader.ReadToEnd
+    '        End Using
 
-            db.ExecuteNonQuery(tableText)
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-        End Try
+    '        db.ExecuteNonQuery(tableText)
+    '    Catch ex As Exception
+    '        ErrHandler2.WriteError(ex)
+    '    End Try
 
 
 
-        Dim filescript As String = DirApp() & "\Novedades\dev\Nuevos_SP WEB desarrollo.sql"
-        Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filescript)
-            tableText = FileReader.ReadToEnd
-        End Using
+    '    Dim filescript As String = DirApp() & "\Novedades\dev\Nuevos_SP WEB desarrollo.sql"
+    '    Using FileReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filescript)
+    '        tableText = FileReader.ReadToEnd
+    '    End Using
 
 
-        Try
-            db.ExecuteNonQuery(tableText)
-        Catch ex As Exception
-            ErrHandler2.WriteError(ex)
-            Dim inner As Exception = ex.InnerException
-            While Not (inner Is Nothing)
-                MsgBox(inner.Message)
-                ErrHandler2.WriteError(inner.Message)
-                inner = inner.InnerException
-            End While
+    '    Try
+    '        db.ExecuteNonQuery(tableText)
+    '    Catch ex As Exception
+    '        ErrHandler2.WriteError(ex)
+    '        Dim inner As Exception = ex.InnerException
+    '        While Not (inner Is Nothing)
+    '            MsgBox(inner.Message)
+    '            ErrHandler2.WriteError(inner.Message)
+    '            inner = inner.InnerException
+    '        End While
 
-            MsgBoxAjax(Me, ex.ToString)
+    '        MsgBoxAjax(Me, ex.ToString)
 
-            Throw
-            'ex.InnerException
-            'ex.InnerException.InnerException
-        End Try
+    '        Throw
+    '        'ex.InnerException
+    '        'ex.InnerException.InnerException
+    '    End Try
 
-        MsgBoxAjax(Me, "exito")
+    '    MsgBoxAjax(Me, "exito")
 
-    End Function
+    'End Function
 
 
 
