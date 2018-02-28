@@ -16777,17 +16777,23 @@ Namespace Pronto.ERP.Bll
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & "A" & """" & SEP 'Para los Entregadores son todas Altas, mandar siempre “A”
                     sb &= .PuntoVenta & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= "0" & SEP
                     sb &= """" & "" & """" & SEP
 =======
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
                     sb &= "A" & SEP 'Para los Entregadores son todas Altas, mandar siempre “A”
                     sb &= .PuntoVenta & SEP
                     sb &= .NumeroCartaDePorte & SEP
                     sb &= "0" & SEP
                     sb &= "" & SEP
+<<<<<<< HEAD
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
 
@@ -16801,7 +16807,11 @@ Namespace Pronto.ERP.Bll
                     'KHumedad        Numérico	8
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & .CodigoSAJPYA & """" & SEP '
+=======
+                    sb &= .CodigoSAJPYA.PadRight(3) & SEP '
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 =======
                     sb &= .CodigoSAJPYA.PadRight(3) & SEP '
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
@@ -16824,15 +16834,21 @@ Namespace Pronto.ERP.Bll
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= cp2.CalidadMermaZarandeo.ToString & SEP
                     sb &= cp2.CalidadZarandeoMerma.ToString & SEP
                     sb &= cp2.CalidadMermaVolatil.ToString & SEP
                     sb &= cp2.CalidadMermaVolatilMerma.ToString & SEP
 =======
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
                     sb &= cp2.CalidadMermaZarandeo.ToString.PadLeft(5) & SEP
                     sb &= cp2.CalidadZarandeoMerma.ToString.PadLeft(10) & SEP
                     sb &= cp2.CalidadMermaVolatil.ToString.PadLeft(5) & SEP
                     sb &= cp2.CalidadMermaVolatilMerma.ToString.PadLeft(10) & SEP
+<<<<<<< HEAD
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
 
@@ -16848,7 +16864,11 @@ Namespace Pronto.ERP.Bll
 
                     'Observaciones       Alfanumérico	30
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & .Observaciones & """" & SEP
+=======
+                    sb &= .Observaciones & SEP
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 =======
                     sb &= .Observaciones & SEP
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
@@ -16866,6 +16886,7 @@ Namespace Pronto.ERP.Bll
 
                     'Cuit vendedor		Alfanumérico	16
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & Left(.TitularCUIT.ToString.Trim(), 13) & """" & SEP
                     'Cuit Comprador		Alfanumérico	16
                     sb &= """""" & Left(.DestinatarioCUIT.ToString.Trim(), 13) & """" & SEP
@@ -16873,12 +16894,17 @@ Namespace Pronto.ERP.Bll
                     Dim wilycuit = "30-70738607-6"
                     sb &= """" & Left(wilycuit.ToString, 13) & """" & SEP
 =======
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
                     sb &= Left(.TitularCUIT.ToString, 14).PadRight(14) & SEP
                     'Cuit Comprador		Alfanumérico	16
                     sb &= Left(.DestinatarioCUIT.ToString, 14).PadRight(14) & SEP
                     'Cuit Entregador		Alfanumérico	16
                     Dim wilycuit = "30-70738607-6"
                     sb &= Left(wilycuit.ToString, 14).PadRight(14) & SEP
+<<<<<<< HEAD
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
 
@@ -16889,9 +16915,15 @@ Namespace Pronto.ERP.Bll
 
                     'Patente Camion		Alfanumérico	10
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & .Patente & """" & SEP
                     'Patente Acoplado		Alfanumérico	10
                     sb &= """" & .Acoplado & """" & SEP
+=======
+                    sb &= .Patente & SEP
+                    'Patente Acoplado		Alfanumérico	10
+                    sb &= .Acoplado & SEP
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 =======
                     sb &= .Patente & SEP
                     'Patente Acoplado		Alfanumérico	10
@@ -16919,21 +16951,28 @@ Namespace Pronto.ERP.Bll
 
                     'Cuit Chofer		Alfanumérico	16
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & If(.ChoferCUIT, "").Trim() & """" & SEP
 
                     'Cuit Emp.Transp		Alfanumérico	16
                     sb &= """" & "" & """" & SEP
 =======
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
                     sb &= .ChoferCUIT & SEP
 
                     'Cuit Emp.Transp		Alfanumérico	16
                     sb &= "" & SEP
+<<<<<<< HEAD
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
 
 
 
                     'CEE     Alfanumérico	14
+<<<<<<< HEAD
 <<<<<<< HEAD
                     sb &= """" & .CEE & """" & SEP
                     'Fecha Vto CEE		Fecha	8
@@ -16950,6 +16989,8 @@ Namespace Pronto.ERP.Bll
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
                     sb &= """" & .DestinoCodigoONCAA & """" & SEP
 =======
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
                     sb &= .CEE & SEP
                     'Fecha Vto CEE		Fecha	8
                     sb &= CDate(If(.FechaVencimiento, DateTime.MinValue)).ToString("yyyyMMdd") & SEP
@@ -16964,6 +17005,9 @@ Namespace Pronto.ERP.Bll
 
                     'Ciudad Destino o CP	Idem anterior	Alfanumérico	10
                     sb &= .DestinoCodigoONCAA & SEP
+<<<<<<< HEAD
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
 
@@ -16992,7 +17036,11 @@ Namespace Pronto.ERP.Bll
 
                     'CTG     Alfanumérico	15
 <<<<<<< HEAD
+<<<<<<< HEAD
                     sb &= """" & .CTG & """" & SEP
+=======
+                    sb &= .CTG & SEP
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 =======
                     sb &= .CTG & SEP
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
