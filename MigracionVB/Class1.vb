@@ -292,7 +292,10 @@ Public Class Class1
                         End If
                     End If
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaFactura " & dt.Rows(fl).Item(3)
-                    mFechaFactura = DateTime.FromOADate(Double.Parse(dt.Rows(fl).Item(3)))
+
+                    'mFechaFactura = DateTime.FromOADate(Double.Parse(dt.Rows(fl).Item(3)))
+                    mFechaFactura = Convert.ToDateTime(dt.Rows(fl).Item(3))
+
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mNumeroCAI " & dt.Rows(fl).Item(18)
                     mNumeroCAI = dt.Rows(fl).Item(18)
                     oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mFechaVencimientoCAI " & dt.Rows(fl).Item(19)

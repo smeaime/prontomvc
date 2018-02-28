@@ -115,7 +115,7 @@ namespace ServicioMVC
                 if (disposing)
                 {
                     db.Dispose();
-                    dbmant.Dispose();
+                    //dbmant.Dispose();
                     // Dispose other managed resources.
                 }
                 //release unmanaged resources.
