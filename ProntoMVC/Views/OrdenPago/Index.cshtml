@@ -1,27 +1,27 @@
 ﻿@model IEnumerable<ProntoMVC.Data.Models.OrdenPago>
-@{
-    ViewBag.Title = "Ordenes de Pago";
-}
+    @{
+        ViewBag.Title = "Ordenes de Pago";
+    }
 
-<div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
-<div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
+    <div><input id="FechaInicial" name="FechaInicial" type="hidden" value=@Request.QueryString["fechainicial"]></div>
+    <div><input id="FechaFinal" name="FechaFinal" type="hidden" value=@Request.QueryString["fechafinal"]></div>
 
-<br />
-
-<div style="padding-left: 15px; padding-right: 15px;">
-    <div class="row-fluid">
-        <div class="span9 lightblue">
-            <button onclick="window.location.href='@Url.Action("EditCC", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Proveedores)</button>
-            <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Fondo fijo)</button>
-            <button onclick="window.location.href='@Url.Action("EditOT", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Otros)</button>
-        </div>
-    </div>
     <br />
-    <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; "></table>
-    <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
-</div>
 
-<script type="text/javascript">
+    <div style="padding-left: 15px; padding-right: 15px;">
+        <div class="row-fluid">
+            <div class="span9 lightblue">
+                <button onclick="window.location.href='@Url.Action("EditCC", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Proveedores)</button>
+                <button onclick="window.location.href='@Url.Action("EditFF", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Fondo fijo)</button>
+                <button onclick="window.location.href='@Url.Action("EditOT", new { id = -1 })'" class="btn btn-primary">Nueva Orden de Pago (Otros)</button>
+            </div>
+        </div>
+        <br />
+        <table id="Lista" class="scroll" cellpadding="0" cellspacing="0" style="font-size: 16px; "></table>
+        <div id="ListaPager" class="scroll" style="text-align: center; background: ; height: 30px"></div>
+    </div>
+
+    <script type="text/javascript">
     $(document).ready(function () {
         var lastSelectedId;
         var inEdit;
@@ -32,7 +32,12 @@
 
         $('#Lista').jqGrid({
             url: '@Url.Action("OrdenesPago_DynamicGridData", "OrdenPago")',
-            postData: { 'FechaInicial': function () { return $("#FechaInicial").val(); }, 'FechaFinal': function () { return $("#FechaFinal").val(); } },
+            postData: {
+                'FechaInicial': function () { return $("#FechaInicial").val(); },
+                'FechaFinal': function () { return $("#FechaFinal").val(); },
+                'bAConfirmar': function () { return @Request.QueryString["bAConfirmar"];
+                }
+            },
             datatype: 'json',
             mtype: 'POST',
             colNames: ['', '', '', 'IdOrdenPago', 'IdOPComplementariaFF', 'Numero', 'Ext.', 'Fecha Pago', 'Tipo', 'Anulada', 'Estado', 'Proveedor', 'Cuenta', 'Mon.', 'Obra', 'Valores', 'Acreedores',
@@ -150,4 +155,4 @@
         pageLayout.hide('south');
     });
 
-</script>
+    </script>
