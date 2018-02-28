@@ -586,25 +586,14 @@ public static class Generales
             // LogOff()
             return null;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 
         return s;
 
     }
-<<<<<<< HEAD
-=======
-
-        return s;
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
-
-    }
-=======
 
 
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+
+
 
 
     public static string conexPorEmpresa(string nombreEmpresa, string sConexBDLMaster, string usuario, bool esSuperadmin)
@@ -625,60 +614,12 @@ public static class Generales
         // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
         // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
 
-<<<<<<< HEAD
-    public static string conexPorEmpresa(string nombreEmpresa, string sConexBDLMaster, string usuario, bool esSuperadmin)
-    {
-
-        string s;
-
-<<<<<<< HEAD
-=======
-    public static string conexPorEmpresa(string nombreEmpresa, string sConexBDLMaster, string usuario, bool esSuperadmin)
-    {
-
-        string s;
-
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
-        var sSQL = "SELECT * FROM BASES " +
-                                                  "left join DetalleUserBD on bases.IdBD=DetalleUserBD.IdBD " +
-                                                  "where " +
-                                                  ((!esSuperadmin) ? "UserId='" + usuario + "' AND" : "") +
-                                                  " Descripcion='" + nombreEmpresa + "'   ";
-<<<<<<< HEAD
-
-        System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                               sSQL);
-
-        //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
-        // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
-        // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
-=======
-
-        System.Data.DataTable dt = EntidadManager.ExecDinamico(sConexBDLMaster,
-                                               sSQL);
-
-        //TODO explota  porque superadmin no tiene acceso a capen en DetalleUserDB
-        // -por qué entonces el combito de "base" al lado del boton "actualizar" incluía esa base? -porque usa la viewbag, que llenas con
-        // -sí!,BasesPorUsuarioColeccion2 , que revisa si es superadmin, y entonces incluye la base
-
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
-
-
-        // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
-
-        // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
-=======
 
 
         // si la base es nueva, cuando haces el join... todavia no tiene usuarios creados. tiene que ser "left join DetalleUserBD"
 
 
->>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+
         if (dt.Rows.Count == 1)
         {
             s = dt.Rows[0]["StringConection"] as string;
