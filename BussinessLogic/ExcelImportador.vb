@@ -4531,9 +4531,17 @@ Public Class ExcelImportadorManager
 
             'Dim pw_str = ".SistemaPronto." ' "asdfasdfasdf" ' //password
 
-            oWB.Unprotect(passwordLibro)
-            oWB.UnprotectSharing(passwordLibro)
             oXL.DisplayAlerts = False
+
+            oWB.Unprotect(passwordLibro)
+            'oWB.UnprotectSharing(passwordLibro)
+
+
+            For Each oSheet In oWB.Worksheets
+                oSheet.Unprotect(passwordHojas)
+            Next
+
+
             oWB.SaveAs(archivoDestino)
             oXL.Quit()
 
@@ -4767,7 +4775,7 @@ Public Class ExcelImportadorManager
 
 
 
-    Public Shared Function GetExcel(ByVal fileName As String, Optional ByVal SheetNumero As Integer = 1) As DataSet
+    Public Shared Function GetExcel(ByVal fileName As String, Optional ByVal SheetNumero As Integer = 1, Optional CorruptLoad As Microsoft.Office.Interop.Excel.XlCorruptLoad = Microsoft.Office.Interop.Excel.XlCorruptLoad.xlExtractData) As DataSet
         'traido de http://www.devcurry.com/2009/07/import-excel-data-into-aspnet-gridview_06.html
 
 
@@ -4807,7 +4815,8 @@ Public Class ExcelImportadorManager
                 oWB = oWBs.Open(fileName, Missing.Value, Missing.Value,
     Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
     Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
-    Missing.Value, Excel.XlCorruptLoad.xlExtractData)
+    Missing.Value,
+    CorruptLoad) 'a veces conviene usar xlNormalLoad 
 
                 'http://stackoverflow.com/questions/9062823/exception-when-opening-excel-file-in-c-sharp-using-interop?noredirect=1&lq=1
 

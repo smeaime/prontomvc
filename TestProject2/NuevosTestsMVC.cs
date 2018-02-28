@@ -174,6 +174,19 @@ namespace ProntoMVC.TestsMVC
             // s.ImportarFondoFijo(excel, scSQL, out mensajeError);
 
 
+            var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2, Microsoft.Office.Interop.Excel.XlCorruptLoad.xlNormalLoad);
+            var yxxx1 = ds2.Tables[0].Rows[0].ItemArray;
+            var yxxx2 = ds2.Tables[0].Rows[1].ItemArray;
+            var yxxx3 = ds2.Tables[0].Rows[2].ItemArray;
+
+
+            MigracionVB.Class1.ImportacionComprobantesFondoFijo2(ds2.Tables[0], scSQL, "", DateTime.Now, 0, 0);
+
+
+            return;
+
+
+
 
             ExcelImportadorManager.DesprotegerExcel(pFileName, pFileName2, "WE",".SistemaPronto.");
 
@@ -186,7 +199,6 @@ namespace ProntoMVC.TestsMVC
 
 
 
-            var ds2 = ExcelImportadorManager.GetExcel(pFileName, 2);
 
 
 
@@ -206,7 +218,6 @@ namespace ProntoMVC.TestsMVC
             
             //var m = new MigracionVB.Class1();
 
-            MigracionVB.Class1.ImportacionComprobantesFondoFijo2(ds2.Tables[0],scSQL , "", DateTime.Now, 0, 0);
             //jjj
 
 

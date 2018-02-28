@@ -13493,6 +13493,12 @@ usuario As String, ConexBDLmaster As String,
 
     End Function
 
+
+
+
+
+
+
     Shared Function ReadBarcode1D_ClearImage(ByVal fileName As String, ByVal page As Integer) As String
         'http://how-to.inliteresearch.com/barcode-reading-howto/read-barcodes-from-an-image-page/
 
