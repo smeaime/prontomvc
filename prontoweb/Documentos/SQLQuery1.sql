@@ -1,3 +1,7 @@
+exec Cuentas_TT
+Cuentas_TX_PorCodigo 1006
+
+
 
 select * from reclamocomentarios
 select * from empleados

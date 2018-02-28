@@ -726,7 +726,8 @@ Namespace Pronto.ERP.Bll
 
         <DataObjectMethod(DataObjectMethodType.Select, True)>
         Public Shared Function TraerFiltrado(ByVal SC As String, ByVal enumNombreSP_Completo As enumSPs, ByVal ParamArray Parametros() As Object) As System.Data.DataTable
-            Return GeneralDB.TraerDatos(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
+            'Return GeneralDB.TraerDatos(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
+            Return TraerDatos2(SC, enumNombreSP_Completo.ToString, Parametros).Tables(0)
         End Function
 
 

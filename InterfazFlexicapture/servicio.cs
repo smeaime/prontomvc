@@ -1074,871 +1074,871 @@ namespace ServicioMVC
 
 
 
-        public static void ImportacionComprobantesFondoFijo2(DataTable dt, string SC, string mArchivo, DateTime mFechaRecepcion, int mNumeroReferencia, int mIdPuntoVenta)
-        {
+    //    public static void ImportacionComprobantesFondoFijo2(DataTable dt, string SC, string mArchivo, DateTime mFechaRecepcion, int mNumeroReferencia, int mIdPuntoVenta)
+    //    {
 
-            /*
+    //        /*
             
-            // /////////////////////////////////////////////////////////////////
-            // /////////////////////////////////////////////////////////////////
-            //         'parametros de entrada
-            //         'mArchivo = .FileBrowser1(0).text
-            //         'mFechaRecepcion = .DTFields(0).Value
-            //         'mNumeroReferencia = Val(.Text1.text)
-            //         'If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
-            // globales que tomaba esta funcion. mover a globales del servicio
-            DateTime gblFechaUltimoCierre;
-            int glbIdMonedaDolar;
-            int glbIdUsuario;
-            bool glbPuntoVentaEnNumeroInternoCP;
-            // /////////////////////////////////////////////////////////////////
-            // /////////////////////////////////////////////////////////////////
-            object oAp;
-            //  As ComPronto.Aplicacion
-            object oCP = new ProntoMVC.Data.Models.ComprobanteProveedor();
-            object oPr;
-            //  As ComPronto.Proveedor
-            object oPar;
-            //  As ComPronto.Parametro
-            object oOP;
-            // As ComPronto.OrdenPago
-            object oRsAux1;
-            // As ADOR.Recordset
-            object oRsAux2;
-            // As ADOR.Recordset
-            object oForm;
-            // As Form
-            Excel.Application oEx;
-            bool mOk;
-            bool mConProblemas;
-            bool mTomarCuentaDePresupuesto;
-            string mComprobante;
-            string mCuit;
-            string mLetra;
-            string mBienesOServicios;
-            string mObservaciones;
-            string mRazonSocial;
-            string mIncrementarReferencia;
-            string mCondicionCompra;
-            string mCodProv;
-            string mNumeroCAI;
-            string mFecha1;
-            string mError;
-            string mCodObra;
-            string mInformacionAuxiliar;
-            string mCuitDefault;
-            string mCodigoCuentaGasto;
-            string mTipo;
-            string mItemPresupuestoObrasNodo;
-            string mMensaje;
-            string mActividad;
-            string mCuitPlanilla;
-            string mPuntosVentaAsociados;
-            string mNumeroCAE;
-            DateTime mFechaFactura;
-            DateTime mFechaVencimientoCAI;
-            int mIdMonedaPesos;
-            int mIdTipoComprobanteFacturaCompra;
-            int mIdUnidadPorUnidad;
-            int fl;
-            int mContador;
-            int mIdCuentaIvaCompras1;
-            int i;
-            int mIdUO;
-            int mvarProvincia;
-            int mIdTipoComprobante;
-            int mIdCodigoIva;
-            int mvarIBCondicion;
-            int mvarIdIBCondicion;
-            int mvarIGCondicion;
-            int mvarIdTipoRetencionGanancia;
-            int mvarPosicionCuentaIva;
-            long mIdProveedor;
-            long mNumeroComprobante1;
-            long mNumeroComprobante2;
-            long mCodigoCuenta;
-            long mCodigoCuentaFF;
-            long mNumeroOP;
-            long mIdOrdenPago;
-            long mAux1;
-            long mAux2;
-            long mNumeroRendicion;
-            long mIdCuenta;
-            long mIdCuenta1;
-            long mIdObra;
-            long mCodigoCuenta1;
-            long mIdCuentaFF;
-            long mIdCuentaGasto;
-            long mIdPresupuestoObrasNodo;
-            long mIdRubroContable;
-            long mIdActividad;
-            float mvarCotizacionDolar;
-            float mPorcentajeIVA;
-            double mTotalItem;
-            double mIVA1;
-            double mGravado;
-            double mNoGravado;
-            double mTotalBruto;
-            double mTotalIva1;
-            double mTotalComprobante;
-            double mTotalPercepcion;
-            double mTotalAjusteIVA;
-            double mAjusteIVA;
-            double mBruto;
-            double mPercepcion;
-            double mCantidad;
-            long[,] mIdCuentaIvaCompras;
-            float[,] mIVAComprasPorcentaje;
-            object mAux;
-
-
-
-            // On Error GoTo Mal
-            mPuntosVentaAsociados = "";
-            if (glbPuntoVentaEnNumeroInternoCP)
-            {
-                oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Empleados_TX_PorId, glbIdUsuario);
-                if ((oRsAux1.RecordCount > 0))
-                {
-                    mPuntosVentaAsociados = (IsNull(oRsAux1.PuntosVentaAsociados) ? "" : oRsAux1.PuntosVentaAsociados);
-                }
-
-                oRsAux1.Close;
-                if ((mPuntosVentaAsociados.Length == 0))
-                {
-                    throw new Exception("No tiene asignados puntos de venta para incorporar a los comprobantes importados");
-                }
-
-            }
-
-            // oForm = New frmPathPresto
-            // With oForm
-            //     .Id = 14
-            //     .Show vbModal
-            //       mOk = .Ok
-            //     If mOk Then
-            //         mArchivo = .FileBrowser1(0).text
-            //         mFechaRecepcion = .DTFields(0).Value
-            //         mNumeroReferencia = Val(.Text1.text)
-            //         If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
-            //     End If
-            // End With
-            // Unload oForm
-            //    oForm = Nothing
-            // If Not mOk Then Exit Sub
-            // If glbPuntoVentaEnNumeroInternoCP And mIdPuntoVenta = 0 Then
-            //     MsgBox "Debe elegir un punto de venta", vbExclamation
-            //     Return
-            // End If
-            // oAp = Aplicacion
-            mIncrementarReferencia = EntidadManager.BuscarClaveINI("IncrementarReferenciaEnImportacionDeComprobantes", SC, -1);
-            mCondicionCompra = EntidadManager.BuscarClaveINI("Condicion de compra default para fondos fijos", SC, -1);
-            mFecha1 = EntidadManager.BuscarClaveINI("Fecha recepcion igual fecha comprobante en fondo fijo", SC, -1);
-            mCuitDefault = EntidadManager.BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos", SC, -1);
-            ParametrosOriginalesRenglon p;
-            // oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
-            mIdMonedaPesos = p.p(ParametroManager.ePmOrg.IdMoneda);
-            mIdTipoComprobanteFacturaCompra = oRsAux1.IdTipoComprobanteFacturaCompra;
-            mIdUnidadPorUnidad = (IsNull(oRsAux1.IdUnidadPorUnidad) ? 0 : oRsAux1.IdUnidadPorUnidad);
-            gblFechaUltimoCierre = (IsNull(oRsAux1.FechaUltimoCierre) ? DateSerial(1980, 1, 1) : oRsAux1.FechaUltimoCierre);
-            // For i = 1 To 10
-            //     If Not IsNull(oRsAux1.IdCuentaIvaCompras" & i).Value) Then
-            //         mIdCuentaIvaCompras(i) = oRsAux1.IdCuentaIvaCompras" & i).Value Then '
-            //         mIVAComprasPorcentaje(i) = oRsAux1.IVAComprasPorcentaje" & i).Value
-            //     Else
-            //         mIdCuentaIvaCompras(i) = 0
-            //         mIVAComprasPorcentaje(i) = 0
-            //     End If
-            // Next
-            // oRsAux1.Close
-            mTomarCuentaDePresupuesto = false;
-            if ((!IsNull(mAux)
-                        && (mAux == "SI")))
-            {
-                mTomarCuentaDePresupuesto = true;
-            }
-
-            fl = 7;
-            mContador = 0;
-            mNumeroRendicion = 0;
-            mIdCuentaFF = 0;
-            string oForm_Label1;
-
-
-            ServicioMVC.servi s = new ServicioMVC.servi(SC);
-
-            while (true)
-            {
-                if (((dt.Rows[fl].Item[2].Trim().Length > 0)
-                            || ((dt.Rows[fl].Item[3].Trim().Length > 0)
-                            || ((dt.Rows[fl].Item[4].Trim().Length > 0)
-                            || ((dt.Rows[fl].Item[5].Trim().Length > 0)
-                            || ((dt.Rows[fl].Item[9].Trim().Length > 0)
-                            || (dt.Rows[fl].Item[10].Trim().Length > 0)))))))
-                {
-                    mConProblemas = false;
-                    if (((mNumeroRendicion == 0)
-                                && IsNumeric(dt.Rows[2].Item[16])))
-                    {
-                        mNumeroRendicion = dt.Rows[2].Item[16];
-                    }
-
-                    mContador = (mContador + 1);
-                    // oForm.Label2 = "Comprobante  " & dt.Rows(fl).Item(8)
-                    // oForm.Label3 = "" & mContador
-                    // DoEvents
-                    mTipo = dt.Rows[fl].Item[4];
-                    if ((dt.Rows[fl].Item[5].Length > 0))
-                    {
-                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mIdTipoComprobante " + dt.Rows[fl].Item[5]))));
-                        mIdTipoComprobante = dt.Rows[fl].Item[5];
-                    }
-                    else
-                    {
-                        mIdTipoComprobante = mIdTipoComprobanteFacturaCompra;
-                    }
-
-                    mLetra = dt.Rows[fl].Item[6].Trim();
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroComprobante1 " + dt.Rows[fl].Item[7]))));
-                    mNumeroComprobante1 = dt.Rows[fl].Item[7];
-                    if ((mNumeroComprobante1 > 9999))
-                    {
-                        mError = (mError + ("\r\n" + ("Fila "
-                                    + (fl + "  - El punto de venta no puede tener mas de 4 digitos."))));
-                        fl = (fl + 1);
-                        // TODO: Continue Do... Warning!!! not translated
-                        //  GoTo FinLoop
-                    }
-
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroComprobante2 " + dt.Rows[fl].Item[8]))));
-                    mNumeroComprobante2 = dt.Rows[fl].Item[8];
-                    if ((mNumeroComprobante2 > 99999999))
-                    {
-                        mError = (mError + ("\r\n" + ("Fila "
-                                    + (fl + "  - El numero de comprobante no puede tener mas de 8 digitos."))));
-                        fl = (fl + 1);
-                        // TODO: Continue Do... Warning!!! not translated
-                        //  GoTo FinLoop
-                    }
-
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mRazonSocial " + dt.Rows[fl].Item[9]))));
-                    mRazonSocial = dt.Rows[fl].Item[9].Substring(0, 50);
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCuit " + dt.Rows[fl].Item[10]))));
-                    mCuitPlanilla = dt.Rows[fl].Item[10];
-                    mCuit = mCuitPlanilla;
-                    if ((mCuit.Length != 13))
-                    {
-                        if ((mCuit.Length == 11))
-                        {
-                            //  mCuit = VBA.mId(mCuit, 1, 2) & "-" & VBA.mId(mCuit, 3, 8) & "-" & VBA.mId(mCuit, 11, 1)
-                        }
-                        else
-                        {
-                            mCuit = "";
-                        }
-
-                    }
-
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mFechaFactura " + dt.Rows[fl].Item[3]))));
-                    mFechaFactura = DateTime.Parse(dt.Rows[fl].Item[3]);
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroCAI " + dt.Rows[fl].Item[18]))));
-                    mNumeroCAI = dt.Rows[fl].Item[18];
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mFechaVencimientoCAI " + dt.Rows[fl].Item[19]))));
-                    if (IsDate(dt.Rows[fl].Item[19]))
-                    {
-                        mFechaVencimientoCAI = DateTime.Parse(dt.Rows[fl].Item[19]);
-                    }
-                    else
-                    {
-                        MinValue;
-                    }
-
-                    if ((mFecha1 == "SI"))
-                    {
-                        mFechaRecepcion = mFechaFactura;
-                    }
-
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCodObra " + dt.Rows[fl].Item[2]))));
-                    mCodObra = dt.Rows[fl].Item[2].Trim();
-                    mActividad = dt.Rows[fl].Item[23].Trim();
-                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroCAE " + dt.Rows[fl].Item[24]))));
-                    mNumeroCAE = dt.Rows[fl].Item[24];
-                    if ((mIdCuentaFF == 0))
-                    {
-                        if ((dt.Rows[2].Item[10].Length == 0))
-                        {
-                            throw new Exception("Debe definir la cuenta del fondo fijo");
-                        }
-
-                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCodigoCuentaFF " + dt.Rows[2].Item[10]))));
-                        mCodigoCuentaFF = double.Parse(dt.Rows[2].Item[10]);
-                        oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Cuentas_TX_PorCodigo, mCodigoCuentaFF);
-                        if ((oRsAux1.RecordCount > 0))
-                        {
-                            mIdCuentaFF = oRsAux1.Fields(0).Value;
-                        }
-                        else
-                        {
-                            mError = (mError + ("\r\n"
-                                        + (mTipo + (" "
-                                        + (mLetra + ("-"
-                                        + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                        + (mNumeroComprobante2.ToString.PadLeft(8, "0") + ", cuenta de fondo fijo inexistente")))))))));
-                            fl = (fl + 1);
-                            // TODO: Continue Do... Warning!!! not translated
-                            //  GoTo FinLoop
-                        }
-
-                        oRsAux1.Close;
-                    }
-
-                    mIdObra = 0;
-                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "Obras_TX_PorNumero", mCodObra);
-                    if ((oRsAux1.RecordCount > 0))
-                    {
-                        mIdObra = oRsAux1.IdObra;
-                    }
-                    else
-                    {
-                        mError = (mError + ("\r\n"
-                                    + (mTipo + (" "
-                                    + (mLetra + ("-"
-                                    + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                    + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                    + (fl + ("  - Obra "
-                                    + (mCodObra + " inexistente")))))))))))));
-                        fl = (fl + 1);
-                        // TODO: Continue Do... Warning!!! not translated
-                        //  GoTo FinLoop
-                    }
-
-                    oRsAux1.Close;
-                    if ((mFechaRecepcion > gblFechaUltimoCierre))
-                    {
-                        if ((mCuit.Length == 0))
-                        {
-                            mCuit = mCuitDefault;
-                        }
-
-                        if ((mCuit.Length == 0))
-                        {
-                            //                        comentado
-                        }
-                        else if (!FuncionesGenericasCSharp.CUITValido(mCuit))
-                        {
-                            mError = (mError + ("\r\n"
-                                        + (mTipo + (" "
-                                        + (mLetra + ("-"
-                                        + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                        + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                        + (fl + ("  - Cuit invalido  " + mCuit))))))))))));
-                            fl = (fl + 1);
-                            // TODO: Continue Do... Warning!!! not translated
-                            //  GoTo FinLoop
-                        }
-
-                        mIdActividad = 0;
-                        if ((mActividad.Length > 0))
-                        {
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "ActividadesProveedores_TX_PorDescripcion", mActividad);
-                            if ((oRsAux1.RecordCount > 0))
-                            {
-                                mIdActividad = oRsAux1.Fields(0).Value;
-                            }
-
-                            oRsAux1.Close;
-                        }
-
-                        mIdProveedor = 0;
-                        if ((mCuit.Length > 0))
-                        {
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Proveedores_TX_PorCuit, mCuit);
-                        }
-                        else
-                        {
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "Proveedores_TX_PorNombre", mRazonSocial);
-                        }
-
-                        if ((oRsAux1.RecordCount > 0))
-                        {
-                            mIdProveedor = oRsAux1.Fields(0).Value;
-                            mvarProvincia = (IsNull(oRsAux1.IdProvincia) ? 0 : oRsAux1.IdProvincia);
-                            mvarIBCondicion = (IsNull(oRsAux1.IBCondicion) ? 0 : oRsAux1.IBCondicion);
-                            mvarIdIBCondicion = (IsNull(oRsAux1.IdIBCondicionPorDefecto) ? 0 : oRsAux1.IdIBCondicionPorDefecto);
-                            mvarIGCondicion = (IsNull(oRsAux1.IGCondicion) ? 0 : oRsAux1.IGCondicion);
-                            mvarIdTipoRetencionGanancia = (IsNull(oRsAux1.IdTipoRetencionGanancia) ? 0 : oRsAux1.IdTipoRetencionGanancia);
-                            mBienesOServicios = (IsNull(oRsAux1.BienesOServicios) ? "B" : oRsAux1.BienesOServicios);
-                            mIdCodigoIva = (IsNull(oRsAux1.IdCodigoIva) ? 0 : oRsAux1.IdCodigoIva);
-                            if (((mIdActividad > 0)
-                                        && (mIdActividad != (IsNull(oRsAux1.IdActividad) ? 0 : oRsAux1.IdActividad))))
-                            {
-                                oPr = oAp.Proveedores.Item[-1];
-                                // With...
-                                oPr.Guardar;
-                                oPr = null;
-                            }
-
-                        }
-                        else
-                        {
-                            if ((mCuit.Length > 0))
-                            {
-                                if ((mLetra == "C"))
-                                {
-                                    mIdCodigoIva = 6;
-                                }
-                                else
-                                {
-                                    mIdCodigoIva = 1;
-                                }
-
-                            }
-                            else
-                            {
-                                mIdCodigoIva = 5;
-                            }
-
-                            oPr = oAp.Proveedores.Item[-1];
-                            // With...
-                            if ((mIdCodigoIva != 0))
-                            {
-
-                            }
-
-                            mRazonSocial.Substring(0, 50).CUIT = 1;
-                            "NO".RazonSocial = 1;
-                            oPr.Registro.Confirmado = 1;
-                            IdCodigoIva = mIdCodigoIva;
-                            if (IsNumeric(mCondicionCompra))
-                            {
-
-                            }
-
-                            IdCondicionCompra = int.Parse(mCondicionCompra);
-                            if ((mIdActividad != 0))
-                            {
-
-                            }
-
-                            IdActividad = mIdActividad;
-                            oPr.Guardar;
-                            mIdProveedor = oPr.Registro.Fields(0).Value;
-                            oPr = null;
-                            mvarProvincia = 0;
-                            mvarIBCondicion = 0;
-                            mvarIdIBCondicion = 0;
-                            mvarIGCondicion = 0;
-                            mvarIdTipoRetencionGanancia = 0;
-                            mBienesOServicios = "B";
-                        }
-
-                        oRsAux1.Close;
-                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "ComprobantesProveedores_TX_PorNumeroComprobante", mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante);
-                        if ((oRsAux1.RecordCount == 0))
-                        {
-                            mvarCotizacionDolar = Cotizacion(SC, mFechaFactura, glbIdMonedaDolar);
-                            if ((mvarCotizacionDolar == 0))
-                            {
-                                mConProblemas = true;
-                            }
-
-                            oCP = oAp.ComprobantesProveedores.Item[-1];
-                            // With...
-                            if ((mFechaFactura > mFechaRecepcion))
-                            {
-                                FechaRecepcion = mFechaFactura;
-                                mIdTipoComprobante.IdObra = mFechaFactura;
-                                oCP.IdTipoComprobante = mFechaFactura;
-                            }
-                            else
-                            {
-                                FechaRecepcion = mFechaRecepcion;
-                            }
-
-                            mNumeroComprobante2.NumeroRendicionFF = mNumeroRendicion;
-                            mNumeroComprobante1.NumeroComprobante2 = mNumeroRendicion;
-                            mLetra.NumeroComprobante1 = mNumeroRendicion;
-                            null.Letra = mNumeroRendicion;
-                            mIdCuentaFF.IdOrdenPago = mNumeroRendicion;
-                            null.IdCuenta = mNumeroRendicion;
-                            mIdProveedor.IdProveedor = mNumeroRendicion;
-                            mvarCotizacionDolar.IdProveedorEventual = mNumeroRendicion;
-                            1.CotizacionDolar = mNumeroRendicion;
-                            mIdMonedaPesos.CotizacionMoneda = mNumeroRendicion;
-                            mFechaFactura.IdMoneda = mNumeroRendicion;
-                            mFechaFactura.FechaAsignacionPresupuesto = mNumeroRendicion;
-                            FechaVencimiento = mNumeroRendicion;
-                            if ((((mvarIBCondicion == 2)
-                                        || (mvarIBCondicion == 3))
-                                        && (mvarIdIBCondicion != 0)))
-                            {
-                                IdIBCondicion = mvarIdIBCondicion;
-                            }
-                            else
-                            {
-                                IdIBCondicion = null;
-                            }
-
-                            if ((((mvarIGCondicion == 2)
-                                        || (mvarIGCondicion == 3))
-                                        && (mvarIdTipoRetencionGanancia != 0)))
-                            {
-                                IdTipoRetencionGanancia = mvarIdTipoRetencionGanancia;
-                            }
-                            else
-                            {
-                                IdTipoRetencionGanancia = null;
-                            }
-
-                            null.NumeroCAI = mNumeroCAI;
-                            mvarProvincia.BienesOServicios = mNumeroCAI;
-                            IdProvinciaDestino = mNumeroCAI;
-                            MinValue;
-                            FechaVencimientoCAI = mFechaVencimientoCAI;
-                            FechaVencimientoCAI = null;
-                            "O".InformacionAuxiliar = mInformacionAuxiliar;
-                            DestinoPago = mInformacionAuxiliar;
-                            if ((mIdCodigoIva != 0))
-                            {
-
-                            }
-
-                            mIdCodigoIva.CircuitoFirmasCompleto = "SI";
-                            IdCodigoIva = "SI";
-                            if ((mIdPuntoVenta != 0))
-                            {
-
-                            }
-
-                            IdPuntoVenta = mIdPuntoVenta;
-                            if ((mNumeroCAE.Length > 0))
-                            {
-
-                            }
-
-                            NumeroCAE = mNumeroCAE;
-                        }
-
-                        mTotalBruto = 0;
-                        mTotalIva1 = 0;
-                        mTotalPercepcion = 0;
-                        mTotalComprobante = 0;
-                        mTotalAjusteIVA = 0;
-                        mAjusteIVA = 0;
-                        while (((dt.Rows[fl].Item[2].Trim().Length > 0)
-                                    && ((mLetra == dt.Rows[fl].Item[6].Trim())
-                                    && ((mNumeroComprobante1 == dt.Rows[fl].Item[7])
-                                    && ((mNumeroComprobante2 == dt.Rows[fl].Item[8])
-                                    && ((mCuit == dt.Rows[fl].Item[10])
-                                    || ((mCuitPlanilla == dt.Rows[fl].Item[10])
-                                    || (mCuit == mCuitDefault))))))))
-                        {
-                            mCodigoCuentaGasto = dt.Rows[fl].Item[22];
-                            mItemPresupuestoObrasNodo = dt.Rows[fl].Item[24].Trim();
-                            mCantidad = double.Parse(dt.Rows[fl].Item[25]);
-                            mIdCuentaGasto = 0;
-                            mIdCuenta = 0;
-                            mCodigoCuenta = 0;
-                            mIdRubroContable = 0;
-                            if ((mCodigoCuentaGasto.Length > 0))
-                            {
-                                oRsAux1 = EntidadManager.TraerFiltrado(SC, "CuentasGastos_TX_PorCodigo2", mCodigoCuentaGasto);
-                                if ((oRsAux1.RecordCount > 0))
-                                {
-                                    mIdCuentaGasto = oRsAux1.IdCuentaGasto;
-                                    oRsAux1.Close;
-                                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorObraCuentaGasto", mIdObra, mIdCuentaGasto);
-                                    if ((oRsAux1.RecordCount > 0))
-                                    {
-                                        mIdCuenta = oRsAux1.IdCuenta;
-                                        mCodigoCuenta = oRsAux1.Codigo;
-                                        mIdRubroContable = (IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero);
-                                        if (((mIdRubroContable == 0)
-                                                    && !IsNull(oRsAux1.CodigoRubroContable)))
-                                        {
-                                            oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.CodigoRubroContable, mIdObra, "SI");
-                                            if ((oRsAux2.RecordCount > 0))
-                                            {
-                                                mIdRubroContable = oRsAux2.Fields(0).Value;
-                                            }
-
-                                            oRsAux2.Close;
-                                        }
-
-                                    }
-                                    else if (!mTomarCuentaDePresupuesto)
-                                    {
-                                        mError = (mError + ("\r\n"
-                                                    + (mTipo + (" "
-                                                    + (mLetra + ("-"
-                                                    + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                                    + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                                    + (fl + ("  - Cuenta de gasto codigo "
-                                                    + (mCodigoCuentaGasto + " inexistente")))))))))))));
-                                        fl = (fl + 1);
-                                        // TODO: Continue Do... Warning!!! not translated
-                                        //  GoTo FinLoop
-                                    }
-
-                                }
-                                else
-                                {
-                                    oRsAux1.Close;
-                                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorCodigo", mCodigoCuentaGasto);
-                                    if ((oRsAux1.RecordCount > 0))
-                                    {
-                                        mIdCuenta = oRsAux1.IdCuenta;
-                                        mCodigoCuenta = oRsAux1.Codigo;
-                                        mIdRubroContable = (IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero);
-                                        if (((mIdRubroContable == 0)
-                                                    && !IsNull(oRsAux1.CodigoRubroContable)))
-                                        {
-                                            oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.CodigoRubroContable, mIdObra, "SI");
-                                            if ((oRsAux2.RecordCount > 0))
-                                            {
-                                                mIdRubroContable = oRsAux2.Fields(0).Value;
-                                            }
-
-                                            oRsAux2.Close;
-                                        }
-
-                                    }
-                                    else if (!mTomarCuentaDePresupuesto)
-                                    {
-                                        mError = (mError + ("\r\n"
-                                                    + (mTipo + (" "
-                                                    + (mLetra + ("-"
-                                                    + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                                    + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                                    + (fl + "  - Cuenta contable inexistente")))))))))));
-                                        fl = (fl + 1);
-                                        // TODO: Continue Do... Warning!!! not translated
-                                        //  GoTo FinLoop
-                                    }
-
-                                }
-
-                                oRsAux1.Close;
-                            }
-
-                            mIdPresupuestoObrasNodo = 0;
-                            if ((mItemPresupuestoObrasNodo.Length > 0))
-                            {
-                                oRsAux1 = EntidadManager.TraerFiltrado(SC, "PresupuestoObrasNodos_TX_PorItem", mItemPresupuestoObrasNodo, mIdObra);
-                                if ((oRsAux1.RecordCount == 1))
-                                {
-                                    mIdPresupuestoObrasNodo = oRsAux1.IdPresupuestoObrasNodo;
-                                    if (((IsNull(oRsAux1.IdCuenta) ? 0 : oRsAux1.IdCuenta) > 0))
-                                    {
-                                        mIdCuenta = (IsNull(oRsAux1.IdCuenta) ? 0 : oRsAux1.IdCuenta);
-                                    }
-
-                                }
-
-                                oRsAux1.Close;
-                            }
-
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorId", mIdCuenta);
-                            if ((oRsAux1.RecordCount > 0))
-                            {
-                                if ((((IsNull(oRsAux1.ImputarAPresupuestoDeObra) ? "NO" : oRsAux1.ImputarAPresupuestoDeObra) == "NO")
-                                            && !mTomarCuentaDePresupuesto))
-                                {
-                                    mIdPresupuestoObrasNodo = 0;
-                                }
-
-                                mCodigoCuenta = oRsAux1.Codigo;
-                                if (((IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero) > 0))
-                                {
-                                    mIdRubroContable = oRsAux1.IdRubroForminanciero;
-                                }
-
-                            }
-                            else
-                            {
-                                mError = (mError + ("\r\n"
-                                            + (mTipo + (" "
-                                            + (mLetra + ("-"
-                                            + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                            + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                            + (fl + "  - Cuenta contable inexistente")))))))))));
-                                fl = (fl + 1);
-                                // TODO: Continue Do... Warning!!! not translated
-                                //  GoTo FinLoop
-                            }
-
-                            oRsAux1.Close;
-                            oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mBruto " + dt.Rows[fl].Item[13]))));
-                            mBruto = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[13])));
-                            oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mIva1 " + dt.Rows[fl].Item[14]))));
-                            mIVA1 = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[14])), 4);
-                            oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mPercepcion " + dt.Rows[fl].Item[15]))));
-                            mPercepcion = Math.Abs(Convert.ToDouble(double.Parse(dt.Rows[fl].Item[15])));
-                            oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mTotalItem " + dt.Rows[fl].Item[16]))));
-                            mTotalItem = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[16])), 2);
-                            mObservaciones = ("Rendicion  "
-                                        + (mNumeroRendicion + ("\r\n"
-                                        + (dt.Rows[fl].Item[20] + "\r\n"))));
-                            mTotalBruto = (mTotalBruto + mBruto);
-                            mTotalIva1 = (mTotalIva1 + mIVA1);
-                            mTotalPercepcion = (mTotalPercepcion + mPercepcion);
-                            mTotalComprobante = (mTotalComprobante + mTotalItem);
-                            mTotalAjusteIVA = (mTotalAjusteIVA + mAjusteIVA);
-                            mPorcentajeIVA = 0;
-                            oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mPorcentajeIVA " + dt.Rows[fl].Item[11]))));
-                            if (((mIVA1 != 0)
-                                        && (mBruto != 0)))
-                            {
-                                mPorcentajeIVA = dt.Rows[fl].Item[11];
-                            }
-
-                            mIdCuentaIvaCompras1 = 0;
-                            mvarPosicionCuentaIva = 1;
-                            if ((mPorcentajeIVA != 0))
-                            {
-                                for (i = 1; (i <= 10); i++)
-                                {
-                                    if ((mIVAComprasPorcentaje[i] == mPorcentajeIVA))
-                                    {
-                                        mIdCuentaIvaCompras1 = mIdCuentaIvaCompras[i];
-                                        mvarPosicionCuentaIva = i;
-                                        break;
-                                    }
-
-                                }
-
-                            }
-
-                            if (((mIVA1 != 0)
-                                        && (mIdCuentaIvaCompras1 == 0)))
-                            {
-                                mError = (mError + ("\r\n"
-                                            + (mTipo + (" "
-                                            + (mLetra + ("-"
-                                            + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                            + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                            + (fl + ("  - No se encontro el porcentaje de iva " + mPorcentajeIVA))))))))))));
-                                fl = (fl + 1);
-                                // TODO: Continue Do... Warning!!! not translated
-                                //  GoTo FinLoop
-                            }
-
-                            object oCPdet = new ProntoMVC.Data.Models.DetalleComprobantesProveedore();
-                            oCP.DetalleComprobantesProveedores.Add(oCPdet);
-                            // With...
-                            if ((mIdCuentaIvaCompras1 != 0))
-                            {
-                                CallByName(oCPdet, ("IdCuentaIvaCompras" + mvarPosicionCuentaIva), CallType.Set, mIdCuentaIvaCompras1);
-                                "NO".IdCuentaIvaCompras10 = 0;
-                                0.AplicarIVA9 = 0;
-                                0.ImporteIVA9 = 0;
-                                null.IVAComprasPorcentaje9 = 0;
-                                "NO".IdCuentaIvaCompras9 = 0;
-                                0.AplicarIVA8 = 0;
-                                0.ImporteIVA8 = 0;
-                                null.IVAComprasPorcentaje8 = 0;
-                                "NO".IdCuentaIvaCompras8 = 0;
-                                0.AplicarIVA7 = 0;
-                                0.ImporteIVA7 = 0;
-                                null.IVAComprasPorcentaje7 = 0;
-                                "NO".IdCuentaIvaCompras7 = 0;
-                                0.AplicarIVA6 = 0;
-                                0.ImporteIVA6 = 0;
-                                null.IVAComprasPorcentaje6 = 0;
-                                "NO".IdCuentaIvaCompras6 = 0;
-                                0.AplicarIVA5 = 0;
-                                0.ImporteIVA5 = 0;
-                                null.IVAComprasPorcentaje5 = 0;
-                                "NO".IdCuentaIvaCompras5 = 0;
-                                0.AplicarIVA4 = 0;
-                                0.ImporteIVA4 = 0;
-                                null.IVAComprasPorcentaje4 = 0;
-                                "NO".IdCuentaIvaCompras4 = 0;
-                                0.AplicarIVA3 = 0;
-                                0.ImporteIVA3 = 0;
-                                null.IVAComprasPorcentaje3 = 0;
-                                "NO".IdCuentaIvaCompras3 = 0;
-                                0.AplicarIVA2 = 0;
-                                0.ImporteIVA2 = 0;
-                                null.IVAComprasPorcentaje2 = 0;
-                                "NO".IdCuentaIvaCompras2 = 0;
-                                0.AplicarIVA1 = 0;
-                                0.ImporteIVA1 = 0;
-                                null.IVAComprasPorcentaje1 = 0;
-                                mBruto.IdCuentaIvaCompras1 = 0;
-                                mCodigoCuenta.Importe = 0;
-                                mIdCuenta.CodigoCuenta = 0;
-                                mIdCuentaGasto.IdCuenta = 0;
-                                mIdObra.IdCuentaGasto = 0;
-                                oCPdet.IdObra = 0;
-                                CallByName(oCPdet, ("IVAComprasPorcentaje" + mvarPosicionCuentaIva), CallType.Set, mPorcentajeIVA);
-                                CallByName(oCPdet, ("ImporteIVA" + mvarPosicionCuentaIva), CallType.Set, Math.Round(mIVA1, 2));
-                                CallByName(oCPdet, ("AplicarIVA" + mvarPosicionCuentaIva), CallType.Set, "SI");
-                            }
-
-                            0.AplicarIVA10 = "NO";
-                            ImporteIVA10 = "NO";
-                            if ((mIdPresupuestoObrasNodo != 0))
-                            {
-
-                            }
-
-                            IdPresupuestoObrasNodo = mIdPresupuestoObrasNodo;
-                            if ((mIdRubroContable > 0))
-                            {
-
-                            }
-
-                            mIdRubroContable.Cantidad = mCantidad;
-                            IdRubroContable = mCantidad;
-                            fl = (fl + 1);
-                        }
-
-                        // With...
-                        if ((mIncrementarReferencia != "SI"))
-                        {
-
-                        }
-
-                        0.AjusteIVA = mObservaciones;
-                        0.TotalIvaNoDiscriminado = mObservaciones;
-                        mTotalComprobante.PorcentajeBonificacion = mObservaciones;
-                        0.TotalComprobante = mObservaciones;
-                        0.TotalBonificacion = mObservaciones;
-                        mTotalIva1.TotalIva2 = mObservaciones;
-                        mTotalBruto.TotalIva1 = mObservaciones;
-                        "NO".TotalBruto = mObservaciones;
-                        mNumeroReferencia.Confirmado = mObservaciones;
-                        oCP.NumeroReferencia = mObservaciones;
-                        AutoincrementarNumeroReferencia = "NO";
-                        s.Grabar_ComprobanteProveedor(oCP, IdUsuario);
-                        mNumeroReferencia = (mNumeroReferencia + 1);
-                    }
-                    else
-                    {
-                        fl = (fl + 1);
-                    }
-
-                }
-                else
-                {
-                    mError = (mError + ("\r\n"
-                                + (mTipo + (" "
-                                + (mLetra + ("-"
-                                + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
-                                + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
-                                + (fl + ("  - Fecha es anterior al ultimo cierre contable : " + mComprobante))))))))))));
-                    fl = (fl + 1);
-                }
-
-                break; //Warning!!! Review that break works as 'Exit Do' as it could be in a nested instruction like switch
-                Using;
-            }
-
-
-    */
-
-        }
+    //        // /////////////////////////////////////////////////////////////////
+    //        // /////////////////////////////////////////////////////////////////
+    //        //         'parametros de entrada
+    //        //         'mArchivo = .FileBrowser1(0).text
+    //        //         'mFechaRecepcion = .DTFields(0).Value
+    //        //         'mNumeroReferencia = Val(.Text1.text)
+    //        //         'If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
+    //        // globales que tomaba esta funcion. mover a globales del servicio
+    //        DateTime gblFechaUltimoCierre;
+    //        int glbIdMonedaDolar;
+    //        int glbIdUsuario;
+    //        bool glbPuntoVentaEnNumeroInternoCP;
+    //        // /////////////////////////////////////////////////////////////////
+    //        // /////////////////////////////////////////////////////////////////
+    //        object oAp;
+    //        //  As ComPronto.Aplicacion
+    //        object oCP = new ProntoMVC.Data.Models.ComprobanteProveedor();
+    //        object oPr;
+    //        //  As ComPronto.Proveedor
+    //        object oPar;
+    //        //  As ComPronto.Parametro
+    //        object oOP;
+    //        // As ComPronto.OrdenPago
+    //        object oRsAux1;
+    //        // As ADOR.Recordset
+    //        object oRsAux2;
+    //        // As ADOR.Recordset
+    //        object oForm;
+    //        // As Form
+    //        Excel.Application oEx;
+    //        bool mOk;
+    //        bool mConProblemas;
+    //        bool mTomarCuentaDePresupuesto;
+    //        string mComprobante;
+    //        string mCuit;
+    //        string mLetra;
+    //        string mBienesOServicios;
+    //        string mObservaciones;
+    //        string mRazonSocial;
+    //        string mIncrementarReferencia;
+    //        string mCondicionCompra;
+    //        string mCodProv;
+    //        string mNumeroCAI;
+    //        string mFecha1;
+    //        string mError;
+    //        string mCodObra;
+    //        string mInformacionAuxiliar;
+    //        string mCuitDefault;
+    //        string mCodigoCuentaGasto;
+    //        string mTipo;
+    //        string mItemPresupuestoObrasNodo;
+    //        string mMensaje;
+    //        string mActividad;
+    //        string mCuitPlanilla;
+    //        string mPuntosVentaAsociados;
+    //        string mNumeroCAE;
+    //        DateTime mFechaFactura;
+    //        DateTime mFechaVencimientoCAI;
+    //        int mIdMonedaPesos;
+    //        int mIdTipoComprobanteFacturaCompra;
+    //        int mIdUnidadPorUnidad;
+    //        int fl;
+    //        int mContador;
+    //        int mIdCuentaIvaCompras1;
+    //        int i;
+    //        int mIdUO;
+    //        int mvarProvincia;
+    //        int mIdTipoComprobante;
+    //        int mIdCodigoIva;
+    //        int mvarIBCondicion;
+    //        int mvarIdIBCondicion;
+    //        int mvarIGCondicion;
+    //        int mvarIdTipoRetencionGanancia;
+    //        int mvarPosicionCuentaIva;
+    //        long mIdProveedor;
+    //        long mNumeroComprobante1;
+    //        long mNumeroComprobante2;
+    //        long mCodigoCuenta;
+    //        long mCodigoCuentaFF;
+    //        long mNumeroOP;
+    //        long mIdOrdenPago;
+    //        long mAux1;
+    //        long mAux2;
+    //        long mNumeroRendicion;
+    //        long mIdCuenta;
+    //        long mIdCuenta1;
+    //        long mIdObra;
+    //        long mCodigoCuenta1;
+    //        long mIdCuentaFF;
+    //        long mIdCuentaGasto;
+    //        long mIdPresupuestoObrasNodo;
+    //        long mIdRubroContable;
+    //        long mIdActividad;
+    //        float mvarCotizacionDolar;
+    //        float mPorcentajeIVA;
+    //        double mTotalItem;
+    //        double mIVA1;
+    //        double mGravado;
+    //        double mNoGravado;
+    //        double mTotalBruto;
+    //        double mTotalIva1;
+    //        double mTotalComprobante;
+    //        double mTotalPercepcion;
+    //        double mTotalAjusteIVA;
+    //        double mAjusteIVA;
+    //        double mBruto;
+    //        double mPercepcion;
+    //        double mCantidad;
+    //        long[,] mIdCuentaIvaCompras;
+    //        float[,] mIVAComprasPorcentaje;
+    //        object mAux;
+
+
+
+    //        // On Error GoTo Mal
+    //        mPuntosVentaAsociados = "";
+    //        if (glbPuntoVentaEnNumeroInternoCP)
+    //        {
+    //            oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Empleados_TX_PorId, glbIdUsuario);
+    //            if ((oRsAux1.RecordCount > 0))
+    //            {
+    //                mPuntosVentaAsociados = (IsNull(oRsAux1.PuntosVentaAsociados) ? "" : oRsAux1.PuntosVentaAsociados);
+    //            }
+
+    //            oRsAux1.Close;
+    //            if ((mPuntosVentaAsociados.Length == 0))
+    //            {
+    //                throw new Exception("No tiene asignados puntos de venta para incorporar a los comprobantes importados");
+    //            }
+
+    //        }
+
+    //        // oForm = New frmPathPresto
+    //        // With oForm
+    //        //     .Id = 14
+    //        //     .Show vbModal
+    //        //       mOk = .Ok
+    //        //     If mOk Then
+    //        //         mArchivo = .FileBrowser1(0).text
+    //        //         mFechaRecepcion = .DTFields(0).Value
+    //        //         mNumeroReferencia = Val(.Text1.text)
+    //        //         If IsNumeric(.dcfields(0).BoundText) Then mIdPuntoVenta = .dcfields(0).BoundText
+    //        //     End If
+    //        // End With
+    //        // Unload oForm
+    //        //    oForm = Nothing
+    //        // If Not mOk Then Exit Sub
+    //        // If glbPuntoVentaEnNumeroInternoCP And mIdPuntoVenta = 0 Then
+    //        //     MsgBox "Debe elegir un punto de venta", vbExclamation
+    //        //     Return
+    //        // End If
+    //        // oAp = Aplicacion
+    //        mIncrementarReferencia = EntidadManager.BuscarClaveINI("IncrementarReferenciaEnImportacionDeComprobantes", SC, -1);
+    //        mCondicionCompra = EntidadManager.BuscarClaveINI("Condicion de compra default para fondos fijos", SC, -1);
+    //        mFecha1 = EntidadManager.BuscarClaveINI("Fecha recepcion igual fecha comprobante en fondo fijo", SC, -1);
+    //        mCuitDefault = EntidadManager.BuscarClaveINI("Cuit por defecto en la importacion de fondos fijos", SC, -1);
+    //        ParametrosOriginalesRenglon p;
+    //        // oRsAux1 = oAp.Parametros.TraerFiltrado("_PorId", 1)
+    //        mIdMonedaPesos = p.p(ParametroManager.ePmOrg.IdMoneda);
+    //        mIdTipoComprobanteFacturaCompra = oRsAux1.IdTipoComprobanteFacturaCompra;
+    //        mIdUnidadPorUnidad = (IsNull(oRsAux1.IdUnidadPorUnidad) ? 0 : oRsAux1.IdUnidadPorUnidad);
+    //        gblFechaUltimoCierre = (IsNull(oRsAux1.FechaUltimoCierre) ? DateSerial(1980, 1, 1) : oRsAux1.FechaUltimoCierre);
+    //        // For i = 1 To 10
+    //        //     If Not IsNull(oRsAux1.IdCuentaIvaCompras" & i).Value) Then
+    //        //         mIdCuentaIvaCompras(i) = oRsAux1.IdCuentaIvaCompras" & i).Value Then '
+    //        //         mIVAComprasPorcentaje(i) = oRsAux1.IVAComprasPorcentaje" & i).Value
+    //        //     Else
+    //        //         mIdCuentaIvaCompras(i) = 0
+    //        //         mIVAComprasPorcentaje(i) = 0
+    //        //     End If
+    //        // Next
+    //        // oRsAux1.Close
+    //        mTomarCuentaDePresupuesto = false;
+    //        if ((!IsNull(mAux)
+    //                    && (mAux == "SI")))
+    //        {
+    //            mTomarCuentaDePresupuesto = true;
+    //        }
+
+    //        fl = 7;
+    //        mContador = 0;
+    //        mNumeroRendicion = 0;
+    //        mIdCuentaFF = 0;
+    //        string oForm_Label1;
+
+
+    //        ServicioMVC.servi s = new ServicioMVC.servi(SC);
+
+    //        while (true)
+    //        {
+    //            if (((dt.Rows[fl].Item[2].Trim().Length > 0)
+    //                        || ((dt.Rows[fl].Item[3].Trim().Length > 0)
+    //                        || ((dt.Rows[fl].Item[4].Trim().Length > 0)
+    //                        || ((dt.Rows[fl].Item[5].Trim().Length > 0)
+    //                        || ((dt.Rows[fl].Item[9].Trim().Length > 0)
+    //                        || (dt.Rows[fl].Item[10].Trim().Length > 0)))))))
+    //            {
+    //                mConProblemas = false;
+    //                if (((mNumeroRendicion == 0)
+    //                            && IsNumeric(dt.Rows[2].Item[16])))
+    //                {
+    //                    mNumeroRendicion = dt.Rows[2].Item[16];
+    //                }
+
+    //                mContador = (mContador + 1);
+    //                // oForm.Label2 = "Comprobante  " & dt.Rows(fl).Item(8)
+    //                // oForm.Label3 = "" & mContador
+    //                // DoEvents
+    //                mTipo = dt.Rows[fl].Item[4];
+    //                if ((dt.Rows[fl].Item[5].Length > 0))
+    //                {
+    //                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mIdTipoComprobante " + dt.Rows[fl].Item[5]))));
+    //                    mIdTipoComprobante = dt.Rows[fl].Item[5];
+    //                }
+    //                else
+    //                {
+    //                    mIdTipoComprobante = mIdTipoComprobanteFacturaCompra;
+    //                }
+
+    //                mLetra = dt.Rows[fl].Item[6].Trim();
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroComprobante1 " + dt.Rows[fl].Item[7]))));
+    //                mNumeroComprobante1 = dt.Rows[fl].Item[7];
+    //                if ((mNumeroComprobante1 > 9999))
+    //                {
+    //                    mError = (mError + ("\r\n" + ("Fila "
+    //                                + (fl + "  - El punto de venta no puede tener mas de 4 digitos."))));
+    //                    fl = (fl + 1);
+    //                    // TODO: Continue Do... Warning!!! not translated
+    //                    //  GoTo FinLoop
+    //                }
+
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroComprobante2 " + dt.Rows[fl].Item[8]))));
+    //                mNumeroComprobante2 = dt.Rows[fl].Item[8];
+    //                if ((mNumeroComprobante2 > 99999999))
+    //                {
+    //                    mError = (mError + ("\r\n" + ("Fila "
+    //                                + (fl + "  - El numero de comprobante no puede tener mas de 8 digitos."))));
+    //                    fl = (fl + 1);
+    //                    // TODO: Continue Do... Warning!!! not translated
+    //                    //  GoTo FinLoop
+    //                }
+
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mRazonSocial " + dt.Rows[fl].Item[9]))));
+    //                mRazonSocial = dt.Rows[fl].Item[9].Substring(0, 50);
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCuit " + dt.Rows[fl].Item[10]))));
+    //                mCuitPlanilla = dt.Rows[fl].Item[10];
+    //                mCuit = mCuitPlanilla;
+    //                if ((mCuit.Length != 13))
+    //                {
+    //                    if ((mCuit.Length == 11))
+    //                    {
+    //                        //  mCuit = VBA.mId(mCuit, 1, 2) & "-" & VBA.mId(mCuit, 3, 8) & "-" & VBA.mId(mCuit, 11, 1)
+    //                    }
+    //                    else
+    //                    {
+    //                        mCuit = "";
+    //                    }
+
+    //                }
+
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mFechaFactura " + dt.Rows[fl].Item[3]))));
+    //                mFechaFactura = DateTime.Parse(dt.Rows[fl].Item[3]);
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroCAI " + dt.Rows[fl].Item[18]))));
+    //                mNumeroCAI = dt.Rows[fl].Item[18];
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mFechaVencimientoCAI " + dt.Rows[fl].Item[19]))));
+    //                if (IsDate(dt.Rows[fl].Item[19]))
+    //                {
+    //                    mFechaVencimientoCAI = DateTime.Parse(dt.Rows[fl].Item[19]);
+    //                }
+    //                else
+    //                {
+    //                    MinValue;
+    //                }
+
+    //                if ((mFecha1 == "SI"))
+    //                {
+    //                    mFechaRecepcion = mFechaFactura;
+    //                }
+
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCodObra " + dt.Rows[fl].Item[2]))));
+    //                mCodObra = dt.Rows[fl].Item[2].Trim();
+    //                mActividad = dt.Rows[fl].Item[23].Trim();
+    //                oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mNumeroCAE " + dt.Rows[fl].Item[24]))));
+    //                mNumeroCAE = dt.Rows[fl].Item[24];
+    //                if ((mIdCuentaFF == 0))
+    //                {
+    //                    if ((dt.Rows[2].Item[10].Length == 0))
+    //                    {
+    //                        throw new Exception("Debe definir la cuenta del fondo fijo");
+    //                    }
+
+    //                    oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mCodigoCuentaFF " + dt.Rows[2].Item[10]))));
+    //                    mCodigoCuentaFF = double.Parse(dt.Rows[2].Item[10]);
+    //                    oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Cuentas_TX_PorCodigo, mCodigoCuentaFF);
+    //                    if ((oRsAux1.RecordCount > 0))
+    //                    {
+    //                        mIdCuentaFF = oRsAux1.Fields(0).Value;
+    //                    }
+    //                    else
+    //                    {
+    //                        mError = (mError + ("\r\n"
+    //                                    + (mTipo + (" "
+    //                                    + (mLetra + ("-"
+    //                                    + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                    + (mNumeroComprobante2.ToString.PadLeft(8, "0") + ", cuenta de fondo fijo inexistente")))))))));
+    //                        fl = (fl + 1);
+    //                        // TODO: Continue Do... Warning!!! not translated
+    //                        //  GoTo FinLoop
+    //                    }
+
+    //                    oRsAux1.Close;
+    //                }
+
+    //                mIdObra = 0;
+    //                oRsAux1 = EntidadManager.TraerFiltrado(SC, "Obras_TX_PorNumero", mCodObra);
+    //                if ((oRsAux1.RecordCount > 0))
+    //                {
+    //                    mIdObra = oRsAux1.IdObra;
+    //                }
+    //                else
+    //                {
+    //                    mError = (mError + ("\r\n"
+    //                                + (mTipo + (" "
+    //                                + (mLetra + ("-"
+    //                                + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                + (fl + ("  - Obra "
+    //                                + (mCodObra + " inexistente")))))))))))));
+    //                    fl = (fl + 1);
+    //                    // TODO: Continue Do... Warning!!! not translated
+    //                    //  GoTo FinLoop
+    //                }
+
+    //                oRsAux1.Close;
+    //                if ((mFechaRecepcion > gblFechaUltimoCierre))
+    //                {
+    //                    if ((mCuit.Length == 0))
+    //                    {
+    //                        mCuit = mCuitDefault;
+    //                    }
+
+    //                    if ((mCuit.Length == 0))
+    //                    {
+    //                        //                        comentado
+    //                    }
+    //                    else if (!FuncionesGenericasCSharp.CUITValido(mCuit))
+    //                    {
+    //                        mError = (mError + ("\r\n"
+    //                                    + (mTipo + (" "
+    //                                    + (mLetra + ("-"
+    //                                    + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                    + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                    + (fl + ("  - Cuit invalido  " + mCuit))))))))))));
+    //                        fl = (fl + 1);
+    //                        // TODO: Continue Do... Warning!!! not translated
+    //                        //  GoTo FinLoop
+    //                    }
+
+    //                    mIdActividad = 0;
+    //                    if ((mActividad.Length > 0))
+    //                    {
+    //                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "ActividadesProveedores_TX_PorDescripcion", mActividad);
+    //                        if ((oRsAux1.RecordCount > 0))
+    //                        {
+    //                            mIdActividad = oRsAux1.Fields(0).Value;
+    //                        }
+
+    //                        oRsAux1.Close;
+    //                    }
+
+    //                    mIdProveedor = 0;
+    //                    if ((mCuit.Length > 0))
+    //                    {
+    //                        oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Proveedores_TX_PorCuit, mCuit);
+    //                    }
+    //                    else
+    //                    {
+    //                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "Proveedores_TX_PorNombre", mRazonSocial);
+    //                    }
+
+    //                    if ((oRsAux1.RecordCount > 0))
+    //                    {
+    //                        mIdProveedor = oRsAux1.Fields(0).Value;
+    //                        mvarProvincia = (IsNull(oRsAux1.IdProvincia) ? 0 : oRsAux1.IdProvincia);
+    //                        mvarIBCondicion = (IsNull(oRsAux1.IBCondicion) ? 0 : oRsAux1.IBCondicion);
+    //                        mvarIdIBCondicion = (IsNull(oRsAux1.IdIBCondicionPorDefecto) ? 0 : oRsAux1.IdIBCondicionPorDefecto);
+    //                        mvarIGCondicion = (IsNull(oRsAux1.IGCondicion) ? 0 : oRsAux1.IGCondicion);
+    //                        mvarIdTipoRetencionGanancia = (IsNull(oRsAux1.IdTipoRetencionGanancia) ? 0 : oRsAux1.IdTipoRetencionGanancia);
+    //                        mBienesOServicios = (IsNull(oRsAux1.BienesOServicios) ? "B" : oRsAux1.BienesOServicios);
+    //                        mIdCodigoIva = (IsNull(oRsAux1.IdCodigoIva) ? 0 : oRsAux1.IdCodigoIva);
+    //                        if (((mIdActividad > 0)
+    //                                    && (mIdActividad != (IsNull(oRsAux1.IdActividad) ? 0 : oRsAux1.IdActividad))))
+    //                        {
+    //                            oPr = oAp.Proveedores.Item[-1];
+    //                            // With...
+    //                            oPr.Guardar;
+    //                            oPr = null;
+    //                        }
+
+    //                    }
+    //                    else
+    //                    {
+    //                        if ((mCuit.Length > 0))
+    //                        {
+    //                            if ((mLetra == "C"))
+    //                            {
+    //                                mIdCodigoIva = 6;
+    //                            }
+    //                            else
+    //                            {
+    //                                mIdCodigoIva = 1;
+    //                            }
+
+    //                        }
+    //                        else
+    //                        {
+    //                            mIdCodigoIva = 5;
+    //                        }
+
+    //                        oPr = oAp.Proveedores.Item[-1];
+    //                        // With...
+    //                        if ((mIdCodigoIva != 0))
+    //                        {
+
+    //                        }
+
+    //                        mRazonSocial.Substring(0, 50).CUIT = 1;
+    //                        "NO".RazonSocial = 1;
+    //                        oPr.Registro.Confirmado = 1;
+    //                        IdCodigoIva = mIdCodigoIva;
+    //                        if (IsNumeric(mCondicionCompra))
+    //                        {
+
+    //                        }
+
+    //                        IdCondicionCompra = int.Parse(mCondicionCompra);
+    //                        if ((mIdActividad != 0))
+    //                        {
+
+    //                        }
+
+    //                        IdActividad = mIdActividad;
+    //                        oPr.Guardar;
+    //                        mIdProveedor = oPr.Registro.Fields(0).Value;
+    //                        oPr = null;
+    //                        mvarProvincia = 0;
+    //                        mvarIBCondicion = 0;
+    //                        mvarIdIBCondicion = 0;
+    //                        mvarIGCondicion = 0;
+    //                        mvarIdTipoRetencionGanancia = 0;
+    //                        mBienesOServicios = "B";
+    //                    }
+
+    //                    oRsAux1.Close;
+    //                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "ComprobantesProveedores_TX_PorNumeroComprobante", mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante);
+    //                    if ((oRsAux1.RecordCount == 0))
+    //                    {
+    //                        mvarCotizacionDolar = Cotizacion(SC, mFechaFactura, glbIdMonedaDolar);
+    //                        if ((mvarCotizacionDolar == 0))
+    //                        {
+    //                            mConProblemas = true;
+    //                        }
+
+    //                        oCP = oAp.ComprobantesProveedores.Item[-1];
+    //                        // With...
+    //                        if ((mFechaFactura > mFechaRecepcion))
+    //                        {
+    //                            FechaRecepcion = mFechaFactura;
+    //                            mIdTipoComprobante.IdObra = mFechaFactura;
+    //                            oCP.IdTipoComprobante = mFechaFactura;
+    //                        }
+    //                        else
+    //                        {
+    //                            FechaRecepcion = mFechaRecepcion;
+    //                        }
+
+    //                        mNumeroComprobante2.NumeroRendicionFF = mNumeroRendicion;
+    //                        mNumeroComprobante1.NumeroComprobante2 = mNumeroRendicion;
+    //                        mLetra.NumeroComprobante1 = mNumeroRendicion;
+    //                        null.Letra = mNumeroRendicion;
+    //                        mIdCuentaFF.IdOrdenPago = mNumeroRendicion;
+    //                        null.IdCuenta = mNumeroRendicion;
+    //                        mIdProveedor.IdProveedor = mNumeroRendicion;
+    //                        mvarCotizacionDolar.IdProveedorEventual = mNumeroRendicion;
+    //                        1.CotizacionDolar = mNumeroRendicion;
+    //                        mIdMonedaPesos.CotizacionMoneda = mNumeroRendicion;
+    //                        mFechaFactura.IdMoneda = mNumeroRendicion;
+    //                        mFechaFactura.FechaAsignacionPresupuesto = mNumeroRendicion;
+    //                        FechaVencimiento = mNumeroRendicion;
+    //                        if ((((mvarIBCondicion == 2)
+    //                                    || (mvarIBCondicion == 3))
+    //                                    && (mvarIdIBCondicion != 0)))
+    //                        {
+    //                            IdIBCondicion = mvarIdIBCondicion;
+    //                        }
+    //                        else
+    //                        {
+    //                            IdIBCondicion = null;
+    //                        }
+
+    //                        if ((((mvarIGCondicion == 2)
+    //                                    || (mvarIGCondicion == 3))
+    //                                    && (mvarIdTipoRetencionGanancia != 0)))
+    //                        {
+    //                            IdTipoRetencionGanancia = mvarIdTipoRetencionGanancia;
+    //                        }
+    //                        else
+    //                        {
+    //                            IdTipoRetencionGanancia = null;
+    //                        }
+
+    //                        null.NumeroCAI = mNumeroCAI;
+    //                        mvarProvincia.BienesOServicios = mNumeroCAI;
+    //                        IdProvinciaDestino = mNumeroCAI;
+    //                        MinValue;
+    //                        FechaVencimientoCAI = mFechaVencimientoCAI;
+    //                        FechaVencimientoCAI = null;
+    //                        "O".InformacionAuxiliar = mInformacionAuxiliar;
+    //                        DestinoPago = mInformacionAuxiliar;
+    //                        if ((mIdCodigoIva != 0))
+    //                        {
+
+    //                        }
+
+    //                        mIdCodigoIva.CircuitoFirmasCompleto = "SI";
+    //                        IdCodigoIva = "SI";
+    //                        if ((mIdPuntoVenta != 0))
+    //                        {
+
+    //                        }
+
+    //                        IdPuntoVenta = mIdPuntoVenta;
+    //                        if ((mNumeroCAE.Length > 0))
+    //                        {
+
+    //                        }
+
+    //                        NumeroCAE = mNumeroCAE;
+    //                    }
+
+    //                    mTotalBruto = 0;
+    //                    mTotalIva1 = 0;
+    //                    mTotalPercepcion = 0;
+    //                    mTotalComprobante = 0;
+    //                    mTotalAjusteIVA = 0;
+    //                    mAjusteIVA = 0;
+    //                    while (((dt.Rows[fl].Item[2].Trim().Length > 0)
+    //                                && ((mLetra == dt.Rows[fl].Item[6].Trim())
+    //                                && ((mNumeroComprobante1 == dt.Rows[fl].Item[7])
+    //                                && ((mNumeroComprobante2 == dt.Rows[fl].Item[8])
+    //                                && ((mCuit == dt.Rows[fl].Item[10])
+    //                                || ((mCuitPlanilla == dt.Rows[fl].Item[10])
+    //                                || (mCuit == mCuitDefault))))))))
+    //                    {
+    //                        mCodigoCuentaGasto = dt.Rows[fl].Item[22];
+    //                        mItemPresupuestoObrasNodo = dt.Rows[fl].Item[24].Trim();
+    //                        mCantidad = double.Parse(dt.Rows[fl].Item[25]);
+    //                        mIdCuentaGasto = 0;
+    //                        mIdCuenta = 0;
+    //                        mCodigoCuenta = 0;
+    //                        mIdRubroContable = 0;
+    //                        if ((mCodigoCuentaGasto.Length > 0))
+    //                        {
+    //                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "CuentasGastos_TX_PorCodigo2", mCodigoCuentaGasto);
+    //                            if ((oRsAux1.RecordCount > 0))
+    //                            {
+    //                                mIdCuentaGasto = oRsAux1.IdCuentaGasto;
+    //                                oRsAux1.Close;
+    //                                oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorObraCuentaGasto", mIdObra, mIdCuentaGasto);
+    //                                if ((oRsAux1.RecordCount > 0))
+    //                                {
+    //                                    mIdCuenta = oRsAux1.IdCuenta;
+    //                                    mCodigoCuenta = oRsAux1.Codigo;
+    //                                    mIdRubroContable = (IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero);
+    //                                    if (((mIdRubroContable == 0)
+    //                                                && !IsNull(oRsAux1.CodigoRubroContable)))
+    //                                    {
+    //                                        oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.CodigoRubroContable, mIdObra, "SI");
+    //                                        if ((oRsAux2.RecordCount > 0))
+    //                                        {
+    //                                            mIdRubroContable = oRsAux2.Fields(0).Value;
+    //                                        }
+
+    //                                        oRsAux2.Close;
+    //                                    }
+
+    //                                }
+    //                                else if (!mTomarCuentaDePresupuesto)
+    //                                {
+    //                                    mError = (mError + ("\r\n"
+    //                                                + (mTipo + (" "
+    //                                                + (mLetra + ("-"
+    //                                                + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                                + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                                + (fl + ("  - Cuenta de gasto codigo "
+    //                                                + (mCodigoCuentaGasto + " inexistente")))))))))))));
+    //                                    fl = (fl + 1);
+    //                                    // TODO: Continue Do... Warning!!! not translated
+    //                                    //  GoTo FinLoop
+    //                                }
+
+    //                            }
+    //                            else
+    //                            {
+    //                                oRsAux1.Close;
+    //                                oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorCodigo", mCodigoCuentaGasto);
+    //                                if ((oRsAux1.RecordCount > 0))
+    //                                {
+    //                                    mIdCuenta = oRsAux1.IdCuenta;
+    //                                    mCodigoCuenta = oRsAux1.Codigo;
+    //                                    mIdRubroContable = (IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero);
+    //                                    if (((mIdRubroContable == 0)
+    //                                                && !IsNull(oRsAux1.CodigoRubroContable)))
+    //                                    {
+    //                                        oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.CodigoRubroContable, mIdObra, "SI");
+    //                                        if ((oRsAux2.RecordCount > 0))
+    //                                        {
+    //                                            mIdRubroContable = oRsAux2.Fields(0).Value;
+    //                                        }
+
+    //                                        oRsAux2.Close;
+    //                                    }
+
+    //                                }
+    //                                else if (!mTomarCuentaDePresupuesto)
+    //                                {
+    //                                    mError = (mError + ("\r\n"
+    //                                                + (mTipo + (" "
+    //                                                + (mLetra + ("-"
+    //                                                + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                                + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                                + (fl + "  - Cuenta contable inexistente")))))))))));
+    //                                    fl = (fl + 1);
+    //                                    // TODO: Continue Do... Warning!!! not translated
+    //                                    //  GoTo FinLoop
+    //                                }
+
+    //                            }
+
+    //                            oRsAux1.Close;
+    //                        }
+
+    //                        mIdPresupuestoObrasNodo = 0;
+    //                        if ((mItemPresupuestoObrasNodo.Length > 0))
+    //                        {
+    //                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "PresupuestoObrasNodos_TX_PorItem", mItemPresupuestoObrasNodo, mIdObra);
+    //                            if ((oRsAux1.RecordCount == 1))
+    //                            {
+    //                                mIdPresupuestoObrasNodo = oRsAux1.IdPresupuestoObrasNodo;
+    //                                if (((IsNull(oRsAux1.IdCuenta) ? 0 : oRsAux1.IdCuenta) > 0))
+    //                                {
+    //                                    mIdCuenta = (IsNull(oRsAux1.IdCuenta) ? 0 : oRsAux1.IdCuenta);
+    //                                }
+
+    //                            }
+
+    //                            oRsAux1.Close;
+    //                        }
+
+    //                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorId", mIdCuenta);
+    //                        if ((oRsAux1.RecordCount > 0))
+    //                        {
+    //                            if ((((IsNull(oRsAux1.ImputarAPresupuestoDeObra) ? "NO" : oRsAux1.ImputarAPresupuestoDeObra) == "NO")
+    //                                        && !mTomarCuentaDePresupuesto))
+    //                            {
+    //                                mIdPresupuestoObrasNodo = 0;
+    //                            }
+
+    //                            mCodigoCuenta = oRsAux1.Codigo;
+    //                            if (((IsNull(oRsAux1.IdRubroForminanciero) ? 0 : oRsAux1.IdRubroForminanciero) > 0))
+    //                            {
+    //                                mIdRubroContable = oRsAux1.IdRubroForminanciero;
+    //                            }
+
+    //                        }
+    //                        else
+    //                        {
+    //                            mError = (mError + ("\r\n"
+    //                                        + (mTipo + (" "
+    //                                        + (mLetra + ("-"
+    //                                        + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                        + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                        + (fl + "  - Cuenta contable inexistente")))))))))));
+    //                            fl = (fl + 1);
+    //                            // TODO: Continue Do... Warning!!! not translated
+    //                            //  GoTo FinLoop
+    //                        }
+
+    //                        oRsAux1.Close;
+    //                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mBruto " + dt.Rows[fl].Item[13]))));
+    //                        mBruto = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[13])));
+    //                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mIva1 " + dt.Rows[fl].Item[14]))));
+    //                        mIVA1 = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[14])), 4);
+    //                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mPercepcion " + dt.Rows[fl].Item[15]))));
+    //                        mPercepcion = Math.Abs(Convert.ToDouble(double.Parse(dt.Rows[fl].Item[15])));
+    //                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mTotalItem " + dt.Rows[fl].Item[16]))));
+    //                        mTotalItem = Math.Round(Math.Abs(Convert.ToDouble(dt.Rows[fl].Item[16])), 2);
+    //                        mObservaciones = ("Rendicion  "
+    //                                    + (mNumeroRendicion + ("\r\n"
+    //                                    + (dt.Rows[fl].Item[20] + "\r\n"))));
+    //                        mTotalBruto = (mTotalBruto + mBruto);
+    //                        mTotalIva1 = (mTotalIva1 + mIVA1);
+    //                        mTotalPercepcion = (mTotalPercepcion + mPercepcion);
+    //                        mTotalComprobante = (mTotalComprobante + mTotalItem);
+    //                        mTotalAjusteIVA = (mTotalAjusteIVA + mAjusteIVA);
+    //                        mPorcentajeIVA = 0;
+    //                        oForm_Label1 = (mMensaje + ("\r\n" + ("\r\n" + ("mPorcentajeIVA " + dt.Rows[fl].Item[11]))));
+    //                        if (((mIVA1 != 0)
+    //                                    && (mBruto != 0)))
+    //                        {
+    //                            mPorcentajeIVA = dt.Rows[fl].Item[11];
+    //                        }
+
+    //                        mIdCuentaIvaCompras1 = 0;
+    //                        mvarPosicionCuentaIva = 1;
+    //                        if ((mPorcentajeIVA != 0))
+    //                        {
+    //                            for (i = 1; (i <= 10); i++)
+    //                            {
+    //                                if ((mIVAComprasPorcentaje[i] == mPorcentajeIVA))
+    //                                {
+    //                                    mIdCuentaIvaCompras1 = mIdCuentaIvaCompras[i];
+    //                                    mvarPosicionCuentaIva = i;
+    //                                    break;
+    //                                }
+
+    //                            }
+
+    //                        }
+
+    //                        if (((mIVA1 != 0)
+    //                                    && (mIdCuentaIvaCompras1 == 0)))
+    //                        {
+    //                            mError = (mError + ("\r\n"
+    //                                        + (mTipo + (" "
+    //                                        + (mLetra + ("-"
+    //                                        + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                                        + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                                        + (fl + ("  - No se encontro el porcentaje de iva " + mPorcentajeIVA))))))))))));
+    //                            fl = (fl + 1);
+    //                            // TODO: Continue Do... Warning!!! not translated
+    //                            //  GoTo FinLoop
+    //                        }
+
+    //                        object oCPdet = new ProntoMVC.Data.Models.DetalleComprobantesProveedore();
+    //                        oCP.DetalleComprobantesProveedores.Add(oCPdet);
+    //                        // With...
+    //                        if ((mIdCuentaIvaCompras1 != 0))
+    //                        {
+    //                            CallByName(oCPdet, ("IdCuentaIvaCompras" + mvarPosicionCuentaIva), CallType.Set, mIdCuentaIvaCompras1);
+    //                            "NO".IdCuentaIvaCompras10 = 0;
+    //                            0.AplicarIVA9 = 0;
+    //                            0.ImporteIVA9 = 0;
+    //                            null.IVAComprasPorcentaje9 = 0;
+    //                            "NO".IdCuentaIvaCompras9 = 0;
+    //                            0.AplicarIVA8 = 0;
+    //                            0.ImporteIVA8 = 0;
+    //                            null.IVAComprasPorcentaje8 = 0;
+    //                            "NO".IdCuentaIvaCompras8 = 0;
+    //                            0.AplicarIVA7 = 0;
+    //                            0.ImporteIVA7 = 0;
+    //                            null.IVAComprasPorcentaje7 = 0;
+    //                            "NO".IdCuentaIvaCompras7 = 0;
+    //                            0.AplicarIVA6 = 0;
+    //                            0.ImporteIVA6 = 0;
+    //                            null.IVAComprasPorcentaje6 = 0;
+    //                            "NO".IdCuentaIvaCompras6 = 0;
+    //                            0.AplicarIVA5 = 0;
+    //                            0.ImporteIVA5 = 0;
+    //                            null.IVAComprasPorcentaje5 = 0;
+    //                            "NO".IdCuentaIvaCompras5 = 0;
+    //                            0.AplicarIVA4 = 0;
+    //                            0.ImporteIVA4 = 0;
+    //                            null.IVAComprasPorcentaje4 = 0;
+    //                            "NO".IdCuentaIvaCompras4 = 0;
+    //                            0.AplicarIVA3 = 0;
+    //                            0.ImporteIVA3 = 0;
+    //                            null.IVAComprasPorcentaje3 = 0;
+    //                            "NO".IdCuentaIvaCompras3 = 0;
+    //                            0.AplicarIVA2 = 0;
+    //                            0.ImporteIVA2 = 0;
+    //                            null.IVAComprasPorcentaje2 = 0;
+    //                            "NO".IdCuentaIvaCompras2 = 0;
+    //                            0.AplicarIVA1 = 0;
+    //                            0.ImporteIVA1 = 0;
+    //                            null.IVAComprasPorcentaje1 = 0;
+    //                            mBruto.IdCuentaIvaCompras1 = 0;
+    //                            mCodigoCuenta.Importe = 0;
+    //                            mIdCuenta.CodigoCuenta = 0;
+    //                            mIdCuentaGasto.IdCuenta = 0;
+    //                            mIdObra.IdCuentaGasto = 0;
+    //                            oCPdet.IdObra = 0;
+    //                            CallByName(oCPdet, ("IVAComprasPorcentaje" + mvarPosicionCuentaIva), CallType.Set, mPorcentajeIVA);
+    //                            CallByName(oCPdet, ("ImporteIVA" + mvarPosicionCuentaIva), CallType.Set, Math.Round(mIVA1, 2));
+    //                            CallByName(oCPdet, ("AplicarIVA" + mvarPosicionCuentaIva), CallType.Set, "SI");
+    //                        }
+
+    //                        0.AplicarIVA10 = "NO";
+    //                        ImporteIVA10 = "NO";
+    //                        if ((mIdPresupuestoObrasNodo != 0))
+    //                        {
+
+    //                        }
+
+    //                        IdPresupuestoObrasNodo = mIdPresupuestoObrasNodo;
+    //                        if ((mIdRubroContable > 0))
+    //                        {
+
+    //                        }
+
+    //                        mIdRubroContable.Cantidad = mCantidad;
+    //                        IdRubroContable = mCantidad;
+    //                        fl = (fl + 1);
+    //                    }
+
+    //                    // With...
+    //                    if ((mIncrementarReferencia != "SI"))
+    //                    {
+
+    //                    }
+
+    //                    0.AjusteIVA = mObservaciones;
+    //                    0.TotalIvaNoDiscriminado = mObservaciones;
+    //                    mTotalComprobante.PorcentajeBonificacion = mObservaciones;
+    //                    0.TotalComprobante = mObservaciones;
+    //                    0.TotalBonificacion = mObservaciones;
+    //                    mTotalIva1.TotalIva2 = mObservaciones;
+    //                    mTotalBruto.TotalIva1 = mObservaciones;
+    //                    "NO".TotalBruto = mObservaciones;
+    //                    mNumeroReferencia.Confirmado = mObservaciones;
+    //                    oCP.NumeroReferencia = mObservaciones;
+    //                    AutoincrementarNumeroReferencia = "NO";
+    //                    s.Grabar_ComprobanteProveedor(oCP, IdUsuario);
+    //                    mNumeroReferencia = (mNumeroReferencia + 1);
+    //                }
+    //                else
+    //                {
+    //                    fl = (fl + 1);
+    //                }
+
+    //            }
+    //            else
+    //            {
+    //                mError = (mError + ("\r\n"
+    //                            + (mTipo + (" "
+    //                            + (mLetra + ("-"
+    //                            + (mNumeroComprobante1.ToString.PadLeft(4, "0") + ("-"
+    //                            + (mNumeroComprobante2.ToString.PadLeft(8, "0") + (", fila "
+    //                            + (fl + ("  - Fecha es anterior al ultimo cierre contable : " + mComprobante))))))))))));
+    //                fl = (fl + 1);
+    //            }
+
+    //            break; //Warning!!! Review that break works as 'Exit Do' as it could be in a nested instruction like switch
+    //            Using;
+    //        }
+
+
+    //*/
+
+    //    }
 
     }
 

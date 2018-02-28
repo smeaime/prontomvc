@@ -154,7 +154,7 @@ Public Class Class1
 
         mPuntosVentaAsociados = ""
         If glbPuntoVentaEnNumeroInternoCP Then
-            oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Empleados_TX_PorId, glbIdUsuario)
+            oRsAux1 = EntidadManager.GetStoreProcedure(SC, enumSPs.Empleados_TX_PorId, glbIdUsuario)
             If oRsAux1.Rows.Count > 0 Then mPuntosVentaAsociados = IIf(IsNull(oRsAux1.Rows(0).Item("PuntosVentaAsociados")), "", oRsAux1.Rows(0).Item(".PuntosVentaAsociados"))
             oRsAux1 = Nothing
             If Len(mPuntosVentaAsociados) = 0 Then
@@ -318,9 +318,9 @@ Public Class Class1
                         End If
                         oForm_Label1 = mMensaje & vbCrLf & vbCrLf & "mCodigoCuentaFF " & dt.Rows(2).Item(10)
                         mCodigoCuentaFF = Val(dt.Rows(2).Item(10))
-                        oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Cuentas_TX_PorCodigo, mCodigoCuentaFF)
+                        oRsAux1 = EntidadManager.GetStoreProcedure(SC, enumSPs.Cuentas_TX_PorCodigo, mCodigoCuentaFF)
                         If oRsAux1.Rows.Count > 0 Then
-                            mIdCuentaFF = oRsAux1.Rows(0).Item(0).Value
+                            mIdCuentaFF = oRsAux1.Rows(0).Item(0)
                         Else
                             mError = mError & vbCrLf & mTipo & " " & mLetra & "-" & mNumeroComprobante1.ToString.PadLeft(4, "0") & "-" & mNumeroComprobante2.ToString.PadLeft(8, "0") & ", cuenta de fondo fijo inexistente"
                             fl = fl + 1
@@ -330,7 +330,7 @@ Public Class Class1
                     End If
 
                     mIdObra = 0
-                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "Obras_TX_PorNumero", mCodObra)
+                    oRsAux1 = EntidadManager.GetStoreProcedure(SC, "Obras_TX_PorNumero", mCodObra)
                     If oRsAux1.Rows.Count > 0 Then
                         mIdObra = oRsAux1.Rows(0).Item("IdObra")
                     Else
@@ -354,27 +354,27 @@ Public Class Class1
 
                         mIdActividad = 0
                         If Len(mActividad) > 0 Then
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "ActividadesProveedores_TX_PorDescripcion", mActividad)
-                            If oRsAux1.Rows.Count > 0 Then mIdActividad = oRsAux1.Rows(0).Item(0).Value
+                            oRsAux1 = EntidadManager.GetStoreProcedure(SC, "ActividadesProveedores_TX_PorDescripcion", mActividad)
+                            If oRsAux1.Rows.Count > 0 Then mIdActividad = oRsAux1.Rows(0).Item(0)
                             oRsAux1 = Nothing
                         End If
 
                         mIdProveedor = 0
                         If Len(mCuit) > 0 Then
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, enumSPs.Proveedores_TX_PorCuit, mCuit)
+                            oRsAux1 = EntidadManager.GetStoreProcedure(SC, enumSPs.Proveedores_TX_PorCuit, mCuit)
                         Else
-                            oRsAux1 = EntidadManager.TraerFiltrado(SC, "Proveedores_TX_PorNombre", mRazonSocial)
+                            oRsAux1 = EntidadManager.GetStoreProcedure(SC, "Proveedores_TX_PorNombre", mRazonSocial)
                         End If
                         If oRsAux1.Rows.Count > 0 Then
-                            mIdProveedor = oRsAux1.Rows(0).Item(0).Value
-                            mvarProvincia = If(oRsAux1.Rows(0).Item("IdProvincia"), 0)
-                            mvarIBCondicion = If(oRsAux1.Rows(0).Item("IBCondicion"), 0)
-                            mvarIdIBCondicion = If(oRsAux1.Rows(0).Item("IdIBCondicionPorDefecto"), 0)
-                            mvarIGCondicion = If(oRsAux1.Rows(0).Item("IGCondicion"), 0)
-                            mvarIdTipoRetencionGanancia = If(oRsAux1.Rows(0).Item("IdTipoRetencionGanancia"), 0)
-                            mBienesOServicios = If(oRsAux1.Rows(0).Item(".BienesOServicios"), "B")
-                            mIdCodigoIva = If(oRsAux1.Rows(0).Item("IdCodigoIva"), 0)
-                            If mIdActividad > 0 And mIdActividad <> If(oRsAux1.Rows(0).Item(".IdActividad"), 0) Then
+                            mIdProveedor = oRsAux1.Rows(0).Item(0)
+                            mvarProvincia = Val(oRsAux1.Rows(0).Item("IdProvincia").ToString)
+                            mvarIBCondicion = Val(oRsAux1.Rows(0).Item("IBCondicion").ToString)
+                            mvarIdIBCondicion = Val(oRsAux1.Rows(0).Item("IdIBCondicionPorDefecto").ToString)
+                            mvarIGCondicion = Val(oRsAux1.Rows(0).Item("IGCondicion").ToString)
+                            mvarIdTipoRetencionGanancia = Val(oRsAux1.Rows(0).Item("IdTipoRetencionGanancia").ToString)
+                            mBienesOServicios = If(oRsAux1.Rows(0).Item("BienesOServicios"), "B")
+                            mIdCodigoIva = Val(oRsAux1.Rows(0).Item("IdCodigoIva").ToString)
+                            If mIdActividad > 0 And mIdActividad <> Val(oRsAux1.Rows(0).Item("IdActividad").ToString) Then
 
 
 
@@ -428,7 +428,7 @@ Public Class Class1
 
 
 
-                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "ComprobantesProveedores_TX_PorNumeroComprobante", mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante)
+                        oRsAux1 = EntidadManager.GetStoreProcedure(SC, "ComprobantesProveedores_TX_PorNumeroComprobante", mIdProveedor, mLetra, mNumeroComprobante1, mNumeroComprobante2, -1, mIdTipoComprobante)
                         If oRsAux1.Rows.Count = 0 Then
                             mvarCotizacionDolar = Cotizacion(SC, mFechaFactura, glbIdMonedaDolar)
                             If mvarCotizacionDolar = 0 Then mConProblemas = True
@@ -511,18 +511,18 @@ Public Class Class1
                                 mCodigoCuenta = 0
                                 mIdRubroContable = 0
                                 If Len(mCodigoCuentaGasto) > 0 Then
-                                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "CuentasGastos_TX_PorCodigo2", mCodigoCuentaGasto)
+                                    oRsAux1 = EntidadManager.GetStoreProcedure(SC, "CuentasGastos_TX_PorCodigo2", mCodigoCuentaGasto)
                                     If oRsAux1.Rows.Count > 0 Then
                                         mIdCuentaGasto = oRsAux1.Rows(0).Item("IdCuentaGasto")
                                         oRsAux1 = Nothing
-                                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorObraCuentaGasto", mIdObra, mIdCuentaGasto)
+                                        oRsAux1 = EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_PorObraCuentaGasto", mIdObra, mIdCuentaGasto)
                                         If oRsAux1.Rows.Count > 0 Then
                                             mIdCuenta = oRsAux1.Rows(0).Item("IdCuenta")
                                             mCodigoCuenta = oRsAux1.Rows(0).Item("Codigo")
                                             mIdRubroContable = If(oRsAux1.Rows(0).Item("IdRubroForminanciero"), 0)
                                             If mIdRubroContable = 0 And Not IsNull(oRsAux1.Rows(0).Item("CodigoRubroContable")) Then
-                                                oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.Rows(0).Item("CodigoRubroContable"), mIdObra, "SI")
-                                                If oRsAux2.Rows.Count > 0 Then mIdRubroContable = oRsAux2.Rows(0).Item(0).Value
+                                                oRsAux2 = EntidadManager.GetStoreProcedure(SC, "RubrosContables_TX_PorCodigo", oRsAux1.Rows(0).Item("CodigoRubroContable"), mIdObra, "SI")
+                                                If oRsAux2.Rows.Count > 0 Then mIdRubroContable = oRsAux2.Rows(0).Item(0)
                                                 oRsAux2 = Nothing
                                             End If
                                         Else
@@ -535,14 +535,14 @@ Public Class Class1
                                         End If
                                     Else
                                         oRsAux1 = Nothing
-                                        oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorCodigo", mCodigoCuentaGasto)
+                                        oRsAux1 = EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_PorCodigo", mCodigoCuentaGasto)
                                         If oRsAux1.Rows.Count > 0 Then
                                             mIdCuenta = oRsAux1.Rows(0).Item("IdCuenta")
                                             mCodigoCuenta = oRsAux1.Rows(0).Item("Codigo")
                                             mIdRubroContable = If(oRsAux1.Rows(0).Item(".IdRubroForminanciero"), 0)
                                             If mIdRubroContable = 0 And Not IsNull(oRsAux1.Rows(0).Item("CodigoRubroContable")) Then
-                                                oRsAux2 = EntidadManager.TraerFiltrado(SC, "RubrosContables_TX_PorCodigo", oRsAux1.Rows(0).Item("CodigoRubroContable"), mIdObra, "SI")
-                                                If oRsAux2.Rows.Count > 0 Then mIdRubroContable = oRsAux2.Rows(0).Item(0).Value
+                                                oRsAux2 = EntidadManager.GetStoreProcedure(SC, "RubrosContables_TX_PorCodigo", oRsAux1.Rows(0).Item("CodigoRubroContable"), mIdObra, "SI")
+                                                If oRsAux2.Rows.Count > 0 Then mIdRubroContable = oRsAux2.Rows(0).Item(0)
                                                 oRsAux2 = Nothing
                                             End If
                                         Else
@@ -559,7 +559,7 @@ Public Class Class1
 
                                 mIdPresupuestoObrasNodo = 0
                                 If Len(mItemPresupuestoObrasNodo) > 0 Then
-                                    oRsAux1 = EntidadManager.TraerFiltrado(SC, "PresupuestoObrasNodos_TX_PorItem", mItemPresupuestoObrasNodo, mIdObra)
+                                    oRsAux1 = EntidadManager.GetStoreProcedure(SC, "PresupuestoObrasNodos_TX_PorItem", mItemPresupuestoObrasNodo, mIdObra)
                                     If oRsAux1.Rows.Count = 1 Then
                                         mIdPresupuestoObrasNodo = oRsAux1.Rows(0).Item("IdPresupuestoObrasNodo")
                                         If If(oRsAux1.Rows(0).Item("IdCuenta"), 0) > 0 Then
@@ -569,7 +569,7 @@ Public Class Class1
                                     oRsAux1 = Nothing
                                 End If
 
-                                oRsAux1 = EntidadManager.TraerFiltrado(SC, "Cuentas_TX_PorId", mIdCuenta)
+                                oRsAux1 = EntidadManager.GetStoreProcedure(SC, "Cuentas_TX_PorId", mIdCuenta)
                                 If oRsAux1.Rows.Count > 0 Then
                                     If If(oRsAux1.Rows(0).Item("ImputarAPresupuestoDeObra"), "NO") = "NO" And Not mTomarCuentaDePresupuesto Then
                                         mIdPresupuestoObrasNodo = 0

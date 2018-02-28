@@ -72,14 +72,19 @@ namespace ProntoMVC.TestsMVC
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
         // la cadena de conexion a la bdlmaster se saca del App.config (no web.config) de este proyecto 
 
+        //const string nombreempresa = "VialAgro";
+        const string nombreempresa = "Williams";
         //const string nombreempresa = "DemoProntoWeb";
-        const string nombreempresa = "VialAgro";
         //const string nombreempresa = "Pronto_Alemarsa";
-        //const string nombreempresa = "Williams2";
         //const string nombreempresa = "Pronto";
 
         //const string usuario = "administrador";
         const string usuario = "supervisor";
+
+        string DirRepo = @"C:\Users\Mariano\Documents\pronto";
+
+
+
         //string bldmasterappconfig = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
         string bldmasterappconfig; //  = "Data Source=SERVERSQL3\\TESTING;Initial catalog=BDLMaster;User ID=sa; Password=.SistemaPronto.;Connect Timeout=8";
         string scEF;
@@ -163,8 +168,9 @@ namespace ProntoMVC.TestsMVC
         public void importacion_excel_de_fondosfijos()
         {
 
-            string DirRepo = @"C:\Users\Mariano\Documents\pronto";
-            string pFileName = DirRepo + @"\docstest\fondofijo\" + @"Copia de FF - LABORATORIO 1 (2).xls";
+           
+            //string pFileName = DirRepo + @"\docstest\fondofijo\" + @"Copia de FF - LABORATORIO 1 (2).xls";
+            string pFileName = DirRepo + @"\docstest\fondofijo\" + @"Copia de MODELO FF SAN LORENZO new con actividades.xls";
             string pFileName2 = DirRepo + @"\docstest\fondofijo\" + @"desprotegido.xls";
             string mensajeError;
 
