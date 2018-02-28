@@ -131,6 +131,8 @@ namespace ProntoMVC.Controllers
 
             if ((o.Eventual ?? "") != "SI")
             {
+                if (o.IdProveedor <= 0) { o.Confirmado = "SI"; }
+
                 if (o.IdEstado == null) sErrorMsg += "\n" + "Falta el estado";
 
                 if ((o.CodigoProveedor ?? 0) == 0) { sErrorMsg += "\n" + "Falta el codigo del proveedor"; }
@@ -147,6 +149,8 @@ namespace ProntoMVC.Controllers
 
                 if ((o.IdCodigoIva ?? 0) == 0) { sErrorMsg += "\n" + "Falta la condicion de IVA del proveedor"; }
 
+                if ((o.IdCuenta ?? 0) == 0) { sErrorMsg += "\n" + "Falta la cuenta contable del proveedor"; }
+
                 if (((o.IBCondicion ?? 0) == 2 || (o.IBCondicion ?? 0) == 3) && (o.IBNumeroInscripcion ?? "") == "") { sErrorMsg += "\n" + "Falta el numero de inscripcion de IIBB del proveedor"; }
 
                 if (o.RetenerSUSS == "SI" && (o.IdImpuestoDirectoSUSS ?? 0) == 0) { sErrorMsg += "\n" + "Falta la categoria SUSS del proveedor"; }
@@ -159,8 +163,15 @@ namespace ProntoMVC.Controllers
             }
 
             string s = "asdasd";
-            s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
-            o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+            if ((o.Cuit ?? "").Length > 0)
+            {
+                s = o.Cuit.NullSafeToString().Replace("-", "").PadLeft(11);
+                o.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+            }
+            else
+            {
+                o.Cuit = "";
+            }
 
             if (!ProntoMVC.Data.FuncionesGenericasCSharp.CUITValido(o.Cuit.NullSafeToString())) { sErrorMsg += "\n" + "El CUIT es incorrecto"; }
 
@@ -187,8 +198,11 @@ namespace ProntoMVC.Controllers
 
             try
             {
-                var s = Proveedor.Cuit.Replace("-", "");
-                Proveedor.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                if ((Proveedor.Cuit ?? "").Length == 11 || (Proveedor.Cuit ?? "").Length == 13)
+                {
+                    var s = Proveedor.Cuit.Replace("-", "") ?? "";
+                    Proveedor.Cuit = s.Substring(0, 2) + "-" + s.Substring(2, 8) + "-" + s.Substring(10, 1);
+                }
 
                 string errs = "";
                 if (!Validar(Proveedor, ref errs))
