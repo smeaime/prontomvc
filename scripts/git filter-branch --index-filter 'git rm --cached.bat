@@ -4,6 +4,10 @@ git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objec
 git filter-branch --index-filter 'git rm --cached --ignore-unmatch Database1/Database1.dbml ProntoMVC/App_Data/Elmah.sdf .hg/store/data/_pronto_m_v_c/bin/_pronto_m_v_c.pdb.d .hg/store/data/_pronto_m_v_c/obj/_debug/_pronto_m_v_c.pdb.d docstest/28-07-17.txt .vs/ProntoMVC/v15/sqlite3/storage.ide' HEAD  
 
 
+ java -jar C:/Users/Mariano/Downloads/bfg-1.13.0.jar --strip-blobs-bigger-than 40M
+
+
+
 Total 74552 (delta 45650), reused 74075 (delta 45284)
 remote: Resolving deltas: 100% (45650/45650), done.
 remote: warning: File .hg/store/data/_pronto_m_v_c/obj/_debug/_pronto_m_v_c.pdb.d is 94.85 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB

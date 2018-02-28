@@ -4429,6 +4429,7 @@ namespace ExtensionMethods
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // la conversion de null a string
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4439,6 +4440,8 @@ namespace ExtensionMethods
 
 =======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
         public static string NullSafeToString(this object obj)
         {
             return obj != null ? obj.ToString() : String.Empty;
@@ -4447,6 +4450,7 @@ namespace ExtensionMethods
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -4463,6 +4467,8 @@ namespace ExtensionMethods
 
 
 
+=======
+>>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
 =======
 >>>>>>> 6902a471cb4eda1a663943b5d4ac8af86358514b
     }
